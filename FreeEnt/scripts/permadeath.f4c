@@ -29,8 +29,20 @@ msfpatch {
         cmp #$01
         beq $+Next
         // %end%
-        stz $1000,x
+
+        // check if running away, then if spoils are available
+        lda $a8
+        and #$40 // ran away, if yes do the check
+        bne $+DoLegendCheck
+        lda $a8
+        and #$10 // spoils available, if not do the check
+        beq $+DoLegendCheck
+        lda $1000,x // going to run twice; check if second time
+        bne $+SkipLegendCheck
+    %DoLegendCheck:
         jsr $_CheckForLegendSword
+    %SkipLegendCheck:
+        stz $1000,x
     %Next:
         jsr $_Util__XPlus40
         cpx #$0140
@@ -92,8 +104,8 @@ msfpatch {
         bcc $-InventoryLoop
 
         // if it didn't make it to the inventory, try to deliver as a battle item
-        lda $c6
-        bne $+SpoilsUnavailable
+        lda $06c6
+        bne $+MIABSpoils
         ldx #$0000
     %SpoilsLoop:
         lda $1804,x
@@ -109,7 +121,10 @@ msfpatch {
         // Override eighth item with Legend, it's important
         bra $-FoundEmptySpoilsSlot
 
-    %SpoilsUnavailable:
-        // this is extremely rare, so lose the sword and rely on the flag
+    %MIABSpoils:
+        // put the Legend Sword in the second spoils slot
+        // and check it in Rewards__MIABContents
+        lda #$19
+        sta $1805
         rts
 }

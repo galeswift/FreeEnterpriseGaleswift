@@ -481,6 +481,10 @@ msfpatch {
         stx $_Rewards__CurrentValueLo
 
         // blank all other slots for safety
+        // unless the Legend Sword is in the second slot!
+        lda $1805
+        cmp #$19
+        beq $03 // skip setting this slot to 0
         stz $1805
         stz $1806
         stz $1807
