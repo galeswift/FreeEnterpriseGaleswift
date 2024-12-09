@@ -577,7 +577,8 @@ msfpatch {
 
         lda $_EvEx__Param1
         jsr $_CharEx__InitializeAxtor
-        jsr $_CharEx__PushShadowPartySlot
+        // pretty sure that this is unnecessary...? (Scythe)
+        // jsr $_CharEx__PushShadowPartySlot
 
     %LoopNext:
         inc $_EvEx__Param1

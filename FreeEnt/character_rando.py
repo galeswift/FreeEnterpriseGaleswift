@@ -398,6 +398,13 @@ def apply(env):
     elif env.options.flags.has('characters_permadeader'):
         env.add_file('scripts/permadeath.f4c')
         env.add_file('scripts/permadeader.f4c')
+    elif env.options.flags.has('characters_briefly_dead'):
+        env.add_file('scripts/swoon_to_wishes.f4c')
+        if env.options.flags.has('characters_irretrievable'):
+            env.add_toggle('check_legend_swoon')
+    elif env.options.flags.has('characters_mostly_dead'):
+        env.add_file('scripts/swoon_to_wishes.f4c')
+        env.add_toggle('check_legend_swoon')
 
     # apply Dark Paladin tweak
     if env.options.flags.has('darkpaladin'):

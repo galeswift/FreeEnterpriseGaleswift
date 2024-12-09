@@ -28,7 +28,7 @@ Cstart:not_cecil Cstart:not_kain Cstart:not_rydia Cstart:not_tellah Cstart:not_e
 Conly:cecil Conly:kain Conly:rydia Conly:tellah Conly:edward Conly:rosa Conly:yang Conly:palom Conly:porom Conly:cid Conly:edge Conly:fusoya
 Cno:cecil Cno:kain Cno:rydia Cno:tellah Cno:edward Cno:rosa Cno:yang Cno:palom Cno:porom Cno:cid Cno:edge Cno:fusoya
 Crestrict:cecil Crestrict:kain Crestrict:rydia Crestrict:tellah Crestrict:edward Crestrict:rosa Crestrict:yang Crestrict:palom Crestrict:porom Crestrict:cid Crestrict:edge Crestrict:fusoya
-Cj:spells Cj:abilities Cnekkie Cthrift:2/Cthrift:3/Cthrift:4/Cthrift:5 Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader Chero
+Cj:spells Cj:abilities Cnekkie Cthrift:2/Cthrift:3/Cthrift:4/Cthrift:5 Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader/Cmostlydead/Cbrieflydead Chero
 Tvanilla Tshuffle/Tstandard/Tpro/Twild/Twildish/Tempty 
 Tsparse:10/Tsparse:20/Tsparse:30/Tsparse:40/Tsparse:50/Tsparse:60/Tsparse:70/Tsparse:80/Tsparse:90
 Tplayable
@@ -136,6 +136,8 @@ Cbye                 characters_irretrievable
 Cpermajoin           characters_commitment
 Cpermadeath          characters_permadeath
 Cpermadeader         characters_permadeader
+Cmostlydead          characters_mostly_dead
+Cbrieflydead         characters_briefly_dead
 Chero                hero_challenge
 
 Tvanilla             treasure_vanilla

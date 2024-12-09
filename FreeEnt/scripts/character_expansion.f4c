@@ -125,6 +125,7 @@ msfpatch {
         rts
 
         and #$1f // A = axtor number
+    CharEx__PushPartySlotToShadowPartyAxtorKnown:
         phx
         jsr $_CharEx__LoadShadowPartySlotAddrX
         txy

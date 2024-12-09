@@ -3843,6 +3843,17 @@ var FLAG_UISPEC = [
             "title": "Permadeader",
             "description": "Party members that are swoon or stone at the end of any battle are permanently removed from the game. (This includes the cutscene/story battles that you are normally allowed to lose; now you will game over if your party wipes during these battles.)",
             "hard": true
+          },
+          {
+            "flag": "Cmostlydead",
+            "title": "Characters reset to base level",
+            "description": "Party members that are swoon at the end of any battle are removed from your party, reset back to base level and equipment, and placed in the Tower of Wishes. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
+            "hard": true
+          },
+          {
+            "flag": "Cbrieflydead",
+            "title": "Characters go to the Tower of Wishes",
+            "description": "Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)"
           }
         ]
       },

@@ -1,0 +1,165 @@
+// Idea: when a character ends the battle swooned,
+// then they get put back into the shadow party and
+// end up at the Tower of Wishes... 
+
+// if it's Cbrieflydead, then that's it, 
+// but if it's Cmostlydead, then they're
+// reinitialized to be at base level, as if you're
+// getting them for the first time again.
+
+// Cbye makes both flags permadeath, so.. that's that.
+
+// hook into the same place that permadeath does,
+// in post_battle.f4c. Otherwise, call the relevant functions.
+
+// most of this code is a reskin of the
+// updated permadeath.f4c code
+
+msfpatch {
+    SwoonToWishes:
+        tdc
+        tax
+    %LoopStart:
+        lda $1003,x
+        and #$80  // check for swoon
+
+        beq $+Next
+        // %flag hero_challenge on%
+        //  the Hero is exempt from being sent to the Tower
+        lda $1000,x
+        and #$1f
+        cmp #$01
+        beq $+Next
+        // %end%
+
+        // %if check_legend_swoon%
+        // retrieve the Legend Sword if Cbye is on or if
+        // Cmostlydead is on, but otherwise it's
+        // fine to leave it on the character
+        lda $a8
+        and #$40 // ran away, if yes do the check
+        bne $+DoLegendCheck
+        lda $a8
+        and #$10 // spoils available, if not do the check
+        beq $+DoLegendCheck
+        lda $1000,x // going to run twice; check if second time
+        bne $+SkipLegendCheck
+    %DoLegendCheck:
+        jsr $_CheckForLegendSword
+    %SkipLegendCheck:
+        // %end%
+
+        lda $1000,x
+        and #$1f
+        
+        // %flag characters_briefly_dead on%
+        phx
+        pha
+        // subroutine expects X + 0x1000, and we can't
+        // easily pass the slot number without using Y, etc.
+        rep #$20
+        .mx 0x00
+        txa
+        adc #$1000
+        tax
+        lda #$0000
+        sep #$20
+        .mx 0x20
+        pla
+        jsr $_CharEx__PushPartySlotToShadowPartyAxtorKnown
+        plx
+        // %end%
+        stz $1000,x
+        // %flag characters_mostly_dead on%
+        // don't push the characters; re-initialize!
+        phx
+        jsr $_CharEx__InitializeAxtor
+        plx
+        // %end%
+
+    %Next:
+        jsr $_Util__XPlus40
+        cpx #$0140
+        bcc $-LoopStart
+
+        // change party leader if previous party leader left the party
+        // switch D bank so we can borrow some bank 15 routines
+        phd
+        ldy #$0600
+        phy
+        pld
+
+        jsl $15c881     // X = party leader slot * 0x40
+        lda $1000,x
+        bne $+PartyLeaderPresent
+
+        jsl $=CyclePartyLeader
+    %PartyLeaderPresent:
+        pld
+        rtl
+
+    %CheckForLegendSword:
+        lda $1034,x
+        beq $+CheckLeftHand
+        lda $1033,x
+        cmp #$19
+        beq $+HasLegend
+    %CheckLeftHand:
+        lda $1036,x
+        beq $+NoLegend
+        lda $1035,x
+        cmp #$19
+        bne $+NoLegend
+    %HasLegend:
+        phx
+        jsr $_KeepLegendSword
+        plx
+    %NoLegend:
+        rts
+
+    %KeepLegendSword:
+        // blank departed character's hand slots to prevent double-trigger later
+        stz $1033,x
+        stz $1035,x
+        // try to stuff Legend Sword in the inventory
+        ldx #$0000
+    %InventoryLoop:
+        lda $1440,x
+        bne $+InventoryNext
+        lda #$19
+        sta $1440,x
+        lda #$01
+        sta $1441,x
+        rts
+    %InventoryNext:
+        inx
+        inx
+        cpx #$0060
+        bcc $-InventoryLoop
+
+        // if it didn't make it to the inventory, try to deliver as a battle item
+        lda $06c6
+        bne $+MIABSpoils
+        ldx #$0000
+    %SpoilsLoop:
+        lda $1804,x
+        bne $+SpoilsNext
+    %FoundEmptySpoilsSlot:
+        lda #$19
+        sta $1804,x
+        rts
+    %SpoilsNext:
+        inx
+        cpx #$0007
+        bcc $-SpoilsLoop
+        // Override eighth item with Legend, it's important
+        bra $-FoundEmptySpoilsSlot
+
+    %MIABSpoils:
+        // put the Legend Sword in the second spoils slot
+        // and check it in Rewards__MIABContents
+        lda #$19
+        sta $1805
+        rts
+}
+

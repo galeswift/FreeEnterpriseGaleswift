@@ -131,6 +131,12 @@ Party members that are "swoon" at the end of any battle are permanently removed 
 [Cpermadeader]
 Party members that are swoon or stone at the end of any battle are permanently removed from the game. (This includes the cutscene/story battles that you are normally allowed to lose; now you will game over if your party wipes during these battles.)
 
+[Cmostlydead]
+Party members that are swoon at the end of any battle are removed from your party, reset back to base level and equipment, and placed in the Tower of Wishes. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)
+
+[Cbrieflydead]
+Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)
+
 [Chero]
 - The starting character is your hero.
 - The hero is the only instance of that character available (unless other flags force it).

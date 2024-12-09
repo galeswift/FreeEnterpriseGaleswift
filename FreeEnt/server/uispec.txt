@@ -228,8 +228,10 @@
 .(Cparty:4) Maximum party size 4
 [Cpermajoin] Characters can't be dismissed
 <> Permadeath options
-.[Cpermadeath]! Permadeath
-.[Cpermadeader]! Permadeader
+.(Cpermadeath)! Permadeath
+.(Cpermadeader)! Permadeader
+.(Cmostlydead)! Characters reset to base level
+.(Cbrieflydead) Characters go to the Tower of Wishes
 [Chero]! Hero challenge
 
 == TREASURES
