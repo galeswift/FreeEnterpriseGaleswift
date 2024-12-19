@@ -241,15 +241,17 @@ msfpatch {
         // %end%
 
         // %if experience_moon_bonus%
-        // check if the map plane is 2 (the surface of the moon)
-        lda $7e1701
+        // check if the map area is 2 (the surface of the moon)
+        lda $1700
         cmp #$02
         beq $+OnMoon
-        // check if the map plane is 1 and the map ID is at least 0x5A
-        cmp #$01
+        // check if the map area is 3
+        // and the map ID is at least 0x5A
+        // (the map area being 3/dungeon forces the map ID to reload)
+        cmp #$03
         bne $+NextModifier__Moon
-        lda $7e1702
-        cmp #$5A
+        ldx $1701
+        cpx #$015a
         bcc $+NextModifier__Moon
 
     %OnMoon:
