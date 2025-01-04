@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Lato');
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
 
 * {
     box-sizing: border-box;
@@ -32,6 +33,19 @@ body {
     color: silver;
     margin-bottom: 1em;
     text-align: center;
+
+    a {
+        color: silver;
+        text-decoration: none;
+    }
+
+    a:visted {
+        color: silver
+    }
+
+    a:hover {
+        color: rgb(150, 150, 150)
+    }
 }
 
 #betaChangelog {
@@ -42,6 +56,21 @@ body {
     color: silver;
     margin-bottom: 1em;
     overflow-x: scroll;
+
+    a {
+        color: silver;
+        text-decoration: none;
+    }
+
+    a:visted {
+        color: silver;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: rgb(150, 150, 150);
+        text-decoration: none;
+    }
 }
 
 #betaChangelogContent {
@@ -139,7 +168,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     cursor: pointer;
-    user-select: none;        
+    user-select: none;
 }
 
 .applyFlagsButton:active {
@@ -160,7 +189,7 @@ body {
 }
 
 .presetCategory {
-    border-bottom: 1px dotted #614183;    
+    border-bottom: 1px dotted #614183;
     color: #e1d8e4;
     text-transform: uppercase;
     padding-left: 0.4em;
@@ -169,7 +198,7 @@ body {
 }
 
 .presetHeader {
-    border-bottom: 1px dotted #614183;    
+    border-bottom: 1px dotted #614183;
     padding-top: 0.5em;
     color: rgb(72 46 78);
     font-size: 0.9em;
@@ -217,7 +246,7 @@ body {
 }
 
 .presetDescription p {
-    margin: 0.7em 0;    
+    margin: 0.7em 0;
 }
 
 .presetDescription a {
@@ -233,8 +262,7 @@ body {
     overflow-wrap: anywhere;
 }
 
-.flagEditor {
-}
+.flagEditor {}
 
 .flagSection {
     margin-bottom: 0.3em;
@@ -247,21 +275,56 @@ body {
     border-left: 1em solid gray;
 }
 
-.shadow, .flagSection, .presetMenu, .metaSection {
+.shadow,
+.flagSection,
+.presetMenu,
+.metaSection {
     box-shadow: 0em 0.5em 1em 0 rgba(0, 0, 0, 0.5);
 }
 
-.flagSection.objectives     { border-left-color: #89dada; }
-.flagSection.keyitems       { border-left-color: #5675b9; }
-.flagSection.pass           { border-left-color: #b3b78d; }
-.flagSection.characters     { border-left-color: #6db16f; }
-.flagSection.treasures      { border-left-color: #c57b8f; }
-.flagSection.shops          { border-left-color: #a988d4; }
-.flagSection.bosses         { border-left-color: #c7a888; }
-.flagSection.challenges     { border-left-color: #a5c2e0; }
-.flagSection.encounters     { border-left-color: #4d828e; }
-.flagSection.glitches       { border-left-color: #a5de65; }
-.flagSection.spoilers       { border-left-color: #111111; }
+.flagSection.objectives {
+    border-left-color: #89dada;
+}
+
+.flagSection.keyitems {
+    border-left-color: #5675b9;
+}
+
+.flagSection.pass {
+    border-left-color: #b3b78d;
+}
+
+.flagSection.characters {
+    border-left-color: #6db16f;
+}
+
+.flagSection.treasures {
+    border-left-color: #c57b8f;
+}
+
+.flagSection.shops {
+    border-left-color: #a988d4;
+}
+
+.flagSection.bosses {
+    border-left-color: #c7a888;
+}
+
+.flagSection.challenges {
+    border-left-color: #a5c2e0;
+}
+
+.flagSection.encounters {
+    border-left-color: #4d828e;
+}
+
+.flagSection.glitches {
+    border-left-color: #a5de65;
+}
+
+.flagSection.spoilers {
+    border-left-color: #111111;
+}
 
 .sectionTitle {
     color: #888;
@@ -277,7 +340,8 @@ body {
     margin: 0.2em;
 }
 
-.flagControl, .flagSelector {
+.flagControl,
+.flagSelector {
     margin-bottom: 0.2em;
 }
 
@@ -289,57 +353,101 @@ body {
     user-select: none;
     color: #aaa;
 }
+
 .flagIcon {
     padding: 0.3em;
     text-align: center;
     min-width: 2em;
 }
+
 .flagTitle {
     padding: 0.3em 0.4em;
 }
+
 .flagName {
     padding: 0.3em;
     min-width: 2em;
     text-align: right;
     background-color: #ccc;
-    color:#eee;
+    color: #eee;
 }
+
 .flagName.container {
     text-align: center;
 }
-.flagButton.hard > .flagName {
+
+.flagButton.hard>.flagName {
     background-color: #ebb;
+}
+
+/* fork tooltip, mostly from https://blog.logrocket.com/creating-beautiful-tooltips-with-only-css/ */
+span.nf {
+    margin-left: .2em;
+    position: relative;
+}
+
+span.nf::after {
+    content: "This flag is from a fork.";
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    left: 100%;
+    margin-left: 15px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #000;
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+}
+
+span.nf:hover::after {
+    display: block;
 }
 
 .flagButton.selected {
     border-color: darkblue;
 }
-.flagControl.container > .flagButton.selected, .flagButton.selected.null {
+
+.flagControl.container>.flagButton.selected,
+.flagButton.selected.null {
     border-color: gray;
 }
-.flagButton.selected.null > .flagTitle {
+
+.flagButton.selected.null>.flagTitle {
     background-color: unset;
 }
+
 .flagButton.selected.hard {
     border-color: darkred;
 }
-.flagButton.selected > .flagTitle {
+
+.flagButton.selected>.flagTitle {
     background-color: white;
     color: black;
 }
-.flagButton.selected > .flagName {
+
+.flagButton.selected>.flagName {
     color: white;
-    background-image: linear-gradient(blue, darkblue);    
+    background-image: linear-gradient(blue, darkblue);
 }
-.flagButton.selected.hard > .flagName {
+
+.flagButton.selected.hard>.flagName {
     color: white;
-    background-image: linear-gradient(red, darkred);    
+    background-image: linear-gradient(red, darkred);
 }
-.flagButton.selected > .flagName.container {
-    background-image: linear-gradient(lightgray, gray);    
+
+.flagButton.selected>.flagName.container {
+    background-image: linear-gradient(lightgray, gray);
 }
-.flagButton.selected.null > .flagName {
-    background-image: linear-gradient(gray, black);    
+
+.flagButton.selected.null>.flagName {
+    background-image: linear-gradient(gray, black);
 }
 
 .flagSubsection {
@@ -347,7 +455,7 @@ body {
     margin-bottom: 0.7em;
 }
 
-.flagControl.selected > .flagSubsection {
+.flagControl.selected>.flagSubsection {
     display: block;
     border-left: 0.5em solid #ddd;
     padding-left: 0.5em;
@@ -359,21 +467,19 @@ body {
     color: #666;
 }
 
-.flagDescription > em {
+.flagDescription>em {
     font-weight: bold;
     font-style: normal;
     color: #864;
 }
 
-.flagDescription > ul {
+.flagDescription>ul {
     margin: 0;
 }
 
-.flagSubsection .flagControlList {
-}
+.flagSubsection .flagControlList {}
 
-.flagSubsection .flagControlList .flagControl {
-}
+.flagSubsection .flagControlList .flagControl {}
 
 .flagControlList.compact {
     display: grid;
@@ -390,7 +496,8 @@ body {
     margin: 0.2em;
 }
 
-.flagControlList.compact .flagTitle, .flagControlList.compact .flagName {
+.flagControlList.compact .flagTitle,
+.flagControlList.compact .flagName {
     padding: 0 0.3em;
 }
 
@@ -398,7 +505,7 @@ body {
     position: relative;
 }
 
-.flagSelectorContainer > .flagButton {
+.flagSelectorContainer>.flagButton {
     border-width: 0.5em;
 }
 
@@ -406,7 +513,7 @@ body {
     padding: 0.6em;
     border: 1px solid gray;
     background-color: #f4f4f4;
-    box-shadow: 0.1em 0.2em 0.8em 0 rgba(0,0,0,0.5);
+    box-shadow: 0.1em 0.2em 0.8em 0 rgba(0, 0, 0, 0.5);
     display: none;
     position: absolute;
     left: 0.5em;
@@ -450,7 +557,7 @@ body {
     margin-right: -0.5em;
 }
 
-.flagSelectorContainer.important > div {
+.flagSelectorContainer.important>div {
     margin: 0;
 }
 
@@ -469,7 +576,7 @@ body {
     font-family: 'Anonymous Pro', monospace;
 }
 
-#summaryInfo > div.label {
+#summaryInfo>div.label {
     padding: 1em;
 }
 
@@ -485,8 +592,7 @@ body {
     font-style: italic;
 }
 
-#flagLogicLogDisplay .list {
-}
+#flagLogicLogDisplay .list {}
 
 #flagLogicLogDisplay .correction {
     color: #fbef7a;
@@ -551,7 +657,7 @@ body {
 .centerer {
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
 }
 
 #generateButtonContainer {
@@ -636,13 +742,14 @@ body {
     margin-top: 0.5em;
 }
 
-#testSettings {
-}
+#testSettings {}
 
 @keyframes spinner {
-    to {transform: rotate(360deg);}
+    to {
+        transform: rotate(360deg);
+    }
 }
-   
+
 .spinner {
     width: 20px;
     height: 20px;
@@ -665,7 +772,7 @@ body {
         display: block;
     }
 
-    .flagButton > .flagName {
+    .flagButton>.flagName {
         font-family: 'Open Sans Condensed', sans-serif;
         font-size: 0.9em;
     }

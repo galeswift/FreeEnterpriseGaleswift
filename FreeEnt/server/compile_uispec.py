@@ -119,7 +119,7 @@ while section_parts:
                     anonymous_id_counter += 1
 
                 line = line[len(m[0]):]
-                m = re.search(r'^[!#\-*]+', line)
+                m = re.search(r'^[!#\-*^]+', line)
                 if m:
                     modifiers = set(m[0])
                     line = line[len(m[0]):].strip()
@@ -141,6 +141,8 @@ while section_parts:
                     flag_control['null'] = True
                 if '*' in modifiers:
                     flag_control['important'] = True
+                if '^' in modifiers:
+                    flag_control['fork'] = True
 
                 if control_type in ["select", "separator"]:
                     flag_control['type'] = control_type

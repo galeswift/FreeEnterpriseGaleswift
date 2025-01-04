@@ -3,6 +3,7 @@ import re
 import os
 import base64
 import json
+import markdown
 import urllib.parse
 
 import cherrypy
@@ -11,6 +12,7 @@ import pymongo
 import requests
 
 from . import tasks, seeds
+from markdown import extensions
 
 import FreeEnt
 
@@ -210,8 +212,36 @@ class Site:
             production=(not cherrypy.request.app.config['FreeEnt']['debug']),
             initial_flags = (_json_escape_str(flags) if flags else ''),
             initial_seed = (seed if seed else ''),
-            beta_changelog = beta_changelog
+            beta_changelog = beta_changelog,
+            fork_link=FreeEnt.FORK_SOURCE_URL
             )
+
+    @cherrypy.expose
+    def fork_info(self, page_name=None, md_file=None):
+        if page_name:
+            return self._env.get_template(f"{page_name}.html").render(page_name=page_name)
+            
+        elif md_file:
+            with open(os.path.join(os.path.dirname(__file__), 'markdown', f"{md_file}.md"), 'r') as infile:
+                  file_text = infile.read()
+            mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition'])
+            return self._env.get_template('markdown_template.html').render(title=md_file,content=mdText, fork_link=FreeEnt.FORK_SOURCE_URL)
+        
+        else:
+            with open(os.path.join(os.path.dirname(__file__), 'markdown', f"main_info.md"), 'r') as infile:
+                  file_text = infile.read()
+            mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition'])
+            return self._env.get_template('fork_info.html').render(fork_link=FreeEnt.FORK_SOURCE_URL, content=mdText)
+            
+        
+    @cherrypy.expose
+    def markdown_test(self, md_file="_example"):
+        if not cherrypy.request.app.config['FreeEnt']['debug']:
+            raise cherrypy.HTTPRedirect("/")
+        with open(os.path.join(os.path.dirname(__file__), 'markdown', f"{md_file}.md"), 'r') as infile:
+                  file_text = infile.read()
+        mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition'])
+        return self._env.get_template('markdown_template.html').render(title=md_file,content=mdText)
 
     @cherrypy.expose
     @cherrypy.tools.allow(methods=['POST'])

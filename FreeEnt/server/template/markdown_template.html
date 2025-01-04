@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="/static/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/fork_info.css">
+
+    <title>FF4FE - {{ title }}</title>
+</head>
+
+<body>
+    <article class="content-width">
+        <section class="title-card">
+            <h1 class="title-h1">{{ title }}
+                {% if fork_link %}
+                <a href="{{ fork_link }}" class="nf nf-dev-git" target="_blank"></a>
+                {% endif %}
+                <a href="/make" class="nf nf-md-controller_classic"></a>
+            </h1>
+        </section>
+
+        <section id="document" class="info-section">
+            {% autoescape false %}
+            {{ content }}
+            {% endautoescape %}
+        </section>
+    </article>
+</body>
+
+</html>
