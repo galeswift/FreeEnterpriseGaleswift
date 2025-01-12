@@ -5570,6 +5570,34 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "@anon57",
+        "title": "Change the PRNG table",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "-prng:shuffle",
+            "title": "Shuffle the PRNG table values"
+          },
+          {
+            "flag": "-prng:random",
+            "title": "Randomize the PRNG values independently",
+            "description": "To prevent softlocks, the randomized PRNG table will be such that all battle slots are available for random targetting."
+          },
+          {
+            "flag": "-prng:consecutive",
+            "title": "Replace the PRNG table with the numbers 0 to 255 in order",
+            "hard": true
+          },
+          {
+            "flag": "-prng:mostlysingle",
+            "title": "Replace the PRNG table with (mostly) a single value",
+            "description": "To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "@anon58",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -5600,12 +5628,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon58",
+        "flag": "@anon59",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon59",
+            "flag": "@anon60",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -5692,7 +5720,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon60",
+            "flag": "@anon61",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -5733,7 +5761,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>",
         "subcontrols": [
           {
-            "flag": "@anon61",
+            "flag": "@anon62",
             "title": "Select challenge",
             "type": "select",
             "subcontrols": [
@@ -5912,7 +5940,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon62",
+        "flag": "@anon63",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
@@ -5939,7 +5967,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon63",
+        "flag": "@anon64",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -5993,7 +6021,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon64",
+            "flag": "@anon65",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -6009,7 +6037,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

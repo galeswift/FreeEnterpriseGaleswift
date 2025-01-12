@@ -507,6 +507,11 @@
 ...(-exp:geometric_20) Repeated monster kills scale down in EXP to 20%
 ...(-exp:geometric_10) Repeated monster kills scale down in EXP to 10%
 ...(-exp:geometric_0) Repeated monster kills do not award EXP
+<>^ Change the PRNG table
+.(-prng:shuffle) Shuffle the PRNG table values
+.(-prng:random) Randomize the PRNG values independently
+.(-prng:consecutive)! Replace the PRNG table with the numbers 0 to 255 in order
+.(-prng:mostlysingle)! Replace the PRNG table with (mostly) a single value
 [] Restore vanilla behaviors
 .[-vanilla:hobs] Vanilla Hobs spell
 .[-vanilla:growup] Vanilla Dwarf Castle summons

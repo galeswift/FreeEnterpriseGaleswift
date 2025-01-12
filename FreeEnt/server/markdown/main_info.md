@@ -172,35 +172,35 @@ These flags are for changing how the agility system works. Some flags choose dif
 
 For agility flags that tend to increase the base ATB, the Count spell duration is lengthened to make it significantly more reasonable (otherwise back attack Plague is nearly impossible). 
 
-### `agility:vanilla` {: .h6 }
+### `-agility:vanilla` {: .h6 }
 
 This flag is simply `-vanilla:agility` renamed (so your anchor will always be the Cecil in the earliest slot, or else the character in the earliest slot).
 
-### `agility:slowest` {: .h6 }
+### `-agility:slowest` {: .h6 }
 
 The character with the lowest agility stat is chosen as the anchor (including 0 Agility, which could potentially be advantageous).
 
-### `agility:fastest` {: .h6 }
+### `-agility:fastest` {: .h6 }
 
 The character with the largest agility stat is chosen as the anchor. This flag doubles the Count timer.
 
-### `agility:average` {: .h6 }
+### `-agility:average` {: .h6 }
 
 The average agility of your party (rounded down, of course) is the value used for anchoring. Empty slots do not count.
 
-### `agility:median` {: .h6 }
+### `-agility:median` {: .h6 }
 
 The median agility of your party (the agility stat in the middle, or the lower of the two in the middle for an even number of characters) is the value used for anchoring. Empty slots do not count.
 
-### `agility:monster` {: .h6 }
+### `-agility:monster` {: .h6 }
 
 The average agility of the _monsters_ in the battle (including pre-swooned/hidden monsters) is the value used for anchoring. This flag is incredibly dangerous, because most later-game monsters are much faster than your party members.
 
-### `agility:flat` {: .h6 }
+### `-agility:flat` {: .h6 }
 
 Every character and monster will have the same base ATB (5 ticks, unless scaled by another flag), regardless of their agility stat. 
 
-### `agility:750formula` {: .h6 }
+### `-agility:750formula` {: .h6 }
 
 - Idea: S3
 - Design: S3
@@ -209,11 +209,11 @@ Every character and monster will have the same base ATB (5 ticks, unless scaled 
 
 The agility formula is completely reworked to be dependent on the absolute speed stat instead of relative to an anchor. The base ATB is now (15 * 5 * 10) / (Agi + 32) ticks, where the 5 can be scaled up to 10 or down to 1 by another flag (the 750 in the flag name comes from the numerator). This flag will tend to increase the number of empty ticks/ticks between actions. This flag triples the Count timer.
 
-### `agility:anchor[7/27/28/41/42]` {: .h6 }
+### `-agility:anchor[7/27/28/41/42]` {: .h6 }
 
 The specified value will be the agility value used for anchoring. The values are chosen to either let most characters at endgame level be RA1 (via 7), force Zeromus to be RA2 or RA3 (28, 42), or force Zeromus to be the worst possible RA1 or RA2 (27, 41). Other fights, especially at lower levels, may be very slow or difficult. The Count timer is doubled for 27/28 and tripled for 41/42.
 
-### `agility:scale[1/10]` {: .h6 }
+### `-agility:scale[1/10]` {: .h6 }
 
 This flag will scale the base ATB for the anchor up to 10 ticks or down to 1 tick (which also impacts flat agility and the 750formula agility). Battles will either feel very slow or very fast. Under 10 tick scaling, the Count timer is doubled.
 
@@ -233,39 +233,63 @@ This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now inc
 
 These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. 
 
-### `exp:crystalbonus` {: .h6 }
+### `-exp:crystalbonus` {: .h6 }
 
 Earn double experience after obtaining the Crystal.
 
-### `exp:objectivebonus[25/10/_num]` {: .h6 }
+### `-exp:objectivebonus[25/10/_num]` {: .h6 }
 
 Earn extra experience based on how many objectives you have completed up until the end of the battle (not including any potential objectives you complete _after_ the battle ends). The options are 25% per objective (25), 10% per objective (10), and a percentage depending on the percentage of the available objectives you have completed (_num). For example, if there are 7 objectives in the seed and you complete 3 of them, then you will earn 42% bonus experience (no matter how many objectives you need to complete to get the objective completion reward). This flag is forced off if there are no objectives,
 
-### `exp:kicheckbonus[10/5/2/_num]` {: .h6 }
+### `-exp:kicheckbonus[10/5/2/_num]` {: .h6 }
 
 Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num), not counting the starting key item check. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
 
-### `exp:zonkbonus[10/5/2]` {: .h6 }
+### `-exp:zonkbonus[10/5/2]` {: .h6 }
 
 A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had, not counting what happens with the starting key item. The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
 
-### `exp:miabbonus[100/50]` {: .h6 }
+### `-exp:miabbonus[100/50]` {: .h6 }
 
 Under this flag, MIAB encounters award double or 1.5 times the usual EXP.
 
-### `exp:moonbonus[200/100]` {: .h6 }
+### `-exp:moonbonus[200/100]` {: .h6 }
 
 Under this flag, encounters on the moon (the surface, Cave Bahamut, or LST) award double or triple the usual EXP.
 
-### `exp:maxlevelbonus` {: .h6 }
+### `-exp:maxlevelbonus` {: .h6 }
 
 Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5). For example, a pack of 3 Warlocks has smallest monster level 73, so if your largest level is 25 (base level Edge), then we compute 5 + 2*25 = 55, and take 73-55 = 18. 18 divided by 5 is 3.6, so there are 3 deficits of 5, so you would receive 3 * 20% = 60% bonus experience.
 
-### `exp:geometric[90/80/.../10/0]` {: .h6 }
+### `-exp:geometric[90/80/.../10/0]` {: .h6 }
 
 In vanilla FF4, each instance of a monster type killed in battle gives the same amount of EXP; there are at most three monster types, and their exp gains get added up separately. (Meaning that the graphical position of the monster doesn't matter; e.g. if there are three Warlocks on screen, they are all just Warlocks, independent of "which" Warlocks they are.) Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not per graphical position in battle (as above).
 
 The options are multiples of 10 from 90 down to 0, resulting in 90% exp scaling, 80% scaling, etc., down to 0% scaling. Analysis of the geometric series `a(1+r+r^2+...)`, where `a` is the base exp for that monster type and `r` is the scale factor (the parameter divided by 100), shows that exp per monster type is bounded above by `a/(1-r)`, meaning that arbitrarily large grinds are now not possible. For examble, if `r` is 0.5, then at most you can get double the base experience from defeating monsters of a given type (e.g. in a D$ grind). Thus, life glitching is not as effective, and on 0% scaling is completely worthless. Moreover, on 0% scaling it is more effective to fight encounters where all of the monsters are different, since duplicate monsters do not give extra exp.
+
+## PRNG Flags
+
+- Idea: various, including ScytheMarshall and cassidy (for `-prng:random`)
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+These flags change the PRNG table for the game (a table of 256 bytes from 0-255, shuffled).
+
+### `-prng:shuffle` {: .h6 }
+
+This flag provides a differently shuffled table of the bytes 0-255.
+
+### `-prng:random` {: .h6 }
+
+This flag independently randomizes each of the 256 bytes of the table, so that there is no guarantee that every number shows up and there are probably repeats. There is a safety check made to ensure that the table allows for every battle slot to be selected. Otherwise, the game will softlock in battle because it cannot choose a valid target.
+
+### `-prng:consecutive` {: .h6 }
+
+This flag replaces the table with the numbers 0-255 in ascending order.
+
+### `-prng:mostlysingle` {: .h6 }
+
+This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 12 of the entries are replaced with 12 numbers near the random integer in order to allow every battle slot to be targettable. (Hence, "mostly single".) 
 
 ## Zeromus Flags
 
@@ -277,47 +301,47 @@ These flags handle the randomization of Zeromus and the relevant battle scripts.
 
 There are four main script change flags: `-z:physical`, `-z:physmag`, `-z:chaos`, and `-z:lavosshell`. Within those flags are two other flags that modify the scripts: `-z:whichbang` and `-z:phaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `-z:nonerfs` and `-z:mustnerf`.
 
-### `z:physical` {: .h6 }
+### `-z:physical` {: .h6 }
 
 Replaces Big Bang and Meteo with Dark Wave, direct Virus with Needle-all, and direct Nuke with Jump. Yes, thanks to the Kain cutscene fight in vanilla, monsters can Jump. The counter attacks are changed so that Fight, Aim, Jump, and Dart are countered by Fight, Counter-all, a very strong Fight, and a very strong single-target Counter; the latter two do not nerf Dark Wave but the first two do. Zeromus's attack stats are set/changed so that damage is roughly equivalent to the vanilla damage, but since Dark Wave is unblockable, it's possibly much more dangerous.
 
 It turns out that spells do not correctly retarget when the only monsters left in the battle are in the back row, so the game softlocks. Normally this isn't an issue, since monsters can't temporarily disappear from battle (and Cecil does not have spells in the cutscene fight), but since Zeromus is Jumping, we need to patch this behaviour.
 
-### `z:physmag` {: .h6 }
+### `-z:physmag` {: .h6 }
 
 50% of the time, this flag does nothing. The other 50% of the time, Zeromus gets the physical scripting from `-z:physical`. The point of this flag is to introduce uncertainty as to what Zeromus is going to do.
 
-### `z:chaos` {: .h6 }
+### `-z:chaos` {: .h6 }
 
 This flag replaces Zeromus's three main attack phases with three new phases consisting of 2-5 attacks (1-3 for the third phase), floor(n/2) of which are "shake" attacks (stronger target-all nerfable attacks preceded by a shake, just like Big Bang; no shakes in third phase), and at most two Black Holes potentially following some attacks. Each phase has at least one damaging move, so that you will eventually lose the battle if you do nothing. The counter attacks are chosen at random, though the triggers for those counters are unchanged.
 
 The flag is named after Chaos, the final boss of FF1 and notorious casino simulator in speedruns.
 
-### `z:lavosshell` {: .h6 }
+### `-z:lavosshell` {: .h6 }
 
 This flag replaces Zeromus's three main attack phases with three random scripts from other monsters (or their reactions), as long as those phases do not modify condition/reaction flags and do not automatically end the battle (among other things). These scripts will be able to defeat you if you do nothing. Some of these scripts are _significantly_ more dangerous than others.
 
 The flag is named after the Lavos Shell, the first form of the final boss of Chrono Trigger (which copies bosses in increasing order of power throughout the game before swapping to its own attack script).
 
-### `z:whichbang` {: .h6 }
+### `-z:whichbang` {: .h6 }
 
 For Z scripts that include Big Bangs, this flag replaces each instance Big Bang with a similar target-all spell chosen from a small list (including Big Bang itself). It could be a different spell for each Big Bang instance.
 
-### `z:phaseshift` {: .h6 }
+### `-z:phaseshift` {: .h6 }
 
 For the non-random-phase scripts, this flag shuffles the order of the three attack phases, so you could see Meteo phase first, then Virus phase, then Nuke phase. The HP thresholds and reactions do not change.
 
-### `z:nonerfs` {: .h6 }
+### `-z:nonerfs` {: .h6 }
 
 This flag places chains around every Big Bang type attack that Zeromus does, so that you cannot modify the stat used for the attack (i.e. you cannot nerf Big Bangs). No extra turns have been added, so Zeromus will be significantly more dangerous.
 
-### `z:mustnerf` {: .h6 }
+### `-z:mustnerf` {: .h6 }
 
 This flag changes Zeromus's base spell power to 255 (or attack stats to (255,99,255), if physical scripting is enabled) and changes the scripted stat changes for Big Bang type attacks to be 253 for spell power and (255,99,255) for physical scripting. In this way, Zeromus will do 9999 damage almost guaranteed, unless you nerf the Big Bangs/Dark Waves.
 
 Dark Wave is normally bugged; it does not cap its damage, so it breaks the graphical display/can heal by overflowing 14-bit damage. So, we need to patch that issue.
 
-### `z:vanillasprite` {: .h6 }
+### `-z:vanillasprite` {: .h6 }
 
 This flag is just `-vanilla:z` renamed.
 

@@ -539,6 +539,16 @@ def select_from_catalog(catalog_path, env):
 
 #--------------------------------------------------------------------------
 
+def check_prng_safe(list_of_bytes):
+    # for "safe" prng, need to ensure that every battle slot can be obtained
+    check_0_4 = set(range(0,5)).issubset(set([i % 5 for i in list_of_bytes]))
+    check_0_7 = set(range(0,8)).issubset(set([i % 8 for i in list_of_bytes]))
+    check_0_13 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
+
+    return (check_0_4 and check_0_7 and check_0_13)
+
+#--------------------------------------------------------------------------
+
 def build(romfile, options, force_recompile=False):
     flags_version = options.flags.get_version()
     if flags_version is not None and list(flags_version) != list(version.NUMERIC_VERSION):
@@ -791,6 +801,30 @@ def build(romfile, options, force_recompile=False):
         exp_geometric_mod = int(exp_geometric_mod) // 10
         env.add_substitution('experience geometric numerator', f'        lda #${exp_geometric_mod:02X}')
         env.add_toggle('experience_geometric')
+
+    # prng changes; changing the PRNG table at $14EE00-14EEFF
+    prng_mod = env.options.flags.get_suffix('-prng:')
+    if prng_mod:
+        if prng_mod == 'shuffle':
+            prng_bytes = list(range(0,256))
+            env.rnd.shuffle(prng_bytes)
+        elif prng_mod == 'random':
+            prng_bytes = [env.rnd.randrange(0,256) for i in range(0,256)]
+            while not check_prng_safe(prng_bytes):
+                prng_bytes = [env.rnd.randrange(0,256) for i in range(0,256)]
+        elif prng_mod == 'consecutive':
+            prng_bytes = list(range(0,256))
+        elif prng_mod == 'mostlysingle':
+            random_integer = env.rnd.randrange(0,256)
+            lower_bound = max(random_integer-6,0)
+            if min(random_integer+6,255) == 255:
+                lower_bound = 243
+            extra_ints = list(range(lower_bound,lower_bound+13))
+            extra_ints.remove(random_integer)
+            env.rnd.shuffle(extra_ints)
+            prng_bytes = [(extra_ints[(i // 20) - 1] if i % 20 == 0 and i // 20 > 0 else random_integer) for i in range(0,256)]
+
+        env.add_binary(BusAddress(0x14EE00), prng_bytes, as_script=False)
 
     if options.flags.has('vintage'):
         env.add_files(

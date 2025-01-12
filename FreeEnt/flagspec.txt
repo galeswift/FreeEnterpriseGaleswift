@@ -62,6 +62,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -exp:moonbonus200/-exp:moonbonus100
 -exp:maxlevelbonus
 -exp:geometric90/-exp:geometric80/-exp:geometric70/-exp:geometric60/-exp:geometric50/-exp:geometric40/-exp:geometric30/-exp:geometric20/-exp:geometric10/-exp:geometric0
+-prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -vanilla:hobs
 -vanilla:growup
 -vanilla:fashion
