@@ -35,7 +35,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "Omode:external",
                 "title": "External Objective",
-                "description": "Use the EagleEye provided to you at the start of the game to complete this objective. This objective is intended for external objectives that cannot be referenced in-game, such as bingo goals or meta objectives."
+                "description": "Use the EagleEye provided to you at the start of the game to complete this objective. This objective is intended for external objectives that cannot be referenced in-game, such as bingo goals or meta objectives.",
+                "fork": true
               }
             ]
           },
@@ -3056,7 +3057,8 @@ var FLAG_UISPEC = [
                     "flag": "Kmiab:all",
                     "title": "All miabs (regardless of Kmoon or Kunsafe)",
                     "description": "All monster-in-a-box chests are included, regardless of any Kmoon or Kunsafe settings.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "@anon16",
@@ -3067,19 +3069,22 @@ var FLAG_UISPEC = [
                         "flag": "Kmiab:above",
                         "title": "All above-ground non-LST miabs (including Giant/Lunar Path)",
                         "description": "Includes the monster-in-a-box chests in Zot, Castle Eblan, Cave Eblan, Upper Bab-il, the Giant of Bab-il, and the Lunar Path.",
-                        "hard": true
+                        "hard": true,
+                        "fork": true
                       },
                       {
                         "flag": "Kmiab:below",
                         "title": "All below-ground miabs",
                         "description": "Includes the monster-in-a-box chests in Lower Bab-il, Sylph Cave, and the Feymarch.",
-                        "hard": true
+                        "hard": true,
+                        "fork": true
                       },
                       {
                         "flag": "Kmiab:lst",
                         "title": "All LST miabs",
                         "description": "Includes the monster-in-a-box chests in the Lunar Subterrane. This setting ignores the Kmoon or Kunsafe safety check.",
-                        "hard": true
+                        "hard": true,
+                        "fork": true
                       }
                     ]
                   }
@@ -3118,7 +3123,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "Kunweighted",
                 "title": "Key items will be placed uniformly at random",
-                "description": "Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting."
+                "description": "Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting.",
+                "fork": true
               }
             ]
           }
@@ -3756,6 +3762,7 @@ var FLAG_UISPEC = [
             "flag": "@Cthrifttier",
             "title": "Characters start with a full set of random gear",
             "description": "Characters start with a full set of gear: weapon(s), possibly a shield, and head/body/arms, all from at most the tier specified. (Duplicate characters will have the same starting gear. Cursed Rings are excluded.)",
+            "fork": true,
             "type": "select",
             "subcontrols": [
               {
@@ -3848,12 +3855,14 @@ var FLAG_UISPEC = [
             "flag": "Cmostlydead",
             "title": "Characters reset to base level",
             "description": "Party members that are swoon at the end of any battle are removed from your party, reset back to base level and equipment, and placed in the Tower of Wishes. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
-            "hard": true
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "Cbrieflydead",
             "title": "Characters go to the Tower of Wishes",
-            "description": "Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)"
+            "description": "Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
+            "fork": true
           }
         ]
       },
@@ -4304,7 +4313,8 @@ var FLAG_UISPEC = [
       {
         "flag": "Tplayable",
         "title": "Chests contain usable items",
-        "description": "Equipment in chests will be usable by at least one character that you can acquire in the seed."
+        "description": "Equipment in chests will be usable by at least one character that you can acquire in the seed.",
+        "fork": true
       },
       {
         "flag": "@anon35",
@@ -4491,13 +4501,15 @@ var FLAG_UISPEC = [
       {
         "flag": "Bwoahdin",
         "title": "Replace Odin's first two Zantetsukens 1 and 2 with random attack",
-        "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack."
+        "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack.",
+        "fork": true
       },
       {
         "flag": "Bspellpower",
         "title": "All bosses gain scaled spell power",
         "description": "Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "@anon40",
@@ -4507,12 +4519,14 @@ var FLAG_UISPEC = [
           {
             "flag": "Bremove:officer_slot",
             "title": "Remove the Officer slot boss fight",
-            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool."
+            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.",
+            "fork": true
           },
           {
             "flag": "Bremove:kingqueen_slot",
             "title": "Remove the KQ Eblan slot boss fight",
-            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.",
+            "fork": true
           }
         ]
       }
@@ -4624,7 +4638,8 @@ var FLAG_UISPEC = [
         "flag": "Enomacgiant",
         "title": "Disable MacGiant encounters",
         "description": "The MacGiant in the Searcher encounter is replaced by a Machine.",
-        "hard": true
+        "hard": true,
+        "fork": true
       }
     ]
   },
@@ -4810,7 +4825,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit:random",
@@ -4952,7 +4968,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit2:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit2:random",
@@ -5094,7 +5111,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit3:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit3:random",
@@ -5122,12 +5140,14 @@ var FLAG_UISPEC = [
         "flag": "-monsterevade",
         "title": "Monsters get physical and magical evasion",
         "description": "Monsters will be able to evade both physical and magical attacks from your party based on their actual stats. (This change constitutes a significant damage reduction for many fights!)",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "-monsterflee",
         "title": "Monsters can flee from battle",
-        "description": "Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active."
+        "description": "Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active.",
+        "fork": true
       },
       {
         "flag": "@smithy",
@@ -5153,7 +5173,8 @@ var FLAG_UISPEC = [
           {
             "flag": "-smith:playable",
             "title": "Kokkol's item will be usable",
-            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed."
+            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
+            "fork": true
           }
         ]
       },
@@ -5161,6 +5182,7 @@ var FLAG_UISPEC = [
         "flag": "@fusoya",
         "title": "Alternative FuSoYa challenges",
         "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "@anon47",
@@ -5207,6 +5229,7 @@ var FLAG_UISPEC = [
         "flag": "@agility",
         "title": "Change the ATB system (or make it vanilla)",
         "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "@anon48",
@@ -5346,12 +5369,14 @@ var FLAG_UISPEC = [
           {
             "flag": "-exp:crystalbonus",
             "title": "Double EXP after obtaining the Crystal",
-            "description": "Under this flag, characters earn double EXP once you obtain the Crystal."
+            "description": "Under this flag, characters earn double EXP once you obtain the Crystal.",
+            "fork": true
           },
           {
             "flag": "@objectiveexp",
             "title": "Award extra EXP for completing objectives",
             "description": "Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each completed objective earns you more EXP from each battle.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon51",
@@ -5379,6 +5404,7 @@ var FLAG_UISPEC = [
             "flag": "@kicheckexp",
             "title": "Award extra EXP for completing key item checks",
             "description": "Normally, completing key item checks does not increase the amount of EXP received from battles. Under this flag, each completed key item check beyond the starting item earns you more EXP from each battle.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon52",
@@ -5410,6 +5436,7 @@ var FLAG_UISPEC = [
             "flag": "@zonkbonusexp",
             "title": "Award extra EXP after non-KI rewards from KI checks",
             "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") you earn more EXP from future battles.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon53",
@@ -5436,6 +5463,7 @@ var FLAG_UISPEC = [
             "flag": "@miabbonusexp",
             "title": "Award extra EXP during MIAB encounters",
             "description": "Normally, MIAB encounters have the same EXP calculation as other encounters. Under this flag, MIAB encounters award double or 1.5 times the usual EXP.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon54",
@@ -5458,6 +5486,7 @@ var FLAG_UISPEC = [
             "flag": "@moonbonusexp",
             "title": "Award extra EXP when on the moon",
             "description": "Normally, location of encounter does not increase EXP. Under this flag, encounters on the moon award double or triple the usual EXP.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon55",
@@ -5479,12 +5508,14 @@ var FLAG_UISPEC = [
           {
             "flag": "-exp:maxlevelbonus",
             "title": "Award extra EXP when underlevelled",
-            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5)."
+            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).",
+            "fork": true
           },
           {
             "flag": "@geometricexp",
             "title": "Decrease EXP earned from repeated same-type monster kills",
             "description": "Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not \"per slot\" in battle.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon56",
@@ -5571,6 +5602,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@anon58",
         "title": "Zeromus fight changes",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "@anon59",
@@ -5726,7 +5758,8 @@ var FLAG_UISPEC = [
               },
               {
                 "flag": "-wacky:dropitlikeitshot",
-                "title": "\"Drop It Like It's Hot\""
+                "title": "\"Drop It Like It's Hot\"",
+                "fork": true
               },
               {
                 "flag": "-wacky:enemyunknown",
@@ -5823,7 +5856,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-wacky:scrambledstats",
                 "title": "\"Scrambled Stats\"",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:sixleggedrace",
@@ -5852,7 +5886,8 @@ var FLAG_UISPEC = [
               },
               {
                 "flag": "-wacky:advertising",
-                "title": "\"Truth in Advertising\""
+                "title": "\"Truth in Advertising\"",
+                "fork": true
               },
               {
                 "flag": "-wacky:darts",
@@ -5865,7 +5900,8 @@ var FLAG_UISPEC = [
               },
               {
                 "flag": "-wacky:whatsmygear",
-                "title": "\"What's My Gear Again?\""
+                "title": "\"What's My Gear Again?\"",
+                "fork": true
               },
               {
                 "flag": "-wacky:zombies",
@@ -5878,6 +5914,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@anon62",
         "title": "Miscellaneous tweaks",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "-tweak:kainmagic",

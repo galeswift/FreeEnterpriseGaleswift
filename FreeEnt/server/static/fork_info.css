@@ -6,6 +6,7 @@
     --bright-wite: rgb(250, 250, 250);
     --link-color: rgb(180, 180, 180);
     --link-color-hover: rgb(150, 150, 150);
+    --darker-background: hsl(240, 11%, 13%);
     --dark-background: hsl(240, 11%, 18%);
     --light-background: hsl(240, 11%, 28%);
     --blue-background: hsl(240, 100%, 19%);
@@ -83,8 +84,11 @@ em {
 }
 
 code {
-    background-color: black;
+    background-color: var(--darker-background);
     color: var(--bright-wite);
+    padding: 0px 4px;
+    border: 1px solid black;
+    border-radius: 4px;
 }
 
 table {
@@ -197,7 +201,7 @@ h4 {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.9rem;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 5px 15px;
 }
 
 h5 {
@@ -207,10 +211,28 @@ h5 {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-variant: small-caps;
 }
 
+h6 {
+    margin: 0;
+    /* remove default margin in Edge */
+
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.3rem;
+    padding: 5px 15px;
+}
+
+/* class specifier for use with higher-level headers to make code headers better */
+.h6 {
+    margin: 0;
+    /* remove default margin in Edge */
+
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.3rem;
+    padding: 5px 15px;
+}
 
 .admonition {
     max-width: 90%;
