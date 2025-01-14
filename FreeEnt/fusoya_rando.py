@@ -522,6 +522,9 @@ def apply(env):
                 location_slot = location_tiers[tier][0]   # we're guaranteed that this tier has a location_slot in it; pick the first element of that list
                 if spell in spell_slots[location_slot]:
                     continue
+                elif location_slot in ['starting1_slot', 'starting2_slot']:
+                    if spell in spell_slots[('starting1_slot' if location_slot == 'starting2_slot' else 'starting2_slot')]:
+                        continue
                 spell_slots[location_slot].append(spell)   # add that spell to the slots for that location if it isn't already there
             
                 # if a location has all its spells, remove that slot, and then check if that's the last slot from a tier; if so, remove weights
