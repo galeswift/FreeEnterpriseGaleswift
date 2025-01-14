@@ -93,12 +93,12 @@ msfpatch {
         // multiply by 2
         asl a
         
-        // subtract min monster level from twice the max party level
+        // subtract twice the max party level from the min monster level
         sta $3945
         pla
         sec
         sbc $3945
-        bmi $+NextModifier__Max
+        bcc $+NextModifier__Max
         // result was non-negative, so divide by 5
         sta $3945
         stz $3946
