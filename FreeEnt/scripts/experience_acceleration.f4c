@@ -250,7 +250,10 @@ msfpatch {
         // (the map area being 3/dungeon forces the map ID to reload)
         cmp #$03
         bne $+NextModifier__Moon
-        ldx $1701
+        lda $1701
+        xba
+        lda $1702
+        tax
         cpx #$015a
         bcc $+NextModifier__Moon
 
