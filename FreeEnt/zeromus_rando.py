@@ -150,7 +150,6 @@ POSSIBLE_CHAOS_COMMANDS = {
     '#spell.Enemy_Poison' : (False, 'spell power', [20], 'all characters'),
     '#spell.Enemy_Maser' : (True, 'spell power', [20], 'all characters'),
     '#spell.Enemy_Demolish' : (True, 'spell power', [20], 'random character'),
-    '#spell.Enemy_Disrupt2' : (True, 'spell power', [20], 'random character'),
     '#spell.Enemy_Remedy' : (False, 'spell power', [20], 'self'),
     '#spell.Enemy_Absorb' : (False, 'spell power', [20], 'self'),
     '#spell.Enemy_Vampire' : (True, 'spell power', [128, 172], 'random character / all characters'),
