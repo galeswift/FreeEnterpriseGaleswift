@@ -457,6 +457,9 @@ def apply(env):
                             spoilers_to_add[i].append(databases.get_spell_spoiler_name(attack_to_add))
                         if black_hole_added:
                             spoilers_to_add[i].append('Blk.Hole')
+            # if we end with the Black Hole commands, then remove the last "wait" to avoid softlocks
+            if chaos_phases[i][-1] == '    wait\n\n':
+                chaos_phases[i].pop()
             # build spoiler entry for this phase
             chaos_spoilers.append((f'Zeromus script {i+1}', ', '.join(spoilers_to_add[i])))
 
