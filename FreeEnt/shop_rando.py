@@ -13,6 +13,22 @@ WHITE_MAGES = set(['tellah', 'rosa', 'porom', 'fusoya'])
 
 SHOP_SPOILER_ORDER = ["Baron", "Mist", "Kaipo", "Fabul", "Mysidia", "Toroia", "Silvera", "Agart", "Cave Eblan", "Dwarf Castle", "Tomra", "Feymarch", "Smithy", "Moon"]
 
+# needed tool for Splayable
+_CHARACTER_TO_USERS = {
+    'cecil' : ['dkcecil', 'pcecil'],
+    'rydia' : ['crydia', 'arydia']
+}
+
+def expand_characters_to_users(char_set):
+    user_set = set()
+    for char in char_set:
+        if char in _CHARACTER_TO_USERS:
+            for user in _CHARACTER_TO_USERS[char]:
+                user_set.add(user)
+        else:
+            user_set.add(char)
+    return user_set
+
 class ShopAssignment:
     def __init__(self, shop):
         self._shop = shop
@@ -66,6 +82,15 @@ def apply(env):
 
     if env.options.flags.has('shops_no_j_items'):
         items_dbview.refine(lambda it: not it.j)
+
+    # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
+    if env.options.flags.has('shops_playable') and not (env.meta.get('wacky_challenge') == 'omnidextrous'):
+        user_set = expand_characters_to_users(env.meta['available_characters'])
+        # In Fist Fight, the only weapons are claws, which are equippable by everyone, so need more complex logic
+        if env.meta.get('wacky_challenge') == 'fistfight':
+            items_dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(it.equip).isdisjoint(user_set)) or (it.subtype == 'claw'))
+        else:
+            items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
 
     if env.meta.get('wacky_challenge') == 'kleptomania':
         items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']) or (it.tier == 1))

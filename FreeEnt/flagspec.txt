@@ -33,7 +33,7 @@ Tvanilla Tshuffle/Tstandard/Tpro/Twild/Twildish/Tempty
 Tsparse:10/Tsparse:20/Tsparse:30/Tsparse:40/Tsparse:50/Tsparse:60/Tsparse:70/Tsparse:80/Tsparse:90
 Tplayable
 Tno:j Tmaxtier:3/Tmaxtier:4/Tmaxtier:5/Tmaxtier:6/Tmaxtier:7 Tmoney/Tjunk
-Svanilla Sshuffle/Sstandard/Spro/Swild/Scabins/Sempty Sfree Ssell:quarter/Ssell:0 Sno:j Sno:apples Sno:sirens Sno:life Sunsafe
+Svanilla Sshuffle/Sstandard/Spro/Swild/Scabins/Sempty Sfree Ssell:quarter/Ssell:0 Sno:j Sno:apples Sno:sirens Sno:life Sunsafe Splayable
 Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bwhyburn/Bwhichburn Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
 Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Eno:jdrops/Eno:sirens Enomacgiant
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
@@ -168,6 +168,7 @@ Sno:apples           shops_no_apples
 Sno:sirens           shops_no_sirens
 Sno:life             shops_no_life
 Sunsafe              shops_unsafe
+Splayable            shops_playable
 
 Bvanilla             bosses_vanilla
 Bstandard            bosses_standard

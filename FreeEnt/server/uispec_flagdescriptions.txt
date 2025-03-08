@@ -183,6 +183,9 @@ A skill-testing randomization, limiting the strength of available items, and wei
 [Swild]
 An unrestricted randomization, allowing equal chance for items to appear in any shop, including the most powerful items.
 
+[Splayable]
+Equipment sold in shops will be usable by at least one character that you can acquire in the seed.
+
 [Sunsafe]
 Normally, the randomizer guarantees Cure2 potions, Life potions and StarVeils are readily available, and that Cure3 potions are available in seeds without white mages. This flag removes those checks.
 

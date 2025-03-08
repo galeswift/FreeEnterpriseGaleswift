@@ -290,6 +290,7 @@
 [Sno:apples] No Apples/Soma Drops in shops
 [Sno:sirens] No Sirens in shops
 [Sno:life] No Life potions in shops
+[Splayable]^ Shops contain usable items
 
 == BOSSES
 <>* Bosses

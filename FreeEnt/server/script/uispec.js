@@ -4439,6 +4439,12 @@ var FLAG_UISPEC = [
       {
         "flag": "Sno:life",
         "title": "No Life potions in shops"
+      },
+      {
+        "flag": "Splayable",
+        "title": "Shops contain usable items",
+        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+        "fork": true
       }
     ]
   },
