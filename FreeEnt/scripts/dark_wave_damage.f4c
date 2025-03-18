@@ -1,23 +1,34 @@
 // Dark Wave doesn't cap its damage, so there's a graphical mistake if it does >9999 damage
 // ("Miss!" or lower 4 out of 5 decimal digits of damage instead of 9999).
-// Hook into the storing-damage part to avoid this issue.
+
+// Unfortunately, both Kick and Dark Wave can miss, so we need to handle 
+// both cases so that Kick doesn't do 9999 when it's supposed to do 
+// no damage. 
+
+
 msfpatch {
-    .addr $03e7d7
-        jsl $=CapDamage__DarkWave
-        nop 
+    .addr $03e7ca
+        jml $=KickDarkWave__HandleMiss
+        nop
+
+    .addr $03e7cf
+        jml $=KickDarkWave__CapDamage
 
     .new
-    CapDamage__DarkWave:
-        ldy $c9
-        cpy #$270f
-        bcc $+StoreDamage
+    KickDarkWave__HandleMiss:
+        ldx #$4000
+        stx $c9
+        bra $+KickDarkWave__StoreDamage
+
+    KickDarkWave__CapDamage:
+        ldx $c9
+        beq $-KickDarkWave__HandleMiss
+
+        cpx #$270f
+        bcc $+KickDarkWave__StoreDamage
         // cap damage at #$270f (i.e. 9999) 
-        ldy #$270f
-        sty $c9
-    %StoreDamage:
-        // displaced first byte of the damage storing;
-        // jump back to do the second byte
-        lda $c9
-        sta $34d4,x
-        rtl
+        ldx #$270f
+        stx $c9
+    %KickDarkWave__StoreDamage:
+        jml $03e7d3
 }
