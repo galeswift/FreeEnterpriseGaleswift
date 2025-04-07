@@ -29,7 +29,7 @@ ordr,flag,world,area,map,index,x,y,contents,jcontents,fight,exclude,spoilerarea,
 27,0x1B,Overworld,Mist,#RydiaHouse,0,22,5,#item.Tiara,,,,Mist Village,Rydia's house,"crawlspace, top left"
 28,0x1C,Overworld,Mist,#RydiaHouse,1,23,5,#item.Cloth,,,,Mist Village,Rydia's house,"crawlspace, top right"
 29,0x1D,Overworld,Mist,#RydiaHouse,2,23,7,#item.RubyRing,,,,Mist Village,Rydia's house,"crawlspace, bottom right"
-30,0x1E,Overworld,Mist,#RydiaHouse,3,22,25,#item.Change,,,,Mist Village,Rydia's house,tiara room
+30,0x1E,Overworld,Mist,#RydiaHouse,3,22,25,#item.Change,,,,Mist Village,Rydia's house,second crawlspace room
 31,0x1F,Overworld,ChocoboForest,#BlackChocoboForest,0,31,8,#item.Carrot,,,,Black Chocobo Forest,,"northeast, top"
 32,0x20,Overworld,ChocoboForest,#BlackChocoboForest,1,31,9,#item.Carrot,,,,Black Chocobo Forest,,"northeast, bottom"
 33,0x21,Overworld,ChocoboForest,#BlackChocoboForest,2,20,29,#item.Carrot,,,,Black Chocobo Forest,,south grass
@@ -232,7 +232,7 @@ ordr,flag,world,area,map,index,x,y,contents,jcontents,fight,exclude,spoilerarea,
 230,0xE6,Underworld,CaveEblan,#CaveEblanExit,0,14,8,#item.Cure3,#item.Kamikaze,,,Cave Eblana,Pass to Bab-il (north connection),top right
 231,0xE7,Underworld,CaveEblan,#CaveEblanExit,1,17,9,#item.Ether2,,,,Cave Eblana,Exit,"top left, through secret path"
 232,0xE8,Underworld,CaveEblan,#CaveEblanExit,2,18,16,#item.Life,#item.Soft,,,Cave Eblana,Exit,middle left
-233,0xE9,Underworld,CaveEblan,#CaveEblanExit,3,18,22,#item.Shuriken,,,,Cave Eblana,Exit,bottom left
+233,0xE9,Underworld,CaveEblan,#CaveEblanExit,3,18,22,#item.Shuriken,,,,Cave Eblana,Pass to Bab-il (north connection),"bottom, through secret path"
 234,0xEA,Underworld,CaveEblan,#CaveEblanSaveRoom,0,17,5,#item.DrainSword,,0x1C6,,Cave Eblana,Save Room,hidden chest
 235,0xEB,Underworld,CaveEblan,#CaveEblanHospital,0,2,5,#item.Cure1,,,,Cave Eblana,Hospital,left pot
 236,0xEC,Underworld,CaveEblan,#CaveEblanHospital,1,14,7,#item.Cure1,,,,Cave Eblana,Hospital,right pot
