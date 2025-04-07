@@ -109,9 +109,10 @@ def apply(env):
             items_dbview.refine(lambda it: not it.j)
         if env.options.flags.has('no_adamants'):
             items_dbview.refine(lambda it: it.const != '#item.AdamantArmor')
-        if env.options.flags.has('playablesmith'):
+        if env.options.flags.has('playablesmith') and not env.meta.get('wacky_challenge') == 'omnidextrous':
             # alt smith item can't be a MoonVeil if Tno:j is on! So restricting to Yang-only without Adamants would be bad; don't restrict in that case.
-            if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') and (env.meta['available_characters']).issubset(set(['yang']))):
+            if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
+                    and (env.meta['available_characters']).issubset(set(['yang']) or env.meta.get('wacky_challenge') == 'fistfight')):
                 items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(env.meta['available_characters']))
         items = items_dbview.find_all(lambda it: it.tier in [7, 8])
         smith_reward = env.rnd.choice(items)
