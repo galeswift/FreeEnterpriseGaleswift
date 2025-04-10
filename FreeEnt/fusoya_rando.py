@@ -409,6 +409,36 @@ MOD_BOSS_SLOT_SPOILER_NAMES = { f"{b}_slot": BOSS_SPOILER_NAMES[b] + " position"
 
 MAYBE_THRESHOLD = 0.15
 
+def get_random_hp_gains(env, max_credits, credits_to_distribute, required_zeros=0, max_gain=1):
+    # the condition parameter is a non-increasing and non-negative quantity; all valid choices leave those two
+    # properties invariant. since max_credits strictly decreases, the recursion has at most the initial max_credits
+    # plus 1 steps. the last step is guaranteed to hit the condition parameter == 0 case because when max_credits is 1, 
+    # required_zeros is either 1 or 0; if it's 1, then credits_to_distribute is already 0, so we choose 0 and in the 
+    # next step the condition parameter is 0. if it's 0, then the only valid option is to choose the value of 
+    # credits_to_distribute, meaning in the next step the condition parameter is exactly 0. 
+    condition_parameter = max_gain * (max_credits - required_zeros) - credits_to_distribute
+
+    if condition_parameter < 0:
+        raise Exception('Invalid parameter combination; please ensure the condition parameter is initially non-negative')
+    # the base case is that there's only one choice for the last few entries, up to permutation    
+    elif condition_parameter == 0:
+        equality_case_list = [max_gain] * (max_credits - required_zeros) + [0] * required_zeros
+        env.rnd.shuffle(equality_case_list)
+        return equality_case_list
+    # when there is flexibility, randomly choose a valid option 
+    # (possible options are bounded above by the max gain or the credits left, and bounded below by the non-negativity restriction)
+    # note that if required_zeros is not as big as possible, the distribution will be somewhat front-loaded because
+    # zeros will be more frequent near the beginning of the list
+    else:
+        possible_options = list(range(max(max_gain - condition_parameter, 0), min(credits_to_distribute,max_gain)+1))
+        # can change the weights to influence the distribution of outcomes; exponential is pretty good here
+        # option_weights = [2 ** ((2 * i) // max_gain) for i in range(len(possible_options))]
+        # option_weights = list(range(len(possible_options)+1))
+        option_weights = [2 ** i for i in range(len(possible_options))]
+        option_weights.reverse()
+        gain_choice = env.rnd.choices(possible_options,weights=option_weights,k=1)
+        return gain_choice + get_random_hp_gains(env, max_credits-1, credits_to_distribute-gain_choice[0], max(required_zeros-(1 if gain_choice[0] == 0 else 0),0), max_gain)
+
 def apply(env):
 
     maybe_spells = False
@@ -419,7 +449,32 @@ def apply(env):
     if env.options.flags.has('japanese_spells'):
         j_spells = True
 
+    max_credits = 14
+    if env.options.flags.has('uncapped_fusoya'):
+        # determine how many credits based on how many boss spots there are available
+        max_credits = 34
+        if env.options.flags.has('no_officer_slot'):
+            max_credits -= 1
+        if env.options.flags.has('no_kq_eblan_slot'):
+            max_credits -= 1
+    elif env.options.flags.has('slowstart_fusoya'):
+        # note that this flag is incompatible with uncapped_fusoya;
+        # exclusion will occur in flagsetcore
+        max_credits = 19
+    elif env.options.flags.has('nerfed_fusoya'):
+        max_credits = 6
+
+    # create the max credits substitution
+    env.add_substitution('fusoya credits', f'${max_credits:02X}')
+
+    if env.options.flags.has_any('slowstart_fusoya','randomhp_fusoya'):
+        env.add_toggle('modified_hp_gains')
+
     if env.options.flags.has('vanilla_fusoya'):
+        if max_credits > 14:
+            max_hp = 500 + max_credits * 100
+            env.add_scripts(f'patch($0faa87 bus) {{ {max_hp % 0x100:02X} {max_hp // 0x100:02X} {max_hp % 0x100:02X} {max_hp // 0x100:02X} }}')
+
         if maybe_spells:
             potential_spells = INTERNAL_SPELL_ORDER.copy()
             if not j_spells:
@@ -463,6 +518,11 @@ def apply(env):
             for spell in black:
                 if env.rnd.random() < MAYBE_THRESHOLD:
                     black.remove(spell)
+
+        if env.options.flags.has('randomhp_fusoya'):
+            # in this case, either the HP max is 3900 or it's 1100, no slowstart option
+            hp_gains = get_random_hp_gains(env, max_credits, max_credits, 0, (5 if max_credits > 14 else 2))
+            env.add_substitution('fusoya challenge hp gains', ' '.join([f'${gain:02X}' for gain in hp_gains]))
     
         env.add_substitution('fusoya initial spells', '')
         env.add_scripts(
@@ -509,6 +569,9 @@ def apply(env):
         
         shuffled_spells = [spell for spell in available_spells]
         env.rnd.shuffle(shuffled_spells)
+
+        if env.options.flags.has('unlearn_fusoya'):
+            full_spell_list = shuffled_spells.copy()
             
         # every spell can be placed at least once, due to combinatorics
         # probably true when a couple slots are removed, but not going to worry about it
@@ -543,11 +606,15 @@ def apply(env):
                 
             shuffled_spells = [spell for spell in available_spells] # update the spells to be placed
             env.rnd.shuffle(shuffled_spells)
-            
-        initial_spells = spell_slots['starting1_slot']
-        initial_spells.extend(spell_slots['starting2_slot'])
-        white = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 0]
-        black = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 1]
+
+        if env.options.flags.has('unlearn_fusoya'):
+            white = [s for s in full_spell_list if ALL_SPELLS_BY_GOODNESS[s] == 0]
+            black = [s for s in full_spell_list if ALL_SPELLS_BY_GOODNESS[s] == 1]
+        else:         
+            initial_spells = spell_slots['starting1_slot']
+            initial_spells.extend(spell_slots['starting2_slot'])
+            white = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 0]
+            black = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 1]
         
         env.add_substitution('fusoya initial spells', '')
         env.add_scripts(
@@ -561,17 +628,22 @@ def apply(env):
         for location_slot in spell_slots:
             learned_spells.extend(spell_slots[location_slot])
         if env.options.flags.has('no_officer_slot'):
-            learned_spells.insert(3, '00') # Officer is the second slot, so its spells would normally start at index 3
-            learned_spells.insert(4, '00')
-            learned_spells.insert(5, '00') 
+            learned_spells.insert(3, 'FF') # Officer is the second slot, so its spells would normally start at index 3
+            learned_spells.insert(4, 'FF')
+            learned_spells.insert(5, 'FF') 
         if env.options.flags.has('no_kq_eblan_slot'):
-            learned_spells.insert(60, '00') # King/Queen Eblan is the twenty-first slot, so its spells would normally start at index 60
-            learned_spells.insert(61, '00')
-            learned_spells.insert(62, '00') 
+            learned_spells.insert(60, 'FF') # King/Queen Eblan is the twenty-first slot, so its spells would normally start at index 60
+            learned_spells.insert(61, 'FF')
+            learned_spells.insert(62, 'FF') 
         env.add_substitution('fusoya challenge spells', '\n'.join(learned_spells))
-            
+
+        if env.options.flags.has('randomhp_fusoya'):
+            hp_gains = get_random_hp_gains(env, max_credits, max_credits, 0, (5 if max_credits > 14 else 3))
+            env.add_substitution('fusoya challenge hp gains', ' '.join([f'{gain:02X}' for gain in hp_gains]))
+
         spoilers = []
-        spoilers.append( ("Initial spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
+        if not env.options.flags.has('unlearn_fusoya'):
+            spoilers.append( ("Initial spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
         for position in MOD_BOSS_SLOT_SPOILER_NAMES: 
             spoilers.append( (MOD_BOSS_SLOT_SPOILER_NAMES[position], ', '.join([databases.get_spell_spoiler_name(s) for s in spell_slots[position]]) ) )
         if env.options.flags.has('kainmagic'):
@@ -614,10 +686,37 @@ def apply(env):
         initial_spells = [p[1] for p in ranked_spells[:6]]
         learned_spells = [p[1] for p in ranked_spells[6:]]
 
-        white = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 0]
-        black = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 1]
+        if env.options.flags.has('randomhp_fusoya'):
+            if env.options.flags.has('slowstart_fusoya'):
+                hp_gains = get_random_hp_gains(env, 6, 3, 3, 1) + get_random_hp_gains(env, 6, 4, 2, 1)
+                hp_gains += get_random_hp_gains(env, max_credits-12, max_credits-7, 0, 3)
+            else:
+                hp_gains = get_random_hp_gains(env, max_credits, max_credits, 0, (5 if max_credits > 14 else 3))
+            env.add_substitution('fusoya challenge hp gains', ' '.join([f'{gain:02X}' for gain in hp_gains]))
+        elif env.options.flags.has('slowstart_fusoya'):
+            hp_gains = get_random_hp_gains(env, 6, 3, 3, 1) + get_random_hp_gains(env, 6, 4, 2, 1) + [1] * (max_credits - 12)
+            env.add_substitution('fusoya challenge hp gains', ' '.join([f'{gain:02X}' for gain in hp_gains]))
 
-        env.add_substitution('fusoya initial spells', '') # this is residual from when Fu Challenge level 1 had you starting with spells
+        # for slowstart, add in 5 sets of FF FF FF into learned_spells, to simulate not learning spells there.
+        # since it is three FFs and not just two/one, the textbox won't pop up, as desired.
+        # then also deal with the spoiler log
+        if env.options.flags.has('slowstart_fusoya'):
+            for idx in range(12):
+                if not hp_gains[idx]:
+                    learned_spells.insert(3*idx,'FF')
+                    learned_spells.insert(3*idx + 1,'FF')
+                    learned_spells.insert(3*idx + 2,'FF')
+
+        if env.options.flags.has('unlearn_fusoya'):
+            env.rnd.shuffle(ranked_spells)
+            white = [s[1] for s in ranked_spells if ALL_SPELLS_BY_GOODNESS[s[1]] == 0]
+            black =[s[1] for s in ranked_spells if ALL_SPELLS_BY_GOODNESS[s[1]] == 1]
+            learned_spells.reverse()
+        else:
+            white = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 0]
+            black = [s for s in initial_spells if ALL_SPELLS_BY_GOODNESS[s] == 1]
+
+        env.add_substitution('fusoya initial spells', '') # under vanilla Fu, the j-spells f4c adds spells here, so blank that out
         env.add_substitution('fusoya challenge spells', '\n'.join(learned_spells))
 
         env.add_scripts(
@@ -626,11 +725,17 @@ def apply(env):
             )
 
         spoilers = []
-        spoilers.append( ("Initial spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
+        if not env.options.flags.has('unlearn_fusoya'):
+            spoilers.append( ("Initial spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
         for i in range(0, len(learned_spells), 3):
             boss_number = (i // 3) + 1
             level_spells = learned_spells[i:i+3] # syntax handles fewer than three spells for free
-            spoilers.append( (f"Boss {boss_number}", ', '.join([databases.get_spell_spoiler_name(s) for s in level_spells])) )
+            if level_spells[0] == 'FF': # happens only under slowstart_fusoya
+                spoilers.append( (f"Boss {boss_number}", 'No spells learned') )
+            else:
+                spoilers.append( (f"Boss {boss_number}", ', '.join([databases.get_spell_spoiler_name(s) for s in level_spells])) )
+        if env.options.flags.has('unlearn_fusoya'):
+            spoilers.append( ("Permanent spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
         if env.options.flags.has('kainmagic'):
             spoilers = [(p, s.replace('Sight', 'Lance')) for p,s in spoilers]
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)

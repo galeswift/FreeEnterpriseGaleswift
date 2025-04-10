@@ -447,6 +447,16 @@ class FlagLogicCore:
         if len(flagset.get_list(r'^-smith:playable')) == len(flagset.get_list(r'^-smith:')):
             self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable'])
 
+        # add restrictions in case people try to fudge the fusoya flags
+        if flagset.has('-fusoya:slowstart') and flagset.has('-fusoya:uncapped'):
+            self._simple_disable(flagset, log, 'Uncapped FuSoYa cannot also have slowstart', ['-fusoya:slowstart'])
+        if flagset.has('-fusoya:location') and flagset.has('-fusoya:slowstart'):
+            self._simple_disable(flagset, log, 'Location FuSoYa cannot have slowstart', ['-fusoya:slowstart'])
+        if flagset.has('-fusoya:nerfed'):
+            self._simple_disable_regex(flagset, log, 'Nerfed FuSoYa cannot have slowstart or unlearn spells', r'^-fusoya:(slowstart|unlearn)')
+        if flagset.has('-fusoya:vanilla'):
+            self._simple_disable_regex(flagset, log, 'Vanilla FuSoYa cannot have his HP or spells change', r'^-fusoya:(slowstart|unlearn|randomhp)')
+
         if flagset.has('-monsterflee') and not flagset.has('-monsterevade'):
             flagset.set('-monsterevade')
             self._lib.push(log, ['correction', 'Monsters require evade to flee; forced to add -monsterevade'])

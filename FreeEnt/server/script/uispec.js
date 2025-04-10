@@ -5186,40 +5186,210 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "@fusoya",
-        "title": "Alternative FuSoYa challenges",
+        "title": "FuSoYa challenges",
         "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
         "fork": true,
         "subcontrols": [
           {
             "flag": "@anon47",
-            "title": "Spell learning changes",
+            "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
               {
+                "flag": "@normalfu",
+                "title": "Usual FuSoYa challenge",
+                "subcontrols": [
+                  {
+                    "flag": "@anon48",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon49",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
                 "flag": "-fusoya:vanilla",
                 "title": "Vanilla FuSoYa",
-                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset."
+                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon50",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:sequential_p",
                 "title": "Fixed spell order (Palom/Porom)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells."
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon48",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon49",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:sequential_r",
                 "title": "Fixed spell order (Rydia/Rosa)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit)."
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
+                "subcontrols": [
+                  {
+                    "flag": "@anon48",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon49",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:location",
                 "title": "Location-dependent spells",
-                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells."
+                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon51",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon52",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:nerfed",
                 "title": "Fixed starting spells, no learning",
-                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual.",
-                "hard": true
+                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
+                "hard": true,
+                "subcontrols": [
+                  {
+                    "flag": "@anon53",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -5238,7 +5408,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon48",
+            "flag": "@anon54",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -5289,7 +5459,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon49",
+                    "flag": "@anon55",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -5329,7 +5499,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon50",
+                "flag": "@anon56",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -5385,7 +5555,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon51",
+                "flag": "@anon57",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -5413,7 +5583,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon58",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -5445,7 +5615,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon59",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -5472,7 +5642,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon54",
+                "flag": "@anon60",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -5495,7 +5665,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon55",
+                "flag": "@anon61",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -5524,7 +5694,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon56",
+                "flag": "@anon62",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -5575,7 +5745,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon57",
+        "flag": "@anon63",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -5603,7 +5773,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon58",
+        "flag": "@anon64",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -5634,12 +5804,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon59",
+        "flag": "@anon65",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon60",
+            "flag": "@anon66",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -5726,7 +5896,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon61",
+            "flag": "@anon67",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -5767,7 +5937,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>",
         "subcontrols": [
           {
-            "flag": "@anon62",
+            "flag": "@anon68",
             "title": "Select challenge",
             "type": "select",
             "subcontrols": [
@@ -5946,7 +6116,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon63",
+        "flag": "@anon69",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
@@ -5973,7 +6143,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon64",
+        "flag": "@anon70",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -6027,7 +6197,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon65",
+            "flag": "@anon71",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -6043,7 +6213,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon66",
+                "flag": "@anon72",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

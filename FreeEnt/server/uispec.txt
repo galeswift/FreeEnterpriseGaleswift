@@ -436,13 +436,32 @@
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
 ..(-smith:super) Kokkol crafts a weapon from FF4 Advance
 .[-smith:playable]^ Kokkol's item will be usable
-[@fusoya]^ Alternative FuSoYa challenges
-.<> Spell learning changes
+[@fusoya]^ FuSoYa challenges
+.<> Spell learning categories
+..(@normalfu) Usual FuSoYa challenge
+...<> Learning modifications
+....(-fusoya:slowstart) 5 of the first 12 bosses defeated will not reward spells or HP
+....(-fusoya:unlearn) FuSoYa will lose spells instead of learning them
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
+....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 ..(-fusoya:vanilla) Vanilla FuSoYa
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
 ..(-fusoya:sequential_p) Fixed spell order (Palom/Porom)
+...[ECHO:@normalfu]
 ..(-fusoya:sequential_r) Fixed spell order (Rydia/Rosa)
+...[ECHO:@normalfu]
 ..(-fusoya:location) Location-dependent spells
+...<> Learning modifications
+....(-fusoya:unlearn) FuSoYa will lose spells instead of learning them
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
+....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 ..(-fusoya:nerfed)! Fixed starting spells, no learning
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
+....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 .[-fusoya:maybe]! Spells not guaranteed to be learned
 [@agility]^ Change the ATB system (or make it vanilla)
 .<> Different anchoring or ATB formula
