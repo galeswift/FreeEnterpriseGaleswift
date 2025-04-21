@@ -606,8 +606,8 @@ patch($435D6) { 02 }
 patch($4370D) { 02 }
 
 // change end credits text scroll timer length
-patch($13D61E bus) { A8 }
-patch($13D624 bus) { 0D }
+patch($13D61E bus) { {% credits scroll timer length low %} }
+patch($13D624 bus) { {% credits scroll timer length high %} }
 
 
 text($22d800 bus) {
@@ -787,6 +787,9 @@ text($22d800 bus) {
 ~~~~~~~~~~~~~~CROW
 ~~~~~~~~~~~MYSELF086
 ~~~~~~~~~~CASSIDYMOEN
+~~~~~~~~~SCYTHEMARSHALL
+~~~~~~~~~~~JAYP12323
+~~~~~~~~~~~~~SGRUNT
 
 ~~~~~~~~~special thanks
 
