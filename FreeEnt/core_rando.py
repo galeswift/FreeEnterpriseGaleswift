@@ -728,6 +728,9 @@ def apply(env):
         if env.options.flags.has('no_free_key_item'):
             tests.append('dmist')
 
+        if env.options.flags.has('key_item_from_pink_tail'):
+            tests.append('#item.Pink')
+
         underground_path_disallowed = []
         if not env.options.flags.has('bosses_vanilla') and not env.options.flags.has('bosses_unsafe'):
             # must be able to access underground without encountering, golbez, wyvern, valvalis or odin replacement
