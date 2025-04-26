@@ -914,6 +914,11 @@ def build(romfile, options, force_recompile=False):
     elif not env.options.flags.has('superhero_challenge'):
         env.add_substitution('quickstart superhero', '')
 
+    credits_line_count = 225
+    credits_tick_count = credits_line_count * 16
+    env.add_substitution('credits scroll timer length low', f'{credits_tick_count & 0xff:02X}')
+    env.add_substitution('credits scroll timer length high', f'{credits_tick_count >> 8:02X}')
+
     scripts = []
     script_preprocessor = ScriptPreprocessor(env)
     for script in env.scripts:

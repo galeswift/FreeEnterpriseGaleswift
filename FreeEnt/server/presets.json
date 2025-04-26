@@ -37,6 +37,41 @@
     ]
   },
   {
+    "category": "Damcyan Grand Prix",
+    "presets": [
+        {
+            "name": "Zeromus Rush",
+            "description": "Start in go mode, staring down Zeromus, without Edward or FuSoYa. This is more meant to test team building and execution when given a bunch of tools to do so, not execute the niche or semi-niche strats that pop up in Tpro and/or Spro settings (There may be seeds where those niche strats are optimal, but that’s more the structure of the randomizer than the intent of the flagset).",
+            "flags": "O1:quest_pass/win:crystal Kmain/summon/miab:above/start:pass Pkey Crelaxed/no:edward,fusoya/nekkie/permajoin Twildish/playable Swildish/no:apples Bstandard/unsafe/whybez/whichbez Etoggle Gmp/warp/life/sylph/backrow -kit:freedom -smith:super,playable -exp:kicheckbonus5,zonkbonus5,maxlevelbonus"
+        },
+        {
+            "name": "MacGiant %",
+            "description": "The Highway to the Zemus Zone VI flagset encouraged players to learn and master the MacGiant grind, mostly by making all the better options untenable. Leaning into that a little bit more, MacGiant% makes the Giant of Bab-il (where a MacGiant grind is performed) a “hard required” objective - meaning you have to complete it to get the crystal regardless of which other objectives you complete. To make things coast a little more consistently, I’ve bumped up the quality of the starting gear (Cthrift:4 instead of Cnekkie), given you a single cursed ring and some exp scaling, and make the flagset require 5 of the 8 non-Giant objectives.",
+            "flags": "O1:quest_giant/2:quest_forge/random:7,tough_quest/req:6/hardreq:1/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/start:cecil,kain,rydia,edward,rosa,yang,palom,porom,cid,edge/no:tellah,fusoya/thrift:4/j:abilities/nodupes/hero Tpro/no:j/maxtier:7/mintier:3 Spro Bstandard/alt:gauntlet/whichburn/whichbez Etoggle/no:jdrops Glife/backrow -kit:freedom -kit2:cursed -noadamants -nocursed -spoon -exp:zonkbonus5 -vanilla:miabs,giant -tweak:edwardheal"
+        },
+        {
+            "name": "Shufflemarket Sweep",
+            "description": "The old Ladder classic, Supermarket Sweep, with jayp’s Doors Rando, and a couple other touches.",
+            "flags": "Orandom:4,quest,boss,char/req:3/win:crystal Kmain Pshop/chests Crelaxed/j:abilities/paladin/nekkie Tempty Swild/free/no:apples Bstandard/alt:gauntlet/whyburn/whybez/whichbez Etoggle Glife/sylph/backrow -spoon -smith:super -exp:crystalbonus -doorsrando:all"
+        },
+        {
+            "name": "In a Rich Man's World",
+            "description": "All the things I could do. If I had a little money.",
+            "flags": "Omode:ki10,goldhunter1000/random:8,boss/req:5/hardreq:1,2/win:game Kmain/summon/moon/nofree:dwarf/unsafer/force:hook Pnone Crelaxed/thrift:5/j:abilities Twildish/mintier:3 Swildish/mixed/unsafe Bstandard/unsafe/whichburn/whichbez/woahdin Etoggle Glife/sylph/backrow -kit:money -kit2:money -kit3:money -noadamants -spoon -wacky:payablegolbez -tweak:edwardheal"
+        },
+        {
+            "name": "OmniPro",
+            "description": "A flagset featured in Possumorpheus and Y2Sky’s Toilet Paper League Tournament Preparation League - presented as Possum DM’d it to me :)",
+            "flags": "O2:quest_monsterking/4:quest_whitealtar/random:5,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:7/no:yang/j:abilities/nekkie/nodupes Tpro Sstandard/sell:0 Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:basic -kit2:money -kit3:money -spoon -wacky:omnidextrous"
+        },
+        {
+            "name": "To Dart a Bard",
+            "description": "",
+            "flags": "Orandom:3,quest/random2:3,tough_quest/random3:3,boss/req:6/win:crystal Kmain/moon/miab:above/nofree:dwarf/start:adamant Pkey Cstandard/nofree/start:edge/only:edward/thrift:5/j:abilities Twildish/mintier:2/money Sprice:200/standard/sell:quarter/no:vampires,bacchus,damage_items,coffin Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Gdupe/life -spoon -smith:super,playable -wacky:darts -tweak:edwardheal"
+        }
+    ]
+  },
+  {
     "header": "Past Events"
   },
   {

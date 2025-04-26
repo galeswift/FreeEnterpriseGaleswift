@@ -4090,7 +4090,7 @@ Exposure Therapist
 Extension Cord Untangler
 Exterior Decorator
 Exterminator
-Exterminator’S Assistant
+Exterminator'S Assistant
 Extract Wringer
 Extreme Sports Consultant
 Extruder Operator
@@ -5031,7 +5031,7 @@ Garden Center Cashier
 Garden Hose Fabricator
 Gardener
 Gardener's Apprentice
-Gardener’S Apprentice
+Gardener'S Apprentice
 Gardening Assistant
 Gargling Advocate
 Garland Hanger
@@ -6011,7 +6011,7 @@ Humorist
 Hunting Guide
 Hurdler
 Hurricane Chaser
-Husband’S Assistant
+Husband'S Assistant
 Husky Breeder
 Husky Trainer
 Hut Architect
@@ -6629,7 +6629,7 @@ Ladder Extender
 Ladder Positioner
 Ladle Curator
 Ladle Saleswoman
-Lady’S Maid
+Lady'S Maid
 Ladyfinger Positioner
 Lag Screwer
 Laissez Faire Sculptor
@@ -6977,7 +6977,7 @@ Live-In Accountant
 Livejournal Influencer
 Livery Cab Driver
 Livery Driver
-Livery Driver’S Assistant
+Livery Driver'S Assistant
 Livestock Appraiser
 Livestock Auctioneer
 Livestock Barterer
@@ -7908,7 +7908,7 @@ Naval Designer
 Navy Barber
 Navy Dentist
 Navy Recruiter
-Ne’Er-Do-Well
+Ne'Er-Do-Well
 Neapolitan Pizza Auditor
 Necco Wafer Salesman
 Neck Cutter
@@ -8497,7 +8497,7 @@ Paralegal Instructor
 Paramecium Enthusiast
 Paramedic
 Paramedic Retrainer
-Paramedic’S Apprentice
+Paramedic'S Apprentice
 Paranormal Eyewitness
 Paranormal Guide
 Paranormal Investigator
@@ -8869,7 +8869,7 @@ Physician's Assistant
 Physicist
 Pi Calculator
 Pianist
-Pianist’S Assistant
+Pianist'S Assistant
 Piano Accompanist
 Piano Assembler
 Piano Bench Assembler
@@ -11318,7 +11318,7 @@ State Gaming Commissioner
 State License Registrar
 State Senator
 State Trooper
-State’S Witness
+State'S Witness
 Statement Retractor
 Station Engineer
 Stationary Boiler Firer
@@ -11371,7 +11371,7 @@ Stenciler
 Stenograher
 Stenographer
 Stenographer's Apprentice
-Stenographer’S Assistant
+Stenographer'S Assistant
 Stenography Instructor
 Stent Manufacturer
 Step Stool Tester
@@ -13049,7 +13049,7 @@ Wicker Artisan
 Wicker Consultant
 Wicker Sculptor
 Wicker Worker
-Widow’S Apprentice
+Widow'S Apprentice
 Wiffle Ball Tester
 Wig Adjuster
 Wig Colorist
@@ -13281,7 +13281,7 @@ Zoo Plumber
 Zoo Valet
 Zoo Vivesectionist
 Zookeeper
-Zookeeper’S Assistant
+Zookeeper'S Assistant
 Zoologist
 Zoology Blogger
 Zucchini Fryer

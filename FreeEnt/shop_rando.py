@@ -64,6 +64,8 @@ def apply(env):
         banned_items.append('#item.LitBolt')
         banned_items.append('#item.Grimoire')
         banned_items.append('#item.Kamikaze')
+        banned_items.append('#item.Stardust')
+        banned_items.append('#item.GaiaDrum')
     if env.options.flags.has('shops_no_sirens'):
         banned_items.append('#item.Siren')
     if env.options.flags.has('shops_no_vampires'):

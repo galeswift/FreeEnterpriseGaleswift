@@ -9,6 +9,7 @@ from . import character_rando
 from .rewards import AxtorChestReward
 import random
 from random import shuffle
+from dataclasses import dataclass
 
 FIGHT_SPOILER_DESCRIPTIONS = {
     0x1C0 : "Staleman/Skulls",
@@ -60,52 +61,67 @@ def _slug(treasure):
     else:
         return f"{treasure.map} {treasure.index}"
 
+@dataclass
+class TreasureData:
+    contents: str
+    fight: str
+    t: any
+    character_reward_slot_index: int
+    character_reward_treasure_index: int
+
 class TreasureAssignment:
     def __init__(self, autosells, env):
         self._autosells = autosells
         self._assignments = {}
         self._remaps = {}
         self._env = env
-        self.reward_index = -1
-
+        
+    def get_remap(self, t):
+        slug = _slug(t)        
+        if slug in self._remaps:
+            slug = self._remaps[slug]
+        return slug
+    
     def remap(self, old, new):
         self._remaps[_slug(old)] = _slug(new)    
 
     def assign(self, t, contents, fight=None, remap=True):
         slug = _slug(t)        
-        if remap and slug in self._remaps:
-            slug = self._remaps[slug]
-
+        if remap: 
+            slug = self.get_remap(t)
         if contents in self._autosells and fight is None:
             contents = '{} gp'.format(self._autosells[contents])        
             
-        reward_index = -1        
+        character_reward_slot_index = -1   
+        character_reward_treasure_index = t.index    
         #translate either a reward slot or item into a reward index
         if contents != None and contents.startswith('#reward_slot.'):            
             slot = rewards.RewardSlot[contents[len('#reward_slot.'):]]
             reward = self._env.meta['rewards_assignment'][slot]
             if type(reward) is AxtorChestReward:
-                reward_index = reward.reward_index             
-
+                character_reward_slot_index = reward.reward_index             
         elif contents != None and '#item.fe_CharacterChestItem' in contents:
-            reward_index = contents[-2:]
-            contents = '#item.NoArmor'  
+            split_contents = contents.split("&")
+            character_reward_slot_index = split_contents[1]
+            character_reward_treasure_index = split_contents[2]
+            contents = '#item.NoArmor'
         
         # if slug in self._assignments and contents != None:
-        #     (ocontents, ofight, ot, oreward_index) = self._assignments[slug]
+        #     (ocontents, ofight, ot, ocharacter_reward_slot_index) = self._assignments[slug]
         #     if ocontents == "#item.NoArmor":
         #         print(f'Re-assigning {slug} to something already assigned, with contents {contents} with prev contents {self._assignments[slug]}')
 
-        # if reward_index != -1 and remap and slug in self._remaps:
+        # if character_reward_slot_index != -1 and remap and slug in self._remaps:
         #     print(f'Added character to remapped chest')
 
-        #print(f'Assigning treasure with {contents}:{fight}:{t}:{reward_index}')
-        self._assignments[slug] = (contents, fight, t, reward_index)
+        #print(f'Assigning treasure with {contents}:{fight}:{t}:{character_reward_slot_index}')
+        newEntry = TreasureData(contents=contents, fight=fight, t=t, character_reward_slot_index=int(character_reward_slot_index), character_reward_treasure_index = int(character_reward_treasure_index))
+        self._assignments[slug] = newEntry
 
     def get(self, t, remap=True):
         slug = _slug(t)
-        if remap and slug in self._remaps:
-            slug = self._remaps[slug]
+        if remap:
+            slug = self.get_remap(t)
 
         return self._assignments.get(slug, (None, None))
 
@@ -116,24 +132,24 @@ class TreasureAssignment:
         treasure_list = [ ]
         slot_list = []
         for slug in self._assignments:
-            contents,fight,t,reward_index = self._assignments[slug]            
-            if contents is None:
-                contents = '$00'
-            if reward_index != -1 and type(t) is not str:                
+            treasureEntry = self._assignments[slug]            
+            if treasureEntry.contents is None:
+                treasureEntry.contents = '$00'
+            if treasureEntry.character_reward_slot_index != -1 and type(treasureEntry.t) is not str:                
                 worldId = 0
-                if t.flag & (0xff00) > 0:
+                if treasureEntry.t.flag & (0xff00) > 0:
                     worldId = 1      
-                mapIdStr = f'{int(t.mapid,16):04X}'
+                mapIdStr = f'{int(treasureEntry.t.mapid,16):04X}'
                 treasure_list.append(f'{worldId:02x}')
                 treasure_list.append(mapIdStr[-2:])
-                treasure_list.append(f'{t.index:02X}')
-                slot_list.append(int(reward_index))
+                treasure_list.append(f'{treasureEntry.character_reward_treasure_index:02X}')
+                slot_list.append(treasureEntry.character_reward_slot_index)
                 
                 char_name = "unknown"
                 for char in character_rando.SLOTS:
-                    if character_rando.SLOTS[char] == int(reward_index):
+                    if character_rando.SLOTS[char] == treasureEntry.character_reward_slot_index:
                         char_name = char
-                print(f'Assigning fight:{fight} {char_name} to {t.spoilerarea} - {t.spoilersubarea} - {t.spoilerdetail}')
+                print(f'Assigning fight:{treasureEntry.fight} {char_name} to {treasureEntry.t.spoilerarea} - {treasureEntry.t.spoilersubarea} - {treasureEntry.t.spoilerdetail}')
 
         env.add_substitution(f'character treasure rewards', ' '.join(treasure_list))
         env.add_substitution(f'character treasure slots', ' '.join([f'{s:02X}' for s in slot_list]))
@@ -141,12 +157,14 @@ class TreasureAssignment:
     def get_script(self):
         lines = []
         for slug in self._assignments:
-            contents,fight,t, reward_index = self._assignments[slug]
+            treasureEntry = self._assignments[slug]
+            contents = treasureEntry.contents     
             if contents is None:
                 contents = '$00'
             # if fight is not None:
             #     trigger = f'{t.map} {t.index}'
             line = f"trigger({slug}) {{ treasure {contents} "
+            fight = treasureEntry.fight
             if fight is not None:
                 if fight >= 0x1E0:
                     fight -= 0x1E0
@@ -285,13 +303,19 @@ def apply(env):
                 t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Overworld"))
                 max_overworld_chests -= 1            
            
-            treasure_assignment.assign(t, '#item.fe_CharacterChestItem_'+"{:02d}".format(character_rando.SLOTS[slot_name]))
-            contents,fight,character_treasure,reward_index = treasure_assignment.get(t)
-            print(f'Putting character {env.assignments[character_rando.SLOTS[slot_name]]} into chest {character_treasure.spoilerarea} - {character_treasure.spoilersubarea} - {character_treasure.spoilerdetail}')
-            assigned_ids.append(character_treasure.ordr)
+            character_dummy = env.assignments[character_rando.SLOTS[slot_name]]           
+
+            treasure_slug = treasure_assignment.get_remap(t)
+            treasure_map = treasure_slug.split(" ")[0]
+            treasure_idx = treasure_slug.split(" ")[1]
+            final_treasure = treasure_dbview.find_one(lambda t: t.map == treasure_map and t.index == int(treasure_idx))
+            treasure_assignment.assign(final_treasure, '#item.fe_CharacterChestItem'+"&{:02d}".format(character_rando.SLOTS[slot_name]) + "&{:02d}".format(int(treasure_idx)))
+            print(f'Putting character {env.assignments[character_rando.SLOTS[slot_name]]} into chest {final_treasure.spoilerarea} - {final_treasure.spoilersubarea} - {final_treasure.spoilerdetail}')            
+            assigned_ids.append(final_treasure.ordr)
+            assigned_ids.append(t.ordr)
     
-        # update the plain chests to remove the character assigned ones
-        plain_chests_dbview = plain_chests_dbview.get_refined_view(lambda t: t.ordr not in assigned_ids)
+            # update the plain chests to remove the character assigned ones
+        plain_chests_dbview.refine(lambda t: t.ordr not in assigned_ids)
 
     if env.options.flags.has('treasure_vanilla'):
         # for various reasons we really do need to assign every treasure chest still
@@ -415,10 +439,10 @@ def apply(env):
         area_use_count = {}
         remaining_chests = []
         for t in plain_chests_dbview.find_all():
-            contents,fight,treasure,reward_index = treasure_assignment.get(t)
-            if contents != '#item.Pass':
-                remaining_chests.append(t)
-                area_use_count[t.area] = 0
+            treasureEntry = treasure_assignment.get(t)
+            if treasureEntry.contents != '#item.Pass':
+                remaining_chests.append(treasureEntry.t)
+                area_use_count[treasureEntry.t.area] = 0
 
         for item_const in env.meta['required_treasures']:
             remaining_count = env.meta['required_treasures'][item_const]
@@ -456,15 +480,14 @@ def apply(env):
     all_treasure_assignments = treasure_assignment.get_assignments()
     treasure_index = 0
     for slug in all_treasure_assignments:
-        contents,fight,t,reward_index = all_treasure_assignments[slug]
         treasure_index +=1
     
     # write the pre-opened chest values
     chest_init_flags = [0x00] * 0x40
     empty_count = 0
     for t in treasure_dbview.find_all():
-        contents,fight,assigned_t,reward_index = treasure_assignment.get(t, remap=False)
-        if contents is None:            
+        treasureEntry = treasure_assignment.get(t,remap=False)
+        if treasureEntry.contents is None:            
             byte_index = t.flag >> 3
             bit_index = t.flag & 0x7
             chest_init_flags[byte_index] |= (1 << bit_index)
@@ -480,11 +503,12 @@ def apply(env):
     all_treasure_public = env.options.flags.has_any('-spoil:all', '-spoil:treasure')
     miabs_public = all_treasure_public or env.options.flags.has('-spoil:miabs')
     for t in treasure_spoiler_order:
-        contents,fight,treasure,reward_index = treasure_assignment.get(t, remap=False)
+        treasureEntry = treasure_assignment.get(t,remap=False)
+        contents = treasureEntry.contents
         if contents is None:
             contents = "  (nothing)"
-        elif reward_index != -1:
-            contents = rewards.REWARD_SLOT_SPOILER_NAMES[rewards.RewardSlot(int(reward_index))]
+        elif treasureEntry.character_reward_slot_index != -1:
+            contents = rewards.REWARD_SLOT_SPOILER_NAMES[rewards.RewardSlot(int(treasureEntry.character_reward_slot_index))]
         elif contents.startswith('#reward_slot.'):
             slot = rewards.RewardSlot[contents[len('#reward_slot.'):]]
             try:
@@ -495,17 +519,17 @@ def apply(env):
         elif not contents.endswith(' gp'):
             contents = databases.get_item_spoiler_name(contents)
 
-        if fight is not None:
-            miab = f" (MIAB: {FIGHT_SPOILER_DESCRIPTIONS[fight]})"
+        if treasureEntry.fight is not None:
+            miab = f" (MIAB: {FIGHT_SPOILER_DESCRIPTIONS[treasureEntry.fight]})"
             treasure_spoilers.append( spoilers.SpoilerRow(
-                t.spoilerarea, contents, f"{t.spoilersubarea} - {t.spoilerdetail}", miab, 
+                treasureEntry.t.spoilerarea, contents, f"{treasureEntry.t.spoilersubarea} - {treasureEntry.t.spoilerdetail}", miab, 
                 public = miabs_public,
                 obscurable=True,
                 obscure_mask=("NYN!" if all_treasure_public else "NYNY")
                 ) )
         else:
             treasure_spoilers.append( spoilers.SpoilerRow(
-                t.spoilerarea, contents, f"{t.spoilersubarea} - {t.spoilerdetail}", 
+                treasureEntry.t.spoilerarea, contents, f"{treasureEntry.t.spoilersubarea} - {treasureEntry.t.spoilerdetail}", 
                 public = all_treasure_public,
                 obscurable=True,
                 obscure_mask="NYN"
