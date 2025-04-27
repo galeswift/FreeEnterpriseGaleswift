@@ -1103,6 +1103,8 @@ msfpatch {
         cmp #$0a
         beq $+FusoyaUnlearn
         cmp #$0b
+        beq $+FusoyaUnlearn
+        cmp #$0e
         bne $+NotFusoya
     %FusoyaUnlearn:
         jsl $=FusoyaChallenge__TakeSpell_Impl
@@ -1235,6 +1237,8 @@ msfpatch {
         cmp #$0a
         beq $+FusoyaUnlearn2
         cmp #$0b
+        beq $+FusoyaUnlearn2
+        cmp #$0e
         bne $+NotFusoya2
     %FusoyaUnlearn2:
         jsl $=FusoyaChallenge__TakeSpell_Impl

@@ -39,7 +39,7 @@ msfpatch {
         tax
         rep #$20
         .mx 0x00
-        lda #$01f4  // starts at 500
+        lda {% fusoya initial hp %}  // starts at 500/#$01f4
         cpx #$0000
         beq $+Done
         clc
@@ -210,6 +210,11 @@ msfpatch {
         ldy #$000a  // white magic set
         cmp #$19
         bcc $+HaveSpellSet
+        cmp #$31
+        bcc $+BlackSpellSet
+        ldy #$000e  // new misc magic set
+        bra $+HaveSpellSet
+    %BlackSpellSet:
         ldy #$000b  // black magic set
     %HaveSpellSet:
         jsl $=CharEx__GiveSpell
@@ -243,7 +248,7 @@ msfpatch {
         
         lda #$ff
         sta $=FusoyaChallenge__LearnedSpell1
-	sta $=FusoyaChallenge__LearnedSpell2
+	    sta $=FusoyaChallenge__LearnedSpell2
         sta $=FusoyaChallenge__LearnedSpell3
         ldy #$0000
     FusoyaChallenge__AdvanceLocation_GiveLoop:
@@ -260,6 +265,11 @@ msfpatch {
         ldy #$000a  // white magic set
         cmp #$19
         bcc $+HaveSpellSet
+        cmp #$31
+        bcc $+BlackSpellSet
+        ldy #$000e  // new misc magic set
+        bra $+HaveSpellSet
+    %BlackSpellSet:
         ldy #$000b  // black magic set
     %HaveSpellSet:
         jsl $=CharEx__GiveSpell

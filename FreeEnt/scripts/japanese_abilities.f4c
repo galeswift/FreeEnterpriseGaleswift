@@ -101,7 +101,7 @@ actor(#Fusoya) {
         #Fight
         #White
         #Black
-        #Regen
+        {% fusoya j ability %}
         #Item
     }
 }

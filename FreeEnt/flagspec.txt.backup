@@ -48,7 +48,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -smith:super/-smith:alt -smith:playable
 -fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
 -fusoya:slowstart/-fusoya:unlearn
--fusoya:maybe -fusoya:uncapped -fusoya:randomhp
+-fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
 -agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42/
 -agility:scale1/-agility:scale10
 -speedmodbalance
@@ -224,6 +224,7 @@ G64                  glitch_allow_64
 -fusoya:unlearn       unlearn_fusoya
 -fusoya:uncapped      uncapped_fusoya
 -fusoya:randomhp      randomhp_fusoya
+-fusoya:omnimage      add_spells_fusoya
 
 -agility:vanilla     vanilla_agility
 -agility:slowest     slowest_agility

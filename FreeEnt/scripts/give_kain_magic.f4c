@@ -1,12 +1,18 @@
 // Kain should be a mage. Let's make him a mage.
 // give him some white magic, black magic, and MP.
 
+// set the constant for Kain's new spellsets, to improve code readability
+consts(spellset) {
+    $01     KainBlack
+    $0d     KainWhite
+}
+
 // first, assign his class the new white magic set and his (unused) black magic set
 patch($13fde0 bus) { 0d 01 ff } // battle?
 patch($14ffa5 bus) { 0d 01 ff } // menu?
 
 // second, overwrite the black magic set
-spellset($01) {
+spellset(#KainBlack) {
     initial {
         #Fire2
         #Ice2
@@ -47,7 +53,7 @@ patch($0fa366 bus) { 6C }
 patch($0fa0a8 bus) { 06 04 00 06 }
 
 // third, build the white magic set from scratch. 
-spellset($0d) {
+spellset(#KainWhite) {
     initial {
         #Cure2
         #Heal
@@ -61,7 +67,8 @@ spellset($0d) {
 }
 
 // fourth, make sure the game does a full initialization of the spellsets to include Kain's
-patch($15c271 bus) { 50 } // 38 + 18 = 50
+// patch($15c271 bus) { 50 } // 38 + 18 = 50
+// ... but, we don't need to do that here; just do more in extend_spellsets.f4c
 
 // fifth, GIVE KAIN MP! too lazy to do level-up so just provide 255 base MP
 patch($0fa92b bus) { FF }

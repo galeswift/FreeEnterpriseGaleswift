@@ -5398,6 +5398,11 @@ var FLAG_UISPEC = [
             "title": "Spells not guaranteed to be learned",
             "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
             "hard": true
+          },
+          {
+            "flag": "-fusoya:omnimage",
+            "title": "FuSoYa also learns summons/Twin/Ninja magic",
+            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</e>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
           }
         ]
       },

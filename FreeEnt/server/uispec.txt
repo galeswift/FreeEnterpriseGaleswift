@@ -463,6 +463,7 @@
 ....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
 ....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 .[-fusoya:maybe]! Spells not guaranteed to be learned
+.[-fusoya:omnimage] FuSoYa also learns summons/Twin/Ninja magic
 [@agility]^ Change the ATB system (or make it vanilla)
 .<> Different anchoring or ATB formula
 ..(-agility:vanilla) Use vanilla agility anchoring
