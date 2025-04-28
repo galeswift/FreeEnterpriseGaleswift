@@ -45,7 +45,7 @@
 
     * Enabling Ctreasure:free enables C:nofree.
     * Enabling Ctreasure:earned enables C:noearned. Unlike the main site, character sprites at overworld locations are not replaced by piggy sprites.
-    * Enabling either Ctreasure:unsafe or Ctreasure:relaxed will enable both Ctreasure:free and Ctreasure:earned
+    * Enabling either Ctreasure:unsafe or Ctreasure:relaxed will enable both Ctreasure:free and Ctreasure:earned, if neither Ctreasure:free nor Ctreasure:earned are explicitly set.
 
 #### Treasures
 - [Tunrestrict]: Allows ignoring the restrictions placed on tiers in the treasury/moon/underworld/overworld
