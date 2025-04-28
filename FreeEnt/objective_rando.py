@@ -287,7 +287,7 @@ def apply(env):
                         continue
                 elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
                     boss = slug[len(BOSS_OBJECTIVE_PREFIX):]
-                    if boss not in env.meta['available_bosses']:
+                    if boss not in env.meta['available_bosses'] or boss in env.meta['banned_objective_bosses']:
                         continue
                 elif slug == 'quest_tradepink':
                     if '#item.Pink' not in env.meta['available_key_items']:

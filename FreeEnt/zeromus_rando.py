@@ -724,8 +724,8 @@ def apply(env):
         # manual bytes for attack phase shuffle:
         env.add_binary(address.UnheaderedAddress(0x076498), [0x15, phases[2], 0x14, phases[1], 0x13, phases[0], 0x00, 0x4B])
         # build spoiler log entry
-        phases_name_dict = ( {0x46 : 'Needle', 0x55 : 'Jump', 0x57 : 'Dark Wave'} if physicalflag 
-                            else {0x46 : 'Virus', 0x55 : 'Nuke', 0x57 : 'Meteo'} )
+        phases_name_dict = ( {0x4C : 'Needle', 0x55 : 'Jump', 0x57 : 'Dark Wave'} if physicalflag 
+                            else {0x4C : 'Virus', 0x55 : 'Nuke', 0x57 : 'Meteo'} )
         env.spoilers.add_table(
             "MISC", 
             [ ("Zeromus phase order", ', '.join([phases_name_dict[p] for p in phases])) ],
