@@ -278,6 +278,9 @@ def apply(env):
             desired_guaranteed_items.append('#item.LitBolt')
             desired_guaranteed_items.append('#item.Grimoire')
             desired_guaranteed_items.append('#item.Kamikaze')
+            desired_guaranteed_items.append('#item.Stardust')
+            desired_guaranteed_items.append('#item.GaiaDrum')
+            desired_guaranteed_items.append('#item.Vampire')                       
         if env.options.flags.has('shops_always_apples'):
             desired_guaranteed_items.append('#item.AgApple')
             desired_guaranteed_items.append('#item.AuApple')
