@@ -4548,11 +4548,6 @@ var FLAG_UISPEC = [
         "type": "select",
         "subcontrols": [
           {
-            "flag": "Evanilla",
-            "title": "Original encounter rate",
-            "null": true
-          },
-          {
             "flag": "Etoggle",
             "title": "Random encounters can be toggled",
             "description": "Encounters can be enabled/disabled from the in-game Custom menu.",
@@ -4573,6 +4568,11 @@ var FLAG_UISPEC = [
                 "description": "Back attacks and \"Surprised!\" encounters will still occur, even when encounters are disabled via <em>Etoggle</em> or <em>Enoencounters</em>."
               }
             ]
+          },
+          {
+            "flag": "Evanilla",
+            "title": "Original encounter rate",
+            "null": true
           },
           {
             "flag": "Ereduce",
@@ -5402,7 +5402,7 @@ var FLAG_UISPEC = [
           {
             "flag": "-fusoya:omnimage",
             "title": "FuSoYa also learns summons/Twin/Ninja magic",
-            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</e>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
+            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
           }
         ]
       },

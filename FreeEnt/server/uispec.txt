@@ -311,11 +311,11 @@
 
 == ENCOUNTERS
 <>* Random encounter rate
-.(Evanilla)- Original encounter rate
 .(Etoggle) Random encounters can be toggled
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights
 ..[Edanger] Keep dangerous encounters
+.(Evanilla)- Original encounter rate
 .(Ereduce) Random encounters reduced by 50%
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights

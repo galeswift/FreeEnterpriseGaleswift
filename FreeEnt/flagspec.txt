@@ -97,7 +97,7 @@ Cvanilla : ~Cstandard & ~Crelaxed
 Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Twild & ~Twildish & ~Tempty
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Scabins & ~Sempty
 Bvanilla : ~Bstandard
-Evanilla : ~Etoggle & ~Ereduce & ~Enoencounters
+Etoggle  : ~Evanilla & ~Ereduce & ~Enoencounters
 Gnone    : ~/^G(?!none)/
 
 ----- SLUGS
