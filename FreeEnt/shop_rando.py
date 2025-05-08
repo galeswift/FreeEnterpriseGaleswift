@@ -66,6 +66,7 @@ def apply(env):
         banned_items.append('#item.Kamikaze')
         banned_items.append('#item.Stardust')
         banned_items.append('#item.GaiaDrum')
+        banned_items.append('#item.Vampire')
     if env.options.flags.has('shops_no_sirens'):
         banned_items.append('#item.Siren')
     if env.options.flags.has('shops_no_vampires'):
@@ -277,6 +278,9 @@ def apply(env):
             desired_guaranteed_items.append('#item.LitBolt')
             desired_guaranteed_items.append('#item.Grimoire')
             desired_guaranteed_items.append('#item.Kamikaze')
+            desired_guaranteed_items.append('#item.Stardust')
+            desired_guaranteed_items.append('#item.GaiaDrum')
+            desired_guaranteed_items.append('#item.Vampire')                       
         if env.options.flags.has('shops_always_apples'):
             desired_guaranteed_items.append('#item.AgApple')
             desired_guaranteed_items.append('#item.AuApple')
@@ -320,7 +324,7 @@ def apply(env):
             if not env.options.flags.has('shops_no_life'):
                 guaranteed_free_items.append('#item.Life')
 
-            if not env.options.flags.has('shops_no_j_items') and not env.options.flags.has('shops_no_starveil'):
+            if not env.options.flags.has('shops_no_j_items') and not env.options.flags.has('shops_no_starveil') and not env.options.flags.has('shops_no_damage_items'):
                 guaranteed_free_items.append('#item.StarVeil')
                 if not env.options.flags.has('bosses_unsafe'):
                     guaranteed_free_items.append('#item.ThorRage')

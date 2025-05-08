@@ -1,7 +1,7 @@
 echo "-- Compiling objective spec"
 python compile_objective_spec.py
 echo "-- Compiling flagspec"
-#python compile_flagspec.py
+python compile_flagspec.py
 echo "-- Transpiling flagset and logic cores"
 python -m metapensiero.pj flagsetcore.py -o server/srcdata/flagsetcore.js
 cd server

@@ -449,11 +449,11 @@ class FlagLogicCore {
         if (flagset.has("Kforge")) {
             this._simple_disable_regex(flagset, log, "-smith is incompatible with Kforge", "^-smith:");
         }
-        kmiab_flags = flagset.get_list("^Kmiab:");
         if ((flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all") && (! flagset.has("Kmain")))) {
             flagset.set("Kmain");
             this._lib.push(log, ["correction", "Advanced key item randomizations are enabled; forced to add Kmain"]);
         }
+        kmiab_flags = flagset.get_list("^Kmiab:");
         if ((flagset.has("Owin:crystal") && flagset.has("Omode:ki17"))) {
             flagset.unset("Omode:ki17");
             flagset.set("Omode:ki16");
@@ -465,9 +465,6 @@ class FlagLogicCore {
         if (flagset.has("Kvanilla")) {
             this._simple_disable(flagset, log, "Key items not randomized", ["Kunsafe", "Kunsafer", "Kunweighted"]);
             this._simple_disable_regex(flagset, log, "Key items not randomized", "^Kstart:");
-        }
-        if ((flagset.has("Kmiab:lst") && flagset.has_any("Kmoon", "Kunsafe"))) {
-            this._simple_disable(flagset, log, "LST miabs already included", ["Kmiab:lst"]);
         }
         if (flagset.has("Kstart:darkness")) {
             this._simple_disable(flagset, log, "Klatedark is incompatible with starting with Darkness", ["Klatedark"]);
@@ -519,11 +516,11 @@ class FlagLogicCore {
         if ((flagset.get_list("^Ctreasure:") && ((flagset.has("Tvanilla") || flagset.has("Tshuffle")) || flagset.has("Tempty")))) {
             this._simple_disable_regex(flagset, log, "Ctreasure: with vanilla-ish or empty chests", "^Ctreasure:");
         }
-        if (flagset.has("Ctreasure:earned")) {
+        if ((flagset.has("Ctreasure:earned") && (! flagset.has("Cnoearned")))) {
             flagset.set("Cnoearned");
             this._lib.push(log, ["correction", "Ctreasure:earned set, auto-assigning Cnoearned"]);
         }
-        if (flagset.has("Ctreasure:free")) {
+        if ((flagset.has("Ctreasure:free") && (! flagset.has("Cnofree")))) {
             flagset.set("Cnofree");
             this._lib.push(log, ["correction", "Ctreasure:free set, auto-assigning Cnofree"]);
         }

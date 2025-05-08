@@ -466,11 +466,11 @@ class FlagLogicCore:
         if flagset.get_list(r'^Ctreasure:') and (flagset.has('Tvanilla') or flagset.has('Tshuffle') or flagset.has('Tempty')):
             self._simple_disable_regex(flagset, log, 'Ctreasure: with vanilla-ish or empty chests', r'^Ctreasure:')
 
-        if flagset.has('Ctreasure:earned'):                            
+        if flagset.has('Ctreasure:earned') and not flagset.has('Cnoearned'):                            
             flagset.set('Cnoearned')
             self._lib.push(log, ['correction', 'Ctreasure:earned set, auto-assigning Cnoearned'])
         
-        if flagset.has('Ctreasure:free'):                            
+        if flagset.has('Ctreasure:free') and not flagset.has('Cnofree'):                    
             flagset.set('Cnofree')
             self._lib.push(log, ['correction', 'Ctreasure:free set, auto-assigning Cnofree'])        
 
