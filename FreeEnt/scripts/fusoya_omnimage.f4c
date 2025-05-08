@@ -9,10 +9,11 @@ consts(spellset) {
 patch($13fe06 bus) { 0E }
 patch($14ffcb bus) { 0E }
 
-// rename $15 to be "Omni"
+// rename $19 to be "Omni", since Fu will not use Regen/Bless now
+// (technically this just also associates #Omni to $19)
 consts(command)
 {
-    $15     Omni
+    $19     Omni
 }
 
 // Add the menu data for "Omni" at the end of Bank 01,
@@ -54,10 +55,10 @@ msfpatch {
         jml $01afaa
 }
 
-// Add battle command name data for "Omni" in Bank 0F
-patch($0fa82f bus) { 50 68 69 64 FF }
+// Replace battle command name data for "Regen" with "Omni" in Bank 0F
+patch($0fa843 bus) { 50 68 69 64 FF }
 
-// Make the $15 command redirect to #Call (like #Ninja does)
+// Make the $19 command redirect to #Call (like #Ninja does)
 msfpatch {
     .addr $02b9c1
         jml $=NinjaOmni__CommandRedirect
@@ -69,15 +70,23 @@ msfpatch {
         bne $+CheckOmni
         jml $02ba29
     %CheckOmni:
-        cmp #$15
+        cmp #$19
         bne $+Done
         jml $02ba36
     %Done: 
         jml $02b9c5
 }
 
-// if not j-abilities, add the $15 command
-// with j-abilities, the relevant f4c has a substitution
+// for completeness, correct the command entry flag data
+// for $19 (was $28, should be $00)
+patch($13fddc bus) { 00 }
+
+// remove the pointer to execute_bless in bank 03,
+// to match other spell commands
+patch($03b3ae bus) { 00 00 }
+
+// if not j-abilities, add the $19 command
+// with j-abilities, we already have it
 // %flag japanese_abilities off%
 actor(#Fusoya) {
     commands {

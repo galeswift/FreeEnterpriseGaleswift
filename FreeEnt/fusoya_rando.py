@@ -528,13 +528,15 @@ MOD_BOSS_SLOT_SPOILER_NAMES = { f"{b}_slot": BOSS_SPOILER_NAMES[b] + " position"
 
 MAYBE_THRESHOLD = 0.15
 
-def remove_spells_by_flag(p_dict,j_spells,all_spells):
+def remove_spells_by_flag(p_dict,j_spells,all_spells,no_lance):
     # removes specific spells from a given dictionary, without worrying if the spells are even there
     spells_to_remove = set()
     if not j_spells:
         spells_to_remove.update(set(JAPANESE_EXCLUSIVE_SPELLS + OMNI_J_SPELLS))
     if not all_spells:
         spells_to_remove.update(set(OMNI_SPELLS + OMNI_J_SPELLS))
+    if not no_lance:
+        spells_to_remove.update(set(['#spell.Sight']))
     for spell in spells_to_remove:
         p_dict.pop(spell, None)    
 
@@ -583,6 +585,10 @@ def apply(env):
         all_spells = True
         env.add_file('scripts/fusoya_omnimage.f4c')
 
+    no_lance = True
+    if env.options.flags.has('kainmagic'):
+        no_lance = False
+
     max_credits = 14
     if env.options.flags.has('uncapped_fusoya'):
         # determine how many credits based on how many boss spots there are available
@@ -605,10 +611,6 @@ def apply(env):
     # create the max credits substitution
     env.add_substitution('fusoya credits', f'${max_credits:02X}')
 
-    # ensure that under J-abilities, FuSoYa gets the correct one
-    if env.options.flags.has('japanese_abilities'):
-        env.add_substitution('fusoya j ability', ('#Omni' if all_spells else '#Regen'))
-
     if env.options.flags.has_any('slowstart_fusoya','randomhp_fusoya'):
         env.add_toggle('modified_hp_gains')
 
@@ -622,7 +624,7 @@ def apply(env):
             env.add_scripts(f'patch($0faa87 bus) {{ {max_hp % 0x100:02X} {max_hp // 0x100:02X} {max_hp % 0x100:02X} {max_hp // 0x100:02X} }}')
 
         potential_spells = INTERNAL_SPELL_ORDER.copy()
-        remove_spells_by_flag(potential_spells,j_spells,all_spells)
+        remove_spells_by_flag(potential_spells,j_spells,all_spells,no_lance)
 
         if maybe_spells:
             missing_spells = []
@@ -646,8 +648,6 @@ def apply(env):
 
         if maybe_spells:
             spoilers = [ ("Missing spells", ', '.join([databases.get_spell_spoiler_name(s) for s in missing_spells])) ]
-            if env.options.flags.has('kainmagic'):
-                spoilers = [(p, s.replace('Sight', 'Lance')) for p,s in spoilers]
             env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)            
             
     elif env.options.flags.has('nerfed_fusoya'):
@@ -656,6 +656,8 @@ def apply(env):
         white = STARTING_WHITE.copy()
         if j_spells:
             white.extend(STARTING_WHITE_JAPANESE)
+        if not no_lance:
+            white.remove('#spell.Sight')
         black = STARTING_BLACK.copy()
         omni = STARTING_CALL.copy()
         
@@ -686,8 +688,6 @@ def apply(env):
         if all_spells:
             env.add_script('spellset(#FusoyaOmni) {{ initial {{ {} }} }}'.format(' '.join(omni)))
             spoilers.append( ("Initial other magic", ', '.join([databases.get_spell_spoiler_name(s) for s in omni])) )
-        if env.options.flags.has('kainmagic'):
-            spoilers = [(p, s.replace('Sight', 'Lance')) for p,s in spoilers]
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)
 
     elif env.options.flags.has('location_fusoya'):
@@ -714,7 +714,7 @@ def apply(env):
         # build a dict of Distributions (see util.py)
         available_distributions = { tier : Distribution(SPELL_TIERS[tier]) for tier in SPELL_TIERS }
         
-        remove_spells_by_flag(available_spells,j_spells,all_spells)
+        remove_spells_by_flag(available_spells,j_spells,all_spells,no_lance)
         
         shuffled_spells = [spell for spell in available_spells]
         env.rnd.shuffle(shuffled_spells)
@@ -799,8 +799,6 @@ def apply(env):
             spoilers.append( ("Initial spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
         for position in MOD_BOSS_SLOT_SPOILER_NAMES: 
             spoilers.append( (MOD_BOSS_SLOT_SPOILER_NAMES[position], ', '.join([databases.get_spell_spoiler_name(s) for s in spell_slots[position]]) ) )
-        if env.options.flags.has('kainmagic'):
-            spoilers = [(p, s.replace('Sight', 'Lance')) for p,s in spoilers]
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)
         
     else:
@@ -810,23 +808,23 @@ def apply(env):
         ranked_spells = []
         if env.options.flags.has('sequential_p_fusoya'):
             level_p_spells = ALL_SPELLS_BY_LEVEL_P.copy()
-            remove_spells_by_flag(level_p_spells,j_spells,all_spells)
+            remove_spells_by_flag(level_p_spells,j_spells,all_spells,no_lance)
             for position,spell in enumerate(level_p_spells):
                 ranked_spells.append( (position, spell) )
         elif env.options.flags.has('sequential_r_fusoya'):
             if j_spells:
                 level_rj_spells = ALL_SPELLS_BY_LEVEL_R_J.copy()
-                remove_spells_by_flag(level_rj_spells,j_spells,all_spells)
+                remove_spells_by_flag(level_rj_spells,j_spells,all_spells,no_lance)
                 for position,spell in enumerate(level_rj_spells):
                     ranked_spells.append( (position, spell) )
             else:
                 level_r_spells = ALL_SPELLS_BY_LEVEL_R.copy()
-                remove_spells_by_flag(level_r_spells,j_spells,all_spells)
+                remove_spells_by_flag(level_r_spells,j_spells,all_spells,no_lance)
                 for position,spell in enumerate(level_r_spells):
                     ranked_spells.append( (position, spell) )
         else:
             goodness_spells = ALL_SPELLS_BY_GOODNESS.copy()
-            remove_spells_by_flag(goodness_spells,j_spells,all_spells)
+            remove_spells_by_flag(goodness_spells,j_spells,all_spells,no_lance)
             for i,spell in enumerate(goodness_spells):
                 position = float(i) / len(goodness_spells)
                 #position += (env.rnd.random() - 0.5) * 0.5
@@ -899,9 +897,7 @@ def apply(env):
             else:
                 spoilers.append( (f"Boss {boss_number}", ', '.join([databases.get_spell_spoiler_name(s) for s in level_spells])) )
         if env.options.flags.has('unlearn_fusoya'):
-            spoilers.append( ("Permanent spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
-        if env.options.flags.has('kainmagic'):
-            spoilers = [(p, s.replace('Sight', 'Lance')) for p,s in spoilers]
+             spoilers.append( ("Permanent spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)
 
 if __name__ == '__main__':

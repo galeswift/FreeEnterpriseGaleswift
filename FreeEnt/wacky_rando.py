@@ -374,7 +374,9 @@ def apply_kleptomania(env):
         item = available_items[index]
         equipment_bytes.append(item.code)
 
-    env.add_binary(WACKY_ROM_ADDRESS, equipment_bytes, as_script=True)        
+    env.add_binary(WACKY_ROM_ADDRESS, equipment_bytes, as_script=True)    
+    if env.options.flags.has('jump') and env.options.flags.has('add_spells_fusoya'):
+        env.add_toggle('omnimage klepto jump bypass')    
 
 def apply_darts(env):
     env.add_substitution('wacky_fightcommandreplacement', '#$16')

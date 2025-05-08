@@ -750,6 +750,19 @@ msfpatch {
         tax
         lda $0dffd4,x
         tax
+        // %omnimage klepto jump bypass%
+        // when we want to put White in Fu's Fight slot
+        // instead of Fight, we need to skip the normal
+        // replacement. so, check if the third command
+        // is #Omni ($19), and if so, put White back,
+        // not the usual command
+        lda $330b,x
+        cmp #$19
+        bne $+ReplaceFight
+        lda #$02
+        bra $02
+    %ReplaceFight:
+        // %end%
         lda {% wacky_fightcommandreplacement : #$00 %}
         sta $3303,x        
 
@@ -769,6 +782,11 @@ msfpatch {
         // change top command to be "Jump" and pretend we selected it
         lda #$06
         sta $3303,x
+        // %omnimage klepto jump bypass%
+        // also change the targetting to be correct
+        lda #$50
+        sta $3302,x
+        // %end%
 
         stz $60
 
@@ -799,6 +817,21 @@ msfpatch {
         tax
         lda $0dffd4,x
         tax
+        // %omnimage klepto jump bypass%
+        // when we want to put White in Fu's Fight slot
+        // instead of Fight, we need to skip the normal
+        // replacement. so, check if the third command
+        // is #Omni ($19), and if so, put White back,
+        // not the usual command; also fix targetting
+        lda $330b,x
+        cmp #$19
+        bne $+ReplaceFight2
+        lda #$00
+        sta $3302,x
+        lda #$02
+        bra $02
+    %ReplaceFight2:
+        // %end%
         lda {% wacky_fightcommandreplacement : #$00 %}
         sta $3303,x        
 

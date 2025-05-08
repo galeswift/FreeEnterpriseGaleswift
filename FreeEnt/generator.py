@@ -841,6 +841,10 @@ def build(romfile, options, force_recompile=False):
     # misc/creative tweaks
     if options.flags.has('kainmagic'):
         env.add_file('scripts/give_kain_magic.f4c')
+        mp_script = '\n'
+        for level in range(1,51):
+            mp_script = mp_script + f'patch (${(0x0FB65E + (0x05 * (level-1))):06X} bus) {{ {2:02X} }}\n'
+        env.add_substitution('kain mp script', mp_script)
     if options.flags.has('edwardheal'):
         env.add_file('scripts/improve_edward_heal.f4c')
 
