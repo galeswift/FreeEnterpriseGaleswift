@@ -66,12 +66,22 @@ Under this flag, all chests will contain items that at least one character avail
 
 With mystery flags, you can tell who the characters are in the seed by looking at the gear you get.
 
+## Shop Flags
+
+### `Splayable` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: shop_rando.py, character_rando.py
+
+Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, with the same exceptions.
+
 ## Boss Flags
 
 ### `Bwoahdin` {: .h6 }
 
 - Idea: CoffeeAndChocobos
-- Design/Programming: SytheMarshall
+- Design/Programming: ScytheMarshall
 - Locations: odin_replace_two_zantetsukens.f4c
 
 In some other FF games, Odin has both the target-all instant death attack and a single-target damaging attack (usually "Gungnir"). Under this flag, Odin's script is changed so that the first two Odin attacks are replaced with a random single-target spell. Odin will also not raise the sword until the point where you can trigger the Thunderstruck script. 
@@ -93,6 +103,8 @@ Under `Bspellpower`, all bosses are treated as having at least 1 spell power. Th
 These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc.
 
 ## Encounter Flags
+
+The default `E` flag is now `Etoggle`.
 
 ### `Enomacgiant` {: .h6 }
 
@@ -130,9 +142,9 @@ Under this flag, the forge item will be usable by one of the characters you can 
 
 ## FuSoYa Flags
 
-- Idea: ScytheMarshall
+- Idea: ScytheMarshall (except `-fusoya:slowstart`, `-fusoya:unlearn`, `-fusoya:omnimage`)
 - Design/Programming: ScytheMarshall
-- Locations: fusoya_rando.py, fusoya_challenge.f4c
+- Locations: fusoya_rando.py, fusoya_challenge.f4c; some wacky f4c files where command menus change
 
 These flags are intended to change how FuSoYa's spell-learning works, with the goal of making the character more balanced and less of an instant exclusion from "competitive" flagsets. 
 
@@ -161,6 +173,32 @@ FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells 
 ### `-fusoya:maybe` {: .h6 }
 
 FuSoYa will not necessarily learn every spell. Each spell is independently kept with a probability of 85%. Vanilla and nerfed FuSoYa will have possibly fewer starting spells and other FuSoYas will learn fewer spells/learn some spells a bit earlier.
+
+### `-fusoya:uncapped` {: .h6 }
+
+FuSoYa will gain, or start with, up to 3900 HP (500 plus 100 HP for every boss in the seed). This flag interacts with `Bremove` and `-fusoya:omnimage` to lower the total HP threshold.
+
+### `-fusoya:slowstart` {: h6 }
+
+- Idea: Guerin
+
+FuSoYa will skip learning spells and gaining HP after three of the first six and two of the next six boss fights. The boss fight numbers are random each seed. Fu will eventually learn all available spells, just five bosses later than usual.
+
+### `-fusoya:randomhp` {: h6 }
+
+FuSoYa will gain the same amount of HP in the same amount of levels, but will possibly not gain any HP after some bosses and more than 100 HP after some bosses. The HP gains will be integer multiples of 100. 
+
+### `-fusoya:unlearn` {: h6 }
+
+- Idea: Galeswift
+
+FuSoYa will start with all possible spells and then lose spells after each boss fight until he's down to six spells. Spell loss happens in reverse order of the usual spell learning, so he will lose more powerful spells earlier; the exception is under `-fusoya:location`, where he loses the spells he would gain at those bosses (meaning he loses more powerful spells after more powerful boss spots).
+
+### `-fusoya:omnimage` {: h6 }
+
+- Idea: Guerin
+
+FuSoYa is given a third spellset potentially containing every non-Black/White spell available to playable characters (except Lance if `-tweak:kainmagic` is on). These spells are included in the spell randomization and interact with the other flags.
 
 ## Agility Flags
 
@@ -412,6 +450,6 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 
 - Idea: CoffeeAndChocobos, though the original FF4 devs may have considered doing something like this
 - Design/Programming: ScytheMarshall (design, programming), CoffeeAndChocobos (design)
-- Locations: cidairship.f4c
+- Locations: cidairship.f4c; some wacky f4c files where command menus change
 
 This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.
