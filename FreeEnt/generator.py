@@ -847,6 +847,8 @@ def build(romfile, options, force_recompile=False):
         env.add_substitution('kain mp script', mp_script)
     if options.flags.has('edwardheal'):
         env.add_file('scripts/improve_edward_heal.f4c')
+    if options.flags.has('cidairship'):
+        env.add_file('scripts/cidairship.f4c')
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')

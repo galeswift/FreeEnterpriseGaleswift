@@ -407,3 +407,11 @@ This flag modifies Edward's Heal J-ability to use the best of Cure1, Cure2, Cure
 - Locations: darkpaladin.f4c, character_rando.py; spoiler logs from core_rando.py, treasure.py, shop_rando.py, custom_weapon_rando.py
 
 This flag makes widespread changes to Paladin Cecil's stats, equipment, and abilities, based loosely on the stronger DKC in Unprecedented Chaos. He retains Dark Wave upon class-change, as well as DKC equipment, and loses command Cover (but will still Cover low-HP characters). His stats become more attack-focused/Wisdom-heavy and his gear now boosts Wis instead of Wil. His white magic set is replaced with a black magic set that mostly has status spells and single-target magic. His equipment is renamed for thematic reasons. Holy swords are now dark elemental, and the Lightbringer (now "Deathbringer") specifically hits dragon weakness. Spoiler logs are updated to match the new names, as are the select button descriptions.
+
+### `-tweak:cidairship` {: .h6 }
+
+- Idea: CoffeeAndChocobos, though the original FF4 devs may have considered doing something like this
+- Design/Programming: ScytheMarshall (design, programming), CoffeeAndChocobos (design)
+- Locations: cidairship.f4c
+
+This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.

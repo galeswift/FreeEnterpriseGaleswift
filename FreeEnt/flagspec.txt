@@ -77,7 +77,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -vintage
 -pushbtojump
 -wacky:random/-wacky:musical/-wacky:bodyguard/-wacky:fistfight/-wacky:omnidextrous/-wacky:whatsmygear/-wacky:scrambledstats/-wacky:biggermagnet/-wacky:sixleggedrace/-wacky:floorislava/-wacky:neatfreak/-wacky:timeismoney/-wacky:nightmode/-wacky:mysteryjuice/-wacky:misspelled/-wacky:enemyunknown/-wacky:kleptomania/-wacky:darts/-wacky:unstackable/-wacky:menarepigs/-wacky:skywarriors/-wacky:zombies/-wacky:afflicted/-wacky:batman/-wacky:battlescars/-wacky:imaginarynumbers/-wacky:tellahmaneuver/-wacky:3point/-wacky:friendlyfire/-wacky:payablegolbez/-wacky:gottagofast/-wacky:worthfighting/-wacky:saveusbigchocobo/-wacky:isthisrandomized/-wacky:forwardisback/-wacky:dropitlikeitshot/-wacky:advertising
--tweak:kainmagic -tweak:edwardheal -tweak:darkpaladin
+-tweak:kainmagic -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -263,3 +263,4 @@ G64                  glitch_allow_64
 -tweak:kainmagic     kainmagic
 -tweak:edwardheal    edwardheal
 -tweak:darkpaladin   darkpaladin
+-tweak:cidairship    cidairship

@@ -6128,7 +6128,7 @@ var FLAG_UISPEC = [
           {
             "flag": "-tweak:kainmagic",
             "title": "Give Kain magic (with Lance)",
-            "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. (Yes, Lance is overpowered when other characters use it. Enjoy your 1200 strats!)"
+            "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets."
           },
           {
             "flag": "-tweak:edwardheal",
@@ -6139,6 +6139,11 @@ var FLAG_UISPEC = [
             "flag": "-tweak:darkpaladin",
             "title": "Cecil becomes a Dark Paladin",
             "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+          },
+          {
+            "flag": "-tweak:cidairship",
+            "title": "Cid gains a target-all Raid command",
+            "description": "Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon."
           }
         ]
       }

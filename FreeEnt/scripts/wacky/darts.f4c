@@ -172,6 +172,9 @@ actor(#Cid)
     commands {
         #Dart
         #Peep
+        // %flag cidairship on%
+        #Raid
+        // %end%
         #Item
     }
 }

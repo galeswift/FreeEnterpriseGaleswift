@@ -149,6 +149,9 @@ actor(#Cid)
     commands {
         #Sing
         #Peep
+        // %flag cidairship on%
+        #Raid
+        // %end%
         #Item
     }
 }
