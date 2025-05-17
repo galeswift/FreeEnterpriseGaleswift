@@ -688,6 +688,8 @@ def apply(env):
         if all_spells:
             env.add_script('spellset(#FusoyaOmni) {{ initial {{ {} }} }}'.format(' '.join(omni)))
             spoilers.append( ("Initial other magic", ', '.join([databases.get_spell_spoiler_name(s) for s in omni])) )
+        if env.options.flags.has('harmspell'):
+            spoilers = [(p, s.replace('Sight', 'Harm')) for p,s in spoilers]
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)
 
     elif env.options.flags.has('location_fusoya'):
@@ -799,6 +801,8 @@ def apply(env):
             spoilers.append( ("Initial spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
         for position in MOD_BOSS_SLOT_SPOILER_NAMES: 
             spoilers.append( (MOD_BOSS_SLOT_SPOILER_NAMES[position], ', '.join([databases.get_spell_spoiler_name(s) for s in spell_slots[position]]) ) )
+        if env.options.flags.has('harmspell'):
+            spoilers = [(p, s.replace('Sight', 'Harm')) for p,s in spoilers]
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)
         
     else:
@@ -898,6 +902,8 @@ def apply(env):
                 spoilers.append( (f"Boss {boss_number}", ', '.join([databases.get_spell_spoiler_name(s) for s in level_spells])) )
         if env.options.flags.has('unlearn_fusoya'):
              spoilers.append( ("Permanent spells", ', '.join([databases.get_spell_spoiler_name(s) for s in initial_spells])) )
+        if env.options.flags.has('harmspell'):
+            spoilers = [(p, s.replace('Sight', 'Harm')) for p,s in spoilers]
         env.spoilers.add_table("FUSOYA SPELLS", spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:misc'), ditto_depth=1)
 
 if __name__ == '__main__':

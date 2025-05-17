@@ -1117,6 +1117,7 @@ const _FE_FLAGSPEC = {
         "-wacky:dropitlikeitshot",
         "-wacky:advertising",
         "-tweak:kainmagic",
+        "-tweak:harmspell",
         "-tweak:edwardheal",
         "-tweak:darkpaladin",
         "-tweak:cidairship",
@@ -2182,6 +2183,10 @@ const _FE_FLAGSPEC = {
             "-wacky:forwardisback",
             "-wacky:dropitlikeitshot",
             "-wacky:advertising"
+        ],
+        [
+            "-tweak:kainmagic",
+            "-tweak:harmspell"
         ],
         [
             "-spoil:treasure",
@@ -8815,132 +8820,138 @@ const _FE_FLAGSPEC = {
         {
             "flag": "-tweak:kainmagic",
             "offset": 316,
-            "size": 1,
+            "size": 2,
             "value": 1
+        },
+        {
+            "flag": "-tweak:harmspell",
+            "offset": 316,
+            "size": 2,
+            "value": 2
         },
         {
             "flag": "-tweak:edwardheal",
-            "offset": 317,
-            "size": 1,
-            "value": 1
-        },
-        {
-            "flag": "-tweak:darkpaladin",
             "offset": 318,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-tweak:cidairship",
+            "flag": "-tweak:darkpaladin",
             "offset": 319,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:all",
+            "flag": "-tweak:cidairship",
             "offset": 320,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:keyitems",
+            "flag": "-spoil:all",
             "offset": 321,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:rewards",
+            "flag": "-spoil:keyitems",
             "offset": 322,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:chars",
+            "flag": "-spoil:rewards",
             "offset": 323,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:treasure",
+            "flag": "-spoil:chars",
             "offset": 324,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:treasure",
+            "offset": 325,
             "size": 2,
             "value": 1
         },
         {
             "flag": "-spoil:miabs",
-            "offset": 324,
+            "offset": 325,
             "size": 2,
             "value": 2
         },
         {
             "flag": "-spoil:shops",
-            "offset": 326,
-            "size": 1,
-            "value": 1
-        },
-        {
-            "flag": "-spoil:bosses",
             "offset": 327,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:misc",
+            "flag": "-spoil:bosses",
             "offset": 328,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:sparse10",
+            "flag": "-spoil:misc",
             "offset": 329,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:sparse10",
+            "offset": 330,
             "size": 4,
             "value": 1
         },
         {
             "flag": "-spoil:sparse20",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 2
         },
         {
             "flag": "-spoil:sparse30",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 3
         },
         {
             "flag": "-spoil:sparse40",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 4
         },
         {
             "flag": "-spoil:sparse50",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 5
         },
         {
             "flag": "-spoil:sparse60",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 6
         },
         {
             "flag": "-spoil:sparse70",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 7
         },
         {
             "flag": "-spoil:sparse80",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 8
         },
         {
             "flag": "-spoil:sparse90",
-            "offset": 329,
+            "offset": 330,
             "size": 4,
             "value": 9
         }

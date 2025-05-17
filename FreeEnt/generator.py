@@ -845,6 +845,8 @@ def build(romfile, options, force_recompile=False):
         for level in range(1,51):
             mp_script = mp_script + f'patch (${(0x0FB65E + (0x05 * (level-1))):06X} bus) {{ {2:02X} }}\n'
         env.add_substitution('kain mp script', mp_script)
+    elif options.flags.has('harmspell'):
+        env.add_file('scripts/harm_spell.f4c')
     if options.flags.has('edwardheal'):
         env.add_file('scripts/improve_edward_heal.f4c')
     if options.flags.has('cidairship'):

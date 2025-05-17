@@ -600,7 +600,9 @@
 ..(-wacky:whatsmygear)^      "What's My Gear Again?"
 ..(-wacky:zombies)           "Zombies!!!"
 []^ Miscellaneous tweaks
-.[-tweak:kainmagic] Give Kain magic (with Lance)
+.<> Sight replacements
+..(-tweak:kainmagic) Give Kain magic (with Lance)
+..(-tweak:harmspell) Replace Sight with Harm
 .[-tweak:edwardheal] Improve Edward's Heal command
 .[-tweak:darkpaladin] Cecil becomes a Dark Paladin
 .[-tweak:cidairship] Cid gains a target-all Raid command

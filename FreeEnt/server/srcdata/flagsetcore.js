@@ -462,7 +462,7 @@ class FlagLogicCore {
             }
         }
         if (flagset.has("Chero")) {
-            this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:");
+            this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:(super|alt|playable)");
         }
         start_include_flags = flagset.get_list("^Cstart:(?!not_)");
         start_exclude_flags = flagset.get_list("^Cstart:not_");

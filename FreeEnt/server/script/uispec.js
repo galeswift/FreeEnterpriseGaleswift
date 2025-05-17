@@ -5185,7 +5185,7 @@ var FLAG_UISPEC = [
           {
             "flag": "-smith:omni",
             "title": "All characters can equip the FF4A weapon",
-            "description": "If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it.",
+            "description": "If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).",
             "fork": true
           }
         ]
@@ -6132,9 +6132,21 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "-tweak:kainmagic",
-            "title": "Give Kain magic (with Lance)",
-            "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets."
+            "flag": "@anon70",
+            "title": "Sight replacements",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:kainmagic",
+                "title": "Give Kain magic (with Lance)",
+                "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets."
+              },
+              {
+                "flag": "-tweak:harmspell",
+                "title": "Replace Sight with Harm",
+                "description": "This flag replaces Sight with Harm, a damage-dealing holy spell slightly weaker than Virus."
+              }
+            ]
           },
           {
             "flag": "-tweak:edwardheal",
@@ -6159,7 +6171,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon70",
+        "flag": "@anon71",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -6213,7 +6225,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon71",
+            "flag": "@anon72",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -6229,7 +6241,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon72",
+                "flag": "@anon73",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -688,6 +688,9 @@ Enables the April Fools Day 2019 mode.
 [-tweak:kainmagic] 
 Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets.
 
+[-tweak:harmspell]
+This flag replaces Sight with Harm, a damage-dealing holy spell slightly weaker than Virus.
+
 [-tweak:edwardheal] 
 Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available.
 

@@ -461,3 +461,11 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Locations: cidairship.f4c; some wacky f4c files where command menus change
 
 This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.
+
+### `-tweak:harmspell` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: harm_spell.f4c; fusoya_rando.py for spoiler log changes, japanese_spells.f4c for spellset changes
+
+This flag replaces Sight with Harm, a holy-elemental damage-dealing spell slightly weaker than Virus with similar targetting, MP cost, and cast time (with the same HP leak effect that White has). The goal is to provide white mages with an offensive magic option before White.
