@@ -140,6 +140,14 @@ These flags restore functionality to monsters that the original devs removed bef
 
 Under this flag, the forge item will be usable by one of the characters you can get in the seed, whether it's an FF4A weapon or a regular tier 7-8 item. This flag does nothing when it's just the vanilla Excalbur (and on `Omode:classicforge`) or if it would otherwise give nothing (only Yang and no j-items or Adamants). 
 
+### `-smith:omni` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design/Programming: CoffeeAndChocobos, ScytheMarshall
+- Locations: custom_weapon_rando.py, flagsetcore.py
+
+This flag allows every character in the seed to equip the FF4A weapon, if there is one. It will not, however, also allow anyone who cannot equip bows or arrows to equip the other hand to use Rosa's weapons.
+
 ## FuSoYa Flags
 
 - Idea: ScytheMarshall (except `-fusoya:slowstart`, `-fusoya:unlearn`, `-fusoya:omnimage`)

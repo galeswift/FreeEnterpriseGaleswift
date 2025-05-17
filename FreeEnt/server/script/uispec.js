@@ -5181,6 +5181,12 @@ var FLAG_UISPEC = [
             "title": "Kokkol's item will be usable",
             "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
             "fork": true
+          },
+          {
+            "flag": "-smith:omni",
+            "title": "All characters can equip the FF4A weapon",
+            "description": "If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it.",
+            "fork": true
           }
         ]
       },

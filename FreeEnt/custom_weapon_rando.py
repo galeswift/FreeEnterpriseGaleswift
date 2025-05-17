@@ -185,8 +185,14 @@ def apply(env):
 
     # write equip table entry
     equip_value = 0x0000
+    if env.options.flags.has('omnismith'):
+        users_set = set()
+        for ch in env.meta['available_characters']:
+            users_set = users_set.union(set(_CHARACTER_TO_USERS.get(ch, [ch])))
+    else:
+        users_set = set(custom_weapon.equip)
     for i,job in enumerate(_EQUIP):
-        if job in custom_weapon.equip:
+        if job in users_set:
             equip_value |= (1 << i)
     env.add_binary(UnheaderedAddress(0x7A550 + CUSTOM_WEAPON_EQUIP_TABLE_INDEX * 0x02), [equip_value & 0xFF, (equip_value >> 8) & 0xFF], as_script=True)
 

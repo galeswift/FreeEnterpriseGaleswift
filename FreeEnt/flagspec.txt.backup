@@ -45,7 +45,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -spoon
 -monsterevade
 -monsterflee
--smith:super/-smith:alt -smith:playable
+-smith:super/-smith:alt -smith:playable -smith:omni
 -fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
 -fusoya:slowstart/-fusoya:unlearn
 -fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
@@ -213,6 +213,7 @@ G64                  glitch_allow_64
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith
+-smith:omni          omnismith
 
 -fusoya:vanilla       vanilla_fusoya
 -fusoya:location      location_fusoya

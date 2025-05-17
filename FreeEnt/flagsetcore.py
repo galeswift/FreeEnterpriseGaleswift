@@ -412,7 +412,7 @@ class FlagLogicCore:
                 self._simple_disable_regex(flagset, log, 'Conly:* flag(s) are specified', r'^Cno:')
 
         if flagset.has('Chero'):
-            self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:')
+            self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:(super|alt|playable)')
 
         start_include_flags = flagset.get_list(r'^Cstart:(?!not_)')
         start_exclude_flags = flagset.get_list(r'^Cstart:not_')
@@ -446,6 +446,8 @@ class FlagLogicCore:
 
         if len(flagset.get_list(r'^-smith:playable')) == len(flagset.get_list(r'^-smith:')):
             self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable'])
+        if flagset.has('-smith:omni') and not (flagset.has_any('-smith:super', 'Chero')):
+            self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni'])
 
         # add restrictions in case people try to fudge the fusoya flags
         if flagset.has('-fusoya:slowstart') and flagset.has('-fusoya:uncapped'):

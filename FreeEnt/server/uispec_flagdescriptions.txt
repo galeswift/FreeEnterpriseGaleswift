@@ -504,6 +504,9 @@ Instead of the Excalibur, Kokkol the Smith will forge a weapon from Final Fantas
 [-smith:playable]
 The item that Kokkol forges will be usable by a character you can acquire in the seed.
 
+[-smith:omni]
+If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).
+
 [@fusoya] 
 By default, Free Enterprise runs with the "FuSoYa Challenge", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.
 
