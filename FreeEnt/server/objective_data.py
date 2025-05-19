@@ -90,4 +90,5 @@ OBJECTIVES = {
     0x6B: {'slug' : 'internal_bosscollector', 'reward': 'none', 'desc': 'Defeat %d %t'},
     0x6C: {'slug' : 'internal_goldhunter', 'reward': 'none', 'desc': 'Bring %d GP to Tory in Agart'},
     0x6D: {'slug' : 'internal_dkmatter', 'reward': 'none', 'desc': 'Bring DkMatters to Kory in Agart'},
+    0x6E: {'slug' : 'internal_external', 'reward': 'none', 'desc': 'Complete external goal and use EagleEye'},
 }

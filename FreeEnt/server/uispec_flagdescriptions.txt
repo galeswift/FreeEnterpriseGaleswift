@@ -318,6 +318,9 @@ Allows items of any strength to appear, including the most powerful items, but u
 [Tplayable]
 Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.
 
+[Tadjmiabareas]
+On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.
+
 [Tsemipro]
 Uses location-based weighting, with item quality between that provided by pro and wildish.
 

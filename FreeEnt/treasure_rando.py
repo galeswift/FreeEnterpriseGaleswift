@@ -377,6 +377,13 @@ def apply(env):
                 weights = util.get_boosted_weights(weights)
             if env.options.flags.has('treasure_semipro'):
                 weights = util.get_semiboosted_weights(weights)
+            # adjust weights down for miab areas (usually for vanilla miabs)
+            if env.options.flags.has('treasure_adjust_miab_areas'):
+                # see assets/db/curves.csvdb for the numbers;
+                # in order, it's Zot, Castle Eblan, Lower Bab-il, Cave Eblan, Upper Bab-il, 
+                # Sylph Cave, Feymarch, Lunar Path, Giant, Lunar Subterrane/Core
+                if row.wikiindex in [22, 25, 24, 26, 27, 31, 32, 36, 37, 38]:
+                    weights = util.get_adjusted_miabs_weights(weights)
 
             distributions_unrestricted[row.area] = util.Distribution(weights)
 

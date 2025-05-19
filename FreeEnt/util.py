@@ -77,3 +77,24 @@ def get_semiboosted_weights(weights):
             semiboosted_weights[i] += weights[chunk[0]] * chunk[1]
 
     return semiboosted_weights
+
+# adjustment matrix for locations with miabs under weighted distributions
+ADJUST_MIABS_MATRIX = { 
+    1: [(1, 1), (2, 1/4)],
+    2: [(2, 3/4), (3, 1/4)],
+    3: [(3, 3/4), (4, 1/2)],
+    4: [(4, 1/2), (5, 1/2)],
+    5: [(5, 1/2), (6, 3/4)],
+    6: [(6, 1/4), (7, 3/4)],
+    7: [(7, 1/4), (8, 3/4)],
+    8: [(8, 1/4)],
+}
+
+def get_adjusted_miabs_weights(weights):
+    adjusted_miabs_weights = {i : 0 for i in range(1,9)}
+
+    for i in adjusted_miabs_weights:
+        for chunk in ADJUST_MIABS_MATRIX[i]:
+            adjusted_miabs_weights[i] += weights[chunk[0]] * chunk[1]
+
+    return adjusted_miabs_weights

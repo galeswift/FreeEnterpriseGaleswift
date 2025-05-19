@@ -45,7 +45,7 @@ Ctreasure:free Ctreasure:earned Ctreasure:unsafe Ctreasure:relaxed Chi Cfifo
 Tvanilla Tshuffle/Tstandard/Tpro/Tsemipro/Twild/Twildish/Tvanillaish/Tempty
 Tsparse:10/Tsparse:20/Tsparse:30/Tsparse:40/Tsparse:50/Tsparse:60/Tsparse:70/Tsparse:80/Tsparse:90
 Tsparsey:underground Tsparsey:moon Tsparsey:overworld
-Tplayable
+Tplayable Tadjmiabareas
 Tunrestrict:treasury Tunrestrict:moon Tunrestrict:underworld Tunrestrict:overworld
 Tno:j Tmaxtier:3/Tmaxtier:4/Tmaxtier:5/Tmaxtier:6/Tmaxtier:7 Tmintier:2/Tmintier:3/Tmintier:4/Tmintier:5 Tmoney/Tjunk
 Sprice:20/Sprice:40/Sprice:60/Sprice:80/Sprice:120/Sprice:140/Sprice:160/Sprice:180/Sprice:200/Sprice:400
@@ -244,6 +244,7 @@ Tvanillaish          treasure_vanillaish
 Tempty               treasure_empty
 Tno:j                treasure_no_j_items
 Tplayable            treasure_playable
+Tadjmiabareas        treasure_adjust_miab_areas
 Tsparsey:underground treasure_sparse_underground
 Tsparsey:moon        treasure_sparse_moon
 Tsparsey:overworld   treasure_sparse_overworld

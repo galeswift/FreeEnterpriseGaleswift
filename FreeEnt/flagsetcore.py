@@ -489,6 +489,9 @@ class FlagLogicCore:
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmaxtier:')
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmintier:')
 
+        if flagset.has('Tadjmiabareas') and not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish'):
+            self._simple_disable(flagset, log, 'Treasures are not weighted', ['Tadjmiabareas'])
+
         if flagset.has_any('Svanilla', 'Scabins', 'Sempty'):
             self._simple_disable_regex(flagset, log, 'Shops are not random', r'^Sno:([^j]|j.)')
             self._simple_disable(flagset, log, 'Shops are not random', ['Sunsafe'])

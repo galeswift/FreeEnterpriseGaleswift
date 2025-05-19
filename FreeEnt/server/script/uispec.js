@@ -281,6 +281,12 @@ var FLAG_UISPEC = [
                     "description": "Obtain 17 key items to complete this objective. Incompatible with <em>Owin:crystal</em>."
                   }
                 ]
+              },
+              {
+                "flag": "Omode:external",
+                "title": "External Objective",
+                "description": "Use the EagleEye provided to you at the start of the game to complete this objective. This objective is intended for external objectives that cannot be referenced in-game, such as bingo goals or meta objectives.",
+                "fork": true
               }
             ]
           },
@@ -3910,12 +3916,14 @@ var FLAG_UISPEC = [
                 "flag": "Kunsafer",
                 "title": "Force underground access via the moon",
                 "description": "As Kunsafe, but you will be <em>required</em> to obtain moon access prior to obtaining underground access.",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "Klatedark",
                 "title": "Force Darkness Crystal to be gated by underground access",
-                "description": "The Darkness Crystal will be gated by underground access."
+                "description": "The Darkness Crystal will be gated by underground access.",
+                "fork": true
               },
               {
                 "flag": "@anon31",
@@ -4617,6 +4625,7 @@ var FLAG_UISPEC = [
             "flag": "@Cthrifttier",
             "title": "Characters start with a full set of random gear",
             "description": "Characters start with a full set of gear: weapon(s), possibly a shield, and head/body/arms, all from at most the tier specified. (Duplicate characters will have the same starting gear. Cursed Rings are excluded.)",
+            "fork": true,
             "type": "select",
             "subcontrols": [
               {
@@ -5125,31 +5134,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5285,31 +5282,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5445,31 +5430,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5605,31 +5578,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5765,31 +5726,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5925,31 +5874,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5969,7 +5906,14 @@ var FLAG_UISPEC = [
       {
         "flag": "Tplayable",
         "title": "Chests contain usable items",
-        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed."
+        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+        "fork": true
+      },
+      {
+        "flag": "Tadjmiabareas",
+        "title": "Areas with MIABs will have slightly worse items",
+        "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+        "fork": true
       },
       {
         "flag": "@anon57",
@@ -6199,6 +6143,28 @@ var FLAG_UISPEC = [
             "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
           }
         ]
+      },
+      {
+        "flag": "Sno:j",
+        "title": "No J-items in shops"
+      },
+      {
+        "flag": "Sno:apples",
+        "title": "No Apples/Soma Drops in shops"
+      },
+      {
+        "flag": "Sno:sirens",
+        "title": "No Sirens in shops"
+      },
+      {
+        "flag": "Sno:life",
+        "title": "No Life potions in shops"
+      },
+      {
+        "flag": "Splayable",
+        "title": "Shops contain usable items",
+        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+        "fork": true
       },
       {
         "flag": "@anon62",
@@ -6641,6 +6607,32 @@ var FLAG_UISPEC = [
             "description": "Each of Shadow's and Golbez's spells are replaced individually. If <em>Bunsafe</em> is enabled, Golbez has access to more powerful spells."
           }
         ]
+      },
+      {
+        "flag": "Bspellpower",
+        "title": "All bosses gain scaled spell power",
+        "description": "Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "@anon68",
+        "title": "Remove certain boss slots",
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Bremove:officer_slot",
+            "title": "Remove the Officer slot boss fight",
+            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.",
+            "fork": true
+          },
+          {
+            "flag": "Bremove:kingqueen_slot",
+            "title": "Remove the KQ Eblan slot boss fight",
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.",
+            "fork": true
+          }
+        ]
       }
     ]
   },
@@ -6648,7 +6640,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon68",
+        "flag": "@anon69",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -6721,7 +6713,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon69",
+        "flag": "@anon70",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6756,6 +6748,13 @@ var FLAG_UISPEC = [
         "title": "Disable D.Machin encounters",
         "description": "The D.Machin in the Searcher encounter is replaced by a Horseman.",
         "hard": true
+      },
+      {
+        "flag": "Enomacgiant",
+        "title": "Disable MacGiant encounters",
+        "description": "The MacGiant in the Searcher encounter is replaced by a Machine.",
+        "hard": true,
+        "fork": true
       }
     ]
   },
@@ -6804,66 +6803,87 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon70",
-        "title": "Doors Randomization Options",
-        "type": "select",
-        "subcontrols": [
-          {
-            "flag": "-doorsrando:normal",
-            "title": "Doors Shuffle without Cross World",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:gated",
-            "title": "Underworld and Moon Doors shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:blueplanet",
-            "title": "Overworld and Underworld Doors Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:why",
-            "title": "Overworld and Moon Doors shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:all",
-            "title": "All Doors shuffled",
-            "hard": true
-          }
-        ]
-      },
-      {
         "flag": "@anon71",
-        "title": "Entrances Randomization Options",
+        "title": "Warps Randomization Options",
         "type": "select",
         "subcontrols": [
           {
-            "flag": "-entrancesrando:normal",
-            "title": "Entrances Shuffle without Cross World",
-            "hard": true
+            "flag": "@doorsrando",
+            "title": "Randomize Doors",
+            "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "subcontrols": [
+              {
+                "flag": "@anon72",
+                "title": "Doors Randomization Options",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "-doorsrando:normal",
+                    "title": "Doors Shuffle without Cross World",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:gated",
+                    "title": "Underworld and Moon Doors shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:blueplanet",
+                    "title": "Overworld and Underworld Doors Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:why",
+                    "title": "Overworld and Moon Doors shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:all",
+                    "title": "All Doors shuffled",
+                    "hard": true
+                  }
+                ]
+              }
+            ]
           },
           {
-            "flag": "-entrancesrando:gated",
-            "title": "Underworld and Moon Entrances Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:blueplanet",
-            "title": "Overworld and Underworld Entrances Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:why",
-            "title": "Overworld and Moon Entrances Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:all",
-            "title": "All Entrances Shuffled",
-            "hard": true
+            "flag": "@entrancesrando",
+            "title": "Randomize Entrances",
+            "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "subcontrols": [
+              {
+                "flag": "@anon73",
+                "title": "Entrances Randomization Options",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "-entrancesrando:normal",
+                    "title": "Entrances Shuffle without Cross World",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:gated",
+                    "title": "Underworld and Moon Entrances Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:blueplanet",
+                    "title": "Overworld and Underworld Entrances Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:why",
+                    "title": "Overworld and Moon Entrances Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:all",
+                    "title": "All Entrances Shuffled",
+                    "hard": true
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -6888,7 +6908,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon72",
+            "flag": "@anon74",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7026,22 +7046,26 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit:adamant",
                 "title": "Adamant kit",
-                "description": "An Adamant Armor."
+                "description": "An Adamant Armor.",
+                "fork": true
               },
               {
                 "flag": "-kit:cursed",
                 "title": "Cursed kit",
-                "description": "A Cursed Ring."
+                "description": "A Cursed Ring.",
+                "fork": true
               },
               {
                 "flag": "-kit:hero",
                 "title": "Hero kit",
-                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon."
+                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
               },
               {
                 "flag": "-kit:exit",
                 "title": "Exit kit",
-                "description": "5-10 Exits"
+                "description": "5-10 Exits",
+                "fork": true
               },
               {
                 "flag": "-kit:random",
@@ -7051,7 +7075,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon73",
+            "flag": "@anon75",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7189,22 +7213,26 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit2:adamant",
                 "title": "Adamant kit",
-                "description": "An Adamant Armor."
+                "description": "An Adamant Armor.",
+                "fork": true
               },
               {
                 "flag": "-kit2:cursed",
                 "title": "Cursed kit",
-                "description": "A Cursed Ring."
+                "description": "A Cursed Ring.",
+                "fork": true
               },
               {
                 "flag": "-kit2:hero",
                 "title": "Hero kit",
-                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon."
+                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
               },
               {
                 "flag": "-kit2:exit",
                 "title": "Exit kit",
-                "description": "5-10 Exits"
+                "description": "5-10 Exits",
+                "fork": true
               },
               {
                 "flag": "-kit2:random",
@@ -7214,7 +7242,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon74",
+            "flag": "@anon76",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7352,21 +7380,25 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit3:adamant",
                 "title": "Adamant kit",
-                "description": "An Adamant Armor."
+                "description": "An Adamant Armor.",
+                "fork": true
               },
               {
                 "flag": "-kit3:cursed",
                 "title": "Cursed kit",
-                "description": "A Cursed Ring."
+                "description": "A Cursed Ring.",
+                "fork": true
               },
               {
                 "flag": "-kit3:hero",
                 "title": "Hero kit",
-                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon."
+                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
               },
               {
                 "flag": "-kit3:exit",
-                "title": "Exit kit"
+                "title": "Exit kit",
+                "fork": true
               },
               {
                 "flag": "-kit3:random",
@@ -7409,7 +7441,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon75",
+            "flag": "@anon77",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7445,8 +7477,8 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon76",
-            "title": "Spell learning changes",
+            "flag": "@anon78",
+            "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
               {
@@ -7454,7 +7486,7 @@ var FLAG_UISPEC = [
                 "title": "Usual FuSoYa challenge",
                 "subcontrols": [
                   {
-                    "flag": "@anon48",
+                    "flag": "@anon79",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7471,7 +7503,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon49",
+                    "flag": "@anon80",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7494,7 +7526,7 @@ var FLAG_UISPEC = [
                 "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
                 "subcontrols": [
                   {
-                    "flag": "@anon50",
+                    "flag": "@anon81",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7512,7 +7544,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon48",
+                    "flag": "@anon79",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7529,7 +7561,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon49",
+                    "flag": "@anon80",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7552,7 +7584,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
                 "subcontrols": [
                   {
-                    "flag": "@anon48",
+                    "flag": "@anon79",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7569,7 +7601,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon49",
+                    "flag": "@anon80",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7592,7 +7624,7 @@ var FLAG_UISPEC = [
                 "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon51",
+                    "flag": "@anon82",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7604,7 +7636,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon52",
+                    "flag": "@anon83",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7628,7 +7660,7 @@ var FLAG_UISPEC = [
                 "hard": true,
                 "subcontrols": [
                   {
-                    "flag": "@anon53",
+                    "flag": "@anon84",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7667,7 +7699,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon54",
+            "flag": "@anon85",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -7718,7 +7750,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon55",
+                    "flag": "@anon86",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -7758,7 +7790,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon56",
+                "flag": "@anon87",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -7783,7 +7815,7 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "@exp",
-        "title": "Restore vanilla EXP distribution",
+        "title": "Restore vanilla or change EXP distribution",
         "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.",
         "subcontrols": [
           {
@@ -7804,15 +7836,17 @@ var FLAG_UISPEC = [
           {
             "flag": "-exp:crystalbonus",
             "title": "Double EXP after obtaining the Crystal",
-            "description": "Under this flag, characters earn double EXP once you obtain the Crystal."
+            "description": "Under this flag, characters earn double EXP once you obtain the Crystal.",
+            "fork": true
           },
           {
             "flag": "@objectiveexp",
             "title": "Award extra EXP for completing objectives",
             "description": "Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each completed objective earns you more EXP from each battle.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon77",
+                "flag": "@anon88",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7837,9 +7871,10 @@ var FLAG_UISPEC = [
             "flag": "@kicheckexp",
             "title": "Award extra EXP for completing key item checks",
             "description": "Normally, completing key item checks does not increase the amount of EXP received from battles. Under this flag, each completed key item check beyond the starting item earns you more EXP from each battle.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon78",
+                "flag": "@anon89",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7868,9 +7903,10 @@ var FLAG_UISPEC = [
             "flag": "@zonkbonusexp",
             "title": "Award extra EXP after non-KI rewards from KI checks",
             "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") you earn more EXP from future battles.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon79",
+                "flag": "@anon90",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7894,9 +7930,10 @@ var FLAG_UISPEC = [
             "flag": "@miabbonusexp",
             "title": "Award extra EXP during MIAB encounters",
             "description": "Normally, MIAB encounters have the same EXP calculation as other encounters. Under this flag, MIAB encounters award double or 1.5 times the usual EXP.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon80",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7916,9 +7953,10 @@ var FLAG_UISPEC = [
             "flag": "@moonbonusexp",
             "title": "Award extra EXP when on the moon",
             "description": "Normally, location of encounter does not increase EXP. Under this flag, encounters on the moon award double or triple the usual EXP.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon81",
+                "flag": "@anon92",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7937,56 +7975,58 @@ var FLAG_UISPEC = [
           {
             "flag": "-exp:maxlevelbonus",
             "title": "Award extra EXP when underlevelled",
-            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5)."
+            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).",
+            "fork": true
           },
           {
             "flag": "@geometricexp",
             "title": "Decrease EXP earned from repeated same-type monster kills",
             "description": "Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not \"per slot\" in battle.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon82",
+                "flag": "@anon93",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:geometric90",
+                    "flag": "-exp:geometric_90",
                     "title": "Repeated monster kills scale down in EXP to 90%"
                   },
                   {
-                    "flag": "-exp:geometric80",
+                    "flag": "-exp:geometric_80",
                     "title": "Repeated monster kills scale down in EXP to 80%"
                   },
                   {
-                    "flag": "-exp:geometric70",
+                    "flag": "-exp:geometric_70",
                     "title": "Repeated monster kills scale down in EXP to 70%"
                   },
                   {
-                    "flag": "-exp:geometric60",
+                    "flag": "-exp:geometric_60",
                     "title": "Repeated monster kills scale down in EXP to 60%"
                   },
                   {
-                    "flag": "-exp:geometric50",
+                    "flag": "-exp:geometric_50",
                     "title": "Repeated monster kills scale down in EXP to 50%"
                   },
                   {
-                    "flag": "-exp:geometric40",
+                    "flag": "-exp:geometric_40",
                     "title": "Repeated monster kills scale down in EXP to 40%"
                   },
                   {
-                    "flag": "-exp:geometric30",
+                    "flag": "-exp:geometric_30",
                     "title": "Repeated monster kills scale down in EXP to 30%"
                   },
                   {
-                    "flag": "-exp:geometric20",
+                    "flag": "-exp:geometric_20",
                     "title": "Repeated monster kills scale down in EXP to 20%"
                   },
                   {
-                    "flag": "-exp:geometric10",
+                    "flag": "-exp:geometric_10",
                     "title": "Repeated monster kills scale down in EXP to 10%"
                   },
                   {
-                    "flag": "-exp:geometric0",
+                    "flag": "-exp:geometric_0",
                     "title": "Repeated monster kills do not award EXP"
                   }
                 ]
@@ -7996,8 +8036,10 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon83",
-        "title": "Restore vanilla behaviors",
+        "flag": "@anon94",
+        "title": "Change the PRNG table",
+        "fork": true,
+        "type": "select",
         "subcontrols": [
           {
             "flag": "-prng:shuffle",
@@ -8022,7 +8064,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon64",
+        "flag": "@anon95",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -8053,11 +8095,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon84",
+        "flag": "@anon96",
         "title": "Zeromus fight changes",
+        "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon85",
+            "flag": "@anon97",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -8144,7 +8187,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon86",
+            "flag": "@anon98",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -8185,7 +8228,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon87",
+            "flag": "@anon99",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8237,7 +8280,8 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:dropitlikeitshot",
-            "title": "\"Drop It Like It's Hot\""
+            "title": "\"Drop It Like It's Hot\"",
+            "fork": true
           },
           {
             "flag": "-wacky:enemyunknown",
@@ -8306,7 +8350,8 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:mirrormirror",
-            "title": "\"Mirror, Mirror, on the Wall\""
+            "title": "\"Mirror, Mirror, on the Wall\"",
+            "fork": true
           },
           {
             "flag": "-wacky:mysteryjuice",
@@ -8336,6 +8381,12 @@ var FLAG_UISPEC = [
             "hard": true
           },
           {
+            "flag": "-wacky:scrambledstats",
+            "title": "\"Scrambled Stats\"",
+            "hard": true,
+            "fork": true
+          },
+          {
             "flag": "-wacky:sixleggedrace",
             "title": "\"Six-Legged Race\""
           },
@@ -8361,6 +8412,11 @@ var FLAG_UISPEC = [
             "title": "\"Time is Money\""
           },
           {
+            "flag": "-wacky:advertising",
+            "title": "\"Truth in Advertising\"",
+            "fork": true
+          },
+          {
             "flag": "-wacky:darts",
             "title": "\"World Championship of Darts\""
           },
@@ -8371,26 +8427,22 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:whatsmygear",
-            "title": "\"What's My Gear Again?\""
+            "title": "\"What's My Gear Again?\"",
+            "fork": true
           },
           {
             "flag": "-wacky:zombies",
             "title": "\"Zombies!!!\""
           }
         ]
-      }
-    ]
-  },
-  {
-    "title": "TWEAKS",
-    "controls": [
+      },
       {
-        "flag": "@anon88",
+        "flag": "@anon100",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon70",
+            "flag": "@anon101",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8429,7 +8481,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon89",
+        "flag": "@anon102",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8483,7 +8535,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon90",
+            "flag": "@anon103",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8499,7 +8551,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon91",
+                "flag": "@anon104",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

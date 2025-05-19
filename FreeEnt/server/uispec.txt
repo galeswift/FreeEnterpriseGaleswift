@@ -488,6 +488,7 @@
 .(Tempty)! Chests are empty
 [Tno:j] No J-items in chests
 [Tplayable]^ Chests contain usable items
+[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
 <> Junk management
 .[Tjunk] Keep junk
 .[Tmoney] Everything is junk

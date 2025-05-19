@@ -439,7 +439,7 @@ class FlagLogicCore {
     fix(flagset) {
         var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, bad_gated_conditions, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, mode, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, required_chars, required_count, required_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
         log = [];
-        if ((flagset.has("Kunsafer") && (! flagset.has("Kmoon")))) {
+        if ((flagset.has("Kunsafer") && (! flagset.has_any("Kmoon", "Kmiab:lst", "Kmiab:all")))) {
             flagset.set("Kmoon");
             this._lib.push(log, ["correction", "Kunsafer requires placing key items on the moon; adding Kmoon"]);
         }
@@ -453,7 +453,6 @@ class FlagLogicCore {
             flagset.set("Kmain");
             this._lib.push(log, ["correction", "Advanced key item randomizations are enabled; forced to add Kmain"]);
         }
-        kmiab_flags = flagset.get_list("^Kmiab:");
         if ((flagset.has("Owin:crystal") && flagset.has("Omode:ki17"))) {
             flagset.unset("Omode:ki17");
             flagset.set("Omode:ki16");
@@ -476,6 +475,7 @@ class FlagLogicCore {
             flagset.set("Pkey");
             this._lib.push(log, ["correction", "Kstart:pass implies Pkey"]);
         }
+        kmiab_flags = flagset.get_list("^Kmiab:");
         if ((_pj.in_es6("Kmiab:all", kmiab_flags) && (kmiab_flags.length > 1))) {
             this._simple_disable_regex(flagset, log, "All miabs already included", "^Kmiab:(standard|above|below|lst)");
         } else {
@@ -539,6 +539,9 @@ class FlagLogicCore {
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmaxtier:");
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmintier:");
         }
+        if ((flagset.has("Tadjmiabareas") && (! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish")))) {
+            this._simple_disable(flagset, log, "Treasures are not weighted", ["Tadjmiabareas"]);
+        }
         if (flagset.has_any("Svanilla", "Scabins", "Sempty")) {
             this._simple_disable_regex(flagset, log, "Shops are not random", "^Sno:([^j]|j.)");
             this._simple_disable(flagset, log, "Shops are not random", ["Sunsafe"]);
@@ -555,6 +558,21 @@ class FlagLogicCore {
         }
         if ((flagset.get_list("^-smith:playable").length === flagset.get_list("^-smith:").length)) {
             this._simple_disable(flagset, log, "No smith item requested", ["-smith:playable"]);
+        }
+        if ((flagset.has("-smith:omni") && (! flagset.has_any("-smith:super", "Chero")))) {
+            this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni"]);
+        }
+        if ((flagset.has("-fusoya:slowstart") && flagset.has("-fusoya:uncapped"))) {
+            this._simple_disable(flagset, log, "Uncapped FuSoYa cannot also have slowstart", ["-fusoya:slowstart"]);
+        }
+        if ((flagset.has("-fusoya:location") && flagset.has("-fusoya:slowstart"))) {
+            this._simple_disable(flagset, log, "Location FuSoYa cannot have slowstart", ["-fusoya:slowstart"]);
+        }
+        if (flagset.has("-fusoya:nerfed")) {
+            this._simple_disable_regex(flagset, log, "Nerfed FuSoYa cannot have slowstart or unlearn spells", "^-fusoya:(slowstart|unlearn)");
+        }
+        if (flagset.has("-fusoya:vanilla")) {
+            this._simple_disable_regex(flagset, log, "Vanilla FuSoYa cannot have his HP or spells change", "^-fusoya:(slowstart|unlearn|randomhp)");
         }
         if ((flagset.has("-monsterflee") && (! flagset.has("-monsterevade")))) {
             flagset.set("-monsterevade");
