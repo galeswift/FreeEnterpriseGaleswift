@@ -1,0 +1,90 @@
+// In apply_scrambledstats, we have precomputed the
+// offsets for each replacement stat load/etc. 
+// So, we need to patch all of those offsets in,
+// when we're guaranteed that it's a character and
+// not a monster. For possible monsters, we need to
+// bypass them; monster stats are awkward and too
+// unbalanced to make a playable experience (and
+// they're only given the derived stats, mostly, 
+// so it's a pain). The plan for monsters would've
+// been "shuffle the three Atk/Def/MDef tuples,
+// possibly swap Speed/Spell Power", but there are
+// many problems with that.
+
+// Strength
+patch($039C31 bus) { {% 3966 STR substitute %} }
+patch($039C91 bus) { {% 3966 STR substitute %} }
+
+// Agility
+patch($0399DD bus) { {% 3967 AGI substitute %} }
+patch($039A9D bus) { {% 3967 AGI substitute %} }
+patch($039C39 bus) { {% 3967 AGI substitute %} }
+
+// deal with loads for anchor and slot agility in 
+// agility.f4c instead of here, using a substitution with
+// a default value; for slot agility, deal with monsters
+// separately because they need to stay the same
+
+// Vitality
+// for the second patch, monsters might behave strangely!
+// i.e. might come back with non-0 HP after Life-glitching
+patch($039A0F bus) { {% 3968 VIT substitute %} }
+patch($03D6DA bus) { {% 2716 VIT substitute %} }
+patch($039F18 bus) { {% 2016 VIT substitute %} }
+
+// Wisdom
+patch($039A90 bus) { {% 3969 WIS substitute %} }
+patch($039F56 bus) { {% 2017 WIS substitute %} }
+
+// Will
+patch($039A93 bus) { {% 3970 WIL substitute %} }
+patch($039ED8 bus) { {% 2018 WIL substitute %} }
+patch($039F59 bus) { {% 2018 WIL substitute %} }
+
+// ... But, we also need to write some custom code to make sure
+// that white magic uses the correct Wil substitute, which is
+// easier said than done.
+
+// idea: offset from Str in either case, but conditionally load
+// the correct offset only for characters.
+
+msfpatch {
+    .addr $03cebc
+        jml $=Wacky__WisToWil
+
+    // offset from Str instead of Wis in both places
+    .addr $03CEC3
+        lda $2694,x 
+
+    .addr $03CF11
+        lda $2694,x
+
+    .new
+    Wacky__WisToWil:
+        // put the subcommand on stack,
+        // check battle_command_actor_slot to branch if monster
+        pha 
+        lda $cd 
+        bmi $+WisToWilMonster
+        pla
+        // first black magic spell (Toad) is #$19
+        cmp #$19 
+        bcs $+CharacterWis
+        {% ldx WIL offset %}
+        bra $+WisWilDone
+    %CharacterWis:
+        {% ldx WIS offset %}
+        bra $+WisWilDone
+
+    %WisToWilMonster:
+        pla
+        cmp #$19 
+        bcs $+MonsterWis
+        ldx #$0004
+        bra $+WisWilDone
+    %MonsterWis:
+        ldx #$0003
+    %WisWilDone:
+        jml $03CEC1
+
+}

@@ -163,7 +163,7 @@ msfpatch {
         bcc $+ObjectiveCompleted
         bra $+CountLoopNext
     %ObjectiveCompleted:
-        iny 
+        iny
     %CountLoopNext:
         inx
         cpx #$_Objectives__MaxCount
@@ -197,28 +197,21 @@ msfpatch {
         // %end%
 
         // %if experience_zonk_bonus%
-        // compute the number of zonks; since we aren't really
-        // treating a non-KI starting item as a zonk, we make a
-        // substitution in the script by looking at the starting
-        // item to handle the arithmetic appropriately
+        // load the zonk count; the starting key item check doesn't
+        // really count as a zonk (no choice), so if the starting check
+        // wasn't a key item (i.e. a zonk), need to subtract one 
+        // (by subtracting 0 with carry clear)
         lda {% starting key item zonk %}
-        beq $+WasZonk
+        bne $+StartingZonk
         sec
         bra $+ComputeDifference
-    %WasZonk:
+    %StartingZonk:
         clc
     %ComputeDifference:
-        lda $_Rewards__KeyItemChecksCount
-        cmp $=Stats_KeyItems
-        bcs $+DoSubtract
-        lda #$0000
-        bra $+DoDivision
-    %DoSubtract:
-        // setting the carry means we compute (KI checks-1) - (KIs - 1)
-        // clearing the carry means we compute (KI checks-1) - KIs
-        sec
-        sbc $=Stats_KeyItems
-    %DoDivision:
+        lda $_Rewards__ZonkChecksCount
+        sbc #$00
+        // setting the carry means we compute (zonk checks - 0 - 1 + 1) = zonk checks
+        // clearing the carry means we compute (zonk checks - 0 - 1)
 
         xba
         lda #$00

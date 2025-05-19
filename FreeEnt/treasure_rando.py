@@ -43,7 +43,7 @@ FIGHT_SPOILER_DESCRIPTIONS = {
     0x1F4 : "Behemoth"
 }
 
-# needed tool for Tspecific
+# needed tool for Tplayable
 _CHARACTER_TO_USERS = {
     'cecil' : ['dkcecil', 'pcecil'],
     'rydia' : ['crydia', 'arydia']
@@ -183,6 +183,8 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.AdamantArmor')
     if env.options.flags.has('no_cursed_rings'):
         dbview.refine(lambda it: it.const != '#item.Cursed')
+    if env.options.flags.has('objective_mode_external'):
+        dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: (it.category not in ['weapon', 'armor']))   
     if env.meta.get('wacky_challenge') == '3point':
@@ -514,10 +516,20 @@ def apply(env):
             try:
                 item = env.meta['rewards_assignment'][slot].item
                 contents = databases.get_item_spoiler_name(item)
+                if env.options.flags.has('darkpaladin'):
+                    contents = contents.replace('Paladin','Ancient')
+                    contents = contents.replace('Light','Chaos')
+                    if not contents == 'Crystal Ring':
+                        contents = contents.replace('Crystal','Hades')
             except KeyError:
                 contents = 'DEBUG'
         elif not contents.endswith(' gp'):
             contents = databases.get_item_spoiler_name(contents)
+            if env.options.flags.has('darkpaladin'):
+                contents = contents.replace('Paladin','Ancient')
+                contents = contents.replace('Light','Chaos')
+                if not contents == 'Crystal Ring':
+                    contents = contents.replace('Crystal','Hades')
 
         if treasureEntry.fight is not None:
             miab = f" (MIAB: {FIGHT_SPOILER_DESCRIPTIONS[treasureEntry.fight]})"

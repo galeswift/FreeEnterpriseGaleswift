@@ -1,0 +1,43 @@
+// The sap timer turns out to be bugged;
+// the wrong byte gets loaded (hi instead of lo)
+// and so the multiplication is either by 0 or 
+// by some random number, depending on what happened
+// previously in the game that used that byte.
+// We fix this by patching in the correct byte;
+// simply the previous byte.
+
+patch($039F68 bus) { E1 } // E2 in vanilla
+
+// Now sap, the only thing that uses this timer,
+// will have duration 4 * $2f + 30 for monsters,
+// or 2 * (Wis+Wil) + 30 for characters.
+
+// The will-based timer is also broken; there is an
+// overflow bug that impacts paralyze, sleep, 
+// and gradual stone. This fix runs the correct
+// subtraction before jumping back to the rest of
+// the computation.
+
+msfpatch {
+    .addr $039edc
+        jml $=WilTimerCorrectSub
+
+    .new
+    WilTimerCorrectSub:
+        stz $ae
+        asl $ad // $ad is no bigger than 127, so no rol $ae needed
+        asl $ad
+        rol $ae // add in a rotate left to catch the top bit
+        sec
+        lda #$2c // lo byte of 300 = 256 + 44
+        sbc $ad
+        sta $a9
+        lda #$01 // hi byte of 300
+        sbc $ae
+        sta $aa
+        bpl $+DoneWilTimer
+        ldx #$0001
+        stx $a9
+    %DoneWilTimer:
+        jml $039ef4
+}

@@ -1002,6 +1002,8 @@ const _FE_FLAGSPEC = {
         "Cpermajoin",
         "Cpermadeath",
         "Cpermadeader",
+        "Cmostlydead",
+        "Cbrieflydead",
         "Chero",
         "Csuperhero",
         "Ctreasure:free",
@@ -1120,6 +1122,9 @@ const _FE_FLAGSPEC = {
         "Bwhybez",
         "Bwhichbez",
         "Bwoahdin",
+        "Bspellpower",
+        "Bremove:kaipo_slot",
+        "Bremove:kqe_slot",
         "Evanilla",
         "Etoggle",
         "Ereduce",
@@ -1133,6 +1138,7 @@ const _FE_FLAGSPEC = {
         "Enodmachin",
         "Eno:jdrops",
         "Eno:sirens",
+        "Enomacgiant",
         "Gnone",
         "Gdupe",
         "Gmp",
@@ -1242,12 +1248,35 @@ const _FE_FLAGSPEC = {
         "-smith:super",
         "-smith:alt",
         "-smith:playable",
+        "-smith:omni",
         "-fusoya:vanilla",
         "-fusoya:location",
         "-fusoya:sequential_p",
         "-fusoya:sequential_r",
         "-fusoya:nerfed",
+        "-fusoya:slowstart",
+        "-fusoya:unlearn",
         "-fusoya:maybe",
+        "-fusoya:uncapped",
+        "-fusoya:randomhp",
+        "-fusoya:omnimage",
+        "-agility:vanilla",
+        "-agility:slowest",
+        "-agility:fastest",
+        "-agility:average",
+        "-agility:median",
+        "-agility:monster",
+        "-agility:flat",
+        "-agility:750formula",
+        "-agility:anchor7",
+        "-agility:anchor27",
+        "-agility:anchor28",
+        "-agility:anchor41",
+        "-agility:anchor42",
+        "",
+        "-agility:scale1",
+        "-agility:scale10",
+        "-speedmodbalance",
         "-exp:split",
         "-exp:noboost",
         "-exp:nokeybonus",
@@ -1351,7 +1380,10 @@ const _FE_FLAGSPEC = {
         "-wacky:forwardisback",
         "-wacky:mirrormirror",
         "-tweak:kainmagic",
+        "-tweak:harmspell",
         "-tweak:edwardheal",
+        "-tweak:darkpaladin",
+        "-tweak:cidairship",
         "-spoil:all",
         "-spoil:keyitems",
         "-spoil:rewards",
@@ -2273,7 +2305,9 @@ const _FE_FLAGSPEC = {
         ],
         [
             "Cpermadeath",
-            "Cpermadeader"
+            "Cpermadeader",
+            "Cmostlydead",
+            "Cbrieflydead"
         ],
         [
             "Tshuffle",
@@ -7734,7 +7768,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Kmiab:above",
             "offset": 168,
-            "size": 1,
+            "size": 3,
             "value": 1
         },
         {
@@ -7980,7 +8014,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Cnopartner",
             "offset": 195,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {
@@ -8094,7 +8128,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Cstart:palom",
             "offset": 207,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {
@@ -8136,7 +8170,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Cstart:not_kain",
             "offset": 214,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {
@@ -8358,7 +8392,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Crestrict:rydia",
             "offset": 251,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {
@@ -8382,7 +8416,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Crestrict:yang",
             "offset": 255,
-            "size": 1,
+            "size": 3,
             "value": 1
         },
         {
@@ -8400,7 +8434,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Crestrict:cid",
             "offset": 258,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {
@@ -8466,7 +8500,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Cnodupes",
             "offset": 268,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {
@@ -11572,11 +11606,11 @@ const _FE_FLAGSPEC = {
             "not",
             "Bstandard"
         ],
-        "Evanilla": [
+        "Etoggle": [
             "and",
             [
                 "not",
-                "Etoggle"
+                "Evanilla"
             ],
             [
                 "not",

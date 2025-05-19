@@ -4000,7 +4000,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "Kunweighted",
                 "title": "Key items will be placed uniformly at random",
-                "description": "Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting."
+                "description": "Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting.",
+                "fork": true
               }
             ]
           }
@@ -4648,19 +4649,23 @@ var FLAG_UISPEC = [
       {
         "flag": "@anon44",
         "title": "Limit maximum party size",
+        "hard": true,
         "type": "select",
         "subcontrols": [
           {
             "flag": "Cparty:1",
-            "title": "Maximum party size 1"
+            "title": "Maximum party size 1",
+            "hard": true
           },
           {
             "flag": "Cparty:2",
-            "title": "Maximum party size 2"
+            "title": "Maximum party size 2",
+            "hard": true
           },
           {
             "flag": "Cparty:3",
-            "title": "Maximum party size 3"
+            "title": "Maximum party size 3",
+            "hard": true
           },
           {
             "flag": "Cparty:4",
@@ -4684,6 +4689,19 @@ var FLAG_UISPEC = [
             "title": "Permadeader",
             "description": "Party members that are swoon or stone at the end of any battle are permanently removed from the game. (This includes the cutscene/story battles that you are normally allowed to lose; now you will game over if your party wipes during these battles.)",
             "hard": true
+          },
+          {
+            "flag": "Cmostlydead",
+            "title": "Characters reset to base level",
+            "description": "Party members that are swoon at the end of any battle are removed from your party, reset back to base level and equipment, and placed in the Tower of Wishes. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Cbrieflydead",
+            "title": "Characters go to the Tower of Wishes",
+            "description": "Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
+            "fork": true
           }
         ]
       },
@@ -6636,11 +6654,6 @@ var FLAG_UISPEC = [
         "type": "select",
         "subcontrols": [
           {
-            "flag": "Evanilla",
-            "title": "Original encounter rate",
-            "null": true
-          },
-          {
             "flag": "Etoggle",
             "title": "Random encounters can be toggled",
             "description": "Encounters can be enabled/disabled from the in-game Custom menu.",
@@ -6661,6 +6674,11 @@ var FLAG_UISPEC = [
                 "description": "Back attacks and \"Surprised!\" encounters will still occur, even when encounters are disabled via <em>Etoggle</em> or <em>Enoencounters</em>."
               }
             ]
+          },
+          {
+            "flag": "Evanilla",
+            "title": "Original encounter rate",
+            "null": true
           },
           {
             "flag": "Ereduce",
@@ -7002,7 +7020,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit:adamant",
@@ -7164,7 +7183,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit2:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit2:adamant",
@@ -7326,7 +7346,8 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit3:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit3:adamant",
@@ -7373,12 +7394,14 @@ var FLAG_UISPEC = [
         "flag": "-monsterevade",
         "title": "Monsters get physical and magical evasion",
         "description": "Monsters will be able to evade both physical and magical attacks from your party based on their actual stats. (This change constitutes a significant damage reduction for many fights!)",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "-monsterflee",
         "title": "Monsters can flee from battle",
-        "description": "Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active."
+        "description": "Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active.",
+        "fork": true
       },
       {
         "flag": "@smithy",
@@ -7404,14 +7427,22 @@ var FLAG_UISPEC = [
           {
             "flag": "-smith:playable",
             "title": "Kokkol's item will be usable",
-            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed."
+            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
+            "fork": true
+          },
+          {
+            "flag": "-smith:omni",
+            "title": "All characters can equip the FF4A weapon",
+            "description": "If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).",
+            "fork": true
           }
         ]
       },
       {
         "flag": "@fusoya",
-        "title": "Alternative FuSoYa challenges",
+        "title": "FuSoYa challenges",
         "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "@anon76",
@@ -7419,30 +7450,200 @@ var FLAG_UISPEC = [
             "type": "select",
             "subcontrols": [
               {
+                "flag": "@normalfu",
+                "title": "Usual FuSoYa challenge",
+                "subcontrols": [
+                  {
+                    "flag": "@anon48",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon49",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
                 "flag": "-fusoya:vanilla",
                 "title": "Vanilla FuSoYa",
-                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset."
+                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon50",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:sequential_p",
                 "title": "Fixed spell order (Palom/Porom)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells."
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon48",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon49",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:sequential_r",
                 "title": "Fixed spell order (Rydia/Rosa)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit)."
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
+                "subcontrols": [
+                  {
+                    "flag": "@anon48",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon49",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:location",
                 "title": "Location-dependent spells",
-                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells."
+                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon51",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon52",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:nerfed",
                 "title": "Fixed starting spells, no learning",
-                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual.",
-                "hard": true
+                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
+                "hard": true,
+                "subcontrols": [
+                  {
+                    "flag": "@anon53",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -7451,6 +7652,132 @@ var FLAG_UISPEC = [
             "title": "Spells not guaranteed to be learned",
             "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
             "hard": true
+          },
+          {
+            "flag": "-fusoya:omnimage",
+            "title": "FuSoYa also learns summons/Twin/Ninja magic",
+            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
+          }
+        ]
+      },
+      {
+        "flag": "@agility",
+        "title": "Change the ATB system (or make it vanilla)",
+        "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.",
+        "fork": true,
+        "subcontrols": [
+          {
+            "flag": "@anon54",
+            "title": "Different anchoring or ATB formula",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-agility:vanilla",
+                "title": "Use vanilla agility anchoring",
+                "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present."
+              },
+              {
+                "flag": "-agility:slowest",
+                "title": "Use your slowest character as anchor"
+              },
+              {
+                "flag": "-agility:fastest",
+                "title": "Use your fastest character as anchor",
+                "description": "This flag will double the Count timer.",
+                "hard": true
+              },
+              {
+                "flag": "-agility:average",
+                "title": "Use your average agility for anchoring",
+                "description": "Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility."
+              },
+              {
+                "flag": "-agility:median",
+                "title": "Use your median agility for anchoring"
+              },
+              {
+                "flag": "-agility:monster",
+                "title": "Use average monster agility for anchoring",
+                "description": "Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.",
+                "hard": true
+              },
+              {
+                "flag": "-agility:flat",
+                "title": "Everyone is the same agility",
+                "description": "Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled)."
+              },
+              {
+                "flag": "-agility:750formula",
+                "title": "Use a formula to determine agility",
+                "description": "Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer."
+              },
+              {
+                "flag": "@anchor",
+                "title": "Use a fixed agility anchor",
+                "description": "Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "@anon55",
+                    "title": "Anchor agility",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-agility:anchor7",
+                        "title": "7 Agility anchor"
+                      },
+                      {
+                        "flag": "-agility:anchor27",
+                        "title": "27 Agility anchor",
+                        "hard": true
+                      },
+                      {
+                        "flag": "-agility:anchor28",
+                        "title": "28 Agility anchor",
+                        "hard": true
+                      },
+                      {
+                        "flag": "-agility:anchor41",
+                        "title": "41 Agility anchor",
+                        "hard": true
+                      },
+                      {
+                        "flag": "-agility:anchor42",
+                        "title": "42 Agility anchor",
+                        "hard": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "@agilityscale",
+            "title": "Scale the base ATB",
+            "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
+            "subcontrols": [
+              {
+                "flag": "@anon56",
+                "title": "Base ATB for the anchor",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "-agility:scale1",
+                    "title": "Base ATB is 1 tick"
+                  },
+                  {
+                    "flag": "-agility:scale10",
+                    "title": "Base ATB is 10 ticks"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "-speedmodbalance",
+            "title": "Alter the speed modifier behaviour",
+            "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8)."
           }
         ]
       },
@@ -7673,10 +8000,31 @@ var FLAG_UISPEC = [
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
-            "flag": "-vanilla:agility",
-            "title": "Vanilla agility anchoring",
-            "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). However, in vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present. (Note that this overrides the <em>Chero</em> agility effect, if playing with the hero challenge.)"
+            "flag": "-prng:shuffle",
+            "title": "Shuffle the PRNG table values"
           },
+          {
+            "flag": "-prng:random",
+            "title": "Randomize the PRNG values independently",
+            "description": "To prevent softlocks, the randomized PRNG table will be such that all battle slots are available for random targetting."
+          },
+          {
+            "flag": "-prng:consecutive",
+            "title": "Replace the PRNG table with the numbers 0 to 255 in order",
+            "hard": true
+          },
+          {
+            "flag": "-prng:mostlysingle",
+            "title": "Replace the PRNG table with (mostly) a single value",
+            "description": "To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "@anon64",
+        "title": "Restore vanilla behaviors",
+        "subcontrols": [
           {
             "flag": "-vanilla:hobs",
             "title": "Vanilla Hobs spell",
@@ -8039,16 +8387,39 @@ var FLAG_UISPEC = [
       {
         "flag": "@anon88",
         "title": "Miscellaneous tweaks",
+        "fork": true,
         "subcontrols": [
           {
-            "flag": "-tweak:kainmagic",
-            "title": "Give Kain magic (with Lance)",
-            "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black."
+            "flag": "@anon70",
+            "title": "Sight replacements",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:kainmagic",
+                "title": "Give Kain magic (with Lance)",
+                "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets."
+              },
+              {
+                "flag": "-tweak:harmspell",
+                "title": "Replace Sight with Harm",
+                "description": "This flag replaces Sight with Harm, a damage-dealing holy spell slightly weaker than Virus."
+              }
+            ]
           },
           {
             "flag": "-tweak:edwardheal",
             "title": "Improve Edward's Heal command",
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
+          },
+          {
+            "flag": "-tweak:darkpaladin",
+            "title": "Cecil becomes a Dark Paladin",
+            "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+          },
+          {
+            "flag": "-tweak:cidairship",
+            "title": "Cid gains a target-all Raid command",
+            "description": "Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon."
           }
         ]
       }

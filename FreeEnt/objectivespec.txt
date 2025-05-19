@@ -88,8 +88,9 @@
    #find_spoon                               #item.Spoon      Find the Spoon
     quest_tradepink                          #item.Pink      Trade away the Pink Tail
     quest_pass                               #item.Pass      Unlock the Pass door in Toroia    
-    internal_ki                              none       Obtain %d key %t
+    internal_ki                              none      Obtain %d key %t
     internal_bosscollector                   none      Defeat %d %t
     internal_goldhunter                      none      Bring %d GP to Tory in Agart
     internal_dkmatter                        none      Bring DkMatters to Kory in Agart
+    internal_external                        none      Complete external goal and use EagleEye
 

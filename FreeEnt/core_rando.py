@@ -499,7 +499,7 @@ def apply(env):
 
     keyitem_assigner.slot_tier(3).extend(keyitem_incapable_fight_slots)
 
-   # limit the number of MIABs that may contain key items according to probability curve
+    # limit the number of MIABs that may contain key items according to probability curve
     # Kmiab granularity: instead of splitting it up into LST and not-LST, split into "above ground", "below ground", and LST
     # also pre-process to handle "standard" and "all" (according to Kunsafe/moon in the case of standard); "all" takes priority
     # over "standard", which takes priority over the subsets. CHEST_ITEM_SLOT_GROUPS is modified to be tuples containing the
@@ -511,7 +511,6 @@ def apply(env):
     if miab_flags:
         good_miab_groups = []
         bad_miab_groups = []
-
         if 'all' in miab_flags:
             good_miab_groups.extend([group for group, flag in CHEST_ITEM_SLOT_GROUPS])
         elif 'standard' in miab_flags:
@@ -534,7 +533,7 @@ def apply(env):
             while r < 0.5:
                 max_good_per_area += 1
                 r *= 2.0
-
+            
             for group in good_miab_groups:
                 potential_miabs.extend(group)
                 if len(group) > max_good_per_area:
@@ -560,7 +559,8 @@ def apply(env):
             for group in bad_miab_groups:
                 bad_miabs.extend(group)
         keyitem_assigner.slot_tier(1).extend(good_miabs)
-        keyitem_assigner.slot_tier(3).extend(bad_miabs)   
+        keyitem_assigner.slot_tier(3).extend(bad_miabs) 
+
     else:
         keyitem_assigner.slot_tier(3).extend(CHEST_ITEM_SLOTS)
 
@@ -571,7 +571,14 @@ def apply(env):
     # if env.options.flags.has('key_items_no_magma'):
     #     keyitem_assigner.item_tier(1).remove(KeyItemReward('#item.Magma'))
     #     layout = '"Package  SandRuby   [lightsword]Legend"      [[ 01 ]]\n        "[key]Baron   [harp]TwinHarp  [crystal]Earth" [[ 01 ]]\n        "         [key]Tower     Hook"            [[ 01 ]]\n        "[key]Luca    [crystal]Darkness  [tail]Rat"   [[ 01 ]]\n        "Adamant  Pan        [knife]Spoon"            [[ 01 ]]\n        "[tail]Pink    [crystal]Crystal"              [[ 00 ]]'
-    #     env.add_substitution('tracker layout', layout)    
+    #     env.add_substitution('tracker layout', layout)
+
+    # potentially remove boss spots (other modules will need to do this again)
+    if env.options.flags.has('no_officer_slot'):
+        BOSS_SLOTS.pop('officer_slot')
+    if env.options.flags.has('no_kq_eblan_slot'):
+        BOSS_SLOTS.pop('kingqueen_slot')
+
     assignable_boss_slots = BOSS_SLOTS.copy()
     bosses = list(BOSSES)
 
@@ -1196,6 +1203,7 @@ def apply(env):
         env.meta['available_bosses'].add(boss_assignment[slot])
     env.add_script('patch($21f860 bus) {\n' + '\n'.join(boss_objective_consts) + '\n}')
     env.meta['banned_objective_bosses'] = banned_required_boss_slots
+    env.add_substitution('randomizer boss count', '{:02X}'.format(len(BOSS_SLOTS)))
 
     # remove golbez item delivery if not needed
     if (RewardSlot.fallen_golbez_item not in rewards_assignment):
@@ -1203,6 +1211,19 @@ def apply(env):
 
     # generate spoiler logs
     item_spoiler_names = {it.const: it.spoilername for it in databases.get_items_dbview()}
+    if env.options.flags.has('darkpaladin'):
+        item_spoiler_names.update(
+            {'#item.Light' : 'Chaos Sword',
+            '#item.CrystalSword' : 'Hades Sword',
+            '#item.PaladinShield' : 'Ancient Shield',
+            '#item.PaladinHelm' : 'Ancient Helm',
+            '#item.PaladinArmor' : 'Ancient Armor',
+            '#item.PaladinGauntlet' : 'Ancient Gauntlet',
+            '#item.CrystalShield' : 'Hades Shield',
+            '#item.CrystalHelm' : 'Hades Helm',
+            '#item.CrystalArmor' : 'Hades Armor',
+            '#item.CrystalGauntlet' : 'Hades Gauntlet'}
+        )
 
     key_item_spoilers = []
     for key_item_reward in list(ESSENTIAL_KEY_ITEMS) + list(NONESSENTIAL_KEY_ITEMS) + [ItemReward("#item.Pass")]:

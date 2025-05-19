@@ -17,8 +17,6 @@ import pyaes
 
 import f4c
 
-from f4c import encode_text
-
 from .flags import FlagSet, FlagLogic
 from .address import *
 from .errors import *
@@ -166,10 +164,13 @@ F4C_FILES = '''
     scripts/config_init.f4c
     scripts/shadow_party.f4c
     scripts/fusoya_challenge.f4c
+    scripts/agility.f4c
     scripts/experience_acceleration.f4c
     scripts/fix_airship_menu_softlock.f4c
     scripts/fix_edward_ghost_command.f4c
     scripts/fix_attack_power_overflow.f4c
+    scripts/fix_wisdom_will_timers.f4c
+    scripts/fix_victim_history.f4c
     scripts/uptco_surprise.f4c
     scripts/sound_engine.f4c
     scripts/mute.f4c
@@ -191,6 +192,7 @@ F4C_FILES = '''
     scripts/blank_textbox_fix.f4c
     scripts/cycle_party_leader.f4c
     scripts/item_delivery_quantity.f4c
+    scripts/extend_spellsets.f4c
 '''
 # the missing scripts/black_shirt_fix.f4c is included below as a conditional, if -wacky:whatsmygear is not on
 
@@ -554,6 +556,16 @@ def select_from_catalog(catalog_path, env):
 
 #--------------------------------------------------------------------------
 
+def check_prng_safe(list_of_bytes):
+    # for "safe" prng, need to ensure that every battle slot can be obtained
+    check_0_4 = set(range(0,5)).issubset(set([i % 5 for i in list_of_bytes]))
+    check_0_7 = set(range(0,8)).issubset(set([i % 8 for i in list_of_bytes]))
+    check_0_13 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
+
+    return (check_0_4 and check_0_7 and check_0_13)
+
+#--------------------------------------------------------------------------
+
 def build(romfile, options, force_recompile=False):
     print(options.test_settings)
     flags_version = options.flags.get_version()
@@ -738,6 +750,33 @@ def build(romfile, options, force_recompile=False):
     if options.flags.has('let_monsters_flee'):
         env.add_file('scripts/monster_flee.f4c')
 
+    # agility flag substitutions and toggles
+    scale_agility_mod = env.options.flags.get_suffix('-agility:scale') # either 1 or 10; 5 is default
+    if scale_agility_mod:
+        scale_agility_mod = int(scale_agility_mod)
+        env.add_substitution('scale agility parameter', f'#$00{10*scale_agility_mod:02X}')
+        env.add_toggle('scale_agility')
+
+    fixed_anchor_agi = env.options.flags.get_suffix('-agility:anchor')
+    if fixed_anchor_agi:
+        fixed_anchor_agi = int(fixed_anchor_agi)
+        env.add_toggle('fixed_anchor')
+        env.add_substitution('fixed anchor agility', f'#${fixed_anchor_agi:02X}')
+
+    count_timer = 2
+    if env.options.flags.get_suffix('-agility:scale') == '10':
+        count_timer *= 2
+    if env.options.flags.has_any('fastest_agility') or env.options.flags.get_suffix('-agility:anchor2'): # matches 27 or 28
+        count_timer *= 2
+    elif env.options.flags.has_any('monster_agility', 'formula_agility') or env.options.flags.get_suffix('-agility:anchor4'): # matches 41 or 42
+        count_timer *= 3
+    if count_timer != 2:
+        env.add_toggle('rescale_inner_count_timer') # goal: make Count not completely broken
+        env.add_substitution('count inner timer length', f'#${count_timer:02X}')
+
+    if env.options.flags.has('-speedmodbalance'):
+        env.add_file('scripts/speed_modifier.f4c')
+
     # experience flag substitutions and toggles
     # split, noboost, nokeyboost, crystalbonus, and maxlevelbonus are all handled directly via f4c scripts
     exp_objective_bonus = env.options.flags.get_suffix('-exp:objectivebonus')
@@ -765,11 +804,11 @@ def build(romfile, options, force_recompile=False):
     if exp_zonk_bonus:
         exp_zonk_bonus = 100 // int(exp_zonk_bonus)
         # need to check for the starting key item here, using the rewards assignment;
-        # cannot count starting non-KI as a zonk, so also ignore starting KI if necessary
+        # cannot count starting non-KI as a zonk
         if (env.meta['rewards_assignment'])[rewards.RewardSlot.starting_item].is_key: 
-            env.add_substitution('starting key item zonk', '#$01')
-        else:
             env.add_substitution('starting key item zonk', '#$00')
+        else:
+            env.add_substitution('starting key item zonk', '#$01')
         env.add_substitution('experience zonk bonus divisor', f'#${exp_zonk_bonus:02X}')
         env.add_toggle('experience_zonk_bonus')
 
@@ -791,6 +830,30 @@ def build(romfile, options, force_recompile=False):
         env.add_substitution('experience geometric numerator', f'        lda #${exp_geometric_mod:02X}')
         env.add_toggle('experience_geometric')
 
+    # prng changes; changing the PRNG table at $14EE00-14EEFF
+    prng_mod = env.options.flags.get_suffix('-prng:')
+    if prng_mod:
+        if prng_mod == 'shuffle':
+            prng_bytes = list(range(0,256))
+            env.rnd.shuffle(prng_bytes)
+        elif prng_mod == 'random':
+            prng_bytes = [env.rnd.randrange(0,256) for i in range(0,256)]
+            while not check_prng_safe(prng_bytes):
+                prng_bytes = [env.rnd.randrange(0,256) for i in range(0,256)]
+        elif prng_mod == 'consecutive':
+            prng_bytes = list(range(0,256))
+        elif prng_mod == 'mostlysingle':
+            random_integer = env.rnd.randrange(0,256)
+            lower_bound = max(random_integer-6,0)
+            if min(random_integer+6,255) == 255:
+                lower_bound = 243
+            extra_ints = list(range(lower_bound,lower_bound+13))
+            extra_ints.remove(random_integer)
+            env.rnd.shuffle(extra_ints)
+            prng_bytes = [(extra_ints[(i // 20) - 1] if i % 20 == 0 and i // 20 > 0 else random_integer) for i in range(0,256)]
+
+        env.add_binary(BusAddress(0x14EE00), prng_bytes, as_script=False)
+
     if options.flags.has('vintage'):
         env.add_files(
             'scripts/vintage_battlefield.f4c',
@@ -805,8 +868,16 @@ def build(romfile, options, force_recompile=False):
     # misc/creative tweaks
     if options.flags.has('kainmagic'):
         env.add_file('scripts/give_kain_magic.f4c')
+        mp_script = '\n'
+        for level in range(1,51):
+            mp_script = mp_script + f'patch (${(0x0FB65E + (0x05 * (level-1))):06X} bus) {{ {2:02X} }}\n'
+        env.add_substitution('kain mp script', mp_script)
+    elif options.flags.has('harmspell'):
+        env.add_file('scripts/harm_spell.f4c')
     if options.flags.has('edwardheal'):
         env.add_file('scripts/improve_edward_heal.f4c')
+    if options.flags.has('cidairship'):
+        env.add_file('scripts/cidairship.f4c')
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')
@@ -845,9 +916,13 @@ def build(romfile, options, force_recompile=False):
         + '\n'.join([f'.def {k} ${blob_defines[k]:06X}' for k in blob_defines])
         + '\n}')
 
-    # item descriptions
-    with open(os.path.join(os.path.dirname(__file__), 'assets/item_info/item_descriptions.bin'), 'rb') as infile:
-        item_description_data = list(infile.read())
+    # item descriptions, possibly adjusted for a big edit
+    if options.flags.has('darkpaladin'):
+        with open(os.path.join(os.path.dirname(__file__), 'assets/item_info/darkpal_item_descriptions.bin'), 'rb') as infile:
+            item_description_data = list(infile.read())
+    else:
+        with open(os.path.join(os.path.dirname(__file__), 'assets/item_info/item_descriptions.bin'), 'rb') as infile:
+            item_description_data = list(infile.read())
     for item_id in env.meta.get('item_description_overrides', {}):
         item_description_override = env.meta['item_description_overrides'][item_id]
 
@@ -862,6 +937,10 @@ def build(romfile, options, force_recompile=False):
             if item_id in [0,96]:
                 continue
             item_description_data[0x80 * item_id + 0x20 : 0x80 * item_id + 0x80] = env.meta['wacky_gear_descriptions'][item_id]
+    elif env.meta.get('wacky_challenge') == 'advertising':
+        for item_id in env.meta['wacky_gear_descriptions']:
+            item_description_data[0x80 * item_id + 0x20 : 0x80 * item_id + 0x80] = env.meta['wacky_gear_descriptions'][item_id]
+        env.add_file('scripts/black_shirt_fix.f4c') # Black Shirt doesn't change
     else:
         env.add_file('scripts/black_shirt_fix.f4c') # cannot double-patch the Black Shirt!
     

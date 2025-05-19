@@ -117,6 +117,7 @@ event($39)  //Kaipo Events, Rydia Joining
     pause 16
     toggle music fade
     music #None
+    // %flag no_officer_slot off%
     pause 4
     player move right
     player face left
@@ -189,6 +190,7 @@ event($39)  //Kaipo Events, Rydia Joining
     pause 12
     p #ChildRydia face right
     pause 5
+    // %end%
     toggle music fade
     toggle screen fade
     clear status 

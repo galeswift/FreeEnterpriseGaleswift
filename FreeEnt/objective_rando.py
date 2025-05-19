@@ -9,6 +9,7 @@ MODES = {
     'Omode:classicforge'  : ['quest_forge'],
     'Omode:classicgiant'  : ['quest_giant'],
     'Omode:fiends'        : ['boss_milon', 'boss_milonz', 'boss_kainazzo', 'boss_valvalis', 'boss_rubicant', 'boss_elements'],
+    'Omode:external'      : ['internal_external']
 }
 
 OBJECTIVE_SLUGS_TO_IDS = {}
@@ -125,6 +126,9 @@ def setup(env):
         if env.options.flags.get_suffix('Omode:dkmatter'):
             env.meta['required_treasures'].setdefault('#item.DkMatter', 0)
             env.meta['required_treasures']['#item.DkMatter'] += 45
+        
+        if env.options.flags.has('objective_mode_external'):
+            env.meta['objective_starter_kit'] = [( 'fe_EagleEye', [1] )]
 
         random_objective_only_characters = set()
         for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
@@ -508,12 +512,16 @@ def apply(env):
             request_text = f"Hi, I'm Kory! Could you\ndo me a favor and bring\nme {dkmatter_count} DkMatters?\n\nThere are 45 of them\nscattered in chests\nall across the world\nand the moon!\nBut I only need {dkmatter_count}.\nThanks!"
             env.add_substitution('kory dkmatter request', request_text) 
         env.add_file('scripts/dark_matter_hunt.f4c')
+        
     if OBJECTIVE_SLUGS_TO_IDS['internal_goldhunter'] in objective_ids:
         target_gold = gold_hunt_count * 1000
         target_bin = [((target_gold >> (i * 8)) & 0xFF) for i in range(4)]
         env.add_binary(BusAddress(0x21fa06), target_bin,  as_script=True)
         env.add_file('scripts/gold_hunt.f4c')
         env.add_script('text(map #AstroTower message 7) {\nHi, I\'m Tory! Could you \ndo me a favor and get me\n'+gold_hunt_text+' GP? \n\nI\'m trying to buy one of \nthose fancy airships...}')
+    
+    if OBJECTIVE_SLUGS_TO_IDS['internal_external'] in objective_ids:
+        env.add_file('scripts/external_objective.f4c')
 
     if OBJECTIVE_SLUGS_TO_IDS['internal_ki'] in objective_ids:
         env.add_toggle('ki_objective')

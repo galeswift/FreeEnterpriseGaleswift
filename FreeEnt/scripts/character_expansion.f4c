@@ -133,6 +133,7 @@ msfpatch {
         rts
 
         and #$1f // A = axtor number
+    CharEx__PushPartySlotToShadowPartyAxtorKnown:
         phx
         jsr $_CharEx__LoadShadowPartySlotAddrX
         txy
@@ -1153,9 +1154,29 @@ msfpatch {
         sep #$20
         .mx 0x20
 
+    // %flag unlearn_fusoya on%
+        lda $1681
+        cmp #$0a
+        beq $+FusoyaUnlearn
+        cmp #$0b
+        beq $+FusoyaUnlearn
+        cmp #$0e
+        bne $+NotFusoya
+    %FusoyaUnlearn:
+        jsl $=FusoyaChallenge__TakeSpell_Impl
+        bra $04
+    %NotFusoya:
+    // %end%
         jsl $=CharEx__GiveSpell_Impl
 
         // part 2: apply to spell sets of axtors in shadow party and party
+        // %if wacky_misspelled%
+        // don't misspell until after adding the spell to the initial state spell list
+          lda $1680
+          jsl $=Wacky__Misspell
+          sta $1680
+        // %end%
+
         stz $1686
         stz $1687
         stz $1688
@@ -1267,6 +1288,19 @@ msfpatch {
         lda #$0000
         sep #$20
         .mx 0x20
+    // %flag unlearn_fusoya on%
+        lda $1681
+        cmp #$0a
+        beq $+FusoyaUnlearn2
+        cmp #$0b
+        beq $+FusoyaUnlearn2
+        cmp #$0e
+        bne $+NotFusoya2
+    %FusoyaUnlearn2:
+        jsl $=FusoyaChallenge__TakeSpell_Impl
+        bra $04
+    %NotFusoya2:
+    // %end%
         jsl $=CharEx__GiveSpell_Impl
 
         // restore loop iterator
@@ -1284,12 +1318,6 @@ msfpatch {
           bcs $+CanLearnSpell
           rtl
         %CanLearnSpell:
-        // %end%
-        // %if wacky_misspelled%
-          lda $1680
-          pha
-          jsl $=Wacky__Misspell
-          sta $1680
         // %end%
         ldx $1682
         ldy #$0000
@@ -1312,10 +1340,6 @@ msfpatch {
         lda $1680
         sta $700000,x
     %Abort:
-        // %if wacky_misspelled%
-          pla
-          sta $1680
-        // %end%
         rtl
 
     %FoundEmptySlot:
@@ -1656,48 +1680,6 @@ msfpatch {
         jml $03f0b0
 }
 
-//-----------------------------------------------
-// remove original Cover-actor-finder code, and also
-// fix agility scaler to correctly detect Cecil
-msfpatch {
-    .addr $038d5c
-        jml $=CharEx__AgilityAnchorMod
-
-    .new
-    CharEx__AgilityAnchorMod:
-        // %flags: ~vanilla_agility ~hero_challenge ~superhero_challenge%
-        bra $+Accept
-        // %end%
-
-        // %flags: ~vanilla_agility hero_challenge%
-        lda $2000,x
-        and #$1f
-        cmp #$01
-        beq $+Accept
-        // %end%
-
-        // %flags: ~vanilla_agility superhero_challenge%
-        lda $2000,x
-        and #$1f
-        cmp #$01
-        beq $+Accept
-        // %end%
-        
-        // %flags: vanilla_agility%
-        lda $2000,x
-        beq $+Next
-        lda $2001,x
-        and #$0f
-        cmp #$00 // DKCecil job
-        beq $+Accept
-        cmp #$09 // PCecil job
-        beq $+Accept
-        // %end%
-    %Next:
-        jml $038d69
-    %Accept:
-        jml $038d84
-}
 
 //-----------------------------------------------
 // fix Cover to work with multiple Paladins

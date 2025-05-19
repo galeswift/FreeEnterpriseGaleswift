@@ -104,6 +104,13 @@ event($A1)  //Fighting Edge's parents
     }
     // autodetected map #BabilB5
     player face up
+    // %flag no_kq_eblan_slot on%
+    pause 2
+    music #None
+    player move up
+    player move up
+    // %end%
+    // %flag no_kq_eblan_slot off%
     sound $7E
     batch 20 {
         screen flash
@@ -131,6 +138,8 @@ event($A1)  //Fighting Edge's parents
     [#B #Objectives_TickBossSlot #rando.kingqueen_slot]
     [#B #Rando_PostBossBattle #rando.kingqueen_slot]
     pause 8
+    // %end%
+
     sound #Glow
     toggle tint $D7
     sound #Fire

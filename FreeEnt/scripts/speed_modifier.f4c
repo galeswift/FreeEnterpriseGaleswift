@@ -1,0 +1,28 @@
+// changes to the speed modifier range and
+// what items/spells do to it go here;
+// loaded under -speedmodbalance
+
+// idea due to S3, though I like 8 better than 10
+// and I want to keep the RA1 -> RA2 option, 
+// so just nerf Slow to +4 instead of +8; 
+// make you really work for it
+
+// change the bounds on the speed modifier range
+// to be 8-32 (.5 to 2)
+// patch($03d89f bus) { 18 }
+patch($03d8a3 bus) { 08 }
+patch($03d8a7 bus) { 08 }
+// patch($03d8ab bus) { 18 }
+
+// change Fast and Slow to be spell power 4
+patch($0f97d1 bus) { FC } // Fast should reduce by 4
+patch($0f97cb bus) { 04 } // Slow should increase by 4
+
+// Hermes is already set up to subtract 8 from the speed modifier
+// otherwise we'd patch($0f96bd bus) { F8 }
+
+// Halve the effectiveness of SilkWebs:
+patch($0f96d5 bus) { 08 } // was 10
+
+// If anyone changes enemy scripts to use DullSong, leave it
+// at +8 (so that instead of Slow, it's effectively a SilkWeb)

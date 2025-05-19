@@ -1,0 +1,310 @@
+// -------------------------
+// Monster changes
+
+// For the Truth in Advertising wacky, 
+// we need to tweak monster elemental/racial data
+// to be more """reasonable""". 
+// monster() {} blocks "add up", so no worry about
+// boss monsters getting un-randomized
+
+
+// For monsters that don't float but should,
+// change the formation to make them float.
+// Or, of course, remove their Air weakness.
+
+
+// VampGirl, bats (each of the next three)
+formation($64)     
+{
+    floating enemies
+}
+
+formation($68)
+{
+    floating enemies
+}
+
+formation($6A)
+{
+    floating enemies
+}
+
+// #VampLady, bats (each of the next three)
+
+formation($162)
+{
+    floating enemies
+}
+
+formation($163)
+{
+    floating enemies
+}
+
+formation($164)
+{
+    floating enemies
+}
+
+// Milon Z
+formation($E3)    
+{
+    floating enemies
+}
+
+// Valvalis
+formation($EA)    
+{
+    floating enemies
+}
+
+
+// For monsters that float but don't have
+// Air weaknesses, set them in monster data
+
+// Also changing a couple monster scripts to better
+// match what is shown on-screen/the themeing.
+
+// To match Tricker now having a visible Air weakness,
+// they should counter e.g. Jump and Aim with... well,
+// let's just make them self-cast Bersk.
+
+// need to build a new AI group that has both Tricker's
+// usual Lit magic counter and a new Aim counter (sure, Jump and Fight too)
+// and has the physical counter be "self-cast Bersk" (no conditions required)
+
+// Tricker
+monster($20) 
+{ 
+    reaction sequence $FE
+}
+
+// this script is unused, as far as I know.
+// basically we're letting Tricker zerk itself,
+// and if you unzerk it... welp, eat Lit3.
+ai_script(moon $3F)
+{
+    message $AF   // "HA HA HA! Thanks a lot!"
+    message $B2   // "It's my turn now!"
+    condition 2
+    target self
+    use #Bersk
+}
+
+// conditions are available starting at $51,
+// because $50 is used for uptco_surprise
+// $51 checks Fight, $52 checks Aim, $53 checks Jump (via "Land"),
+// and it only works if you have Air on your weapon (spears, bow/arrow, Dwarf Axe, Boom/Full)
+patch($0ee844 bus) { 07 19 C0 20 }
+patch($0ee848 bus) { 07 19 CC 20 }
+patch($0ee84C bus) { 07 19 DE 20 }
+
+// need to repurpose condition *sets*, in order
+// to make use of the conditions. Conveniently, the Edward/Tellah
+// cutscene battle has three condition sets that aren't available, and we actually
+// only want the Bersk trigger to happen when it's condition 0, so we can easily
+// repurpose the condition sets to do what we need.
+patch($0ee677 bus) { 10 51 }
+patch($0ee67a bus) { 10 52 }
+patch($0ee67d bus) { 10 53 }
+
+// I don't *think* anything uses the random "7D" ai group
+// at the end of the block. It's... only half-formed? 7D FF doesn't work.
+// so, start replacing there (index $FE):
+patch($0ee51f bus) { 0A 23 31 3F 32 3F 33 3F }
+
+// Kainazzo's script needs some tweaking
+ai_script($A5)
+{
+    chain {
+        set reaction $01
+        pass
+        
+        message $46   // "Gathering the water!"
+        pass
+        
+        set sprite $13
+        pass
+        
+        set weakness #Lit
+        set resistance #Fire #Ice #Absorb
+        pass
+    }
+    
+    use #Enemy_Wave
+    
+    target self
+    use #Fast
+}
+
+ai_script($A8)
+{
+    chain {
+        condition 0
+        pass
+        
+        set reaction $00
+        pass
+        
+        set sprite $12
+        pass
+        
+        set weakness #Ice
+        set resistance 
+        pass
+        
+        message $74   // "The Lit scared him!"
+        pass
+    }
+}
+
+ai_script($A9)
+{
+    chain {
+        condition 2
+        pass
+        
+        set reaction $00
+        pass
+        
+        set sprite $14
+        pass
+        
+        set weakness #Ice
+        set resistance 
+        pass
+        
+        message $47   // "Hiding inside the shell!"
+        pass
+    }
+}
+
+
+// Rubicant's script needs some tweaking
+ai_script($BF)
+{
+    chain {
+        set sprite $11
+        pass
+        
+        set resistance #Fire #Absorb
+        set weakness #Ice #Immune
+        pass
+    }
+    
+    pass
+    
+    use #Enemy_Glare
+    
+    chain {
+        set sprite $10
+        pass
+        
+        set resistance #Fire #Ice #Absorb
+        set weakness #Immune
+        pass
+    }
+    
+    fight
+    
+    chain {
+        set sprite $11
+        pass
+        
+        set resistance #Fire #Absorb
+        set weakness #Ice #Immune
+        pass
+    }
+    
+    pass
+    
+    use #Enemy_Glare
+    
+    chain {
+        set sprite $10
+        pass
+        
+        set resistance #Fire #Ice #Absorb
+        set weakness #Immune
+        pass
+    }
+    
+    pass
+    condition 1
+}
+
+
+// Odin's scripting gets changed a bit in 
+// odin_advertising.f4c; the correct Odin script
+// files are loaded in odin_rando.py
+
+
+// Trying, potentially in vain, to fix Elements
+
+// Milon form of Elements 1
+ai_script($EB) 
+{    
+    fight
+    
+    fight
+    
+    fight
+    
+    fight
+    
+    use #Enemy_Curse
+}
+
+// transition from Rubicant to Kainazzo in Elements fight
+ai_script($EE)
+{
+    condition 2
+    use #Transform3
+}
+
+// Kainazzo form of Elements 2
+ai_script($EF) 
+{    
+    fight
+    
+    fight
+    
+    fight
+    
+    fight
+    
+    use #Enemy_BigWave
+}
+
+// reaction to change from Kainazzo to Valvalis
+// no #Air weakness, because we can't make Valvalis float
+// without also making all the others float, but we'll leave
+// that not resisted; need to set weakness #Immune or else
+// the strong thunder weakness persists due to the same
+// issue that causes the Adamant weakness bug!
+ai_script($F0) 
+{
+    condition 3
+    set sprite $74
+    set resistance #Fire #Ice #Lit #Dark #Holy #Absorb
+    set weakness #Immune 
+    set race 
+    pass
+}
+
+
+// -------------------------
+// Spell changes
+
+// Make #Enemy_Quake a 200 power spell, like #Quake.
+patch($0f9b67 bus) { 32 }
+
+// Rename Blaze to "Frost" (don't want to lie to folks!)
+text ( spell name $97 ) {
+Frost   
+}
+
+// ------------------------
+// Item changes; can't do this without just patching bytes.
+// Patches written in wacky_rando.py under apply_advertising
+// to make address arithmetic easy.

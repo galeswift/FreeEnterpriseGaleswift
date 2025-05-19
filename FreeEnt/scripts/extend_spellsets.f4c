@@ -1,0 +1,9 @@
+// The game will let you try to add no spells
+// to empty spellsets (that's what happens with
+// Kain's $01 empty/unused spellset), so
+// we can simply extend spellsets out to the max
+// without consequence, to allow for easy 
+// spellset addition in the future.
+// note that in rom.py, the MAX_SPELLSETS value
+// has been set to 20 already (changed from vanilla FE)
+patch($15c271 bus) { E0 } // 20 * 24 = 480 = 0x1E0

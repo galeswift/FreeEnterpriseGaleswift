@@ -1,0 +1,12 @@
+// Replace the Searcher/MacGiant fight with $B8,
+// the Searcher/Machine fight
+
+formation($C2)
+{
+    monsters {
+        $96 x 1   // Searcher
+        $88 x 1   // Machine 
+    }
+    arrangement $80
+    cursor graph $1C
+}

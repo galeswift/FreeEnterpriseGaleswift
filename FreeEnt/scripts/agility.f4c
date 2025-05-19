@@ -1,0 +1,372 @@
+// handle changes to the agility system;
+// moving CharEx__AgilityAnchorMod out 
+// of character_expansion.f4c
+
+// note that RandoFlag $09, vanilla_agility, is
+// unused anywhere and can be replaced/removed once
+// it is determined that doing so does not cause harm
+
+//-----------------------------------------------
+// remove original Cover-actor-finder code, and also
+// fix agility scaler to correctly detect Cecil, or
+// run a separate loop/calculation to find the correct
+// slot to point to (we need to pass the correct slot
+// offset in the X register)
+msfpatch {
+    // %wacky scrambled stats agi address%
+    .def  CharAgilityAddress  $2015
+    // %end%    
+
+    .addr $038d5c
+        jml $=CharEx__AgilityAnchorMod
+
+    .new
+    CharEx__AgilityAnchorMod:
+        //-----------------------------------------------
+        // %if flags: vanilla_agility%
+        lda $2001,x // check sprite class, i.e. job
+        and #$0f
+        cmp #$00 // DKCecil job
+        beq $+Accept
+        cmp #$09 // PCecil job
+        beq $+Accept
+
+        // %elif flags: monster_agility%
+        bra $+Accept // doesn't matter who the anchor is
+
+        //-----------------------------------------------
+        // %elif flags: slowest_agility%
+        // write separate loop to find the index with
+        // the smallest agility;
+        // yes, 0 is the smallest
+        phx // put the first non-empty slot index onto the stack
+    %PartyMinAgilityLoop:
+        txy
+        lda $_CharAgilityAddress,x
+        plx // now X is the stored index of slowest agility
+        cmp $_CharAgilityAddress,x
+        // if A is less than the saved agility, then that's the new smallest
+        // otherwise, push X to the stack first, then bring the slot index back
+        bcc $+PartyMinAgilitySmaller
+        phx
+        tyx
+        bra $+PartyMinAgilityLoopEnd
+    %PartyMinAgilitySmaller:
+        tyx
+        phx
+    %PartyMinAgilityLoopEnd:
+        cpx #$0200
+        bcs $+PartyMinAgilityDone
+        jsr $_Util__XPlus80
+        lda $2000,x // check if the next slot is empty
+        beq $+PartyMinAgilityLoopEnd
+        bra $-PartyMinAgilityLoop
+
+    %PartyMinAgilityDone:
+        plx // now X has the index of the slot with the smallest agility
+        bra $+Accept
+
+        //-----------------------------------------------
+        // %elif flags: fastest_agility%
+        // write separate loop to find the index with
+        // the fastest agility
+        phx // put the first non-empty slot index onto the stack
+    %PartyMaxAgilityLoop:
+        txy
+        lda $_CharAgilityAddress,x
+        plx // now X is the stored index of fastest agility
+        cmp $_CharAgilityAddress,x
+        // if A is less than the saved agility, then we don't update
+        // otherwise, push X to the stack first, then bring the slot index back
+        bcc $+PartyMaxAgilitySmaller
+        tyx
+        phx
+        bra $+PartyMaxAgilityLoopEnd
+    %PartyMaxAgilitySmaller:
+        phx
+        tyx
+    %PartyMaxAgilityLoopEnd:
+        cpx #$0200
+        bcs $+PartyMaxAgilityDone
+        jsr $_Util__XPlus80
+        lda $2000,x // check if the next slot is empty
+        beq $+PartyMaxAgilityLoopEnd
+        bra $-PartyMaxAgilityLoop
+
+    %PartyMaxAgilityDone:
+        plx // now X has the index of the slot with the largest agility
+        bra $+Accept
+
+        //-----------------------------------------------
+        // %elif flags: average_agility%
+        bra $+Accept // doesn't matter who the anchor is
+
+        //-----------------------------------------------
+        // %elif flags: median_agility%
+        // copy the experience code where it calculates median level,
+        // but instead calculate median agility. we can use the Util
+        // scratch space; $1670-167f are available, so use $1670-1676
+
+        stz $1676 // will store number of party members
+        ldy #$0000
+    %CalculateMedianAgility_LoopStart:
+        lda $_CharAgilityAddress,x
+        sta $1670,y
+        inc $1676
+        iny
+    %CalculateMedianAgility_LoopNext:
+        jsr $_Util__XPlus80
+        cpx #$0280
+        beq $+CalculateMedianAgility_Sort
+        lda $2000,x // check for an empty slot
+        beq $+CalculateMedianAgility_LoopNext
+        bra $-CalculateMedianAgility_LoopStart
+
+    %CalculateMedianAgility_Sort:
+        ldx #$0000
+    %CalculateMedianAgility_SortLoopStart:
+        txa
+        tay
+        iny
+    %CalculateMedianAgility_SortInnerLoopStart:
+        lda $1670,y
+        cmp $1670,x
+        bcs $+CalculateMedianAgility_SortInnerLoopNext
+        pha
+        lda $1670,x
+        sta $1670,y
+        pla
+        sta $1670,x
+    %CalculateMedianAgility_SortInnerLoopNext:
+        iny
+        tya
+        cmp $1676
+        bne $-CalculateMedianAgility_SortInnerLoopStart
+
+        inx
+        txa
+        inc a
+        cmp $1676
+        bne $-CalculateMedianAgility_SortLoopStart
+
+        lda $1676
+        lsr a
+        tax // now X has the slot for the median
+        lda $1670,x 
+        sta $1676 // and $1676 has the median value 
+
+        ldx #$0000
+    %FindMedianSlot_LoopStart:
+        lda $2000,x
+        beq $+FindMedianSlot_LoopNext
+        lda $_CharAgilityAddress,x
+        cmp $1676
+        beq $+Accept
+    %FindMedianSlot_LoopNext:
+        jsr $_Util__XPlus80
+        bra $-FindMedianSlot_LoopStart
+
+        //-----------------------------------------------------
+        // %elif flags: flat_agility%
+        bra $+Accept // doesn't matter who the anchor is
+
+        // %elif flags: formula_agility%
+        bra $+Accept // doesn't matter who the anchor is
+
+        // %elif fixed_anchor%
+        bra $+Accept // doesn't matter who the anchor is
+
+        // %elif flags: hero_challenge%
+        lda $2000,x // check axtor ID, looking for 01/starting character
+        and #$1f
+        cmp #$01
+        beq $+Accept
+
+        // %else%
+        bra $+Accept // just take the first non-empty slot
+
+        // %end%
+
+    %Next:
+        jml $038d69
+    %Accept:
+        jml $038d84
+}
+
+//-----------------------------------------------
+// change how the relative agility is calculated,
+// either by replacing specific values or by
+// running a different calculation
+
+// %if flags: monster_agility%
+msfpatch {
+    .addr $038d84
+        jsl $=MonsterAverageAgility__Calculate
+    
+    .new
+    MonsterAverageAgility__Calculate:
+        // do a loop over the monsters, average their agilities
+        ldx #$0280
+        ldy #$0005
+        stz $_Util__Divide_Dividend0
+        stz $_Util__Divide_Dividend1
+        stz $_Util__Divide_Dividend2
+        stz $_Util__Divide_Divisor0
+    %MonsterAgilitySumLoop:
+        lda $3540,y // check if this monster slot is empty via the empty_slot array
+        bne $+MonsterAgilitySumLoopNext
+        inc $_Util__Divide_Divisor0
+        lda $2015,x
+        clc
+        adc $_Util__Divide_Dividend0
+        sta $_Util__Divide_Dividend0
+        bcc $+MonsterAgilitySumLoopNext
+        inc $_Util__Divide_Dividend1
+    %MonsterAgilitySumLoopNext:
+        jsr $_Util__XPlus80
+        iny
+        cpy #$000d // stop after the last monster slot
+        bcc $-MonsterAgilitySumLoop
+
+        stz $_Util__Divide_Divisor1
+        jsr $_Util__Divide
+
+        // put the result into X, return to the vanilla code where X is used
+        ldx $_Util__Divide_Quotient0
+        rtl
+}
+
+// %elif flags: average_agility%
+msfpatch {
+    .addr $038d84
+        jsl $=PartyAverageAgility__Calculate
+    
+    .new
+    PartyAverageAgility__Calculate:
+        // do a loop over the party members, average their agilities
+        ldx #$0000
+        txy
+        stz $_Util__Divide_Dividend0
+        stz $_Util__Divide_Dividend1
+        stz $_Util__Divide_Dividend2
+        stz $_Util__Divide_Divisor0
+    %PartyAgilitySumLoop:
+        lda $3540,y // check if this party slot is empty via the empty_slot array
+        bne $+PartyAgilitySumLoopNext
+        inc $_Util__Divide_Divisor0
+        lda $_CharAgilityAddress,x
+        clc
+        adc $_Util__Divide_Dividend0
+        sta $_Util__Divide_Dividend0
+        bcc $+PartyAgilitySumLoopNext
+        inc $_Util__Divide_Dividend1
+    %PartyAgilitySumLoopNext:
+        jsr $_Util__XPlus80
+        iny
+        cpy #$0005 // stop after the last party slot
+        bcc $-PartyAgilitySumLoop
+
+        stz $_Util__Divide_Divisor1
+        jsr $_Util__Divide
+
+        // put the result into X, return to the vanilla code where X is used
+        ldx $_Util__Divide_Quotient0
+        rtl
+}
+
+// %elif flags: flat_agility%
+msfpatch {
+    // simply treat every slot as having 1 Agi -> everyone has the same RA
+    .addr $038d84
+        lda #$01
+        nop
+
+    .addr $038da8
+        lda #$01
+        nop
+}
+
+// %elif flags: formula_agility%
+msfpatch {
+    // idea by S3, recoded in msfpatch language
+    // formula is (15 * 50) / (Agi + 32); the 50 can be 10 or 100 based on scaling
+    .addr $038d84
+        ldx #$000f // the 15 part of 15 * 50
+        nop
+    
+    .addr $038da8
+        jsl $=MonsterCharAgiSplit
+        adc #$20 // add 32 to the agility
+        sta $e3 // store to lower byte of 8-bit mult result
+        stz $e4 // set the upper byte to 0
+        nop nop // meet up with the original code for the division
+}
+
+// %elif fixed_anchor%
+msfpatch {
+    .addr $038d84
+        lda {% fixed anchor agility %}
+        nop
+}
+
+// %else%
+msfpatch {
+    .addr $038d84
+        lda $_CharAgilityAddress,x
+}
+
+// %end%
+
+// Scrambled Stats wacky agility changes:
+// aside from the substitutions above that only apply
+// under this wacky, we need to make sure monster agility 
+// is not impacted when loading slot agility from possibly
+// not the usual place
+
+// Outside of flag/formula agility, call the monster/char split
+// function to correctly separate agility loads
+// %flags: ~flat_agility ~formula_agility%
+msfpatch {
+    .addr $038da8
+        jsl $=MonsterCharAgiSplit
+        nop
+}
+// %end%
+
+// we don't need this function on flat_agility, so cut it to
+// save space
+// %flags: ~flat_agility%
+msfpatch {
+    MonsterCharAgiSplit:
+        cpx #$0280 // check if X is pulling a monster slot
+        bcs $+MonsterAgi
+        lda $_CharAgilityAddress,x
+        bra $+DoneAgi
+
+    %MonsterAgi:
+        lda $2015,x // just load agility normally
+    %DoneAgi:
+        sta $df // displaced, $df is a dead-end register
+        rtl
+}
+// %end%
+
+// %if scale_agility%
+msfpatch {
+    .addr $038d8b
+        ldx {% scale agility parameter %}
+}
+// %end%
+
+// Count is... mildly broken for slow teams. So we should adjust
+// the duration of the inner count timer, which is by default 2 ticks.
+
+// %if rescale_inner_count_timer%
+msfpatch {
+    .addr $0382be // initial timer length
+        lda {% count inner timer length %}
+    
+    .addr $039711 // refresh timer length
+        lda {% count inner timer length %}
+}
+// %end%

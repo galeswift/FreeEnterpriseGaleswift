@@ -184,6 +184,12 @@ msfpatch {
         cmp #$ff
         beq $+BlankName
 
+        // Sometimes Fu only learns one or two spells,
+        // so if A contains FF (no spell), then send to
+        // blank name
+        cmp #$ff
+        beq $+BlankName
+
         cmp #$48
         bcs $+LongName
 

@@ -11,6 +11,9 @@ spellset(#Rosa) {
         11  #Life1
         12  #Armor
         13  #Cure2
+        // %flag harmspell on%
+        14  $17
+        // %end%
         15  #Mute
         18  #Heal
         20  #Bersk
@@ -59,6 +62,9 @@ spellset(#Porom) {
         11  #Life1
         12  #Armor
         13  #Cure2
+        // %flag harmspell on%
+        14  $17
+        // %end%
         15  #Mute
         18  #Bersk
         19  #Exit

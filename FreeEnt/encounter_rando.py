@@ -62,3 +62,5 @@ def apply(env):
 
     if env.options.flags.has('encounter_no_dmachin'):
         env.add_file('scripts/encounter_no_dmachin.f4c')
+    if env.options.flags.has('encounter_no_macgiant'):
+        env.add_file('scripts/encounter_no_macgiant.f4c')

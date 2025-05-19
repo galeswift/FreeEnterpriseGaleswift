@@ -91,4 +91,5 @@ consts(objective) {
   $6B  internal_bosscollector
   $6C  internal_goldhunter
   $6D  internal_dkmatter
+  $6E  internal_external
 }

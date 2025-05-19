@@ -18,6 +18,10 @@ actor(#Kain1)
     commands {
         #Fight
         #Jump
+        // %flag kainmagic on%
+        #White
+        #Black
+        // %end%
         #Item
     }
 }
@@ -115,8 +119,16 @@ actor(#PCecil)
 {
     commands {
         #Fight
+        // %flags: darkpaladin japanese_abilities%
+        #DarkWave
+        // %end%
+        // %flag darkpaladin on%
+        #Black
+        // %end%
+        // %flag darkpaladin off%
         #White
         #Cover
+        // %end%
         #Item
     }
 }
@@ -136,6 +148,9 @@ actor(#Cid)
     commands {
         #Fight
         #Peep
+        // %flag cidairship on%
+        #Raid
+        // %end%
         #Item
     }
 }
@@ -167,8 +182,11 @@ actor(#Fusoya)
         #Fight
         #White
         #Black
-        // %flag japanese_abilities on%
+        // %flags: japanese_abilities ~add_spells_fusoya%
         #Regen
+        // %end%
+        // %flag add_spells_fusoya on%
+        #Omni
         // %end%
         #Item
     }

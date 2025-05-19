@@ -224,13 +224,15 @@ class Site:
         elif md_file:
             with open(os.path.join(os.path.dirname(__file__), 'markdown', f"{md_file}.md"), 'r') as infile:
                   file_text = infile.read()
-            mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition'])
-            return self._env.get_template('markdown_template.html').render(title=md_file,content=mdText, fork_link=FreeEnt.FORK_SOURCE_URL)
+            mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition', 'toc'],
+                                       extension_configs={'toc' : {'baselevel' : '2', 'toc_depth' : '3-6'}})
+            return self._env.get_template('markdown_template.html').render(title=md_file.title().replace("_", " "),content=mdText, fork_link=FreeEnt.FORK_SOURCE_URL)
         
         else:
             with open(os.path.join(os.path.dirname(__file__), 'markdown', f"main_info.md"), 'r') as infile:
                   file_text = infile.read()
-            mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition'])
+            mdText = markdown.markdown(file_text, extensions=['attr_list', 'tables', 'def_list', 'admonition', 'toc'],
+                                       extension_configs={'toc' : {'baselevel' : '2', 'toc_depth' : '3-6'}})
             return self._env.get_template('fork_info.html').render(fork_link=FreeEnt.FORK_SOURCE_URL, content=mdText)
             
         

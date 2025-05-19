@@ -39,7 +39,6 @@ text(bank 1 message $9D) {X}
 text(bank 1 message $9E) {X}
 text(bank 1 message $9F) {X}
 
-text(bank 1 message $A6) {X}
 text(bank 1 message $A7) {X}
 text(bank 1 message $A8) {X}
 text(bank 1 message $A9) {X}
@@ -678,7 +677,7 @@ event($DA) // Elder praying
 { } // Erase for space
 
 event($DB) // Smut
-{ } // Erase for space
+{ } // Erase for space, but is overwritten in the event (hah) of external objective
 
 event($DC)  // Sealed with unknown power (lunar palace)
 { } // Erase for space

@@ -63,9 +63,13 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -spoon
 -monsterevade
 -monsterflee
--smith:super/-smith:alt -smith:playable
+-smith:super/-smith:alt -smith:playable -smith:omni
 -fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
--fusoya:maybe
+-fusoya:slowstart/-fusoya:unlearn
+-fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
+-agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42/
+-agility:scale1/-agility:scale10
+-speedmodbalance
 -exp:split
 -exp:noboost
 -exp:nokeybonus
@@ -151,7 +155,7 @@ Cvanilla : ~Cstandard & ~Crelaxed
 Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Tsemipro & ~Twild & ~Twildish & ~Tvanillaish & ~Tempty
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Swildish & ~Scabins & ~Svanillaish & ~Sempty & ~Ssame
 Bvanilla : ~Bstandard
-Evanilla : ~Etoggle & ~Ereduce & ~Enoencounters
+Etoggle  : ~Evanilla & ~Ereduce & ~Enoencounters
 Gnone    : ~/^G(?!none)/
 ----- SLUGS
 
@@ -300,6 +304,9 @@ Bwhybez              golbez_no_shadow
 Bwhichbez            golbez_random_spells
 Bitburns             wyvern_all_bad_things
 Bwoahdin             odin_random_spell
+Bspellpower          bosses_nonzero_spellpower
+Bremove:kqe_slot     no_kq_eblan_slot
+Bremove:kaipo_slot   no_officer_slot
 
 Evanilla             encounter_vanilla
 Etoggle              encounter_toggle
@@ -314,6 +321,7 @@ Enogp                no_gp_for_random_encounters
 Enodmachin           encounter_no_dmachin
 Eno:jdrops           drops_no_j
 Eno:sirens           drops_no_sirens
+Enomacgiant          encounter_no_macgiant
 
 Gdupe                glitch_allow_duplication
 Gmp                  glitch_allow_mp_underflow
@@ -332,6 +340,7 @@ G64                  glitch_allow_64
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith
+-smith:omni          omnismith
 
 -fusoya:vanilla       vanilla_fusoya
 -fusoya:location      location_fusoya
@@ -339,6 +348,21 @@ G64                  glitch_allow_64
 -fusoya:sequential_r  sequential_r_fusoya
 -fusoya:nerfed        nerfed_fusoya
 -fusoya:maybe         maybe_fusoya
+-fusoya:slowstart     slowstart_fusoya
+-fusoya:unlearn       unlearn_fusoya
+-fusoya:uncapped      uncapped_fusoya
+-fusoya:randomhp      randomhp_fusoya
+-fusoya:omnimage      add_spells_fusoya
+
+-agility:vanilla     vanilla_agility
+-agility:slowest     slowest_agility
+-agility:fastest     fastest_agility
+-agility:average     average_agility
+-agility:median      median_agility
+-agility:monster     monster_agility
+-agility:flat        flat_agility
+-agility:750formula  formula_agility
+-speedmodbalance     balance_speed_mod_range
 
 -exp:split           experience_split
 -exp:noboost         experience_no_boost
@@ -366,3 +390,6 @@ G64                  glitch_allow_64
 
 -tweak:kainmagic     kainmagic
 -tweak:edwardheal    edwardheal
+-tweak:darkpaladin   darkpaladin
+-tweak:cidairship    cidairship
+-tweak:harmspell     harmspell

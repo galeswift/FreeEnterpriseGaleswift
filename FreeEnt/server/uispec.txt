@@ -56,6 +56,7 @@
 ...(Omode:ki15) Obtain 15 key items
 ...(Omode:ki16) Obtain 16 key items
 ...(Omode:ki17) Obtain 17 key items
+..[Omode:external]^ External Objective
 .[@Ocustom] Custom objectives
 ..<> Custom objective #1
 ...(O1:*)
@@ -242,8 +243,8 @@
 ...(Kforce:magma) Guarantee underworld access via Magma Key
 ...(Kforce:hook)! Force underworld access via Hook route
 ..[Kunsafe]! No safety checks
-..[Kunsafer]! Force underground access via the moon
-..[Klatedark] Force Darkness Crystal to be gated by underground access
+..[Kunsafer]!^ Force underground access via the moon
+..[Klatedark]^ Force Darkness Crystal to be gated by underground access
 ..<>^ Starting items
 ...(Kstart:package) You start with the Package
 ...(Kstart:sandruby) You start with the Sandruby
@@ -263,7 +264,7 @@
 ...(Kstart:pink) You start with the Pink tail
 ...(Kstart:spoon) You start with the Spoon
 ...(Kstart:crystal) You start with the Crystal
-..[Kunweighted] Key items will be placed uniformly at random
+..[Kunweighted]^ Key items will be placed uniformly at random
 
 == PASS
 [Pshop] Include Pass in a shop
@@ -398,20 +399,22 @@
 ..[Cstart:not_fusoya] Cannot start with Fusoya
 <> Specify possible starting gear
 .(Cnekkie) Characters start with limited gear
-.<@Cthrifttier> Characters start with a full set of random gear
+.<@Cthrifttier>^ Characters start with a full set of random gear
 ..<> Max equipment tier
 ...(Cthrift:2) Starting gear is at best tier 2
 ...(Cthrift:3) Starting gear is at best tier 3
 ...(Cthrift:4) Starting gear is at best tier 4
 ...(Cthrift:5) Starting gear is at best tier 5
-<> Limit maximum party size
-.(Cparty:1) Maximum party size 1
-.(Cparty:2) Maximum party size 2
-.(Cparty:3) Maximum party size 3
+<>! Limit maximum party size
+.(Cparty:1)! Maximum party size 1
+.(Cparty:2)! Maximum party size 2
+.(Cparty:3)! Maximum party size 3
 .(Cparty:4) Maximum party size 4
 <> Permadeath options
-.[Cpermadeath]! Permadeath
-.[Cpermadeader]! Permadeader
+.(Cpermadeath)! Permadeath
+.(Cpermadeader)! Permadeader
+.(Cmostlydead)!^ Characters reset to base level
+.(Cbrieflydead)^ Characters go to the Tower of Wishes
 <> Hero Options
 .[Chero]! Hero challenge
 .[Csuperhero]!^ Superhero challenge
@@ -487,7 +490,7 @@
 ..[ECHO:Tstandard]
 .(Tempty)! Chests are empty
 [Tno:j] No J-items in chests
-[Tplayable] Chests contain usable items
+[Tplayable]^ Chests contain usable items
 <> Junk management
 .[Tjunk] Keep junk
 .[Tmoney] Everything is junk
@@ -527,6 +530,11 @@
 .[Salways:illusion] Illusions always sold in shops
 .[Salways:coffin] Coffins always sold in shops
 .[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
+[Sno:j] No J-items in shops
+[Sno:apples] No Apples/Soma Drops in shops
+[Sno:sirens] No Sirens in shops
+[Sno:life] No Life potions in shops
+[Splayable]^ Shops contain usable items
 
 ()# Remove Items
 .[Sno:j] No J-items in shops
@@ -586,17 +594,21 @@
 .(Bwhichburn) Replace Wyvern's opening MegaNuke with a random attack
 .(Bitburns)^ Replace Wyvern's opening MegaNuke with random, incredibly dangerous attack
 [Bwoahdin] Replace Odin's first two Zantetsukens 1 and 2 with a random attack
-() Change Golbez's behaviour
+[] Change Golbez's behaviour
 .[Bwhybez] Disable Golbez's Shadow summon
 .[Bwhichbez] Replace Golbez's and Shadow's spells with random spells
+[Bspellpower]!^ All bosses gain scaled spell power
+<> Remove certain boss slots
+.[Bremove:officer_slot]^ Remove the Officer slot boss fight
+.[Bremove:kingqueen_slot]^ Remove the KQ Eblan slot boss fight
 
 == ENCOUNTERS
 <>* Random encounter rate
-.(Evanilla)- Original encounter rate
 .(Etoggle) Random encounters can be toggled
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights
 ..[Edanger] Keep dangerous encounters
+.(Evanilla)- Original encounter rate
 .(Ereduce) Random encounters reduced by 50%
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights
@@ -611,6 +623,7 @@
 [Enoexp]! No EXP for random encounters
 [Enogp]! No GP for random encounters
 [Enodmachin]! Disable D.Machin encounters
+[Enomacgiant]!^ Disable MacGiant encounters
 
 == GLITCHES
 [@G] Enable major glitches
@@ -623,18 +636,21 @@
 .[G64] Allow 64-floor glitch
 
 == DOORS
-<> Doors Randomization Options
-.(-doorsrando:normal)!           Doors Shuffle without Cross World
-.(-doorsrando:gated)!          Underworld and Moon Doors shuffled
-.(-doorsrando:blueplanet)!          Overworld and Underworld Doors Shuffled
-.(-doorsrando:why)!          Overworld and Moon Doors shuffled
-.(-doorsrando:all)!          All Doors shuffled
-<> Entrances Randomization Options
-.(-entrancesrando:normal)!           Entrances Shuffle without Cross World
-.(-entrancesrando:gated)!          Underworld and Moon Entrances Shuffled
-.(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
-.(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
-.(-entrancesrando:all)!          All Entrances Shuffled
+<> Warps Randomization Options
+.(@doorsrando) Randomize Doors
+..<> Doors Randomization Options
+...(-doorsrando:normal)!           Doors Shuffle without Cross World
+...(-doorsrando:gated)!          Underworld and Moon Doors shuffled
+...(-doorsrando:blueplanet)!          Overworld and Underworld Doors Shuffled
+...(-doorsrando:why)!          Overworld and Moon Doors shuffled
+...(-doorsrando:all)!          All Doors shuffled
+.(@entrancesrando) Randomize Entrances
+..<> Entrances Randomization Options
+...(-entrancesrando:normal)!           Entrances Shuffle without Cross World
+...(-entrancesrando:gated)!          Underworld and Moon Entrances Shuffled
+...(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
+...(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
+...(-entrancesrando:all)!          All Entrances Shuffled
 [-calmness] Disable the Panic Button (Select + R)
 [-forcesealed] Disable skipping the Sealed Cave Boss
 
@@ -667,11 +683,11 @@
 ..(-kit:libra)        Libra kit
 ..(-kit:99)           99 kit
 ..(-kit:green)        Green Names kit
-..(-kit:atb)          ATB kit
-..(-kit:adamant)      Adamant kit
-..(-kit:cursed)       Cursed kit
-..(-kit:hero)         Hero kit
-..(-kit:exit)         Exit kit
+..(-kit:atb)^         ATB kit
+..(-kit:adamant)^     Adamant kit
+..(-kit:cursed)^      Cursed kit
+..(-kit:hero)^        Hero kit
+..(-kit:exit)^        Exit kit
 ..(-kit:random)       Select a random kit
 .<> Kit 2
 ..(-kit2:basic)        Basic kit
@@ -699,11 +715,11 @@
 ..(-kit2:libra)        Libra kit
 ..(-kit2:99)           99 kit
 ..(-kit2:green)        Green Names kit
-..(-kit2:atb)          ATB kit
-..(-kit2:adamant)      Adamant kit
-..(-kit2:cursed)       Cursed kit
-..(-kit2:hero)         Hero kit
-..(-kit2:exit)         Exit kit
+..(-kit2:atb)^         ATB kit
+..(-kit2:adamant)^     Adamant kit
+..(-kit2:cursed)^      Cursed kit
+..(-kit2:hero)^        Hero kit
+..(-kit2:exit)^        Exit kit
 ..(-kit2:random)       Select a random kit
 .<> Kit 3
 ..(-kit3:basic)        Basic kit
@@ -731,80 +747,127 @@
 ..(-kit3:libra)        Libra kit
 ..(-kit3:99)           99 kit
 ..(-kit3:green)        Green Names kit
-..(-kit3:atb)          ATB kit
-..(-kit3:adamant)      Adamant kit
-..(-kit3:cursed)       Cursed kit
-..(-kit3:hero)         Hero kit
-..(-kit3:exit)         Exit kit
+..(-kit3:atb)^         ATB kit
+..(-kit3:adamant)^     Adamant kit
+..(-kit3:cursed)^      Cursed kit
+..(-kit3:hero)^        Hero kit
+..(-kit3:exit)^        Exit kit
 ..(-kit3:random)       Select a random kit
 [-noadamants] No Adamant Armors
 [-nocursed] No Cursed Rings
 [-spoon] Edward can equip the Spoon
-[-monsterevade]! Monsters get physical and magical evasion
-[-monsterflee] Monsters can flee from battle
+[-monsterevade]!^ Monsters get physical and magical evasion
+[-monsterflee]^ Monsters can flee from battle
 [@smithy] Smithy reward
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
 ..(-smith:super) Kokkol crafts a weapon from FF4 Advance
-.[-smith:playable] Kokkol's item will be usable
-[@fusoya] Alternative FuSoYa challenges
-.<> Spell learning changes
+.[-smith:playable]^ Kokkol's item will be usable
+.[-smith:omni]^ All characters can equip the FF4A weapon 
+[@fusoya]^ FuSoYa challenges
+.<> Spell learning categories
+..(@normalfu) Usual FuSoYa challenge
+...<> Learning modifications
+....(-fusoya:slowstart) 5 of the first 12 bosses defeated will not reward spells or HP
+....(-fusoya:unlearn) FuSoYa will lose spells instead of learning them
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
+....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 ..(-fusoya:vanilla) Vanilla FuSoYa
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
 ..(-fusoya:sequential_p) Fixed spell order (Palom/Porom)
+...[ECHO:@normalfu]
 ..(-fusoya:sequential_r) Fixed spell order (Rydia/Rosa)
+...[ECHO:@normalfu]
 ..(-fusoya:location) Location-dependent spells
+...<> Learning modifications
+....(-fusoya:unlearn) FuSoYa will lose spells instead of learning them
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
+....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 ..(-fusoya:nerfed)! Fixed starting spells, no learning
+...[] HP gain modifications
+....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
+....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
 .[-fusoya:maybe]! Spells not guaranteed to be learned
-[@exp] Restore vanilla EXP distribution
+.[-fusoya:omnimage] FuSoYa also learns summons/Twin/Ninja magic
+[@agility]^ Change the ATB system (or make it vanilla)
+.<> Different anchoring or ATB formula
+..(-agility:vanilla) Use vanilla agility anchoring
+..(-agility:slowest) Use your slowest character as anchor
+..(-agility:fastest)! Use your fastest character as anchor
+..(-agility:average) Use your average agility for anchoring
+..(-agility:median) Use your median agility for anchoring
+..(-agility:monster)! Use average monster agility for anchoring
+..(-agility:flat) Everyone is the same agility
+..(-agility:750formula) Use a formula to determine agility
+..<@anchor> Use a fixed agility anchor
+...<> Anchor agility
+....(-agility:anchor7) 7 Agility anchor
+....(-agility:anchor27)! 27 Agility anchor
+....(-agility:anchor28)! 28 Agility anchor
+....(-agility:anchor41)! 41 Agility anchor
+....(-agility:anchor42)! 42 Agility anchor
+.[@agilityscale] Scale the base ATB
+..<> Base ATB for the anchor
+...(-agility:scale1) Base ATB is 1 tick 
+...(-agility:scale10) Base ATB is 10 ticks 
+.[-speedmodbalance] Alter the speed modifier behaviour
+[@exp] Restore vanilla or change EXP distribution
 .[-exp:split] Split EXP distribution
 .[-exp:noboost] No low-level EXP boost
 .[-exp:nokeybonus] No EXP bonus after 10 key items
-.[-exp:crystalbonus] Double EXP after obtaining the Crystal
-.[@objectiveexp] Award extra EXP for completing objectives
-..<> Amount of bonus EXP
+.[-exp:crystalbonus]^ Double EXP after obtaining the Crystal
+.[@objectiveexp]^ Award extra EXP for completing objectives
+..<> Amount of bonus EXP 
 ...(-exp:objectivebonus25) Each completed objective gives 25% extra EXP
 ...(-exp:objectivebonus10) Each completed objective gives 10% extra EXP
 ...(-exp:objectivebonus_num) Each completed objective gives extra EXP
-.[@kicheckexp] Award extra EXP for completing key item checks
+.[@kicheckexp]^ Award extra EXP for completing key item checks
 ..<> Amount of bonus EXP
 ...(-exp:kicheckbonus10) Each completed KI check gives 10% extra EXP
 ...(-exp:kicheckbonus5) Each completed KI check gives 5% extra EXP
 ...(-exp:kicheckbonus2) Each completed KI check gives 2% extra EXP
 ...(-exp:kicheckbonus_num) Each completed KI check gives extra EXP
-.[@zonkbonusexp] Award extra EXP after non-KI rewards from KI checks
+.[@zonkbonusexp]^ Award extra EXP after non-KI rewards from KI checks
 ..<> Amount of bonus EXP
 ...(-exp:zonkbonus10) Each non-KI reward gives 10% extra EXP
 ...(-exp:zonkbonus5) Each non-KI reward gives 5% extra EXP
 ...(-exp:zonkbonus2) Each non-KI reward gives 2% extra EXP
-.[@miabbonusexp] Award extra EXP during MIAB encounters
+.[@miabbonusexp]^ Award extra EXP during MIAB encounters
 ..<> Amount of bonus EXP
 ...(-exp:miabbonus100) MIAB encounters give double EXP
 ...(-exp:miabbonus50) MIAB encounters give 50% extra EXP
-.[@moonbonusexp] Award extra EXP when on the moon
+.[@moonbonusexp]^ Award extra EXP when on the moon
 ..<> Amount of bonus EXP
 ...(-exp:moonbonus200) Moon encounters give triple EXP
 ...(-exp:moonbonus100) Moon encounters give double EXP
-.[-exp:maxlevelbonus] Award extra EXP when underlevelled
-.[@geometricexp] Decrease EXP earned from repeated same-type monster kills
+.[-exp:maxlevelbonus]^ Award extra EXP when underlevelled
+.[@geometricexp]^ Decrease EXP earned from repeated same-type monster kills
 ..<> Per-monster-kill percentage reduction
-...(-exp:geometric90) Repeated monster kills scale down in EXP to 90%
-...(-exp:geometric80) Repeated monster kills scale down in EXP to 80%
-...(-exp:geometric70) Repeated monster kills scale down in EXP to 70%
-...(-exp:geometric60) Repeated monster kills scale down in EXP to 60%
-...(-exp:geometric50) Repeated monster kills scale down in EXP to 50%
-...(-exp:geometric40) Repeated monster kills scale down in EXP to 40%
-...(-exp:geometric30) Repeated monster kills scale down in EXP to 30%
-...(-exp:geometric20) Repeated monster kills scale down in EXP to 20%
-...(-exp:geometric10) Repeated monster kills scale down in EXP to 10%
-...(-exp:geometric0) Repeated monster kills do not award EXP
+...(-exp:geometric_90) Repeated monster kills scale down in EXP to 90%
+...(-exp:geometric_80) Repeated monster kills scale down in EXP to 80%
+...(-exp:geometric_70) Repeated monster kills scale down in EXP to 70%
+...(-exp:geometric_60) Repeated monster kills scale down in EXP to 60%
+...(-exp:geometric_50) Repeated monster kills scale down in EXP to 50%
+...(-exp:geometric_40) Repeated monster kills scale down in EXP to 40%
+...(-exp:geometric_30) Repeated monster kills scale down in EXP to 30%
+...(-exp:geometric_20) Repeated monster kills scale down in EXP to 20%
+...(-exp:geometric_10) Repeated monster kills scale down in EXP to 10%
+...(-exp:geometric_0) Repeated monster kills do not award EXP
+<>^ Change the PRNG table
+.(-prng:shuffle) Shuffle the PRNG table values
+.(-prng:random) Randomize the PRNG values independently
+.(-prng:consecutive)! Replace the PRNG table with the numbers 0 to 255 in order
+.(-prng:mostlysingle)! Replace the PRNG table with (mostly) a single value
 [] Restore vanilla behaviors
-.[-vanilla:agility] Vanilla agility anchoring
 .[-vanilla:hobs] Vanilla Hobs spell
 .[-vanilla:growup] Vanilla Dwarf Castle summons
 .[-vanilla:fashion] Vanilla fashion
 .[-vanilla:miabs] Vanilla monster-in-a-box locations
 .[-vanilla:giant] Vanilla Giant
-[] Zeromus fight changes
+[]^ Zeromus fight changes
 .<> Script category
 ..(@vanilla) Vanilla Z script
 ...[-z:whichbang]! Replace every Big Bang with another spell
@@ -832,46 +895,51 @@
 ..(-wacky:random4)!          4 random wacky challenges
 ..(-wacky:random5)!          5 random wacky challenges
 ..(-wacky:random6)!          6 random wacky challenges
-.(-wacky:afflicted)!        "Afflicted"
-.(-wacky:battlescars)!      "Battle Scars"
-.(-wacky:bodyguard)         "The Bodyguard"
-.(-wacky:dropitlikeitshot)  "Drop It Like It's Hot"
-.(-wacky:enemyunknown)!     "Enemy Unknown"
-.(-wacky:musical)!          "Final Fantasy IV: The Musical"
-.(-wacky:fistfight)!        "Fist Fight"
-.(-wacky:floorislava)       "The Floor Is Made Of Lava"
-.(-wacky:forwardisback)!    "Forward is the New Back"
-.(-wacky:friendlyfire)      "Friendly Fire"
-.(-wacky:gottagofast)!      "Gotta Go Fast"
-.(-wacky:batman)!           "Holy Onomatopoeias, Batman!"
-.(-wacky:imaginarynumbers)! "Imaginary Numbers"
-.(-wacky:isthisrandomized)  "Is This Even Randomized?"
-.(-wacky:kleptomania)       "Kleptomania"
-.(-wacky:menarepigs)!       "Men Are Pigs"
-.(-wacky:misspelled)        "Misspelled"
-.(-wacky:biggermagnet)!     "A Much Bigger Magnet"
-.(-wacky:mirrormirror)      "Mirror, Mirror, on the Wall"
-.(-wacky:mysteryjuice)      "Mystery Juice"
-.(-wacky:neatfreak)!        "Neat Freak"
-.(-wacky:nightmode)!        "Night Mode"
-.(-wacky:omnidextrous)      "Omnidextrous"
-.(-wacky:payablegolbez)     "Payable Golbez"
-.(-wacky:saveusbigchocobo)! "Save Us, Big Chocobo!"
-.(-wacky:sixleggedrace)     "Six-Legged Race"
-.(-wacky:skywarriors)       "The Sky Warriors"
-.(-wacky:worthfighting)!    "Something Worth Fighting For"
-.(-wacky:tellahmaneuver)    "The Tellah Maneuver"
-.(-wacky:3point)            "The 3-Point System"
-.(-wacky:timeismoney)       "Time is Money"
-.(-wacky:darts)             "World Championship of Darts"
-.(-wacky:unstackable)!      "Unstackable"
-.(-wacky:whatsmygear)       "What's My Gear Again?"
-.(-wacky:zombies)           "Zombies!!!"
+.[-wacky:afflicted]!        "Afflicted"
+.[-wacky:battlescars]!      "Battle Scars"
+.[-wacky:bodyguard]         "The Bodyguard"
+.[-wacky:dropitlikeitshot]^ "Drop It Like It's Hot"
+.[-wacky:enemyunknown]!     "Enemy Unknown"
+.[-wacky:musical]!          "Final Fantasy IV: The Musical"
+.[-wacky:fistfight]!        "Fist Fight"
+.[-wacky:floorislava]       "The Floor Is Made Of Lava"
+.[-wacky:forwardisback]!    "Forward is the New Back"
+.[-wacky:friendlyfire]      "Friendly Fire"
+.[-wacky:gottagofast]!      "Gotta Go Fast"
+.[-wacky:batman]!           "Holy Onomatopoeias, Batman!"
+.[-wacky:imaginarynumbers]! "Imaginary Numbers"
+.[-wacky:isthisrandomized]  "Is This Even Randomized?"
+.[-wacky:kleptomania]       "Kleptomania"
+.[-wacky:menarepigs]!       "Men Are Pigs"
+.[-wacky:misspelled]        "Misspelled"
+.[-wacky:biggermagnet]!     "A Much Bigger Magnet"
+.[-wacky:mirrormirror]^     "Mirror, Mirror, on the Wall"
+.[-wacky:mysteryjuice]      "Mystery Juice"
+.[-wacky:neatfreak]!        "Neat Freak"
+.[-wacky:nightmode]!        "Night Mode"
+.[-wacky:omnidextrous]      "Omnidextrous"
+.[-wacky:payablegolbez]     "Payable Golbez"
+.[-wacky:saveusbigchocobo]! "Save Us, Big Chocobo!"
+.[-wacky:scrambledstats]!^  "Scrambled Stats"
+.[-wacky:sixleggedrace]     "Six-Legged Race"
+.[-wacky:skywarriors]       "The Sky Warriors"
+.[-wacky:worthfighting]!    "Something Worth Fighting For"
+.[-wacky:tellahmaneuver]    "The Tellah Maneuver"
+.[-wacky:3point]            "The 3-Point System"
+.[-wacky:timeismoney]       "Time is Money"
+.[-wacky:advertising]^      "Truth in Advertising"
+.[-wacky:darts]             "World Championship of Darts"
+.[-wacky:unstackable]!      "Unstackable"
+.[-wacky:whatsmygear]^      "What's My Gear Again?"
+.[-wacky:zombies]           "Zombies!!!"
 
-== TWEAKS
-[] Miscellaneous tweaks
-.[-tweak:kainmagic] Give Kain magic (with Lance)
+[]^ Miscellaneous tweaks
+.<> Sight replacements
+..(-tweak:kainmagic) Give Kain magic (with Lance)
+..(-tweak:harmspell) Replace Sight with Harm
 .[-tweak:edwardheal] Improve Edward's Heal command
+.[-tweak:darkpaladin] Cecil becomes a Dark Paladin
+.[-tweak:cidairship] Cid gains a target-all Raid command
 
 == SPOILERS
 <> No spoiler log

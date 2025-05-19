@@ -233,6 +233,8 @@ def apply(env):
 
     if env.meta.get('wacky_starter_kit'):
         kit_names.append('wacky_challenge')
+    if env.meta.get('objective_starter_kit'):
+        kit_names.append('objective')
 
     for kit_name in kit_names:
         if kit_name == 'grabbag':
@@ -270,6 +272,8 @@ def apply(env):
             kit_spec = kit_spec + [ ([ armor ], [1]), ( [ head ], [1]), ( [ hand ], [1]) ]
         elif kit_name == 'wacky_challenge':
             kit_spec = env.meta['wacky_starter_kit']
+        elif kit_name == 'objective':
+            kit_spec = env.meta['objective_starter_kit']
         else:
             kit_spec = KIT_SPECS[kit_name]
 
@@ -309,7 +313,7 @@ def apply(env):
     patch_lines = []
 
     altered_item_names = env.meta.get('altered_item_names', {})
-    for i in range(4):
+    for i in range(5):
         if not kits:
             env.add_substitution(f'starterkit{i} message enable', '')
         else:        

@@ -118,6 +118,10 @@ event($10)  //Opening events
     sound #GetItem
     message $A5
     // %end%
+    // %starterkit4 message enable%
+    sound #GetItem
+    message $A6
+    // %end%
     [#B #GiveStarterKit]
 
     pause 2
@@ -376,6 +380,10 @@ text(bank 1 message $A3) {
 }
 text(bank 1 message $A5) {
 // %starterkit3 message text%
+// %end%
+}
+text(bank 1 message $A6) {
+// %starterkit4 message text%
 // %end%
 }
 

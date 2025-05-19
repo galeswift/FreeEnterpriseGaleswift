@@ -390,7 +390,7 @@ class FlagLogicCore:
 
         # NOTE: mutex flags ARE handled internally by FlagSet, don't worry about them here        
         # key item flags
-        if flagset.has('Kunsafer') and not flagset.has('Kmoon'):
+        if flagset.has('Kunsafer') and not flagset.has_any('Kmoon', 'Kmiab:lst', 'Kmiab:all'):
             flagset.set('Kmoon')
             self._lib.push(log, ['correction', 'Kunsafer requires placing key items on the moon; adding Kmoon'])
 
@@ -405,7 +405,6 @@ class FlagLogicCore:
                            'Kmiab:all') and not flagset.has('Kmain'):
             flagset.set('Kmain')
             self._lib.push(log, ['correction', 'Advanced key item randomizations are enabled; forced to add Kmain'])
-        kmiab_flags = flagset.get_list(r'^Kmiab:')
 
         if flagset.has('Owin:crystal') and flagset.has('Omode:ki17'):
             flagset.unset('Omode:ki17')
@@ -431,6 +430,7 @@ class FlagLogicCore:
             flagset.set('Pkey')
             self._lib.push(log, ['correction', 'Kstart:pass implies Pkey'])
 
+        kmiab_flags = flagset.get_list(r'^Kmiab:')
         if 'Kmiab:all' in kmiab_flags and len(kmiab_flags) > 1:
             self._simple_disable_regex(flagset, log, 'All miabs already included', r'^Kmiab:(standard|above|below|lst)')
         elif 'Kmiab:standard' in kmiab_flags and len(kmiab_flags) > 1:
@@ -444,8 +444,8 @@ class FlagLogicCore:
                 self._simple_disable_regex(flagset, log, 'Conly:* flag(s) are specified', r'^Cno:')
 
         if flagset.has('Chero'):
-            self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:')
-        
+            self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:(super|alt|playable)')
+
         start_include_flags = flagset.get_list(r'^Cstart:(?!not_)')
         start_exclude_flags = flagset.get_list(r'^Cstart:not_')
         if len(start_exclude_flags) > 0 and len(start_include_flags) > 0:
@@ -505,6 +505,18 @@ class FlagLogicCore:
 
         if len(flagset.get_list(r'^-smith:playable')) == len(flagset.get_list(r'^-smith:')):
             self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable'])
+        if flagset.has('-smith:omni') and not (flagset.has_any('-smith:super', 'Chero')):
+            self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni'])
+
+        # add restrictions in case people try to fudge the fusoya flags
+        if flagset.has('-fusoya:slowstart') and flagset.has('-fusoya:uncapped'):
+            self._simple_disable(flagset, log, 'Uncapped FuSoYa cannot also have slowstart', ['-fusoya:slowstart'])
+        if flagset.has('-fusoya:location') and flagset.has('-fusoya:slowstart'):
+            self._simple_disable(flagset, log, 'Location FuSoYa cannot have slowstart', ['-fusoya:slowstart'])
+        if flagset.has('-fusoya:nerfed'):
+            self._simple_disable_regex(flagset, log, 'Nerfed FuSoYa cannot have slowstart or unlearn spells', r'^-fusoya:(slowstart|unlearn)')
+        if flagset.has('-fusoya:vanilla'):
+            self._simple_disable_regex(flagset, log, 'Vanilla FuSoYa cannot have his HP or spells change', r'^-fusoya:(slowstart|unlearn|randomhp)')
 
         if flagset.has('-monsterflee') and not flagset.has('-monsterevade'):
             flagset.set('-monsterevade')

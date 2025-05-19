@@ -8,6 +8,7 @@ Omode:dkmatter5/Omode:dkmatter10/Omode:dkmatter15/Omode:dkmatter20/Omode:dkmatte
 Omode:ki1/Omode:ki2/Omode:ki3/Omode:ki4/Omode:ki5/Omode:ki6/Omode:ki7/Omode:ki8/Omode:ki9/Omode:ki10/Omode:ki11/Omode:ki12/Omode:ki13/Omode:ki14/Omode:ki15/Omode:ki16/Omode:ki17
 Omode:bosscollector1/Omode:bosscollector2/Omode:bosscollector3/Omode:bosscollector4/Omode:bosscollector5/Omode:bosscollector6/Omode:bosscollector7/Omode:bosscollector8/Omode:bosscollector9/Omode:bosscollector10/Omode:bosscollector15/Omode:bosscollector20/Omode:bosscollector25/Omode:bosscollector30/Omode:bosscollector34
 Omode:goldhunter100/Omode:goldhunter250/Omode:goldhunter500/Omode:goldhunter750/Omode:goldhunter1000
+Omode:external
 # BEGIN_AUTO_OBJECTIVES
 O1:char_cecil/O1:char_kain/O1:char_rydia/O1:char_tellah/O1:char_edward/O1:char_rosa/O1:char_yang/O1:char_palom/O1:char_porom/O1:char_cid/O1:char_edge/O1:char_fusoya/O1:boss_dmist/O1:boss_officer/O1:boss_octomamm/O1:boss_antlion/O1:boss_waterhag/O1:boss_mombomb/O1:boss_fabulgauntlet/O1:boss_milon/O1:boss_milonz/O1:boss_mirrorcecil/O1:boss_guard/O1:boss_karate/O1:boss_baigan/O1:boss_kainazzo/O1:boss_darkelf/O1:boss_magus/O1:boss_valvalis/O1:boss_calbrena/O1:boss_golbez/O1:boss_lugae/O1:boss_darkimp/O1:boss_kingqueen/O1:boss_rubicant/O1:boss_evilwall/O1:boss_asura/O1:boss_leviatan/O1:boss_odin/O1:boss_bahamut/O1:boss_elements/O1:boss_cpu/O1:boss_paledim/O1:boss_wyvern/O1:boss_plague/O1:boss_dlunar/O1:boss_ogopogo/O1:quest_mistcave/O1:quest_waterfall/O1:quest_antlionnest/O1:quest_hobs/O1:quest_fabul/O1:quest_ordeals/O1:quest_baroninn/O1:quest_baroncastle/O1:quest_magnes/O1:quest_zot/O1:quest_dwarfcastle/O1:quest_lowerbabil/O1:quest_falcon/O1:quest_sealedcave/O1:quest_monsterqueen/O1:quest_monsterking/O1:quest_baronbasement/O1:quest_giant/O1:quest_cavebahamut/O1:quest_murasamealtar/O1:quest_crystalaltar/O1:quest_whitealtar/O1:quest_ribbonaltar/O1:quest_masamunealtar/O1:quest_burnmist/O1:quest_curefever/O1:quest_unlocksewer/O1:quest_music/O1:quest_toroiatreasury/O1:quest_magma/O1:quest_supercannon/O1:quest_unlocksealedcave/O1:quest_bigwhale/O1:quest_traderat/O1:quest_forge/O1:quest_wakeyang/O1:quest_tradepan/O1:quest_tradepink/O1:quest_pass
 O2:char_cecil/O2:char_kain/O2:char_rydia/O2:char_tellah/O2:char_edward/O2:char_rosa/O2:char_yang/O2:char_palom/O2:char_porom/O2:char_cid/O2:char_edge/O2:char_fusoya/O2:boss_dmist/O2:boss_officer/O2:boss_octomamm/O2:boss_antlion/O2:boss_waterhag/O2:boss_mombomb/O2:boss_fabulgauntlet/O2:boss_milon/O2:boss_milonz/O2:boss_mirrorcecil/O2:boss_guard/O2:boss_karate/O2:boss_baigan/O2:boss_kainazzo/O2:boss_darkelf/O2:boss_magus/O2:boss_valvalis/O2:boss_calbrena/O2:boss_golbez/O2:boss_lugae/O2:boss_darkimp/O2:boss_kingqueen/O2:boss_rubicant/O2:boss_evilwall/O2:boss_asura/O2:boss_leviatan/O2:boss_odin/O2:boss_bahamut/O2:boss_elements/O2:boss_cpu/O2:boss_paledim/O2:boss_wyvern/O2:boss_plague/O2:boss_dlunar/O2:boss_ogopogo/O2:quest_mistcave/O2:quest_waterfall/O2:quest_antlionnest/O2:quest_hobs/O2:quest_fabul/O2:quest_ordeals/O2:quest_baroninn/O2:quest_baroncastle/O2:quest_magnes/O2:quest_zot/O2:quest_dwarfcastle/O2:quest_lowerbabil/O2:quest_falcon/O2:quest_sealedcave/O2:quest_monsterqueen/O2:quest_monsterking/O2:quest_baronbasement/O2:quest_giant/O2:quest_cavebahamut/O2:quest_murasamealtar/O2:quest_crystalaltar/O2:quest_whitealtar/O2:quest_ribbonaltar/O2:quest_masamunealtar/O2:quest_burnmist/O2:quest_curefever/O2:quest_unlocksewer/O2:quest_music/O2:quest_toroiatreasury/O2:quest_magma/O2:quest_supercannon/O2:quest_unlocksealedcave/O2:quest_bigwhale/O2:quest_traderat/O2:quest_forge/O2:quest_wakeyang/O2:quest_tradepan/O2:quest_tradepink/O2:quest_pass
@@ -39,21 +40,21 @@ Conly:cecil Conly:kain Conly:rydia Conly:tellah Conly:edward Conly:rosa Conly:ya
 Cno:cecil Cno:kain Cno:rydia Cno:tellah Cno:edward Cno:rosa Cno:yang Cno:palom Cno:porom Cno:cid Cno:edge Cno:fusoya
 Crestrict:cecil Crestrict:kain Crestrict:rydia Crestrict:tellah Crestrict:edward Crestrict:rosa Crestrict:yang Crestrict:palom Crestrict:porom Crestrict:cid Crestrict:edge Crestrict:fusoya
 Cthrift:2/Cthrift:3/Cthrift:4/Cthrift:5
-Cj:spells Cj:abilities Cpaladin Cnekkie Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader Chero Csuperhero
+Cj:spells Cj:abilities Cpaladin Cnekkie Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader/Cmostlydead/Cbrieflydead Chero Csuperhero
 Ctreasure:free Ctreasure:earned Ctreasure:unsafe Ctreasure:relaxed Chi Cfifo
 Tvanilla Tshuffle/Tstandard/Tpro/Tsemipro/Twild/Twildish/Tvanillaish/Tempty
 Tsparse:10/Tsparse:20/Tsparse:30/Tsparse:40/Tsparse:50/Tsparse:60/Tsparse:70/Tsparse:80/Tsparse:90
 Tsparsey:underground Tsparsey:moon Tsparsey:overworld
 Tplayable
-Sprice:20/Sprice:40/Sprice:60/Sprice:80/Sprice:120/Sprice:140/Sprice:160/Sprice:180/Sprice:200/Sprice:400
-Spricey:items Spricey:weapons Spricey:armor
 Tunrestrict:treasury Tunrestrict:moon Tunrestrict:underworld Tunrestrict:overworld
 Tno:j Tmaxtier:3/Tmaxtier:4/Tmaxtier:5/Tmaxtier:6/Tmaxtier:7 Tmintier:2/Tmintier:3/Tmintier:4/Tmintier:5/Tmintier:6/Tmintier:7/Tmintier:8 Tmoney/Tjunk
-Svanilla Sshuffle/Sstandard/Spro/Swild/Swildish/Scabins/Svanillaish/Sempty/Ssame Ssingles Sfree/Smixed Sunsafe Ssell:quarter/Ssell:0 
+Sprice:20/Sprice:40/Sprice:60/Sprice:80/Sprice:120/Sprice:140/Sprice:160/Sprice:180/Sprice:200/Sprice:400
+Spricey:items Spricey:weapons Spricey:armor
+Svanilla Sshuffle/Sstandard/Spro/Swild/Swildish/Scabins/Svanillaish/Sempty/Ssame Ssingles Sfree/Smixed Sunsafe Ssell:quarter/Ssell:0 Splayable
 Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus Salways:starveil Salways:cure3 Salways:illusion Salways:damage_items Salways:coffin
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
-Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package Bwhyburn/Bwhichburn/Bitburns Bwhybez Bwhichbez Bwoahdin
-Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Enodmachin Eno:jdrops/Eno:sirens
+Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package Bwhyburn/Bwhichburn/Bitburns Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
+Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:exit/-kit:atb/-kit:random
 -kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:exit/-kit2:atb/-kit2:random
@@ -63,9 +64,13 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -spoon
 -monsterevade
 -monsterflee
--smith:super/-smith:alt -smith:playable
+-smith:super/-smith:alt -smith:playable -smith:omni
 -fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
--fusoya:maybe
+-fusoya:slowstart/-fusoya:unlearn
+-fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
+-agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42/
+-agility:scale1/-agility:scale10
+-speedmodbalance
 -exp:split
 -exp:noboost
 -exp:nokeybonus
@@ -77,7 +82,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -exp:moonbonus200/-exp:moonbonus100
 -exp:maxlevelbonus
 -exp:geometric90/-exp:geometric80/-exp:geometric70/-exp:geometric60/-exp:geometric50/-exp:geometric40/-exp:geometric30/-exp:geometric20/-exp:geometric10/-exp:geometric0
--vanilla:agility
+-prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -vanilla:hobs
 -vanilla:growup
 -vanilla:fashion
@@ -96,8 +101,6 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -forcesealed
 -wacky:random/-wacky:random2/-wacky:random3/-wacky:random4/-wacky:random5/-wacky:random6
 -wacky:musical
--wacky:dropitlikeitshot
--wacky:whatsmygear
 -wacky:bodyguard
 -wacky:fistfight
 -wacky:omnidextrous
@@ -130,8 +133,11 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:isthisrandomized
 -wacky:forwardisback
 -wacky:mirrormirror
--tweak:kainmagic 
--tweak:edwardheal
+-wacky:dropitlikeitshot
+-wacky:whatsmygear
+-wacky:scrambledstats
+-wacky:advertising
+-tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -151,13 +157,14 @@ Cvanilla : ~Cstandard & ~Crelaxed
 Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Tsemipro & ~Twild & ~Twildish & ~Tvanillaish & ~Tempty
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Swildish & ~Scabins & ~Svanillaish & ~Sempty & ~Ssame
 Bvanilla : ~Bstandard
-Evanilla : ~Etoggle & ~Ereduce & ~Enoencounters
+Etoggle  : ~Evanilla & ~Ereduce & ~Enoencounters
 Gnone    : ~/^G(?!none)/
 ----- SLUGS
 
 Onone                objective_none
 Omode:classicforge   objective_mode_classicforge
 Omode:classicgiant   objective_mode_classicgiant
+Omode:external       objective_mode_external
 Owin:crystal         objective_zeromus
 
 Kvanilla             key_items_vanilla
@@ -217,6 +224,8 @@ Cpermadeath          characters_permadeath
 Cpermadeader         characters_permadeader
 Chi                  characters_force_add
 Cfifo                characters_first_in_first_out
+Cmostlydead          characters_mostly_dead
+Cbrieflydead         characters_briefly_dead
 Chero                hero_challenge
 Csuperhero           superhero_challenge
 Ctreasure:free       characters_in_treasure_free
@@ -281,6 +290,7 @@ Salways:cure3        shops_always_cure3
 Salways:illusion     shops_always_illusion
 Salways:coffin       shops_always_coffin
 Salways:damage_items  shops_always_damage_items
+Splayable            shops_playable
 
 Bvanilla             bosses_vanilla
 Bstandard            bosses_standard
@@ -300,6 +310,9 @@ Bwhybez              golbez_no_shadow
 Bwhichbez            golbez_random_spells
 Bitburns             wyvern_all_bad_things
 Bwoahdin             odin_random_spell
+Bspellpower          bosses_nonzero_spellpower
+Bremove:kqe_slot     no_kq_eblan_slot
+Bremove:kaipo_slot   no_officer_slot
 
 Evanilla             encounter_vanilla
 Etoggle              encounter_toggle
@@ -314,6 +327,7 @@ Enogp                no_gp_for_random_encounters
 Enodmachin           encounter_no_dmachin
 Eno:jdrops           drops_no_j
 Eno:sirens           drops_no_sirens
+Enomacgiant          encounter_no_macgiant
 
 Gdupe                glitch_allow_duplication
 Gmp                  glitch_allow_mp_underflow
@@ -332,6 +346,7 @@ G64                  glitch_allow_64
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith
+-smith:omni          omnismith
 
 -fusoya:vanilla       vanilla_fusoya
 -fusoya:location      location_fusoya
@@ -339,13 +354,27 @@ G64                  glitch_allow_64
 -fusoya:sequential_r  sequential_r_fusoya
 -fusoya:nerfed        nerfed_fusoya
 -fusoya:maybe         maybe_fusoya
+-fusoya:slowstart     slowstart_fusoya
+-fusoya:unlearn       unlearn_fusoya
+-fusoya:uncapped      uncapped_fusoya
+-fusoya:randomhp      randomhp_fusoya
+-fusoya:omnimage      add_spells_fusoya
+
+-agility:vanilla     vanilla_agility
+-agility:slowest     slowest_agility
+-agility:fastest     fastest_agility
+-agility:average     average_agility
+-agility:median      median_agility
+-agility:monster     monster_agility
+-agility:flat        flat_agility
+-agility:750formula  formula_agility
+-speedmodbalance     balance_speed_mod_range
 
 -exp:split           experience_split
 -exp:noboost         experience_no_boost
 -exp:nokeybonus      experience_no_key_item_bonus
 -exp:crystalbonus    experience_crystal_bonus
 -exp:maxlevelbonus   experience_max_level_bonus
--vanilla:agility     vanilla_agility
 -vanilla:hobs        vanilla_hobs
 -vanilla:growup      vanilla_dwarf_summons
 -vanilla:fashion     vanilla_fashion
@@ -366,3 +395,6 @@ G64                  glitch_allow_64
 
 -tweak:kainmagic     kainmagic
 -tweak:edwardheal    edwardheal
+-tweak:darkpaladin   darkpaladin
+-tweak:cidairship    cidairship
+-tweak:harmspell     harmspell

@@ -1,0 +1,102 @@
+// Odin should only be weak to Lit when the
+// sword is raised, so change scripting to
+// reflect that. Moreover, this file handles
+// the possible Bwoahdin scenario as well.
+
+// Technically it'll set weakness back to normal
+// before the Odin hits you, but I'd rather that
+// than put a chain in.
+
+// %flag odin_random_spell on%
+ai_script($D3)
+{
+    fight
+    
+    fight
+    
+    fight
+
+    pass
+    
+    pass
+    
+    {% odin spell replacement %}
+    
+    fight
+    
+    fight
+    
+    pass
+    
+    pass
+    
+    {% odin spell replacement %}
+    
+    fight
+    
+    chain {
+        set sprite $2B
+        set weakness #Lit #Immune
+        pass
+        
+        condition 1
+        pass
+    }
+
+    condition 0
+    set weakness #Immune
+    use #Enemy_Odin
+}
+// %end%
+
+// %flag odin_random_spell off%
+ai_script($D3)
+{
+    fight
+    
+    fight
+    
+    fight
+    
+    set sprite $2B
+    set weakness #Lit #Immune
+    pass
+    
+    // add an extra empty turn to allow for more weakness time
+    // (as gameplay balance)
+    pass
+
+    pass
+    
+    set weakness #Immune
+    use #Enemy_Odin
+    
+    fight
+    
+    fight
+    
+    set sprite $2B
+    set weakness #Lit #Immune
+    pass
+    
+    pass
+    
+    set weakness #Immune
+    use #Enemy_Odin
+    
+    fight
+    
+    chain {
+        set sprite $2B
+        set weakness #Lit #Immune
+        pass
+        
+        condition 1
+        pass
+    }
+    
+    condition 0
+    set weakness #Immune
+    use #Enemy_Odin
+}
+// %end%
