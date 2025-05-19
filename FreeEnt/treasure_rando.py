@@ -187,7 +187,7 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: (it.category not in ['weapon', 'armor']))   
-    if env.meta.get('wacky_challenge') == '3point':
+    if '3points' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: it.const != '#item.SomaDrop')
 
     # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
@@ -356,10 +356,8 @@ def apply(env):
             for i,t in enumerate(tier['chests']):
                 treasure_assignment.assign(t, tier['pool'][i])
     elif env.options.flags.has('treasure_wild') or env.options.flags.has('treasure_standard'):
-        max_item_tier = (99 if env.options.flags.has('treasure_wild') else (mintier if (mintier and (mintier > 5)) else 5))
+        max_item_tier = (99 if env.options.flags.has('treasure_wild') else 5)
         # exclude HrGlass1 and HrGlass3 from Twild gen if HrGlass2 can't spawn
-        if (max_item_tier == 99 and mintier and mintier > 5):
-            max_item_tier = 98
         item_pool = items_dbview.get_refined_view(lambda it: it.tier <= max_item_tier).find_all()
         for t in plain_chests_dbview.find_all():
             treasure_assignment.assign(t, env.rnd.choice(item_pool).const)
@@ -379,10 +377,6 @@ def apply(env):
                 weights = util.get_boosted_weights(weights)
             if env.options.flags.has('treasure_semipro'):
                 weights = util.get_semiboosted_weights(weights)
-            if mintier:
-                for tier in range(1,mintier):
-                    weights[mintier] += weights[tier]
-                    weights[tier] = 0
 
             distributions_unrestricted[row.area] = util.Distribution(weights)
 

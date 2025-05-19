@@ -471,13 +471,10 @@
 ...[Tunrestrict:underworld] Chests in the underworld will be unaffected by any Tmaxtier flags
 ...[Tunrestrict:overworld] Chests on the overworld will be unaffected by any Tmaxtier flags
 ..<> Improve item quality
-...(Tmintier:2) Chests contain tier 2 items at minimum
-...(Tmintier:3) Chests contain tier 3 items at minimum
-...(Tmintier:4) Chests contain tier 4 items at minimum
-...(Tmintier:5) Chests contain tier 5 items at minimum
-...(Tmintier:6) Chests contain tier 6 items at minimum
-...(Tmintier:7) Chests contain tier 7 items at minimum
-...(Tmintier:8) Chests contain tier 8 items
+...(Tmintier:2) Chests contain tier 2 items at worst
+...(Tmintier:3) Chests contain tier 3 items at worst
+...(Tmintier:4) Chests contain tier 4 items at worst
+...(Tmintier:5) Chests contain tier 5 items at worst
 .(Tvanillaish) Vanilla-ish chest randomization
 ..[ECHO:Tstandard]
 .(Tpro) Pro chest randomization

@@ -919,14 +919,8 @@ def apply(env):
         if not env.options.flags.has('key_item_from_pink_tail'):
             unassigned_quest_slots.remove(RewardSlot.pink_trade_item)
 
-        mintier = env.options.flags.get_suffix('Tmintier:')
-        if mintier:
-            mintier = int(mintier)
-
         if env.options.flags.has('treasure_standard') or env.options.flags.has('treasure_wild'):
             reward_tiers = [6, 7, 8]
-            if mintier:
-                reward_tiers = [tier for tier in reward_tiers if tier >= mintier]
             src_pool = items_dbview.find_all(lambda it: it.tier in reward_tiers)
             pool = list(src_pool)
             while len(pool) < len(unassigned_quest_slots):
@@ -943,10 +937,6 @@ def apply(env):
                     weights = util.get_boosted_weights(weights)
                 if env.options.flags.has('treasure_semipro'):
                     weights = util.get_semiboosted_weights(weights)
-                if mintier:
-                    for tier in range(1,mintier):
-                        weights[mintier] += weights[tier]
-                        weights[tier] = 0
                 quest_distribution = util.Distribution(weights)
                 tier_counts = quest_distribution.choose_many(env.rnd, len(unassigned_quest_slots_for_curve))
                 pool = []
@@ -995,8 +985,8 @@ def apply(env):
                         
         if env.options.flags.has('treasure_standard') or env.options.flags.has('treasure_wild'):
             # exclude HrGlass1 and HrGlass3 from MIAB items if HrGlass2 is excluded
-            min_miab_tier = mintier if (mintier and mintier >= 5) else 5
-            max_miab_tier = 98 if (env.options.flags.has('treasure_standard') or (mintier and mintier >= 6)) else 99
+            min_miab_tier = 5
+            max_miab_tier = 98 if env.options.flags.has('treasure_standard') else 99
             src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
             pool = list(src_pool)
             while len(pool) < len(unassigned_chest_slots):
@@ -1018,10 +1008,6 @@ def apply(env):
                     weights = util.get_boosted_weights(weights)
                 if env.options.flags.has('treasure_semipro'):
                     weights = util.get_semiboosted_weights(weights)
-                if mintier:
-                    for tier in range(1,mintier):
-                        weights[mintier] += weights[tier]
-                        weights[tier] = 0
                 miab_distributions[c.area[len("MIAB_"):]] = util.Distribution(weights)
 
             tier_counts_by_area = {}
