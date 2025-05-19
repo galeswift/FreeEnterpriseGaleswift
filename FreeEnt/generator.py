@@ -937,7 +937,7 @@ def build(romfile, options, force_recompile=False):
             if item_id in [0,96]:
                 continue
             item_description_data[0x80 * item_id + 0x20 : 0x80 * item_id + 0x80] = env.meta['wacky_gear_descriptions'][item_id]
-    elif env.meta.get('wacky_challenge') == 'advertising':
+    elif 'advertising' in env.meta.get('wacky_challenge',[]):
         for item_id in env.meta['wacky_gear_descriptions']:
             item_description_data[0x80 * item_id + 0x20 : 0x80 * item_id + 0x80] = env.meta['wacky_gear_descriptions'][item_id]
         env.add_file('scripts/black_shirt_fix.f4c') # Black Shirt doesn't change

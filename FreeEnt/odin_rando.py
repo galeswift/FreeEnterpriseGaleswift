@@ -42,7 +42,7 @@ def apply(env):
         cmd = env.rnd.choice(list(odin_commands))
         script = f'use {cmd}'
         env.add_substitution('odin spell replacement', script)
-        if env.meta.get('wacky_challenge') == 'advertising':
+        if 'advertising' in env.meta.get('wacky_challenge',[]):
             env.add_file('scripts/wacky/odin_advertising.f4c')
         else:
             env.add_file('scripts/odin_replace_two_zantetsukens.f4c')
@@ -52,5 +52,5 @@ def apply(env):
             [["Odin spells 1+2", databases.get_spell_spoiler_name(cmd)]],
             public = env.options.flags.has_any('-spoil:all','-spoil:misc')
             )
-    elif env.meta.get('wacky_challenge') == 'advertising':
+    elif 'advertising' in env.meta.get('wacky_challenge',[]):
         env.add_file('scripts/wacky/odin_advertising.f4c')

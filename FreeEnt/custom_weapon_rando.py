@@ -111,10 +111,10 @@ def apply(env):
             items_dbview.refine(lambda it: not it.j)
         if env.options.flags.has('no_adamants'):
             items_dbview.refine(lambda it: it.const != '#item.AdamantArmor')
-        if env.options.flags.has('playablesmith') and not env.meta.get('wacky_challenge') == 'omnidextrous':
+        if env.options.flags.has('playablesmith') and not 'omnidextrous' in env.meta.get('wacky_challenge',[]):
             # alt smith item can't be a MoonVeil if Tno:j is on! So restricting to Yang-only without Adamants would be bad; don't restrict in that case.
             if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
-                    and (env.meta['available_characters']).issubset(set(['yang']) or env.meta.get('wacky_challenge') == 'fistfight')):
+                    and (env.meta['available_characters']).issubset(set(['yang']) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
                 items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(env.meta['available_characters']))
         items = items_dbview.find_all(lambda it: it.tier in [7, 8])
         smith_reward = env.rnd.choice(items)
@@ -138,7 +138,7 @@ def apply(env):
         custom_weapon.spirits = ''
         custom_weapon.undead = ''
 
-    if custom_weapon.id == 0x106 and env.meta.get('wacky_challenge') == 'advertising':
+    if custom_weapon.id == 0x106 and 'advertising'  in env.meta.get('wacky_challenge',[]):
         custom_weapon.giants = 'y'
 
     # write item name
@@ -209,7 +209,7 @@ def apply(env):
     if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
         with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
             description_data = infile.read()
-    elif custom_weapon.id == 0x106 and env.meta.get('wacky_challenge') == 'advertising':
+    elif custom_weapon.id == 0x106 and 'advertising' in env.meta.get('wacky_challenge',[]):
         with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'advertising_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
             description_data = infile.read()
     else: 

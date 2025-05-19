@@ -437,7 +437,7 @@ def apply(env):
             dp_level_up_stats_script = dp_level_up_stats_script + f'patch (${(0x0FC010 + (0x05 * (level-1))):06X} bus) {{ {stats_byte:02X} {hp_byte:02X} }}\n'
         env.add_script(dp_level_up_stats_script)
         
-        if not env.meta.get('wacky_challenge') == 'whatsmygear':
+        if not 'whatsmygear' in env.meta.get('wacky_challenge',[]):
             env.add_script('\n'+ 
                 'patch ($0f91d7 bus) { 90 }\n' + # Str/Wis +3 for Light/Chaos Sword
                 'patch ($0f92ff bus) { B3 }\n' # Str/Vit/Wis +15 for Crystal/Hades Sword
