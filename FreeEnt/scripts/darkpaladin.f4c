@@ -15,7 +15,9 @@ actor(#PCecil)
 {
     commands {
         #Fight
+        // %flag japanese_abilities on%
         #DarkWave
+        // %end%
         #Black
         #Item
     }
