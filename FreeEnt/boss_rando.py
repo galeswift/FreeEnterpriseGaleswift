@@ -775,7 +775,7 @@ def apply(env):
                 monster_name = MONSTER_SCRIPTED_CHANGES[monster_id][0]
                 for pair in MONSTER_SCRIPTED_CHANGES[monster_id][1:]:
                     stat, value = pair
-                    if stat == 'spell power':
+                    if stat == 'spell power' and not (monster_name == 'wyvern' and env.options.flags.has('wyvern_flat_spellpower_nuke')):
                         if env.options.flags.has('bosses_nonzero_spellpower'):
                             scaled_value = str(min(255, int(math.ceil(value * _get_spell_power_ratio_min_one(ref_leader, leader)))))
                         else:

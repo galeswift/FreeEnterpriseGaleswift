@@ -591,6 +591,7 @@
 .(Bwhyburn) Disable Wyvern's opening MegaNuke
 .(Bwhichburn) Replace Wyvern's opening MegaNuke with a random attack
 .(Bitburns)^ Replace Wyvern's opening MegaNuke with random, incredibly dangerous attack
+[Bflatvern]^ Wyvern will not scale spell power for Nuke
 [Bwoahdin] Replace Odin's first two Zantetsukens 1 and 2 with a random attack
 [] Change Golbez's behaviour
 .[Bwhybez] Disable Golbez's Shadow summon

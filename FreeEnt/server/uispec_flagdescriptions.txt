@@ -393,6 +393,9 @@ The replacement attack will be weaker than MegaNuke (unless <em>Bunsafe</em> is 
 [Bitburns]
 The replacement attack will include Meganuke, Big Bang, Zanteksuken, Full party charm, and Meteo
 
+[Bflatvern]
+In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the reflected Nukes and the counter MegaNuke did not get scaled, due to a typo in the code. This bug has been fixed, but this flag will restore the vanilla FE spell power for those attacks.
+
 [Bwoahdin]
 The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack.
 
