@@ -680,7 +680,7 @@ event($DB) // Smut
 { } // Erase for space, but is overwritten in the event (hah) of external objective
 
 event($DC)  // Sealed with unknown power (lunar palace)
-{ } // Erase for space
+{ } // Erase for space, but is used for Cid in Dwarf Castle on Knofree:dwarf
 
 event($DE)  // Acquire Smut
 { } // Erase for space
