@@ -291,14 +291,14 @@ Under `Ssingles`, each shop only sells a single item which can be different betw
 - Programming: sgrunt
 - Locations: shop_rando.py
 
-This flag provides a higher-powered shops setting without the full randomness of `Swild`. The specific description is:
+This flag provides a higher-powered shops setting without the full randomness of `Swild`.
 
-!!! info "`Swildish` Description
+!!! info "`Swildish` Description"
     - Kokkol's shop contains tier 6-7 items/gear.
     - Gated shops are up to tier 6.
     - Ungated weapon/armor shops are up to tier 5.
     - Ungated item shops are up to tier 4.
-    - Pick two of: Siren, Coffin, HrGlass2, Bacchus, Elixir, Levia, and 1-2 of the damage "wild" items and distribute them to free shops.
+    - Pick two of Siren, Coffin, HrGlass2, Bacchus, Elixir, and Levia; pick 1-2 of the damage "wild" items. Distribute these items to free shops.
 
 ### `Svanillaish` {: .h6 }
 
@@ -371,13 +371,14 @@ This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can app
 ### `Bitburns` {: .h6 }
 
 - Idea: xPankraz
-- Design/Programming: Galeswift
+- Design/Programming: Galeswift (with advice from folks in the Discord thread)
 - Locations: wyvern_rando.py
 
 Like `Bwhichburn`, but the replacement attack will be _very_ unsafe, regardless of the `Bunsafe` flag.
 
-!!! warning "`Bitburns` Options"
+!!! warn "`Bitburns` Options"
     The replacement attack will be one of:
+
     - MegaNuke
     - Big Bang
     - Zantetsuken/Odin
@@ -386,12 +387,16 @@ Like `Bwhichburn`, but the replacement attack will be _very_ unsafe, regardless 
     - Globe199 by row
     - Full party non-reflectable Charm/Glance
     - Magnet/Stop/Stone/Fatal/Gaze/Bluster by row
+
     If the boss slot has 40,000 HP or more (D.Lunars, Elements), then the attack could be one of:
+
     - Full-party Laser
     - Blizzard
     - Wave
     - Tornado
+
     If the boss slot has 127 spell power (CPU, Ogopogo), then the attack could be one of:
+
     - Heat Ray
     - Glare
     - White
@@ -875,7 +880,7 @@ The "Tweak" flags are miscellaneous flags that modify the game in fairly large w
 - Design/Programming: ScytheMarshall
 - Locations: give_kain_magic.f4c
 
-This flag gives Kain 255 MP, a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Every character that gets Sight will also get Lance because the spell just hasn't been removed from their spell lists yet (but also, white mages having an offensive spell before White is nice). 
+This flag gives Kain a relatively small amount of MP and MP growth up to around level 50, a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Because Lance is scaled more to Kain's Will instead of an actual white mage's stats, every character that gets Sight will have Lance removed from their spell list because the spell is too strong. 
 
 ### `-tweak:harmspell` {: .h6 }
 

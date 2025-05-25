@@ -1,0 +1,120 @@
+Vanilla FE ROM map thanks to b0ard/Wylem;
+Fork modifications via fork devs.
+-- Fork values noted by: F:
+
+01:FFF8 - 01:FFFF   : menu kit long call hook
+
+20:8000 - 20:FFFF   : added code bank
+
+21:8000 - 21:807F   : extended shops (shop types)
+21:8080 - 21:80FF   : item megapricing table
+21:8100 - 21:88FF   : extended shops (manifests)
+21:8900 - 21:897F   : title screen display metadata
+21:8980 - 21:89BF   : actor families
+21:89C0 - 21:89FF   : character alternate jobs
+21:8A00 - 21:8BFF   : dimmed job palettes
+21:8C00 - 21:8CFF   : extended names - code lookup table
+21:8D00 - 21:8D8F   : *** UNUSED ***
+21:8D90 - 21:8FFF   : extended names - extra names
+21:9000 - 21:AFFF   : NPC sprite lookup table
+21:B000 - 21:BFFF   : extended NPC palette table
+21:C000 - 21:CFFF   : midiharp score
+21:D000 - 21:D1FF   : reward slot maps & coordinates
+21:D200 - 21:D2FB   : ending vignette order
+21:D2FC - 21:D2FF   : vignette timing values
+21:D300 - 21:D4FF   : *** UNUSED ***
+21:D500 - 21:D6FF   : replacement text for ending Mysidian Legend
+21:D700 - 21:D7FF   : castle baron soldier index table
+21:D800 - 21:D80F   : version number string
+21:D810 - 21:D87F   : silly name char lists
+21:D880 - 21:D99F   : pregame sprite table
+21:D9A0 - 21:D9DF   : treasure flag init values
+21:D9E0 - 21:D9FF   : *** UNUSED ***
+
+21:DA00 - 21:DBFF   : precalculated formation average levels
+21:DC00 - 21:DCFF   : flags indicating whether reward slots could contain key items
+21:DD00 - 21:DD5F   : starter kit / initial inventory
+21:DD60 - 21:DFFF   : *** UNUSED ***
+
+21:E000 - 21:E31F  F: doors rando trigger data
+21:E320 - 21:EFFF   : *** UNUSED ***
+
+21:F000 - 21:F0CF   : *** UNUSED ***
+21:F0D0 - 21:F0EF   : randomizer - flags
+
+21:F0F0 - 21:F0F7   : *** UNUSED ***
+
+21:F0F8             : custom weapon proxy item ID
+21:F0F9             : randomizer - objective required count
+21:F0FA - 21:F0FB   : randomizer - max treasure count
+21:F0FC             : randomizer - objective total count
+21:F0FD             : randomizer - max number of characters obtainable
+21:F0FE             : randomizer - max number of key items obtainable
+21:F0FF             : randomizer - max party size
+21:F000            F: randomizer - max number of bosses
+21:F101 - 21:F47F   : *** UNUSED ***
+21:F480 - 21:F4FF   : randomizer - continue-with-fanfare formations
+21:F500 - 21:F5FF   : randomizer - boss XP limit break table
+21:F600 - 21:F67F   : randomizer - Fusoya challenge spells
+21:F680 - 21:F6FF  F: randomizer - Fusoya challenge HP growth
+21:F700 - 21:F73F   : randomizer - lookup table of axtor -> actor for stats/gear/commands
+21:F740 - 21:F76F   : randomizer - wacky sprite data
+21:F770 - 21:F78F   : randomizer - lookup table of axtor -> alt palette index
+21:F790 - 21:F7AF   : randomizer - lookup table of name distinguisher symbols
+21:F7B0 - 21:F7FF   : *** UNUSED ***
+
+21:F800 - 21:F81F   : randomizer - objective IDs
+21:F820 - 21:F83F  F: randomizer - hard-required objective IDs
+21:F840 - 21:F85F   : randomizer - objective thresholds
+21:F860 - 21:F88F   : randomizer - boss slot -> boss objective lookup table
+21:F890 - 21:F9FF   : *** UNUSED ***
+21:FA00            F: randomizer - hard-required objective count
+21:FA04            F: randomizer - boss collector objective id
+21:FA05            F: randomizer - gold hunt objective ID
+21:FA06            F: randomizer - gold hunt goal amount
+21:FA0B            F: randomizer - gated objective ID
+21:FA0C            F: randomizer - gated objective required count
+21:FA0D - 21:FA4F   : *** UNUSED ***
+21:FA50 - 21:FA8F  F: randomizer - characters in treasures locations
+21:FA90 - 21:FAAF  F: randomizer - characters in treasures slot IDs
+
+22:8000 - 22:AFFF   : expanded Zeromus CHR data
+22:B000 - 22:D7FF   : *** UNUSED ***
+
+22:D800 - 22:DFFF   : end credits text
+22:E000 - 22:EFFF   : reward slot names
+22:F000 - 22:F8FF   : standing character portraits
+22:F900 - 22:F9FF   : sound engine program extension
+22:FA00 - 22:FFFF   : *** UNUSED ***
+
+23:8000 - 23:BFFF   : pregame screen text
+23:C000 - 23:C7FF   : objective description text
+23:C800 - 23:FFFF   : *** UNUSED ***
+
+24:8000 - 24:FFFF   : extended weapon/armor descriptions
+
+25:8000 - 25:FFFF   : data blob
+
+26:8000 - 26:FFFF   : wacky challenge memory area
+
+27:8000 - 27:FFFF   : *** UNUSED *** (32k)
+
+28:8000 - 28:FFFF   : alt palette bank 0
+  :8000-EFFF          : CHR data
+  :F000-F17F          : palette data
+  :F200-FFFF          : data
+29:8000 - 29:FFFF   : alt palette bank 1
+2A:8000 - 2A:FFFF   : alt palette bank 2
+2B:8000 - 2B:FFFF   : alt palette bank 3
+2C:8000 - 2C:FFFF   : alt palette bank 4
+2D:8000 - 2D:FFFF   : alt palette bank 5
+2E:8000 - 2E:FFFF   : alt palette bank 6
+2F:8000 - 2F:FFFF   : alt palette bank 7
+30:8000 - 30:FFFF   : alt palette bank 8
+31:8000 - 31:FFFF   : alt palette bank 9
+32:8000 - 32:FFFF   : alt palette bank 10
+33:8000 - 33:FFFF   : alt palette bank 11
+
+34:8000 - 38:FFFF   : *** UNUSED *** (32k x 5)
+
+39:8000 - 3F:FFFF   : build report

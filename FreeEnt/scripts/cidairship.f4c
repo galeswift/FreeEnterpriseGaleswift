@@ -155,10 +155,10 @@ msfpatch{
         jsr $_Util__BattleMultiplyE3 // $e3-$e4 has 25 * (Airship Level + 1)
         tdc
         ldx $a6
-        lda $2015,x
+        lda $_CharAgilityAddress,x
         asl a
         clc
-        adc $2015,x // a has the lower byte of 3 * Agi, possible 1 in the carry
+        adc $_CharAgilityAddress,x // a has the lower byte of 3 * Agi, possible 1 in the carry
         xba // b now has that value, a is #$00
         adc #$00 // a possibly is now 1, if the carry had been set
         xba // the two-byte accumulator now has 3 * Agi
