@@ -30,7 +30,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@bosscollector",
                 "title": "Boss Collector",
-                "description": "Find and defeat the specified number of bosses to complete this objective. <a href=\"/fork_info#bosscollector\" class=\"nf nf-md-information\"></a>",
+                "description": "Find and defeat the specified number of bosses to complete this objective.",
                 "fork": true,
                 "subcontrols": [
                   {
@@ -105,13 +105,12 @@ var FLAG_UISPEC = [
               {
                 "flag": "@goldhunter",
                 "title": "Gold Hunter",
-                "description": "Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective. <a href=\"/fork_info#goldhunter\" class=\"nf nf-md-information\"></a>",
+                "description": "Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective.",
                 "fork": true,
                 "subcontrols": [
                   {
                     "flag": "@anon2",
                     "title": "Set type of gold hunt",
-                    "important": true,
                     "type": "select",
                     "subcontrols": [
                       {
@@ -141,6 +140,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon3",
                 "title": "Dark Matter Hunt",
+                "fork": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -193,6 +193,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon4",
                 "title": "Key Item Hunt",
+                "fork": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -3241,7 +3242,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Orandompool2",
             "title": "Random objectives pool #2",
-            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href=\"/fork_info#objective-pools\" class=\"nf nf-md-information\"></a>",
+            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types.",
             "fork": true,
             "subcontrols": [
               {
@@ -3375,7 +3376,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Orandompool3",
             "title": "Random objectives pool #3",
-            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href=\"/fork_info#objective-pools\" class=\"nf nf-md-information\"></a>",
+            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types.",
             "fork": true,
             "subcontrols": [
               {
@@ -3560,7 +3561,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Ogated",
             "title": "Gated Objective",
-            "description": "A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set \"Complete the Tower of Zot\" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives. <a href=\"/fork_info#objectives-gated\" class=\"nf nf-md-information\"></a>",
+            "description": "A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set \"Complete the Tower of Zot\" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives.",
             "fork": true,
             "subcontrols": [
               {
@@ -3647,7 +3648,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Ohardreq",
             "title": "Hard Required Objectives",
-            "description": "Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4. <a href=\"/fork_info#objectives-required\" class=\"nf nf-md-information\"></a>",
+            "description": "Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4.",
             "compact": true,
             "fork": true,
             "subcontrols": [
@@ -3764,7 +3765,6 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon26",
                 "title": "Replace free key item in Toroia",
-                "hard": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -3777,13 +3777,15 @@ var FLAG_UISPEC = [
                     "flag": "Knofree:dwarf",
                     "title": "Move key item from Toroia to Dwarf Castle",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from talking to Cid in the Dwarf Castle hospital.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "Knofree:package",
                     "title": "Rydia's mom requires burning Mist to appear",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from Rydia's mom in Mist, who will appear after you have used the Package to burn Mist Village.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   }
                 ]
               }
@@ -3821,11 +3823,13 @@ var FLAG_UISPEC = [
                     "flag": "Kmiab:all",
                     "title": "All miabs (regardless of Kmoon or Kunsafe)",
                     "description": "All monster-in-a-box chests are included, regardless of any Kmoon or Kunsafe settings.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "@anon28",
                     "title": "Specific miab subgroupings",
+                    "fork": true,
                     "type": "select",
                     "subcontrols": [
                       {
@@ -3854,18 +3858,19 @@ var FLAG_UISPEC = [
                 "flag": "Kforge",
                 "title": "Forge provides a key item",
                 "description": "The reward for turning in the Legend Sword and Adamant to Kokkol is a key item. The vanilla Excalibur is added to the key items rewards pool. If the hero challenge is enabled, this overrides the normal <em>Chero</em> supersmith reward.",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "Kpink",
                 "title": "Pink Tail trades for a key item",
                 "description": "The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless adamant armors are disabled via <em>-noadamants</em>.",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
-                "flag": "@anon29",
+                "flag": "@anon26",
                 "title": "Replace free key item in Toroia",
-                "hard": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -3878,18 +3883,20 @@ var FLAG_UISPEC = [
                     "flag": "Knofree:dwarf",
                     "title": "Move key item from Toroia to Dwarf Castle",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from talking to Cid in the Dwarf Castle hospital.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "Knofree:package",
                     "title": "Rydia's mom requires burning Mist to appear",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from Rydia's mom in Mist, who will appear after you have used the Package to burn Mist Village.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   }
                 ]
               },
               {
-                "flag": "@anon30",
+                "flag": "@anon29",
                 "title": "Underworld access",
                 "type": "select",
                 "subcontrols": [
@@ -3926,7 +3933,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon31",
+                "flag": "@anon30",
                 "title": "Starting items",
                 "fork": true,
                 "type": "select",
@@ -4002,6 +4009,11 @@ var FLAG_UISPEC = [
                   {
                     "flag": "Kstart:crystal",
                     "title": "You start with the Crystal"
+                  },
+                  {
+                    "flag": "Kstart:zonk",
+                    "title": "You do not start with a key item",
+                    "description": "This flag takes priority over having the Spoon and/or the Pink Tail (in absence of Kpink), meaning this flag will remove one of those items if necessary."
                   }
                 ]
               },
@@ -4039,7 +4051,7 @@ var FLAG_UISPEC = [
     "title": "CHARACTERS",
     "controls": [
       {
-        "flag": "@anon32",
+        "flag": "@anon31",
         "title": "Characters",
         "important": true,
         "type": "select",
@@ -4060,9 +4072,8 @@ var FLAG_UISPEC = [
                 "description": "Normally, the randomizer will try to include every eligible character in the game at least once. This flag removes that logic, meaning some eligible characters may not appear."
               },
               {
-                "flag": "@anon33",
+                "flag": "@anon32",
                 "title": "Limit number of distinct characters",
-                "hard": true,
                 "null": true,
                 "type": "select",
                 "subcontrols": [
@@ -4121,12 +4132,12 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon34",
+                "flag": "@anon33",
                 "title": "Specify available characters",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon35",
+                    "flag": "@anon34",
                     "title": "Only include specific characters",
                     "compact": true,
                     "subcontrols": [
@@ -4181,7 +4192,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon36",
+                    "flag": "@anon35",
                     "title": "Exclude specific characters",
                     "compact": true,
                     "subcontrols": [
@@ -4306,9 +4317,8 @@ var FLAG_UISPEC = [
                 "description": "Normally, the randomizer will try to include every eligible character in the game at least once. This flag removes that logic, meaning some eligible characters may not appear."
               },
               {
-                "flag": "@anon37",
+                "flag": "@anon36",
                 "title": "Limit number of distinct characters",
-                "hard": true,
                 "null": true,
                 "type": "select",
                 "subcontrols": [
@@ -4367,12 +4377,12 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon38",
+                "flag": "@anon37",
                 "title": "Specify available characters",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon39",
+                    "flag": "@anon38",
                     "title": "Only include specific characters",
                     "compact": true,
                     "subcontrols": [
@@ -4427,7 +4437,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon40",
+                    "flag": "@anon39",
                     "title": "Exclude specific characters",
                     "compact": true,
                     "subcontrols": [
@@ -4488,7 +4498,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon41",
+        "flag": "@anon40",
         "title": "Specify possible starting characters",
         "null": true,
         "type": "select",
@@ -4612,7 +4622,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon42",
+        "flag": "@anon41",
         "title": "Specify possible starting gear",
         "type": "select",
         "subcontrols": [
@@ -4629,7 +4639,7 @@ var FLAG_UISPEC = [
             "type": "select",
             "subcontrols": [
               {
-                "flag": "@anon43",
+                "flag": "@anon42",
                 "title": "Max equipment tier",
                 "type": "select",
                 "subcontrols": [
@@ -4656,9 +4666,8 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon44",
+        "flag": "@anon43",
         "title": "Limit maximum party size",
-        "hard": true,
         "type": "select",
         "subcontrols": [
           {
@@ -4683,7 +4692,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon45",
+        "flag": "@anon44",
         "title": "Permadeath options",
         "type": "select",
         "subcontrols": [
@@ -4715,7 +4724,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon46",
+        "flag": "@anon45",
         "title": "Hero Options",
         "type": "select",
         "subcontrols": [
@@ -4728,16 +4737,15 @@ var FLAG_UISPEC = [
           {
             "flag": "Csuperhero",
             "title": "Superhero challenge",
-            "description": "<ul><li>This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back. <a href=\"/fork_info#superhero\" class=\"nf nf-md-information\"></a></li></ul>",
+            "description": "<ul><li>This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back.</li></ul>",
             "hard": true,
             "fork": true
           }
         ]
       },
       {
-        "flag": "@anon47",
+        "flag": "@anon46",
         "title": "Difficulty modifiers",
-        "null": true,
         "subcontrols": [
           {
             "flag": "Cnofree",
@@ -4754,48 +4762,46 @@ var FLAG_UISPEC = [
           {
             "flag": "Cnopartner",
             "title": "No starting partner",
-            "description": "Your starting partner will not join your party. <a href=\"/fork_info#nopartner\" class=\"nf nf-md-information\"></a>",
+            "description": "Your starting partner will not join your party.",
             "hard": true,
             "fork": true
           }
         ]
       },
       {
-        "flag": "@anon48",
+        "flag": "@anon47",
         "title": "Characters in chests",
-        "null": true,
         "fork": true,
         "subcontrols": [
           {
             "flag": "Ctreasure:free",
             "title": "Free characters are found in treasure chests instead",
-            "description": "Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href=\"/fork_info#ctreasure-free\" class=\"nf nf-md-information\"></a>",
+            "description": "Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.",
             "hard": true
           },
           {
             "flag": "Ctreasure:earned",
             "title": "Earned characters are found in treasure chests instead",
-            "description": "Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href=\"/fork_info#ctreasure-earned\" class=\"nf nf-md-information\"></a>",
+            "description": "Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.",
             "hard": true
           },
           {
             "flag": "Ctreasure:relaxed",
             "title": "Restricted characters in all chests",
-            "description": "Restricted characters will be found in all chests.  No characters will be placed in MIAB chests. <a href=\"/fork_info#ctreasure-relaxed\" class=\"nf nf-md-information\"></a>",
+            "description": "Restricted characters will be found in all chests.  No characters will be placed in MIAB chests.",
             "hard": true
           },
           {
             "flag": "Ctreasure:unsafe",
             "title": "Unsafe characters in chests",
-            "description": "Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld. <a href=\"/fork_info#ctreasure-unsafe\" class=\"nf nf-md-information\"></a>",
+            "description": "Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld.",
             "hard": true
           }
         ]
       },
       {
-        "flag": "@anon49",
+        "flag": "@anon48",
         "title": "J-commands and spells",
-        "null": true,
         "subcontrols": [
           {
             "flag": "Cj:spells",
@@ -4810,9 +4816,8 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon50",
+        "flag": "@anon49",
         "title": "Character Join Options",
-        "null": true,
         "subcontrols": [
           {
             "flag": "Cnodupes",
@@ -4846,7 +4851,7 @@ var FLAG_UISPEC = [
       {
         "flag": "Cpaladin",
         "title": "Cecil starts the game as a paladin",
-        "description": "Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check. <a href=\"/fork_info#cpaladin\" class=\"nf nf-md-information\"></a>",
+        "description": "Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check.",
         "fork": true
       }
     ]
@@ -4855,7 +4860,7 @@ var FLAG_UISPEC = [
     "title": "TREASURES",
     "controls": [
       {
-        "flag": "@anon51",
+        "flag": "@anon50",
         "title": "Treasure chests (other than MIABs)",
         "important": true,
         "type": "select",
@@ -4866,9 +4871,10 @@ var FLAG_UISPEC = [
             "null": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -4888,7 +4894,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -4938,9 +4944,10 @@ var FLAG_UISPEC = [
             "description": "Treasure contents are the same as in original FF4, but their positions are shuffled. This randomization is weighted so that overworld treasures tend to remain in the overworld, and similarly for underworld/moon treasures.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -4960,7 +4967,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5010,9 +5017,10 @@ var FLAG_UISPEC = [
             "description": "A basic randomization, allowing items of reasonable strength to appear. Items are equally likely to appear in any chest regardless of location.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5032,7 +5040,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5075,7 +5083,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon53",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5104,7 +5112,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon54",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5128,7 +5136,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon55",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5156,11 +5164,13 @@ var FLAG_UISPEC = [
             "flag": "Tvanillaish",
             "title": "Vanilla-ish chest randomization",
             "description": "Uses location-based weighting, with item quality approximately that of the vanilla game.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5180,7 +5190,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5223,7 +5233,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon53",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5252,7 +5262,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon54",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5276,7 +5286,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon55",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5306,9 +5316,10 @@ var FLAG_UISPEC = [
             "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5328,7 +5339,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5371,7 +5382,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon53",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5400,7 +5411,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon54",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5424,7 +5435,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon55",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5452,11 +5463,13 @@ var FLAG_UISPEC = [
             "flag": "Tsemipro",
             "title": "Semi-pro chest randomization",
             "description": "Uses location-based weighting, with item quality between that provided by pro and wildish.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5476,7 +5489,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5519,7 +5532,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon53",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5548,7 +5561,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon54",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5572,7 +5585,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon55",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5602,9 +5615,10 @@ var FLAG_UISPEC = [
             "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5624,7 +5638,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5667,7 +5681,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon53",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5696,7 +5710,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon54",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5720,7 +5734,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon55",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5750,9 +5764,10 @@ var FLAG_UISPEC = [
             "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon51",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5772,7 +5787,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon52",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5815,7 +5830,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon53",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5844,7 +5859,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon54",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5868,7 +5883,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon55",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5916,7 +5931,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon57",
+        "flag": "@anon56",
         "title": "Junk management",
         "type": "select",
         "subcontrols": [
@@ -5938,7 +5953,7 @@ var FLAG_UISPEC = [
     "title": "SHOPS",
     "controls": [
       {
-        "flag": "@anon58",
+        "flag": "@anon57",
         "title": "Shops",
         "important": true,
         "type": "select",
@@ -5968,7 +5983,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -5987,7 +6003,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -5995,6 +6012,7 @@ var FLAG_UISPEC = [
             "flag": "Swildish",
             "title": "Wild-ish shop randomization",
             "description": "A basic randomization, allowing slightly stronger items than the standard randomization to place in shops.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "Sunsafe",
@@ -6006,7 +6024,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6025,7 +6044,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6033,6 +6053,7 @@ var FLAG_UISPEC = [
             "flag": "Svanillaish",
             "title": "Vanilla-ish shop randomization",
             "description": "Shops will contain items of similar quality and quantity as their vanilla counterparts.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "Sunsafe",
@@ -6044,7 +6065,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6057,7 +6079,8 @@ var FLAG_UISPEC = [
             "flag": "Ssame",
             "title": "Shops sell only one type of item",
             "description": "Shops only sell a single item, and all shops in the game are the same.  The item chosen uses the same rules as Swild.",
-            "hard": true
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "Sempty",
@@ -6067,7 +6090,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon59",
+        "flag": "@anon58",
         "title": "Buy prices",
         "type": "select",
         "subcontrols": [
@@ -6077,12 +6100,13 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "Smixed",
-            "title": "Shop item prices are randomized"
+            "title": "Shop item prices are randomized",
+            "fork": true
           }
         ]
       },
       {
-        "flag": "@anon60",
+        "flag": "@anon59",
         "title": "Sell prices",
         "type": "select",
         "subcontrols": [
@@ -6097,7 +6121,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon61",
+        "flag": "@anon60",
         "title": "Guarantee Items",
         "compact": true,
         "fork": true,
@@ -6145,29 +6169,13 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "Sno:j",
-        "title": "No J-items in shops"
-      },
-      {
-        "flag": "Sno:apples",
-        "title": "No Apples/Soma Drops in shops"
-      },
-      {
-        "flag": "Sno:sirens",
-        "title": "No Sirens in shops"
-      },
-      {
-        "flag": "Sno:life",
-        "title": "No Life potions in shops"
-      },
-      {
         "flag": "Splayable",
         "title": "Shops contain usable items",
         "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
         "fork": true
       },
       {
-        "flag": "@anon62",
+        "flag": "@anon61",
         "title": "Remove Items",
         "compact": true,
         "subcontrols": [
@@ -6185,7 +6193,8 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "Sno:life",
-            "title": "No Life potions in shops"
+            "title": "No Life potions in shops",
+            "hard": true
           },
           {
             "flag": "Sno:vampires",
@@ -6230,7 +6239,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon63",
+        "flag": "@anon62",
         "title": "Shop price adjustments",
         "fork": true,
         "type": "select",
@@ -6240,7 +6249,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 20% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6265,7 +6274,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 40% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6290,7 +6299,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 60% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6315,7 +6324,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 80% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6340,7 +6349,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 120% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6365,7 +6374,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 140% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6390,7 +6399,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 160% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6415,7 +6424,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 180% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6440,7 +6449,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 200% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6466,7 +6475,7 @@ var FLAG_UISPEC = [
             "hard": true,
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon63",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6494,7 +6503,7 @@ var FLAG_UISPEC = [
     "title": "BOSSES",
     "controls": [
       {
-        "flag": "@anon65",
+        "flag": "@anon64",
         "title": "Bosses",
         "important": true,
         "type": "select",
@@ -6534,6 +6543,7 @@ var FLAG_UISPEC = [
         "flag": "@Brestrict",
         "title": "Restrict required boss locations",
         "description": "Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "Brestrict:summon",
@@ -6566,7 +6576,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon66",
+        "flag": "@anon65",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -6588,13 +6598,21 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "Bwoahdin",
-        "title": "Replace Odin's first two Zantetsukens 1 and 2 with a random attack",
-        "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack."
+        "flag": "Bflatvern",
+        "title": "Wyvern will not scale spell power for Nuke",
+        "description": "In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the reflected Nukes and the counter MegaNuke did not get scaled, due to a typo in the code. This bug has been fixed, but this flag will restore the vanilla FE spell power for those attacks.",
+        "fork": true
       },
       {
-        "flag": "@anon67",
+        "flag": "Bwoahdin",
+        "title": "Replace Odin's first two Zantetsukens 1 and 2 with a random attack",
+        "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack.",
+        "fork": true
+      },
+      {
+        "flag": "@anon66",
         "title": "Change Golbez's behaviour",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "Bwhybez",
@@ -6616,8 +6634,9 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon68",
+        "flag": "@anon67",
         "title": "Remove certain boss slots",
+        "fork": true,
         "type": "select",
         "subcontrols": [
           {
@@ -6640,7 +6659,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon69",
+        "flag": "@anon68",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -6713,7 +6732,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon70",
+        "flag": "@anon69",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6741,13 +6760,15 @@ var FLAG_UISPEC = [
       {
         "flag": "Enogp",
         "title": "No GP for random encounters",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "Enodmachin",
         "title": "Disable D.Machin encounters",
         "description": "The D.Machin in the Searcher encounter is replaced by a Horseman.",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "Enomacgiant",
@@ -6803,7 +6824,7 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon71",
+        "flag": "@anon70",
         "title": "Warps Randomization Options",
         "type": "select",
         "subcontrols": [
@@ -6813,7 +6834,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon72",
+                "flag": "@anon71",
                 "title": "Doors Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -6852,7 +6873,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon73",
+                "flag": "@anon72",
                 "title": "Entrances Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -6908,7 +6929,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon74",
+            "flag": "@anon73",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7075,7 +7096,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon75",
+            "flag": "@anon74",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7242,7 +7263,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon76",
+            "flag": "@anon75",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7441,7 +7462,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon77",
+            "flag": "@anon76",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7477,7 +7498,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon78",
+            "flag": "@anon77",
             "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
@@ -7486,7 +7507,7 @@ var FLAG_UISPEC = [
                 "title": "Usual FuSoYa challenge",
                 "subcontrols": [
                   {
-                    "flag": "@anon79",
+                    "flag": "@anon78",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7498,12 +7519,13 @@ var FLAG_UISPEC = [
                       {
                         "flag": "-fusoya:unlearn",
                         "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
                       }
                     ]
                   },
                   {
-                    "flag": "@anon80",
+                    "flag": "@anon79",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7526,7 +7548,7 @@ var FLAG_UISPEC = [
                 "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
                 "subcontrols": [
                   {
-                    "flag": "@anon81",
+                    "flag": "@anon80",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7544,7 +7566,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon79",
+                    "flag": "@anon78",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7556,12 +7578,13 @@ var FLAG_UISPEC = [
                       {
                         "flag": "-fusoya:unlearn",
                         "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
                       }
                     ]
                   },
                   {
-                    "flag": "@anon80",
+                    "flag": "@anon79",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7584,7 +7607,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
                 "subcontrols": [
                   {
-                    "flag": "@anon79",
+                    "flag": "@anon78",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7596,12 +7619,13 @@ var FLAG_UISPEC = [
                       {
                         "flag": "-fusoya:unlearn",
                         "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
                       }
                     ]
                   },
                   {
-                    "flag": "@anon80",
+                    "flag": "@anon79",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7624,19 +7648,20 @@ var FLAG_UISPEC = [
                 "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon82",
+                    "flag": "@anon81",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
                       {
                         "flag": "-fusoya:unlearn",
                         "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual."
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
                       }
                     ]
                   },
                   {
-                    "flag": "@anon83",
+                    "flag": "@anon82",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7660,7 +7685,7 @@ var FLAG_UISPEC = [
                 "hard": true,
                 "subcontrols": [
                   {
-                    "flag": "@anon84",
+                    "flag": "@anon83",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7699,7 +7724,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon85",
+            "flag": "@anon84",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -7750,7 +7775,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon86",
+                    "flag": "@anon85",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -7790,7 +7815,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon87",
+                "flag": "@anon86",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -7846,7 +7871,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon88",
+                "flag": "@anon87",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7874,7 +7899,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon89",
+                "flag": "@anon88",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7906,7 +7931,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon90",
+                "flag": "@anon89",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7933,7 +7958,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon91",
+                "flag": "@anon90",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7956,7 +7981,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon92",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7985,7 +8010,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon92",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -8036,7 +8061,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon94",
+        "flag": "@anon93",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -8064,7 +8089,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon95",
+        "flag": "@anon94",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -8095,12 +8120,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon96",
+        "flag": "@anon95",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon97",
+            "flag": "@anon96",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -8187,7 +8212,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon98",
+            "flag": "@anon97",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -8228,7 +8253,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon99",
+            "flag": "@anon98",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8240,27 +8265,32 @@ var FLAG_UISPEC = [
               {
                 "flag": "-wacky:random2",
                 "title": "2 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random3",
                 "title": "3 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random4",
                 "title": "4 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random5",
                 "title": "5 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random6",
                 "title": "6 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -8437,12 +8467,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon100",
+        "flag": "@anon99",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon101",
+            "flag": "@anon100",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8481,7 +8511,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon102",
+        "flag": "@anon101",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8535,7 +8565,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon103",
+            "flag": "@anon102",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8551,7 +8581,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon104",
+                "flag": "@anon103",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -460,6 +460,10 @@ class FlagLogicCore {
         }
         if (((! flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all")) && flagset.has("Omode:ki17"))) {
             this._simple_disable(flagset, log, "Cannot replace a key item if all of them are required", ["Pkey", "Kstart:pass"]);
+            this._simple_disable(flagset, log, "Cannot remove a key item reward slot if all of them are required", ["Kstart:zonk"]);
+        }
+        if (((((! flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all")) && flagset.has("Pkey")) && (! flagset.has("Owin:crystal"))) && flagset.has("Omode:ki16"))) {
+            this._simple_disable(flagset, log, "Cannot remove two key items if one of them is required", ["Kstart:zonk"]);
         }
         if (flagset.has("Kvanilla")) {
             this._simple_disable(flagset, log, "Key items not randomized", ["Kunsafe", "Kunsafer", "Kunweighted"]);

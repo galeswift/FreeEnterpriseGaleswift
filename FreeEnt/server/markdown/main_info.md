@@ -132,9 +132,11 @@ This flag forces the Darkness crystal to be gated by underground access, meaning
 
 - Idea: various
 - Design/Programming: sgrunt, Galeswift, ScytheMarshall (for `Kstart:zonk`)
-- Locations: core_rando.py
+- Locations: core_rando.py, flagsetcore.py
 
-The starting key item check will be the item specified in the flag, or a non-key-item in the case of `Kstart:zonk`.
+The starting key item check will be the item specified in the flag, or a non-key-item in the case of `Kstart:zonk`. This flag is incompatible with `Kvanilla`, for obvious reasons.
+
+When operating with minimal key item checks, `Kstart:zonk` will take priority over placing the Spoon and/or the Pink Tail at the starting slot, and therefore can remove one (or both!) of those items from the game. This situation will often occur when the Pass and the Crystal are both in the key item pool (e.g. on `Onone Pkey`). On `Tvanilla` or `Tshuffle`, you may get literally nothing (like the Baron Castle check does on `Kvanilla Pnone`) or a Cure1 in a random MIAB if the Spoon or Pink Tail cannot be placed in the starting slot.
 
 ### `Kunweighted` {: .h6 }
 

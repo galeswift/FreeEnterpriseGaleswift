@@ -29,10 +29,10 @@ Defeat Milon, Milon Z., Kainazzo, Valvalis, Rubicant, and Elements to complete t
 45 Dark Matters are randomly placed in chests (MIABs excluded); bring 30 of them to Kory in Agart to complete this objective.
 
 [@bosscollector]
-Find and defeat the specified number of bosses to complete this objective. <a href="/fork_info#bosscollector" class="nf nf-md-information"></a>
+Find and defeat the specified number of bosses to complete this objective.
 
 [@goldhunter]
-Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective. <a href="/fork_info#goldhunter" class="nf nf-md-information"></a>
+Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective.
 
 [Omode:dkmatter35]
 45 Dark Matters are randomly placed in chests (MIABs excluded); bring 35 of them to Kory in Agart to complete this objective.
@@ -107,16 +107,16 @@ Complete the required number of objectives to immediately win the game. Zeromus 
 Complete the required number of objectives to get the Crystal, then defeat Zeromus to win the game.
 
 [@Orandompool2]
-An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href="/fork_info#objective-pools" class="nf nf-md-information"></a>
+An additinal pool of random objectives, enabling both more random objectives and different allowed types.
 
 [@Orandompool3]
-An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href="/fork_info#objective-pools" class="nf nf-md-information"></a>
+An additinal pool of random objectives, enabling both more random objectives and different allowed types. 
 
 [@Ogated]
-A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set "Complete the Tower of Zot" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives. <a href="/fork_info#objectives-gated" class="nf nf-md-information"></a>
+A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set "Complete the Tower of Zot" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives. 
 
 [@Ohardreq]
-Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4. <a href="/fork_info#objectives-required" class="nf nf-md-information"></a>
+Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4. 
 
 [@Ocustom]
 <ul>
@@ -194,6 +194,9 @@ You are guaranteed that the Hook route through Cave Eblan is the only way to acc
     <li>If Kmiab is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>
 </ul>
 
+[Kstart:zonk]
+This flag takes priority over having the Spoon and/or the Pink Tail (in absence of Kpink), meaning this flag will remove one of those items if necessary.
+
 [Kunweighted]
 Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting. 
 
@@ -219,25 +222,25 @@ Characters will not join your party in the Watery Pass, Damcyan, Mysidia, or Mt.
 Characters will not join your party in Kaipo, Mt. Hobs, Baron, Zot, the Dwarf Castle, Cave Eblan, the Lunar Palace, or the Giant of Bab-il.
 
 [Cnopartner]
-Your starting partner will not join your party. <a href="/fork_info#nopartner" class="nf nf-md-information"></a>
+Your starting partner will not join your party.
 
 [Cpaladin]
-Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check. <a href="/fork_info#cpaladin" class="nf nf-md-information"></a>
+Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check.
 
 [Cmaybe]
 Normally, the randomizer will try to include every eligible character in the game at least once. This flag removes that logic, meaning some eligible characters may not appear.
 
 [Ctreasure:free]
-Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href="/fork_info#ctreasure-free" class="nf nf-md-information"></a>
+Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.
 
 [Ctreasure:earned]
-Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href="/fork_info#ctreasure-earned" class="nf nf-md-information"></a>
+Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.
 
 [Ctreasure:unsafe]
-Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld. <a href="/fork_info#ctreasure-unsafe" class="nf nf-md-information"></a>
+Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld. 
 
 [Ctreasure:relaxed]
-Restricted characters will be found in all chests.  No characters will be placed in MIAB chests. <a href="/fork_info#ctreasure-relaxed" class="nf nf-md-information"></a>
+Restricted characters will be found in all chests.  No characters will be placed in MIAB chests. 
 
 [@CrestrictDefine]
 Under standard settings, the randomizer considers Fusoya and Edge to be "restricted" characters due to their power level, and will try to place them in later-game positions. You may redefine which characters are considered "restricted" here.
@@ -298,7 +301,7 @@ Party members that are swoon at the end of any battle are removed from your part
 - The hero is exempt from permadeath.
 
 [Csuperhero]
-- This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back. <a href="/fork_info#superhero" class="nf nf-md-information"></a>
+- This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back.
 
 [Tshuffle]
 Treasure contents are the same as in original FF4, but their positions are shuffled. This randomization is weighted so that overworld treasures tend to remain in the overworld, and similarly for underworld/moon treasures.

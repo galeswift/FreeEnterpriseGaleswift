@@ -445,9 +445,13 @@ def apply(env):
 
     forced_starting_key_item = ''
     for f in env.options.flags.get_list(rf'^Kstart:'):
-        forced_starting_key_item = STARTING_ITEM_MAP[f]
-        keyitem_assigner.slot_tier(0).remove(RewardSlot.starting_item)
-        keyitem_assigner.remove_item(forced_starting_key_item)
+        if f == 'Kstart:zonk':
+            keyitem_assigner.slot_tier(0).remove(RewardSlot.starting_item)
+            keyitem_assigner.slot_tier(3).append(RewardSlot.starting_item)
+        else:
+            forced_starting_key_item = STARTING_ITEM_MAP[f]
+            keyitem_assigner.slot_tier(0).remove(RewardSlot.starting_item)
+            keyitem_assigner.remove_item(forced_starting_key_item)
         break
 
     if env.meta.get('has_objectives', False) and env.meta.get('zeromus_required', True):

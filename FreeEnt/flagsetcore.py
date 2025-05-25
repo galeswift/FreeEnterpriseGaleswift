@@ -415,6 +415,12 @@ class FlagLogicCore:
                            'Kmiab:standard', 'Kmiab:above', 'Kmiab:below', 'Kmiab:lst',
                            'Kmiab:all') and flagset.has('Omode:ki17'):
             self._simple_disable(flagset, log, 'Cannot replace a key item if all of them are required', ['Pkey', 'Kstart:pass'])
+            self._simple_disable(flagset, log, 'Cannot remove a key item reward slot if all of them are required', ['Kstart:zonk'])
+
+        if not flagset.has_any('Ksummon', 'Kmoon', 'Kforge', 'Kpink',
+                           'Kmiab:standard', 'Kmiab:above', 'Kmiab:below', 'Kmiab:lst',
+                           'Kmiab:all') and flagset.has('Pkey') and not flagset.has('Owin:crystal') and flagset.has('Omode:ki16'):
+            self._simple_disable(flagset, log, 'Cannot remove two key items if one of them is required', ['Kstart:zonk'])
 
         if flagset.has('Kvanilla'):
             self._simple_disable(flagset, log, 'Key items not randomized', ['Kunsafe', 'Kunsafer','Kunweighted'])

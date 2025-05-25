@@ -30,7 +30,7 @@ Ohardreq:1 Ohardreq:2 Ohardreq:3 Ohardreq:4 Ohardreq:5 Ohardreq:6 Ohardreq:7 Oha
 Ogated:1/Ogated:2/Ogated:3/Ogated:4/Ogated:5/Ogated:6/Ogated:7/Ogated:8/Ogated:9/Ogated:10/Ogated:11/Ogated:12/Ogated:13/Ogated:14/Ogated:15/Ogated:16/Ogated:17/Ogated:18
 Owin:game/Owin:crystal
 Kvanilla Kmain Ksummon Kmoon Kmiab:standard Kmiab:above Kmiab:below Kmiab:lst Kmiab:all Kforge Kpink Knofree/Knofree:dwarf/Knofree:package Kunsafe/Kunsafer Kforce:magma/Kforce:hook Kunweighted Klatedark
-Kstart:package/Kstart:sandruby/Kstart:baron/Kstart:twinharp/Kstart:earthcrystal/Kstart:magma/Kstart:tower/Kstart:hook/Kstart:luca/Kstart:darkness/Kstart:rat/Kstart:pan/Kstart:crystal/Kstart:legend/Kstart:adamant/Kstart:spoon/Kstart:pink/Kstart:pass
+Kstart:package/Kstart:sandruby/Kstart:baron/Kstart:twinharp/Kstart:earthcrystal/Kstart:magma/Kstart:tower/Kstart:hook/Kstart:luca/Kstart:darkness/Kstart:rat/Kstart:pan/Kstart:crystal/Kstart:legend/Kstart:adamant/Kstart:spoon/Kstart:pink/Kstart:pass/Kstart:zonk
 Pnone Pshop Pkey Pchests
 Cvanilla Cstandard/Crelaxed Cnofree Cnoearned Cmaybe Cnopartner
 Cdistinct:1/Cdistinct:2/Cdistinct:3/Cdistinct:4/Cdistinct:5/Cdistinct:6/Cdistinct:7/Cdistinct:8/Cdistinct:9/Cdistinct:10/Cdistinct:11
@@ -53,7 +53,7 @@ Spricey:items Spricey:weapons Spricey:armor
 Svanilla Sshuffle/Sstandard/Spro/Swild/Swildish/Scabins/Svanillaish/Sempty/Ssame Ssingles Sfree/Smixed Sunsafe Ssell:quarter/Ssell:0 Splayable
 Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus Salways:starveil Salways:cure3 Salways:illusion Salways:damage_items Salways:coffin
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
-Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package Bwhyburn/Bwhichburn/Bitburns Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
+Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
 Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:exit/-kit:atb/-kit:random
@@ -200,6 +200,7 @@ Kstart:adamant          key_items_start_adamant
 Kstart:spoon            key_items_start_spoon
 Kstart:pink             key_items_start_pink
 Kstart:pass             key_items_start_pass
+Kstart:zonk             key_items_start_zonk
 
 Pnone                pass_none
 Pshop                pass_in_shop
@@ -307,6 +308,7 @@ Brestrict:sealedcave bosses_no_required_in_sealedcave
 Brestrict:package    bosses_no_required_at_package
 Bwhyburn             wyvern_no_meganuke
 Bwhichburn           wyvern_random_meganuke
+Bflatvern            wyvern_flat_spellpower_nuke
 Bwhybez              golbez_no_shadow
 Bwhichbez            golbez_random_spells
 Bitburns             wyvern_all_bad_things
