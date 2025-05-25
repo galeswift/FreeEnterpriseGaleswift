@@ -30,7 +30,7 @@ npc(#LockedDoorWeaponArmorShop)
 // Change Mysidia lady who turns you into pig's dialog
 text(bank 1 message $1A5) {
 You realize that this is
-probabaly a softlock,
+probably a softlock,
 right?
 }
 

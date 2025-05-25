@@ -2,13 +2,13 @@
 
 This fork of [the v4.6.0 FE repository](https://github.com/HungryTenor/FreeEnterprise4) is intended to collect a variety of contributions from community members into one fork, providing players the options for... Bad Ideas.
 
-This page lists out, in some detail, the new/non-vanilla flags offered by the fork, arranged by flag name. Each description will credit the flag creator/designer (possibly multiple people) and point to the main point(s) in the repository codebase where the flag is implemented.
+This page lists out, in some detail, the new/non-vanilla flags offered by the fork, arranged roughly by where they are on the generator page. Each description will credit the flag creator/designer (possibly multiple people) and point to the main point(s) in the repository codebase where the flag is implemented.
 
 [TOC]
 
 ## Objective Flags
 
-### `Omode:bosscollector` {: .h6 }
+### `Omode:bosscollector[N]` {: .h6 }
 
 - Idea: sgrunt
 - Design/Programming: Galeswift
@@ -16,22 +16,29 @@ This page lists out, in some detail, the new/non-vanilla flags offered by the fo
 
 This flag requires you to defeat some number of bosses to complete the objective (independent of any boss hunt objectives).
 
+### `Omode:goldhunter[N]` {: .h6 }
 
-- [Omode:bosscollector]: Kill X number of bosses as an objective
-{: #bosscollector }
-- [Omode:goldhunter]: Turn in a certain amount of gold to Tory in Agart as an objective
-{: #goldhunter }
-- Random pools: Added 2 extra 'buckets' of randomized objectives, allowing individual configuration of them
-{: #objective-pools }
-- Random:only chars: Added ability to specify that random character quests for an objective are only for certain characters
-{: #objective-character-restrictions }
-- Gated objectives: A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set "Complete the Tower of Zot" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives.
-{: #objectives-gated }
-- Hard required objectives: Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4.
-{: #objectives-required }
+- Idea: Galeswift
+- Design/Programming: Galeswift:
+- Locations: goldhunt.f4c, objective_rando.py, eventextensions(_if, _misc).f4c, objectives.f4c 
 
+This flag requires you to turn in a certain amount of GP to Tory in Agart to complete the objective. You lose the GP afterwards. 
 
+### `Omode:dkmatter[N]` {: .h6 }
 
+- Idea: b0ardface, sgrunt
+- Design/Programming: sgrunt
+- Locations: objective_rando.py, dark_matter_hunt.f4c
+
+Vanilla FE requires you to obtain 30 DkMatters out of 45; this flag expansion by sgrunt allows you to configure the number of required DkMatters in multiples of 5.
+
+### `Omode:ki[N]`
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: bank00_extensions.f4c, rewards.f4c, objective_rando.py 
+
+This flag requires you to obtain a certain number of key items to complete the objective. `Omode:ki17` is incompatible with `Owin:crystal`, of course. 
 
 ### `Omode:external` {: .h6 }
 
@@ -41,7 +48,45 @@ This flag requires you to defeat some number of bosses to complete the objective
 
 An objective that is completed upon the usage of the EagleEye item (instead of it casting Sight), which is given to you at the start of the seed and is impossible to lose. This objective is intended for handling "external" objectives, meaning things like bingo cards, meta objectives, and so on.
 
+### `Orandom[N]` {: .h6 }
+
+- Idea: Galeswift (but probably others)
+- Design/Programming: Galeswift
+- Locations: uispec.txt, objective_rando.py
+
+Up to three "buckets" of randomized objectives are now available, allowing individual configuration of each bucket.
+
+### `Orandom:only[char]` {: .h6 }
+
+- Idea: Galeswift
+- Design/Programming: Galeswift
+- Locations: uispec.txt, objective_rando.py
+
+Random character quests for objectives can now be specified to only be for certain characters.
+
+### `Ogated:[N]` {: .h6 }
+
+- Idea: Galeswift
+- Design/Programming: Galeswift
+- Locations: eventextensions_if.f4c, objectives.f4c, rewards.f4c, objective_rando.py, core_rando.py, tracker.f4c, rosas_mom_hints.f4c
+
+This flag allows some tiering of objectives. A gated objective means that you will only get the reward needed for completion of that objective upon completion of all other required objectives. For example, if you set "Complete the Tower of Zot" as a gated objective, you will be granted the Earth Crystal automatically upon completion of the other objectives.
+
+### `Ohardreq:[N]` {: .h6 }
+
+- Idea: Antidale (but probably others)
+- Design/Programming: Galeswift
+- Locations: objectives.f4c, tracker.f4c, objective_rando.py
+
+This flag forces you to complete certain objectives to complete the seed. For example, if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4; if you complete the other 4 objectives, you will not obtain the objective reward until you complete the hard required objective.
+
 ## Key Item Flags
+
+### `Knofree[dwarf,package]` {: .h6 }
+
+- Idea: sgrunt (probably others)
+- Design/Programming: sgrunt
+- Locations: 
 
 ### `Kmiab:[standard,all,above,below,lst]` {: .h6 }
 
@@ -51,6 +96,46 @@ An objective that is completed upon the usage of the EagleEye item (instead of i
 
 The v4.6.0 `Kmiab` flag includes all of the non-LST miabs in the key item pool, or all miabs if `Kmoon` or `Kunsafe` is on. Now, there are three subgroups of miabs: "above-ground" (Zot, Eblan, Hook route, Lunar Path, Giant), "below-ground" (Feymarch, Sylph Cave, Lower Bab-il), and the LST miabs. These subgroups can be specified separately, the vanilla `Kmiab` behaviour with safety checks can be selected using `Kmiab:standard`, and all miabs (ignoring the safety checks, so the pre-v.4.6.0 behaviour) can be selected using Kmiab:all or just specifying all three subgroups. 
 
+### `Kforge` {: .h6 }
+
+- Idea: sgrunt (but probably others, and b0ardface for the original "Forge the Crystal")
+- Design/Programming: sgrunt
+- Locations: custom_weapon_rando.py, core_rando.py
+
+This flag adds Kokkol's forge item to the available key item slots. The vanilla Excalibur is added to the key item rewards pool, just like v4.6.0 `Omode:classicforge` does. This setting overrides any supersmith reward.
+
+### `Kpink` {: .h6 }
+
+- Idea: sgrunt (but probably others)
+- Design/Programming: sgrunt
+- Locations: core_rando.py
+
+This flag adds the Pink Tail trade reward to the available key item slots. The vanilla Adamant armor is added to the key item rewards pool, unless Adamants have been removed via `-noadamants`. 
+
+### `Kunsafer` {: .h6 }
+
+- Idea: Milkode (but probably others)
+- Design/Programming: sgrunt
+- Locations: core_rando.py
+
+Under this flag, you will be _required_ to obtain moon access prior to obtaining underground access, meaning you will find your underground access somewhere accessible using the Darkness crystal (either on the moon somewhere or via the Giant).
+
+### `Klatedark` {: .h6 }
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: core_rando.py
+
+This flag forces the Darkness crystal to be gated by underground access, meaning you will find it somewhere beyond the Magma Key or the Hook.
+
+### `Kstart:[item]` {: .h6 }
+
+- Idea: various
+- Design/Programming: sgrunt, Galeswift, ScytheMarshall (for `Kstart:zonk`)
+- Locations: core_rando.py
+
+The starting key item check will be the item specified in the flag, or a non-key-item in the case of `Kstart:zonk`.
+
 ### `Kunweighted` {: .h6 }
 
 - Idea: various (including CoffeeAndChocobos, ScytheMarshall)
@@ -59,42 +144,7 @@ The v4.6.0 `Kmiab` flag includes all of the non-LST miabs in the key item pool, 
 
 FE normally has a weighted Key Item placement algorithm, that prioritizes `Kmain` checks over every other check; basically only half (or a few more) of the flags-possible `Ksummon`/`Kmoon` checks actually get added to the slots to which key items are assigned, and similarly for each area with monster boxes under Kmiab, where the first two are added and then maybe more, randomly. This flag removes that weighting, so that every check has the same chance of having a key item. 
 
-
-- [KStart]: Added ability to specify key items as the starting item granted
-{: #kstart }
-
 ## Character Flags
-
-
-
-- [CNopartner]: Disables your starting partner.
-{: #nopartner }
-- [Cpaladin]: Cecil starts as a paladin.  Ordeals is still available as an objective as usual.
-{: #cpaladin }
-- [Chi]: New characters are required to join the party, even if your party is full.
-{: #chi }
-- [Cfifo]: When dismissing a character, you must dismiss the character that has been in your party the longest.
-{: #cfifo}
-- [Csuperhero]: This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness). Trading in the Earth Crystal to the boss in the Tower of Zot removes the Earth Crystal from your inventory and restores the stat boosts.
-{: #superhero }
-- Ctreasure
-    - [Ctreasure-free] Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs
-{: #ctreasure-free  }
-    - [Ctreasure-earned] Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs
-{: #ctreasure-earned  }
-    - [Ctreasure-unsafe] Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld.
-{: #ctreasure-unsafe  }
-    - [Ctreasure-relaxed] Restricted characters will be found in all chests.  No characters will be placed in MIAB chests.
-{: #ctreasure-relaxed }
-
-!!! info "Linked Flags"
-    In order to enable any of the Ctreasure flags, you must select treasure settings that randomize chest contents. The flag validation will remove your Ctreasure flags when any of Tvanilla, Tshuffle, and Tempty are set.
-
-    * Enabling Ctreasure:free enables C:nofree.
-    * Enabling Ctreasure:earned enables C:noearned. Unlike the main site, character sprites at overworld locations are not replaced by piggy sprites.
-    * Enabling either Ctreasure:unsafe or Ctreasure:relaxed will enable both Ctreasure:free and Ctreasure:earned, if neither Ctreasure:free nor Ctreasure:earned are explicitly set.
-
-
 
 ### `Cthrift[n]` {: .h6 }
 
@@ -114,7 +164,97 @@ These new "permadeath" options allow for characters to leave your party when the
 
 Under `Cbye`, both options operate as the usual permadeath. When a character's equipment would be otherwise inaccessible, the Legend Sword (if equipped) will be forcibly placed into your inventory.
 
+### `Csuperhero` {: .h6 }
+
+- Idea: Jokermage
+- Design/Programming: Galeswift
+- Locations: eventextensions_misc.f4c, rewards.f4c, zot_top.f4c, places where the hero challenge is checked for
+
+This flag acts the same as `Chero`, except that your starting character will obtain incredible stat boosts (+50 to each of the five stats) until finding the Earth crystal (their one weakness). After returning the crystal to the boss at the top of Zot, the character gains their stat boosts back.
+
+### `Cnopartner` {: .h6 }
+
+- Idea: Guerin
+- Design/Programming: Galeswift
+- Locations: character_rando.py, opening.f4c
+
+The starting partner character (who meets your starting/pre-game screen character in the opening cutscene) will not join your party, nor will be in the Tower of Wishes.
+
+### `Ctreasure:[free/earned/relaxed/unsafe]` {: .h6 }
+
+- Idea: Galeswift (but potentially others)
+- Design/Programming: Galeswift
+- Locations: core_rando.py, character_rando.py, rewards.f4c, treasure_rando.py
+
+These flags take characters from the usual axtor reward slots and place them into treasure chests. `Ctreasure:free/earned` are linked to `Cnofree/noearned`, so free characters are placed in boxes separately from earned characters. Restricted characters will be found in MIABs, which doesn't normally do anything on `Ctreasure:free` unless you force the generator to roll `Crelaxed/restrict:[chars]/nofree/treasure:free` (which is not normally possible with just the UI on the generator page).
+
+Free characters will normally all be placed in treasures in the overworld only. Under `Ctreasure:unsafe`, they can go anywhere. Under `Ctreasure:relaxed`, restricted charaacters will be placed in non-MIAB boxes as well.
+
+!!! info "Linked Flags"
+    In order to enable any of the `Ctreasure` flags, you must select treasure settings that randomize chest contents. The flag validation will remove your `Ctreasure` flags when any of `Tvanilla`, `Tshuffle`, and `Tempty` are set.
+
+    * Enabling `Ctreasure:free` enables `C:nofree`.
+    * Enabling `Ctreasure:earned` enables `C:noearned`. Unlike the main site, character sprites at overworld locations are not replaced by piggy sprites.
+    * Enabling either `Ctreasure:unsafe` or `Ctreasure:relaxed` will enable both `Ctreasure:free` and `Ctreasure:earned`, if neither `Ctreasure:free` nor `Ctreasure:earned` are explicitly set.
+
+
+### `Chi` {: .h6 }
+
+- Idea: Galeswift
+- Design/Programming: Galeswift
+- Locations: character_expansion.f4c, join_full_party_menu.f4c
+
+Under this flag, new characters are required to join the party, even if your party is full. This flag cannot be set under `Chero/party:1`. 
+
+### `Cfifo` {: .h6 }
+
+- Idea: FirebirdLover
+- Design/Programming: Galeswift
+- Locations: join_full_party_menu.f4c
+
+Under this flag, when you are dismissing a character, you must dismiss the character that has been in your party the longest, excluding the hero character if there is one.
+
+### `Cpaladin` {: .h6 }
+
+- Idea: various, probably
+- Design/Programming: Galeswift, ScytheMarshall (pre-game sprites and bugfixes)
+- Locations: mtordeals.f4c, character_rando.py, paladin_start_sprite.f4c, opening.f4c, pregame_screen.f4c, generator.py, standing_characters_paladin.bin
+
+Cecil starts as a paladin on this flag, at the same stats as he normally would after his class change. Ordeals is still available as a key item check/etc. as usual and will restore Tellah's spells. Multiple files are changed in order to handle the class change, or lack thereof, under `Csuperhero`.
+
 ## Treasure Flags
+
+### `Tsparsey:[underground,moon,overworld]` {: .h6 }
+
+- Idea: Galeswift
+- Design/Programming: Galeswift
+- Locations: treasure_rando.py, flagsetcore.py
+
+This flag restricts the `Tsparse` settings to only the chosen areas. Cave Eblana and Upper Bab-il count as the underworld for the purposes of this flag, and the Giant counts as the moon.
+
+### `Tunrestrict:[treasury,moon,underworld,overworld]` {: .h6 }
+
+- Idea: Galeswift (potentially others)
+- Design/Programming: Galeswift
+- Locations: treasure_rando.py
+
+This flag causes the specified areas to ignore the restrictions imposed on non-MIAB chests by `Tmaxtier` and `Tmintier`. 
+
+### `Tvanillaish` {: .h6 }
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: treasure_rando.py, core_rando.py, tvanillaish.csvdb
+
+`Tvanillaish` is a weighted treasure distribution. The weights for non-MIAB chests in each area are given by the number of non-MIAB items of each tier in vanilla FF4 (the Japanese version, not the US version FF2). The weights for MIAB rewards in each area are given similarly, but for vanilla MIAB rewards in that area (meaning if there is only one MIAB reward, then then the reward for that MIAB will be exactly that tier). The weights for the three categories of quest rewards are the `Tpro` weights.
+
+### `Tsemipro` {: .h6 }
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: treasure_rando.py, core_rando.py, util.py
+
+`Tsemipro` is a weighted treasure distribution between `Tpro` and `Twildish`. Similarly to `Twildish`, it uses a matrix (found in util.py) to shift weight up to the next tier.
 
 ### `Tplayable` {: .h6 }
 
@@ -126,29 +266,87 @@ Under this flag, all chests will contain items that at least one character avail
 
 With mystery flags, you can tell who the characters are in the seed by looking at the gear you get.
 
+### `Tadjmiabareas` {: .h6 }
 
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: util.py, treasure_rando.py
 
-- [Tunrestrict]: Allows ignoring the restrictions placed on tiers in the treasury/moon/underworld/overworld
-{: #tunrestrict }
+This flag scales down weights for non-MIAB treasures in areas where there are MIABs, similarly to how `Twildish` scales up `Tpro` weights. The goal is to allow some fine-tuning of weighted treasure to make `-vanilla:miabs` a bit more balanced in the early game.
 
 ## Shop Flags
 
+### `Ssingles` {: .h6 }
 
+- Idea: Skarcerer (via jokes from #newbies-corner)
+- Design/Programming: Galeswift
+- Locations: shop_rando.py
 
-- [Sprice]/[Spricey]: Changes the price of items in shops.  Can target armor/weapons/items individually
-{: #sprice  }
-- [Salways]: Items are forced to be guaranteed in shops
-{: #salways  }
-- [Sno]: More options added to exclude items such as bacchus, coffin, etc.
-{: #sno  }
-- [Smixed]: Shop prices are randomized
-{: #smixed }
-- [Ssame]: Shops only sell a single item, and all shops in the game are the same. The item chosen uses the same rules as Swild.
-{: #ssame  }
-- [Ssingles]: Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).
-{: #ssingles  }
+Under `Ssingles`, each shop only sells a single item which can be different between the shops, but otherwise follow the standard randomization rules and safety checks (unless disabled).
 
+### `Swildish` {: .h6 }
 
+- Idea: Too many community members to count
+- Design: ScytheMarshall/Xenocat823543 (this version)
+- Programming: sgrunt
+- Locations: shop_rando.py
+
+This flag provides a higher-powered shops setting without the full randomness of `Swild`. The specific description is:
+
+!!! info "`Swildish` Description
+    - Kokkol's shop contains tier 6-7 items/gear.
+    - Gated shops are up to tier 6.
+    - Ungated weapon/armor shops are up to tier 5.
+    - Ungated item shops are up to tier 4.
+    - Pick two of: Siren, Coffin, HrGlass2, Bacchus, Elixir, Levia, and 1-2 of the damage "wild" items and distribute them to free shops.
+
+### `Svanillaish` {: .h6 }
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: shop_rando.py
+
+Under this flag, shops will contain items of similar quality and quantity as their vanilla counterparts. In particular, a shop will have exactly the same number of items in each tier as the vanilla game; the flag interacts with `Sno:j` by basing the quantities of each tier on the US version.
+
+### `Ssame` {: .h6 }
+
+- Idea: Galeswift
+- Design/Programming: Galeswift
+- Locations: shop_rando.py
+
+Shops only sell a single item, where all shops in the game are the same. The item chosen uses the same rules as `Swild`.
+
+### `Smixed` {: .h6 }
+
+- Idea: Skarcerer
+- Design/Programming: Galeswift
+- Locations: compile_item_prices.py
+
+This flag shuffles the prices of all of the items in the game. As implemented, this flag mixes in the prices of key items and non-items like no-weapon, no-armor, Sort, and the TrashCan, so some normal items will just be worth 0 GP.
+
+### `Salways:[item]` {: .h6 }
+
+- Idea: Galeswift (probably others)
+- Design/Programming: Galeswift
+- Locations: shop_rando.py
+
+Each of the specified items will be in at least one shop somewhere, according to the usual restrictions.
+
+### `Sno:[item]` {: .h6 }
+
+- Idea: Galeswift (probably others)
+- Design/Programming: Galeswift
+- Locations: shop_rando.py
+
+The `Sno:` family of flags has been expanded to include many other items and classes of items.
+
+### `Sprice/pricey:[N]` {: .h6 }
+
+- Idea: Galeswift
+- Design/Programming: Galeswift
+- Locations: compile_item_prices.py
+
+These flags change the prices of the items specified by `Spricey`, which can be armor/weapons/items separately.
 
 ### `Splayable` {: .h6 }
 
@@ -160,11 +358,51 @@ Similarly to `Tplayable`, this flag limits shop items to those usable to charact
 
 ## Boss Flags
 
+For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now).
 
-- [Bitburns]: The replacement attack will include Meganuke, Big Bang, Zanteksuken, Full party charm, and Meteo
-{: #bitburns  }
+### `Brestrict:[location]` {: .h6 }
 
+- Idea: Galeswift (probably others)
+- Design/Programming: Galeswift
+- Locations: core_rando.py, objective_rando.py
 
+This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can appear.
+
+### `Bitburns` {: .h6 }
+
+- Idea: xPankraz
+- Design/Programming: Galeswift
+- Locations: wyvern_rando.py
+
+Like `Bwhichburn`, but the replacement attack will be _very_ unsafe, regardless of the `Bunsafe` flag.
+
+!!! warning "`Bitburns` Options"
+    The replacement attack will be one of:
+    - MegaNuke
+    - Big Bang
+    - Zantetsuken/Odin
+    - Meteo
+    - Quake
+    - Globe199 by row
+    - Full party non-reflectable Charm/Glance
+    - Magnet/Stop/Stone/Fatal/Gaze/Bluster by row
+    If the boss slot has 40,000 HP or more (D.Lunars, Elements), then the attack could be one of:
+    - Full-party Laser
+    - Blizzard
+    - Wave
+    - Tornado
+    If the boss slot has 127 spell power (CPU, Ogopogo), then the attack could be one of:
+    - Heat Ray
+    - Glare
+    - White
+
+### `Bflatvern` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: boss_rando.py
+
+In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the reflected Nukes and the counter MegaNuke did not get scaled, due to a typo in the code. That bug has been fixed in this fork, but this flag will restore the vanilla FE spell power for those attacks, to allow for the vanilla pre-v5.0 FE Wyvern experience.
 
 ### `Bwoahdin` {: .h6 }
 
@@ -173,6 +411,19 @@ Similarly to `Tplayable`, this flag limits shop items to those usable to charact
 - Locations: odin_replace_two_zantetsukens.f4c
 
 In some other FF games, Odin has both the target-all instant death attack and a single-target damaging attack (usually "Gungnir"). Under this flag, Odin's script is changed so that the first two Odin attacks are replaced with a random single-target spell. Odin will also not raise the sword until the point where you can trigger the Thunderstruck script. 
+
+### `Bwhybez/whichbez` {: .h6 }
+
+- Idea: sgrunt (probably others)
+- Design/Programming: sgrunt
+- Locations: golbez_rando.py
+
+Golbez's attack script will change similarly to Wyvern's script under `Bwhyburn` and `Bwhichburn`. `Bwhybez` removes the HoldGas/Shadow phase of the fight and proceeds directly to cycling the three spells (with a bit of comedy added in). `Bwhichbez` randomizes what Golbez's three spells are, as well as Shadow's three spells if `Bwhybez` is not on. 
+
+Golbez's spells are single-target damaging spells (and Weak), and can be worse if `Bunsafe` is on. Shadow's spells are single-target status spells that incapacitate your characters.
+
+!!! warning "Don't reflect Shadow's spells!"
+    Some of Shadow's spells can be bounced off Wall... which sounds great, until you reflect Beak onto Golbez and softlock the fight because Beak bypasses the boss bit.
 
 ### `Bspellpower` {: .h6 }
 
@@ -194,6 +445,24 @@ These flags will remove the specified boss slot from the game entirely. No objec
 
 The default `E` flag is now `Etoggle`.
 
+******* remember to get ap7's encounter shuffle flags?
+
+### `Enogp` {: .h6 }
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: encounter_no_gp.f4c, encounter_rando.py
+
+This flag removes GP from random encounters.
+
+### `Enodmachin` {: .h6 }
+
+- Idea: sgrunt (probably others)
+- Design/Programming: sgrunt
+- Locations: encounter_no_dmachin.f4c, encounter_rando.py
+
+This flag replaces the D.Machin in the repeatable D.Machin grind encounter with a Horseman.
+
 ### `Enomacgiant` {: .h6 }
 
 - Idea: various (including ScytheMarshall)
@@ -204,6 +473,46 @@ This flag replaces the MacGiant in the repeatable MacGiant grind encounter with 
 
 ## Other Flags
 
+### `-doorsrando:[category]` {: .h6 }
+
+- Idea: various
+- Design/Programming: jayp12323, Wylem
+- Locations: doors_rando.py, map_history_extension.f4c, doorsrando.f4c, generator.py
+
+Most doors in the game are randomized, including entrances to field maps from overworld maps, within the given categories. The doors that aren't include connectors between floors of the same dungeon and every Training Room in the game. Dungeons which, in vanilla, chain into other dungeons have their "exits" also randomized, so Cave Eblana will exit out into a map that is probably not the normal connection to Upper Bab-il, and so on.
+
+The doors in Baron Town that are locked by the Baron Key are now open by default; the Baron Key check is now placed in the water outside of Baron Castle, so you can still Push B to Jump past it but it will block your progression otherwise. 
+
+Many return triggers have been reworked into teleport triggers, to prevent unusual behaviour. Be very careful to not follow chains forever, though, because the map stack will not appreciate it. Some teleports have been removed, for example the teleport in the Sylph Cave house and one of the teleports on the treasure floor of the Feymarch town.
+
+The Tower Key is now a logical way underground, if you can access Lower Bab-il from the overworld. Sylph Cave MIABs can still be in Yang's room in Sylph Cave, even though the room is disconnected from the rest of Sylph.
+
+### `-entrancesrando:[category]` {: .h6 }
+
+- Idea: various
+- Design/Programming: jayp12323, Wylem
+- Locations: doors_rando.py, map_history_extension.f4c, doorsrando.f4c, generator.py
+
+Entrances to field maps from the various overworld maps are randomized within the given categories; for example, under `all` the entrance to Baron Town might lead to Dwarf Castle and the entrance to Baron Castle might lead to Cave Bahamut. Doors within field maps, for example doors to buildings inside of towns or connectors to different parts of a dungeon, remain intact.
+
+### `-calmness` {: .h6 }
+
+- Idea: jayp12323
+- Design/Programming: jayp12323
+- Locations: doorsrando.f4c
+
+When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button".
+
+This flag _removes_ the Select+R functionality.
+
+### `-forcesealed` {: .h6 }
+
+- Idea: rejakdylle
+- Design/Programming: jayp12323
+- Locations: doorsrando.f4c
+
+Normally, with the Panic button you can simply warp out of Sealed Cave after picking up the item at the bottom without fighting the boss. This flag triggers the boss fight on the way into the crystal room, not out of it. You can, of course, still skip the fight on Push B to Jump.
+
 ### `-kit:atb` {: .h6 }
 
 - Idea: ScytheMarshall
@@ -211,6 +520,38 @@ This flag replaces the MacGiant in the repeatable MacGiant grind encounter with 
 - Locations: kit_rando.py
 
 This kit gives 2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heals (since they reset the speed modifier).
+
+### `-kit:adamant` {: .h6 }
+
+- Idea: tons of folks
+- Design/Programming: sgrunt
+- Locations: kit_rando.py
+
+This kit gives you an Adamant armor, regardless of `-noadamants`.
+
+### `-kit:cursed` {: .h6 }
+
+- Idea: also tons of folks
+- Design/Programming: sgrunt
+- Locations: kit_rando.py
+
+This kit gives you a Cursed ring, regardless of `-nocursed`.
+
+### `-kit:hero` {: .h6 }
+
+- Idea: sgrunt
+- Design/Programming: sgrunt
+- Locations: kit_rando.py
+
+This kit gives you one tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
+
+### `-kit:exit` {: .h6 }
+
+- Idea: JudgeJoe, Fleury14
+- Design/Programming: jayp12323
+- Locations: kit_rando.py
+
+This kit gives you 5-10 Exits.
 
 ### `-monsterevade`, `-monsterflee` {: .h6 }
 
@@ -481,6 +822,16 @@ This flag is just `-vanilla:z` renamed.
 
 ## Wacky Flags
 
+Wylem reworked the wacky challenge framework to allow for multiple wackies to be present at once, in his multi-wacky fork. Thanks, Wylem!
+
+### `-wacky:mirrormirror` - Mirror, Mirror, On the Wall {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: Wylem
+- Locations: wacky_rando.py, wacky/mirrormirror.f4c
+
+This wacky flag forces all actors in battle to start with Wall (except summoned monsters).
+
 ### `-wacky:dropitlikeitshot` - Drop It Like It's Hot {: .h6 }
 
 - Idea: ScytheMarshall
@@ -526,6 +877,14 @@ The "Tweak" flags are miscellaneous flags that modify the game in fairly large w
 
 This flag gives Kain 255 MP, a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Every character that gets Sight will also get Lance because the spell just hasn't been removed from their spell lists yet (but also, white mages having an offensive spell before White is nice). 
 
+### `-tweak:harmspell` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: harm_spell.f4c; fusoya_rando.py for spoiler log changes, japanese_spells.f4c for spellset changes
+
+This flag replaces Sight with Harm, a holy-elemental damage-dealing spell slightly weaker than Virus with similar targetting, MP cost, and cast time (with the same HP leak effect that White has). The goal is to provide white mages with an offensive magic option before White.
+
 ### `-tweak:edwardheal` {: .h6 }
 
 - Idea: ScytheMarshall
@@ -536,7 +895,7 @@ This flag modifies Edward's Heal J-ability to use the best of Cure1, Cure2, Cure
 
 ### `-tweak:darkpaladin` {: .h6 }
 
-- Idea: various, but initial inspiration from PinkPuff (via Unprecedented Chaos)
+- Idea: various, but initial inspiration from PinkPuff (via Unprecedented Chaos) and F&I thread from Kindron Darkfire
 - Design/Programming: ScytheMarshall (taking cues from UC)
 - Locations: darkpaladin.f4c, character_rando.py; spoiler logs from core_rando.py, treasure.py, shop_rando.py, custom_weapon_rando.py
 
@@ -549,11 +908,3 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Locations: cidairship.f4c; some wacky f4c files where command menus change
 
 This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.
-
-### `-tweak:harmspell` {: .h6 }
-
-- Idea: ScytheMarshall
-- Design/Programming: ScytheMarshall
-- Locations: harm_spell.f4c; fusoya_rando.py for spoiler log changes, japanese_spells.f4c for spellset changes
-
-This flag replaces Sight with Harm, a holy-elemental damage-dealing spell slightly weaker than Virus with similar targetting, MP cost, and cast time (with the same HP leak effect that White has). The goal is to provide white mages with an offensive magic option before White.

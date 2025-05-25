@@ -45,6 +45,7 @@ patch($0fa0a8 bus) { 06 0B 06 00 }
 // Let Cecil get it at level 17 (along with Porom, Rosa at 14 for utility);
 // remove from Rydia's learned spells
 
+// %flag darkpaladin off%
 spellset(#PCecil) {
     learned {
         8  #Peep
@@ -54,6 +55,7 @@ spellset(#PCecil) {
         24  #Heal
     }
 }
+// %end%
 
 spellset(#RydiaWhite) {
     learned {
