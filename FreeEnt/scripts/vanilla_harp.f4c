@@ -1,0 +1,18 @@
+text(map $94 message 1) // #CaveMagnesCrystalRoom
+{
+[music $12]       Now Playing
+      MELODY OF LUTE
+           from
+     Final Fantasy IV
+       Composed by
+      Nobuo Uematsu
+}
+
+text(bank 1 message $11C) {
+[music $12]       Now Playing
+      MELODY OF LUTE
+           from
+     Final Fantasy IV
+       Composed by
+      Nobuo Uematsu
+}

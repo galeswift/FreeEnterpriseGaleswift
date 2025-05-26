@@ -318,12 +318,26 @@ body {
     border-left-color: #4d828e;
 }
 
+.flagSection.harpoptions {
+    border-left-color: #cd6d28;
+}
+
 .flagSection.glitches {
     border-left-color: #a5de65;
 }
 
+.flagSection.doors {
+    border-left-color: #7a3c3c;
+}
+
 .flagSection.spoilers {
     border-left-color: #111111;
+}
+
+/* leave the "other" section alone, grey is fine */
+
+.flagSection.tweaks {
+    border-left-color: #ffa4e4;
 }
 
 .sectionTitle {

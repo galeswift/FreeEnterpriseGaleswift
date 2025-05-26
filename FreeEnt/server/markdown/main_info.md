@@ -478,6 +478,34 @@ This flag replaces the D.Machin in the repeatable D.Machin grind encounter with 
 
 This flag replaces the MacGiant in the repeatable MacGiant grind encounter with a Machine.
 
+## Harp Flags
+
+harumph, the leader of the #FadeHarp community, made some flags to change the TwinHarp behaviour. In vanilla FE, you will always get a randomized song instead of the vanilla Melody of Lute (Edward's theme) during the TwinHarp cutscene and subsequent fight. These flags change that behaviour.
+
+### `Hrandom` {: .h6 }
+
+- Idea: b0ardface
+- Design/Programming: b0ardface, music by b0ardface, Calmlamity, Xenocat823543, and others
+- Locations: midiharp.f4c, the compiled_songs folder, the harp tools in fetools 
+
+This flag replicates vanilla FE behaviour (up to the songs available on this fork). The random song will never be Melody of Lute.
+
+### `Hvanilla` {: .h6 }
+
+- Idea: harumph
+- Design/Programming: harumph, ScytheMarshall (this particular implementation)
+- Locations: vanilla_harp.f4c
+
+This flag forces Edward to play Melody of Lute. The song credits will still display.
+
+### `Hnone` {: .h6 }
+
+- Idea: harumph, others
+- Design/Programming: harumph, ScytheMarshall (this particular implementation)
+- Locations: no_harp.f4c
+
+This flag forces Edward to play nothing. The track used is a "silence" audio track in the game's data.
+
 ## Other Flags
 
 ### `-doorsrando:[category]` {: .h6 }

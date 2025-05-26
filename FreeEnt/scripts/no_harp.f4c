@@ -1,0 +1,45 @@
+// hook into music loading code and hijack Edward's song score loading
+msfpatch {
+    MidiHarp__Start:
+        cmp #$12  // Edward's theme
+        beq $+MidiHarp__LoadNone
+
+        // resume normal operation
+        sta $4202   // displaced instruction
+        lda #$03    // displaced instruction
+        jml $048188
+
+    MidiHarp__LoadNone:
+        // hardcode the 25-byte "silence" track
+        lda #$0e
+        sta $10
+        lda #$f7
+        sta $11
+        lda #$06
+        sta $12
+        // jump back to code, bypassing normal
+        // score address lookup
+        jml $0481f3
+
+    .addr 0x048183
+        jml $=MidiHarp__Start
+}
+
+text(map $94 message 1) // #CaveMagnesCrystalRoom
+{
+[music $12]       Now Playing
+         SILENCE
+           from
+     Final Fantasy IV
+       Composed by
+      Nobuo Uematsu
+}
+
+text(bank 1 message $11C) {
+[music $12]       Now Playing
+         SILENCE
+           from
+     Final Fantasy IV
+       Composed by
+      Nobuo Uematsu
+}

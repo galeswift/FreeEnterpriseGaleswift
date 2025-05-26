@@ -444,6 +444,15 @@ The D.Machin in the Searcher encounter is replaced by a Horseman.
 [Enomacgiant]
 The MacGiant in the Searcher encounter is replaced by a Machine.
 
+[Hrandom]
+The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members.
+
+[Hvanilla]
+The song that Edward plays during the TwinHarp cutscene and fight is vanilla.
+
+[Hnone]
+No music plays during the TwinHarp cutscene and fight.
+
 [@kit]
 Starter kits allow you to begin the game with additional items in your inventory.
 

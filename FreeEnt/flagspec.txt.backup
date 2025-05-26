@@ -55,6 +55,7 @@ Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus S
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
 Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
 Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
+Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:exit/-kit:atb/-kit:random
 -kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:exit/-kit2:atb/-kit2:random
@@ -158,6 +159,7 @@ Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Tsemipro & ~Twild & ~Twildish & ~Tv
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Swildish & ~Scabins & ~Svanillaish & ~Sempty & ~Ssame
 Bvanilla : ~Bstandard
 Etoggle  : ~Evanilla & ~Ereduce & ~Enoencounters
+Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
 ----- SLUGS
 
@@ -331,6 +333,10 @@ Enodmachin           encounter_no_dmachin
 Eno:jdrops           drops_no_j
 Eno:sirens           drops_no_sirens
 Enomacgiant          encounter_no_macgiant
+
+Hrandom              random_harp
+Hvanilla             vanilla_harp
+Hnone                no_harp
 
 Gdupe                glitch_allow_duplication
 Gmp                  glitch_allow_mp_underflow

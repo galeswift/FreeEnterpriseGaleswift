@@ -698,13 +698,18 @@ def build(romfile, options, force_recompile=False):
             zeromus_sprite_script = infile.read()
         env.add_scripts('// [[[ ZEROMUS SPRITE START ]]]\n' + zeromus_sprite_script + '\n// [[[ ZEROMUS SPRITE END ]]]\n')
 
-    env.add_file('scripts/midiharp.f4c')
-    HARP_SONGS_DIR = os.path.join(os.path.dirname(__file__), 'compiled_songs')
-    song_asset = select_from_catalog(os.path.join(HARP_SONGS_DIR, 'catalog'), env) + '.asset'
-    env.add_substitution('midiharp default credits', '')
-    with open(os.path.join(HARP_SONGS_DIR, song_asset), 'r') as infile:
-        harp_script = infile.read()
-    env.add_scripts('// [[[ HARP START ]]]\n' + harp_script + '\n// [[[ HARP END ]]]\n')
+    if env.options.flags.has('vanilla_harp'):
+        env.add_file('scripts/vanilla_harp.f4c')
+    elif env.options.flags.has('no_harp'):
+        env.add_file('scripts/no_harp.f4c')
+    else:
+        env.add_file('scripts/midiharp.f4c')
+        HARP_SONGS_DIR = os.path.join(os.path.dirname(__file__), 'compiled_songs')
+        song_asset = select_from_catalog(os.path.join(HARP_SONGS_DIR, 'catalog'), env) + '.asset'
+        env.add_substitution('midiharp default credits', '')
+        with open(os.path.join(HARP_SONGS_DIR, song_asset), 'r') as infile:
+            harp_script = infile.read()
+        env.add_scripts('// [[[ HARP START ]]]\n' + harp_script + '\n// [[[ HARP END ]]]\n')
 
     # hack: add a block area to insert default names in rescript.py
     env.add_scripts('// [[[ NAMES START ]]]\n// [[[ NAMES END ]]]')

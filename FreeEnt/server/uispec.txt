@@ -619,6 +619,12 @@
 [Enodmachin]!^ Disable D.Machin encounters
 [Enomacgiant]!^ Disable MacGiant encounters
 
+== HARP OPTIONS
+<>*^ Harp randomization
+.(Hrandom) Edward plays a random song
+.(Hvanilla)- Edward plays the vanilla song
+.(Hnone) Edward plays nothing
+
 == GLITCHES
 [@G] Enable major glitches
 .[Gdupe] Allow item duplication
