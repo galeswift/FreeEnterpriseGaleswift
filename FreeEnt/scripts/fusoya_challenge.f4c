@@ -214,6 +214,7 @@ msfpatch {
 //  Fusoya challenge - spells by number of bosses (formerly level 2)
 // (level 1 was the Tellah-style Ordeals buff)
 
+// %flag location_fusoya off%
 msfpatch {
     FusoyaChallenge__AdvanceBossNumber:
         // the HP credits counter tells us what spells to give
@@ -268,11 +269,13 @@ msfpatch {
     FusoyaChallenge__AdvanceBossNumber_HPDone:
         rts
 }
+// %end%
 
 // ----------------------------------------------------------
 //  Fusoya challenge - spells by boss location
 //  (It's the same code, just loading the boss slot instead of the current number of credits)
 
+// %flag location_fusoya on%
 msfpatch { 
     FusoyaChallenge__AdvanceLocation:
         // credits do nothing except HP, it's all about the boss slots you've fought
@@ -328,6 +331,7 @@ msfpatch {
     FusoyaChallenge__AdvanceLocation_HPDone:
         rts
 }
+// %end%
 
 // Handle the textboxes after each boss. 
 // Because we need to care about both location/not-location and
