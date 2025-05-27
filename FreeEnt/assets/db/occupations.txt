@@ -1768,7 +1768,7 @@ Caddie
 Caddy
 Cadence Critic
 Cadmium Burner
-Café Manager
+Cafe Manager
 Cafeteria Attendant
 Cafeteria Chef
 Cafeteria Sous Chef
@@ -1846,7 +1846,7 @@ Can Recycler
 Can Sorter
 Can Tab Collector
 Canal Digger
-Canapé Visionary
+Canape Visionary
 Canary Breeder
 Candelabra Restorer
 Candelabra Salesman
@@ -3005,7 +3005,7 @@ Cream Infuser
 Creationist Pediatrician
 Creative Consultant
 Creative Director
-Créche Architect
+Creche Architect
 Credibility Appraiser
 Credit Adjuster
 Credit Analyst
@@ -3017,7 +3017,7 @@ Credit Union President
 Creditor
 Creek Dredger
 Cremator
-Crème Brûlée Cracker
+Creme Brulee Cracker
 Crepe Wrangler
 Crew Member
 Cribbage Master
@@ -4475,8 +4475,8 @@ Flag Waver
 Flagellation Specialist
 Flagger
 Flagilist
-Flambé Lighter
-Flambé Safety Expert
+Flambe Lighter
+Flambe Safety Expert
 Flame Decal Embosser
 Flame Degreaser
 Flame Eater
@@ -8444,8 +8444,8 @@ Paper Glosser
 Paper Hanger
 Paper Hole Puncher
 Paper Laminator
-Paper Mâché Expert
-Paper Mâché Researcher
+Paper Mâche Expert
+Paper Mâche Researcher
 Paper Maker
 Paper Perforator
 Paper Plate Separator
@@ -8473,7 +8473,7 @@ Paperwork Processor
 Paperwork Reviewer
 Paperwork Shredder
 Paperwork Stapler
-Papier-Mâché Artist
+Papier-Mâche Artist
 Papyrus Archivist
 Papyrus Stretcher
 Parachute Folder
@@ -8596,8 +8596,8 @@ Patch Finisher
 Patchouli Expert
 Patchouli Farmer
 Patchouli Scatterer
-Paté Spreader
-Pâté Whipper
+Pate Spreader
+Pâte Whipper
 Patellar Reflex Fan
 Patent Agent
 Patent Approver
@@ -10527,7 +10527,7 @@ Seam Mender
 Seam Reinforcer
 Seam Ripper
 Seamstress
-Séance Assistant
+Seance Assistant
 Seance Auditor
 Seance Organizer
 Seance Technician
@@ -11114,7 +11114,7 @@ Song Dedicator
 Sonographer
 Sorghum Grower
 Sorghum Harvester
-Soufflé Chef
+Souffle Chef
 Sound Baffle Technician
 Sound Check Coordinator
 Sound Distortionist
