@@ -1,0 +1,166 @@
+// script changes and various patches for
+// Bstats:j; stats handled in boss_rando.py
+
+// D.Mist is the same
+// Officer/Soldiers are stats only
+// Octomamm is the same
+// Antlion is stats only
+// MomBomb/Bomb/GrayBomb are stats only
+// Fabul gauntlet are stats only
+// Milon is stats only
+
+// Milon Z, beyond stats, needs to be given
+// the reaction sequence, which is
+// script $9D after fire magic 
+monster($A6)   // Milon Z.
+{
+    reaction sequence $96
+}
+
+// patch the textbox
+text(battle message $AA) {
+Inhale the undead gas!
+}
+
+// DKC is stats only
+// Guards are stats only
+// Karate is stats only
+// Baigan/RightArm/LeftArm are stats only
+// Kainazzo is stats only
+
+// Dark Elf is stats only
+
+// Magus Sisters are stats only
+// Valvalis is stats only
+// Calbrena/Cal/Brena are stats only
+
+// Golbez/Shadow are stats only, but
+// Shadow's agility goes from (66,66)
+// to (86,86), via SPEED_TABLE patch
+
+// Lugae/Balnab/Balnab-Z/Lugae form 2 are stats only
+
+// Dark Imps are stats only... do we care to patch
+// the original monster, as well as the clone? ... no.
+
+// KQ Eblan are stats only
+// Rubicant's counter script doesn't care about Edge
+// for some reason? so patch the pass script in
+// patch($0ee3d8 bus) { 00 }
+// ... at least, this would matter if the counter script
+// doesn't just always occur because Kain *2* ($0F) isn't
+// a possible reference actor ID in FE
+
+// EvilWall is stats only,
+// though (86,86) instead of (66,66) speed
+
+// Elements 1 is stats only,
+// though (99,99) instead of (89,89) speed
+
+// Elements 2 has an attack script change:
+ai_script($F1)
+{
+    fight
+    
+    use #Enemy_Ray
+    
+    fight
+       
+    fight
+    
+    use #Enemy_Storm
+}
+
+// CPU/Defender/Attacker are stats only
+
+// Odin is stats only
+
+// Patch Asura Cure4 action to Armor
+ai_script($E5) 
+{
+    set sprite $36
+    target self
+    use #Armor
+    condition 1
+}
+
+//spell($5B)  // Patch Asura summon for Armor
+//{
+//    casting time 0
+//    target $02
+//    param $01   // 1
+//    hit 100
+//    boss False
+//    effect $0D
+//    damage True
+//    element $00
+//    impact False
+//    mp cost 50
+//    ignore wall True
+//}
+
+// no compile_spells yet, so directly patch
+// $5A = Cure2, $5B = Cure3, $5C = Life1
+patch($0f99c2 bus) { 40 01 64 0D 00 B2 }
+
+// patch visuals; $5A = Cure2 visuals,
+// $5B = Cure3 visuals, $5C = Armor visuals
+// only change the tile block and script;
+// palette and handler are already correct
+patch($0fa1b8 bus) { 08 01 0E 18 }
+
+// no need to patch audio; 
+// it's already the Armor sound
+
+//-------------------------
+
+// Leviatan is stats-only
+// Bahamut is stats-only
+
+// Pale Dim has different scripting
+ai_script(moon $30)
+{
+    fight
+    
+    fight
+    
+    fight
+    
+    fight
+    
+    fight
+
+    use #Enemy_Storm
+}
+
+// Wyvern is stats only, but 
+// speed is (80,80) which needs a patch
+
+// Plague is stats only
+
+// D.Lunars are stats only, but
+// speed is (86,86) which needs a patch
+
+// Ogopogo is stats only
+
+// handle Zeromus script changes in zeromus_rando.py,
+// but stats here:
+monster($C9)   // Zeromus 
+{
+    hp 65498
+    // %zeromus attack index%
+    // %end%
+    defense index $81        // (3, 35, 3)
+    magic defense index $D0  // (8, 50, 38)
+    // %zeromus initial spell power%
+    spell power 39
+    // %end%
+}
+
+// speed table patches
+// (yes, Red D. patch, since it's boss bit)
+patch($0ea678 bus) { 6A 6F } // $2C, (41, 44) -> (106, 111) for Red D.
+patch($0ea67a bus) { 50 50 } // $2D, (42, 45) -> (80, 80) for Wyvern
+patch($0ea688 bus) { 56 56 } // $34, (66, 66) -> (86, 86) for EvilWall, Asura, ... and Tricker
+patch($0ea698 bus) { 63 63 } // $3C, (89, 89) -> (99, 99) for both parts of Elements
+patch($0ea69e bus) { 65 65 } // $3F, (69, 69) -> (101, 101) for Zeromus

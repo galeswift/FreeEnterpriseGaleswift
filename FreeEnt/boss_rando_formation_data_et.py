@@ -1,4 +1,4 @@
-# This file is auto-generated, do not make manual edits
+# This file is probably not auto-generated; sorry, b0ard
 FORMATION_DATA = {
     0xDE : {
         0xA1 : { 'name' : 'D.Mist', 'qty' : 1, 'hp' : 465, 'level' : 10, 'attack' : (2, 90, 16), 'defense' : (0, 0, 5), 'magic defense' : (7, 80, 31), 'speed' : (5, 5), 'spell power' : 10, 'xp' : 700, 'gp' : 200 },  # D.Mist  
@@ -59,7 +59,7 @@ FORMATION_DATA = {
     },
     0xE7 : {
         0xAC : { 'name' : 'Dark Elf', 'qty' : 1, 'hp' : 22000, 'level' : 15, 'attack' : (1, 75, 18), 'defense' : (0, 0, 0), 'magic defense' : (99, 99, 254), 'speed' : (9, 9), 'spell power' : 1, 'xp' : 1000, 'gp' : 4000 },  # Dark Elf
-        0xC3 : { 'name' : 'Dark Elf', 'qty' : 1, 'hp' : 3000, 'level' : 19, 'attack' : (4, 99, 54), 'defense' : (0, 0, 3), 'magic defense' : (99, 99, 254), 'speed' : (11, 11), 'spell power' : 15, 'xp' : 6000, 'gp' : 5000 },  # Dark Elf
+        0xC3 : { 'name' : 'Dark Elf', 'qty' : 1, 'hp' : 3000, 'level' : 19, 'attack' : (4, 99, 54), 'defense' : (0, 0, 3), 'magic defense' : (99, 99, 254), 'speed' : (10, 10), 'spell power' : 15, 'xp' : 6000, 'gp' : 5000 },  # Dark Elf
     },
     0xE8 : {
         0xAD : { 'name' : 'Sandy', 'qty' : 1, 'hp' : 2500, 'level' : 16, 'attack' : (3, 80, 30), 'defense' : (1, 50, 1), 'magic defense' : (3, 60, 11), 'speed' : (7, 7), 'spell power' : 11, 'xp' : 3000, 'gp' : 3000 },  # Sandy   
@@ -70,16 +70,16 @@ FORMATION_DATA = {
         0xB1 : { 'name' : 'Valvalis', 'qty' : 1, 'hp' : 6000, 'level' : 36, 'attack' : (5, 99, 70), 'defense' : (0, 0, 0), 'magic defense' : (3, 40, 12), 'speed' : (18, 18), 'spell power' : 63, 'xp' : 9500, 'gp' : 5500 },  # Valvalis
     },
     0x1A7 : {
-        0xB2 : { 'name' : 'Cal', 'qty' : 3, 'hp' : 1000, 'level' : 31, 'attack' : (4, 99, 54), 'defense' : (0, 0, 0), 'magic defense' : (3, 60, 11), 'speed' : (16, 19), 'spell power' : 31, 'xp' : 1000, 'gp' : 500 },  # Cal     
-        0xD2 : { 'name' : 'Brena', 'qty' : 3, 'hp' : 300, 'level' : 15, 'attack' : (4, 99, 54), 'defense' : (1, 40, 1), 'magic defense' : (3, 60, 11), 'speed' : (16, 19), 'spell power' : 31, 'xp' : 1000, 'gp' : 500 },  # Brena   
-        0xB3 : { 'name' : 'Calbrena', 'qty' : 1, 'hp' : 4624, 'level' : 47, 'attack' : (7, 99, 96), 'defense' : (1, 80, 2), 'magic defense' : (6, 60, 25), 'speed' : (11, 11), 'spell power' : 41, 'xp' : 15000, 'gp' : 5000 },  # Calbrena
+        0xB2 : { 'name' : 'Cal', 'qty' : 3, 'hp' : 1000, 'level' : 31, 'attack' : (4, 99, 54), 'defense' : (0, 0, 0), 'magic defense' : (3, 60, 11), 'speed' : (14, 17), 'spell power' : 31, 'xp' : 1000, 'gp' : 500 },  # Cal     
+        0xD2 : { 'name' : 'Brena', 'qty' : 3, 'hp' : 300, 'level' : 15, 'attack' : (4, 99, 52), 'defense' : (1, 40, 1), 'magic defense' : (3, 60, 11), 'speed' : (15, 18), 'spell power' : 31, 'xp' : 1000, 'gp' : 500 },  # Brena   
+        0xB3 : { 'name' : 'Calbrena', 'qty' : 1, 'hp' : 4312, 'level' : 47, 'attack' : (7, 80, 90), 'defense' : (1, 65, 2), 'magic defense' : (6, 60, 25), 'speed' : (10, 10), 'spell power' : 41, 'xp' : 15000, 'gp' : 5000 },  # Calbrena
     },
     0x1B6 : {
         0xB4 : { 'name' : 'Golbez', 'qty' : 1, 'hp' : 22001, 'level' : 31, 'attack' : (5, 99, 68), 'defense' : (0, 0, 0), 'magic defense' : (0, 0, 0), 'speed' : (27, 27), 'spell power' : 1, 'xp' : 15000, 'gp' : 10000 },  # Golbez  
         0xB5 : { 'name' : 'Shadow', 'qty' : 1, 'hp' : 1, 'level' : 7, 'attack' : (6, 99, 86), 'defense' : (3, 30, 4), 'magic defense' : (0, 0, 0), 'speed' : (66, 66), 'spell power' : 31, 'xp' : 5000, 'gp' : 1000 },  # Shadow  
     },
     0x1A9 : {
-        0xB6 : { 'name' : 'Dr.Lugae', 'qty' : 1, 'hp' : 4416, 'level' : 32, 'attack' : (1, 75, 18), 'defense' : (0, 0, 0), 'magic defense' : (3, 60, 11), 'speed' : (11, 11), 'spell power' : None, 'xp' : 5500, 'gp' : 2000 },  # Dr.Lugae
+        0xB6 : { 'name' : 'Dr.Lugae', 'qty' : 1, 'hp' : 4416, 'level' : 32, 'attack' : (1, 75, 18), 'defense' : (0, 0, 0), 'magic defense' : (3, 60, 11), 'speed' : (10, 10), 'spell power' : None, 'xp' : 5500, 'gp' : 2000 },  # Dr.Lugae
         0xB7 : { 'name' : 'Balnab', 'qty' : 1, 'hp' : 3927, 'level' : 32, 'attack' : (6, 99, 86), 'defense' : (0, 0, 0), 'magic defense' : (3, 60, 11), 'speed' : (31, 31), 'spell power' : 31, 'xp' : 5500, 'gp' : 2500 },  # Balnab  
         0xD4 : { 'name' : 'Balnab-Z', 'qty' : 1, 'hp' : 4000, 'level' : 47, 'attack' : (9, 80, 114), 'defense' : (1, 40, 1), 'magic defense' : (0, 0, 0), 'speed' : (31, 31), 'spell power' : None, 'xp' : 20, 'gp' : 2500 },  # Balnab-Z
     },
@@ -106,13 +106,13 @@ FORMATION_DATA = {
         0xBD : { 'name' : 'Leviatan', 'qty' : 1, 'hp' : 35000, 'level' : 79, 'attack' : (13, 99, 174), 'defense' : (0, 0, 5), 'magic defense' : (10, 80, 47), 'speed' : (53, 53), 'spell power' : 34, 'xp' : 28000, 'gp' : 0 },  # Leviatan
     },
     0x1AC : {
-        0xBC : { 'name' : 'Odin', 'qty' : 1, 'hp' : 20500, 'level' : 53, 'attack' : (9, 85, 116), 'defense' : (2, 90, 3), 'magic defense' : (7, 50, 32), 'speed' : (43, 46), 'spell power' : 95, 'xp' : 18000, 'gp' : 0 },  # Odin    
+        0xBC : { 'name' : 'Odin', 'qty' : 1, 'hp' : 18000, 'level' : 53, 'attack' : (9, 85, 116), 'defense' : (2, 90, 3), 'magic defense' : (7, 50, 32), 'speed' : (43, 46), 'spell power' : 95, 'xp' : 18000, 'gp' : 0 },  # Odin    
     },
     0x1AE : {
         0xBE : { 'name' : 'Bahamut', 'qty' : 1, 'hp' : 37000, 'level' : 47, 'attack' : (13, 99, 174), 'defense' : (0, 0, 1), 'magic defense' : (1, 60, 8), 'speed' : (27, 27), 'spell power' : 17, 'xp' : 35000, 'gp' : 0 },  # Bahamut 
     },
     0xDC : {
-        0xC1 : { 'name' : 'Elements', 'qty' : 1, 'hp' : 57000, 'level' : 79, 'attack' : (10, 80, 128), 'defense' : (2, 35, 3), 'magic defense' : (3, 60, 4), 'speed' : (89, 89), 'spell power' : 15, 'xp' : 40000, 'gp' : 10000 },  # Elements
+        0xC1 : { 'name' : 'Elements', 'qty' : 1, 'hp' : 57000, 'level' : 79, 'attack' : (10, 80, 128), 'defense' : (2, 35, 3), 'magic defense' : (3, 60, 4), 'speed' : (89, 89), 'spell power' : 26, 'xp' : 40000, 'gp' : 10000 },  # Elements
         0xC2 : { 'name' : 'Elements', 'qty' : 1, 'hp' : 47000, 'level' : 79, 'attack' : (10, 90, 132), 'defense' : (1, 45, 2), 'magic defense' : (0, 0, 3), 'speed' : (89, 89), 'spell power' : 31, 'xp' : 62500, 'gp' : 10000 },  # Elements
     },
     0xDD : {
@@ -121,19 +121,19 @@ FORMATION_DATA = {
         0xC6 : { 'name' : 'Defender', 'qty' : 1, 'hp' : 2000, 'level' : 48, 'attack' : (9, 85, 116), 'defense' : (5, 20, 5), 'magic defense' : (3, 60, 11), 'speed' : (111, 111), 'spell power' : 47, 'xp' : 50000, 'gp' : 0 },  # Defender
     },
     0x1FB : {
-        0x9E : { 'name' : 'Pale Dim', 'qty' : 1, 'hp' : 27300, 'level' : 98, 'attack' : (11, 85, 144), 'defense' : (5, 40, 5), 'magic defense' : (10, 50, 48), 'speed' : (40, 43), 'spell power' : 31, 'xp' : 59000, 'gp' : 0 },  # Pale Dim
+        0x9E : { 'name' : 'Pale Dim', 'qty' : 1, 'hp' : 30000, 'level' : 98, 'attack' : (11, 85, 144), 'defense' : (5, 40, 5), 'magic defense' : (10, 50, 48), 'speed' : (36, 39), 'spell power' : 31, 'xp' : 59000, 'gp' : 0 },  # Pale Dim
     },
     0x1FC : {
-        0x98 : { 'name' : 'Wyvern', 'qty' : 1, 'hp' : 25000, 'level' : 99, 'attack' : (12, 90, 160), 'defense' : (4, 80, 5), 'magic defense' : (10, 50, 52), 'speed' : (43, 46), 'spell power' : 8, 'xp' : 64300, 'gp' : 0 },  # Wyvern  
+        0x98 : { 'name' : 'Wyvern', 'qty' : 1, 'hp' : 36000, 'level' : 99, 'attack' : (12, 90, 160), 'defense' : (4, 80, 5), 'magic defense' : (10, 50, 52), 'speed' : (43, 46), 'spell power' : 10, 'xp' : 64300, 'gp' : 0 },  # Wyvern  
     },
     0x1FE : {
         0x6B : { 'name' : 'Plague', 'qty' : 1, 'hp' : 28000, 'level' : 96, 'attack' : (11, 90, 146), 'defense' : (4, 50, 5), 'magic defense' : (7, 50, 32), 'speed' : (29, 32), 'spell power' : None, 'xp' : 31200, 'gp' : 550 },  # Plague  
     },
     0x1FD : {
-        0x95 : { 'name' : 'D. Lunar', 'qty' : 2, 'hp' : 21000, 'level' : 99, 'attack' : (11, 85, 144), 'defense' : (3, 30, 4), 'magic defense' : (10, 80, 54), 'speed' : (30, 30), 'spell power' : 36, 'xp' : 50000, 'gp' : 0 },  # D. Lunar
+        0x95 : { 'name' : 'D. Lunar', 'qty' : 2, 'hp' : 21500, 'level' : 99, 'attack' : (13, 99, 174), 'defense' : (3, 30, 4), 'magic defense' : (10, 80, 54), 'speed' : (23, 23), 'spell power' : 29, 'xp' : 50000, 'gp' : 0 },  # D. Lunar
     },
     0x1FA : {
-        0x9A : { 'name' : 'Ogopogo', 'qty' : 1, 'hp' : 37000, 'level' : 62, 'attack' : (11, 99, 150), 'defense' : (4, 55, 4), 'magic defense' : (9, 50, 40), 'speed' : (38, 38), 'spell power' : 127, 'xp' : 61100, 'gp' : 0 },  # Ogopogo 
+        0x9A : { 'name' : 'Ogopogo', 'qty' : 1, 'hp' : 30000, 'level' : 62, 'attack' : (11, 99, 152), 'defense' : (4, 55, 4), 'magic defense' : (9, 50, 40), 'speed' : (38, 38), 'spell power' : 127, 'xp' : 61100, 'gp' : 0 },  # Ogopogo 
     },
 }
 
@@ -366,7 +366,7 @@ STATS_TABLE = [
 
 SPEED_TABLE = [
     (1, 2),
-    (30, 30),
+    (23, 23), # <- was (30, 30)
     (1, 2),
     (1, 3),
     (2, 4),
@@ -421,21 +421,21 @@ SPEED_TABLE = [
     (4, 4),
     (15, 15),
     (18, 18),
-    (11, 11),
+    (10, 10), # <- was (11, 11)
     (7, 7),
     (27, 27),
     (38, 38),
     (89, 89),
     (53, 53),
     (111, 111),
-    (69, 69),
+    (60, 60), # <- was (69, 69)
 ]
 
 MONSTER_HP_SCALED_THRESHOLDS = {
     0xAA : { 0x02 : 700.0 / 4000.0 },    # Kainazzo
-    0xB3 : { 0x04 : 100.0 / 4624.0 },    # Calbrena
+#   0xB3 : { 0x04 : 100.0 / 4312.0 },    # Calbrena does not counter-split in ET
     0xBB : { 0x0A : 1000.0 / 25200.0 },  # Rubicant
-    0xC1 : { 0x08 : 11000.0 / 57000.0,   # Elements
+    0xC1 : { 0x08 : 10000.0 / 57000.0,   # Elements
              0x07 : 40000.0 / 57000.0 }, 
     0xC2 : { 0x09 : 27000.0 / 47000.0 }  # Elements
     }

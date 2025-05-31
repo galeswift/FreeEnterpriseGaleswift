@@ -1,13 +1,4 @@
-// for when Z needs maxed out attack/spell power,
-// we need to adjust the attack index/spell power using
-// scripting because otherwise the boss data doesn't line up
-monster($C9)   // Zeromus 
-{
-    // %zeromus attack index%
-    // %end%
-    // %zeromus initial spell power%
-    // %end%
-}
+// replacing the script for vanilla ET script
 
 // Z pre-first-BB phase
 ai_script(moon $4B) 
@@ -30,7 +21,7 @@ ai_script(moon $4C)
     use #ZeromusShake2
 
     // %big bang 2 replacement%
-    set spell power 31
+    set spell power 27
     use #Enemy_BigBang
     // %end%
     
@@ -42,14 +33,12 @@ ai_script(moon $4C)
     use #ZeromusShake2
     
     // %big bang 3 replacement%
-    set spell power 32
+    set spell power 28
     use #Enemy_BigBang
     // %end%
     
     // %script virus replacement%
-    set spell power 36
-    target all characters
-    use #Virus
+    use #Enemy_Count
     // %end%
     
     use #Enemy_BlkHole
@@ -60,7 +49,7 @@ ai_script(moon $4C)
     use #ZeromusShake2
     
     // %big bang 4 replacement%
-    set spell power 32
+    set spell power 28
     use #Enemy_BigBang
     // %end%
     
@@ -76,7 +65,7 @@ ai_script(moon $55)
     use #ZeromusShake2
     
     // %big bang 5 replacement%
-    set spell power 31
+    set spell power 28
     use #Enemy_BigBang
     // %end%
     
@@ -84,7 +73,7 @@ ai_script(moon $55)
     message $75   // "Magics became invalid."
     wait
     // %script nuke replacement%
-    set spell power 14
+    set spell power 11
     use #Nuke
     // %end%
     
@@ -95,24 +84,65 @@ ai_script(moon $55)
     use #ZeromusShake2
     
     // %big bang 6 replacement%
-    set spell power 32
+    set spell power 27
     use #Enemy_BigBang
     // %end%
 }
 
 // Z Meteo phase
-ai_script(moon $57) 
+ai_script(moon $57)
 {
-    chain {
-        // %meteo replacement%
-        set spell power 3
-        pass
-        
-        target all characters
-        use #Meteo
-        // %end%
-    }
-    
+    target all characters
+    use #Enemy_Count
+
+    pass
+
+    // %meteo replacement%
+    set spell power 3
+    target all characters
+    use #Meteo
+    // %end%
+
+    pass
+
+    // %meteo replacement%
+    set spell power 3
+    target all characters
+    use #Meteo
+    // %end%
+
+    pass
+
+    // %meteo replacement%
+    set spell power 3
+    target all characters
+    use #Meteo
+    // %end%
+
+    pass
+
+    // %meteo replacement%
+    set spell power 3
+    target all characters
+    use #Meteo
+    // %end%
+
+    pass
+
+    // %meteo replacement%
+    set spell power 3
+    target all characters
+    use #Meteo
+    // %end%
+
+    pass
+
+    // %meteo replacement%
+    set spell power 3
+    target all characters
+    use #Meteo
+    // %end%
+
     pass
 }
 
@@ -120,7 +150,7 @@ ai_script(moon $57)
 ai_script(moon $4D) 
 {
     // %counter nuke replacement%
-    set spell power 14
+    set spell power 11
     use #Nuke
     // %end%
 }
@@ -130,7 +160,7 @@ ai_script(moon $4E)
 {
     // %counter nuke call replacement%
     set spell power 14
-    use #Nuke
+    use #Enemy_Hug
     // %end%
 }
 

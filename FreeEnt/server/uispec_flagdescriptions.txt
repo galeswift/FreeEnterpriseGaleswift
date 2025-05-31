@@ -387,6 +387,12 @@ All boss battle enemies have the "boss bit" set.  The alternate win conditions a
 [Balt:gauntlet]
 Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area.
 
+[Bstats:j]
+Bosses (including Zeromus) have FF4j scripts, the Asura summon casts one of Armor/Cure3/Life like the boss does, and boss location stats scale with FF4j except the Karate slot's HP (scaled to 8000 instead of 62000).
+
+[Bstats:et]
+Bosses (including Zeromus) have FF4ET scripts and boss location stats scale with FF4ET.
+
 [@Brestrict]
 Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.
 

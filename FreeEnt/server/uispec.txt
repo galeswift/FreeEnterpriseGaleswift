@@ -574,6 +574,9 @@
 ..[Bunsafe]! No safety checks
 [Bnofree]! No free bosses
 [Balt:gauntlet] Alt Gauntlet
+<>^ Alternate boss stats/scripts
+.(Bstats:j)! FF4j boss stats and scripts
+.(Bstats:et) FF4 Easy Type boss stats and scripts
 (@Brestrict)^ Restrict required boss locations
 .[Brestrict:summon] Required bosses cannot be at summon spots
 .[Brestrict:moon] Required bosses cannot be at moon spots

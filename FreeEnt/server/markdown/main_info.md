@@ -182,7 +182,7 @@ This flag acts the same as `Chero`, except that your starting character will obt
 
 The starting partner character (who meets your starting/pre-game screen character in the opening cutscene) will not join your party, nor will be in the Tower of Wishes.
 
-### `Ctreasure:[free/earned/relaxed/unsafe]` {: .h6 }
+### `Ctreasure:[free,earned,relaxed,unsafe]` {: .h6 }
 
 - Idea: Galeswift (but potentially others)
 - Design/Programming: Galeswift
@@ -361,6 +361,22 @@ Similarly to `Tplayable`, this flag limits shop items to those usable to charact
 ## Boss Flags
 
 For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now).
+
+### `Bstats:[j/et]` {: .h6 }
+
+- Idea: harumph (probably others)
+- Design: harumph, original FF4 devs
+- Programming: ScytheMarshall, with some original work from harumph
+- Locations: boss_rando.py, japanese_bosses.f4c, easy_type_bosses.f4c, zeromus_jscript.f4c, zeromus_etscript.f4c, boss_rando_formation_data.py (and _j, _et versions), zeromus_rando.py
+
+These flags change all bosses, including Zeromus, to have stats and attack/reaction scripts based on the original Japanese version of FF4 or the Easy Type version (an "easier" version of the game for the Japanese audience based on the US version). Non-boss monsters are not changed, including any Alt Gauntlet monsters, excepting that Tricker and Red D are significantly faster in the J version, due to speed table changes.
+
+The `-z` flags interact with these flags in the following ways: 
+
+- Any time the original spell powers for Big Bangs are used, they will be the numbers found in the J/ET versions.
+- Any "made-up" spell powers or similar are scaled up by 5/4 on the J version and down by 5/6 on the ET version.
+- If Zeromus's original scripts show up, then they will be based on the J/ET versions.
+- The ET version changes the HP threshold for Meteo phase regardless of `-z` flags.
 
 ### `Brestrict:[location]` {: .h6 }
 
@@ -629,6 +645,8 @@ This flag is just the `-vanilla:fusoya` flag but renamed; Fu starts at full powe
 Under this flag, FuSoYa learns spells in a fixed order: the order in which Porom and Palom learn their spells by level-up. If spells are learned at the same level, there is an arbitrary choice for which spells come first (mostly for minor balancing).
 
 ### `-fusoya:sequential_r` {: .h6 }
+
+- Idea: Deathlike
 
 Under this flag, FuSoYa learns spells in a fixed order: the order in which Rosa and Rydia learn their spells by level-up. If spells are learned at the same level, there is an arbitrary choice for which spells come first (mostly for minor balancing). Since Rosa and Rydia don't learn all of their spells by level-up (no Exit, Fire1, Fire/Ice/Lit2), FuSoYa will not learn the missing spells.
 

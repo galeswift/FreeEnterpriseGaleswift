@@ -6540,6 +6540,25 @@ var FLAG_UISPEC = [
         "description": "Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area."
       },
       {
+        "flag": "@anon65",
+        "title": "Alternate boss stats/scripts",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Bstats:j",
+            "title": "FF4j boss stats and scripts",
+            "description": "Bosses (including Zeromus) have FF4j scripts, the Asura summon casts one of Armor/Cure3/Life like the boss does, and boss location stats scale with FF4j except the Karate slot's HP (scaled to 8000 instead of 62000).",
+            "hard": true
+          },
+          {
+            "flag": "Bstats:et",
+            "title": "FF4 Easy Type boss stats and scripts",
+            "description": "Bosses (including Zeromus) have FF4ET scripts and boss location stats scale with FF4ET."
+          }
+        ]
+      },
+      {
         "flag": "@Brestrict",
         "title": "Restrict required boss locations",
         "description": "Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.",
@@ -6576,7 +6595,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon65",
+        "flag": "@anon66",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -6610,7 +6629,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon66",
+        "flag": "@anon67",
         "title": "Change Golbez's behaviour",
         "fork": true,
         "subcontrols": [
@@ -6634,7 +6653,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon67",
+        "flag": "@anon68",
         "title": "Remove certain boss slots",
         "fork": true,
         "type": "select",
@@ -6659,7 +6678,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon68",
+        "flag": "@anon69",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -6732,7 +6751,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon69",
+        "flag": "@anon70",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6783,7 +6802,7 @@ var FLAG_UISPEC = [
     "title": "HARP OPTIONS",
     "controls": [
       {
-        "flag": "@anon70",
+        "flag": "@anon71",
         "title": "Harp randomization",
         "important": true,
         "fork": true,
@@ -6797,7 +6816,8 @@ var FLAG_UISPEC = [
           {
             "flag": "Hvanilla",
             "title": "Edward plays the vanilla song",
-            "description": "The song that Edward plays during the TwinHarp cutscene and fight is vanilla."
+            "description": "The song that Edward plays during the TwinHarp cutscene and fight is vanilla.",
+            "null": true
           },
           {
             "flag": "Hnone",
@@ -6853,7 +6873,7 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon71",
+        "flag": "@anon72",
         "title": "Warps Randomization Options",
         "type": "select",
         "subcontrols": [
@@ -6863,7 +6883,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon72",
+                "flag": "@anon73",
                 "title": "Doors Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -6902,7 +6922,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon73",
+                "flag": "@anon74",
                 "title": "Entrances Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -6958,7 +6978,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon74",
+            "flag": "@anon75",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7125,7 +7145,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon75",
+            "flag": "@anon76",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7292,7 +7312,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon76",
+            "flag": "@anon77",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7491,7 +7511,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon77",
+            "flag": "@anon78",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7527,7 +7547,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon78",
+            "flag": "@anon79",
             "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
@@ -7536,7 +7556,7 @@ var FLAG_UISPEC = [
                 "title": "Usual FuSoYa challenge",
                 "subcontrols": [
                   {
-                    "flag": "@anon79",
+                    "flag": "@anon80",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7554,7 +7574,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon80",
+                    "flag": "@anon81",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7577,7 +7597,7 @@ var FLAG_UISPEC = [
                 "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
                 "subcontrols": [
                   {
-                    "flag": "@anon81",
+                    "flag": "@anon82",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7595,7 +7615,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon79",
+                    "flag": "@anon80",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7613,7 +7633,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon80",
+                    "flag": "@anon81",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7636,7 +7656,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
                 "subcontrols": [
                   {
-                    "flag": "@anon79",
+                    "flag": "@anon80",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7654,7 +7674,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon80",
+                    "flag": "@anon81",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7677,7 +7697,7 @@ var FLAG_UISPEC = [
                 "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon82",
+                    "flag": "@anon83",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7690,7 +7710,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon83",
+                    "flag": "@anon84",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7714,7 +7734,7 @@ var FLAG_UISPEC = [
                 "hard": true,
                 "subcontrols": [
                   {
-                    "flag": "@anon84",
+                    "flag": "@anon85",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7753,7 +7773,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon85",
+            "flag": "@anon86",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -7804,7 +7824,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon86",
+                    "flag": "@anon87",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -7844,7 +7864,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon87",
+                "flag": "@anon88",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -7900,7 +7920,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon88",
+                "flag": "@anon89",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7928,7 +7948,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon89",
+                "flag": "@anon90",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7960,7 +7980,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon90",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7987,7 +8007,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon91",
+                "flag": "@anon92",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8010,7 +8030,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon92",
+                "flag": "@anon93",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8039,7 +8059,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon94",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -8090,7 +8110,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon94",
+        "flag": "@anon95",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -8118,7 +8138,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon95",
+        "flag": "@anon96",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -8149,12 +8169,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon96",
+        "flag": "@anon97",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon97",
+            "flag": "@anon98",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -8241,7 +8261,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon98",
+            "flag": "@anon99",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -8282,7 +8302,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon99",
+            "flag": "@anon100",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8496,12 +8516,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon100",
+        "flag": "@anon101",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon101",
+            "flag": "@anon102",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8540,7 +8560,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon102",
+        "flag": "@anon103",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8594,7 +8614,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon103",
+            "flag": "@anon104",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8610,7 +8630,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon104",
+                "flag": "@anon105",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -1,5 +1,4 @@
 from . import core_rando
-from .boss_rando_formation_data import *
 from .palette_wizard import PaletteWizard
 from .address import *
 from .spoilers import SpoilerRow
@@ -103,15 +102,6 @@ MONSTER_HP_OFFSETS = {
     0xBA : 57000,  # Q.Eblan
     }
 
-MONSTER_HP_SCALED_THRESHOLDS = {
-    0xAA : { 0x02 : 700.0 / 4000.0 },    # Kainazzo
-    0xB3 : { 0x04 : 100.0 / 4624.0 },    # Calbrena
-    0xBB : { 0x0A : 1000.0 / 25200.0 },  # Rubicant
-    0xC1 : { 0x08 : 11000.0 / 57000.0,   # Elements
-             0x07 : 40000.0 / 57000.0 }, 
-    0xC2 : { 0x09 : 27000.0 / 47000.0 }  # Elements
-    }
-
 MONSTER_SCRIPTED_CHANGES = {
     0xC4 : ['waterhag', ('defense', 0x60)],
     0xAA : ['kainazzo', ('defense', 0x7A)],
@@ -120,12 +110,7 @@ MONSTER_SCRIPTED_CHANGES = {
         ('magic defense', 0xDE),
         ('defense', 0x60),
         ('magic defense', 0xB0),
-        ],  
-    0x98 : ['wyvern',
-        ('spell power', 12),
-        ('spell power', 8),
-        ('spell power', 6),
-        ]
+        ],
 }
 
 MONSTER_ID_REMAPS = {
@@ -475,7 +460,7 @@ def _is_moon_formation(formation_number):
     else:
         return False
 
-def _get_cumulative_formation(formation_data):
+def _get_cumulative_formation(formation_data, data_table):
     if type(formation_data) is not list:
         formation_data = [formation_data]
 
@@ -483,9 +468,9 @@ def _get_cumulative_formation(formation_data):
     for f in formation_data:
         if type(f) is int:
             if f == 0xDA:  # fabul gauntlet formation remap
-                f = FORMATION_DATA[0xF7]
+                f = data_table[0xF7]
             else:
-                f = FORMATION_DATA[f]
+                f = data_table[f]
 
         for monster_id in f:
             if monster_id in cumulative_formation:
@@ -494,13 +479,13 @@ def _get_cumulative_formation(formation_data):
                 cumulative_formation[monster_id] = copy(f[monster_id])
     return cumulative_formation
 
-def _get_total_hp_xp_gp_qty(formation_data):
+def _get_total_hp_xp_gp_qty(formation_data, data_table):
     total_hp = 0
     total_gp = 0
     total_xp = 0
     total_qty = 0
 
-    for monster_id in _get_cumulative_formation(formation_data):
+    for monster_id in _get_cumulative_formation(formation_data, data_table):
         monster = formation_data[monster_id]
         hp = monster['hp']
         if monster_id in MONSTER_HP_OFFSETS:
@@ -512,10 +497,10 @@ def _get_total_hp_xp_gp_qty(formation_data):
 
     return (total_hp, total_xp, total_gp, total_qty)
 
-def _get_leader(formation_data):
+def _get_leader(formation_data, data_table):
     leader = None
     leader_hp = None
-    for monster_id in _get_cumulative_formation(formation_data):
+    for monster_id in _get_cumulative_formation(formation_data, data_table):
         monster = formation_data[monster_id]
         hp = monster['hp']
         if monster_id in MONSTER_HP_OFFSETS:
@@ -558,6 +543,37 @@ def apply(env):
     limit_breaks = []
 
     stat_scaling_reports = []
+
+    if env.options.flags.has('japanese_bosses'):
+        from .boss_rando_formation_data_j import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        env.add_file('scripts/japanese_bosses.f4c')
+        # load the correct scripted changes for Wyvern
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 12),
+                ('spell power', 8),
+                ('spell power', 6),
+                ]
+            })
+    elif env.options.flags.has('easy_type_bosses'):
+        from .boss_rando_formation_data_et import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        env.add_file('scripts/easy_type_bosses.f4c')
+        # load the correct scripted changes for Wyvern
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 14),
+                ]
+            })
+    else:
+        from .boss_rando_formation_data import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        # load the correct scripted changes for Wyvern
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 12),
+                ('spell power', 8),
+                ('spell power', 6),
+                ]
+            })
 
     # potentially remove boss spots again; boss_rando pulls the original BOSS_SLOTS and turns it into a list
     if env.options.flags.has('no_officer_slot'):
@@ -652,16 +668,16 @@ def apply(env):
 
             script_lines.append('}')
 
-        source_formation = _get_cumulative_formation(source_formation_id_list)
-        target_formation = _get_cumulative_formation(target_formation_id_list)
+        source_formation = _get_cumulative_formation(source_formation_id_list, FORMATION_DATA)
+        target_formation = _get_cumulative_formation(target_formation_id_list, FORMATION_DATA)
 
         # get reference stats from original formation in slot
-        ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation)
-        ref_leader = _get_leader(source_formation)
+        ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation, FORMATION_DATA)
+        ref_leader = _get_leader(source_formation, FORMATION_DATA)
 
         # calculate and apply new values for formation going into slot
-        total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation)
-        leader = _get_leader(target_formation)
+        total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation, FORMATION_DATA)
+        leader = _get_leader(target_formation, FORMATION_DATA)
 
         env.add_substitution(f'{boss} defaults', '')
         stat_scaling_reports.append(f'{slot} <- {boss}')
@@ -943,6 +959,10 @@ def apply(env):
         script_lines.append('}')
 
     env.add_file('scripts/randomizer_boss.f4c')
+    if env.options.flags.has('easy_type_bosses'):
+        env.add_file('scripts/wyvern_script_et.f4c')
+    else:
+        env.add_file('scripts/wyvern_script_us_j.f4c')
 
     # special case wyvern
     if assignment['milonz_slot'] == 'wyvern' and not env.options.flags.has('wyvern_no_meganuke') and not env.options.flags.has('wyvern_random_meganuke'):

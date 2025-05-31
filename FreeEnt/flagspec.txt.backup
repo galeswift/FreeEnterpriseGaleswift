@@ -53,7 +53,9 @@ Spricey:items Spricey:weapons Spricey:armor
 Svanilla Sshuffle/Sstandard/Spro/Swild/Swildish/Scabins/Svanillaish/Sempty/Ssame Ssingles Sfree/Smixed Sunsafe Ssell:quarter/Ssell:0 Splayable
 Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus Salways:starveil Salways:cure3 Salways:illusion Salways:damage_items Salways:coffin
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
-Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
+Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et
+Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
+Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
 Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
@@ -301,6 +303,8 @@ Bstandard            bosses_standard
 Bnofree              no_free_bosses
 Bunsafe              bosses_unsafe
 Balt:gauntlet        bosses_alt_gauntlet
+Bstats:j             japanese_bosses
+Bstats:et            easy_type_bosses
 Brestrict:summon     bosses_no_required_at_summon
 Brestrict:moon       bosses_no_required_on_moon
 Brestrict:zot        bosses_no_required_in_zot

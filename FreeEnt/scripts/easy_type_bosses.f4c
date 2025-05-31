@@ -1,0 +1,213 @@
+// script changes and various patches for
+// Bstats:et; stats handled in boss_rando.py
+
+// Dark Elf is stats only
+// ... but we need to patch
+// a value in the speed table
+// (11, 11) -> (10, 10)
+// for Easy Type
+
+// Calbrena is weak to Fire in this version??
+monster($B3)   // Calbrena
+{
+    weak element #Fire
+}
+
+// Calbrena does not split back into
+// dolls at very low HP on ET; need to change
+// the aigroup to do a "nothing"/pass script
+// for that counter
+patch($0ee396 bus) { 00 }
+
+
+// Lugae/Balnab/Balnab-Z/Lugae form 2 are stats only
+// but (11,11) -> (10,10) speed for Lugae form 1
+
+// Dr.Lugae form 2 has a longer script
+ai_script($CE)
+{
+    use #Enemy_Beam
+    
+    use #Enemy_Laser
+    
+    use #Enemy_Emission
+    
+    target all characters
+    use #Enemy_Heal
+
+    chain {
+        use #Enemy_Beam
+
+        use #Enemy_Beam
+    }
+}
+
+// Pale Dim has different elemental
+// weaknesses and resistances
+monster($9E)   // Pale Dim
+{
+    weak element #Fire #Lit #Immune
+    resist element #Ice #Absorb
+}
+
+// Pale Dim has different scripting
+ai_script(moon $30)
+{
+    fight
+    
+    use #Enemy_Blizzard
+
+    use #Enemy_WeakEnemy
+}
+
+ai_script(moon $31)
+{
+    use #Enemy_Entangle
+}
+
+// Wyvern gains elemental absorb
+monster($98)   // Wyvern  
+{
+    resist element #Fire #Ice #Lit #Absorb
+}
+
+// Wyvern has a countdown script now, and
+// skips its Remedy phase entirely
+ai_script(moon $25)
+{
+    message $7A next action   // "           3"
+    pass
+    
+    message $7B next action   // "           2"
+    pass
+    
+    message $7C next action   // "           1"
+    wait
+    use #Enemy_MegaNuke
+    
+    target self
+    use #Wall
+}
+
+// cast Venom instead of one Nuke,
+// with funky spell power (need to change
+// in boss_rando.py)
+ai_script(moon $26)
+{
+    set spell power 14
+    target self
+    use #Nuke
+    
+    set spell power 14
+    target self
+    use #Venom
+    
+    set spell power 14
+    target self
+    use #Nuke
+}
+
+// counter with Storm instead of MegaNuke
+ai_script(moon $27)
+{
+    use #Enemy_Storm
+}
+
+// D. Lunars have lightning elemental attack??
+monster($95)   // D. Lunar
+{
+    attack element #Lit
+    attack sequence $FE
+}
+
+// also very different attack/counter scripts:
+
+// create ai group $FE to handle the 3-condition set
+// group instead of 2-condition set group that D. Lunars
+// normally have
+// aigroup($B2) {
+//     condition set $02 : script $59  // alone
+//     condition set $19 : script $2C  // self status #Wall
+//     condition set $00 : script $2B  // $FF $FF $FF $FF
+// }
+patch($0ee51f bus) { 02 59 19 2C 00 2B }
+
+// change usual attack script
+ai_script(moon $2B)
+{
+    condition 1
+    use #Enemy_Fire
+    
+    use #Enemy_Fire
+    
+    use #Enemy_Fire
+    
+    use #Enemy_Fire
+    
+    target all characters
+    use #Enemy_Breath
+}
+
+// repurpose unused (???) moon script $59
+// for additional scripting
+ai_script(moon $59)
+{
+    use #Enemy_Quake
+
+    use #Enemy_Quake
+
+    use #Enemy_Breath
+}
+
+// ai group $B3 is changed to be...
+// aigroup($B3) {
+//     condition set $07 : script $03  // anyone (character) uses magic
+//     condition set $51 : script $2F  // anyone (character) uses #Call
+//     condition set $41 : script $2D  // condition flag 1, anyone (character) uses #Fight
+// }
+patch($0ee3bb bus) { 07 03 51 2F 41 2D }
+
+// script $2D sets condition to 0, not 1
+ai_script(moon $2D)
+{
+    target all monsters
+    use #Wall
+    condition 0
+}
+
+
+// Ogopogo has a strong Lit weakness
+monster($9A)   // Ogopogo 
+{
+    weak element #Lit #Immune
+}
+
+// Ogopogo has counter script changes
+ai_script(moon $29)
+{
+    use #Enemy_Blaze
+}
+
+ai_script(moon $2A)
+{
+    use #Enemy_BigWave
+}
+
+// handle Zeromus script changes in zeromus_rando.py,
+// but stats here:
+monster($C9)   // Zeromus 
+{
+    // %zeromus attack index%
+    // %end%
+    // %zeromus initial spell power%
+    spell power 30
+    // %end%
+}
+
+// modify HP index $0C to be 17000 instead of 12000
+patch($0ee018 bus) { 68 42 }
+
+// speed table patches
+patch($0ea622 bus) { 17 17 } // $01, (30, 30) -> (23, 23) for D.Lunars
+patch($0ea690 bus) { 0A 0A } // $38, (11, 11) -> (10, 10) for Dark Dragon, Calbrena, Lugae 1
+patch($0ea69e bus) { 3C 3C } // $3F, (69, 69) -> (60, 60) for Zeromus

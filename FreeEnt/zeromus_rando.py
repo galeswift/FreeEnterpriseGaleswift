@@ -196,12 +196,26 @@ def apply(env):
     counter_nuke_call_replacement = []
     counter_weak_replacement = []
     counter_virus_replacement = []
-    stat_changes = ['monster($C9)\n', '{\n']
-    bb_spell_powers = [31, 31, 32, 32, 31, 32]
+
+    # adjust various values under Bstats:j/et
+    jversion = False
+    etversion = False
+    if env.options.flags.has('japanese_bosses'):
+        jversion = True
+        bb_spell_powers = [39, 39, 39, 39, 39, 39]
+        nuke_spell_power = 21
+    elif env.options.flags.has('easy_type_bosses'):
+        etversion = True
+        bb_spell_powers = [30, 27, 28, 28, 28, 27]
+        nuke_spell_power = 11
+    else:
+        bb_spell_powers = [32, 31, 32, 32, 31, 32]
+        nuke_spell_power = 14
+    versionmult = (5/4 if jversion else (5/6 if etversion else 1))
+
     physicalflag = False
     whichbangflag = False
     replacescriptflag = False
-    statchangeflag = False
     fixjumpflag = False
 
     # main script changes: physical, chaos, or three random scripts. Handle each of the applicable subflags as well, except for phaseshift.
@@ -210,25 +224,36 @@ def apply(env):
     if env.options.flags.has('z_physical_script') or ((env.rnd.random() < 1/2) and env.options.flags.has('z_physical_or_magical_script')):
         physicalflag = True
         replacescriptflag = True
-        statchangeflag = True
         fixjumpflag = True
         # repurpose attack index $5D to be (20, 99, 200) and $5E to be (18, 99, 255), set Z's base attack index to be $5D
+        # make adjustments for ET or J Zeromus, to get closer to those damage amounts
         # ......... do I want to give Z an attack element? ... like *Drain*? lmao. No, but that'd be wild.
-        env.add_binary(address.UnheaderedAddress(0x072497), [0x14, 0x63, 0xC8])
-        env.add_binary(address.UnheaderedAddress(0x07249A), [0x12, 0x63, 0xFF])
+        if jversion:
+            env.add_binary(address.UnheaderedAddress(0x072497), [0x16, 0x63, 0xC8])
+            env.add_binary(address.UnheaderedAddress(0x07249A), [0x13, 0x63, 0xFF])
+        elif etversion:
+            env.add_binary(address.UnheaderedAddress(0x072497), [0x10, 0x63, 0xC8])
+            env.add_binary(address.UnheaderedAddress(0x07249A), [0x0F, 0x63, 0xFF])
+        else:                       
+            env.add_binary(address.UnheaderedAddress(0x072497), [0x14, 0x63, 0xC8])
+            env.add_binary(address.UnheaderedAddress(0x07249A), [0x12, 0x63, 0xFF])
         # use a different attack index under z_must_nerf:
         if env.options.flags.has('z_must_nerf'):
-            stat_changes.append('    attack index $9F\n') # (255, 99, 255)
+            env.add_substitution('zeromus attack index', '    attack index $9F\n') # (255, 99, 255)
             env.add_file('scripts/dark_wave_damage.f4c')
         else:
-            stat_changes.append('    attack index $5D\n')
-        bb014_attack_index = ('$9F' if env.options.flags.has('z_must_nerf') else '$5D')
-        bb235_attack_index = ('$9F' if env.options.flags.has('z_must_nerf') else '$5E')
+            env.add_substitution('zeromus attack index', '    attack index $5D\n')
+        if jversion:
+            bb014_attack_index = ('$9F' if env.options.flags.has('z_must_nerf') else '$5E')
+            bb235_attack_index = ('$9F' if env.options.flags.has('z_must_nerf') else '$5E')            
+        else:
+            bb014_attack_index = ('$9F' if env.options.flags.has('z_must_nerf') else '$5D')
+            bb235_attack_index = ('$9F' if env.options.flags.has('z_must_nerf') else '$5E')
 
         if env.options.flags.has('z_no_nerfs'):
             bigbang_replacements[0].extend([
                 '    chain {\n',
-                '        set attack index $5D\n',
+                '        set attack index ' + bb014_attack_index + '\n',
                 '        chain into\n',
                 '        use command #DarkWave\n',
                 '        condition 3\n'
@@ -237,7 +262,7 @@ def apply(env):
             for i in [1, 4]:
                 bigbang_replacements[i].extend([
                     '    chain {\n',
-                    '        set attack index $5D\n',
+                    '        set attack index ' + bb014_attack_index + '\n',
                     '        chain into\n',
                     '        use command #DarkWave\n',
                     '    }\n',
@@ -245,7 +270,7 @@ def apply(env):
             for i in [2, 3, 5]:
                 bigbang_replacements[i].extend([
                     '    chain {\n',
-                    '        set attack index $5E\n',
+                    '        set attack index ' + bb235_attack_index + '\n',
                     '        chain into\n',
                     '        use command #DarkWave\n',
                     '    }\n',
@@ -276,12 +301,19 @@ def apply(env):
             '    target all characters\n',
             '    use #spell.Enemy_Needle\n',
         ])
-        # already in a chain
-        meteo_replacement.extend([
-            '    set attack index $4E\n',
-            '    pass\n\n',
-            '    use command #DarkWave\n',
-        ])
+        if etversion:
+            # no chain
+            meteo_replacement.extend([
+                '    set attack index $4E\n',
+                '    use command #DarkWave\n'
+            ])
+        else:
+            # already in a chain
+            meteo_replacement.extend([
+                '    set attack index $4E\n',
+                '    pass\n\n',
+                '    use command #DarkWave\n',
+            ])
         # new Fight counter, intended to allow nerfing of Dark Wave; script 0x4D
         counter_nuke_replacement.extend([ 
             '    set attack index $41\n',
@@ -352,13 +384,13 @@ def apply(env):
                         attack_list.append('    use command #DarkWave\n\n')
                     else:
                         if env.options.flags.has('z_no_nerfs') and attack_to_add == '#spell.Meteo':
-                            attack_list.append(f'    set spell power 9\n')
+                            attack_list.append(f'    set spell power {int(versionmult * 9)}\n')
                         elif env.options.flags.has('z_no_nerfs') and attack_to_add == '#spell.Enemy_Globe199':
-                            attack_list.append(f'    set spell power 20\n')
+                            attack_list.append(f'    set spell power {int(versionmult * 20)}\n')
                         elif env.options.flags.has('z_must_nerf'):
                             attack_list.append(f'    set spell power 253\n')
                         else:
-                            attack_list.append(f'    set spell power {shake_dict[attack_to_add][2]}\n')
+                            attack_list.append(f'    set spell power {int(versionmult * shake_dict[attack_to_add][2])}\n')
                         attack_list.extend(['    target all characters\n',
                                             '    use ' + attack_to_add + '\n\n'])
                     if env.options.flags.has('z_no_nerfs'):
@@ -418,12 +450,12 @@ def apply(env):
                         spell_power_index = POSSIBLE_CHAOS_COMMANDS[attack_to_add][3].split(' / ').index(targeting_data)
                         if targeting_data == 'random character':
                             attack_list.extend([
-                                f'    set spell power {POSSIBLE_CHAOS_COMMANDS[attack_to_add][2][spell_power_index]}\n',
+                                f'    set spell power {int(versionmult * POSSIBLE_CHAOS_COMMANDS[attack_to_add][2][spell_power_index])}\n',
                                 '    use ' + attack_to_add + '\n\n'
                                 ])                            
                         else:
                             attack_list.extend([
-                                f'    set spell power {POSSIBLE_CHAOS_COMMANDS[attack_to_add][2][spell_power_index]}\n',
+                                f'    set spell power {int(versionmult * POSSIBLE_CHAOS_COMMANDS[attack_to_add][2][spell_power_index])}\n',
                                 '    target ' + targeting_data + '\n',
                                 '    use ' + attack_to_add + '\n\n'
                                 ])
@@ -464,9 +496,8 @@ def apply(env):
             chaos_spoilers.append((f'Zeromus script {i+1}', ', '.join(spoilers_to_add[i])))
 
         if env.options.flags.has('z_must_nerf'):
-            statchangeflag = True
             # even with whichbang, we're restricting the opening BB to be magic, so don't change attack
-            stat_changes.append('    spell power 255\n')
+            env.add_substitution('zeromus initial spell power', '    spell power 255')
 
         for i in range(0,3):
             env.add_substitution(f'chaos phase {i+1}', ''.join(chaos_phases[i]))
@@ -505,14 +536,14 @@ def apply(env):
             # set both attack and spell power for all reactions, in case of DarkWave
             if reaction_to_add == 'fight':
                 reaction_list.append([
-                    '    set spell power 14\n',
+                    '    set spell power ' + f'{nuke_spell_power}' + '\n',
                     '    set attack index $5F\n',
                     '    fight\n'
                 ])
                 chaos_spoilers.append((reaction_spoiler_labels[i], 'Fight'))
             elif reaction_to_add == '#Change':
                 reaction_list.append([
-                    '    set spell power 14\n',
+                    '    set spell power ' + f'{nuke_spell_power}' + '\n',
                     '    set attack index $5F\n',
                     '    use command ' + reaction_to_add + '\n'
                 ])
@@ -522,13 +553,13 @@ def apply(env):
                 spell_power_index = POSSIBLE_CHAOS_REACTIONS[reaction_to_add][3].split(' / ').index(targeting_data)
                 if targeting_data == 'random character':
                     reaction_list.append([
-                        f'    set spell power {POSSIBLE_CHAOS_REACTIONS[reaction_to_add][2][spell_power_index]}\n',
+                        f'    set spell power {int(versionmult * POSSIBLE_CHAOS_REACTIONS[reaction_to_add][2][spell_power_index])}\n',
                         '    set attack index $5F\n',
                         '    use ' + reaction_to_add + '\n'
                     ])         
                 else:          
                     reaction_list.append([
-                        f'    set spell power {POSSIBLE_CHAOS_REACTIONS[reaction_to_add][2][spell_power_index]}\n',
+                        f'    set spell power {int(versionmult * POSSIBLE_CHAOS_REACTIONS[reaction_to_add][2][spell_power_index])}\n',
                         '    set attack index $5F\n',
                         '    target ' + targeting_data + '\n',
                         '    use ' + reaction_to_add + '\n'
@@ -598,8 +629,7 @@ def apply(env):
                     ])
         elif env.options.flags.has('z_must_nerf'):
             replacescriptflag = True
-            statchangeflag = True
-            stat_changes.append('    spell power 255\n')
+            env.add_substitution('zeromus initial spell power', '    spell power 255')
             if 0x14C in scripts[:3]:
                 for i in [1, 2, 3]:
                     bigbang_replacements[i].extend([
@@ -651,8 +681,7 @@ def apply(env):
             # setting 255 at the start via the script-change f4c
             # I *think* using 255 (0xFF) makes the game think it's an opcode... yep. so does 254 (0xFE), so 253 it is.
             replacescriptflag = True
-            statchangeflag = True
-            stat_changes.append('    spell power 255\n')
+            env.add_substitution('zeromus initial spell power', '    spell power 255')
             
             for i in range(1,6):
                 bigbang_replacements[i].extend([
@@ -674,13 +703,12 @@ def apply(env):
         # use a different spell power under z_must_nerf:
         # setting 255 at the start via the f4c, 253 for scripted changes because 254/255 break things
         if env.options.flags.has('z_must_nerf'):
-            statchangeflag = True
-            stat_changes.append('    spell power 255\n')
+            env.add_substitution('zeromus initial spell power', '    spell power 255')
         for i in range(0,6):
             if env.options.flags.has('z_no_nerfs') and replacement_commands[i] == '#spell.Meteo':
-                bb_spell_powers[i] = 9
+                bb_spell_powers[i] = int(versionmult * 9)
             elif env.options.flags.has('z_no_nerfs') and replacement_commands[i] == '#spell.Enemy_Globe199':
-                bb_spell_powers[i] = 20
+                bb_spell_powers[i] = int(versionmult * 20)
             elif env.options.flags.has('z_must_nerf'):
                 bb_spell_powers[i] = 253
 
@@ -747,9 +775,11 @@ def apply(env):
         env.add_substitution('counter weak replacement', ''.join(counter_weak_replacement))
         env.add_substitution('counter nuke call replacement', ''.join(counter_nuke_call_replacement))
     if replacescriptflag:
-        env.add_file('scripts/zeromus_replacescript.f4c')
-    if statchangeflag:
-        stat_changes.append('}\n')
-        env.add_substitution('Z base stat changes', ''.join(stat_changes))
+        if env.options.flags.has('japanese_bosses'):
+            env.add_file('scripts/zeromus_jscript.f4c')
+        elif env.options.flags.has('easy_type_bosses'):
+            env.add_file('scripts/zeromus_etscript.f4c')
+        else:
+            env.add_file('scripts/zeromus_replacescript.f4c')
     if fixjumpflag:
         env.add_file('scripts/fix_jump_retargeting.f4c')

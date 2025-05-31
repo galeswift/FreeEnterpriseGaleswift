@@ -1,13 +1,4 @@
-// for when Z needs maxed out attack/spell power,
-// we need to adjust the attack index/spell power using
-// scripting because otherwise the boss data doesn't line up
-monster($C9)   // Zeromus 
-{
-    // %zeromus attack index%
-    // %end%
-    // %zeromus initial spell power%
-    // %end%
-}
+// replacing the script for vanilla J script
 
 // Z pre-first-BB phase
 ai_script(moon $4B) 
@@ -30,7 +21,7 @@ ai_script(moon $4C)
     use #ZeromusShake2
 
     // %big bang 2 replacement%
-    set spell power 31
+    set spell power 39
     use #Enemy_BigBang
     // %end%
     
@@ -42,12 +33,12 @@ ai_script(moon $4C)
     use #ZeromusShake2
     
     // %big bang 3 replacement%
-    set spell power 32
+    set spell power 39
     use #Enemy_BigBang
     // %end%
     
     // %script virus replacement%
-    set spell power 36
+    set spell power 49
     target all characters
     use #Virus
     // %end%
@@ -60,7 +51,7 @@ ai_script(moon $4C)
     use #ZeromusShake2
     
     // %big bang 4 replacement%
-    set spell power 32
+    set spell power 39
     use #Enemy_BigBang
     // %end%
     
@@ -76,7 +67,7 @@ ai_script(moon $55)
     use #ZeromusShake2
     
     // %big bang 5 replacement%
-    set spell power 31
+    set spell power 39
     use #Enemy_BigBang
     // %end%
     
@@ -84,7 +75,7 @@ ai_script(moon $55)
     message $75   // "Magics became invalid."
     wait
     // %script nuke replacement%
-    set spell power 14
+    set spell power 21
     use #Nuke
     // %end%
     
@@ -95,7 +86,7 @@ ai_script(moon $55)
     use #ZeromusShake2
     
     // %big bang 6 replacement%
-    set spell power 32
+    set spell power 39
     use #Enemy_BigBang
     // %end%
 }
@@ -120,7 +111,7 @@ ai_script(moon $57)
 ai_script(moon $4D) 
 {
     // %counter nuke replacement%
-    set spell power 14
+    set spell power 21
     use #Nuke
     // %end%
 }
@@ -129,7 +120,7 @@ ai_script(moon $4D)
 ai_script(moon $4E) 
 {
     // %counter nuke call replacement%
-    set spell power 14
+    set spell power 21
     use #Nuke
     // %end%
 }
@@ -146,7 +137,7 @@ ai_script(moon $4F)
 ai_script(moon $58) 
 {
     // %counter virus replacement%
-    set spell power 36
+    set spell power 40
     target all characters
     use #Virus
     // %end%
