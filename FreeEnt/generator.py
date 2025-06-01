@@ -169,8 +169,6 @@ F4C_FILES = '''
     scripts/fix_airship_menu_softlock.f4c
     scripts/fix_edward_ghost_command.f4c
     scripts/fix_attack_power_overflow.f4c
-    scripts/fix_wisdom_will_timers.f4c
-    scripts/fix_victim_history.f4c
     scripts/uptco_surprise.f4c
     scripts/sound_engine.f4c
     scripts/mute.f4c
@@ -193,6 +191,7 @@ F4C_FILES = '''
     scripts/cycle_party_leader.f4c
     scripts/item_delivery_quantity.f4c
     scripts/extend_spellsets.f4c
+    scripts/odin_sprite_patch.f4c
 '''
 # the missing scripts/black_shirt_fix.f4c is included below as a conditional, if -wacky:whatsmygear is not on
 
@@ -858,6 +857,13 @@ def build(romfile, options, force_recompile=False):
             prng_bytes = [(extra_ints[(i // 20) - 1] if i % 20 == 0 and i // 20 > 0 else random_integer) for i in range(0,256)]
 
         env.add_binary(BusAddress(0x14EE00), prng_bytes, as_script=False)
+
+    if options.flags.has('bug_fixes'):
+        env.add_files(
+            'scripts/fix_wisdom_will_timers.f4c',
+            'scripts/fix_victim_history.f4c',
+            'scripts/fix_hermes_berserk.f4c'
+            )
 
     if options.flags.has('vintage'):
         env.add_files(

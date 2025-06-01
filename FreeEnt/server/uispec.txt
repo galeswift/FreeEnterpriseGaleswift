@@ -864,6 +864,7 @@
 .(-prng:random) Randomize the PRNG values independently
 .(-prng:consecutive)! Replace the PRNG table with the numbers 0 to 255 in order
 .(-prng:mostlysingle)! Replace the PRNG table with (mostly) a single value
+[-miscbugfixes] Include minor bug fixes
 [] Restore vanilla behaviors
 .[-vanilla:hobs] Vanilla Hobs spell
 .[-vanilla:growup] Vanilla Dwarf Castle summons

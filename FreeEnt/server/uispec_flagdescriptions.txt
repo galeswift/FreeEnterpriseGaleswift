@@ -913,6 +913,9 @@ To prevent softlocks, the randomized PRNG table will be such that all battle slo
 [-prng:mostlysingle]
 To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.
 
+[-miscbugfixes]
+This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, and incorrect victim history entries.
+
 [-vanilla:hobs]
 By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior.
 
