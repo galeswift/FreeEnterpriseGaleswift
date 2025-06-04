@@ -450,6 +450,30 @@ The D.Machin in the Searcher encounter is replaced by a Horseman.
 [Enomacgiant]
 The MacGiant in the Searcher encounter is replaced by a Machine.
 
+[Etable:shuffle7]
+The seven non-rare encounters in each area (i.e. those encounters not obtainable via Siren) are shuffled.
+
+[Etable:shuffle8]
+All encounters in each area are shuffled, so a Siren may pull a different formation than normal.
+
+[Etable:relocatedish]
+Encounter groups are shuffled amongst each other, within four zones: the overworld (no Hook route starting at Cave Eblana), the underworld, the moon (including LST), and the Hook route/Giant.
+
+[Etable:relocated]
+Encounter groups are shuffled amongst each other, based on the high byte of the formation IDs in those groups: the overworld (including the Giant and Hook route) and the underworld/moon.
+
+[Etable:wildish]
+Encounters are shuffled within four zones: the overworld (no Hook route starting at Cave Eblana), the underworld, the moon (including LST), and the Hook route/Giant.
+
+[Etable:wild]
+Encounters are shuffled within two groups, based on the high byte of the formation ID: the overworld (including the Giant and Hook route) and the underworld/moon.
+
+[Etable:chaos]
+Encounters are randomly assigned to encounter groups independently, within the overworld (including the Giant and Hook route) and the underworld/moon separately.
+
+[Etable:uniquelygood]
+Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
+
 [Hrandom]
 The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members.
 

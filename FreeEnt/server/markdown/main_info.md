@@ -494,6 +494,15 @@ This flag replaces the D.Machin in the repeatable D.Machin grind encounter with 
 
 This flag replaces the MacGiant in the repeatable MacGiant grind encounter with a Machine.
 
+### `Etable:[shuffle7,shuffle8,relocatedish,relocated,wildish,wild,chaos,uniquelygood]` {: .h6 }
+
+- Idea: leggystarscream, ap7, ScytheMarshall, probably others
+- Design: leggystarscream (`shuffle8`), ap7 (`shuffle7`, `wildish`, `wild`), ScytheMarshall (the rest)
+- Programming: ScytheMarshall (for this implementation)
+- Locations: encounter_rando.py
+
+These flags change the encounter tables; namely, which encounters are in which group. The "map ID to group" association is left unchanged (because that is patched by the Something Worth Fighting For wacky flag). The `shuffle` flags only shuffle the encounters within each group. The `relocated` flags shuffle the groups around, within certain zones. The `wild` flags shuffle the encounters around with no regard for group, only for zones or map plane. The `chaos` flag randomly assigns valid encounters with no regard for ensuring encounters are still there. The `uniquelygood` flag chooses one encounter from each group to be the only encounter that group has; the encounter will be a grind fight, an otherwise useful encounter, or a notable fight, without repeating an encounter from another group (e.g. double King-Ryus are in multiple groups, they will only show up once here).
+
 ## Harp Flags
 
 harumph, the leader of the #FadeHarp community, made some flags to change the TwinHarp behaviour. In vanilla FE, you will always get a randomized song instead of the vanilla Melody of Lute (Edward's theme) during the TwinHarp cutscene and subsequent fight. These flags change that behaviour.

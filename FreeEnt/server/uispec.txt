@@ -621,6 +621,15 @@
 [Enogp]!^ No GP for random encounters
 [Enodmachin]!^ Disable D.Machin encounters
 [Enomacgiant]!^ Disable MacGiant encounters
+<>^ Change encounter tables
+.(Etable:shuffle7) Shuffle non-rare encounters within group
+.(Etable:shuffle8) Shuffle all encounters within group
+.(Etable:relocatedish) Shuffle encounter groups within large zones
+.(Etable:relocated) Shuffle encounter groups within map plane
+.(Etable:wildish) Shuffle encounters within large zones
+.(Etable:wild) Shuffle encounters within map plane
+.(Etable:chaos) Randomly assign encounters independently
+.(Etable:uniquelygood) Each area has one hand-picked encounter
 
 == HARP OPTIONS
 <>*^ Harp randomization
