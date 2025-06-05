@@ -157,6 +157,9 @@ def apply(env):
         env.add_file('scripts/encounter_no_macgiant.f4c')
 
     table_flag = env.options.flags.get_suffix('Etable:')
+    if not table_flag:
+        return
+    
     if table_flag.startswith('shuffle'):
         shuffle_param = int(table_flag[-1])
         enc_script = '\n'

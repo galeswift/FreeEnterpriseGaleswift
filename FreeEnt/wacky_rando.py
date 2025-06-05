@@ -303,7 +303,7 @@ def apply_whatsmygear(env, rom_address):
     # pass the gear_descriptions to env in order to have generator.py make the replacements while it does the other descriptions
     env.meta['wacky_gear_descriptions'] = gear_description_bytes
 
-def apply_scrambledstats(env):
+def apply_scrambledstats(env, rom_address):
     statslist = [0, 1, 2, 3, 4] # Str, Agi, Vit, Wis, Wil
     env.rnd.shuffle(statslist)
     statsdict = {stat : statslist[i] for stat, i in zip(['STR', 'AGI', 'VIT', 'WIS', 'WIL'], [0, 1, 2, 3, 4])}
@@ -325,7 +325,7 @@ def apply_scrambledstats(env):
     env.add_toggle('wacky_scrambledstats')
     env.add_file('scripts/wacky/scrambledstats.f4c')
 
-def apply_sixleggedrace(env):
+def apply_sixleggedrace(env, rom_address):
     env.add_toggle('wacky_challenge_show_detail')
 
 def apply_neatfreak(env, rom_address):
@@ -770,7 +770,7 @@ def apply_batman(env, rom_address):
     env.add_binary(rom_address, data, as_script=True)
     return len(data)
 
-def apply_advertising(env):
+def apply_advertising(env, rom_address):
     MONSTER_DATA_CHANGES = {
         0x01 : {'weak' : '#Ice'}, # Basilisk
         0x05 : {'resist element' : None, 'attack element' : '#Absorb', 'weak' : '#Air #Immune'}, # Cave Bat

@@ -90,7 +90,7 @@ patch($03B3A6 bus) { 10 F2 }
 // than in bank20
 
 msfpatch{
-    .addr $03f210
+    .addr $03f220
         jsl $=BattleCommand__ExecuteRaid
         rts
     BattleCommand__ExecuteRaidRNG:
