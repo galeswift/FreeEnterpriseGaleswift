@@ -241,7 +241,9 @@
 ...(Kforce:hook)! Force underworld access via Hook route
 ..[Kunsafe]! No safety checks
 ..[Kunsafer]!^ Force underground access via the moon
-..[Klatedark]^ Force Darkness Crystal to be gated by underground access
+..<>^ Gated Darkness options
+...(Klatedark) Force Darkness Crystal to be gated by underground access
+...(Kunreliabledark) Encourage the Darkness Crystal to be gated by underground access
 ..<>^ Starting items
 ...(Kstart:package) You start with the Package
 ...(Kstart:sandruby) You start with the Sandruby

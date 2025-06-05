@@ -120,13 +120,13 @@ This flag adds the Pink Tail trade reward to the available key item slots. The v
 
 Under this flag, you will be _required_ to obtain moon access prior to obtaining underground access, meaning you will find your underground access somewhere accessible using the Darkness crystal (either on the moon somewhere or via the Giant).
 
-### `Klatedark` {: .h6 }
+### `Klatedark`, `Kunreliabledark` {: .h6 }
 
-- Idea: sgrunt
-- Design/Programming: sgrunt
+- Idea: sgrunt, Antidale
+- Design/Programming: sgrunt (for `Klatedark`), Antidale, ScytheMarshall (for `Kunreliabledark`)
 - Locations: core_rando.py
 
-This flag forces the Darkness crystal to be gated by underground access, meaning you will find it somewhere beyond the Magma Key or the Hook.
+The `Klatedark` flag forces the Darkness crystal to be gated by underground access, meaning you will find it somewhere beyond the Magma Key or the Hook. The `Kunreliabledark` flag implements Antidale's weighting suggestion that Darkness should be gated by underground access about 66% of the time on the usual flagsets as long as `Kunsafe/r` is not on, which amounts to forcing it to be gated 25% of the time.
 
 ### `Kstart:[item]` {: .h6 }
 

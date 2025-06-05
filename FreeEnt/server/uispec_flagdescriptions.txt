@@ -206,6 +206,9 @@ As Kunsafe, but you will be <em>required</em> to obtain moon access prior to obt
 [Klatedark]
 The Darkness Crystal will be gated by underground access.
 
+[Kunreliabledark]
+When <em>Kunsafe</em> and <em>Kunsafer</em> are not on, force the Darkness Crystal to be gated by underground access 25% of the time.
+
 [Pchests]
 Passes are placed in three random treasure chests (not on the moon).
 
@@ -251,8 +254,11 @@ Your starting character will be chosen among the options selected here, regardle
 [@CstartModify]
 Your starting character will be selected as normal according to your other flag settings, modified by the options selected here.
 
-[Cj:spells]
+[Cspells:j]
 White mages will learn Armor, Shell, and Dispel. All mages learn spells at the levels they would in FF4j.
+
+[Cspells:anti]
+Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.
 
 [Cj:abilities]
 Characters retain the battle commands from FF4j that were removed in FF4us.
