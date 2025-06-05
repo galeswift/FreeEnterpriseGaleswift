@@ -590,7 +590,7 @@ def apply(env):
         no_lance = False
         excluded_spells.extend(['#spell.Sight'])
 
-    if env.options.flags.has('antidale_spell_progression'):
+    if env.options.flags.has('antidale_spells_progression'):
         excluded_spells.extend(['#spell.Weak'])
 
     max_credits = 14
