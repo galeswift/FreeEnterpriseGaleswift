@@ -374,16 +374,18 @@ def apply(env):
         for row in curves_dbview:
             weights = {i : getattr(row, f"tier{i}") for i in range(1,9)}
             if env.options.flags.has('treasure_wild_weighted'):
-                weights = util.get_boosted_weights(weights)
-            if env.options.flags.has('treasure_semipro'):
-                weights = util.get_semiboosted_weights(weights)
+                weights = util.get_boosted_weights(weights, 'wildish')
+            elif env.options.flags.has('treasure_semipro'):
+                weights = util.get_boosted_weights(weights, 'semipro')
+            elif env.options.flags.has('treasure_standard_weighted'):
+                weights = util.get_boosted_weights(weights, 'standardish')
             # adjust weights down for miab areas (usually for vanilla miabs)
             if env.options.flags.has('treasure_adjust_miab_areas'):
                 # see assets/db/curves.csvdb for the numbers;
                 # in order, it's Zot, Castle Eblan, Lower Bab-il, Cave Eblan, Upper Bab-il, 
                 # Sylph Cave, Feymarch, Lunar Path, Giant, Lunar Subterrane/Core
                 if row.wikiindex in [22, 25, 24, 26, 27, 31, 32, 36, 37, 38]:
-                    weights = util.get_adjusted_miabs_weights(weights)
+                    weights = util.get_boosted_weights(weights, 'miab_areas')
 
             distributions_unrestricted[row.area] = util.Distribution(weights)
 

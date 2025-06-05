@@ -403,6 +403,10 @@
 ...(Cthrift:3) Starting gear is at best tier 3
 ...(Cthrift:4) Starting gear is at best tier 4
 ...(Cthrift:5) Starting gear is at best tier 5
+<> Spell options
+.(Cspells:j) Characters learn J-spells
+.(Cspells:anti)^ Characters learn US spells, with altered progression.
+[Cj:abilities] Characters have J-commands
 <> Limit maximum party size
 .(Cparty:1)! Maximum party size 1
 .(Cparty:2)! Maximum party size 2
@@ -425,9 +429,6 @@
 .[Ctreasure:earned]! Earned characters are found in treasure chests instead
 .[Ctreasure:relaxed]! Restricted characters in all chests
 .[Ctreasure:unsafe]! Unsafe characters in chests
-[] J-commands and spells
-.[Cj:spells] Characters learn J-spells
-.[Cj:abilities] Characters have J-commands
 [] Character Join Options
 .[Cnodupes] Duplicate characters not allowed
 .[Chi]^ New characters are forced to join the party
@@ -482,6 +483,8 @@
 .(Twild) Wild chest randomization
 ..[ECHO:Tstandard]
 .(Twildish) Wild-ish chest randomization
+..[ECHO:Tstandard]
+.(Tstandardish)^ Standard-ish chest randomization
 ..[ECHO:Tstandard]
 .(Tempty)! Chests are empty
 [Tno:j] No J-items in chests

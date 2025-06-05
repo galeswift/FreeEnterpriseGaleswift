@@ -7680,7 +7680,7 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Ohardreq:16",
             "offset": 155,
-            "size": 1,
+            "size": 2,
             "value": 1
         },
         {

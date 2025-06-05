@@ -44,6 +44,8 @@ from . import objective_rando
 from . import kit_rando
 from . import custom_weapon_rando
 from . import wacky_rando
+from . import update_spells
+
 from . import compile_item_prices
 from . import doors_rando
 
@@ -650,6 +652,9 @@ def build(romfile, options, force_recompile=False):
 
     if options.flags.has('japanese_spells'):
         env.add_file('scripts/japanese_spells.f4c')
+    elif options.flags.has('antidale_spells_progression'):
+        env.add_file('scripts/reordered_spells.f4c')
+        update_spells.apply(env)
 
     if options.flags.has('japanese_abilities'):
         env.add_file('scripts/japanese_abilities.f4c')
@@ -911,6 +916,7 @@ def build(romfile, options, force_recompile=False):
 
     # must be last
     wacky_rando.apply(env)
+    
     # finalize rewards table
     rewards_data = env.meta['rewards_assignment'].generate_table()
     # for reward in env.meta['rewards_assignment']:

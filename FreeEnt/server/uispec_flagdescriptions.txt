@@ -327,6 +327,9 @@ On weighted treasure distributions, areas with MIABs will have the non-miab trea
 [Tsemipro]
 Uses location-based weighting, with item quality between that provided by pro and wildish.
 
+[Tstandardish]
+A weighted treasure distribution that boosts middle tiers more than high tiers.
+
 [Tvanillaish]
 Uses location-based weighting, with item quality approximately that of the vanilla game.
 

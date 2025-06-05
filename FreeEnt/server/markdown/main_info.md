@@ -156,6 +156,53 @@ FE normally has a weighted Key Item placement algorithm, that prioritizes `Kmain
 
 Under `Cthrift[n]`, where `n` can be from 2 to 5, characters will start with a full set of gear: one of each armour piece, a primary-hand weapon, and either a shield (for characters that get them who are not getting a two-handed weapon), a second weapon (for Yang/Edge), or nothing in their off-hand. The gear is selected from items with tier at most `n`. Cursed Rings are excluded, for balance/softlock-avoidance/flagset-design reasons. 
 
+### `Cspells:[j,anti]` {: .h6}
+
+- Idea: Antidale
+- Design/Programming: Antidale (with some tweaks by ScytheMarshall)
+- Locations: reordered_spells.f4c, update_spells.py, updated_spells.csvdb, fusoya_rando.py, mtordeals.f4c
+
+These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. The other details of the changes are as follows:
+
+Rosa
+:   White 48 -> 55
+
+Porom
+:   Blink 23 -> 22
+:   Charm 25 -> 24
+:   Size 31 -> 29
+:   Cure3 33 -> 30
+:   Float 40 -> 32
+:   Fast 38 -> 34
+:   Wall 44 -> 38
+:   Cure4 48 -> 40
+:   Life2 56 -> 46
+:   White 52 -> 57
+
+Rydia
+:   Virus 26 -> 24
+:   Psych 32 -> 29
+:   Ice3 38 -> 30
+:   Fire3 40 -> 30
+:   Lit3 42 -> 30
+:   Drain 35 -> 33
+:   Stone 46 -> 36
+:   Quake 44 -> 38
+:   Fatal 49 -> 42
+:   Weak 48 -> 46
+:   Nuke 50 -> 54
+:   Meteo 60 -> 56
+
+Palom
+:   Ice3 32 -> 30
+:   Fire3 33 -> 30
+:   Lit3 34 -> 30
+:   Fatal 46 -> 42
+:   Weak 48 -> 44
+:   Nuke 52 -> 57
+
+Tier 1 spells are now instant cast (previously ATB Delay of 2), tier 2 have an ATB delay of 2 (previously 6), and tier 3 have an ATB delay of 4 (previously 8).
+
 ### `Cmostlydead`, `Cbrieflydead` {: .h6 }
 
 - Idea: warlink05
@@ -226,6 +273,44 @@ Cecil starts as a paladin on this flag, at the same stats as he normally would a
 
 ## Treasure Flags
 
+Courtesy of Antidale, the `Tpro` weights have been modified slightly, to reduce the chance of the lowest tiers in some areas and up the chance of the highest tier(s). The list of changes is as follows.
+
+Baron Town
+:   from: 40,20,20,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;35,22,20,18,5,0,0,0
+
+Damcyan
+:   from: 40,20,20,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;35,22,20,18,5,0,0,0
+
+Village Mist
+:   from: 20,30,30,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;17,30,30,18,5,0,0,0
+
+Bahamut Cave
+:   from: 20,30,30,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,10,25,30,20,10,5,0
+
+Lunar Path
+:   from: 8,12,30,30,18,2,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,10,30,30,20,10,0,0
+
+Waterfall
+:   from: 0,0,35,40,23,2,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,50,28,17,5,0
+
+Mist Cave
+:   from: 0,0,35,40,23,2,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,35,40,20,5,0,0
+
+Tomra
+:   from: 10,20,40,28,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5,15,40,28,7,5,0,0
+
+Giant (MIAB)
+:   from: 0,0,0,0,30,35,35,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,0,25,35,35,5
+
 ### `Tsparsey:[underground,moon,overworld]` {: .h6 }
 
 - Idea: Galeswift
@@ -241,6 +326,14 @@ This flag restricts the `Tsparse` settings to only the chosen areas. Cave Eblana
 - Locations: treasure_rando.py
 
 This flag causes the specified areas to ignore the restrictions imposed on non-MIAB chests by `Tmaxtier` and `Tmintier`. 
+
+### `Tstandardish` {: .h6 }
+
+- Idea: Antidale
+- Design/Programming: Antidale
+- Locations: treasure_rando.py, core_rando.py, util.py
+
+Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the boosts are more targeted towards tier 5 and tier 6 treasures. The Last Arm miab can have tier 8, unlike on `Tpro`.
 
 ### `Tvanillaish` {: .h6 }
 

@@ -528,15 +528,9 @@ MOD_BOSS_SLOT_SPOILER_NAMES = { f"{b}_slot": BOSS_SPOILER_NAMES[b] + " position"
 
 MAYBE_THRESHOLD = 0.15
 
-def remove_spells_by_flag(p_dict,j_spells,all_spells,no_lance):
+def remove_spells_by_list(p_dict,sp_list):
     # removes specific spells from a given dictionary, without worrying if the spells are even there
-    spells_to_remove = set()
-    if not j_spells:
-        spells_to_remove.update(set(JAPANESE_EXCLUSIVE_SPELLS + OMNI_J_SPELLS))
-    if not all_spells:
-        spells_to_remove.update(set(OMNI_SPELLS + OMNI_J_SPELLS))
-    if not no_lance:
-        spells_to_remove.update(set(['#spell.Sight']))
+    spells_to_remove = set(sp_list)
     for spell in spells_to_remove:
         p_dict.pop(spell, None)    
 
@@ -575,19 +569,29 @@ def apply(env):
     maybe_spells = False
     if env.options.flags.has('maybe_fusoya'):
         maybe_spells = True
+
+    excluded_spells = []
     
     j_spells = False
     if env.options.flags.has('japanese_spells'):
         j_spells = True
+    else:
+        excluded_spells.extend(JAPANESE_EXCLUSIVE_SPELLS + OMNI_J_SPELLS)
 
     all_spells = False
     if env.options.flags.has('add_spells_fusoya'):
         all_spells = True
         env.add_file('scripts/fusoya_omnimage.f4c')
+    else:
+        excluded_spells.extend(OMNI_SPELLS + OMNI_J_SPELLS)
 
     no_lance = True
     if env.options.flags.has('kainmagic'):
         no_lance = False
+        excluded_spells.extend(['#spell.Sight'])
+
+    if env.options.flags.has('antidale_spell_progression'):
+        excluded_spells.extend(['#spell.Weak'])
 
     max_credits = 14
     if env.options.flags.has('uncapped_fusoya'):
@@ -624,7 +628,7 @@ def apply(env):
             env.add_scripts(f'patch($0faa87 bus) {{ {max_hp % 0x100:02X} {max_hp // 0x100:02X} {max_hp % 0x100:02X} {max_hp // 0x100:02X} }}')
 
         potential_spells = INTERNAL_SPELL_ORDER.copy()
-        remove_spells_by_flag(potential_spells,j_spells,all_spells,no_lance)
+        remove_spells_by_list(potential_spells,excluded_spells)
 
         if maybe_spells:
             missing_spells = []
@@ -716,7 +720,7 @@ def apply(env):
         # build a dict of Distributions (see util.py)
         available_distributions = { tier : Distribution(SPELL_TIERS[tier]) for tier in SPELL_TIERS }
         
-        remove_spells_by_flag(available_spells,j_spells,all_spells,no_lance)
+        remove_spells_by_list(available_spells,excluded_spells)
         
         shuffled_spells = [spell for spell in available_spells]
         env.rnd.shuffle(shuffled_spells)
@@ -812,23 +816,23 @@ def apply(env):
         ranked_spells = []
         if env.options.flags.has('sequential_p_fusoya'):
             level_p_spells = ALL_SPELLS_BY_LEVEL_P.copy()
-            remove_spells_by_flag(level_p_spells,j_spells,all_spells,no_lance)
+            remove_spells_by_list(level_p_spells,excluded_spells)
             for position,spell in enumerate(level_p_spells):
                 ranked_spells.append( (position, spell) )
         elif env.options.flags.has('sequential_r_fusoya'):
             if j_spells:
                 level_rj_spells = ALL_SPELLS_BY_LEVEL_R_J.copy()
-                remove_spells_by_flag(level_rj_spells,j_spells,all_spells,no_lance)
+                remove_spells_by_list(level_rj_spells,excluded_spells)
                 for position,spell in enumerate(level_rj_spells):
                     ranked_spells.append( (position, spell) )
             else:
                 level_r_spells = ALL_SPELLS_BY_LEVEL_R.copy()
-                remove_spells_by_flag(level_r_spells,j_spells,all_spells,no_lance)
+                remove_spells_by_list(level_r_spells,excluded_spells)
                 for position,spell in enumerate(level_r_spells):
                     ranked_spells.append( (position, spell) )
         else:
             goodness_spells = ALL_SPELLS_BY_GOODNESS.copy()
-            remove_spells_by_flag(goodness_spells,j_spells,all_spells,no_lance)
+            remove_spells_by_list(goodness_spells,excluded_spells)
             for i,spell in enumerate(goodness_spells):
                 position = float(i) / len(goodness_spells)
                 #position += (env.rnd.random() - 0.5) * 0.5

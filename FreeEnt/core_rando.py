@@ -782,6 +782,9 @@ def apply(env):
         if env.options.flags.has('key_items_late_darkness'):
             tests.append(['#item.DarkCrystal', [], 'underground'])
 
+        if not unsafe and (env.rnd.random() < 0.25):
+            tests.append(['#item.DarkCrystal', [], 'underground'])
+
         # must be able to encounter all bosses required of forced objective flags
         required_bosses = env.meta.get('objective_required_bosses', [])
         tests.extend(required_bosses)
@@ -937,10 +940,14 @@ def apply(env):
                 quest_curve = curves_dbview.find_one(lambda c: c.area == curve_name)
                 unassigned_quest_slots_for_curve = [s for s in unassigned_quest_slots if s in QUEST_REWARD_CURVES[curve_name]]
                 weights = {i : getattr(quest_curve, f"tier{i}") for i in range(1,9)}
+
                 if env.options.flags.has('treasure_wild_weighted'):
-                    weights = util.get_boosted_weights(weights)
-                if env.options.flags.has('treasure_semipro'):
-                    weights = util.get_semiboosted_weights(weights)
+                    weights = util.get_boosted_weights(weights, 'wildish')
+                elif env.options.flags.has('treasure_semipro'):
+                    weights = util.get_boosted_weights(weights, 'semipro')
+                elif env.options.flags.has('treasure_standard_weighted'):
+                    weights = util.get_boosted_weights(weights, 'standardish')
+
                 quest_distribution = util.Distribution(weights)
                 tier_counts = quest_distribution.choose_many(env.rnd, len(unassigned_quest_slots_for_curve))
                 pool = []
@@ -1009,9 +1016,12 @@ def apply(env):
             for c in curves_dbview.find_all(lambda c: c.area.startswith("MIAB_")):
                 weights = {i : getattr(c, f"tier{i}") for i in range(1,9)}
                 if env.options.flags.has('treasure_wild_weighted'):
-                    weights = util.get_boosted_weights(weights)
-                if env.options.flags.has('treasure_semipro'):
-                    weights = util.get_semiboosted_weights(weights)
+                    weights = util.get_boosted_weights(weights, 'wildish')
+                elif env.options.flags.has('treasure_semipro'):
+                    weights = util.get_boosted_weights(weights, 'semipro')
+                elif env.options.flags.has('treasure_standard_weighted'):
+                    weights = util.get_boosted_weights(weights, 'standardish')
+
                 miab_distributions[c.area[len("MIAB_"):]] = util.Distribution(weights)
 
             tier_counts_by_area = {}
