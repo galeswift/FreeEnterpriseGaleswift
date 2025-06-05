@@ -209,7 +209,10 @@ def apply(env):
         for row in databases.get_curves_dbview():
             weights = {i : getattr(row, f"tier{i}") for i in range(1,9)}
             if env.options.flags.has('treasure_wild_weighted'):
-                weights = util.get_boosted_weights(weights)
+                weights = util.get_boosted_weights(weights, True)
+            elif env.options.flags.has('treasure_standard_weighted'):
+                weights = util.get_boosted_weights(weights, False)
+            
 
             # null out distributions for empty item tiers
             for i in range(1,9):

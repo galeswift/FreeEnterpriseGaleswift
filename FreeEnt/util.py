@@ -38,7 +38,7 @@ class Distribution:
 
 
 # awkward spot for it, but it needs to go somewhere
-BOOST_MATRIX = {
+WILDISH_BOOST_MATRIX = {
     1: [(1, 7/8)],
     2: [(1, 1/8), (2, 6/8)],
     3: [(2, 2/8), (3, 5/8)],
@@ -49,11 +49,23 @@ BOOST_MATRIX = {
     8: [(7, 7/8), (8, 1)],
 }
 
-def get_boosted_weights(weights):
+STANDARDISH_BOOST_MATRIX = {
+    1: [(1, 6/8)],
+    2: [(1, 2/8), (2, 6/8)],
+    3: [(2, 2/8), (3, 5/8)],
+    4: [(3, 3/8), (4, 4/8)],
+    5: [(4, 4/8), (5, 5/8)],
+    6: [(5, 3/8), (6, 6/8)],
+    7: [(6, 2/8), (7, 7/8)],
+    8: [(7, 1/8), (8, 1)],
+}
+
+def get_boosted_weights(weights, is_wildish):
     boosted_weights = {i : 0 for i in range(1,9)}
+    active_weights = WILDISH_BOOST_MATRIX if is_wildish else STANDARDISH_BOOST_MATRIX 
 
     for i in boosted_weights:
-        for chunk in BOOST_MATRIX[i]:
+        for chunk in active_weights[i]:
             boosted_weights[i] += weights[chunk[0]] * chunk[1]
 
     return boosted_weights

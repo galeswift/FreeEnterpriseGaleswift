@@ -1,3 +1,3 @@
 from .generator import Generator, GeneratorOptions, GeneratorOutput
 from .flags import FlagSet
-from .version import VERSION, VERSION_STR
+from .version import VERSION, VERSION_STR, FORK_SOURCE_URL

@@ -47,16 +47,16 @@ TOUGH_QUEST_OBJECTIVES_EXCLUDED = [
     'quest_unlocksealedcave',
     'quest_bigwhale',
     'quest_wakeyang',
+    'quest_monsterqueen',
+    'quest_ribbonaltar',
 ]
 
 TOUGH_QUEST_OBJECTIVES_WEIGHTED = [
     'quest_monsterking',
-    'quest_monsterqueen',
     'quest_cavebahamut',
     'quest_murasamealtar',
     'quest_crystalaltar',
     'quest_whitealtar',
-    'quest_ribbonaltar',
     'quest_masamunealtar'
 ]
 

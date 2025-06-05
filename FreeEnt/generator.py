@@ -186,6 +186,7 @@ F4C_FILES = '''
     scripts/blank_textbox_fix.f4c
     scripts/cycle_party_leader.f4c
     scripts/item_delivery_quantity.f4c
+    scripts/fix_hermes_berserk.f4c
 '''
 
 BINARY_PATCHES = {
@@ -612,8 +613,9 @@ def build(romfile, options, force_recompile=False):
 
     if options.flags.has('japanese_spells'):
         env.add_file('scripts/japanese_spells.f4c')
-    else:
+    elif options.flags.has('antidale_spells_progression'):
         env.add_file('scripts/reordered_spells.f4c')
+        update_spells.apply(env)
 
     if options.flags.has('japanese_abilities'):
         env.add_file('scripts/japanese_abilities.f4c')
@@ -715,8 +717,6 @@ def build(romfile, options, force_recompile=False):
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')
-
-    update_spells.apply(env)
 
     # must be last
     wacky_rando.apply(env)

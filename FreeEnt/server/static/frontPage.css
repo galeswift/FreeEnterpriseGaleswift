@@ -40,7 +40,7 @@
   justify-content: space-between;
   align-items: stretch;
 
-  min-height:20rem;
+  min-height: 20rem;
 
   background-color: rgba(0, 0, 0, 0.2);
   background-size: cover;
@@ -83,6 +83,14 @@
   background-image: url('action-play.jpg');
 }
 
+#action-info {
+  background-image: url('action-info-off.jpg');
+}
+
+#action-info:hover {
+  background-image: url('action-info.jpg');
+}
+
 #action-resources {
   background-image: url('action-resources-off.jpg');
 }
@@ -109,6 +117,6 @@
 
 /* Footer */
 #footer a {
-    text-decoration: underline;
-    color: rgb(120, 120, 200);
+  text-decoration: underline;
+  color: rgb(120, 120, 200);
 }

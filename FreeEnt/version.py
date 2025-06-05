@@ -1,9 +1,10 @@
 MAJOR = 4
 MINOR = 6
 PATCH = 0
-FORK = "bad.ideas"
+FORK = "anti"
 
 VERSION = (MAJOR, MINOR, PATCH, FORK)
 NUMERIC_VERSION = (MAJOR, MINOR, PATCH)
 VERSION_STR = f"{MAJOR}.{MINOR}.{PATCH}.{FORK}"
 NUMERIC_VERSION_STR = f"{MAJOR}.{MINOR}.{PATCH}"
+FORK_SOURCE_URL = "https://github.com/Antidale/FreeAntiprise"

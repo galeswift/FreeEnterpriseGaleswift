@@ -135,6 +135,9 @@ An unrestricted randomization, allowing equal chance for items to appear in any 
 [Twildish]
 Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.
 
+[Tstandardish]
+A weighted treasure distribution that boots middle tiers more than high tiers.
+
 [Tjunk]
 Normally, poor-quality items in chests are replaced with an equivalent amount of GP (based on sell price) to reduce inventory bloat. Enable this flag if you want to keep them as items.
 

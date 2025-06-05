@@ -12,13 +12,13 @@
     · Wall 44 -> 38
     · Cure4 48 -> 40
     · Life2 56 -> 46
-    · White 52 -> 56
+    · White 52 -> 57
   · Rydia
     · Virus 26 -> 24
     · Psych 32 -> 29
     · Ice3 38 -> 30
     · Fire3 40 -> 30
-    · Lit3 42 -> 40
+    · Lit3 42 -> 30
     · Drain 35 -> 33
     · Stone 46 -> 36
     · Quake 44 -> 38
@@ -29,7 +29,7 @@
   · Palom
     · Ice3 32 -> 30
     · Fire3 33 -> 30
-    · Lit3 34 -> 40
+    · Lit3 34 -> 30
     · Fatal 46 -> 42
     · Weak 48 -> 44
     · Nuke 52 -> 57

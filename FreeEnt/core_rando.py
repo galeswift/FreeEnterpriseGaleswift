@@ -739,8 +739,12 @@ def apply(env):
                 quest_curve = curves_dbview.find_one(lambda c: c.area == curve_name)
                 unassigned_quest_slots_for_curve = [s for s in unassigned_quest_slots if s in QUEST_REWARD_CURVES[curve_name]]
                 weights = {i : getattr(quest_curve, f"tier{i}") for i in range(1,9)}
+
                 if env.options.flags.has('treasure_wild_weighted'):
-                    weights = util.get_boosted_weights(weights)
+                    weights = util.get_boosted_weights(weights, True)
+                elif env.options.flags.has('treasure_standard_weighted'):
+                    weights = util.get_boosted_weights(weights, False)
+
                 quest_distribution = util.Distribution(weights)
                 tier_counts = quest_distribution.choose_many(env.rnd, len(unassigned_quest_slots_for_curve))
                 pool = []
@@ -785,7 +789,9 @@ def apply(env):
             for c in curves_dbview.find_all(lambda c: c.area.startswith("MIAB_")):
                 weights = {i : getattr(c, f"tier{i}") for i in range(1,9)}
                 if env.options.flags.has('treasure_wild_weighted'):
-                    weights = util.get_boosted_weights(weights)
+                    weights = util.get_boosted_weights(weights, True)
+                elif env.options.flags.has('treasure_standard_weighted'):
+                    weights = util.get_boosted_weights(weights, False)
 
                 miab_distributions[c.area[len("MIAB_"):]] = util.Distribution(weights)
 
