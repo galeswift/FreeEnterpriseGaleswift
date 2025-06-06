@@ -45,6 +45,8 @@ msfpatch {
         sep #$20
         .mx 0x20
 
+        // by default, load Call
+        ldy #$b1fc
         // now check for FuSoYa
         lda $0001,x
         and #$0f

@@ -2,6 +2,7 @@ Vanilla FE ROM map thanks to b0ard/Wylem;
 Fork modifications via fork devs.
 -- Fork values noted by: F:
 
+01:FFF0 - 01:FFF6  F: omni spellset name data
 01:FFF8 - 01:FFFF   : menu kit long call hook
 02:FFBE - 01:FFEF  F: cid airship graphics hooks
 03:F20D - 03:F21C   : post-battle calls
