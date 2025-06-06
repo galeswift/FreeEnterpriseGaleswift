@@ -82,12 +82,16 @@ msfpatch{
 
 
 // add a pointer at $03B3A6 for the $15 command jump data
-patch($03B3A6 bus) { 10 F2 }
+patch($03B3A6 bus) { 20 F2 }
 
-// use $03F210 for hook to new code, re: _execute
+// use $03F220 for hook to new code, re: _execute
 // and make sure to rts here, and/or do other
 // bank03-specific things that would be easier here
 // than in bank20
+
+// the vanilla FF4 unused area starts at $03F210, but
+// post_battle.f4c uses a few bytes of that for permadeath and
+// wacky stuff, so we push the hook a bit further in
 
 msfpatch{
     .addr $03f220
