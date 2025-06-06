@@ -64,6 +64,7 @@ spellset(#RydiaWhite) {
     }
 }
 
+// %flag antidale_spells_progression off%
 spellset(#Rosa) {
     initial {
         #Cure1
@@ -118,3 +119,4 @@ spellset(#Porom) {
         56  #Life2
     }
 }
+// %end%
