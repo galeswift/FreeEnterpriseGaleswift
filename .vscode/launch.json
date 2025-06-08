@@ -5,20 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/mainapp.js",
+            "name": "Launch nodemon",
+            "program": "${workspaceFolder}/../ff4fetrackerapp/mainapp.js",
             "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "type": "node",
             "args": ["dev"]
-        },
-        {
-            "name": "Python Debugger: Module",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "FreeEnt"
         },
         {
             "name": "Run FF4FE Make",
@@ -36,11 +30,11 @@
             "args": [
                 ".\\ff4.smc",
                 "make",
-                "-s",
-                "YPDEY5RND9",
+                //"-s",
+                //"YPDEY5RND9",
                 "-f",
                 //"Orandom:3,quest/random2:3,tough_quest/random3:3,boss/req:6/win:crystal Kmain/moon/miab:above/nofree:dwarf/start:adamant Pkey Cstandard/nofree/noearned/start:edge/only:edward/thrift:5/j:abilities/treasure:free,earned,relaxed Twildish/mintier:2/money Sprice:200/standard/sell:quarter/no:vampires,bacchus,damage_items,coffin Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Gdupe/life -spoon -smith:super,playable -wacky:darts -tweak:edwardheal",
-                "O1:char_tellah/req:all/win:game Kmain/start:magma Pnone Cstandard/treasure:free/nofree Tstandard Svanilla Bvanilla Etoggle Gnone",
+                "O1:char_tellah/req:all/win:game Kmain/start:magma Pnone Cstandard/treasure:free/nofree Twild/maxtier:3/unrestrict:treasury Svanilla Bvanilla Etoggle Gnone",
                 "-o",
                 "output/output.smc"
             ]
