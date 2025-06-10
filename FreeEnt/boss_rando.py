@@ -944,24 +944,137 @@ def apply(env):
     env.spoilers.add_table("BOSSES", boss_spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:bosses'))
 
 if __name__ == '__main__':
-    from .FreeEnt import FreeEntOptions
-    import random
+    # from .FreeEnt import FreeEntOptions
+    # import random
 
-    CSV_OUTPUT = True
-    bosses = list(core_rando.BOSSES)
+    # CSV_OUTPUT = True
+    # bosses = list(core_rando.BOSSES)
 
-    options = FreeEntOptions()
-    options.flags.load('B')
+    # options = FreeEntOptions()
+    # options.flags.load('B')
 
-    rnd = random.Random()
+    # rnd = random.Random()
 
-    for i in range(len(bosses)):
-        assignment = dict(zip(core_rando.BOSS_SLOTS, bosses))
-        result = randomize(rnd, options, assignment)
-        bosses.append(bosses.pop(0))
+    # for i in range(len(bosses)):
+    #     assignment = dict(zip(core_rando.BOSS_SLOTS, bosses))
+    #     result = randomize(rnd, options, assignment)
+    #     bosses.append(bosses.pop(0))
     
     #print(result['script'])
     #for k in result['substitutions']:
     #    print('{} -> {}'.format(k, result['substitutions'][k]))
 
+    # generate the big boss scaling stats spreadsheet!
+    # use, for instance, "python -m FreeEnt.boss_rando" in the main project directory
 
+    boss_stats = open('boss_scaling_stats.csv', 'w')
+
+    for boss in BOSSES:
+        for slot in BOSS_SLOTS:
+
+            source_formation_id = FORMATION_MAP[slot[:-5]] # remove "_slot" suffix
+            target_formation_id = FORMATION_MAP[boss]
+
+            source_formation_id_list = (source_formation_id if type(source_formation_id) is list else [source_formation_id])
+            target_formation_id_list = (target_formation_id if type(target_formation_id) is list else [target_formation_id])
+
+            source_formation = _get_cumulative_formation(source_formation_id_list)
+            target_formation = _get_cumulative_formation(target_formation_id_list)
+
+            # get reference stats from original formation in slot
+            ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation)
+            ref_leader = _get_leader(source_formation)
+
+            # calculate and apply new values for formation going into slot
+            total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation)
+            leader = _get_leader(target_formation)
+
+            for monster_id in target_formation:
+                monster = target_formation[monster_id]
+                csv_row = [boss, slot, monster['name']]
+
+                hp = monster['hp']
+                if monster_id in MONSTER_HP_OFFSETS:
+                    hp -= MONSTER_HP_OFFSETS[monster_id]
+                scaled_hp = int(math.ceil(hp / total_hp * ref_hp))
+                if monster_id in MONSTER_HP_OFFSETS:
+                    restore_threshold = True
+                    if boss == 'kingqueen':
+                        restore_threshold = False
+                    if restore_threshold:
+                        scaled_hp += MONSTER_HP_OFFSETS[monster_id]
+                scaled_hp = min(65000, scaled_hp)
+
+                if total_xp == 0:
+                    scaled_xp = int(ref_xp / total_qty)
+                else:
+                    scaled_xp = int(math.ceil(monster['xp'] / total_xp * ref_xp))
+
+                if total_gp == 0:
+                    scaled_gp = int(ref_gp / total_qty)
+                else:
+                    scaled_gp = min(65000, int(math.ceil(monster['gp'] / total_gp * ref_gp)))
+
+                scaled_xp_actual = scaled_xp
+                scaled_level = int(math.ceil(monster['level'] * ref_leader['level'] / leader['level']))
+                scaled_level = max(1, min(99, scaled_level))
+
+                csv_row.extend([scaled_level, scaled_hp, scaled_xp_actual, scaled_gp])
+
+                monster_scaled_stats = {}
+                for stats_name in ['attack', 'defense', 'magic defense', 'speed']:
+                    if sum(leader[stats_name]) == 0:
+                        stats_ratio = [monster['level'] / leader['level']] * len(monster[stats_name])
+                    else:
+                        stats_ratio = [monster[stats_name][i] / max(leader[stats_name][i], 1) for i in range(len(monster[stats_name]))]
+                    stats_ideal = [ref_leader[stats_name][i] * stats_ratio[i] for i in range(len(stats_ratio))]
+                    if stats_name == 'speed':
+                        closest_index, closest_value = _get_closest_stat(stats_ideal, SPEED_TABLE, (1.0,1.0))
+                    else:
+                        closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+
+                    monster_scaled_stats[stats_name] = closest_value
+                    csv_row.extend(closest_value)
+
+                if monster['spell power'] is not None:
+                    scaled_spell_power = min(255, int(math.ceil(monster['spell power'] * _get_spell_power_ratio(ref_leader, leader))))
+                    csv_row.append(scaled_spell_power)
+                else:
+                    csv_row.append('')
+
+                if monster_id in MONSTER_HP_SCALED_THRESHOLDS:
+                    for threshold_id in MONSTER_HP_SCALED_THRESHOLDS[monster_id]:
+                        ratio = MONSTER_HP_SCALED_THRESHOLDS[monster_id][threshold_id]
+                        scaled_threshold = int(math.ceil(scaled_hp * ratio))
+                        csv_row.append(f'scriptHP: {scaled_threshold}')
+
+                if monster_id in MONSTER_SCRIPTED_CHANGES:
+                    monster_name = MONSTER_SCRIPTED_CHANGES[monster_id][0]
+                    for pair in MONSTER_SCRIPTED_CHANGES[monster_id][1:]:
+                        stat, value = pair
+                        if stat == 'spell power':
+                            scaled_value = str(min(255, int(math.ceil(value * _get_spell_power_ratio(ref_leader, leader)))))
+                            csv_row.append(f'scriptSpellPower: {scaled_value}')
+                        else:
+                            stats_scripted = (SPEED_TABLE if stat == 'speed' else STATS_TABLE)[value]
+                            if stat == 'speed':
+                                stats_ratio = [stats_scripted[i] / max(monster[stat][i], 1) for i in range(len(stats_scripted))]
+                                stats_ideal = [monster_scaled_stats[stat][i] * stats_ratio[i] for i in range(len(stats_ratio))]
+                                closest_index, closest_value = _get_closest_stat(stats_ideal, SPEED_TABLE, (1.0, 1.0))
+                            else:
+                                # New scripted-stats-scaling algorithm; speed still works the same, because no monster has 0 speed.
+                                # For all other stats, the old algorithm treated the scripted changes as multiplicative scaling, but for example,
+                                # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
+                                # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
+                                # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
+                                # (Technically this algorithm will not give Waterhag (0,0,0) defense at exactly the Antlion spot, but it's close enough.)
+                                diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
+                                stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+                            csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+
+
+                boss_stats.write(','.join([str(v) for v in csv_row]) + '\n')
+    
+    boss_stats.close()
