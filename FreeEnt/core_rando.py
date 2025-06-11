@@ -426,6 +426,9 @@ def apply(env):
     keyitem_assigner.item_tier(1).extend(ESSENTIAL_KEY_ITEMS)
     keyitem_assigner.item_tier(2).extend(NONESSENTIAL_KEY_ITEMS)
 
+    if env.options.flags.has('pass_in_key_items') and not env.options.flags.has('key_items_start_pass'):
+        keyitem_assigner.item_tier(1).append(ItemReward('#item.Pass'))
+
     forced_hook_route = env.options.flags.has('key_items_force_hook')
     has_magma_key = True
     # assign gated objective item and metadata
@@ -567,9 +570,6 @@ def apply(env):
 
     else:
         keyitem_assigner.slot_tier(3).extend(CHEST_ITEM_SLOTS)
-
-    if env.options.flags.has('pass_in_key_items') and not env.options.flags.has('key_items_start_pass'):
-        keyitem_assigner.item_tier(1).append(ItemReward('#item.Pass'))
 
     ## Deprecated no_magma code, preserving in case of future implementation.
     # if env.options.flags.has('key_items_no_magma'):
