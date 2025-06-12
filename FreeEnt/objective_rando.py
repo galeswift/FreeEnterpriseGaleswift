@@ -4,6 +4,7 @@ from .errors import *
 from . import util
 from .spoilers import SpoilerRow
 from . import character_rando
+from .core_rando import STARTING_ITEM_MAP
 
 MODES = {
     'Omode:classicforge'  : ['quest_forge'],
@@ -157,6 +158,10 @@ def setup(env):
                 raise BuildError(f"Flags stipulate generating gated objective #{gated_objective_specifier+1}, but there are only {len(objective_ids)} custom objectives")
             else:
                 env.meta['gated_objective_reward'] = target_objective['reward']
+                starting_key_items = env.options.flags.get_list(rf'^Kstart:')
+                for key_item in starting_key_items:
+                    if STARTING_ITEM_MAP.get(key_item,'zonk') == env.meta['gated_objective_reward']:
+                        raise BuildError(f"The starting item cannot also be the gated objective reward.")
                 env.meta['has_gated_objective'] = True
                 env.meta['gated_objective_id'] = target_objective_id                
             env.add_substitution('gated objective id', f'{target_objective_id:02X}')
