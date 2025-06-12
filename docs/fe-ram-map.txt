@@ -114,3 +114,4 @@ WRAM:
 7E:16B3             : music custom setting
 7E:16B4             : flashing custom setting
 7E:16B5             : encounter custom setting
+7E:16B6             : dash custom setting

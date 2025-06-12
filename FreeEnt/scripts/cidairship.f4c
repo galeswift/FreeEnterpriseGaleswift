@@ -97,10 +97,6 @@ msfpatch{
     .addr $03f220
         jsl $=BattleCommand__ExecuteRaid
         rts
-    BattleCommand__ExecuteRaidRNG:
-        // back-hook for battle RNG call
-        jsr $8379
-        rtl
     BattleCommand__ExecuteRaidApplyDamage:
         // back-hook for applying damage
         jsr $ca7e
@@ -178,21 +174,16 @@ msfpatch{
         ldx $3941
         stx $cb // base damage without randomness
 
-        // set slots to check
+        // set first slot to check (always goes up to #$0C)
+        // assuming that monsters cannot use Raid
+        // ... though that would be amusing
         ldx #$0005
         stx $c7
-        ldx #$000d
-        stx $c3
+        // zero out $c3 and use it to store targetting data,
+        // update during the loop for graphics purposes
+        stz $c3
 
     RaidLoopStart:    
-        // check if the slot is empty; 
-        // can move compared to Dark Wave due to
-        // fewer than 128 bytes to RaidLoopNext
-        lda $c7
-        tax
-        lda $3540,x
-        bne $+RaidLoopNext
-
         // loop the slots, include random damage (not capped at 255)
         // 4 * (0..attack base/2) + (0..3)
         // push attack base to the stack
@@ -204,14 +195,14 @@ msfpatch{
         lsr $c6
         ror $c5
         lda $c5 // value is between 25 and 198
-        jsl $=BattleCommand__ExecuteRaidRNG
+        jsl $=Util__BattleRNG
         sta $c9
         asl $c9
         rol $ca
         asl $c9
         rol $ca // $c9-$ca has 4 * (0..attack base/2)
         lda #$03
-        jsl $=BattleCommand__ExecuteRaidRNG
+        jsl $=Util__BattleRNG
         rep #$20
         .mx 0x00
         clc
@@ -225,6 +216,12 @@ msfpatch{
         plx
         stx $c5
         // note that damage is guaranteed <9999, no cap needed
+
+        // check if the slot is empty
+        lda $c7
+        tax
+        lda $3540,x
+        bne $+RaidLoopNext
 
         // check if the slot has damage-precluding status
         lda $c7
@@ -246,14 +243,26 @@ msfpatch{
         lda $ca
         sta $34d5,x
 
+        // set the slot's bit for targetting
+        sec
+        lda $c7
+        sbc #$05
+        tax
+        lda $c3
+        ora $13fefe,x
+        sta $c3
+
     %RaidLoopNext:
         inc $c7
         lda $c7
-        cmp $c3
+        cmp #$0d
         beq $+RaidDamage
         jmp $_RaidLoopStart
 
     %RaidDamage:
+        // finalize targetting for graphics, then continue
+        lda $c3
+        sta $34c5
         jsl $=BattleCommand__ExecuteRaidApplyDamage
 
     DoneRaid:

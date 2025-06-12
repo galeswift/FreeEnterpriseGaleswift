@@ -6,7 +6,8 @@ Fork modifications via fork devs.
 01:FFF8 - 01:FFFF   : menu kit long call hook
 02:FFBE - 01:FFEF  F: cid airship graphics hooks
 03:F20D - 03:F21C   : post-battle calls
-03:F220 - 03:F22F  F: cid airship command hooks
+03:F220 - 03:F228  F: cid airship command hooks
+03:FEE3 - 03:FEE6   : bank03 battle_RNG call with rtl
 
 20:8000 - 20:FFFF   : added code bank
 
