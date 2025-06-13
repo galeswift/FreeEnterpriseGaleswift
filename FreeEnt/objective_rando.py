@@ -462,6 +462,13 @@ def apply(env):
             text = text.replace('%t', 'items' if ki_count > 1 else 'item' )
 
         lines = _split_lines(text)
+        # add key to gated objective, add crystals to hard-required objectives;
+        # note that this step happens after the split/sanity check, so if a line is too long
+        # the text will overflow onto e.g. the tracker screen (capped at 24 chars per line).
+        # the pre-game screen has no border, so it gets an extra character, and the textbox 
+        # upon completion can have 26+ characters per line.
+        # so far, the only problematic objective for the tracker is Break the Dark Elf's spell
+        # with the TwinHarp.
         if env.meta['has_gated_objective'] and objective_id == env.meta['gated_objective_id']:
             lines[-1] = lines[-1] + ' [key]'
         elif objective_id in hard_required_objective_ids:
@@ -476,7 +483,12 @@ def apply(env):
 
         for j,line in enumerate(lines):
             addr = 0x23C000 + (i * 0x40) + (j * 0x20)          
-            env.add_binary(BusAddress(addr), [len(line)], as_script=True)            
+            if '[key]' in line:
+                env.add_binary(BusAddress(addr), [len(line)-4], as_script=True)
+            elif '[crystal]' in line:
+                env.add_binary(BusAddress(addr), [len(line)-8], as_script=True)
+            else:
+                env.add_binary(BusAddress(addr), [len(line)], as_script=True)            
             encoded_line = line.replace('(', '[$cc]').replace(')', '[$cd]')            
             env.add_script(f'text(${addr + 1:06X} bus) {{{encoded_line}}}')
 

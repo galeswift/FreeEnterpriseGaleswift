@@ -167,8 +167,8 @@ text(bank 1 message $113) {
 }
 
 text(bank 1 message $80) {
-Gated objective now 
-unlocked!
+   Gated objective now
+        unlocked!
 }
 
 //----------------------------------------------------------------
