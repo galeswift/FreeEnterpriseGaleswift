@@ -599,7 +599,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O1:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O1:quest_toroiatreasury",
@@ -950,7 +950,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O2:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O2:quest_toroiatreasury",
@@ -1301,7 +1301,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O3:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O3:quest_toroiatreasury",
@@ -1652,7 +1652,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O4:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O4:quest_toroiatreasury",
@@ -2003,7 +2003,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O5:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O5:quest_toroiatreasury",
@@ -2354,7 +2354,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O6:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O6:quest_toroiatreasury",
@@ -2705,7 +2705,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O7:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O7:quest_toroiatreasury",
@@ -3056,7 +3056,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O8:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O8:quest_toroiatreasury",

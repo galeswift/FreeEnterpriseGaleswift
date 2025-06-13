@@ -74,7 +74,7 @@ OBJECTIVES = {
     0x5B: {'slug' : 'quest_burnmist', 'reward': '#item.Package', 'desc': 'Burn village Mist with the Package'},
     0x5C: {'slug' : 'quest_curefever', 'reward': '#item.SandRuby', 'desc': 'Cure the fever with the SandRuby'},
     0x5D: {'slug' : 'quest_unlocksewer', 'reward': '#item.Baron', 'desc': 'Unlock the sewer with the Baron Key'},
-    0x5E: {'slug' : 'quest_music', 'reward': '#item.TwinHarp', 'desc': 'Break the Dark Elf\'s spell with the TwinHarp'},
+    0x5E: {'slug' : 'quest_music', 'reward': '#item.TwinHarp', 'desc': 'Break Dark Elf\'s spell with the TwinHarp'},
     0x5F: {'slug' : 'quest_toroiatreasury', 'reward': '#item.EarthCrystal', 'desc': 'Open the Toroia treasury with the Earth Crystal'},
     0x60: {'slug' : 'quest_magma', 'reward': '#item.Magma', 'desc': 'Drop the Magma Key into the Agart well'},
     0x61: {'slug' : 'quest_supercannon', 'reward': '#item.Tower', 'desc': 'Destroy the Super Cannon'},
