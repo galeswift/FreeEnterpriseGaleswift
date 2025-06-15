@@ -431,7 +431,7 @@ def randomize_doors(env, entrances, exits, scope):
                     else:
                         remapped_map[destination] = entrance_location
                     spoil_entrances.append(message)
-                    if "Mist" in entrance_location:
+                    if "Mist" in entrance_location and "MistCave" not in entrance_location:
                         if j[2]==96:
                             entrance_location = "#Mist West"
                         else:
