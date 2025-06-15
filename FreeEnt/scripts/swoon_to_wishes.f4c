@@ -17,9 +17,23 @@
 
 msfpatch {
     SwoonToWishes:
+        // don't do anything for "no gameover" battles
+        lda $38e5
+        and #$02
+        beq $+DoSwoonToWishes
+        rtl
+        
+    %DoSwoonToWishes:
         tdc
         tax
     %LoopStart:
+        // check that the character isn't just residual data
+        // because you can enter another battle after losing a
+        // character, and the status field doesn't change.
+        // (doesn't matter for permadeath, but does here)
+        lda $1000,x
+        beq $+Next
+
         lda $1003,x
         and #$80  // check for swoon
 
@@ -60,6 +74,7 @@ msfpatch {
         rep #$20
         .mx 0x00
         txa
+        clc
         adc #$1000
         tax
         lda #$0000
