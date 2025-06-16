@@ -1081,7 +1081,8 @@ const _FE_FLAGSPEC = {
         "Ssame",
         "Ssingles",
         "Sfree",
-        "Smixed",
+        "Smixed:shaken",
+        "Smixed:stirred",
         "Sunsafe",
         "Ssell:quarter",
         "Ssell:0",
@@ -2407,7 +2408,8 @@ const _FE_FLAGSPEC = {
         ],
         [
             "Sfree",
-            "Smixed"
+            "Smixed:shaken",
+            "Smixed:stirred"
         ],
         [
             "Ssell:quarter",
@@ -9094,10 +9096,16 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "Smixed",
+            "flag": "Smixed:shaken",
             "offset": 326,
             "size": 2,
             "value": 2
+        },
+        {
+            "flag": "Smixed:stirred",
+            "offset": 326,
+            "size": 2,
+            "value": 3
         },
         {
             "flag": "Sunsafe",

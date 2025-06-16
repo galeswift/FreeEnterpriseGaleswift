@@ -515,8 +515,9 @@
 .(Ssame)!^ Shops sell only one type of item
 .(Sempty)! Shops sell nothing
 <> Buy prices
-.[Sfree] Shop items are free
-.[Smixed]^ Shop item prices are randomized
+.(Sfree) Shop items are free
+.(Smixed:stirred)^ Shop item prices are shuffled within normal items
+.(Smixed:shaken)^ Shop item prices are fully shuffled within all items
 <> Sell prices
 .(Ssell:quarter) Items sell for 1/4 price
 .(Ssell:0) Items sell for 0 GP

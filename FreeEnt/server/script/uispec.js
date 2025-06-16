@@ -6268,8 +6268,14 @@ var FLAG_UISPEC = [
             "title": "Shop items are free"
           },
           {
-            "flag": "Smixed",
-            "title": "Shop item prices are randomized",
+            "flag": "Smixed:stirred",
+            "title": "Shop item prices are shuffled within normal items",
+            "fork": true
+          },
+          {
+            "flag": "Smixed:shaken",
+            "title": "Shop item prices are fully shuffled within all items",
+            "description": "This shuffle includes key items and other excluded items that have 0 GP as their buy/sell price.",
             "fork": true
           }
         ]

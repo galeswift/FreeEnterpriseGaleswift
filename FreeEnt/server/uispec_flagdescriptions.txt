@@ -384,6 +384,9 @@ Equipment sold in shops will be usable by at least one character that you can ac
 [Sunsafe]
 Normally, the randomizer guarantees Cure2 potions, Life potions and StarVeils are readily available, and that Cure3 potions are available in seeds without white mages. This flag removes those checks.
 
+[Smixed:shaken]
+This shuffle includes key items and other excluded items that have 0 GP as their buy/sell price.
+
 [Bstandard]
 The positions of bosses are shuffled. Boss stats are roughly scaled to match the battle it's replacing. For example, Rubicant in the Watery Pass would have the HP and speed of Octomamm. (Yes, this flag is janky, and a MegaNuke is still a MegaNuke. Save often.)
 
