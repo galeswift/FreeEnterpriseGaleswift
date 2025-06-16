@@ -1123,6 +1123,8 @@ def apply(env, randomize_scope, randomize_type, testing=False):
         print([(i, str(env.assignments[i])) for i in env.assignments])
         key_items = {}
         for x in env.assignments:
+            # to update if/when gated objectives can be handled logically 
+            # flagsetcore.py should be updated to allow this combo
             if x == RewardSlot.gated_objective:
                 continue
             if "*" in str(env.assignments[x]) and "[#item.Crystal]" not in str(env.assignments[x]):

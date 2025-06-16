@@ -606,6 +606,11 @@ class FlagLogicCore:
                         bad_gated_conditions = True
                         self._lib.push(log, ['error', f'Cannot have objective #{hard_required_index} be both gated AND hard required.'])
                         break
+                doors_entrances_rando = flagset.get_list(r'^-(doors|entrances)rando:')
+                for doors_entrances in doors_entrances_rando:
+                    bad_gated_conditions = True
+                    self._lib.push(log, ['error', 'Doors and entrances rando does not currently support gated objectives.'])
+                    break
                 if bad_gated_conditions:
                     break
 
