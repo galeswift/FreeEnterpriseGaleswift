@@ -85,6 +85,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -exp:miabbonus100/-exp:miabbonus50
 -exp:moonbonus200/-exp:moonbonus100
 -exp:maxlevelbonus
+-exp:smallparty
 -exp:geometric90/-exp:geometric80/-exp:geometric70/-exp:geometric60/-exp:geometric50/-exp:geometric40/-exp:geometric30/-exp:geometric20/-exp:geometric10/-exp:geometric0
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
@@ -394,6 +395,7 @@ G64                  glitch_allow_64
 -exp:nokeybonus      experience_no_key_item_bonus
 -exp:crystalbonus    experience_crystal_bonus
 -exp:maxlevelbonus   experience_max_level_bonus
+-exp:smallparty      experience_small_party
 -miscbugfixes        bug_fixes
 -vanilla:hobs        vanilla_hobs
 -vanilla:growup      vanilla_dwarf_summons

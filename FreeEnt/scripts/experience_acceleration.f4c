@@ -267,6 +267,57 @@ msfpatch {
     %NextModifier__Moon:
         // %end%
 
+        // %flag experience_small_party on%
+        // provide extra exp depending on the number of
+        // empty party slots (10% for each empty slot up to/including that slot);
+        // because _battle_spoils occurs between instances of Perma/etc.-death,
+        // characters leaving the party create empty slots 
+        tdc
+        tax
+        stx $df
+        stx $e1
+
+        // first, put the number of empty slots plus 1 into $e1
+        inc $e1
+    %SmallPartyLoop1:
+        lda $1000,x
+        bne $+SmallPartyLoop1Next
+        inc $e1
+    %SmallPartyLoop1Next:
+        cpx #$140
+        bcs $+SmallPartyNext
+        jsr $_Util__XPlus40
+        bra $-SmallPartyLoop1        
+
+    %SmallPartyNext:
+        // next, put 6-(max party size) in A
+        lda #$06
+        sec
+        sbc $21f0ff
+
+        // now, compute the number of bonuses in $df
+    %SmallPartyLoop2:
+        cmp $e1
+        bcs $+SmallPartyDone
+        pha
+        clc
+        adc $df
+        sta $df
+        pla
+        inc a
+        bra $-SmallPartyLoop2
+
+    %SmallPartyDone:
+        lda $df
+        tay
+        lda #$0a
+        jsr $_DivideAndAddLoop
+        bcc $+NextModifier__Small
+        jmp $_MaxExp
+
+    %NextModifier__Small:
+        // %end%
+
         bra $+ExperienceAcceleration_CalculateMedianLevel
     
     DivideAndAddLoop:

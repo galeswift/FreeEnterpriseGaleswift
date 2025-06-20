@@ -8276,6 +8276,12 @@ var FLAG_UISPEC = [
             "fork": true
           },
           {
+            "flag": "-exp:smallparty",
+            "title": "Award extra EXP when your party is not full",
+            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
+            "fork": true
+          },
+          {
             "flag": "@geometricexp",
             "title": "Decrease EXP earned from repeated same-type monster kills",
             "description": "Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not \"per slot\" in battle.",

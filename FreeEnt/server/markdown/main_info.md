@@ -906,6 +906,12 @@ Under this flag, encounters on the moon (the surface, Cave Bahamut, or LST) awar
 
 Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5). For example, a pack of 3 Warlocks has smallest monster level 73, so if your largest level is 25 (base level Edge), then we compute 5 + 2*25 = 55, and take 73-55 = 18. 18 divided by 5 is 3.6, so there are 3 deficits of 5, so you would receive 3 * 20% = 60% bonus experience.
 
+### `-exp:smallparty` {: .h6 }
+
+Under this flag, encounters give more EXP when your party is not full. If you can have `N` characters and you don't, then you get `6-N` bonuses of 10%, which sums over `N` from 1 to the maximum party size. For example, if you have 2 characters but you could have 5, then you get 1+2+3 = 6 bonuses of 10% (with contributions from `N` being 5,4,3), for 60% total bonus EXP. 
+
+Since the battle spoils function runs after permadeath/etc. occurs, any characters that leave your party do not count as being part of your party for the purposes of this calculation.
+
 ### `-exp:geometric[90/80/.../10/0]` {: .h6 }
 
 In vanilla FF4, each instance of a monster type killed in battle gives the same amount of EXP; there are at most three monster types, and their exp gains get added up separately. (Meaning that the graphical position of the monster doesn't matter; e.g. if there are three Warlocks on screen, they are all just Warlocks, independent of "which" Warlocks they are.) Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not per graphical position in battle (as above).

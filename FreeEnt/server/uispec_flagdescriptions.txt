@@ -940,6 +940,9 @@ Normally, location of encounter does not increase EXP. Under this flag, encounte
 [-exp:maxlevelbonus]
 Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).
 
+[-exp:smallparty]
+Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.
+
 [@geometricexp]
 Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not "per slot" in battle.
 

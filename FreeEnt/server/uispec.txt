@@ -862,6 +862,7 @@
 ...(-exp:moonbonus200) Moon encounters give triple EXP
 ...(-exp:moonbonus100) Moon encounters give double EXP
 .[-exp:maxlevelbonus]^ Award extra EXP when underlevelled
+.[-exp:smallparty]^ Award extra EXP when your party is not full
 .[@geometricexp]^ Decrease EXP earned from repeated same-type monster kills
 ..<> Per-monster-kill percentage reduction
 ...(-exp:geometric_90) Repeated monster kills scale down in EXP to 90%
