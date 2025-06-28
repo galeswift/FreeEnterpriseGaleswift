@@ -25,7 +25,8 @@ POSSIBLE_SHADOW_COMMANDS = [
     '#spell.Enemy_Breath',
     '#spell.Enemy_Count',
     '#spell.Enemy_Crush',
-    '#spell.Enemy_Disrupt',
+    '#spell.Enemy_Demolish',
+    '#spell.Enemy_Disrupt2', # the instant-kill, not the status removal
     '#spell.Fatal',
     '#spell.Enemy_Gas',
     '#spell.Enemy_Hug',
