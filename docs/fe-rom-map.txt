@@ -4,10 +4,18 @@ Fork modifications via fork devs.
 
 01:FFF0 - 01:FFF6  F: omni spellset name data
 01:FFF8 - 01:FFFF   : menu kit long call hook
+02:85A7 - 02:85D1  F: Big Chocobo summon graphics handler (replaces unused func)
 02:FFBE - 01:FFEF  F: cid airship graphics hooks
 03:F20D - 03:F21C   : post-battle calls
 03:F220 - 03:F228  F: cid airship command hooks
 03:FEE3 - 03:FEE6   : bank03 battle_RNG call with rtl
+
+0D:8814 - 0D:8815  F: Big Chocobo summon tile data offset
+0D:D750 - 0D:DD4F  F: Big Chocobo summon tile data
+0D:F1C0 - 0D:F201  F: Big Chocobo summon tilemap data
+0D:F7D7 - 0D:F7E6  F: Big Chocobo summon frame data
+
+13:FA55 - 13:FA58  F: Big Chocobo summon position/size data
 
 20:8000 - 20:FFFF   : added code bank
 

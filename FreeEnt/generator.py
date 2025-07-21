@@ -894,6 +894,12 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/improve_edward_heal.f4c')
     if options.flags.has('cidairship'):
         env.add_file('scripts/cidairship.f4c')
+    if options.flags.has('twinmeteo'):
+        env.add_file('scripts/twin_meteo_stone.f4c')
+    if options.flags.has('bigchocobosummon'):
+        env.add_file('scripts/big_chocobo_summon.f4c')
+        if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
+            env.add_toggle('save us big chocobo summon')
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')
