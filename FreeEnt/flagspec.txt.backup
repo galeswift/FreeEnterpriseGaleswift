@@ -60,19 +60,20 @@ Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
--kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:exit/-kit:atb/-kit:random
--kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:exit/-kit2:atb/-kit2:random
--kit3:basic/-kit3:better/-kit3:loaded/-kit3:cata/-kit3:freedom/-kit3:cid/-kit3:yang/-kit3:money/-kit3:grabbag/-kit3:miab/-kit3:archer/-kit3:fabul/-kit3:castlevania/-kit3:summon/-kit3:notdeme/-kit3:meme/-kit3:defense/-kit3:mist/-kit3:mysidia/-kit3:baron/-kit3:dwarf/-kit3:eblan/-kit3:libra/-kit3:99/-kit3:green/-kit3:adamant/-kit3:cursed/-kit3:hero/-kit3:exit/-kit3:atb/-kit3:random
+-kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:exit/-kit:atb/-kit:egg/-kit:random
+-kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:exit/-kit2:atb/-kit2:egg/-kit2:random
+-kit3:basic/-kit3:better/-kit3:loaded/-kit3:cata/-kit3:freedom/-kit3:cid/-kit3:yang/-kit3:money/-kit3:grabbag/-kit3:miab/-kit3:archer/-kit3:fabul/-kit3:castlevania/-kit3:summon/-kit3:notdeme/-kit3:meme/-kit3:defense/-kit3:mist/-kit3:mysidia/-kit3:baron/-kit3:dwarf/-kit3:eblan/-kit3:libra/-kit3:99/-kit3:green/-kit3:adamant/-kit3:cursed/-kit3:hero/-kit3:exit/-kit3:atb/-kit3:egg/-kit3:random
 -noadamants
 -nocursed
 -spoon
 -monsterevade
 -monsterflee
 -smith:super/-smith:alt -smith:playable -smith:omni
+-starting:blackchocobo/-starting:underground
 -fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
 -fusoya:slowstart/-fusoya:unlearn
 -fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
--agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42/
+-agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:random/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42/
 -agility:scale1/-agility:scale10
 -speedmodbalance
 -exp:split
@@ -143,7 +144,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:whatsmygear
 -wacky:scrambledstats
 -wacky:advertising
--tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship
+-tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -190,6 +191,7 @@ Kforce:magma         key_items_force_magma
 Kforce:hook          key_items_force_hook
 Kunweighted          key_items_unweighted
 Klatedark            key_items_late_darkness
+Kunreliabledark      key_items_unreliable_darkness
 Kstart:package          key_items_start_package
 Kstart:sandruby         key_items_start_sandruby
 Kstart:baron            key_items_start_baron
@@ -367,6 +369,8 @@ G64                  glitch_allow_64
 -smith:alt           altsmith
 -smith:playable      playablesmith
 -smith:omni          omnismith
+-starting:blackchocobo  starting_blackchocobo
+-starting:underground   starting_underground
 
 -fusoya:vanilla       vanilla_fusoya
 -fusoya:location      location_fusoya
@@ -385,6 +389,7 @@ G64                  glitch_allow_64
 -agility:fastest     fastest_agility
 -agility:average     average_agility
 -agility:median      median_agility
+-agility:random      random_agility
 -agility:monster     monster_agility
 -agility:flat        flat_agility
 -agility:750formula  formula_agility
@@ -420,3 +425,5 @@ G64                  glitch_allow_64
 -tweak:darkpaladin   darkpaladin
 -tweak:cidairship    cidairship
 -tweak:harmspell     harmspell
+-tweak:twinmeteo     twinmeteo
+-tweak:chocobosummon bigchocobosummon

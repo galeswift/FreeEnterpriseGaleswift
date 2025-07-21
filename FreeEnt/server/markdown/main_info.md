@@ -475,8 +475,8 @@ The `-z` flags interact with these flags in the following ways:
 
 ### `Brestrict:[location]` {: .h6 }
 
-- Idea: Galeswift (probably others)
-- Design/Programming: Galeswift
+- Idea: sgrunt (probably others)
+- Design/Programming: sgrunt
 - Locations: core_rando.py, objective_rando.py
 
 This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can appear.
@@ -708,6 +708,14 @@ This kit gives you one tier 4-5 weapon, body armor, headgear, and ring/gauntlet 
 
 This kit gives you 5-10 Exits.
 
+### `-kit:egg` {: .h6 }
+
+- Idea: ScytheMarshall, Deathlike, Skarcerer
+- Design/Programming: ScytheMarshall
+- Locations: kit_rando.py
+
+This kit gives you one Siren and a selection of items that your starting character can use to successfully defeat a Yellow D egg. It's possible that resets are necessary or that the fights will be very long. Depending on the starting character, there may be many possible selections of items or only a few. The probability of a specific selection of items is smaller if the Yellow D fight will be long/etc. or if the items contribute to your party's power afterwards.
+
 ### `-monsterevade`, `-monsterflee` {: .h6 }
 
 - Idea: ScytheMarshall (but also probably others)
@@ -744,6 +752,15 @@ Under this flag, the forge item will be usable by one of the characters you can 
 - Locations: custom_weapon_rando.py, flagsetcore.py
 
 This flag allows every character in the seed to equip the FF4A weapon, if there is one. It will not, however, also allow anyone who cannot equip bows or arrows to equip the other hand to use Rosa's weapons.
+
+### `-starting:blackchocobo,underground` {: .h6 }
+
+- Idea: Deathlike, Skarcerer, others in the past
+- Design: Deathlike, Skarcerer, Marshal, ScytheMarshall, others
+- Programming: ScytheMarshall
+- Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
+
+These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. Mist does not get locked from the right side after the Package cutscene.
 
 ## FuSoYa Flags
 
@@ -809,7 +826,7 @@ FuSoYa is given a third spellset potentially containing every non-Black/White sp
 
 ## Agility Flags
 
-- Idea: ScytheMarshall (except `-agility:750formula` and `-speedmodbalance`)
+- Idea: ScytheMarshall (except `-agility:random`, `-agility:750formula`, and `-speedmodbalance`)
 - Design/Programming: ScytheMarshall (except for the above)
 - Locations: agility.f4c (mostly)
 
@@ -836,6 +853,12 @@ The average agility of your party (rounded down, of course) is the value used fo
 ### `-agility:median` {: .h6 }
 
 The median agility of your party (the agility stat in the middle, or the lower of the two in the middle for an even number of characters) is the value used for anchoring. Empty slots do not count.
+
+### `-agility:random` {: .h6 }
+
+- Idea: Found in rivers's dev ideas document
+
+The anchor slot is randomly determined (like Afflicted, it is fixed for each formation); for that battle, the agility anchor is chosen by taking the first non-empty party slot starting at the randomly determined slot, cycling around to lower party slots if necessary.
 
 ### `-agility:monster` {: .h6 }
 
@@ -1084,3 +1107,21 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Locations: cidairship.f4c; some wacky f4c files where command menus change
 
 This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.
+
+### `-tweak:twinmeteo` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: twin_meteo_stone.f4c
+
+This flag allows Twin to cast W.Meteo or self-target Stone, in addition to Flare and Comet, but only if the casting twins have a combined level of 70 or greater. The probabilities become 143/256 for Flare, 1/4 for Comet (remains the same), 1/8 for W.Meteo, 1/16 for self-target Stone, and 1/256 for failing. Stone will only target the casting twins.
+
+### `-tweak:chocobosummon` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design/Programming: CoffeeAndChocobos (design), ScytheMarshall (design and programming), others in the Discord thread
+- Locations: big_chocobo_summon.f4c
+
+This flag turns the Chocobo summon into a spell somewhat like Asura, in that sometimes it will instead Call the Big Chocobo to attack. The chance of the Big Chocobo attacking is 4% plus 2% for each distinct item stored with the Big Chocobo, maxing out at 100% at 48 distinct items. The spell power is described in the following way. The base spell power is 40. For each distinct item stored with the Big Chocobo, the spell power increases by 8, plus its item price (prices larger than 112000 GP count as 112000) divided by 16000, times 8. The largest increase per item is 64 points of spell power (e.g. Crystal Sword, Avenger, Adamant). The maximum total spell power is 2040. Carrots give +16 spell power instead of +8, and Whistles give +32 spell power instead of +16. The Grimoire's Chocobo summon is replaced with Big Chocobo.
+
+Since the Big Chocobo menu cannot be accessed with the Save Us Big Chocobo wacky active, the probability is a static 20% with 232 spell power (as if you stored 8 different items with an average of 24 bonus spell power each).

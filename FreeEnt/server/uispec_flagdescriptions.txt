@@ -586,7 +586,10 @@ A Cursed Ring.
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
 [-kit:exit]
-5-10 Exits
+5-10 Exits.
+
+[-kit:egg]
+One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
 [-kit:random]
 One of the other kit options, selected at random.
@@ -679,7 +682,10 @@ A Cursed Ring.
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
 [-kit2:exit]
-5-10 Exits
+5-10 Exits.
+
+[-kit2:egg]
+One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
 [-kit2:random]
 One of the other kit options, selected at random.
@@ -772,7 +778,10 @@ A Cursed Ring.
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
 [-kit:exit]
-5-10 Exits
+5-10 Exits.
+
+[-kit3:egg]
+One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
 [-kit3:random]
 One of the other kit options, selected at random.
@@ -797,6 +806,12 @@ The item that Kokkol forges will be usable by a character you can acquire in the
 
 [-smith:omni]
 If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).
+
+[-starting:blackchocobo]
+Instead of starting with the Enterprise, start at Baron with Black Chocobos available but no Enterprise. The Enterprise is obtained by completing Baron Castle.
+
+[-starting:dwarfcastle]
+Instead of starting at Baron with the Enterprise, start at Dwarf Castle with the Falcon. The Drill to get above ground is now a key item to be found and the Enterprise is not obtained upon completing the Super Cannon check.
 
 [@fusoya] 
 By default, Free Enterprise runs with the "FuSoYa Challenge", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.
@@ -882,6 +897,9 @@ This flag will double the Count timer.
 
 [-agility:average]
 Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility.
+
+[-agility:random]
+Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.
 
 [-agility:monster]
 Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.
@@ -1042,3 +1060,9 @@ Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark
 
 [-tweak:cidairship]
 Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon.
+
+[-tweak:twinmeteo]
+Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the casting twins have a combined level of 70 or greater, then W.Meteo and self-target Stone are also possible options. W.Meteo is about half as likely as Comet, and Stone is half as likely as W.Meteo (with a corresponding reduction to Flare's chances).
+
+[-tweak:chocobosummon]
+The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there).

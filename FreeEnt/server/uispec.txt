@@ -706,6 +706,7 @@
 ..(-kit:cursed)^      Cursed kit
 ..(-kit:hero)^        Hero kit
 ..(-kit:exit)^        Exit kit
+..(-kit:egg)^         Egg kit
 ..(-kit:random)       Select a random kit
 .<> Kit 2
 ..(-kit2:basic)        Basic kit
@@ -738,6 +739,7 @@
 ..(-kit2:cursed)^      Cursed kit
 ..(-kit2:hero)^        Hero kit
 ..(-kit2:exit)^        Exit kit
+..(-kit2:egg)^         Egg kit
 ..(-kit2:random)       Select a random kit
 .<> Kit 3
 ..(-kit3:basic)        Basic kit
@@ -770,6 +772,7 @@
 ..(-kit3:cursed)^      Cursed kit
 ..(-kit3:hero)^        Hero kit
 ..(-kit3:exit)^        Exit kit
+..(-kit3:egg)^         Egg kit
 ..(-kit3:random)       Select a random kit
 [-noadamants] No Adamant Armors
 [-nocursed] No Cursed Rings
@@ -782,6 +785,9 @@
 ..(-smith:super) Kokkol crafts a weapon from FF4 Advance
 .[-smith:playable]^ Kokkol's item will be usable
 .[-smith:omni]^ All characters can equip the FF4A weapon 
+<> Alternate starting conditions
+.(-starting:blackchocobo) Start with black chocobos but no Enterprise
+.(-starting:underground) Start underground with a Drill-less Falcon
 [@fusoya]^ FuSoYa challenges
 .<> Spell learning categories
 ..(@normalfu) Usual FuSoYa challenge
@@ -817,6 +823,7 @@
 ..(-agility:fastest)! Use your fastest character as anchor
 ..(-agility:average) Use your average agility for anchoring
 ..(-agility:median) Use your median agility for anchoring
+..(-agility:random)! A random party slot is chosen for anchoring
 ..(-agility:monster)! Use average monster agility for anchoring
 ..(-agility:flat) Everyone is the same agility
 ..(-agility:750formula) Use a formula to determine agility
@@ -960,6 +967,8 @@
 .[-tweak:edwardheal] Improve Edward's Heal command
 .[-tweak:darkpaladin] Cecil becomes a Dark Paladin
 .[-tweak:cidairship] Cid gains a target-all Raid command
+.[-tweak:twinmeteo] Twin can also cast W.Meteo or self-Stone
+.[-tweak:chocobosummon] Sometimes Call the Big Chocobo in battle
 
 == SPOILERS
 <> No spoiler log
