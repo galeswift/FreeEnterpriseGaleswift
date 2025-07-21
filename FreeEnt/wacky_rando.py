@@ -155,7 +155,7 @@ def setup(env):
             setup_func(env)
 
 def apply(env):
-    wacky_challenge = env.meta.get('wacky_challenge', None)
+    wacky_challenge = env.meta.get('wacky_challenge', [])
     if wacky_challenge:
         env.add_file('scripts/wacky/wacky_common.f4c')
         env.add_substitution('intro disable', '')
@@ -190,11 +190,8 @@ def apply(env):
                 if ram_base.get_bus() + ram_bytes_used - 1 > WACKY_LAST_AVAILABLE_RAM_BYTE:
                     raise Exception(f"Incompatible wacky modes (RAM incompatibility): {', '.join(wacky_challenge)}")
                 ram_base = ram_base.offset(ram_bytes_used)
-            try:
-                text = WACKY_CHALLENGES[wacky]
-            except:
-                text = WACKY_CHALLENGES[wacky_orig]
 
+            text = WACKY_CHALLENGES[wacky]
             centered_text = '\n'.join([line.center(26).upper().rstrip() for line in text.split('\n')])
             env.add_substitution(f'wacky challenge title {idx+1}', f'\n{centered_text}')
             env.add_toggle(f'wacky_challenge_{idx+1}')
@@ -289,7 +286,7 @@ def apply_whatsmygear(env, rom_address):
         
         # when we allow multiple wackies, usual_row should read '[$00][$fa]As advertised[$c9] except      [$fb][$00][$00]'
         # when What's My Gear Again? interacts with Truth in Advertising (i.e. What's My Gear Again? takes priority).
-        if 'advertising' in env.meta.get('wacky_challenge', None):
+        if 'advertising' in env.meta.get('wacky_challenge', []):
             usual_row = '[$00][$fa]As advertised[$c9] except      [$fb][$00][$00]'
         else:
             usual_row = '[$00][$fa]As normal[$c9] except          [$fb][$00][$00]'
@@ -552,7 +549,7 @@ def apply_afflicted(env, rom_address):
         status_bytes.extend(STATUSES[status])    
     env.add_binary(rom_address, status_bytes, as_script=True)
 
-    rng_table = [env.rnd.randint(0, len(STATUSES) - 1) for i in range(0x200)]
+    rng_table = [env.rnd.randint(0, len(STATUSES) - 1) for i in range(0x100)]
     env.add_binary(rom_address.offset(0x100), rng_table, as_script=True)
     return 0x100 + len(rng_table)
 
@@ -1032,7 +1029,7 @@ def apply_advertising(env, rom_address):
 
     # since we changed equipment, need to manually modify descriptions for every piece of gear
     # (but not if What's My Gear Again? is on; deal with that when we merge multi-wacky)
-    if not ('whatsmygear' in env.meta.get('wacky_challenge', None)):
+    if not ('whatsmygear' in env.meta.get('wacky_challenge', [])):
         env.meta['wacky_gear_descriptions'] = gear_description_bytes
 
     env.add_file('scripts/wacky/advertising.f4c')
