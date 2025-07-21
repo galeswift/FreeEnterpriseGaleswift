@@ -941,6 +941,13 @@ msfpatch {
                 bcc $-NeatFreakLoopStart
         // %end%
 
+        // %flag bigchocobosummon on%
+        // need to initialize the stats at some point,
+        // this event happens exactly once before
+        // gameplay starts
+        jsr $_BigChocoboCalculateStats
+        // %end%
+
         jmp $_EvEx__End
 
     %GiveGP:
