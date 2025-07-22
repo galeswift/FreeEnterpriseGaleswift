@@ -760,6 +760,10 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/monster_flee.f4c')
 
     # agility flag substitutions and toggles
+    if options.flags.has('random_agility'):
+        random_offset = env.rnd.randrange(0x100)
+        env.add_substitution('random agility PRNG offset', f'#${random_offset:02X}')
+
     scale_agility_mod = env.options.flags.get_suffix('-agility:scale') # either 1 or 10; 5 is default
     if scale_agility_mod:
         scale_agility_mod = int(scale_agility_mod)

@@ -167,6 +167,53 @@ msfpatch {
         bra $-FindMedianSlot_LoopStart
 
         //-----------------------------------------------------
+        // %elif flags: random_agility%
+        // use the formation to compute a preferred slot number
+        // (swap hi/lo nibbles of the lo byte, EOR with hi byte,
+        // then index into PRNG and divide by 5)
+        phx
+        lda #$00
+        xba
+        lda $1800
+        cmp #$80
+        rol a
+        rol a
+        rol a
+        rol a
+        eor $1801
+        tax
+        lda $14ee00,x
+        clc
+        adc {% random agility PRNG offset %} 
+        sta $1670
+        stz $1671
+        stz $1672
+        lda #$05
+        sta $1674
+        stz $1675
+        jsr $_Util__Divide
+        plx
+
+    %CheckRandomLoopStart:
+        // now we check our slots, starting
+        // with the current slot; if we don't
+        // find an anchor after slot 4, then
+        // use the built-in "take the first
+        // non-empty slot" vanilla fallback,
+        // since that's the next non-empty
+        // slot in order
+        cpy $167c
+        bcs $+Accept
+        iny
+        cpy #$0005
+        beq $+EndLoop
+        jsr $_Util__XPlus80
+        bra $-CheckRandomLoopStart
+        bra $+Accept 
+    %EndLoop:
+        jml $038d7a        
+
+        //-----------------------------------------------------
         // %elif flags: flat_agility%
         bra $+Accept // doesn't matter who the anchor is
 
