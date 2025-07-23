@@ -368,17 +368,26 @@ def apply_misspelled(env, rom_address):
     env.rnd.shuffle(shuffled_spells)
 
     # get summon effects and pair them with their summon spell
-    raw_summon_effects = spells_dbview.find_all(lambda sp: (sp.code >=0x4D and sp.code <= 0x5D))
+    if env.options.flags.has('bigchocobosummon'):
+        raw_summon_effects = spells_dbview.find_all(lambda sp: (sp.code >=0x4D and sp.code <= 0x5D) or sp.code == 0x5F)
+    else:
+        raw_summon_effects = spells_dbview.find_all(lambda sp: (sp.code >=0x4D and sp.code <= 0x5D))
     summon_effects_list = list(raw_summon_effects)
     summon_effects_linked = {}
     for effect in summon_effects_list:
-        # three Asuna effects
-        if (effect.code in [0x5A, 0x5B, 0x5C]):
+        # possibly two Chocobo effects
+        if (effect.code in [0x51, 0x5F]):
+            try:
+                summon_effects_linked[0x35].append(effect)
+            except:
+                summon_effects_linked[0x35] = [effect]
+        # three Asura effects
+        elif (effect.code in [0x5A, 0x5B, 0x5C]):
             try:
                 summon_effects_linked[0x3E].append(effect)
             except:
                 summon_effects_linked[0x3E] = [effect]
-        # bahamut
+        # Bahamut
         elif (effect.code == 0x5D):
             summon_effects_linked[0x3F] = effect
         else:
@@ -393,7 +402,17 @@ def apply_misspelled(env, rom_address):
             text(spell name {pair[1].const}) {{{pair[0].name}}}
         ''')
         # rename effects of summon spells as well
-        if (pair[1].code >= 0x31 and pair[1].code <= 0x3D):
+        if (pair[1].code == 0x35):
+            # possibly two Chocobo effects (it DOES matter if Chocobo shuffles to itself; 
+            # should still get "BigChoco", later, so don't rename $5F in that case)
+            env.add_script(f'''
+                text(spell name $51) {{{pair[0].name}}}
+            ''')
+            if len(summon_effects_linked[0x35]) > 1 and pair[0].code != 0x35:
+                env.add_script(f'''
+                    text(spell name $5F) {{{pair[0].name}}}
+                ''')
+        elif (pair[1].code >= 0x31 and pair[1].code <= 0x3D):
             env.add_script(f'''
                 text(spell name ${pair[1].code + 0x1C:02X}) {{{pair[0].name}}}
             ''')
@@ -405,7 +424,7 @@ def apply_misspelled(env, rom_address):
                 text(spell name $5C) {{{pair[0].name}}}
             ''')
         elif (pair[1].code == 0x3F):
-            # bahamut
+            # Bahamut
             env.add_script(f'''
                 text(spell name $5D) {{{pair[0].name}}}
             ''')
@@ -418,14 +437,27 @@ def apply_misspelled(env, rom_address):
         )
 
         # trade summon effect MP costs as well
-        if (pair[1].code >= 0x31 and pair[1].code <= 0x3D):
+        if (pair[1].code == 0x35):
+            # possibly two Chocobo effects, both of which ignore Walls
+            env.add_binary(
+                BusAddress(0xF97A5 + (0x06 * 0x51)),
+                [(pair[0].data[5] & 0x7F) | 0x80],
+                as_script=True
+            )
+            if len(summon_effects_linked[0x35]) > 1:
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x5F)),
+                    [(pair[0].data[5] & 0x7F) | 0x80],
+                    as_script=True
+                )
+        elif (pair[1].code >= 0x31 and pair[1].code <= 0x3D):
             env.add_binary(
                 BusAddress(0xF97A5 + (0x06 * (pair[1].code + 0x1C))),
                 [(pair[0].data[5] & 0x7F) | (summon_effects_linked[pair[1].code].data[5] & 0x80)],
                 as_script=True
             )
         elif (pair[1].code == 0x3E):
-            # three Asuna effects
+            # three Asura effects
             env.add_binary(
                 BusAddress(0xF97A5 + (0x06 * 0x5A)),
                 [(pair[0].data[5] & 0x7F) | (summon_effects_linked[0x3E][0].data[5] & 0x80)],
@@ -442,14 +474,18 @@ def apply_misspelled(env, rom_address):
             as_script=True
             )
         elif (pair[1].code == 0x3F):
-            # bahamut
+            # Bahamut
             env.add_binary(
             BusAddress(0xF97A5 + (0x06 * 0x5D)),
             [(pair[0].data[5] & 0x7F) | (summon_effects_linked[0x3F].data[5] & 0x80)],
             as_script=True
             )   
 
-    
+    # For the purposes of -fusoya:omnimage (where he gets Comet and Flare), assign those two
+    # spells their normal spells (since they can't be remapped due to Twin), so that Fu is
+    # still given the spells
+    remap_data[0x40] = 0x40 # Comet
+    remap_data[0x41] = 0x41 # Flare    
 
     env.add_binary(rom_address, remap_data, as_script=True)
     env.add_toggle('wacky_misspelled')
