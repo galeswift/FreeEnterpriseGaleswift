@@ -127,6 +127,36 @@ msfpatch {
 }
 
 msfpatch {
+    // param: A = command byte (as index to name data),
+    // X = target buffer number
+    // (returns long)
+    TextBuffer__LoadCommandName:
+        stx $_TextBuffer__TargetBuffer
+
+        // get command code * 5 + base address
+        rep #$20
+        .mx 0x00
+        and #$00ff
+        sta $_TextBuffer__SourceAddrLo
+        asl a
+        asl a
+        clc
+        adc $_TextBuffer__SourceAddrLo
+        adc #$a7c6
+        sta $_TextBuffer__SourceAddrLo
+        lda #$0000
+        sep #$20
+        .mx 0x20
+
+        lda #$0f
+        sta $_TextBuffer__SourceBank
+        lda #$05
+        sta $_TextBuffer__MaxLength
+
+        jml $=TextBuffer__Load
+}
+
+msfpatch {
     // param: A = axtor code, X = target buffer number
     // (returns long)
     TextBuffer__LoadAxtorName:
@@ -178,12 +208,6 @@ msfpatch {
         %CanLearn:
         // %end%
         
-        // Sometimes Fu only learns one or two spells,
-        // so if A contains FF (no spell), then send to
-        // blank name
-        cmp #$ff
-        beq $+BlankName
-
         // Sometimes Fu only learns one or two spells,
         // so if A contains FF (no spell), then send to
         // blank name

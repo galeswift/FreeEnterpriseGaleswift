@@ -1041,7 +1041,7 @@ Enables the April Fools Day 2019 mode.
 	<li>None of these modes can be used together: "3point", "afflicted", "battlescars", "menarepigs", "mirrormirror", "skywarriors", "unstackable", "zombies"</li>
 	<li>None of these modes can be used together: "afflicted", "friendlyfire"</li>
 	<li>None of these modes can be used together: "afflicted", "battlescars", "worthfighting", "zombies"</li>
-	<li>None of these modes can be used together: "darts", "musical"</li>
+	<li>None of these modes can be used together: "darts", "musical", "skillissue"</li>
 	<li>None of these modes can be used together: "3point", "tellahmaneuver"</li>	
 </ul>
 <p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>

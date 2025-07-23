@@ -144,6 +144,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:whatsmygear
 -wacky:scrambledstats
 -wacky:advertising
+-wacky:skillissue
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon
 -spoil:all
 -spoil:keyitems

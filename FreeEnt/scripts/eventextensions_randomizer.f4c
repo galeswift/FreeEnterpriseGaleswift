@@ -354,6 +354,51 @@ msfpatch {
         stx $_Bank00LongCallAddr
         jsl $=Bank00LongCall
     %SkipBossCollectorDialog:
+
+        // %if wacky_skillissue%
+        // check if we need to show a textbox
+        inc $_Wacky__RAM_skillissue
+        lda $_Wacky__RAM_skillissue
+        cmp {% wacky skill issue max credits %}
+        bcs $+SkipSkillIssue
+    
+        // identify which command has been unlocked;
+        // we should *not* need to bail out after
+        // a particular X value, since we already checked
+        ldx #$0000
+    %SkillIssueLoopStart:
+        cmp $=Wacky__ROMData_skillissue,x
+        beq $+FoundNewCommand
+        inx
+        bra $-SkillIssueLoopStart
+
+    %FoundNewCommand:
+        txa
+        // now we need to display the 
+        // "Unlocked [skill]!" custom textbox
+        ldx #$0000
+        jsl $=TextBuffer__LoadCommandName
+        lda #$33
+        sta $b2
+
+        // Play sound
+        lda #$24
+        jsr $_Util__PlaySFX
+
+        // display messages
+        ldx #$b1e1  // _load_message_bank_1_hi_offset
+        stx $_Bank00LongCallAddr
+        jsl $=Bank00LongCall
+        ldx #$b0d1  // _show_upper_dialog
+        stx $_Bank00LongCallAddr
+        jsl $=Bank00LongCall
+        ldx #$b164  // _close_upper_dialog
+        stx $_Bank00LongCallAddr
+        jsl $=Bank00LongCall
+
+    %SkipSkillIssue:
+        // %end%
+
         // check for Fusoya challenge
         lda $=RandoFlag_vanilla_fusoya
         beq $03
@@ -744,4 +789,8 @@ text(bank 1 message $131) {
 
 text(bank 1 message $132) {
     [amount] bosses collected!
+}
+
+text(bank 1 message $133) {
+Unlocked [name $e0]!
 }

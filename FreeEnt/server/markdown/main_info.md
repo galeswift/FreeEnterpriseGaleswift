@@ -1064,6 +1064,14 @@ This wacky flag makes widespread changes to equipment, spells, and monsters in o
 
 This wacky flag fully randomizes the stat bonuses that equipment items give (and changes the select button descriptions to show what the new stat bonuses are). "Unarmed" is not modified.
 
+### `-wacky:skillissue` - Skill Issue {: .h6 }
+
+- Idea: Guerin, name by Shiru
+- Design/Programming: ScytheMarshall, design suggestions by Guerin and Antidale 
+- Locations: wacky_rando.py, skillissue.f4c, eventextensions_randomizer.f4c, text_buffers.f4c, character_expansion.f4c, unused.f4c
+
+This wacky flag causes all commands except for Fight and Item to be locked at the beginning of the seed, and each boss defeated unlocks one of the commands (similarly to how Ultimecia's Castle works in FFVIII, except you cannot choose the command to unlock). If a magic command is locked, then you cannot use those spells outside of battle either. This wacky is compatible with Misspelled but not with FF4: The Musical or World Championship of Darts. On Push B to Jump, you can still push B to Jump even if you have not unlocked the Jump command.
+
 ## Tweak Flags
 
 The "Tweak" flags are miscellaneous flags that modify the game in fairly large ways, to try out different mechanics, do proof-of-concepts for code changes or f4c usage, and so on.

@@ -46,6 +46,7 @@ WACKY_CHALLENGES = {
     'whatsmygear'       : 'What\'s My\nGear Again?',
     'scrambledstats'    : 'Scrambled Stats',
     'advertising'       : 'Truth in\nAdvertising',
+    'skillissue'        : 'Skill Issue',
 }
 
 WACKY_ROM_ADDRESS = BusAddress(0x268000)
@@ -91,13 +92,14 @@ WACKY_RAM_USAGE = {
     'mirrormirror'      : 13, # StatusEnforcement
     'scrambledstats'    : 0,
     'advertising'       : 0,
+    'skillissue'        : 2,
 }
 
 WACKY_MUTUAL_INCOMPATIBILITIES = [
     ['3point', 'battlescars', 'unstackable', 'afflicted', 'menarepigs', 'skywarriors', 'zombies', 'mirrormirror'], # These all use Wacky__InitializeAxtorHook
     ['afflicted', 'friendlyfire'], # These both use Wacky_SpellFilterHook
     ['battlescars', 'afflicted', 'zombies', 'worthfighting'], # These all use Wacky__PostBattleHook
-    ['darts', 'musical'], # These both replace the Fight command
+    ['darts', 'musical', 'skillissue'], # These all replace the Fight command or prevent command usage
     ['3point','tellahmaneuver'], # These both mess with MP
 ]
 
@@ -320,7 +322,6 @@ def apply_scrambledstats(env, rom_address):
     env.add_substitution('ldx WIL offset', f'ldx #$00{statsdict["WIL"]:02X}')
 
     env.add_toggle('wacky_scrambledstats')
-    env.add_file('scripts/wacky/scrambledstats.f4c')
 
 def apply_sixleggedrace(env, rom_address):
     env.add_toggle('wacky_challenge_show_detail')
@@ -1032,12 +1033,26 @@ def apply_advertising(env, rom_address):
     if not ('whatsmygear' in env.meta.get('wacky_challenge', [])):
         env.meta['wacky_gear_descriptions'] = gear_description_bytes
 
-    env.add_file('scripts/wacky/advertising.f4c')
     env.add_script('\n'.join(advertising_script))
     
 
 def setup_saveusbigchocobo(env):
     env.meta['wacky_starter_kit'] = [( 'Carrot', [5] )]
 
-def apply_dropitlikeitshot(env, rom_address):
-    env.add_file('scripts/wacky/dropitlikeitshot.f4c')
+def apply_skillissue(env, rom_address):
+    skill_unlock_table = list(range(0x01,0x18))
+    num_skills = len(skill_unlock_table)
+    if env.options.flags.has('cidairship'):
+        skill_unlock_table.append(0x18)
+        num_skills += 1
+    env.rnd.shuffle(skill_unlock_table)
+    skill_unlock_table.insert(0,0x00)
+    skill_unlock_table.insert(0,0x00)
+    if not env.options.flags.has('cidairship'):
+        skill_unlock_table.insert(0x15,0x00)
+
+    env.add_toggle('wacky_skillissue')
+    env.add_substitution('wacky skill issue max credits', f'#${num_skills+1:02X}')
+    env.add_binary(rom_address, skill_unlock_table, as_script=True)
+
+    return len(skill_unlock_table)

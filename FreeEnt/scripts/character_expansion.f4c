@@ -1383,6 +1383,13 @@ msfpatch {
 
         lda $0000,x
         beq $+Abort
+        // %if wacky_skillissue%
+        pha
+        lda $0001,x
+        and #$0f
+        sta $_(Wacky__RAM_skillissue+1)
+        pla
+        // %end%
         and #$1f
         jsr $_CharEx__PullSpellSets
     %Abort:

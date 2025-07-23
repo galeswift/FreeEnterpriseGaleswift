@@ -949,6 +949,7 @@
 .[-wacky:saveusbigchocobo]! "Save Us, Big Chocobo!"
 .[-wacky:scrambledstats]!^  "Scrambled Stats"
 .[-wacky:sixleggedrace]     "Six-Legged Race"
+.[-wacky:skillissue]        "Skill Issue"
 .[-wacky:skywarriors]       "The Sky Warriors"
 .[-wacky:worthfighting]!    "Something Worth Fighting For"
 .[-wacky:tellahmaneuver]    "The Tellah Maneuver"

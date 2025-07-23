@@ -141,7 +141,10 @@ text(bank 1 message $12D) {X}
 text(bank 1 message $12E) {X}
 text(bank 1 message $12F) {X}
 text(bank 1 message $130) {X}
-text(bank 1 message $133) {X}
+
+// messages $133-135 are for 
+// post-boss-battle message updates
+
 text(bank 1 message $134) {X}
 
 text(bank 1 message $137) {X}

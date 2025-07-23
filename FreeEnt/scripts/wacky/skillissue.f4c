@@ -1,0 +1,168 @@
+// hook into multiple places in order
+// to prevent usage of certain commands
+// before the requisite number of bosses
+
+// use the first byte of wacky RAM as a boss
+// counter; use the second byte to keep track
+// of the selected menu character's job
+
+// hook into the "check if a command is
+// disabled" function to first check for
+// having it unlocked
+msfpatch{
+    .addr $03a28e
+        jml $=Wacky__SkillIssueCommand
+
+    .new
+    Wacky__SkillIssueCommand:
+        // first, check if the command is valid;
+        // if it is, perform displaced instructions
+        // and return, else jump to the invalid case
+        jsr $_Wacky__SkillIssueCheck
+        bcc $+InvalidCommand
+        // displaced
+        cmp #$05
+        beq $+CheckDarkWave
+        jml $03a292
+    %CheckDarkWave:
+        jml $03a29e
+    %InvalidCommand:
+        jml $03a2c8
+}
+
+// hook into the "draw the spell name in the menu"
+// function to check if the correct command has been unlocked
+msfpatch{
+    .addr $01b287
+        jml $=Wacky__SkillIssueDrawSpell
+
+    .new
+    Wacky__SkillIssueDrawSpell:
+        // displaced 
+        sta $1a87
+
+        // perform the check, preserving the
+        // spell ID in the accumulator
+        jsr $_Wacky__SkillIssueMenuWrapper
+
+        bcc $+DrawDimmed
+        // can use the command
+        // jump back to checking MP
+        // displaced
+        phy
+        jml $01b28b
+
+    %DrawDimmed:
+        // skip to dimming it out
+        jml $01b2a6
+}
+
+// hook into the "can cast this spell on the field"
+// function to check if the correct command has been unlocked
+msfpatch{
+    .addr $01b536
+        jml $=Wacky__SkillIssueCastSpell
+
+    .new
+    Wacky__SkillIssueCastSpell:
+        // perform the check, preserving the
+        // spell ID in the accumulator
+        jsr $_Wacky__SkillIssueMenuWrapper
+
+        bcc $+CastError
+        // can use the command,
+        // continue with various checks
+        // displaced
+        sta $1b89
+        cmp #$12
+        beq $+IsHeal
+        jml $01b53d
+    %IsHeal:
+        jml $01b55f
+        
+    %CastError:
+        // error sound and return
+        jml $01b4f0        
+}
+
+// utility function to check if
+// a command is valid; sets the carry
+// if it is and does not if it's not.
+// takes in the command byte in the accumulator,
+// preserves X and the lo byte of the accumulator
+// but wipes out the hi byte, returns short
+msfpatch{
+    .new
+    Wacky__SkillIssueCheck:
+        phx
+        pha
+        xba
+        lda #$00
+        xba
+        tax
+        lda $_Wacky__RAM_skillissue
+        cmp $=Wacky__ROMData_skillissue,x
+        pla
+        plx
+        rts
+}
+
+// wrapper function for SkillIssueCheck
+// in the magic menu, since there are two
+// places that we need to do checks for
+// commands and making this work with
+// Misspelled would be very cool.
+// preserves the accumulator; assumes
+// that $_Wacky__RAM_skillissue+1 contains
+// the job of the current character.
+// returns short; carry is set if the command
+// is valid, clear if invalid.
+msfpatch{
+    .new
+    Wacky__SkillIssueMenuWrapper:
+        // preserve the accumulator, which is
+        // likely the spell ID
+        pha
+        // we assume that the spell *is* field-castable,
+        // but we need to confirm the command;
+        // first, load the spell list index
+        // from the cursor coordinates to see
+        // if it's White, Black/Ninja, or Call/Omni
+        lda $1b81
+        cmp #$01
+        bcc $+CheckForWhite
+        beq $+CheckForBlackNinja
+
+        // Call/Omni slot
+        // check if the character is FuSoYa
+        lda $_(Wacky__RAM_skillissue+1)
+        cmp #$0d
+        beq $+CheckForOmni
+        // not Fu, so check for Call
+        lda #$04
+        bra $+PerformCheck
+    %CheckForOmni:
+        lda #$19
+        bra $+PerformCheck
+
+    %CheckForBlackNinja:
+        // check if the character is Edge
+        lda $_(Wacky__RAM_skillissue+1)
+        cmp #$0c
+        beq $+CheckForNinja
+        // not Edge, so check for Black
+        lda #$03
+        bra $+PerformCheck
+    %CheckForNinja:
+        lda #$18
+        bra $+PerformCheck
+
+    %CheckForWhite:
+        lda #$02
+
+    %PerformCheck:
+        jsr $_Wacky__SkillIssueCheck
+        // restore the accumulator
+        pla
+        rts
+}
