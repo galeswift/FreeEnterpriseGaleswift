@@ -2,6 +2,9 @@ Vanilla FE ROM map thanks to b0ard/Wylem;
 Fork modifications via fork devs.
 -- Fork values noted by: F:
 
+00:FD31 - 00:FD4E   : MIAB reward delivery code
+00:FD4F - 00:FD61  F: KI objective addition to MIAB reward code
+00:FFB5 - 00:FFBB   : Bank00 LongCall utility
 01:FFF0 - 01:FFF6  F: omni spellset name data
 01:FFF8 - 01:FFFF   : menu kit long call hook
 02:85A7 - 02:85D1  F: Big Chocobo summon graphics handler (replaces unused func)
