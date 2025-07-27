@@ -792,5 +792,6 @@ text(bank 1 message $132) {
 }
 
 text(bank 1 message $133) {
-Unlocked [name $e0]!
+Unlocked the [name $e0]
+command!
 }
