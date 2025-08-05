@@ -367,17 +367,6 @@ EGG_METHODS = {
               ('Cursed', [1]) 
               ] },
 
-    'sorcrobe' : # includes special processing to add a weapon
-        { 'freq' : 2,
-          'users' : ['crydia', 'tellah', 'rosa', 'palom', 'porom', 'fusoya'],
-          'type' : 'fight',
-          'items' : [
-              ('Siren', [1]),
-              ('Glass', [1]),
-              ('Sorcerer', [1]),
-              ('Cursed', [1])
-              ] },
-
     'moonveil' : # includes special processing to add a weapon
         { 'freq' : 2,
           'users' : ['dkcecil', 'pcecil', 'kain', 'crydia', 'tellah', 'edward', 'rosa', 'yang', 'palom', 'porom', 'cid', 'edge', 'fusoya'],
@@ -385,7 +374,8 @@ EGG_METHODS = {
           'items' : [
               ('Siren', [1]),
               ('MoonVeil', [1]),
-              ('Cure2', [10])
+              ('Cure2', [10]),
+              ('BlBelt', [1])
               ] },
 
     'magicspear' : 
