@@ -378,7 +378,7 @@ msfpatch {
         // "Unlocked [skill]!" custom textbox
         ldx #$0000
         jsl $=TextBuffer__LoadCommandName
-        lda #$33
+        lda #$34
         sta $b2
 
         // Play sound
@@ -791,7 +791,7 @@ text(bank 1 message $132) {
     [amount] bosses collected!
 }
 
-text(bank 1 message $133) {
+text(bank 1 message $134) {
 Unlocked the [name $e0]
 command!
 }
