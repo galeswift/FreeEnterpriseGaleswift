@@ -25,7 +25,15 @@ event($66) {
     confirm message $102
     toggle music fade
     sound #Glow
+    // %flag starting_blackchocobo on%
+    load map #Overworld at 37 83 no transition
+    // %end%
+    // %flag starting_underground on%
+    load map #Overworld at 36 83 on falcon no transition no launch
+    // %end%
+    // %flags: ~starting_blackchocobo ~starting_underground%
     load map #Overworld at 36 83 on enterprise no transition no launch
+    // %end%
     vfx #ReturnToZot
     load map #Zot1F at 8 26 facing right
     player face right
@@ -56,8 +64,40 @@ event($8E)  //Exiting the Tower of Zot
         [#B #PutWhale 156 201]
     }
     // %end%
+
+    // %flag starting_blackchocobo on%
+    load map #Overworld at 37 83
+    // %end%
+    // %if doorsrando_starting_underground%
+    // prevent overworld access just by leaving Zot
+    load map #Underworld at 99 83 on falcon no launch
+    // %elif flags: starting_underground%
+    load map #Overworld at 36 83 on falcon no launch
+    // %end%  
+    // %flags: ~starting_blackchocobo ~starting_underground%
     load map #Overworld at 36 83 on enterprise no launch
+    // %end%
+
     player face left
+    // %flag starting_blackchocobo on%
+    music #BlackChocobo fade in
+    // %end%
+    // %flag starting_blackchocobo off%
     music #Airship fade in
+    // %end%
     vfx #BigWhaleLanding
 }
+
+// %flag starting_blackchocobo on%
+// change the enter/leave Zot events to use the Black Chocobo sprite
+// by telling the _draw_enterprise function to load that instead
+patch($00dabe bus) { 1A } // palette 5
+patch($00dac2 bus) { 90 } // black chocobo tiles
+// %end%
+
+// %flag starting_underground on%
+// change the enter/leave Zot events to use the Falcon sprite
+// by telling the _draw_enterprise function to load that instead
+patch($00dabe bus) { 1E } // palette 7
+patch($00dac2 bus) { D8 } // falcon tiles
+// %end%

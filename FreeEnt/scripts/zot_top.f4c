@@ -543,6 +543,11 @@ event($7C)  //Valvalis battle
     player face down
     toggle run
     toggle screen shake
+    // %if doorsrando_starting_underground%
+    // Exit to Dwarf instead of Baron
+    load map #DwarfCastleHospital at 9 5 facing down
+    // %end%
+    // %if ~doorsrando_starting_underground%
     consts(placement) {
         2   Rosa1_B
         1   Kain1
@@ -550,6 +555,7 @@ event($7C)  //Valvalis battle
         4   Yang1
     }
     load map #BaronCastleCecilRoom at 5 5 facing down
+    // %end%
     toggle run
     player face down
     player face left
@@ -597,10 +603,21 @@ event($7C)  //Valvalis battle
     message #msg.fe_Received
     [#B #Objectives_TickRewardSlot #reward_slot.zot_item]
     [#B #Rando_DeliverRewardFromSlot #reward_slot.zot_item]
+    // %if doorsrando_starting_underground%
+    batch 5 {
+        player move left
+    }
+    batch 2 {
+        player move up
+    }
+    player move right
+    // %end%
+    // %if ~doorsrando_starting_underground%
     player move up
     batch 4 {
         player move left
     }
+    // %end%
     player bow head
     [#B #Objectives_Tick #objective.quest_zot]
     toggle music fade
@@ -610,17 +627,45 @@ event($7C)  //Valvalis battle
     clear status 
     restore hp
     restore mp
-    vfx #PutEnterpriseAtBaron
+
     set #FoughtValvalis
     // %if doorsrando%
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 156 201]
     }
     // %end%
+
+    // %flag starting_blackchocobo on%
+    // TwinsStone is the plot flag for finishing Baron Castle,
+    // so we use that to tell if we should have the Enterprise
+    [#B #If #Flag #flag.TwinsStone]{
+        vfx #PutEnterpriseAtBaron
+    }
+    // %end%
+
+    // %if doorsrando_starting_underground%
+    // Exiting out to Dwarf instead, PutFalcon assumes Overworld
+    // so we'll just load into the Falcon while flying
+    music #Airship fade in
+    load map #Underworld at 99 83 on falcon no launch
+    toggle screen fade
+    // %elif flags: starting_underground%
+    [#B #If #Flag #flag.TwinsStone]{
+        vfx #PutEnterpriseAtBaron
+    }
     music #Overworld fade in
     load map #Overworld at 101 158
     player face down
     toggle screen fade
+    // %end%
+
+    // %flags: ~starting_underground ~starting_blackchocobo%
+    vfx #PutEnterpriseAtBaron
+    music #Overworld fade in
+    load map #Overworld at 101 158
+    player face down
+    toggle screen fade
+    // %end%
 
 }
 

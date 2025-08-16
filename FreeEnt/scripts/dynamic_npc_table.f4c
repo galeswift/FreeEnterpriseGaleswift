@@ -211,6 +211,8 @@ patch($219000 bus) {
     ##map.HouseOfWishes             09  #dyn.AxPorom
     ##map.BaronCastleLobby          07  #dyn.AxKain1
     ##map.DockedAirship             05  #dyn.AxKain1
+    ##map.BaronCastle               0B  #dyn.AxKain1
+    ##map.DwarfCastleThroneRoom     06  #dyn.AxKain1
     ##map.ZotCommandCenter          05  #dyn.AxRosa2
     ##map.ZotCommandCenter          06  #dyn.AxRosa2
 

@@ -4,8 +4,13 @@ consts(item) {
     $FC     fe_Hook
 }
 
+// %flag starting_underground off%
 text(item name #fe_Hook) {Hook}
-
+// %end%
+// %flag starting_underground on%
+// repurpose the Hook to act like the Drill
+text(item name #fe_Hook) {Drill}
+// %end%
 
 //-------------------------------------------------------------------
 // make PinkPuffs just directly drop Adamant Armor
@@ -52,7 +57,12 @@ msfpatch {
 
     KeyItemEx__KeyItemFlags:
         [[
+        // %flag starting_underground on%
+        FC 3D   // drill
+        // %end%
+        // %flag starting_underground off%
         FC 36   // hook
+        // %end%
         F5 60   // dark crystal
         F1 61   // earth crystal
         EE 63   // package

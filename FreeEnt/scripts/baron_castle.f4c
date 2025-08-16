@@ -419,14 +419,25 @@ event($1B)  //Kainazzo battle, losing twins
     activate #PalomStatue
     activate #PoromStatue
 
-    music #Overworld
-    [#B #PutEnterprise 102 158]
     // %if doorsrando%
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 156 201]
     }
     // %end%
+    // %flag starting_underground on%
+    set #UnderworldOpen
+    music #Airship fade in
+    load map #Overworld at 102 155 on enterprise no transition
+    // %end%
+    // %flag starting_blackchocobo on%
+    music #Airship fade in
+    load map #Overworld at 102 155 on enterprise no transition
+    // %end%
+    // %flags: ~starting_underground ~starting_blackchocobo%
+    music #Overworld
+    [#B #PutEnterprise 102 158]
     load map #Overworld at 102 158
+    // %end%
 }
 
 mapgrid($2c 29 29) {

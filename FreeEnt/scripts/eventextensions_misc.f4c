@@ -203,6 +203,13 @@ msfpatch {
         stz $171b  // hardcode: put on overworld
         jmp $_EvEx__End
 
+    EvEx__PutFalcon:
+        jsr $_EvEx__ReadParameters_2
+        ldx $_EvEx__Param1
+        stx $1721
+        stz $1723  // hardcode: put on overworld
+        jmp $_EvEx__End    
+
     EvEx__PartyLeaderCecil:
         ldx #$0000
         ldy #$0000

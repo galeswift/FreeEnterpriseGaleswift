@@ -45,7 +45,7 @@ consts(eventext) {
     $26    PutHovercraft
     $27    Rando_InitAxtorName
     $28    Rando_DeliverRewardFromSlot
-    // REMOVED: $29    Rando_CheckFlagEquals
+    $29    PutFalcon
     $2A    Rando_PostBossBattle
     // REMOVED: $2B    Rando_IncreaseKeyItemCount
     $2C    Rando_RetrieveCharacter
@@ -133,7 +133,7 @@ msfpatch {
             $_EvEx__PutHovercraft
             $_EvEx__Rando_InitAxtorName
             $_EvEx__Rewards_DeliverFromSlot
-            FF FF // REMOVED: $_EvEx__Rando_CheckFlagEquals
+            $_EvEx__PutFalcon
             $_EvEx__Rando_PostBossBattle
             FF FF // REMOVED: $_EvEx__Rando_IncreaseKeyItemCount
             $_EvEx__Rando_RetrieveCharacter

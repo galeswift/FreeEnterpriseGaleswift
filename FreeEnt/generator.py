@@ -75,7 +75,6 @@ F4C_FILES = '''
     scripts/post_battle.f4c
 
     scripts/titlescreen.f4c
-    scripts/opening.f4c
     scripts/mist.f4c
     scripts/damcyan.f4c
     scripts/antlion.f4c
@@ -196,6 +195,7 @@ F4C_FILES = '''
     scripts/odin_sprite_patch.f4c
 '''
 # the missing scripts/black_shirt_fix.f4c is included below as a conditional, if -wacky:whatsmygear is not on
+# the missing opening.f4c script is included as a condition, depending on -starting: flags
 
 BINARY_PATCHES = {
     0x117000 : 'binary_patches/standing_characters.bin',
@@ -610,7 +610,12 @@ def build(romfile, options, force_recompile=False):
 
     env.add_files(*(F4C_FILES.split()))
 
-
+    if env.options.flags.has('starting_blackchocobo'):
+        env.add_file('scripts/opening_blackchocobo.f4c')
+    elif env.options.flags.has('starting_underground'):
+        env.add_file('scripts/opening_underground.f4c')
+    else:
+        env.add_file('scripts/opening.f4c')
 
     env.add_substitution('version_encoded', ''.join([f'{b:02X}' for b in f4c.encode_text(options.get_version_str())]))
     env.add_substitution('title_screen_text', _generate_title_screen_text(options))
@@ -917,10 +922,13 @@ def build(romfile, options, force_recompile=False):
         if rando_scope == "-entrancesrando":
             env.add_toggle('entrancesrando')
 
-        if options.flags.has('-calmness'):
-            env.add_toggle('calmness')
+        if not options.flags.has('-calmness'):
+            env.add_file('scripts/panic_button.f4c')
         if options.flags.has('-forcesealed'):
             env.add_toggle('forcesealed')
+        
+        if options.flags.has('starting_underground'):
+            env.add_toggle('doorsrando_starting_underground')
 
         doors_rando.apply(env, rando_scope,rando_type)
 
@@ -1016,9 +1024,6 @@ def build(romfile, options, force_recompile=False):
 
     if not (options.quickstart or options.test_settings.get('quickstart', False)):
         env.add_substitution('quickstart', '')
-        env.add_substitution('quickstart superhero', '')
-    elif not env.options.flags.has('superhero_challenge'):
-        env.add_substitution('quickstart superhero', '')
 
     credits_line_count = 225
     credits_tick_count = credits_line_count * 16

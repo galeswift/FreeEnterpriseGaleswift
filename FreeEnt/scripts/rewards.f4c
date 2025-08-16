@@ -200,7 +200,7 @@ msfpatch {
 }
 
 text(bank 1 message $133) {
-The earth crystal weakens
+The Earth crystal weakens
 your super powers!
 }
 

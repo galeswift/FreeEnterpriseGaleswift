@@ -157,8 +157,18 @@ event($30)  //Mist events
     deactivate #SleepingBubble1
     set #MistComplete
 
+    // %flags: ~starting_underground ~starting_blackchocobo%
     [#B #PutEnterprise 104 118]
+    // %end%
+    // %flag starting_underground on%
+    [#B #PutFalcon 104 118]
+    // %end%
+    // %flag starting_blackchocobo off%
     [#B #SaveVehiclesFromMist]
+    // %end%
+    // %if doorsrando_starting_underground%
+    set #UnderworldOpen
+    // %end%
     load map #Overworld at 103 119
     player face down
     music #Overworld
@@ -304,6 +314,20 @@ eventcall($16)
     $15
 }
 
+// %flag starting_blackchocobo on%
+// always exit Mist by right side to the Kaipo side
+event($15)  //Cid greeting Cecil -> leaving Mist by right side
+{
+    music #Overworld 
+    load map #Overworld at 98 119
+}   
+
+// completely bypass the tile changing; Titan just
+// causes an earthquake without blocking the way!
+patch($15c732 bus) { 80 } // was F0; use BRA instead of BEQ
+// %end%
+
+// %flag starting_blackchocobo off%
 event($15)  //Cid greeting Cecil -> leaving Mist by right side
 {
     music #Overworld 
@@ -314,4 +338,4 @@ event($15)  //Cid greeting Cecil -> leaving Mist by right side
         load map #Overworld at 98 119
     }
 }   
-
+// %end%

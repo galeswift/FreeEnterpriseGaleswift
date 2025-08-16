@@ -17,6 +17,7 @@ from .spoilers import SpoilerRow
 
 from .address import *
 
+from f4c import encode_text
 
 import math
 
@@ -378,6 +379,36 @@ def apply(env):
     if (env.options.flags.has('no_free_key_item_package')):
         ITEM_SLOTS[RewardSlot.rydias_mom_item] = ['#item.Package?']
 
+    if env.options.flags.has('starting_blackchocobo'):
+        # add the Enterprise as a restriction for using the Hook
+        for slot_group in [ITEM_SLOTS, SUMMON_QUEST_SLOTS, MOON_BOSS_SLOTS, CHEST_ITEM_SLOTS, BOSS_SLOTS]:
+            for slot in slot_group:
+                if '#item.fe_Hook?' in slot_group[slot]:
+                    slot_group[slot].insert(0, 'enterprise?')
+                    
+        # Antlion Nest and Waterfall Cave require you to go through Mist Cave, or
+        # else have the Enterprise; the latter requirement will be dealt with later
+        ITEM_SLOTS[RewardSlot.antlion_item].insert(0, 'dmist_slot')
+        BOSS_SLOTS['antlion_slot'] = ['dmist_slot']
+        BOSS_SLOTS['octomamm_slot'] = ['dmist_slot']
+
+    elif env.options.flags.has('starting_underground'):
+        # we need to modify all of the item slot dependencies, because by starting underground,
+        # we have removed that dependency but have *added* getting 'aboveground' as requirement for some checks
+        for slot_group in [ITEM_SLOTS, SUMMON_QUEST_SLOTS, MOON_BOSS_SLOTS, CHEST_ITEM_SLOTS, BOSS_SLOTS]:
+            for slot in slot_group:
+                if 'underground?' in slot_group[slot]:
+                    slot_group[slot].remove('underground?')
+                elif not (slot == RewardSlot.starting_item):
+                    slot_group[slot].insert(0, 'aboveground?')
+
+                if '#item.fe_Hook?' in slot_group[slot]:
+                    slot_group[slot].insert(0, 'enterprise')
+
+        # fix up special cases: the Sheila checks need you to go above ground
+        ITEM_SLOTS[RewardSlot.found_yang_item] = ['aboveground?']
+        ITEM_SLOTS[RewardSlot.pan_trade_item].insert(0, 'aboveground?')
+
     treasure_dbview = databases.get_treasure_dbview()
     treasure_dbview.refine(lambda t: not t.exclude)
 
@@ -577,6 +608,21 @@ def apply(env):
     #     layout = '"Package  SandRuby   [lightsword]Legend"      [[ 01 ]]\n        "[key]Baron   [harp]TwinHarp  [crystal]Earth" [[ 01 ]]\n        "         [key]Tower     Hook"            [[ 01 ]]\n        "[key]Luca    [crystal]Darkness  [tail]Rat"   [[ 01 ]]\n        "Adamant  Pan        [knife]Spoon"            [[ 01 ]]\n        "[tail]Pink    [crystal]Crystal"              [[ 00 ]]'
     #     env.add_substitution('tracker layout', layout)
 
+    # ... but we can still use the substitution to handle the renaming of Hook to Drill!
+    if env.options.flags.has('starting_underground'):
+        layout = '''        "Package  SandRuby   [lightsword]Legend"      [[ 01 ]]\n        "[key]Baron   [harp]TwinHarp  [crystal]Earth" [[ 01 ]]\n        "[key]Magma   [key]Tower     Drill"            [[ 01 ]]\n        "[key]Luca    [crystal]Darkness  [tail]Rat"   [[ 01 ]]\n        "Adamant  Pan        [knife]Spoon"            [[ 01 ]]\n        "[tail]Pink    [crystal]Crystal"              [[ 00 ]]
+        '''
+        env.add_substitution('tracker layout', layout) 
+
+        # also update the item description data while we're at it, since the Drill text should say something else
+        drill_description_row1 = '[$00][$fa]Drill                       [$fb][$00]'
+        drill_description_row2 = '[$00][$fa]Allows the Falcon to        [$fb][$00]'
+        drill_description_row3 = '[$00][$fa]dig up to the Overworld.    [$fb][$00]'
+        env.meta.setdefault('item_description_overrides', {})[0xFC] = encode_text(drill_description_row1 
+                                                                                  + drill_description_row2 
+                                                                                  + drill_description_row3 
+                                                                                  + '[$00][$fa]                            [$fb][$00]')
+
     # potentially remove boss spots (other modules will need to do this again)
     if env.options.flags.has('no_officer_slot'):
         BOSS_SLOTS.pop('officer_slot')
@@ -692,11 +738,23 @@ def apply(env):
                     b.append(step)
             checker.add_branch(*b)
 
-        for branch in COMMON_BRANCHES:
-            add_branch_with_substitutions(*branch)
-
-        if not prevent_hook_seed:
-            add_branch_with_substitutions(*HOOK_UNDERGROUND_BRANCH)
+        if env.options.flags.has('starting_blackchocobo'):
+            add_branch_with_substitutions(*['enterprise?', 'antlion_slot'])
+            add_branch_with_substitutions(*['enterprise?', 'octomamm_slot'])
+            add_branch_with_substitutions(*['#item.Baron?', 'baigan_slot', 'kainazzo_slot', 'enterprise'])
+            add_branch_with_substitutions(*['#item.DarkCrystal?', 'moon'])
+            add_branch_with_substitutions(*['enterprise?', '#item.Magma?', 'underground'])
+            if not prevent_hook_seed:
+                add_branch_with_substitutions(*(['enterprise?'] + HOOK_UNDERGROUND_BRANCH))
+        elif env.options.flags.has('starting_underground'):
+            add_branch_with_substitutions(*['#item.fe_Hook?', 'aboveground'])
+            add_branch_with_substitutions(*['aboveground?', '#item.Baron?', 'baigan_slot', 'kainazzo_slot', 'enterprise'])
+            add_branch_with_substitutions(*['#item.DarkCrystal?', 'moon'])
+        else:
+            for branch in COMMON_BRANCHES:
+                add_branch_with_substitutions(*branch)
+            if not prevent_hook_seed:
+                add_branch_with_substitutions(*HOOK_UNDERGROUND_BRANCH)
 
         
         if gated_objective_item != '':
@@ -742,48 +800,65 @@ def apply(env):
         if env.options.flags.has('key_item_from_pink_tail'):
             tests.append('#item.Pink')
 
-        underground_path_disallowed = []
-        if not env.options.flags.has('bosses_vanilla') and not env.options.flags.has('bosses_unsafe'):
-            # must be able to access underground without encountering, golbez, wyvern, valvalis or odin replacement
-            # (or Dark Cecil in NFL2)
-            mean_bosses = ['golbez', 'wyvern', 'valvalis', boss_assignment['odin_slot']]
+        if env.options.flags.has('starting_underground'):
+            aboveground_path_disallowed = []
+            # we'll still prevent you from having to go through awful fights, e.g. Valvalis at Calbrena,
+            # but there are slightly fewer restrictions to get above ground
+            if not env.options.flags.has('bosses_vanilla') and not env.options.flags.has('bosses_unsafe'):
+                # leave Golbez, Wyvern, Valvalis, Bnofree Pain Man as mean, put no summon spots in because of possible exp
+                mean_bosses = ['golbez', 'wyvern', 'valvalis']
 
-            if env.options.flags.has('no_free_bosses') and 'mirrorcecil' not in mean_bosses:
-                mean_bosses.append('mirrorcecil')
-                
-            # obscure special case: if a mean boss is in Yang's slot, and
-            #  DMist is in guard slot, and DMist gates underworld, then
-            #  that's bad
-            if env.options.flags.has('no_free_key_item') and boss_assignment['guard_slot'] == 'dmist' and boss_assignment['karate_slot'] in mean_bosses:
-                mean_bosses.append('dmist')
+                if env.options.flags.has('no_free_bosses'):
+                    mean_bosses.append('mirrorcecil')
 
-            underground_path_disallowed.extend(mean_bosses)
+                aboveground_path_disallowed.extend(mean_bosses)    
 
-        if not env.options.flags.has('key_items_vanilla') and not unsafe:
-            # must be able to access underground without accessing moon
-            underground_path_disallowed.append('moon')
-        
-        if underground_path_disallowed:
-            tests.append(['underground', underground_path_disallowed])
+            if aboveground_path_disallowed:
+                tests.append(['aboveground', aboveground_path_disallowed])
+                        
+        else:
+            underground_path_disallowed = []
+            if not env.options.flags.has('bosses_vanilla') and not env.options.flags.has('bosses_unsafe'):
+                # must be able to access underground without encountering, golbez, wyvern, valvalis or odin replacement
+                # (or Dark Cecil in NFL2)
+                mean_bosses = ['golbez', 'wyvern', 'valvalis', boss_assignment['odin_slot']]
 
-        magma_path_forced = None 
+                if env.options.flags.has('no_free_bosses') and 'mirrorcecil' not in mean_bosses:
+                    mean_bosses.append('mirrorcecil')
+                    
+                # obscure special case: if a mean boss is in Yang's slot, and
+                #  DMist is in guard slot, and DMist gates underworld, then
+                #  that's bad
+                if env.options.flags.has('no_free_key_item') and boss_assignment['guard_slot'] == 'dmist' and boss_assignment['karate_slot'] in mean_bosses:
+                    mean_bosses.append('dmist')
 
-        if env.options.flags.has('key_items_unsafer'):
-            if not forced_hook_route:
-                magma_path_forced = 'moon'
-            tests.append(['#item.fe_Hook', [], 'moon'])
+                underground_path_disallowed.extend(mean_bosses)
 
-        if forced_hook_route:
-            magma_path_forced = 'underground'
+            if not env.options.flags.has('key_items_vanilla') and not unsafe:
+                # must be able to access underground without accessing moon
+                underground_path_disallowed.append('moon')
+            
+            if underground_path_disallowed:
+                tests.append(['underground', underground_path_disallowed])
 
-        if magma_path_forced and has_magma_key:
-            tests.append(['#item.Magma', [], magma_path_forced])
+            magma_path_forced = None 
 
-        if env.options.flags.has('key_items_late_darkness'):
-            tests.append(['#item.DarkCrystal', [], 'underground'])
+            if env.options.flags.has('key_items_unsafer'):
+                if not forced_hook_route:
+                    magma_path_forced = 'moon'
+                tests.append(['#item.fe_Hook', [], 'moon'])
 
-        if not unsafe and (env.rnd.random() < 0.25):
-            tests.append(['#item.DarkCrystal', [], 'underground'])
+            if forced_hook_route:
+                magma_path_forced = 'underground'
+
+            if magma_path_forced and has_magma_key:
+                tests.append(['#item.Magma', [], magma_path_forced])
+
+            if env.options.flags.has('key_items_late_darkness'):
+                tests.append(['#item.DarkCrystal', [], 'underground'])
+
+            if not unsafe and env.options.flags.has('key_items_unreliable_darkness') and (env.rnd.random() < 0.25):
+                tests.append(['#item.DarkCrystal', [], 'underground'])
 
         # must be able to encounter all bosses required of forced objective flags
         required_bosses = env.meta.get('objective_required_bosses', [])
@@ -1224,6 +1299,8 @@ def apply(env):
             '#item.CrystalArmor' : 'Hades Armor',
             '#item.CrystalGauntlet' : 'Hades Gauntlet'}
         )
+    if env.options.flags.has('starting_underground'):
+        item_spoiler_names.update({'#item.fe_Hook' : 'Drill'})
 
     key_item_spoilers = []
     for key_item_reward in list(ESSENTIAL_KEY_ITEMS) + list(NONESSENTIAL_KEY_ITEMS) + [ItemReward("#item.Pass")]:

@@ -302,7 +302,11 @@ def apply(env):
             if max_overworld_chests <= 0:
                 t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids))        
             else:
-                t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Overworld"))
+                if env.options.flags.has('starting_underground'):
+                    # let the underworld have the freebie characters when starting there
+                    t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Underworld"))
+                else:
+                    t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Overworld"))
                 max_overworld_chests -= 1            
            
             character_dummy = env.assignments[character_rando.SLOTS[slot_name]]           
@@ -524,6 +528,8 @@ def apply(env):
                     contents = contents.replace('Light','Chaos')
                     if not contents == 'Crystal Ring':
                         contents = contents.replace('Crystal','Hades')
+                if env.options.flags.has('starting_underground') and contents == 'Hook':
+                    contents = 'Drill'
             except KeyError:
                 contents = 'DEBUG'
         elif not contents.endswith(' gp'):

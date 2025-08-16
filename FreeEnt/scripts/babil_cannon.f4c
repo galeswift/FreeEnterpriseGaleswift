@@ -330,7 +330,12 @@ event($96)  //Jump from Tower of Bab-il, airship escape
     //clear #FirstVisitToUnderworld
     music #None
     activate #AirshipEngineer
+	// %flag starting_underground on%
+    load map #Underworld at 99 16 no transition on falcon no launch
+	// %end%
+    // %flag starting_underground off%
     load map #Underworld at 99 16 no transition on enterprise no launch
+    // %end%
     sound #Propellers
     vfx #EnterpriseCatchBabilFall
     consts(placement) {
@@ -381,5 +386,22 @@ event($96)  //Jump from Tower of Bab-il, airship escape
     }
     // %end%
 
+	// %flag starting_underground on%
+    load map #Underworld at 49 16 no transition on falcon no launch
+	// %end%
+    // %flag starting_underground off%
     load map #Underworld at 49 16 no transition on enterprise no launch
+    // %end%
 }
+
+// %flag starting_underground on%
+// Modify the EnterpriseCatchBabilFall custom effect to use the Falcon
+// instead of the Enterprise
+msfpatch{
+    .addr $00c28c
+        sta $b8 // Falcon's altitude
+
+    .addr $00c2aa
+        jsl $15b9cc // draw the Falcon
+}
+// %end%
