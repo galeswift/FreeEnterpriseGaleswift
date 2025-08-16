@@ -431,7 +431,8 @@ def randomize_doors(env, entrances, exits, scope):
                     else:
                         remapped_map[destination] = entrance_location
                     spoil_entrances.append(message)
-                    if "Mist" in entrance_location and "MistCave" not in entrance_location:
+                    if ("Mist" in entrance_location and not ("MistCave" in entrance_location
+                                        or "MistInn" in entrance_location or "MistWeapon" in entrance_location or "MistArmor" in entrance_location)):
                         if j[2]==96:
                             entrance_location = "#Mist West"
                         else:
@@ -525,7 +526,7 @@ def randomize_doors(env, entrances, exits, scope):
                 if location == "#Damcyan":
                     is_Damcyan_accessible = []
                     for damcyan_path in paths_to_world[location]:
-                        if damcyan_path[1][0] in ["#AdamantGrotto" "#CaveEblanEntrance"]:
+                        if damcyan_path[1][0] in ["#AdamantGrotto", "#CaveEblanEntrance"]:
                             is_Damcyan_accessible.append(False)
                         else:
                             is_Damcyan_accessible.append(True)
@@ -1120,7 +1121,7 @@ def apply(env, randomize_scope, randomize_type, testing=False):
         #     door_to_entrance =
         #     paths_to_world = add_doors_paths_entrancerando(paths_to_world)
 
-        print([(i, str(env.assignments[i])) for i in env.assignments])
+        # print([(i, str(env.assignments[i])) for i in env.assignments])
         key_items = {}
         for x in env.assignments:
             # to update if/when gated objectives can be handled logically 
