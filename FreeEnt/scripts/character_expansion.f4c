@@ -611,7 +611,7 @@ msfpatch {
         and #$0f
         cmp #$03 // Tellah job
         bne $+AfterTellahCheck
-        lda #$0b // CecilBecamePaladin plot flag
+        lda #$81 // fe_FinishedOrdealsRoom plot flag
         jsr $_Util__CheckPlotFlag
         bcc $+AfterTellahCheck
         // assign new command set

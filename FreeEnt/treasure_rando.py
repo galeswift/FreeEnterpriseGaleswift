@@ -216,6 +216,8 @@ def apply(env):
     plain_chests_dbview = treasure_dbview.get_refined_view(lambda t: t.fight is None)
 
     items_dbview = databases.get_items_dbview()
+    unrestricted_items_dbview = databases.get_items_dbview()
+    refineItemsView(unrestricted_items_dbview, env)      
     refineItemsView(items_dbview, env)        
 
     maxtier = env.options.flags.get_suffix('Tmaxtier:')
@@ -362,16 +364,22 @@ def apply(env):
     elif env.options.flags.has('treasure_wild') or env.options.flags.has('treasure_standard'):
         max_item_tier = (99 if env.options.flags.has('treasure_wild') else 5)
         # exclude HrGlass1 and HrGlass3 from Twild gen if HrGlass2 can't spawn
-        item_pool = items_dbview.get_refined_view(lambda it: it.tier <= max_item_tier).find_all()
+        item_pool = items_dbview.get_refined_view(lambda it: it.tier <= max_item_tier).find_all()    
+        unrestricted_item_pool = unrestricted_items_dbview.find_all()    
         for t in plain_chests_dbview.find_all():
-            treasure_assignment.assign(t, env.rnd.choice(item_pool).const)
+            if (should_unrestrict(env, t)):
+                treasure_assignment.assign(t, env.rnd.choice(unrestricted_item_pool).const)
+            else:
+                treasure_assignment.assign(t, env.rnd.choice(item_pool).const)
     else:
         # revised rivers rando
         items_by_tier = {}
-        items_by_tier_unrestricted = {}
+        unrestricted_items_by_tier = {}
         for item in items_dbview:
             items_by_tier.setdefault(item.tier, []).append(item.const)
-            items_by_tier_unrestricted.setdefault(item.tier, []).append(item.const)
+        for item in unrestricted_items_dbview:
+            unrestricted_items_by_tier.setdefault(item.tier, []).append(item.const)
+
         distributions = {}
         distributions_unrestricted = {}
         curves_dbview = databases.get_tvanillaish_dbview() if (env.options.flags.has('treasure_vanillaish')) else databases.get_curves_dbview()
@@ -390,7 +398,7 @@ def apply(env):
                 # Sylph Cave, Feymarch, Lunar Path, Giant, Lunar Subterrane/Core
                 if row.wikiindex in [22, 25, 24, 26, 27, 31, 32, 36, 37, 38]:
                     weights = util.get_boosted_weights(weights, 'miab_areas')
-
+                    
             distributions_unrestricted[row.area] = util.Distribution(weights)
 
             # null out distributions for empty item tiers
@@ -401,19 +409,15 @@ def apply(env):
         for t in plain_chests_dbview.find_all():
             tier = -1
             tries = 100
-            target_distribution = distributions
-            if ((t.area == 'ToroiaTreasury' and env.options.flags.has('Tunrestrict:treasury')) or
-                (t.world == 'Overworld' and env.options.flags.has('Tunrestrict:overworld')) or
-                (t.world == 'Underworld' and env.options.flags.has('Tunrestrict:underworld')) or
-                (t.world == 'Moon' and env.options.flags.has('Tunrestrict:moon')) ):
-                target_distribution = distributions_unrestricted
-            
-            while tier not in items_by_tier and tries > 0:
+            target_distribution = distributions_unrestricted if should_unrestrict(env,t) else distributions
+            target_items_by_tier = unrestricted_items_by_tier if should_unrestrict(env,t) else items_by_tier
+                        
+            while tier not in target_items_by_tier and tries > 0:
                 tier = min(8, target_distribution[t.area].choose(env.rnd))
                 tries -= 1
 
-            if tier in items_by_tier:
-                treasure_assignment.assign(t, env.rnd.choice(items_by_tier[tier]))
+            if tier in target_items_by_tier:
+                treasure_assignment.assign(t, env.rnd.choice(target_items_by_tier[tier]))
 
     # apply sparsity
     sparse_level = env.options.flags.get_suffix('Tsparse:')
@@ -558,7 +562,13 @@ def apply(env):
     treasure_assignment.do_substitution(env)
     env.spoilers.add_table("TREASURE", treasure_spoilers, public=(all_treasure_public or miabs_public), ditto_depth=1)
 
-
+def should_unrestrict(env, t):
+    return (
+        (t.area == 'ToroiaTreasury' and env.options.flags.has('Tunrestrict:treasury')) or
+        (t.world == 'Overworld' and env.options.flags.has('Tunrestrict:overworld')) or
+        (t.world == 'Underworld' and env.options.flags.has('Tunrestrict:underworld')) or
+        (t.world == 'Moon' and env.options.flags.has('Tunrestrict:moon'))
+    )
 if __name__ == '__main__':
     import FreeEnt
     import random
