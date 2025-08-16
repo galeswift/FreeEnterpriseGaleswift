@@ -9,7 +9,7 @@ var NAVBAR_HTML = `
     <a href="/changelog">Changelog</a>
     <span class="version">Current version: {VERSION}</span>
     <div class="spacer"></div>    
-    <a href="https://discord.gg/AVeUqkb" target="_blank">Discord</a>
+    <a href="https://discord.gg/eM5AcqwSHK" target="_blank">Discord</a>
   </div>
   `;
 
