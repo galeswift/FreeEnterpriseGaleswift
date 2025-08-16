@@ -70,6 +70,22 @@ event($E2)  //Trading the Rat Tail for Adamant
         [#B #Tracker_SetKeyItemUsed #tracker_key_item_index.pink_tail]
         music #Cave
     }
+    // in case we get the Rat Tail from the Pink Tail check, 
+    // run the Rat Tail check again to automatically turn it in
+    [#B #If #SelectedItem #item.Rat] {
+        set #Temp
+        p #GrottoAdamantMiniWantsTails spin
+        p #GrottoAdamantMiniWantsTails face down
+        [#B #Objectives_Tick #objective.quest_traderat]
+        [#B #Text_LoadRewardNameFromSlot #reward_slot.rat_trade_item 0]
+        map message 2  // "It's a Rat Tail I have been looking for!"
+        p #GrottoAdamantMiniWantsTails wave in
+        take item #Rat
+        [#B #Objectives_TickRewardSlot #reward_slot.rat_trade_item]
+        [#B #Rando_DeliverRewardFromSlot #reward_slot.rat_trade_item]
+        [#B #Tracker_SetKeyItemUsed #tracker_key_item_index.rat_tail]
+        music #Cave
+    }
 
     [#B #If #not_Flag #flag.Temp] {
         message $14 // "nothing happened"
