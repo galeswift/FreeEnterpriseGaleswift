@@ -42,6 +42,102 @@ msfpatch {
         sta $af
         // %end%
 
+        // %if wacky_workexperience%
+        // use average party level to build a scale factor to the experience;
+        // do first to avoid potential obnoxious handling of overflow scenarios
+        // (since it can reduce experience instead of increase it)
+
+        // compute average party level; code modified from
+        // encounter_dangerous.f4c (one day we'll make it a function)
+        ldx #$0000
+        stz $_Util__Divide_Dividend0
+        stz $_Util__Divide_Dividend1
+        stz $_Util__Divide_Dividend2
+        stz $_Util__Divide_Divisor0
+    %WackyWorkExp_LevelSumLoop:
+        lda $1000,x
+        and #$1f
+        beq $+WackyWorkExp_LevelSumLoopNext
+        inc $_Util__Divide_Divisor0
+        lda $1002,x
+        clc
+        adc $_Util__Divide_Dividend0
+        sta $_Util__Divide_Dividend0
+        bcc $+WackyWorkExp_LevelSumLoopNext
+        inc $_Util__Divide_Dividend1
+    %WackyWorkExp_LevelSumLoopNext:
+        jsr $_Util__XPlus40
+        cpx #$0140 // stop after the last party slot
+        bcc $-WackyWorkExp_LevelSumLoop
+
+        stz $_Util__Divide_Divisor1
+        jsr $_Util__Divide
+
+        // divide by 8 and add 1; put that in Y
+        lda $_Util__Divide_Quotient0
+        lsr a
+        lsr a
+        lsr a
+        inc a
+        tay
+
+        // next, get a scaling factor out of 48 (= 8*6),
+        // so that you need level 40 to get full experience
+        cpy #$0006
+        beq $+NextModifier__WackyWorkExp
+        lda $ad
+        sta $_Util__Divide_Dividend0
+        lda $ae
+        sta $_Util__Divide_Dividend1
+        lda $af
+        sta $_Util__Divide_Dividend2
+        lda #$06
+        sta $_Util__Divide_Divisor0
+        stz $_Util__Divide_Divisor1
+        jsr $_Util__Divide
+        stz $ad
+        stz $ae
+        stz $af
+        stz $_Util__Divide_Dividend0
+        stz $_Util__Divide_Dividend1
+        stz $_Util__Divide_Dividend2
+    %WackyWorkExp_Loop1Start:
+        clc
+        lda $ad
+        adc $_Util__Divide_Quotient0
+        sta $ad
+        lda $ae
+        adc $_Util__Divide_Quotient1
+        sta $ae
+        lda $af
+        adc $_Util__Divide_Quotient2
+        bcc $03
+        jmp $_MaxExp
+        sta $af
+        lda $_Util__Divide_Remainder0
+        adc $_Util__Divide_Dividend0
+        sta $_Util__Divide_Dividend0
+        // remainder is at most 5, loop is at most 13 times.
+        dey
+        bne $-WackyWorkExp_Loop1Start
+        // also handle the remainder
+        jsr $_Util__Divide
+        clc 
+        lda $_Util__Divide_Quotient0
+        adc $ad
+        sta $ad
+        lda $_Util__Divide_Quotient1
+        adc $ae
+        sta $ae
+        lda $_Util__Divide_Quotient2
+        adc $af
+        bcc $03
+        jml $_MaxExp
+        sta $af
+
+    %NextModifier__WackyWorkExp:
+        // %end%
+
         // %flag experience_max_level_bonus on%
         // compute max party level, mult by 2, compare against min monster level
         // each five levels of deficit gives a 20% bonus
@@ -321,8 +417,25 @@ msfpatch {
         bra $+ExperienceAcceleration_CalculateMedianLevel
     
     DivideAndAddLoop:
-        // A is the special divisor
-        // Y is the loop parameter
+        // ideally, we simply multiply exp by a scale factor.
+        // we can't, because of integer arithmetic!
+        // so instead, our scale factors look like (1 + loop/div),
+        // and we compute new exp = exp + loop * (exp/div),
+        // computed using integer arithmetic.
+
+        // note that exp = q * div + r, so that
+        // loop * exp = (loop * q) * div + loop * r
+        //            = (loop * q) * div + q_1 * div + r_1
+        //            = (loop * q + q_1) * div + r_1,
+        // so we can minimize division error by handling
+        // the remainder term effectively. (thanks to Wylem for the idea!)
+        // the end result is:
+        // new exp = exp + (loop * q + q_1),
+        // where q is the integer division of exp by A
+        // and q_1 is the integer division of loop * r by A.
+
+        // A is the special divisor, assumed to be one byte
+        // Y is the loop parameter, assumed to be #$00yy
         sta $_Util__Divide_Divisor0
         stz $_Util__Divide_Divisor1
         lda $ad
@@ -334,10 +447,16 @@ msfpatch {
         jsr $_Util__Divide
         // now $_Util__Divide_Quotient0-2 contains the experience divided by the parameter
 
+        // $Util__Divide_Remainder0-2 contains the integer division remainder;
+        // we'll add Y copies of it into the dividend and divide again (the divisor doesn't change)
+        stz $_Util__Divide_Dividend0
+        stz $_Util__Divide_Dividend1
+        stz $_Util__Divide_Dividend2
+
     %AddingLoopStart:
         // add the result back to the experience the required number of times
         cpy #$0001
-        bcc $+DoneLoop
+        bcc $+RemainderHandling
         clc
         lda $_Util__Divide_Quotient0
         adc $ad
@@ -349,8 +468,32 @@ msfpatch {
         adc $af
         bcs $+DoneLoop
         sta $af
+        // now add the remainder into the dividend spot, if we haven't
+        // maxed out experience already (no overflow risk here if so)
+        // no need to clear the carry, if we're here (it's already clear)
+        // no need to deal with the third byte
+        lda $_Util__Divide_Remainder0
+        adc $_Util__Divide_Dividend0
+        sta $_Util__Divide_Dividend0
+        lda $_Util__Divide_Remainder1
+        adc $_Util__Divide_Dividend1
+        sta $_Util__Divide_Dividend1
         dey
         bra $-AddingLoopStart
+    %RemainderHandling:
+        jsr $_Util__Divide
+        // now we just add the quotient to the experience once
+        clc 
+        lda $_Util__Divide_Quotient0
+        adc $ad
+        sta $ad
+        lda $_Util__Divide_Quotient1
+        adc $ae
+        sta $ae
+        lda $_Util__Divide_Quotient2
+        adc $af
+        bcs $+DoneLoop
+        sta $af
     %DoneLoop:
         rts
 
@@ -449,21 +592,131 @@ msfpatch {
         lda $3593
         sta $af
 
-        // %flag experience_no_boost on%
-        jmp $_ExperienceAcceleration_Individual_Bypass
+        // %if wacky_workexperience%
+        // first, determine axtor-specific modifier
+        // using the formation number
+        phx
+        lda $1000,x
+        and #$1f
+        pha
+        lda #$00
+        xba
+        lda $1801
+        inc a
+        asl a
+        asl a
+        asl a
+        eor $1800
+        tax
+        pla
+        clc
+        adc $14ee00,x
+        sta $_Util__Divide_Dividend0
+        stz $_Util__Divide_Dividend1
+        stz $_Util__Divide_Dividend2
+        lda #$05
+        sta $_Util__Divide_Divisor0
+        stz $_Util__Divide_Divisor1
+        jsr $_Util__Divide
+        plx
+
+        // then, use 2+remainder as the numerator
+        // of a fraction over 4 (so, 2-6 over 4),
+        // unless it would be no change
+        lda $_Util__Divide_Remainder0
+        cmp #$02
+        beq $+NextIndividual__WackyWorkExp
+        // only increment once because we start with
+        // one copy of the exp value in $ad-af
+        inc a
+        tay
+        // use Util__Divide_Remainder0-1 for remainder tracking
+        stz $_Util__Divide_Remainder0
+        stz $_Util__Divide_Remainder1
+        lsr $af
+        ror $ae
+        ror $ad
+        bcc $03
+        inc $_Util__Divide_Remainder0
+        lsr $af
+        ror $ae
+        ror $ad
+        bcc $06
+        inc $_Util__Divide_Remainder0
+        inc $_Util__Divide_Remainder0
+        // put the new values in dead-end registers for use
+        lda $ad
+        sta $_Util__Divide_Quotient0
+        lda $ae
+        sta $_Util__Divide_Quotient1
+        lda $af
+        sta $_Util__Divide_Quotient2
+    %WackyWorkExp_Loop2Start:
+        clc
+        lda $ad
+        adc $_Util__Divide_Quotient0
+        sta $ad
+        lda $ae
+        adc $_Util__Divide_Quotient1
+        sta $ae
+        lda $af
+        adc $_Util__Divide_Quotient2
+        bcc $03
+        jmp $_MaxExp_Individual
+        sta $af
+        lda $_Util__Divide_Remainder1
+        adc $_Util__Divide_Remainder0
+        sta $_Util__Divide_Remainder1
+        dey
+        bne $-WackyWorkExp_Loop2Start
+        // add in the remainder exp, which is just in one byte
+        lsr a
+        lsr a
+        clc
+        adc $ad
+        sta $ad
+        lda $ae
+        adc #$00
+        sta $ae
+        lda $af
+        adc #$00
+        bcc $03
+        jmp $_MaxExp_Individual
+        sta $af
+
+    %NextIndividual__WackyWorkExp:
         // %end%
 
+        // %flag experience_no_boost off%
         // check for level under median
         lda $1002,x
         clc
         adc #$04
         cmp $2635
-        bcs $03
-        jsr $_ExperienceAcceleration_Individual_ApplySingleBonus
+        bcs $+NextIndividual__MedianBoost
+
+        // double the experience gained
+        clc
+        rol $ad
+        rol $ae
+        rol $af
+        bcs $+MaxExp_Individual
+
+    %NextIndividual__MedianBoost:
+        // %end%
+
+        bra $+ExperienceAcceleration_IndividualFinish
+
+        // cap at max value if overflowed
+    MaxExp_Individual:
+        lda #$ff
+        sta $ad
+        sta $ae
+        sta $af
 
         // perform actual EXP addition (copy of original code at $03ee9f
         // except using copy of EXP value at $ad-af)
-    ExperienceAcceleration_Individual_Bypass:
+    ExperienceAcceleration_IndividualFinish:
         clc
         lda $1037,x
         adc $ad
@@ -477,26 +730,4 @@ msfpatch {
 
         // return
         jml $03eebb
-
-    ExperienceAcceleration_Individual_ApplySingleBonus:
-        clc
-        lda $ad
-        adc $3591
-        sta $ad
-        lda $ae
-        adc $3592
-        sta $ae
-        lda $af
-        adc $3593
-        sta $af
-
-        bcs $01
-        rts
-
-        // cap at max value if overflowed
-        lda #$ff
-        sta $ad
-        sta $ae
-        sta $af
-        rts
 }

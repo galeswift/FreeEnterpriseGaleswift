@@ -69,7 +69,6 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -monsterevade
 -monsterflee
 -smith:super/-smith:alt -smith:playable -smith:omni
--starting:blackchocobo/-starting:underground
 -fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
 -fusoya:slowstart/-fusoya:unlearn
 -fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
@@ -145,6 +144,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:scrambledstats
 -wacky:advertising
 -wacky:skillissue
+-wacky:workexperience
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon
 -spoil:all
 -spoil:keyitems
@@ -370,8 +370,6 @@ G64                  glitch_allow_64
 -smith:alt           altsmith
 -smith:playable      playablesmith
 -smith:omni          omnismith
--starting:blackchocobo  starting_blackchocobo
--starting:underground   starting_underground
 
 -fusoya:vanilla       vanilla_fusoya
 -fusoya:location      location_fusoya

@@ -47,6 +47,7 @@ WACKY_CHALLENGES = {
     'scrambledstats'    : 'Scrambled Stats',
     'advertising'       : 'Truth in\nAdvertising',
     'skillissue'        : 'Skill Issue',
+    'workexperience'    : 'Work Experience',
 }
 
 WACKY_ROM_ADDRESS = BusAddress(0x268000)
@@ -93,6 +94,7 @@ WACKY_RAM_USAGE = {
     'scrambledstats'    : 0,
     'advertising'       : 0,
     'skillissue'        : 2,
+    'workexperience'    : 0,
 }
 
 WACKY_MUTUAL_INCOMPATIBILITIES = [
@@ -1092,3 +1094,6 @@ def apply_skillissue(env, rom_address):
     env.add_binary(rom_address, skill_unlock_table, as_script=True)
 
     return len(skill_unlock_table)
+
+def apply_workexperience(env, rom_address):
+    env.add_toggle('wacky_workexperience')

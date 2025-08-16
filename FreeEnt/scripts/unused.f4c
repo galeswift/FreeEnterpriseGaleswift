@@ -120,6 +120,8 @@ text(bank 1 message $FF) {X}
 
 // 100 and 101 are namingway messages
 
+// 103-105 are FuSoYa spell-learning messages
+
 text(bank 1 message $10D) {X}
 text(bank 1 message $10E) {X}
 
@@ -142,10 +144,11 @@ text(bank 1 message $12E) {X}
 text(bank 1 message $12F) {X}
 text(bank 1 message $130) {X}
 
-// messages $133-135 are for 
+// messages $131-134 are for 
 // post-boss-battle message updates
 
-text(bank 1 message $134) {X}
+// messages $135-136 are for
+// Edge learning spells before Rubicant
 
 text(bank 1 message $137) {X}
 text(bank 1 message $138) {X}

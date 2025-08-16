@@ -7782,29 +7782,13 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon81",
-        "title": "Alternate starting conditions",
-        "type": "select",
-        "subcontrols": [
-          {
-            "flag": "-starting:blackchocobo",
-            "title": "Start with black chocobos but no Enterprise",
-            "description": "Instead of starting with the Enterprise, start at Baron with Black Chocobos available but no Enterprise. The Enterprise is obtained by completing Baron Castle."
-          },
-          {
-            "flag": "-starting:underground",
-            "title": "Start underground with a Drill-less Falcon"
-          }
-        ]
-      },
-      {
         "flag": "@fusoya",
         "title": "FuSoYa challenges",
         "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon82",
+            "flag": "@anon81",
             "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
@@ -7813,7 +7797,7 @@ var FLAG_UISPEC = [
                 "title": "Usual FuSoYa challenge",
                 "subcontrols": [
                   {
-                    "flag": "@anon83",
+                    "flag": "@anon82",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7831,7 +7815,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon84",
+                    "flag": "@anon83",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7854,7 +7838,7 @@ var FLAG_UISPEC = [
                 "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
                 "subcontrols": [
                   {
-                    "flag": "@anon85",
+                    "flag": "@anon84",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7872,7 +7856,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon83",
+                    "flag": "@anon82",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7890,7 +7874,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon84",
+                    "flag": "@anon83",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7913,7 +7897,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
                 "subcontrols": [
                   {
-                    "flag": "@anon83",
+                    "flag": "@anon82",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7931,7 +7915,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon84",
+                    "flag": "@anon83",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7954,7 +7938,7 @@ var FLAG_UISPEC = [
                 "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon86",
+                    "flag": "@anon85",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7967,7 +7951,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon87",
+                    "flag": "@anon86",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7991,7 +7975,7 @@ var FLAG_UISPEC = [
                 "hard": true,
                 "subcontrols": [
                   {
-                    "flag": "@anon88",
+                    "flag": "@anon87",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -8030,7 +8014,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon89",
+            "flag": "@anon88",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -8087,7 +8071,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon90",
+                    "flag": "@anon89",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -8127,7 +8111,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon91",
+                "flag": "@anon90",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -8183,7 +8167,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon92",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8211,7 +8195,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon92",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8243,7 +8227,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon94",
+                "flag": "@anon93",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8270,7 +8254,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon95",
+                "flag": "@anon94",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8293,7 +8277,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon96",
+                "flag": "@anon95",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8328,7 +8312,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon97",
+                "flag": "@anon96",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -8379,7 +8363,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon98",
+        "flag": "@anon97",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -8412,7 +8396,7 @@ var FLAG_UISPEC = [
         "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, and incorrect victim history entries."
       },
       {
-        "flag": "@anon99",
+        "flag": "@anon98",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -8443,12 +8427,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon100",
+        "flag": "@anon99",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon101",
+            "flag": "@anon100",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -8535,7 +8519,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon102",
+            "flag": "@anon101",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -8576,7 +8560,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon103",
+            "flag": "@anon102",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8745,7 +8729,9 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:skillissue",
-            "title": "\"Skill Issue\""
+            "title": "\"Skill Issue\"",
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "-wacky:skywarriors",
@@ -8788,18 +8774,24 @@ var FLAG_UISPEC = [
             "fork": true
           },
           {
+            "flag": "-wacky:workexperience",
+            "title": "\"Work Experience\"",
+            "hard": true,
+            "fork": true
+          },
+          {
             "flag": "-wacky:zombies",
             "title": "\"Zombies!!!\""
           }
         ]
       },
       {
-        "flag": "@anon104",
+        "flag": "@anon103",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon105",
+            "flag": "@anon104",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8848,7 +8840,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon106",
+        "flag": "@anon105",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8902,7 +8894,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon107",
+            "flag": "@anon106",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8918,7 +8910,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon108",
+                "flag": "@anon107",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

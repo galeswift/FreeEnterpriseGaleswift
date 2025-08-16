@@ -785,9 +785,6 @@
 ..(-smith:super) Kokkol crafts a weapon from FF4 Advance
 .[-smith:playable]^ Kokkol's item will be usable
 .[-smith:omni]^ All characters can equip the FF4A weapon 
-<> Alternate starting conditions
-.(-starting:blackchocobo) Start with black chocobos but no Enterprise
-.(-starting:underground) Start underground with a Drill-less Falcon
 [@fusoya]^ FuSoYa challenges
 .<> Spell learning categories
 ..(@normalfu) Usual FuSoYa challenge
@@ -949,7 +946,7 @@
 .[-wacky:saveusbigchocobo]! "Save Us, Big Chocobo!"
 .[-wacky:scrambledstats]!^  "Scrambled Stats"
 .[-wacky:sixleggedrace]     "Six-Legged Race"
-.[-wacky:skillissue]        "Skill Issue"
+.[-wacky:skillissue]!^      "Skill Issue"
 .[-wacky:skywarriors]       "The Sky Warriors"
 .[-wacky:worthfighting]!    "Something Worth Fighting For"
 .[-wacky:tellahmaneuver]    "The Tellah Maneuver"
@@ -959,6 +956,7 @@
 .[-wacky:darts]             "World Championship of Darts"
 .[-wacky:unstackable]!      "Unstackable"
 .[-wacky:whatsmygear]^      "What's My Gear Again?"
+.[-wacky:workexperience]!^  "Work Experience"
 .[-wacky:zombies]           "Zombies!!!"
 
 []^ Miscellaneous tweaks

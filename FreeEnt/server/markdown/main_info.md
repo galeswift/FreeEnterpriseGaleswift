@@ -760,7 +760,9 @@ This flag allows every character in the seed to equip the FF4A weapon, if there 
 - Programming: ScytheMarshall
 - Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
 
-These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. Mist does not get locked from the right side after the Package cutscene.
+These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. Mist does not get locked from the right side after the Package cutscene if starting with the Black Chocobo.
+
+Or, at least, these flags _would_ do that, but because Doors Rando is a thing on the fork and modifying it to work with a different starting location is highly non-trivial, these flags will remain inactive for now. Once Doors Rando has been modified to work with these flags, these flags will become active. For now, while the flags are not accessible, all of the logic is available to look at in the various files, for when things are ready.
 
 ## FuSoYa Flags
 
@@ -1071,6 +1073,16 @@ This wacky flag fully randomizes the stat bonuses that equipment items give (and
 - Locations: wacky_rando.py, skillissue.f4c, eventextensions_randomizer.f4c, text_buffers.f4c, character_expansion.f4c, unused.f4c
 
 This wacky flag causes all commands except for Fight and Item to be locked at the beginning of the seed, and each boss defeated unlocks one of the commands (similarly to how Ultimecia's Castle works in FFVIII, except you cannot choose the command to unlock). If a magic command is locked, then you cannot use those spells outside of battle either. This wacky is compatible with Misspelled but not with FF4: The Musical or World Championship of Darts. On Push B to Jump, you can still push B to Jump even if you have not unlocked the Jump command.
+
+### `-wacky:workexperience` - Work Experience {: .h6 }
+
+- Idea: ScytheMarshall, off-hand suggestion from Wylem
+- Design/Programming: ScytheMarshall 
+- Locations: wacky_rando.py, experience_acceleration.f4c
+
+This wacky flag makes two changes to experience, to simulate what it's like to get work experience in real life: 1. Each distinct character instance gets an experience modifier of 0.5-1.5x in increments of 0.25, and 2. Your average party level determines a second modifier to all character's experience, by computing (average party level / 8) + 1 and then using that divided by 6 as the modifier, so that you only start gaining full experience at average party level 40. Base level Rydia, Edward, and Paladin Cecil start with 1/6 experience; a party with most of the usual characters will start with roughly 1/3 experience.
+
+The idea is that two characters can do the same work and get different experience, and that you need work experience to get work experience. Probably the most cynical wacky flag of the whole bunch.
 
 ## Tweak Flags
 
