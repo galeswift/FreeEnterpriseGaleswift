@@ -551,6 +551,9 @@ def apply(env):
     elif env.options.flags.has('shops_sell_zero'):
         env.add_file('scripts/sell_zero.f4c')
 
+    if env.options.flags.has('shops_ethers_sell_full'):
+        env.add_file('scripts/ether_full_sell_price.f4c')
+
     # generate spoilers
     def spoiler_sort_key(sa):
         key = [-1]

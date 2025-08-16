@@ -594,6 +594,9 @@ class FlagLogicCore {
         if ((! flagset.has_any("-entrancesrando:normal", "-entrancesrando:gated", "-entrancesrando:blueplanet", "-entrancesrando:why", "-entrancesrando:all", "-doorsrando:normal", "-doorsrando:gated", "-doorsrando:blueplanet", "-doorsrando:why", "-doorsrando:all"))) {
             this._simple_disable(flagset, log, "Removing doors rando related flags when no doors/entrances option is enabled ", ["-calmness", "-forcesealed"]);
         }
+        if (flagset.has_any("-starting:underground", "-starting:blackchocobo")) {
+            this._lib.push(log, ["error", "Different starting location flags are not currently available; remove them and try again."]);
+        }
         if ((flagset.has("-z:physical") && flagset.has("-z:whichbang"))) {
             this._simple_disable(flagset, log, "No guaranteed Big Bangs in script", ["-z:whichbang"]);
         }

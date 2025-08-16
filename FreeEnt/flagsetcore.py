@@ -549,6 +549,10 @@ class FlagLogicCore:
                                '-doorsrando:blueplanet','-doorsrando:why','-doorsrando:all'):
             self._simple_disable(flagset, log, 'Removing doors rando related flags when no doors/entrances option is enabled ', ['-calmness','-forcesealed'])
 
+        # temporarily prevent usage of -starting:underground and -starting:blackchocobo, until Doors are fixed
+        if flagset.has_any('-starting:underground','-starting:blackchocobo'):
+            self._lib.push(log, ['error', "Different starting location flags are not currently available; remove them and try again."])
+
         if flagset.has('-z:physical') and flagset.has('-z:whichbang'):
             self._simple_disable(flagset, log, 'No guaranteed Big Bangs in script', ['-z:whichbang'])
 

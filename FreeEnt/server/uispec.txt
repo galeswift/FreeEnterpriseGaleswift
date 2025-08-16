@@ -533,6 +533,7 @@
 .[Salways:coffin] Coffins always sold in shops
 .[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
 [Splayable]^ Shops contain usable items
+[Sethersell]^ Ethers and Elixirs sell like other items
 
 ()# Remove Items
 .[Sno:j] No J-items in shops

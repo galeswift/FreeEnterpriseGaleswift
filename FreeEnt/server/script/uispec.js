@@ -6350,6 +6350,12 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "Sethersell",
+        "title": "Ethers and Elixirs sell like other items",
+        "description": "Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.",
+        "fork": true
+      },
+      {
         "flag": "@anon62",
         "title": "Remove Items",
         "compact": true,

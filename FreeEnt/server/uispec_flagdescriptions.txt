@@ -387,6 +387,9 @@ Normally, the randomizer guarantees Cure2 potions, Life potions and StarVeils ar
 [Smixed:shaken]
 This shuffle includes key items and other excluded items that have 0 GP as their buy/sell price.
 
+[Sethersell]
+Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.
+
 [Bstandard]
 The positions of bosses are shuffled. Boss stats are roughly scaled to match the battle it's replacing. For example, Rubicant in the Watery Pass would have the HP and speed of Octomamm. (Yes, this flag is janky, and a MegaNuke is still a MegaNuke. Save often.)
 

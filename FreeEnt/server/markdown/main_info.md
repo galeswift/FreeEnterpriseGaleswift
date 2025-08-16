@@ -453,6 +453,14 @@ These flags change the prices of the items specified by `Spricey`, which can be 
 
 Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, with the same exceptions.
 
+### `Sethersell` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: ether_full_sell_price.f4c, shop_rando.py
+
+This flag bypasses the override that the vanilla game does to make Ether1s/Ether2s/Elixirs sell for 1 GP each, so they'll sell like any other item.
+
 ## Boss Flags
 
 For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now).
