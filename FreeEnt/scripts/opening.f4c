@@ -41,7 +41,7 @@ event($10)  //Opening events
     [#B #Rando_PaladinizeCecil]    
     // %end%
 
-    // %quickstart superhero%
+    // %flags: superhero_challenge%
     [#B #MakeSuperhero]
     // %end%
 
@@ -135,10 +135,6 @@ event($10)  //Opening events
     // Has partner flag
     set #Temp
 
-    // %flags: Cparty:1 ~Cpermajoin%
-    clear #Temp
-    // %end%
-
     [#B #Rando_CheckFlag #randoflag.no_starting_partner]    
     [#B #If #Flag #flag.Result] {
         clear #Temp
@@ -149,14 +145,15 @@ event($10)  //Opening events
         [#B #Text_LoadRewardNameFromSlot #reward_slot.starting_partner_character 0]
         map message 6 // Let's go!
 
+        // %flags: Cparty:1 ~Cpermajoin%
+        p #Kain1 toggle visible
+        // %end%
+
         //TODO: restore? [#B #Objectives_TickRewardSlot #reward_slot.starting_partner_character]
         [#B #Rando_DeliverRewardFromSlot #reward_slot.starting_partner_character]
         pause 2
     }
-        
-    // %flags: superhero_challenge%
-    [#B #MakeSuperhero]
-    // %end%
+
     // %debug init%
     // %end%
 
@@ -244,13 +241,13 @@ event($10)  //Opening events
     }
     load map #DockedAirship at 25 8 facing left
     player face left
-    [#B #If #Flag #flag.Temp] {
+    [#B #If #not_PartySize 1] {
         batch {
             player move left
             p #Kain toggle visible
         }
     }
-    [#B #If #not_Flag #flag.Temp] {
+    [#B #If #PartySize 1] {
         player move left
     }
 
