@@ -9642,7 +9642,6 @@ Quarter Roll Unwrapper
 Quarter-Section Ironer
 Quartermaster
 Query Checker
-Quiceañera Bouncer
 Quick Mixer Operator
 Quill Advocate
 Quill Cleaner
@@ -9655,8 +9654,8 @@ Quilt Restorer
 Quilt Stuffer
 Quilter
 Quilting Machine Operator
-Quinceañera Bouncer
-Quinceañera Coordinator
+Quinceaera Bouncer
+Quinceaera Coordinator
 Quirk Sander
 Rabble-Furnace Tender
 Rabies Doctor
