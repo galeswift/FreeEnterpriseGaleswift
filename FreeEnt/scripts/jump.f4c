@@ -715,12 +715,27 @@ msfpatch {
         jml $00f0ed
 }
 
+// %if ~doorsrando%
 // add door trigger for Tower of Babil door that you can cross halves to
 trigger(#BabilFloorIceMail2 3)
 {
     position 10 4
     teleport #BabilFloorAirship at 10 5 facing down
 }
+// %end%
+
+// %if doorsrando%
+// block the Tower of Bab-il jump that lets you cross halves,
+// in order to save a trigger
+// first patch the tile to be 0x02 instead of 0x19 (looks different/not great;
+// maybe there's a better choice here); we use grid $127 because the revisit map
+// uses that grid instead of its own map ID grid.
+mapgrid($127 12 5) { 02 }
+// then block the tile from being jumpable (you do not jump over this
+// tile anywhere else)
+patch($a1804) { 80 }
+// %end%
+
 
 // there is a door you can reach past the babil crystal room that is not
 // hooked up; set it to be a return door
