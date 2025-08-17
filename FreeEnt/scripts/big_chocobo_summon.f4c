@@ -1,0 +1,544 @@
+// Modify spell $5f to be a Big Chocobo summon,
+// called randomly by the Chocobo summon
+// with a custom spell power.
+
+text( spell name $5F ) {
+BigChoco
+} 
+
+// Unless, of course, it's Save Us Big Chocobo,
+// in which case we simply use a default 20% chance
+// to happen and base spell power 232 = 8 * 29 (byte 1D)
+// (we're not using this value, but just in case)
+// %if wacky_misspelled%
+// don't patch the MP/wall byte, since wacky_rando will
+patch ($0f99da bus) { 80 1D 64 00 00 }
+// %else%
+patch ($0f99da bus) { 80 1D 64 00 00 87 }
+// %end%
+
+// For graphics:
+// Spell visual properties
+patch($0fa1c8 bus) { 18 00 00 1B }
+
+// Audio effect (Pan)
+patch($0fa3ae bus) { 76 }
+
+// Spell effect handler pointer $1B, which points to the
+// address in bank02 where things happen
+patch($02ebac bus) { A7 85 }
+
+// Custom spell effect handler, overwriting an unused
+// multiplication routine (hopefully unused!)
+msfpatch{
+    .addr $0285a7
+        jsl $=BigChocoboSummonSetup1
+        // initialize projectiles,
+        // then animate moving to
+        // above the monster
+        jsr $e7bd
+        jsr $eef1
+        // wait for 25 frames
+        ldx #$0019
+        jsr $c89e
+        jsl $=BigChocoboSummonSetup2
+        // reinitialize projectiles,
+        // land on the monster
+        jsr $e7bd
+        jsr $eef1
+        // play the sound effect corresponding
+        // to this spell
+        jsr $f5e4
+        // wait for 25 frames
+        ldx #$0019
+        jsr $c89e
+        // finish the Call animation
+        // and eventually return
+        jmp $be89
+
+    .new 
+    BigChocoboSummonSetup1:
+        // set horizontal movement speed to be
+        // 6 pixels per frame (most projectiles work
+        // at 8 pixels per frame, but the diagonal makes
+        // it look faster, so let's try it)
+        lda #$06
+        sta $f115
+        // set source coordinates to be the sprite coords
+        ldx $f321
+        stx $f111
+
+        // eventual goal: land the Big Chocobo roughly on top
+        // of the middle of the monster.
+
+        // IF the monster's "center coordinates" are actually
+        // in the middle of the monster sprite, then I want
+        // to offset the x coord left by half the Big Chocobo's width
+        // and the y coord up by half the Big Chocobo's height.
+        // ... do I? This is the case, but the Big Chocobo's coords are
+        // actually in the top-left corner. ... oh, but that
+        // translation does do the correct thing. Probably shift it
+        // up a bit more than half the Chocobo's height, honestly,
+        // so it doesn't just overlap perfectly lol.
+        // one tile (of 4 in a 2x2) is 16 pixels by 16 pixels
+        // (actually made up of four 8x8 "base" tiles),
+        // so for Big Chocobo I want to sec, sbc #$20, for both
+        // x and y.
+
+        // once I've got the correct ending target coordinates, then
+        // I can do the offset to get the intermediate target coords
+        // and then undo it to get the ending coords.
+
+        // pull the target's slot, then get that slot's
+        // x coordinate, subtract 32, and store it to the target coords
+        lda $49
+        asl a
+        tax
+        lda $f043,x
+        sec
+        sbc #$20
+        sta $f113
+        // get the y coordinate, divide by 8, and add it
+        // to the x coordinate to get an offset required to
+        // deal with the fact that we can't move a projectile
+        // vertically... whoops. add this offset to the target
+        // coords and store it. I don't *think* the y coordinate
+        // can ever be less than 8.
+        lda $f044,x
+        lsr a
+        lsr a
+        lsr a
+        clc
+        adc $f113
+        sta $f113
+        // set the target y coordinate to be at the top of
+        // the screen
+        lda #$00
+        sta $f114
+        rtl
+
+    BigChocoboSummonSetup2:
+        // horizontal movement speed is now 1, to get the 
+        // vertical speed to be equal to 8 pixels per frame due to
+        // the above
+        lda #$01
+        sta $f115
+        // current alt sprite coords are still the source coords
+        ldx $f321
+        stx $f111
+        // target coords are the monster coords, so load them and
+        // store them, but subtract 32 from x and 36 from y first
+        lda $49
+        asl a
+        tax
+        lda $f043,x
+        sec
+        sbc #$20
+        sta $f113
+        lda $f044,x
+        sec
+        sbc #$24
+        sta $f114
+        rtl
+}
+
+// Add in an extra check for Big Chocobo, because
+// W.Meteo is immediately after Bahamut and before Big Chocobo
+msfpatch{
+    .addr $02ead5
+        jml $=BigChocoboSummonAnimateCheck
+    
+    .new
+    BigChocoboSummonAnimateCheck:
+        // check if it's Big Chocobo, otherwise
+        // use the normal checks
+        cmp #$5f
+        beq $+BigChocoboSummonIsCall
+        cmp #$4d
+        bcc $+BigChocoboSummonNotCall
+        jml $02ead9
+    %BigChocoboSummonNotCall:
+        jml $02eafb
+    %BigChocoboSummonIsCall:
+        jml $02eadd
+}
+
+// Add in a sprite data offset to the table,
+// sprite data will be at $0DD750;
+// tilemap data will be at $0DF1C0;
+// position (2)/size (2) will be at $13fa55-58
+
+msfpatch{
+    .def BigChocoboSummonSpriteDataLocation  $0dd750
+    .def BigChocoboSummonTilemapLocation  $0df1c0
+    .def BigChocoboSummonPaletteLocation  $0d8110
+    .def BigChocoboSummonPosition  $13fa55
+    .def BigChocoboFrameData  $0df7d7
+
+    .addr $0d8814
+        [[ 50 D7 ]]
+
+    .addr $13fa55
+        [[ B0 30 04 04 ]]
+}
+
+// Place the sprite and tilemap data into ROM
+// Add in an extra check for loading the Call sprite
+// (because the data tables are only 17 bytes with no
+// added room for an 18th spell)
+msfpatch{
+    // sprite data for Big Chocobo
+    .addr $0dd750
+        [[  00 00 00 00 30 00 30 00 CC 30 CC 30 CF 30 CF 30 00 00 00 00 30 30 30 30 
+            00 00 00 00 0F 00 0F 00 30 0F 30 0F C0 3F C0 3F 00 00 00 00 0F 0F 30 30 
+            C0 3F C0 3F 30 0F 30 0F CC 33 CC 33 C3 3C C3 3C 3F 3F 0C 0C 3F 3F 3F 3F 
+            30 CF 30 CF 03 FC 03 FC 03 FC 03 FC 03 30 03 30 CC CC 30 30 00 00 CC CC 
+            FF 00 FF 00 00 FF 00 FF 00 FF 00 FF 3F C0 3F C0 00 00 FF FF 00 00 00 00 
+            FF 00 FF 00 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 00 FF FF 00 00 00 00 
+            C0 3C C0 3C 0F F0 0F F0 30 CF 30 CF C3 3C C3 3C 0F 0F 30 30 C0 C0 00 00 
+            C3 3C C3 3C FC 00 FC 00 30 C0 30 C0 F3 00 F3 00 03 03 0F 0F 0F 0F 0C 0C 
+            C0 0F C0 0F 30 03 30 03 0C 00 0C 00 0C 00 0C 00 3F 3F 0F 0F 03 03 03 03 
+            00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 00 00 00 C0 C0 FF FF 
+            0C 00 0C 00 03 00 03 00 00 00 00 00 00 00 00 00 03 03 00 00 00 00 00 00 
+            00 3F 00 3F 00 00 00 00 C0 00 C0 00 3F 00 3F 00 FF FF FF FF 3F 3F 00 00 
+            33 CC 33 CC 0F F0 0F F0 0C F0 0C F0 F0 00 F0 00 C0 C0 00 00 3F 3F FF FF 
+            C0 00 C0 00 00 00 00 00 0F 00 0F 00 FF 00 FF 00 3F 3F FF FF FF FF F0 F0 
+            3F C0 3F C0 3C 00 3C 00 C0 0F C0 0F 00 FF 00 FF FC FC C3 C3 3F 3F F0 F0 
+            FF 00 FF 00 00 FF 00 FF 30 CF 30 CF 0F F0 0F F0 00 00 FF FF C0 C0 30 30 
+            00 00 00 00 F0 00 F0 00 0C F0 0C F0 33 CC 33 CC 00 00 00 00 F0 F0 CC CC 
+            00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+            C0 0F C0 0F C3 3C C3 3C 30 00 30 00 00 00 00 00 33 33 C0 C0 FF FF FF FF 
+            C0 00 C0 00 C0 00 C0 00 C0 00 C0 00 FF 00 FF 00 00 00 00 00 00 00 C0 C0 
+            00 0F 00 0F 00 3F 00 3F 00 3F 00 3F 00 3F 00 3F 00 00 03 03 0C 0C 0C 0C 
+            00 F0 00 F0 00 FC 00 FC 00 FC 00 FC 00 FC 00 FC 00 00 C0 C0 F0 F0 F0 F0 
+            00 3F 00 3F 00 3F 00 3F 00 C0 00 C0 00 00 00 00 0F 0F 00 00 00 00 00 00 
+            00 FC 00 FC 00 F0 00 F0 00 00 00 00 00 00 00 00 F0 F0 00 00 00 00 00 00 
+            00 00 00 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 FF FF F0 F0 00 00 00 00 
+            03 00 03 00 F3 00 F3 00 F3 00 F3 00 FF 00 FF 00 FC FC 0C 0C 0C 0C 30 30 
+            FF 00 FF 00 F0 00 F0 00 0F F0 0F F0 00 FF 00 FF F0 F0 0F 0F 30 30 0C 0C 
+            FC 00 FC 00 F0 00 F0 00 CF 30 CF 30 03 FC 03 FC 30 30 C0 C0 30 30 0C 0C 
+            00 00 00 00 03 00 03 00 0C 03 0C 03 0C 03 0C 03 00 00 00 00 03 03 03 03 
+            C0 00 C0 00 30 C0 30 C0 30 C0 30 C0 30 C0 30 C0 00 00 00 00 00 00 00 00 
+            30 0F 30 0F C0 3F C0 3F 00 FF 00 FF C0 3F C0 3F 0C 0C 30 30 F0 F0 3C 3C 
+            30 C0 30 C0 CC 30 CC 30 0C F0 0C F0 3C C0 3C C0 00 00 00 00 30 30 C0 C0 
+            00 00 00 00 0C 00 0C 00 33 00 33 00 33 00 33 00 00 00 00 00 0C 0C 0C 0C 
+            0C 03 0C 03 30 03 30 03 30 0F 30 0F F0 03 F0 03 03 03 0F 0F 0F 0F 0F 0F 
+            30 0C 30 0C 30 03 30 03 CC 03 CC 03 C3 00 C3 00 0F 0F 0F 0F 33 33 3C 3C 
+            FC 00 FC 00 C3 00 C3 00 F0 0C F0 0C 00 3F 00 3F 33 33 3C 3C FF FF FF FF 
+            00 FF 00 FF 00 FF 00 FF 00 FF 00 FF 00 FC 00 FC 00 00 00 00 03 03 FF FF 
+            00 FC 00 FC C3 00 C3 00 3C 03 3C 03 C0 00 C0 00 FF FF 3C 3C C3 C3 3F 3F 
+            03 00 03 00 FC 00 FC 00 03 00 03 00 03 FC 03 FC FC FC 03 03 FC FC FC FC 
+            33 00 33 00 CF 30 CF 30 0F F0 0F F0 3F C0 3F C0 CC CC 33 33 C3 C3 33 33 
+            F0 00 F0 00 F0 03 F0 03 CC 00 CC 00 30 00 30 00 0F 0F 0F 0F 33 33 0F 0F 
+            00 3F 00 3F 00 3F 00 3F 00 0C 00 0C 00 00 00 00 FF FF FF FF FF FF FF FF 
+            0C 00 0C 00 FF 00 FF 00 FF 00 FF 00 03 00 03 00 03 03 00 00 00 00 00 00 
+            00 00 00 00 F0 00 F0 00 FF 00 FF 00 FF 00 FF 00 FF FF 0F 0F 00 00 00 00 
+            03 FC 03 FC 00 3F 00 3F 00 3F 00 3F C0 0F C0 0F FC FC FF FF FF FF 3F 3F 
+            F3 00 F3 00 FF 00 FF 00 FC 00 FC 00 3F C0 3F C0 FF FF 3F 3F 3F 3F CF CF 
+            C0 00 C0 00 30 00 30 00 FF 00 FF 00 FF 00 FF 00 3F 3F CF CF 00 00 00 00 
+            3C C0 3C C0 0F 00 0F 00 0F 00 0F 00 FF 00 FF 00 CF CF F3 F3 F3 F3 00 00 
+            C0 3F C0 3F 00 FF 00 FF 30 CF 30 CF CC 33 CC 33 00 00 C0 C0 C0 C0 30 30 
+            03 FC 03 FC 0C F3 0C F3 00 FF 00 FF 00 FF 00 FF 0C 0C 33 33 0C 0C 00 00 
+            0C F3 0C F3 0C C3 0C C3 F3 0C F3 0C FC 00 FC 00 C0 C0 30 30 C0 C0 C3 C3 
+            00 FF 00 FF F0 0F F0 0F 0C F3 0C F3 30 CF 30 CF 00 00 00 00 C0 C0 0C 0C 
+            30 CF 30 CF 0C F3 0C F3 0C F3 0C F3 0F F0 0F F0 CF CF 33 33 33 33 30 30 
+            CC 30 CC 30 30 C0 30 C0 C0 00 C0 00 0F 00 0F 00 30 30 C0 C0 00 00 00 00 
+            03 FC 03 FC 03 FC 03 FC 33 CC 33 CC 0F F0 0F F0 0C 0C 0C 0C 0C 0C 30 30 
+            30 0F 30 0F C3 3C C3 3C C3 00 C3 00 3F 00 3F 00 0C 0C 30 30 FC FC FC FC 
+            03 00 03 00 C0 00 C0 00 3F 00 3F 00 0C 03 0C 03 FF FF FF FF F0 F0 F3 F3 
+            30 0F 30 0F C0 3F C0 3F 00 FF 00 FF 00 FF 00 FF CF CF 3F 3F FF FF FF FF 
+            F0 0F F0 0F 30 00 30 00 3C 00 3C 00 0F F0 0F F0 CF CF CF CF C3 C3 C0 C0 
+            00 0F 00 0F 30 00 30 00 CF 00 CF 00 FF 00 FF 00 FF FF CF CF 30 30 00 00 
+            03 FC 03 FC 03 FC 03 FC 3F C0 3F C0 3F C0 3F C0 0C 0C FC FC CF CF CF CF 
+            CF 00 CF 00 0C 00 0C 00 FC 00 FC 00 0C 00 0C 00 FC FC F0 F0 F0 F0 F0 F0 
+            03 00 03 00 3F 00 3F 00 FF 00 FF 00 FF 00 FF 00 FC FC C0 C0 00 00 00 00 
+            CC 00 CC 00 FC 00 FC 00 F3 0C F3 0C FC 00 FC 00 F0 F0 F0 F0 30 30 00 00  ]]
+
+    // tilemap data for Big Chocobo
+    .addr $0df1c0
+        [[  00 01 10 11 02 03 12 13
+            20 21 30 31 22 23 32 33
+            04 05 14 15 06 07 16 17
+            24 25 34 35 26 27 36 37
+            40 41 50 51 42 43 52 53
+            60 61 70 71 62 63 72 73
+            44 45 54 55 46 47 56 57
+            64 65 74 75 66 67 76 77 FF ]]
+
+    .addr $02ea7f
+        jml $=BigChocoboLoadSprite
+
+    .new
+    BigChocoboLoadSprite:
+        // displaced
+        pha
+        sec
+        sbc #$4d
+        // check if Big Chocobo, if not carry on
+        cmp #$12
+        beq $+BigChocoboLoadSpriteContinue
+        jml $02ea83
+    %BigChocoboLoadSpriteContinue:
+        pha
+        pha
+        // manually load the Big Chocobo
+        // palette data into palette 12,
+        // which (as it is) requires us
+        // to write our own loop, due to where
+        // the data happens to be stored
+        ldx #$0000
+    %BigChocoboLoadSpritePaletteLoop:
+        lda $=BigChocoboSummonPaletteLocation,x
+        sta $eed0,x
+        inx
+        cpx #$0020
+        bcc $-BigChocoboLoadSpritePaletteLoop
+        jml $02ea90
+
+    .addr $02eaab
+        jml $=BigChocoboLoadTileMap
+
+    .new
+    BigChocoboLoadTileMap:
+        cmp #$12
+        beq $+BigChocoboLoadTilemapContinue
+        // displaced
+        asl a
+        tax
+        rep #$20
+        // don't use .mx 0x00, because we don't need it
+        jml $02eaaf
+    %BigChocoboLoadTilemapContinue:
+        // manually load the tilemap offset
+        ldx #$_BigChocoboSummonTilemapLocation
+        lda #$^BigChocoboSummonTilemapLocation
+        jml $02eab9
+}
+
+// Patch a BEQ into a BCS to handle a "not Asura" case
+patch($03fd72 bus) { B0 }
+
+// Add in a check to initialize the alternate sprite
+msfpatch{
+    .addr $03fda3
+        jml $=BigChocoboInitializeSprite
+
+    .new
+    BigChocoboInitializeSprite:
+        cmp #$12
+        beq $+BigChocoboInitializeSpriteContinue
+        // displaced
+        asl a
+        asl a
+        tax
+        tdc
+        jml $03fda7
+    %BigChocoboInitializeSpriteContinue:
+        // load the position and size data
+        ldx #$0000
+    %BigChocoboInitializeLoopStart:
+        lda $=BigChocoboSummonPosition,x
+        sta $f321,x
+        inx
+        cpx #$0004
+        bcc $-BigChocoboInitializeLoopStart
+        jml $03fdb6
+}
+
+// Skip most of the frame data computations,
+// just load the correct frame data (no offsets)
+msfpatch{
+    .addr $0df7d7
+        [[  06 04 02 00 
+            26 24 22 20 
+            46 44 42 40 
+            66 64 62 60 ]]
+
+    .addr $01fe28
+        jml $=BigChocoboDrawSprite
+
+    .new
+    BigChocoboDrawSprite:
+        // we just multiplied the relative spell index,
+        // aka the sprite index, by 4, so compare
+        // to 0x12 * 0x4 = 0x48
+        cmp #$48
+        beq $+BigChocoboDrawSpriteContinue
+        // displaced
+        clc 
+        adc $0e
+        tax
+        jml $01fe2c
+    %BigChocoboDrawSpriteContinue:
+        // set coordinate offsets to 0, since we're skipping
+        // the normal code that does this
+        stz $f32e
+        stz $f32f
+        // set the pointer to the correct frame data,
+        // then jump back
+        ldx #$_BigChocoboFrameData
+        stx $1c
+        lda #$^BigChocoboFrameData
+        sta $1e
+        jml $01fe80
+}
+
+// Reserve two bytes in RAM for Big Chocobo
+// probability and spell power
+// Add a random check for Chocobo to turn into Big Chocobo
+msfpatch{
+    .def BigChocoboProbability  $1637
+    .def BigChocoboSpellPower   $1638
+
+    .addr $03e050
+        jml $=BigChocoboSummonRandom
+
+    .new
+    BigChocoboSummonRandom:
+        // check if it's Chocobo; if yes, 
+        // branch to get a random summon
+        cmp #$35
+        beq $+IsChocobo
+        cmp #$3e
+        bcc $+IsBeforeAsura
+        jml $03e054
+    %IsBeforeAsura:
+        jml $03e06e
+    %IsChocobo:
+        ldx #$0000
+        lda #$63
+        jsl $=Util__BattleRNG
+        cmp $_BigChocoboProbability
+        bcc $+IsBigChocobo
+        // regular Chocobo
+        lda #$51
+        jml $03e074
+    %IsBigChocobo:
+        lda #$5f
+        jml $03e074
+}
+
+// Utility function to calculate the probability
+// and spell power of Big Chocobo; loop over every
+// item in the game and if there is a stack of it,
+// then add to the probability (starting at 4%) and
+// add to the spell power/8 (starting at 5).
+// Use a flat 20%/232 spell power for Save Us Big Chocobo.
+// Returns short (since we're always hooking
+// into code to call it).
+msfpatch{
+    .new
+    BigChocoboCalculateStats:
+        // %if save us big chocobo summon%
+        lda #$14
+        sta $_BigChocoboProbability
+        lda #$1d
+        sta $_BigChocoboSpellPower
+        rts
+        // %else%
+        // initialize base prob/spell power
+        lda #$04
+        sta $_BigChocoboProbability
+        inc a
+        sta $_BigChocoboSpellPower
+        // skip "no item", of course;
+        // X loops over items, 
+        // Y loops over inventory slots
+        ldx #$0001
+    %BigChocoboCalculateStatsOuterLoopStart:
+        ldy #$0000
+    %BigChocoboCalculateStatsInnerLoopStart:
+        lda $1340,y
+        // the inventory is guaranteed to be
+        // sorted before this function is called,
+        // so empty spaces mean we can move on
+        beq $+BigChocoboCalculateStatsNextItem
+        txa
+        cmp $1340,y
+        bne $+BigChocoboCalculateStatsNextSlot
+        // found a new item, so add 2%,
+        // unless otherwise capped at 100%
+        lda #$02
+        clc
+        adc $_BigChocoboProbability
+        cmp #$65
+        bcc $+NotMaxProb
+        lda #$64
+    %NotMaxProb:
+        sta $_BigChocoboProbability
+        // and compute the spell power/8 bonus,
+        // unless already capped at 255
+        lda $0fa450,x
+        bmi $+NotCheapItem
+        lda #$00
+    %NotCheapItem:
+        and #$7f
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        inc a
+        clc
+        adc $_BigChocoboSpellPower
+        bcc $+NotMaxSpellPower
+        lda #$ff
+    %NotMaxSpellPower:
+        sta $_BigChocoboSpellPower
+        bra $+BigChocoboCalculateStatsNextItem
+    %BigChocoboCalculateStatsNextSlot:
+        iny
+        iny
+        // Big Chocobo inventory has 7e entries,
+        // zero-indexed of course,
+        // so the last relevant Y is 0x7d * 2 = 0xfa
+        cpy #$00fc
+        bcc $-BigChocoboCalculateStatsInnerLoopStart
+    %BigChocoboCalculateStatsNextItem:
+        inx
+        cpx #$0100
+        bcc $-BigChocoboCalculateStatsOuterLoopStart
+        rts
+        // %end%
+}
+
+// hook into leaving the menu to update stats
+msfpatch{
+    .addr $01cdb6
+        jml $=BigChocoboMenuCheckLeaving
+
+    .new
+    BigChocoboMenuCheckLeaving:
+        // displaced
+        and #$80
+        bne $+BigChocoboMenuLeave
+        jml $01cdbb
+    %BigChocoboMenuLeave:
+        jsr $_BigChocoboCalculateStats
+        jml $01cdba
+}
+
+// hook into the code just before the "multiply by 8"
+// part of the damage calculation to override the spell power
+msfpatch{
+    .addr $03d058
+        jsl $=BigChocoboCheckSpellPower
+        nop
+    
+    .new
+    BigChocoboCheckSpellPower:
+        lda $26d2
+        cmp #$5f
+        bne $+UseUsualSpellPower
+        lda $_BigChocoboSpellPower
+        bra $+BackToDamage
+    %UseUsualSpellPower:
+        lda $289d
+    %BackToDamage:
+        sta $a9
+        rtl
+}
+
+// Also replace the Chocobo summon from Grimoires
+// with the Big Chocobo (high-bit = single-target)
+patch($13feec bus) { DF }
+

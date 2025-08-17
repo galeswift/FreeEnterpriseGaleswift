@@ -203,6 +203,13 @@ msfpatch {
         stz $171b  // hardcode: put on overworld
         jmp $_EvEx__End
 
+    EvEx__PutFalcon:
+        jsr $_EvEx__ReadParameters_2
+        ldx $_EvEx__Param1
+        stx $1721
+        stz $1723  // hardcode: put on overworld
+        jmp $_EvEx__End    
+
     EvEx__PartyLeaderCecil:
         ldx #$0000
         ldy #$0000
@@ -593,7 +600,8 @@ msfpatch {
 
         lda $_EvEx__Param1
         jsr $_CharEx__InitializeAxtor
-        jsr $_CharEx__PushShadowPartySlot
+        // pretty sure that this is unnecessary...? (Scythe)
+        // jsr $_CharEx__PushShadowPartySlot
 
     %LoopNext:
         inc $_EvEx__Param1
@@ -938,6 +946,13 @@ msfpatch {
                 inx
                 cpx #$0060
                 bcc $-NeatFreakLoopStart
+        // %end%
+
+        // %flag bigchocobosummon on%
+        // need to initialize the stats at some point,
+        // this event happens exactly once before
+        // gameplay starts
+        jsr $_BigChocoboCalculateStats
         // %end%
 
         jmp $_EvEx__End

@@ -1,0 +1,7 @@
+// Normally, there is an exception for
+// Ether1/Ether2/Elixir that makes them sell for 1 GP.
+// Here, we bypass that code.
+msfpatch{
+    .addr $01c97d
+        jmp $c98d
+}

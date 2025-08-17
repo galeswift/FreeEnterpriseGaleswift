@@ -86,13 +86,19 @@ event($43)  //Tellah fighting Edward, Edward joining
     player invisible
     pause 2
     music #Overworld
-    sound $62
-    [#B #PutEnterprise 118 62]
     // %if doorsrando%
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 156 201]
     }
     // %end%
+    // %flag starting_underground on%
+    set #UnderworldOpen
+    [#B #PutFalcon 117 62]
+    // %end%
+    // %flags: ~starting_underground ~starting_blackchocobo%
+    [#B #PutEnterprise 118 62]
+    // %end%
+    sound $62
     load map #Overworld at 117 57 on hovercraft
     player visible
     set #TellahFightsEdward

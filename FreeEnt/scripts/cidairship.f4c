@@ -1,0 +1,335 @@
+// Command $15 was, potentially, an "Airship"
+// command for Cid that would be a target-all
+// attack. Let's make that happen.
+
+// Add battle command name data for "Raid" in Bank 0F
+patch($0fa82f bus) { 53 5C 64 5F FF }
+
+// add "Raid" as a constant
+consts(command)
+{
+    $15     Raid
+}
+
+// provide Cid the Raid command
+actor(#Cid) {
+    commands {
+        #Fight
+        #Peep
+        #Raid
+        #Item
+    }
+}
+
+// helper function to get the airship level
+// 1 for Enterprise, 2 for Falcon, 3 for Big Whale
+msfpatch{
+    BattleCommand__GetAirshipLevel:
+        // returns the airship level in A
+        // changes both X and Y
+        // returns short
+        lda #$43
+        jsr $_Util__CheckPlotFlag
+        bcs $+AirshipWhale
+        lda #$38
+        jsr $_Util__CheckPlotFlag
+        bcs $+AirshipFalcon
+        lda #$01
+        bra $+AirshipDone
+
+    %AirshipWhale:
+        lda #$03
+        bra $+AirshipDone
+    %AirshipFalcon:
+        lda #$02
+    %AirshipDone:
+        rts
+}
+
+// carve out a timer value exception for Raid just like
+// the Jump command has, to allow for three different fixed values
+msfpatch{
+    .addr $039f98
+    jml $=BattleCommand__TimerRaid
+
+    .new
+    BattleCommand__TimerRaid:
+        // first, perform displaced Jump check
+        cmp #$06
+        beq $+IsJump
+        cmp #$15
+        bne $+NotRaid
+        jsr $_BattleCommand__GetAirshipLevel
+        cmp #$02
+        bcc $+EnterpriseTimer
+        beq $+FalconTimer
+        ldx #$000a // Whale timer
+        bra $+GotTimerValue
+    %EnterpriseTimer:
+        ldx #$0004
+        bra $+GotTimerValue
+    %FalconTimer:
+        ldx #$0006
+    %GotTimerValue:
+        jml $039fd4
+
+    %IsJump:
+        jml $039f9c
+    %NotRaid:
+        jml $039fa1
+
+}
+
+
+// add a pointer at $03B3A6 for the $15 command jump data
+patch($03B3A6 bus) { 20 F2 }
+
+// use $03F220 for hook to new code, re: _execute
+// and make sure to rts here, and/or do other
+// bank03-specific things that would be easier here
+// than in bank20
+
+// the vanilla FF4 unused area starts at $03F210, but
+// post_battle.f4c uses a few bytes of that for permadeath and
+// wacky stuff, so we push the hook a bit further in
+
+msfpatch{
+    .addr $03f220
+        jsl $=BattleCommand__ExecuteRaid
+        rts
+    BattleCommand__ExecuteRaidApplyDamage:
+        // back-hook for applying damage
+        jsr $ca7e
+        rtl
+
+    .new
+    BattleCommand__ExecuteRaid:
+        // similar to Dark Wave, at $03e707
+
+        // first, get the airship level, store in $c1
+        jsr $_BattleCommand__GetAirshipLevel
+        sta $c1
+
+        // setting up audiovisual dialog boxes and damage display
+        lda #$15 // set Raid as the current action
+        sta $34c8 
+        lda #$10 // flag the current action as a command
+        sta $34c7
+        lda #$f8 // display dialog
+        sta $33c2 // for the command name
+        lda #$02
+        sta $33c3 // command name
+
+        // check for invincible monsters
+        lda $3881
+        beq $03
+        jmp $_DoneRaid
+
+        // more audiovisual
+        lda #$f8 // display dialog
+        sta $33c6 // for damage
+        lda #$04 
+        sta $33c7 // damage
+
+        // ensure wall sources/targets are 0, to bypass Wall
+        // (in case the data does not get cleared)
+        stz $3522 // sources
+        stz $3523 // targets
+
+        // calculate damage: 
+        // (4 * Airship Level) * (25 * (Airship Level + 1) + 3 * Agility)
+        // use Dark Wave bytes for ease of use:
+        // $c1 = airship level, $c5-$c6 = attack base, 
+        // $c9-$ca = total damage, $cb-$cc = base damage without randomness 
+        lda $c1 // airship level
+        asl a
+        asl a
+        sta $393d // multiplier
+        stz $393e
+
+        lda $c1
+        inc a
+        sta $df
+        lda #$19
+        sta $e1
+        jsr $_Util__BattleMultiplyE3 // $e3-$e4 has 25 * (Airship Level + 1)
+        tdc
+        ldx $a6
+        lda $_CharAgilityAddress,x
+        asl a
+        clc
+        adc $_CharAgilityAddress,x // a has the lower byte of 3 * Agi, possible 1 in the carry
+        xba // b now has that value, a is #$00
+        adc #$00 // a possibly is now 1, if the carry had been set
+        xba // the two-byte accumulator now has 3 * Agi
+        rep #$20
+        .mx 0x00
+        adc $e3 // c = 25 * (Airship Level + 1) + 3 * Agility
+        sta $c5 // attack base, hoping $c6 is unused
+        sta $393f
+        tdc
+        sep #$20
+        .mx 0x20
+        jsr $_Util__BattleMultiply3941
+        ldx $3941
+        stx $cb // base damage without randomness
+
+        // set first slot to check (always goes up to #$0C)
+        // assuming that monsters cannot use Raid
+        // ... though that would be amusing
+        ldx #$0005
+        stx $c7
+        // zero out $c3 and use it to store targetting data,
+        // update during the loop for graphics purposes
+        stz $c3
+
+    RaidLoopStart:    
+        // loop the slots, include random damage (not capped at 255)
+        // 4 * (0..attack base/2) + (0..3)
+        // push attack base to the stack
+        ldx $c5
+        phx
+        tdc
+        tax
+        stx $c9 // reset the total damage value
+        lsr $c6
+        ror $c5
+        lda $c5 // value is between 25 and 198
+        jsl $=Util__BattleRNG
+        sta $c9
+        asl $c9
+        rol $ca
+        asl $c9
+        rol $ca // $c9-$ca has 4 * (0..attack base/2)
+        lda #$03
+        jsl $=Util__BattleRNG
+        rep #$20
+        .mx 0x00
+        clc
+        adc $c9 // a has the full random damage
+        adc $cb // a has the total damage
+        sta $c9 // total damage is in $c9-$ca
+        sep #$20
+        .mx 0x20
+        tdc
+        // restore the attack base from the stack
+        plx
+        stx $c5
+        // note that damage is guaranteed <9999, no cap needed
+
+        // check if the slot is empty
+        lda $c7
+        tax
+        lda $3540,x
+        bne $+RaidLoopNext
+
+        // check if the slot has damage-precluding status
+        lda $c7
+        jsr $_Util__CalcBattleOffsets
+        ldx $a6
+        lda $2003,x
+        and #$c0
+        bne $+RaidLoopNext
+        lda $2005,x
+        and #$02
+        bne $+RaidLoopNext
+
+        // store the damage
+        lda $c7
+        asl a
+        tax
+        lda $c9
+        sta $34d4,x
+        lda $ca
+        sta $34d5,x
+
+        // set the slot's bit for targetting
+        sec
+        lda $c7
+        sbc #$05
+        tax
+        lda $c3
+        ora $13fefe,x
+        sta $c3
+
+    %RaidLoopNext:
+        inc $c7
+        lda $c7
+        cmp #$0d
+        beq $+RaidDamage
+        jmp $_RaidLoopStart
+
+    %RaidDamage:
+        // finalize targetting for graphics, then continue
+        lda $c3
+        sta $34c5
+        jsl $=BattleCommand__ExecuteRaidApplyDamage
+
+    DoneRaid:
+        rtl
+}
+
+// add a pointer at $02C075 to the new 
+// audiovisual command handler at $02FFBE
+// (start of 66 unused bytes at the end of bank02)
+patch($02c075 bus) { BE FF }
+
+// write the handler at $02FFBE, because too many
+// bank02 functions are needed and we have space
+// (similar to Dark Wave, at $02C84B)
+msfpatch{
+    .addr $02ffbe
+        jsr $c879 // disable status pose
+        jsr $bdac // move Cid to the acting position
+        lda #$0b // non-animated "casting" pose for Cid
+        jsr $c7f7 // update pose
+
+        lda #$32 // airship sound effect
+        jsr $c800 // play sound effect
+
+        ldx #$005a 
+        jsr $c89e // wait x (90, could change) frames
+
+        lda #$0f // special/Peep pose for Cid
+        jsr $c7f7 // update pose        
+
+        jsl $=BattleCommand__AudiovisualRaid // save bytes
+
+        // A has the spell ID
+        beq $05 // skip animating if A is #$00
+        jsr $eac6 // animate the spell
+        bra $05
+        lda #$00
+        jsr $c800 // stop playing the airship sound if necessary
+
+        jsr $c881 // enable status pose
+        jmp $c89a // reset and rts
+
+    .new
+    BattleCommand__AudiovisualRaid:
+        // call the usual spell animator as normal,
+        // after choosing the correct spell ID
+        stz $f2d0 // reset special mode
+        // check for invincible enemies again
+        lda $3881
+        beq $03
+        lda #$00 // "nothing", skip animating the attack
+        rtl        
+
+        lda $c1 // airship level
+        cmp #$02
+        bcc $+RaidFlare
+        beq $+RaidFire3
+
+        lda #$2f // Meteo
+        rtl
+
+    %RaidFlare:
+        lda #$41 // Flare
+        rtl
+
+    %RaidFire3:
+        lda #$1f // Fire3
+        rtl
+}
+

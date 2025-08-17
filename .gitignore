@@ -33,6 +33,7 @@ FreeEnt/.build/**
 FreeEnt/server/_build/**
 .lastseed
 *.smc
+*.sfc
 *.public
 *.private
 *.symbols

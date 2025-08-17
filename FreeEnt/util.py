@@ -38,7 +38,7 @@ class Distribution:
 
 
 # awkward spot for it, but it needs to go somewhere
-BOOST_MATRIX = {
+WILDISH_BOOST_MATRIX = {
     1: [(1, 7/8)],
     2: [(1, 1/8), (2, 6/8)],
     3: [(2, 2/8), (3, 5/8)],
@@ -49,14 +49,16 @@ BOOST_MATRIX = {
     8: [(7, 7/8), (8, 1)],
 }
 
-def get_boosted_weights(weights):
-    boosted_weights = {i : 0 for i in range(1,9)}
-
-    for i in boosted_weights:
-        for chunk in BOOST_MATRIX[i]:
-            boosted_weights[i] += weights[chunk[0]] * chunk[1]
-
-    return boosted_weights
+STANDARDISH_BOOST_MATRIX = {
+    1: [(1, 6/8)],
+    2: [(1, 2/8), (2, 6/8)],
+    3: [(2, 2/8), (3, 5/8)],
+    4: [(3, 3/8), (4, 4/8)],
+    5: [(4, 4/8), (5, 5/8)],
+    6: [(5, 3/8), (6, 6/8)],
+    7: [(6, 2/8), (7, 7/8)],
+    8: [(7, 1/8), (8, 1)],
+}
 
 SEMIBOOST_MATRIX = {
     1: [(1, 15/16)],
@@ -69,11 +71,31 @@ SEMIBOOST_MATRIX = {
     8: [(7, 7/16), (8, 1)],
 }
 
-def get_semiboosted_weights(weights):
-    semiboosted_weights = {i : 0 for i in range(1,9)}
+# adjustment matrix for locations with miabs under weighted distributions
+ADJUST_MIABS_MATRIX = { 
+    1: [(1, 1), (2, 1/4)],
+    2: [(2, 3/4), (3, 1/4)],
+    3: [(3, 3/4), (4, 1/2)],
+    4: [(4, 1/2), (5, 1/2)],
+    5: [(5, 1/2), (6, 3/4)],
+    6: [(6, 1/4), (7, 3/4)],
+    7: [(7, 1/4), (8, 3/4)],
+    8: [(8, 1/4)],
+}
 
-    for i in semiboosted_weights:
-        for chunk in SEMIBOOST_MATRIX[i]:
-            semiboosted_weights[i] += weights[chunk[0]] * chunk[1]
+def get_boosted_weights(weights, adjustment):
+    boosted_weights = {i : 0 for i in range(1,9)}
+    if adjustment == 'wildish':
+        active_weights = WILDISH_BOOST_MATRIX
+    elif adjustment == 'standardish':
+        active_weights = STANDARDISH_BOOST_MATRIX 
+    elif adjustment == 'semipro':
+        active_weights = SEMIBOOST_MATRIX
+    elif adjustment == 'miab_areas':
+        active_weights = ADJUST_MIABS_MATRIX
 
-    return semiboosted_weights
+    for i in boosted_weights:
+        for chunk in active_weights[i]:
+            boosted_weights[i] += weights[chunk[0]] * chunk[1]
+
+    return boosted_weights

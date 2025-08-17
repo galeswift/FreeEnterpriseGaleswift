@@ -335,9 +335,12 @@ event($A5)  //Finding the Falcon
     toggle screen shake
     pause 32
 
+    // %flag starting_underground off%
     // Falcon comes reinforced and with the drill
+    // but only if we don't start underground
     set #ReinforcedFalcon
     set #Drill
+    // %end%
     // %if doorsrando%
     set #UnderworldOpen
 

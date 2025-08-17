@@ -200,7 +200,7 @@ msfpatch {
 }
 
 text(bank 1 message $133) {
-The earth crystal weakens
+The Earth crystal weakens
 your super powers!
 }
 
@@ -213,6 +213,7 @@ msfpatch {
     .def Rewards__PendingCharacterDeliverySlot  $7e162d
     // KI Experience
     .def Rewards__KeyItemChecksCount  $7e1630
+    .def Rewards__ZonkChecksCount  $7e1631
 
     // KI Objective
     .def Rewards__TriggerDeliveryEvent $7e1632
@@ -284,28 +285,44 @@ msfpatch {
         beq $+DeliverNormalItem
 
         // this is a key item, execute required additional steps:
+        // increment key item checks counter (since it had to be one),
+        // for exp flag purposes
+        inc $_Rewards__KeyItemChecksCount
         // set corresponding plot flags
         jsl $=Rewards__DeliverKeyItemSideEffects
-//%if ki_objective_crystal%
-    lda $_Rewards__CurrentValueLo
-    cmp #$c8 //#item.Crystal
-    beq $+DeliverNormalItem // don't recurse when getting the crystal
-                            // from Omode:ki in case this hangs    
-    sta $_Rewards__PendingDeliverySlot
-    lda #$5E    // Check if this item was the one delivered from the gated objective
-    jsl $=Rewards__GetFromSlot
-    txa
-    cmp $_Rewards__PendingDeliverySlot
-    stz $_Rewards__PendingDeliverySlot
-    beq $+DeliverNormalItem
-    lda $_Rewards__CurrentSlot
-    jsl $=Rewards__GetFromSlot  // Load up the correct values for the item again
-//%end%
-//%if ki_objective%
-        jsl $=EvEx__ObjectivesImpl_DoEvent
-//%end%
+        //%if ki_objective_crystal%
+        lda $_Rewards__CurrentValueLo
+        cmp #$c8 //#item.Crystal
+        beq $+DeliverNormalItem // don't recurse when getting the crystal
+                                // from Omode:ki in case this hangs    
+        sta $_Rewards__PendingDeliverySlot
+        lda #$5E    // Check if this item was the one delivered from the gated objective
+        jsl $=Rewards__GetFromSlot
+        txa
+        cmp $_Rewards__PendingDeliverySlot
+        stz $_Rewards__PendingDeliverySlot
+        beq $+DeliverNormalItem
+        lda $_Rewards__CurrentSlot
+        jsl $=Rewards__GetFromSlot  // Load up the correct values for the item again
+        //%end%
+        //%if ki_objective%
+            jsl $=EvEx__ObjectivesImpl_DoEvent
+        //%end%
+        bra $+NotZonkCheck
 
     %DeliverNormalItem:
+        // for exp flag purposes, possibly increment checks counters
+        // to transfer A to X, need to ensure the upper byte of A is #$00
+        lda #$00
+        xba
+        lda $_Rewards__CurrentSlot
+        tax 
+        lda $=PossibleKeyItemRewardSlots,x
+        beq $+NotZonkCheck
+        inc $_Rewards__KeyItemChecksCount
+        inc $_Rewards__ZonkChecksCount
+
+    %NotZonkCheck:
         // get item code back and do "give item" handler
         lda $_Rewards__CurrentValueLo
         sta $08fb
@@ -559,23 +576,28 @@ msfpatch {
     Rewards__MIABContents:
         // A contains reward slot
         sta $_Rewards__CurrentSlot
-        // %if experience_kicheck_bonus%
+        
+        // for exp flag purposes, possibly increment checks counters
         // to transfer A to X, need to ensure the upper byte of A is #$00
         xba
         lda #$00
         xba
         tax
         lda $=PossibleKeyItemRewardSlots,x
+        pha // store the potential key item check value for later
         beq $+NotKeyMIAB
         inc $_Rewards__KeyItemChecksCount
 
     %NotKeyMIAB:
         lda $_Rewards__CurrentSlot
-        // %end%
         jsl $=Rewards__GetFromSlot
         stx $_Rewards__CurrentValueLo
 
         // blank all other slots for safety
+        // unless the Legend Sword is in the second slot!
+        lda $1805
+        cmp #$19
+        beq $03 // skip setting this slot to 0
         stz $1805
         stz $1806
         stz $1807
@@ -593,7 +615,7 @@ msfpatch {
         bcs $+ExternalReward
 
         and #$02
-        beq $+IsRegularItem
+        beq $+CheckForZonk
 
 //%if ki_objective%
 	lda #$ff
@@ -608,11 +630,17 @@ msfpatch {
         jsl $=Rewards__DeliverKeyItemSideEffects
 
         // mark slot as delivered
+        pla // pop the stack because we pushed a value there just in case
         lda $_Rewards__CurrentSlot
         ldx #$_Tracker__RewardSlotFlags
         jsl $=Tracker__SetBit
+        bra $+NotZonkMIAB
 
-    %IsRegularItem:
+    %CheckForZonk:
+        pla // recheck if the miab could give a key item
+        beq $+NotZonkMIAB
+        inc $_Rewards__ZonkChecksCount
+    %NotZonkMIAB:
         lda $_Rewards__CurrentValueLo
         sta $1804
         stz $c6
@@ -621,6 +649,7 @@ msfpatch {
     %ExternalReward:
         // set a special item code to display the reward without
         // giving it
+        pla // pop the stack because we pushed a value there just in case
         lda #$fe
         sta $1804
         

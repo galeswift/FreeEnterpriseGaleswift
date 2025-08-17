@@ -1,6 +1,5 @@
 from . import databases
 from .address import *
-import random
 
 def apply(env):
     prices = []
@@ -8,17 +7,32 @@ def apply(env):
 
     items_dbview = databases.get_items_dbview()
     altered_item_prices = env.meta.get('altered_item_prices', {})
+
     randomized_item_codes = list(range(0x100))
     env.rnd.shuffle(randomized_item_codes)
+    normal_items_dbview = items_dbview.get_refined_view(lambda it: not (it.flag == 'D') and not (it.flag == 'K' and it.code not in [0x3E, 0xEC]))
+    randomized_normal_item_codes = [it.code for it in normal_items_dbview]
+    env.rnd.shuffle(randomized_normal_item_codes)
+    # since randomized_normal_item_codes isn't length 0x100, insert the excluded items in their normal spots
+    for item_code in range(0x100):
+        if item_code not in randomized_normal_item_codes:
+            randomized_normal_item_codes.insert(item_code,item_code)
+
     for item_code in range(0x100):
         if env.options.flags.has('shops_free'):
             price = 0
-        elif env.options.flags.has('shops_mixed'):
+        elif env.options.flags.has_any('shops_mixed_all','shops_mixed_exclude'):
             item = items_dbview.find_one(lambda it: it.code == item_code)
-            random_item = items_dbview.find_one(lambda it: it.code == randomized_item_codes[item_code])
-            price = (random_item.price if random_item else 0)
-            #print(f'Price {price} {item.const}')
+            if env.options.flags.has('shops_mixed_all'):
+                random_item = items_dbview.find_one(lambda it: it.code == randomized_item_codes[item_code])
+            else: 
+                random_item = normal_items_dbview.find_one(lambda it: it.code == randomized_normal_item_codes[item_code])
+            # assert that the S flag happens *after* changed item prices e.g. via the Mystery Juice wacky,
+            # so shuffle altered item prices into the pool
+            price = altered_item_prices.get(randomized_item_codes[item_code],(random_item.price if random_item else 0))
+            #print(f'Price {price} {item.code}')
         elif item_code in altered_item_prices:
+            item = items_dbview.find_one(lambda it: it.code == item_code)
             price = altered_item_prices[item_code]
         else:
             item = items_dbview.find_one(lambda it: it.code == item_code)
@@ -28,12 +42,12 @@ def apply(env):
         has_any_adjustment_filters = env.options.flags.get_suffix('Spricey:')
         can_adjust_price = not has_any_adjustment_filters or ((env.options.flags.has('Spricey:items') and item.category == 'item' ) or (env.options.flags.has('Spricey:weapons') and item.category == 'weapon' ) or (env.options.flags.has('Spricey:armor') and item.category == 'armor' ))
         if price_adjustment and can_adjust_price: 
-            prevPrice = price;
+            #prevPrice = price
             price = price * float(price_adjustment)//100.0
             price = int(price)
             if (price > 0 and price < 10):
                 price = 10
-            #print(f"{item.const} adjust pricing from "+price_adjustment+" from "+str(prevPrice)+" to "+str(price))
+            #print(f"{item.const} adjust pricing by "+price_adjustment+" percent from "+str(prevPrice)+" to "+str(price))
 
         if price > 126000:
             prices.append(0xFF)

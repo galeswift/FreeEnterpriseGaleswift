@@ -1,0 +1,79 @@
+// implement Panic Button (Select + R)
+// functionality on Doors Rando
+
+// %flag starting_blackchocobo on%
+event($17){
+    [#B #If #Flag #flag.TellahFightsEdward]{
+        [#B #PutHovercraft 102 160]
+    }
+    [#B #If #Flag #flag.BigWhaleSurfaced]{
+        [#B #PutWhale 100 160]
+    }
+    [#B #If #Flag #flag.TwinsStone]{
+        [#B #PutEnterprise 102 158]
+    }
+
+    // the BlackChocobo simply respawns in the forest,
+    // so go find it. on this mode the panic button is
+    // more just return-to-start
+    load map #Overworld at 101 158
+}
+// %end%
+
+// %flag starting_underground on%
+event($17){
+    [#B #If #Flag #flag.BigWhaleSurfaced]{
+        [#B #PutWhale 158 201]
+    }
+
+    load map #Underworld at 99 83 on falcon no launch
+}
+// %end%
+
+// %flags: ~starting_blackchocobo ~starting_underground%
+event($17){
+    [#B #If #Flag #flag.TellahFightsEdward]{
+        [#B #PutHovercraft 156 201]
+    }
+    [#B #If #Flag #flag.BigWhaleSurfaced]{
+        [#B #PutWhale 158 201]
+    }
+
+    load map #Overworld at 157 201 on enterprise no launch
+}
+// %end%
+
+msfpatch{
+    .addr $008179
+        jsr $88A6
+        jsl $15C852
+}
+
+msfpatch{
+    .addr $15C857
+        jsl $=DoorsRando_CheckSelectReset
+
+    .new
+    DoorsRando_CheckSelectReset:
+        lda  $02
+        and  #$10
+        bne $+DoorsRando_SelectPressed
+        rtl
+
+    %DoorsRando_SelectPressed:
+        lda $03
+        and #$20
+        beq $+DoorsRando_ReturnBack
+
+        lda #$1
+        sta $6B1
+        ldx #$df63  // address of bank 00 subroutine to run event
+        stx $_Bank00LongCallAddr
+        lda #$17
+        jsl $=Bank00LongCall
+        stz $6B1
+        jml $15c861
+    %DoorsRando_ReturnBack:
+        jml $15C85D
+
+}

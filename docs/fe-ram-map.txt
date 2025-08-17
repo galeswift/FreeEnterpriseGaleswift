@@ -1,0 +1,119 @@
+Vanilla FE RAM map thanks to b0ard/Wylem,
+Fork modifications via fork devs.
+-- Fork values noted by: F:
+
+SRAM OVERALL MAP:
+  70:0000-1FFF      : slots 1-4, original segment
+  70:2000-2FFF      : live game, extended segment
+  70:3000-6FFF      : slots 1-4, extended segment
+  70:7000-7FFF      : global segment
+
+Expanded SRAM data area map (max 0x18 actors):
+  0000 - 05FF       : shadow party
+  0600 - 0CBF       : spell sets
+  0CC0 - 0DF7       : initial state spell sets
+  0DF8 - 0DFF       : (unallocated)
+  0E00 - 0FFF       : (unallocated)
+
+70:2000 - 70:2FFF   : expanded save data area for currently active game
+70:3000 - 70:6FFF   : expanded save slots 1-4 (0x1000 bytes each)
+70:7000 - 70:7FFF   : global save data
+    -> 70:7000-707F   : default character names
+    -> 70:7080-70A7   : tracker - key item locations (requires 0x12 * 2 bytes)
+    -> 70:70F0        : name distinguisher setting
+    -> 70:70F1        : MSU-1 support indicator
+    -> 70:70F2        : game completed indicator
+
+    -> 70:70FD        : should show pregame menu indicator (disappears on new game)
+    -> 70:70FE-70FF   : first startup indicator (checks against ROM checksum)
+    -> 70:7100-7101   : "has global custom data" indicator
+    -> 70:7102-711F   : copy of config data
+    -> 70:7200-729F   : battle palette cache
+    -> 70:72A0-72A4   : battle sprite bank cache
+
+    -> 70:72E0-72FF   : objective progress staging area
+
+WRAM:
+
+7E:1140 - 7E:117F   : shadow party working area
+7E:1180 - 7E:123F   : character names
+7E:1240 - 7E:125F   : discovered axtor -> actor table
+
+7E:1500 - 7E:1553   : API area (was character names)
+    -> 7E:1500-1502   : key item "found" bits
+    -> 7E:1503-1505   : key item "used" bits
+    -> 7E:1510-151F   : reward slot checked bits
+    -> 7E:1520-153F   : objective progress
+
+7E:1560 - 7E:158F   : reclaimed space
+  1560 - 158F         : persistent FE data (eg. stats)
+    -> 7E:1560-1577   : (unallocated)
+
+    -> 7E:1578        : key item counter
+    -> 7E:1579        : character counter
+    -> 7E:157A-157B   : treasure counter
+    -> 7E:157C        : boss counter
+    -> 7E:157D-1580   : endgame time
+
+    -> 7E:1581-1582   : (unallocated)
+    -> 7E:1583-1584   : scrolling text delegate function
+    -> 7E:1585        : scrolling text delegate command        
+    -> 7E:1586        : music memo
+    -> 7E:1587        : RNG counter for dangerous encounters
+    -> 7E:1588        : forced back attack / surprise attack
+    -> 7E:1589        : placement number from event interaction
+    -> 7E:158A        : no64 detection
+    -> 7E:158B        : Fusoya Credits
+    -> 7E:158C-158E   : "treasure discarded" temp flags
+    -> 7E:158F        : (temporary) map transition var
+  
+  1590 - 15FF       : spell set working area
+    -> 7E:1590-1591  F: also reward slot index for characters in treasures
+    -> 7E:1592-1593  F: also treasure index for characters in treasures
+
+  1600 - 167F       : FE program data
+    -> 7E:1600-1604   : twin-capable indicators
+    -> 7E:1605-1609   : twin partners
+    -> 7E:160A-160E   : cover-capable indicators
+    -> 7E:160F-1613   : cover assignments
+    -> 7E:1614        : twin count
+    -> 7E:1615-1616   : event GoSub return pointer
+    -> 7E:1617        : fashion code for fights against allies
+    -> 7E:1618        : fashion code short-term memo
+    -> 7E:1619        : GiveAxtor persistent code
+    -> 7E:161A-161B   : fashion loop counter
+    -> 7E:161C-161F   : extended item description work space
+    -> 7E:1620        : item descriptions enabled flag
+    -> 7E:1621        : active reward slot
+    -> 7E:1622-1623   : active reward value
+    -> 7E:1624        : no auto-hide flags
+    -> 7E:1625        : rosa's mom hint counter
+    -> 7E:1626        : pending post-battle reward delivery
+    -> 7E:1627        : permajoin bypass
+    -> 7E:1628        : alt gauntlet indicator
+    -> 7E:1629        : jump byte
+    -> 7E:162A        : dialog box special value
+    -> 7E:162B       F: delivered item count *** unused???
+    -> 7E:162D       F: axtor delivery slot
+    -> 7E:1630       F: key item checks count
+    -> 7E:1631       F: zonk checks count
+    -> 7E:1632       F: Omode:ki deliver reward event trigger
+    -> 7E:1634-1635  F: Cfifo oldest axtor index
+    -> 7E:1636       F: Cfifo oldest axtor buffer
+    -> 7E:1637       F: Big Chocobo Summon probability
+    -> 7E:1638       F: Big Chocobo Summon spell power byte
+
+    -> 7E:1660-166C   : wacky challenge allocated space
+    -> 7E:166D-166F   : long address storage
+    -> 7E:1670-167F   : util.f4c/dead-end registers
+  1680 - 1697       : scratch space
+    -> 7E:1680-168F   : local variables
+    -> 7E:1690-1697   : longer-term temporary variables
+  1698 - 16FF      F: doors rando work space
+    -> 7E:1698-169F  F: map_plane bit array
+    -> 7E:16FF       F: 1-byte map history index
+
+7E:16B3             : music custom setting
+7E:16B4             : flashing custom setting
+7E:16B5             : encounter custom setting
+7E:16B6             : dash custom setting

@@ -39,7 +39,6 @@ text(bank 1 message $9D) {X}
 text(bank 1 message $9E) {X}
 text(bank 1 message $9F) {X}
 
-text(bank 1 message $A6) {X}
 text(bank 1 message $A7) {X}
 text(bank 1 message $A8) {X}
 text(bank 1 message $A9) {X}
@@ -121,6 +120,8 @@ text(bank 1 message $FF) {X}
 
 // 100 and 101 are namingway messages
 
+// 103-105 are FuSoYa spell-learning messages
+
 text(bank 1 message $10D) {X}
 text(bank 1 message $10E) {X}
 
@@ -142,8 +143,12 @@ text(bank 1 message $12D) {X}
 text(bank 1 message $12E) {X}
 text(bank 1 message $12F) {X}
 text(bank 1 message $130) {X}
-text(bank 1 message $133) {X}
-text(bank 1 message $134) {X}
+
+// messages $131-134 are for 
+// post-boss-battle message updates
+
+// messages $135-136 are for
+// Edge learning spells before Rubicant
 
 text(bank 1 message $137) {X}
 text(bank 1 message $138) {X}
@@ -678,10 +683,10 @@ event($DA) // Elder praying
 { } // Erase for space
 
 event($DB) // Smut
-{ } // Erase for space
+{ } // Erase for space, but is overwritten in the event (hah) of external objective
 
 event($DC)  // Sealed with unknown power (lunar palace)
-{ } // Erase for space
+{ } // Erase for space, but is used for Cid in Dwarf Castle on Knofree:dwarf
 
 event($DE)  // Acquire Smut
 { } // Erase for space

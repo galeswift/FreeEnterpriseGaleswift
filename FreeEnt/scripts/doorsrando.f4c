@@ -30,7 +30,7 @@ npc(#LockedDoorWeaponArmorShop)
 // Change Mysidia lady who turns you into pig's dialog
 text(bank 1 message $1A5) {
 You realize that this is
-probabaly a softlock,
+probably a softlock,
 right?
 }
 
@@ -74,53 +74,7 @@ msfpatch{
         rtl
 }
 
-// %if ~calmness%
-event($17){
-    [#B #If #Flag #flag.TellahFightsEdward]{
-        [#B #PutHovercraft 156 201]
-    }
-    [#B #If #Flag #flag.BigWhaleSurfaced]{
-        [#B #PutWhale 158 201]
-    }
 
-    load map #Overworld at 157 201 on enterprise no launch
-}
-
-msfpatch{
-    .addr $008179
-        jsr $88A6
-        jsl $15C852
-}
-
-msfpatch{
-    .addr $15C857
-        jsl $=DoorsRando_CheckSelectReset
-
-    .new
-    DoorsRando_CheckSelectReset:
-        lda  $02
-        and  #$10
-        bne $+DoorsRando_SelectPressed
-        rtl
-
-    %DoorsRando_SelectPressed:
-        lda $03
-        and #$20
-        beq $+DoorsRando_ReturnBack
-
-        lda #$1
-        sta $6B1
-        ldx #$df63  // address of bank 00 subroutine to run event
-        stx $_Bank00LongCallAddr
-        lda #$17
-        jsl $=Bank00LongCall
-        stz $6B1
-        jml $15c861
-    %DoorsRando_ReturnBack:
-        jml $15C85D
-
-}
-// %end%
 
 
 // %if forcesealed%

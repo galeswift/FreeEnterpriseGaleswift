@@ -1466,8 +1466,29 @@ msfpatch {
         jmp $_EvEx__End
 }
 
+// %flag starting_underground on%
+// hook into going-aboveground code to track use of drill
+msfpatch {
+    .addr $009420
+        jsl $=Tracker_UseDrill
 
+    .new
+    Tracker_UseDrill:
+        // first of two displaced commands
+        sta $b1
 
+        lda #$08  // index for drill key item
+        ldx #$_Tracker__KeyItemUsedFlags
+        jsl $=Tracker__SetBit
+
+        // second of two displaced commands
+        lda #$c6
+
+        rtl
+}
+// %end%
+
+// %flag starting_underground off%
 // hook into hook-deployment code to track use of hook
 msfpatch {
     .addr $00a514
@@ -1485,4 +1506,4 @@ msfpatch {
 
         rtl
 }
-
+// %end%

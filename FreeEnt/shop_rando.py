@@ -13,6 +13,22 @@ WHITE_MAGES = set(['tellah', 'rosa', 'porom', 'fusoya'])
 
 SHOP_SPOILER_ORDER = ["Baron", "Mist", "Kaipo", "Fabul", "Mysidia", "Toroia", "Silvera", "Agart", "Cave Eblan", "Dwarf Castle", "Tomra", "Feymarch", "Smithy", "Moon"]
 
+# needed tool for Splayable
+_CHARACTER_TO_USERS = {
+    'cecil' : ['dkcecil', 'pcecil'],
+    'rydia' : ['crydia', 'arydia']
+}
+
+def expand_characters_to_users(char_set):
+    user_set = set()
+    for char in char_set:
+        if char in _CHARACTER_TO_USERS:
+            for user in _CHARACTER_TO_USERS[char]:
+                user_set.add(user)
+        else:
+            user_set.add(char)
+    return user_set
+
 class ShopAssignment:
     def __init__(self, shop):
         self._shop = shop
@@ -89,6 +105,8 @@ def apply(env):
         banned_items.append('#item.AdamantArmor')
     if env.options.flags.has('no_cursed_rings'):
         banned_items.append('#item.Cursed')
+    if env.options.flags.has('objective_mode_external'):
+        banned_items.append('#item.fe_EagleEye')
     if banned_items:
         items_dbview.refine(lambda it: it.const not in banned_items)
 
@@ -96,6 +114,16 @@ def apply(env):
         items_dbview.refine(lambda it: not it.j)
 
     wacky = env.meta.get('wacky_challenge', [])
+
+    # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
+    if env.options.flags.has('shops_playable') and not ('omnidextrous' in wacky):
+        user_set = expand_characters_to_users(env.meta['available_characters'])
+        # In Fist Fight, the only weapons are claws, which are equippable by everyone, so need more complex logic
+        if 'fistfight' in wacky:
+            items_dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(it.equip).isdisjoint(user_set)) or (it.subtype == 'claw'))
+        else:
+            items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
+
     if 'kleptomania' in wacky:
         items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']) or (it.tier == 1))
     if 'friendlyfire' in wacky:
@@ -523,6 +551,9 @@ def apply(env):
     elif env.options.flags.has('shops_sell_zero'):
         env.add_file('scripts/sell_zero.f4c')
 
+    if env.options.flags.has('shops_ethers_sell_full'):
+        env.add_file('scripts/ether_full_sell_price.f4c')
+
     # generate spoilers
     def spoiler_sort_key(sa):
         key = [-1]
@@ -541,7 +572,13 @@ def apply(env):
     for sa in sorted_shop_assignments:
         if sa.manifest:
             for item in sa.manifest:
-                shop_spoilers.append( SpoilerRow(sa.shop.memo, databases.get_item_spoiler_name(item), obscurable=True) )
+                item_spoiler_name = databases.get_item_spoiler_name(item)
+                if env.options.flags.has('darkpaladin'):
+                    item_spoiler_name = item_spoiler_name.replace('Paladin','Ancient')
+                    item_spoiler_name = item_spoiler_name.replace('Light','Chaos')
+                    if not item_spoiler_name == 'Crystal Ring':
+                        item_spoiler_name = item_spoiler_name.replace('Crystal','Hades')
+                shop_spoilers.append( SpoilerRow(sa.shop.memo, item_spoiler_name, obscurable=True) )
         else:
             shop_spoilers.append( SpoilerRow(sa.shop.memo, "(nothing)", obscurable=True) )
 

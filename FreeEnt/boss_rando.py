@@ -1,5 +1,4 @@
 from . import core_rando
-from .boss_rando_formation_data import *
 from .palette_wizard import PaletteWizard
 from .address import *
 from .spoilers import SpoilerRow
@@ -103,15 +102,6 @@ MONSTER_HP_OFFSETS = {
     0xBA : 57000,  # Q.Eblan
     }
 
-MONSTER_HP_SCALED_THRESHOLDS = {
-    0xAA : { 0x02 : 700.0 / 4000.0 },    # Kainazzo
-    0xB3 : { 0x04 : 100.0 / 4624.0 },    # Calbrena
-    0xBB : { 0x0A : 1000.0 / 25200.0 },  # Rubicant
-    0xC1 : { 0x08 : 11000.0 / 57000.0,   # Elements
-             0x07 : 40000.0 / 57000.0 }, 
-    0xC2 : { 0x09 : 27000.0 / 47000.0 }  # Elements
-    }
-
 MONSTER_SCRIPTED_CHANGES = {
     0xC4 : ['waterhag', ('defense', 0x60)],
     0xAA : ['kainazzo', ('defense', 0x7A)],
@@ -120,12 +110,7 @@ MONSTER_SCRIPTED_CHANGES = {
         ('magic defense', 0xDE),
         ('defense', 0x60),
         ('magic defense', 0xB0),
-        ],  
-    0x98 : ['wyvern',
-        ('spell power', 12),
-        ('spell power', 8),
-        ('spell power', 6),
-        ]
+        ],
 }
 
 MONSTER_ID_REMAPS = {
@@ -475,7 +460,7 @@ def _is_moon_formation(formation_number):
     else:
         return False
 
-def _get_cumulative_formation(formation_data):
+def _get_cumulative_formation(formation_data, data_table):
     if type(formation_data) is not list:
         formation_data = [formation_data]
 
@@ -483,9 +468,9 @@ def _get_cumulative_formation(formation_data):
     for f in formation_data:
         if type(f) is int:
             if f == 0xDA:  # fabul gauntlet formation remap
-                f = FORMATION_DATA[0xF7]
+                f = data_table[0xF7]
             else:
-                f = FORMATION_DATA[f]
+                f = data_table[f]
 
         for monster_id in f:
             if monster_id in cumulative_formation:
@@ -494,13 +479,13 @@ def _get_cumulative_formation(formation_data):
                 cumulative_formation[monster_id] = copy(f[monster_id])
     return cumulative_formation
 
-def _get_total_hp_xp_gp_qty(formation_data):
+def _get_total_hp_xp_gp_qty(formation_data, data_table):
     total_hp = 0
     total_gp = 0
     total_xp = 0
     total_qty = 0
 
-    for monster_id in _get_cumulative_formation(formation_data):
+    for monster_id in _get_cumulative_formation(formation_data, data_table):
         monster = formation_data[monster_id]
         hp = monster['hp']
         if monster_id in MONSTER_HP_OFFSETS:
@@ -512,10 +497,10 @@ def _get_total_hp_xp_gp_qty(formation_data):
 
     return (total_hp, total_xp, total_gp, total_qty)
 
-def _get_leader(formation_data):
+def _get_leader(formation_data, data_table):
     leader = None
     leader_hp = None
-    for monster_id in _get_cumulative_formation(formation_data):
+    for monster_id in _get_cumulative_formation(formation_data, data_table):
         monster = formation_data[monster_id]
         hp = monster['hp']
         if monster_id in MONSTER_HP_OFFSETS:
@@ -540,6 +525,12 @@ def _get_spell_power_ratio(monster1, monster2):
     else:
         return monster1['spell power'] / monster2['spell power']
 
+def _get_spell_power_ratio_min_one(monster1, monster2):
+    spellpower1 = monster1['spell power']
+    spellpower2 = monster2['spell power']
+    adj_spellpower1 = (1 if spellpower1 is None else spellpower1)
+    adj_spellpower2 = (1 if spellpower2 is None else spellpower2)
+    return adj_spellpower1 / adj_spellpower2
 
 def apply(env):
     # random boss assignments handled in core_rando
@@ -552,6 +543,43 @@ def apply(env):
     limit_breaks = []
 
     stat_scaling_reports = []
+
+    if env.options.flags.has('japanese_bosses'):
+        from .boss_rando_formation_data_j import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        env.add_file('scripts/japanese_bosses.f4c')
+        # load the correct scripted changes for Wyvern
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 12),
+                ('spell power', 8),
+                ('spell power', 6),
+                ]
+            })
+    elif env.options.flags.has('easy_type_bosses'):
+        from .boss_rando_formation_data_et import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        env.add_file('scripts/easy_type_bosses.f4c')
+        # load the correct scripted changes for Wyvern
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 14),
+                ]
+            })
+    else:
+        from .boss_rando_formation_data import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        # load the correct scripted changes for Wyvern
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 12),
+                ('spell power', 8),
+                ('spell power', 6),
+                ]
+            })
+
+    # potentially remove boss spots again; boss_rando pulls the original BOSS_SLOTS and turns it into a list
+    if env.options.flags.has('no_officer_slot'):
+        BOSS_SLOTS.remove('officer_slot')
+    if env.options.flags.has('no_kq_eblan_slot'):
+        BOSS_SLOTS.remove('kingqueen_slot')
 
     assignment = {k : env.assignments[k] for k in env.assignments if k in BOSS_SLOTS}
 
@@ -640,16 +668,16 @@ def apply(env):
 
             script_lines.append('}')
 
-        source_formation = _get_cumulative_formation(source_formation_id_list)
-        target_formation = _get_cumulative_formation(target_formation_id_list)
+        source_formation = _get_cumulative_formation(source_formation_id_list, FORMATION_DATA)
+        target_formation = _get_cumulative_formation(target_formation_id_list, FORMATION_DATA)
 
         # get reference stats from original formation in slot
-        ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation)
-        ref_leader = _get_leader(source_formation)
+        ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation, FORMATION_DATA)
+        ref_leader = _get_leader(source_formation, FORMATION_DATA)
 
         # calculate and apply new values for formation going into slot
-        total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation)
-        leader = _get_leader(target_formation)
+        total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation, FORMATION_DATA)
+        leader = _get_leader(target_formation, FORMATION_DATA)
 
         env.add_substitution(f'{boss} defaults', '')
         stat_scaling_reports.append(f'{slot} <- {boss}')
@@ -732,12 +760,18 @@ def apply(env):
                 monster_scaled_stats[stats_name] = closest_value
                 csv_row.extend(closest_value)
 
-            if monster['spell power'] is not None:
-                scaled_spell_power = min(255, int(math.ceil(monster['spell power'] * _get_spell_power_ratio(ref_leader, leader))))
+            if env.options.flags.has('bosses_nonzero_spellpower'):
+                adj_monster_spellpower = (1 if monster['spell power'] is None else monster['spell power'])
+                scaled_spell_power = min(255, int(math.ceil(adj_monster_spellpower * _get_spell_power_ratio_min_one(ref_leader, leader))))
                 script_lines.append(f'    spell power {scaled_spell_power}')
                 csv_row.append(scaled_spell_power)
             else:
-                csv_row.append('')
+                if monster['spell power'] is not None:
+                    scaled_spell_power = min(255, int(math.ceil(monster['spell power'] * _get_spell_power_ratio(ref_leader, leader))))
+                    script_lines.append(f'    spell power {scaled_spell_power}')
+                    csv_row.append(scaled_spell_power)
+                else:
+                    csv_row.append('')
 
             script_lines.append('}')
 
@@ -757,8 +791,11 @@ def apply(env):
                 monster_name = MONSTER_SCRIPTED_CHANGES[monster_id][0]
                 for pair in MONSTER_SCRIPTED_CHANGES[monster_id][1:]:
                     stat, value = pair
-                    if stat == 'spell power':
-                        scaled_value = str(min(255, int(math.ceil(value * _get_spell_power_ratio(ref_leader, leader)))))
+                    if stat == 'spell power' and not (monster_name == 'wyvern' and env.options.flags.has('wyvern_flat_spellpower_nuke')):
+                        if env.options.flags.has('bosses_nonzero_spellpower'):
+                            scaled_value = str(min(255, int(math.ceil(value * _get_spell_power_ratio_min_one(ref_leader, leader)))))
+                        else:
+                            scaled_value = str(min(255, int(math.ceil(value * _get_spell_power_ratio(ref_leader, leader)))))
                         env.add_substitution(f'{monster_name} script spell power change {value}', f'set spell power {scaled_value}')
                         csv_row.append(f'scriptSpellPower: {scaled_value}')
                     else:
@@ -922,6 +959,10 @@ def apply(env):
         script_lines.append('}')
 
     env.add_file('scripts/randomizer_boss.f4c')
+    if env.options.flags.has('easy_type_bosses'):
+        env.add_file('scripts/wyvern_script_et.f4c')
+    else:
+        env.add_file('scripts/wyvern_script_us_j.f4c')
 
     # special case wyvern
     if assignment['milonz_slot'] == 'wyvern' and not env.options.flags.has('wyvern_no_meganuke') and not env.options.flags.has('wyvern_random_meganuke'):
@@ -944,24 +985,145 @@ def apply(env):
     env.spoilers.add_table("BOSSES", boss_spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:bosses'))
 
 if __name__ == '__main__':
-    from .FreeEnt import FreeEntOptions
-    import random
+    # from .FreeEnt import FreeEntOptions
+    # import random
 
-    CSV_OUTPUT = True
-    bosses = list(core_rando.BOSSES)
+    # CSV_OUTPUT = True
+    # bosses = list(core_rando.BOSSES)
 
-    options = FreeEntOptions()
-    options.flags.load('B')
+    # options = FreeEntOptions()
+    # options.flags.load('B')
 
-    rnd = random.Random()
+    # rnd = random.Random()
 
-    for i in range(len(bosses)):
-        assignment = dict(zip(core_rando.BOSS_SLOTS, bosses))
-        result = randomize(rnd, options, assignment)
-        bosses.append(bosses.pop(0))
+    # for i in range(len(bosses)):
+    #     assignment = dict(zip(core_rando.BOSS_SLOTS, bosses))
+    #     result = randomize(rnd, options, assignment)
+    #     bosses.append(bosses.pop(0))
     
     #print(result['script'])
     #for k in result['substitutions']:
     #    print('{} -> {}'.format(k, result['substitutions'][k]))
 
+    # generate the big boss scaling stats spreadsheet!
+    # use, for instance, "python -m FreeEnt.boss_rando" in the main project directory
+    # change the import statement to get the information for ET or J bosses,
+    # and change the csv name so you can keep track
 
+    boss_stats = open('boss_scaling_stats.csv', 'w')
+    # boss_stats = open('boss_scaling_stats_et.csv', 'w')
+    # boss_stats = open('boss_scaling_stats_j.csv', 'w')
+
+    from .boss_rando_formation_data import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+    # from .boss_rando_formation_data_et import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+    # from .boss_rando_formation_data_j import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+
+    for boss in BOSSES:
+        for slot in BOSS_SLOTS:
+
+            source_formation_id = FORMATION_MAP[slot[:-5]] # remove "_slot" suffix
+            target_formation_id = FORMATION_MAP[boss]
+
+            source_formation_id_list = (source_formation_id if type(source_formation_id) is list else [source_formation_id])
+            target_formation_id_list = (target_formation_id if type(target_formation_id) is list else [target_formation_id])
+
+            source_formation = _get_cumulative_formation(source_formation_id_list)
+            target_formation = _get_cumulative_formation(target_formation_id_list)
+
+            # get reference stats from original formation in slot
+            ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation)
+            ref_leader = _get_leader(source_formation)
+
+            # calculate and apply new values for formation going into slot
+            total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation)
+            leader = _get_leader(target_formation)
+
+            for monster_id in target_formation:
+                monster = target_formation[monster_id]
+                csv_row = [boss, slot, monster['name']]
+
+                hp = monster['hp']
+                if monster_id in MONSTER_HP_OFFSETS:
+                    hp -= MONSTER_HP_OFFSETS[monster_id]
+                scaled_hp = int(math.ceil(hp / total_hp * ref_hp))
+                if monster_id in MONSTER_HP_OFFSETS:
+                    restore_threshold = True
+                    if boss == 'kingqueen':
+                        restore_threshold = False
+                    if restore_threshold:
+                        scaled_hp += MONSTER_HP_OFFSETS[monster_id]
+                scaled_hp = min(65000, scaled_hp)
+
+                if total_xp == 0:
+                    scaled_xp = int(ref_xp / total_qty)
+                else:
+                    scaled_xp = int(math.ceil(monster['xp'] / total_xp * ref_xp))
+
+                if total_gp == 0:
+                    scaled_gp = int(ref_gp / total_qty)
+                else:
+                    scaled_gp = min(65000, int(math.ceil(monster['gp'] / total_gp * ref_gp)))
+
+                scaled_xp_actual = scaled_xp
+                scaled_level = int(math.ceil(monster['level'] * ref_leader['level'] / leader['level']))
+                scaled_level = max(1, min(99, scaled_level))
+
+                csv_row.extend([scaled_level, scaled_hp, scaled_xp_actual, scaled_gp])
+
+                monster_scaled_stats = {}
+                for stats_name in ['attack', 'defense', 'magic defense', 'speed']:
+                    if sum(leader[stats_name]) == 0:
+                        stats_ratio = [monster['level'] / leader['level']] * len(monster[stats_name])
+                    else:
+                        stats_ratio = [monster[stats_name][i] / max(leader[stats_name][i], 1) for i in range(len(monster[stats_name]))]
+                    stats_ideal = [ref_leader[stats_name][i] * stats_ratio[i] for i in range(len(stats_ratio))]
+                    if stats_name == 'speed':
+                        closest_index, closest_value = _get_closest_stat(stats_ideal, SPEED_TABLE, (1.0,1.0))
+                    else:
+                        closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+
+                    monster_scaled_stats[stats_name] = closest_value
+                    csv_row.extend(closest_value)
+
+                if monster['spell power'] is not None:
+                    scaled_spell_power = min(255, int(math.ceil(monster['spell power'] * _get_spell_power_ratio(ref_leader, leader))))
+                    csv_row.append(scaled_spell_power)
+                else:
+                    csv_row.append('')
+
+                if monster_id in MONSTER_HP_SCALED_THRESHOLDS:
+                    for threshold_id in MONSTER_HP_SCALED_THRESHOLDS[monster_id]:
+                        ratio = MONSTER_HP_SCALED_THRESHOLDS[monster_id][threshold_id]
+                        scaled_threshold = int(math.ceil(scaled_hp * ratio))
+                        csv_row.append(f'scriptHP: {scaled_threshold}')
+
+                if monster_id in MONSTER_SCRIPTED_CHANGES:
+                    monster_name = MONSTER_SCRIPTED_CHANGES[monster_id][0]
+                    for pair in MONSTER_SCRIPTED_CHANGES[monster_id][1:]:
+                        stat, value = pair
+                        if stat == 'spell power':
+                            scaled_value = str(min(255, int(math.ceil(value * _get_spell_power_ratio(ref_leader, leader)))))
+                            csv_row.append(f'scriptSpellPower: {scaled_value}')
+                        else:
+                            stats_scripted = (SPEED_TABLE if stat == 'speed' else STATS_TABLE)[value]
+                            if stat == 'speed':
+                                stats_ratio = [stats_scripted[i] / max(monster[stat][i], 1) for i in range(len(stats_scripted))]
+                                stats_ideal = [monster_scaled_stats[stat][i] * stats_ratio[i] for i in range(len(stats_ratio))]
+                                closest_index, closest_value = _get_closest_stat(stats_ideal, SPEED_TABLE, (1.0, 1.0))
+                            else:
+                                # New scripted-stats-scaling algorithm; speed still works the same, because no monster has 0 speed.
+                                # For all other stats, the old algorithm treated the scripted changes as multiplicative scaling, but for example,
+                                # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
+                                # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
+                                # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
+                                # (Technically this algorithm will not give Waterhag (0,0,0) defense at exactly the Antlion spot, but it's close enough.)
+                                diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
+                                stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+                            csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+
+
+                boss_stats.write(','.join([str(v) for v in csv_row]) + '\n')
+    
+    boss_stats.close()

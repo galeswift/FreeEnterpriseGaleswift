@@ -1,0 +1,93 @@
+// Goal: Change Paladin Cecil into "Dark Paladin" Cecil,
+// somewhat similar to what Unprecedented Crisis does
+// to make DKC endgame viable
+
+// some aspects of the change are done in character_rando.py 
+// to make use of better tools
+
+// Change the class name (7 chars) to "DPaladn"
+patch ($0FA7A3 bus) { 45 51 5C 67 5C 5F 69 }
+
+// We'll let Cecil keep the same sprite class and see what happens
+
+// assign commands and default equipment
+actor(#PCecil)
+{
+    commands {
+        #Fight
+        // %flag japanese_abilities on%
+        #DarkWave
+        // %end%
+        #Black
+        #Item
+    }
+    right hand #Ancient
+    left hand #NoWeapon
+    head #NoWeapon
+    body #PaladinArmor
+    arms #NoWeapon
+}
+
+// build new spell by revamping Paladin Cecil's old White set
+spellset(#PCecil) {
+    initial {
+        #Venom
+    }
+    learned {
+        3 #Sleep
+        5 #Piggy
+        8 #Drain
+        12 #Psych
+        15 #Toad
+        19 #Warp
+        22 #Stop
+        25 #Virus
+        33 #Weak
+        37 #Fatal
+        40 #Nuke
+    }
+}
+
+// assign this spell set to "Black" instead of "White"
+patch ($13fdf8 bus) { FF 00 FF }
+patch ($14ffbd bus) { FF 00 FF }
+
+// update equipment names
+text(item name #PaladinShield) {[shield]Ancient}
+text(item name #PaladinHelm) {[helmet]Ancient}
+text(item name #PaladinArmor) {[armor]Ancient}
+text(item name #PaladinGauntlet) {[gauntlet]Ancient}
+text(item name #CrystalShield) {[shield]Hades}
+text(item name #CrystalHelm) {[helmet]Hades}
+text(item name #CrystalArmor) {[armor]Hades}
+text(item name #CrystalGauntlet) {[gauntlet]Hades}
+text(item name #Ancient) {[darksword]Ancient}
+text(item name #Light) {[darksword]Chaos}
+text(item name #CrystalSword) {[darksword]Hades}
+
+// let Dark Paladin Cecil equip all of DKC's gear by 
+// expanding the "only equippable by DKC" class
+patch ($0fa57a bus) { 01 02 }
+
+// update the weaker dark swords to be a bit stronger
+patch ($0f91b9 bus) { 1E } // Darkness Sword becomes 30 attack
+patch ($0f9201 bus) { 32 } // Ancient Sword becomes 50 attack
+patch ($0f91c1 bus) { 46 } // Black Sword becomes 70 attack
+
+// change Ancient Sword to be only equippable by Cecil
+patch ($0f9206 bus) { 15 }
+
+// change Light/Chaos to be Dark
+patch ($0f91d4 bus) { 04 }
+
+// change Crystal/Hades to be Dark and have no racial strength
+patch ($0f92fc bus) { 04 00 }
+
+// stats changes to Light/Chaos and Crystal/Hades and all of 
+// the two sets of armour depend on the whatsmygear wacky, 
+// so handle in character_rando.py
+
+// also handle item description overrides in generator.py
+
+// handle all initial/level-up stats patching in
+// character_rando.py, for sanity/ease of arithmetic/loops

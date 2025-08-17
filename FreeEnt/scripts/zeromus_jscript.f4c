@@ -1,0 +1,144 @@
+// replacing the script for vanilla J script
+
+// Z pre-first-BB phase
+ai_script(moon $4B) 
+{
+    use #InvincibleOff
+    
+    use #ZeromusShake2
+    
+    // %big bang 1 replacement%
+    use #Enemy_BigBang
+    condition 3
+    // %end%
+}
+
+// Z Virus phase
+ai_script(moon $4C) 
+{
+    pass
+    
+    use #ZeromusShake2
+
+    // %big bang 2 replacement%
+    set spell power 39
+    use #Enemy_BigBang
+    // %end%
+    
+    use #Enemy_BlkHole
+    message $75   // "Magics became invalid."
+    wait
+    pass
+    
+    use #ZeromusShake2
+    
+    // %big bang 3 replacement%
+    set spell power 39
+    use #Enemy_BigBang
+    // %end%
+    
+    // %script virus replacement%
+    set spell power 49
+    target all characters
+    use #Virus
+    // %end%
+    
+    use #Enemy_BlkHole
+    message $75   // "Magics became invalid."
+    wait
+    pass
+    
+    use #ZeromusShake2
+    
+    // %big bang 4 replacement%
+    set spell power 39
+    use #Enemy_BigBang
+    // %end%
+    
+    use #Enemy_BlkHole
+    message $75   // "Magics became invalid."
+}
+
+// Z nuke phase
+ai_script(moon $55) 
+{
+    pass
+    
+    use #ZeromusShake2
+    
+    // %big bang 5 replacement%
+    set spell power 39
+    use #Enemy_BigBang
+    // %end%
+    
+    use #Enemy_BlkHole
+    message $75   // "Magics became invalid."
+    wait
+    // %script nuke replacement%
+    set spell power 21
+    use #Nuke
+    // %end%
+    
+    pass
+    
+    pass
+    
+    use #ZeromusShake2
+    
+    // %big bang 6 replacement%
+    set spell power 39
+    use #Enemy_BigBang
+    // %end%
+}
+
+// Z Meteo phase
+ai_script(moon $57) 
+{
+    chain {
+        // %meteo replacement%
+        set spell power 3
+        pass
+        
+        target all characters
+        use #Meteo
+        // %end%
+    }
+    
+    pass
+}
+
+// Z counter-Nukes for non-White/Call magic
+ai_script(moon $4D) 
+{
+    // %counter nuke replacement%
+    set spell power 21
+    use #Nuke
+    // %end%
+}
+
+// Z counter-Nukes for Call in Virus phase
+ai_script(moon $4E) 
+{
+    // %counter nuke call replacement%
+    set spell power 21
+    use #Nuke
+    // %end%
+}
+
+// Z counter-Weak for White magic
+ai_script(moon $4F) 
+{
+    // %counter weak replacement%
+    use #Enemy_WeakEnemy
+    // %end%
+}
+
+// Z counter-Virus for Call in non-Virus phase
+ai_script(moon $58) 
+{
+    // %counter virus replacement%
+    set spell power 40
+    target all characters
+    use #Virus
+    // %end%
+}

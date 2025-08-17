@@ -1,0 +1,31 @@
+// Enemy Odin command doesn't change sprites if in Wyvern battle
+// or Zeromus battle (will need to change if Zeromus
+// gets randomized into the boss pool)
+msfpatch {
+    OdinGfxPatch:
+        pha
+        lda $1800
+        cmp #$fc // Wyvern
+        beq $+OdinGfxPatch_PossibleBattle
+        cmp #$b7 // Zeromus
+        bne $+OdinGfxPatch_NotWyvernZeromusBattle
+
+    OdinGfxPatch_PossibleBattle:
+        lda $1801
+        cmp #$01
+        bne $+OdinGfxPatch_NotWyvernZeromusBattle
+
+        // is Wyvern/Zeromus battle; do nothing and return
+        pla
+        rtl
+
+    OdinGfxPatch_NotWyvernZeromusBattle:
+        // do normal behavior
+        pla
+        jml $02cc5b
+
+    .addr $01fce6
+        jsl $=OdinGfxPatch
+    .addr $01fcf2
+        jsl $=OdinGfxPatch
+}

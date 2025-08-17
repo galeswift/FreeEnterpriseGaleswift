@@ -431,3 +431,11 @@ SPEED_TABLE = [
     (69, 69),
 ]
 
+MONSTER_HP_SCALED_THRESHOLDS = {
+    0xAA : { 0x02 : 700.0 / 4000.0 },    # Kainazzo
+    0xB3 : { 0x04 : 100.0 / 4624.0 },    # Calbrena
+    0xBB : { 0x0A : 1000.0 / 25200.0 },  # Rubicant
+    0xC1 : { 0x08 : 11000.0 / 57000.0,   # Elements
+             0x07 : 40000.0 / 57000.0 }, 
+    0xC2 : { 0x09 : 27000.0 / 47000.0 }  # Elements
+    }

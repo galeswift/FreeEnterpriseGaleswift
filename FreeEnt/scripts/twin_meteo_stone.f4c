@@ -1,0 +1,99 @@
+// Let the Twins cast Meteo... and sometimes
+// self-target Stone, for thematic purposes/balancing.
+
+// make W.Meteo cost 99 MP
+patch($0f99d9 bus) { E3 } 
+
+// add in a level-based check, etc.,
+// and change targetting if necessary
+msfpatch{
+    .addr $03e582
+        jml $=TwinMeteoStone
+
+    .new
+    TwinMeteoStone:
+        // displaced, leave the 1-in-255 failure
+        cmp #$ff
+        bne $+TwinMeteoStoneNoFail
+        jml $03e586
+
+    %TwinMeteoStoneNoFail:
+        // put the random number on the stack
+        pha
+
+        // get the other Twin's slot, 
+        // find the level, add to current Twin's level,
+        // check if the sum is at least 70
+        lda $cd
+        tax
+        lda $_CharEx__TwinAssignments,x
+        jsr $_Util__CalcBattleOffsets
+        ldx $a6
+        lda $2002,x
+        pha
+        lda $cd
+        jsr $_Util__CalcBattleOffsets
+        ldx $a6
+        pla
+        clc
+        adc $2002,x
+        cmp #$46
+        bcs $+TwinMeteoStoneContinue
+        pla
+    %TwinMeteoStoneReturn:
+        jml $03e58e
+
+    %TwinMeteoStoneContinue:
+        pla
+        cmp #$ef
+        bcs $+TwinSelfStone
+        cmp #$cf
+        bcs $+TwinMeteoCast
+        // else, go back to normal checks
+        bra $-TwinMeteoStoneReturn
+    
+    %TwinMeteoCast:
+        lda #$5e
+        jml $03e598
+
+    %TwinSelfStone:
+        // need to change targetting to be
+        // just the Twin slots.
+        // first, set the target slot to be the actor,
+        // which resets the target flags
+        lda $cd
+        sta $ce
+        // set the current actor targetting data 
+        // zero out the monster targets
+        stz $26d3
+        // loop to set the correct party slot targets
+        ldy #$0005
+        tax
+        stz $e1
+    %TwinSlotSearchStart:
+        tya
+        dec a
+        cmp $cd
+        beq $+TwinSlotSearchAdd
+        // X is the offset for
+        // the current actor's slot
+        cmp $_CharEx__TwinAssignments,x
+        bne $+TwinSlotSearchSkip
+    %TwinSlotSearchAdd:
+        lda $e1
+        ora #$80
+        sta $e1
+    %TwinSlotSearchSkip:
+        dey
+        beq $+TwinSlotSearchDone
+        lsr $e1
+        bra $-TwinSlotSearchStart
+    %TwinSlotSearchDone:
+        lda $e1
+        sta $26d4
+
+        // set the spell to Stone,
+        // carry on with the usual code
+        lda #$2a
+        jml $03e598
+}

@@ -19,6 +19,7 @@ _CAST_TABLE = {
     'Nuke' : 0x30,
     'Heal' : 0x12,
     'Wall' : 0x0A,
+    'Fatal' : 0x2B,
 }
 
 _EQUIP = ['dkcecil', 'kain', 'crydia', 'tellah', 'edward', 'rosa', 'yang', 'palom', 'porom', 'pcecil', 'cid', 'arydia', 'edge', 'fusoya']
@@ -110,9 +111,10 @@ def apply(env):
             items_dbview.refine(lambda it: not it.j)
         if env.options.flags.has('no_adamants'):
             items_dbview.refine(lambda it: it.const != '#item.AdamantArmor')
-        if env.options.flags.has('playablesmith'):
+        if env.options.flags.has('playablesmith') and not 'omnidextrous' in env.meta.get('wacky_challenge',[]):
             # alt smith item can't be a MoonVeil if Tno:j is on! So restricting to Yang-only without Adamants would be bad; don't restrict in that case.
-            if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') and (env.meta['available_characters']).issubset(set(['yang']))):
+            if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
+                    and (env.meta['available_characters']).issubset(set(['yang']) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
                 items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(env.meta['available_characters']))
         items = items_dbview.find_all(lambda it: it.tier in [7, 8])
         smith_reward = env.rnd.choice(items)
@@ -125,6 +127,19 @@ def apply(env):
     if custom_weapon is None:
         env.add_substitution('custom weapon enabled', '')
         return
+
+    if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
+        custom_weapon.name = '[darksword]Bringer'
+        custom_weapon.spoilername = 'Deathbringer'
+        custom_weapon.elements = ['dark']
+        custom_weapon.cast = 'Fatal'
+        custom_weapon.spellpower = 8
+        custom_weapon.dragons = 'y'
+        custom_weapon.spirits = ''
+        custom_weapon.undead = ''
+
+    if custom_weapon.id == 0x106 and 'advertising'  in env.meta.get('wacky_challenge',[]):
+        custom_weapon.giants = 'y'
 
     # write item name
     env.add_script(f'text(item name ${CUSTOM_WEAPON_ITEM_ID:02X}) {{{custom_weapon.name}}}')
@@ -172,8 +187,14 @@ def apply(env):
 
     # write equip table entry
     equip_value = 0x0000
+    if env.options.flags.has('omnismith'):
+        users_set = set()
+        for ch in env.meta['available_characters']:
+            users_set = users_set.union(set(_CHARACTER_TO_USERS.get(ch, [ch])))
+    else:
+        users_set = set(custom_weapon.equip)
     for i,job in enumerate(_EQUIP):
-        if job in custom_weapon.equip:
+        if job in users_set:
             equip_value |= (1 << i)
     env.add_binary(UnheaderedAddress(0x7A550 + CUSTOM_WEAPON_EQUIP_TABLE_INDEX * 0x02), [equip_value & 0xFF, (equip_value >> 8) & 0xFF], as_script=True)
 
@@ -185,8 +206,15 @@ def apply(env):
     env.add_binary(UnheaderedAddress(0x7A590 + CUSTOM_WEAPON_ELEMENT_TABLE_INDEX * 0x03), [element_value & 0xFF, (element_value >> 8) & 0xFF, (element_value >> 16) & 0xFF], as_script=True)
 
     # set override item description
-    with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
-        description_data = infile.read()
+    if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
+        with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
+            description_data = infile.read()
+    elif custom_weapon.id == 0x106 and 'advertising' in env.meta.get('wacky_challenge',[]):
+        with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'advertising_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
+            description_data = infile.read()
+    else: 
+        with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
+            description_data = infile.read()
     env.meta.setdefault('item_description_overrides', {})[CUSTOM_WEAPON_ITEM_ID] = description_data
 
     # write proxy item value

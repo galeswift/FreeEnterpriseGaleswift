@@ -1,0 +1,39 @@
+ai_script(moon $26)
+{
+    // %wyvern script spell power change 12%
+    set spell power 12
+    // %end%
+    target self
+    use #Nuke
+    // %wyvern script spell power change 8%
+    set spell power 8
+    // %end%
+    wait
+    // %wyvern script spell power change 12%
+    set spell power 12
+    // %end%
+    target self
+    use #Nuke
+    // %wyvern script spell power change 8%
+    set spell power 8
+    // %end%
+    wait
+    // %wyvern script spell power change 12%
+    set spell power 12
+    // %end%
+    target self
+    use #Nuke
+    // %wyvern script spell power change 8%
+    set spell power 8
+    // %end%
+    wait
+    pass
+}
+
+ai_script(moon $27)
+{
+    // %wyvern script spell power change 6%
+    set spell power 6
+    // %end%
+    use #Enemy_MegaNuke
+}

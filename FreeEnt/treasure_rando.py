@@ -43,7 +43,7 @@ FIGHT_SPOILER_DESCRIPTIONS = {
     0x1F4 : "Behemoth"
 }
 
-# needed tool for Tspecific
+# needed tool for Tplayable
 _CHARACTER_TO_USERS = {
     'cecil' : ['dkcecil', 'pcecil'],
     'rydia' : ['crydia', 'arydia']
@@ -183,9 +183,11 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.AdamantArmor')
     if env.options.flags.has('no_cursed_rings'):
         dbview.refine(lambda it: it.const != '#item.Cursed')
+    if env.options.flags.has('objective_mode_external'):
+        dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: (it.category not in ['weapon', 'armor']))   
-    if env.meta.get('wacky_challenge') == '3point':
+    if '3points' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: it.const != '#item.SomaDrop')
 
     # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
@@ -302,7 +304,11 @@ def apply(env):
             if max_overworld_chests <= 0:
                 t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids))        
             else:
-                t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Overworld"))
+                if env.options.flags.has('starting_underground'):
+                    # let the underworld have the freebie characters when starting there
+                    t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Underworld"))
+                else:
+                    t = env.rnd.choice(character_treasure_chests.find_all(lambda t: t.ordr not in assigned_ids and t.world == "Overworld"))
                 max_overworld_chests -= 1            
            
             character_dummy = env.assignments[character_rando.SLOTS[slot_name]]           
@@ -356,10 +362,8 @@ def apply(env):
             for i,t in enumerate(tier['chests']):
                 treasure_assignment.assign(t, tier['pool'][i])
     elif env.options.flags.has('treasure_wild') or env.options.flags.has('treasure_standard'):
-        max_item_tier = (99 if env.options.flags.has('treasure_wild') else (mintier if (mintier and (mintier > 5)) else 5))
+        max_item_tier = (99 if env.options.flags.has('treasure_wild') else 5)
         # exclude HrGlass1 and HrGlass3 from Twild gen if HrGlass2 can't spawn
-        if (max_item_tier == 99 and mintier and mintier > 5):
-            max_item_tier = 98
         item_pool = items_dbview.get_refined_view(lambda it: it.tier <= max_item_tier).find_all()    
         unrestricted_item_pool = unrestricted_items_dbview.find_all()    
         for t in plain_chests_dbview.find_all():
@@ -382,16 +386,20 @@ def apply(env):
         for row in curves_dbview:
             weights = {i : getattr(row, f"tier{i}") for i in range(1,9)}
             if env.options.flags.has('treasure_wild_weighted'):
-                weights = util.get_boosted_weights(weights)
-            if env.options.flags.has('treasure_semipro'):
-                weights = util.get_semiboosted_weights(weights)
-
+                weights = util.get_boosted_weights(weights, 'wildish')
+            elif env.options.flags.has('treasure_semipro'):
+                weights = util.get_boosted_weights(weights, 'semipro')
+            elif env.options.flags.has('treasure_standard_weighted'):
+                weights = util.get_boosted_weights(weights, 'standardish')
+            # adjust weights down for miab areas (usually for vanilla miabs)
+            if env.options.flags.has('treasure_adjust_miab_areas'):
+                # see assets/db/curves.csvdb for the numbers;
+                # in order, it's Zot, Castle Eblan, Lower Bab-il, Cave Eblan, Upper Bab-il, 
+                # Sylph Cave, Feymarch, Lunar Path, Giant, Lunar Subterrane/Core
+                if row.wikiindex in [22, 25, 24, 26, 27, 31, 32, 36, 37, 38]:
+                    weights = util.get_boosted_weights(weights, 'miab_areas')
+                    
             distributions_unrestricted[row.area] = util.Distribution(weights)
-            
-            if mintier:
-                for tier in range(1,mintier):
-                    weights[mintier] += weights[tier]
-                    weights[tier] = 0
 
             # null out distributions for empty item tiers
             for i in range(1,9):
@@ -519,10 +527,22 @@ def apply(env):
             try:
                 item = env.meta['rewards_assignment'][slot].item
                 contents = databases.get_item_spoiler_name(item)
+                if env.options.flags.has('darkpaladin'):
+                    contents = contents.replace('Paladin','Ancient')
+                    contents = contents.replace('Light','Chaos')
+                    if not contents == 'Crystal Ring':
+                        contents = contents.replace('Crystal','Hades')
+                if env.options.flags.has('starting_underground') and contents == 'Hook':
+                    contents = 'Drill'
             except KeyError:
                 contents = 'DEBUG'
         elif not contents.endswith(' gp'):
             contents = databases.get_item_spoiler_name(contents)
+            if env.options.flags.has('darkpaladin'):
+                contents = contents.replace('Paladin','Ancient')
+                contents = contents.replace('Light','Chaos')
+                if not contents == 'Crystal Ring':
+                    contents = contents.replace('Crystal','Hades')
 
         if treasureEntry.fight is not None:
             miab = f" (MIAB: {FIGHT_SPOILER_DESCRIPTIONS[treasureEntry.fight]})"

@@ -262,6 +262,10 @@ event($9E)  //Big Whale surfacing
     [#B #Tracker_SetKeyItemUsed #tracker_key_item_index.dark_crystal]
     player face down
     [#B #Objectives_Tick #objective.quest_bigwhale]
+    
+    // %if doorsrando_starting_underground%
+    set #UnderworldOpen
+    // %end%
 
     pause 2
     batch 8 {

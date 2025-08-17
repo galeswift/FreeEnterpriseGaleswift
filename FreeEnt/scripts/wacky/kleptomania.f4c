@@ -55,6 +55,9 @@ actor(#Kain1)
     commands {
         #Fight
         #Jump
+        // %flag kainmagic on%
+        #White
+        // %end%
         #Sneak
         #Item
     }
@@ -145,8 +148,16 @@ actor(#PCecil)
 {
     commands {
         #Fight
+        // %flags: darkpaladin japanese_abilities%
+        #DarkWave
+        // %end%
+        // %flag darkpaladin on%
+        #Black
+        // %end%
+        // %flag darkpaladin off%
         #White
         #Cover
+        // %end%
         #Sneak
         #Item
     }
@@ -168,6 +179,9 @@ actor(#Cid)
     commands {
         #Fight
         #Peep
+        // %flag cidairship on%
+        #Raid
+        // %end%
         #Sneak
         #Item
     }
@@ -198,9 +212,14 @@ actor(#Edge)
 actor(#Fusoya)
 {
     commands {
+        // %flag add_spells_fusoya off%
         #Fight
+        // %end%
         #White
         #Black
+        // %flag add_spells_fusoya on%
+        #Omni
+        // %end%
         #Sneak
         #Item
     }

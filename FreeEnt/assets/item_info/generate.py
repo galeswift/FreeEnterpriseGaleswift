@@ -90,12 +90,17 @@ with open('item_names.txt', 'r') as infile:
 with open('vanilla_item_names.txt', 'r') as infile:
     VANILLA_ITEM_NAMES = [l.strip() for l in infile]
 
+with open('dp_item_names.txt', 'r') as infile:
+    FE_DARKPAL_ITEM_NAMES = [l.strip() for l in infile]
+
 FE_DESCRIPTIONS = load_custom_descriptions('custom_descriptions.txt')
 VANILLA_DESCRIPTIONS = load_custom_descriptions('vanilla_descriptions.txt')
 CUSTOM_WEAPON_DESCRIPTIONS =  load_custom_descriptions('gba_descriptions.txt')
+FE_DARKPAL_DESCRIPTIONS = load_custom_descriptions('custom_descriptions_dark_paladin.txt')
 
 fe_item_data = []
 vanilla_item_data = []
+fe_dp_item_data = []
 
 with open('PATH-TO-ROM', 'rb') as romfile:
     for item_id in range(0xFD):
@@ -127,15 +132,29 @@ with open('PATH-TO-ROM', 'rb') as romfile:
                 strength=strength, percent=percent, magic_strength=magic_strength, magic_percent=magic_percent,
                 metallic=metallic, throwable=throwable, long_range=long_range
                 ))
+            
+            fe_dp_item_data.extend(generate_item_description_data(FE_DARKPAL_ITEM_NAMES[item_id], FE_DARKPAL_DESCRIPTIONS.get(item_id, None),
+                is_weapon=is_weapon, is_armor=is_armor,
+                strength=strength, percent=percent, magic_strength=magic_strength, magic_percent=magic_percent,
+                metallic=metallic, throwable=throwable, long_range=long_range
+                ))
         else:
             fe_item_data.extend(generate_item_description_data(FE_ITEM_NAMES[item_id], FE_DESCRIPTIONS.get(item_id, None)))
             vanilla_item_data.extend(generate_item_description_data(VANILLA_ITEM_NAMES[item_id], VANILLA_DESCRIPTIONS.get(item_id, None)))
+            fe_dp_item_data.extend(generate_item_description_data(FE_ITEM_NAMES[item_id], FE_DESCRIPTIONS.get(item_id, None)))
+
+fe_dp_item_data[0x80 * 0x17 + 0x17] = 0x83 # Darkness Sword is 30 power, not 20
+fe_dp_item_data[0x80 * 0x18 + 0x17] = 0x87 # Black Sword is 70 power, not 30
+fe_dp_item_data[(0x80 * 0x20 + 0x17):(0x80 * 0x20 + 0x19)] = [0x85, 0x80] # Ancient Sword is 50 power, not 35
 
 with open('item_descriptions.bin', 'wb') as outfile:
     outfile.write(bytes(fe_item_data))
 
 with open('vanilla_item_descriptions.bin', 'wb') as outfile:
     outfile.write(bytes(vanilla_item_data))
+
+with open('darkpal_item_descriptions.bin', 'wb') as outfile:
+    outfile.write(bytes(fe_dp_item_data))
 
 custom_weapons_dbview = databases.get_custom_weapons_dbview()
 for custom_weapon in custom_weapons_dbview:
@@ -151,3 +170,5 @@ for custom_weapon in custom_weapons_dbview:
         )
     with open(f'custom_weapon_{custom_weapon.id:X}_description.bin', 'wb') as outfile:
         outfile.write(bytes(data))
+
+# To output the "Deathbringer" description, need to modify the above custom_weapon code to only care about 0x103 and output to the special file.

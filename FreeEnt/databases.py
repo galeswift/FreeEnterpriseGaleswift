@@ -64,6 +64,16 @@ _spells_db = csvdb.CsvDb(os.path.join(DB_PATH, 'spells.csvdb'), {
     'data' : csvdb.List(',', value_type=csvdb.HexInt)
     })
 
+_update_spells_db = csvdb.CsvDb(os.path.join(DB_PATH, 'updated_spells.csvdb'), {
+    'code' : csvdb.HexInt,
+    'mp' : int,
+    'data' : csvdb.List(',', value_type=csvdb.HexInt)
+    })
+
+_encounter_groups_db = csvdb.CsvDb(os.path.join(DB_PATH, 'encounter_groups.csvdb'), {
+    'id' : csvdb.HexInt
+    })
+
 _custom_weapons_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_weapons.csvdb'), {
     'id' : csvdb.HexInt,
     'equip' : csvdb.List(','),
@@ -104,6 +114,12 @@ def get_shops_dbview():
 def get_spells_dbview():
     return _spells_db.create_view()
 
+def get_update_spells_dbview():
+    return _update_spells_db.create_view()
+
+def get_encounter_groups_dbview():
+    return _encounter_groups_db.create_view()
+
 def get_custom_weapons_dbview():
     return _custom_weapons_db.create_view()
 
@@ -127,3 +143,11 @@ def get_spell_spoiler_name(spell):
                 _spell_spoiler_names[sp.const] = sp.spoilername
 
     return _spell_spoiler_names[spell]
+
+_encounter_group_spoiler_names = {}
+def get_encounter_group_names(group_id):
+    if not _encounter_group_spoiler_names:
+        for enc in get_encounter_groups_dbview():
+            _encounter_group_spoiler_names[enc.id] = (enc.spoilername, enc.preferredencounter)
+    
+    return _encounter_group_spoiler_names[group_id]

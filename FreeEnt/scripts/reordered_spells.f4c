@@ -1,0 +1,148 @@
+//---------------------------------------------------------
+// Spell alterations: Nuke to > 1_300_000 xp, White to > 1_200_000 xp
+// FuSoYa and Tellah learn Weak after the earn about 260_000 exp (53 and 33 respectively)
+// Rydia and Palom learns tier 3s earlier and at the same time
+// Porom learns later spells much earlier
+
+spellset(#Rosa) {
+    learned {
+        11  #Life1
+        13  #Cure2
+        // %flag harmspell on%
+        14  $17
+        // %end%
+        15  #Mute
+        18  #Heal
+        20  #Bersk
+        23  #Blink
+        24  #Charm
+        28  #Cure3
+        29  #Size
+        30  #Fast
+        32  #Float
+        34  #Wall
+        38  #Cure4
+        42  #Life2
+        55  #White
+    }
+}
+
+spellset(#RydiaBlack) {
+    learned {
+        2  #Ice1
+        5  #Lit1
+        8  #Sleep
+        10  #Venom
+        12  #Warp
+        13  #Toad
+        15  #Stop
+        20  #Piggy
+        24  #Virus
+        29  #Psych
+        30  #Ice3
+        30  #Fire3
+        30  #Lit3
+        33  #Drain
+        36  #Stone
+        38  #Quake
+        42  #Fatal
+        46  #Weak
+        54  #Nuke
+        56  #Meteo
+    }
+}
+
+spellset(#Porom) {
+    learned {
+        11  #Life1
+        13  #Cure2
+        // %flag harmspell on%
+        14  $17
+        // %end%
+        15  #Mute
+        18  #Bersk
+        19  #Exit
+        20  #Heal
+        22  #Blink
+        24  #Charm
+        29  #Size
+        30  #Cure3
+        32  #Float
+        34  #Fast
+        38  #Wall
+        40  #Cure4
+        46  #Life2
+        57  #White
+    }
+}
+
+spellset(#Palom) {
+    learned {
+        11 #Ice2
+        11 #Piggy
+        12 #Fire2
+        13 #Lit2
+        14 #Stop
+        19 #Virus
+        22 #Toad
+        23 #Quake
+        26 #Drain
+        29 #Warp
+        30 #Ice3
+        30 #Fire3
+        30 #Lit3
+        36 #Stone
+        40 #Psych
+        42 #Fatal
+        44 #Weak
+        50 #Meteo
+        57 #Nuke
+    }
+}
+
+spellset(#TellahBlack) {
+    initial {
+        #Fire1
+        #Ice1
+        #Lit1
+        #Stop
+        #Psych
+    }
+    learned {
+        33 #Weak
+    }
+}
+
+spellset(#FusoyaBlack) {
+    initial {
+        #Toad
+        #Piggy
+        #Warp
+        #Venom
+        #Fire1
+        #Fire2
+        #Fire3
+        #Ice1
+        #Ice2
+        #Ice3
+        #Lit1
+        #Lit2
+        #Lit3
+        #Virus
+        #Weak
+        #Quake
+        #Sleep
+        #Stone
+        #Fatal
+        #Stop
+        #Drain
+        #Psych
+        #Meteo
+        #Nuke
+    }
+    learned {
+        // %flag nerfed_fusoya off%
+        53 #Weak
+        // %end%
+    }
+}

@@ -6,6 +6,12 @@ msfpatch {
         // %flag characters_permadeader on%
         jsl $=Permadeath
         // %end%
+        // %flag characters_mostly_dead on%
+        jsl $=SwoonToWishes
+        // %end%
+        // %flag characters_briefly_dead on%
+        jsl $=SwoonToWishes
+        // %end%
 
         // %if wacky_post_battle_hook%
         jsl $=Wacky__PostBattleHook

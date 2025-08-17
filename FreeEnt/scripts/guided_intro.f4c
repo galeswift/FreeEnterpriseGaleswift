@@ -104,7 +104,15 @@ event($40) // guidingway introduction
     }
     p #Guidingway toggle visible
 
+	// %flag starting_underground on%
+	load map #Underworld at 99 83 on falcon no transition no launch
+	// %end%
+	// %flag starting_blackchocobo on%
+	load map #Overworld at 102 158 no transition
+	// %end%
+	// %flags: ~starting_underground ~starting_blackchocobo%
     load map #Overworld at 102 155 on enterprise no transition no launch
+	// %end%
     player visible
 }
 

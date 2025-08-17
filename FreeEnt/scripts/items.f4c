@@ -322,6 +322,10 @@ msfpatch {
         beq $+Inventory_DoQuickTrash_NotOK
         cmp #$c8  // crystal
         beq $+Inventory_DoQuickTrash_NotOK
+        // %flag objective_mode_external on%
+        cmp #$e4  // EagleEye, but only when it's important
+        beq $+Inventory_DoQuickTrash_NotOK
+        // %end%  
         cmp #$ec  // less than Pass
         bcc $+Inventory_DoQuickTrash_OK
 

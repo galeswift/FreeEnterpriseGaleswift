@@ -482,7 +482,9 @@ event($62)  //Cecil's transformation, Tellah remembering
     give spell #TellahWhite #Cure4
     give spell #TellahWhite #Life2
     give spell #TellahWhite #Size
+    // %flag kainmagic off%
     give spell #TellahWhite #Sight
+    // %end%
     give spell #TellahWhite #Float
     [#B #Rando_CheckFlag #randoflag.japanese_spells]
     [#B #If #Flag #flag.Result] {

@@ -29,10 +29,10 @@ Defeat Milon, Milon Z., Kainazzo, Valvalis, Rubicant, and Elements to complete t
 45 Dark Matters are randomly placed in chests (MIABs excluded); bring 30 of them to Kory in Agart to complete this objective.
 
 [@bosscollector]
-Find and defeat the specified number of bosses to complete this objective. <a href="/fork_info#bosscollector" class="nf nf-md-information"></a>
+Find and defeat the specified number of bosses to complete this objective.
 
 [@goldhunter]
-Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective. <a href="/fork_info#goldhunter" class="nf nf-md-information"></a>
+Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective.
 
 [Omode:dkmatter35]
 45 Dark Matters are randomly placed in chests (MIABs excluded); bring 35 of them to Kory in Agart to complete this objective.
@@ -94,6 +94,9 @@ Obtain 16 key items to complete this objective.
 [Omode:ki17]
 Obtain 17 key items to complete this objective. Incompatible with <em>Owin:crystal</em>.
 
+[Omode:external]
+Use the EagleEye provided to you at the start of the game to complete this objective. This objective is intended for external objectives that cannot be referenced in-game, such as bingo goals or meta objectives.
+
 [Orandom:tough_quest]
 Refers only to the more difficult, later-game quest objectives.
 
@@ -104,16 +107,16 @@ Complete the required number of objectives to immediately win the game. Zeromus 
 Complete the required number of objectives to get the Crystal, then defeat Zeromus to win the game.
 
 [@Orandompool2]
-An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href="/fork_info#objective-pools" class="nf nf-md-information"></a>
+An additinal pool of random objectives, enabling both more random objectives and different allowed types.
 
 [@Orandompool3]
-An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href="/fork_info#objective-pools" class="nf nf-md-information"></a>
+An additinal pool of random objectives, enabling both more random objectives and different allowed types. 
 
 [@Ogated]
-A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set "Complete the Tower of Zot" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives. <a href="/fork_info#objectives-gated" class="nf nf-md-information"></a>
+A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set "Complete the Tower of Zot" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives. 
 
 [@Ohardreq]
-Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4. <a href="/fork_info#objectives-required" class="nf nf-md-information"></a>
+Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4. 
 
 [@Ocustom]
 <ul>
@@ -137,8 +140,17 @@ Key items may be awarded by the bosses of the Lunar Subterrane.
 [Kmiab:standard]
 This excludes monster-in-a-box chests in the Lunar Subterrane, unless also using Kmoon or Kunsafe.
 
-[Klstmiab]
-This ignores the Kmoon or Kunsafe safety check that Kmiab has.
+[Kmiab:all]
+All monster-in-a-box chests are included, regardless of any Kmoon or Kunsafe settings.
+
+[Kmiab:above]
+Includes the monster-in-a-box chests in Zot, Castle Eblan, Cave Eblan, Upper Bab-il, the Giant of Bab-il, and the Lunar Path.
+
+[Kmiab:below]
+Includes the monster-in-a-box chests in Lower Bab-il, Sylph Cave, and the Feymarch.
+
+[Kmiab:lst]
+Includes the monster-in-a-box chests in the Lunar Subterrane. This setting ignores the Kmoon or Kunsafe safety check.
 
 [Kforge]
 The reward for turning in the Legend Sword and Adamant to Kokkol is a key item. The vanilla Excalibur is added to the key items rewards pool. If the hero challenge is enabled, this overrides the normal <em>Chero</em> supersmith reward.
@@ -182,6 +194,9 @@ You are guaranteed that the Hook route through Cave Eblan is the only way to acc
     <li>If Kmiab is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>
 </ul>
 
+[Kstart:zonk]
+This flag takes priority over having the Spoon and/or the Pink Tail (in absence of Kpink), meaning this flag will remove one of those items if necessary.
+
 [Kunweighted]
 Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting. 
 
@@ -190,6 +205,9 @@ As Kunsafe, but you will be <em>required</em> to obtain moon access prior to obt
 
 [Klatedark]
 The Darkness Crystal will be gated by underground access.
+
+[Kunreliabledark]
+When <em>Kunsafe</em> and <em>Kunsafer</em> are not on, force the Darkness Crystal to be gated by underground access 25% of the time.
 
 [Pchests]
 Passes are placed in three random treasure chests (not on the moon).
@@ -207,25 +225,25 @@ Characters will not join your party in the Watery Pass, Damcyan, Mysidia, or Mt.
 Characters will not join your party in Kaipo, Mt. Hobs, Baron, Zot, the Dwarf Castle, Cave Eblan, the Lunar Palace, or the Giant of Bab-il.
 
 [Cnopartner]
-Your starting partner will not join your party. <a href="/fork_info#nopartner" class="nf nf-md-information"></a>
+Your starting partner will not join your party.
 
 [Cpaladin]
-Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check. <a href="/fork_info#cpaladin" class="nf nf-md-information"></a>
+Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check.
 
 [Cmaybe]
 Normally, the randomizer will try to include every eligible character in the game at least once. This flag removes that logic, meaning some eligible characters may not appear.
 
 [Ctreasure:free]
-Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href="/fork_info#ctreasure-free" class="nf nf-md-information"></a>
+Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.
 
 [Ctreasure:earned]
-Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href="/fork_info#ctreasure-earned" class="nf nf-md-information"></a>
+Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.
 
 [Ctreasure:unsafe]
-Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld. <a href="/fork_info#ctreasure-unsafe" class="nf nf-md-information"></a>
+Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld. 
 
 [Ctreasure:relaxed]
-Restricted characters will be found in all chests.  No characters will be placed in MIAB chests. <a href="/fork_info#ctreasure-relaxed" class="nf nf-md-information"></a>
+Restricted characters will be found in all chests.  No characters will be placed in MIAB chests. 
 
 [@CrestrictDefine]
 Under standard settings, the randomizer considers Fusoya and Edge to be "restricted" characters due to their power level, and will try to place them in later-game positions. You may redefine which characters are considered "restricted" here.
@@ -236,8 +254,11 @@ Your starting character will be chosen among the options selected here, regardle
 [@CstartModify]
 Your starting character will be selected as normal according to your other flag settings, modified by the options selected here.
 
-[Cj:spells]
+[Cspells:j]
 White mages will learn Armor, Shell, and Dispel. All mages learn spells at the levels they would in FF4j.
+
+[Cspells:anti]
+Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.
 
 [Cj:abilities]
 Characters retain the battle commands from FF4j that were removed in FF4us.
@@ -269,6 +290,12 @@ Party members that are "swoon" at the end of any battle are permanently removed 
 [Cpermadeader]
 Party members that are swoon or stone at the end of any battle are permanently removed from the game. (This includes the cutscene/story battles that you are normally allowed to lose; now you will game over if your party wipes during these battles.)
 
+[Cmostlydead]
+Party members that are swoon at the end of any battle are removed from your party, reset back to base level and equipment, and placed in the Tower of Wishes. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)
+
+[Cbrieflydead]
+Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)
+
 [Chero]
 - The starting character is your hero.
 - The hero is the only instance of that character available (unless other flags force it).
@@ -280,7 +307,7 @@ Party members that are swoon or stone at the end of any battle are permanently r
 - The hero is exempt from permadeath.
 
 [Csuperhero]
-- This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back. <a href="/fork_info#superhero" class="nf nf-md-information"></a>
+- This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back.
 
 [Tshuffle]
 Treasure contents are the same as in original FF4, but their positions are shuffled. This randomization is weighted so that overworld treasures tend to remain in the overworld, and similarly for underworld/moon treasures.
@@ -300,8 +327,14 @@ Allows items of any strength to appear, including the most powerful items, but u
 [Tplayable]
 Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.
 
+[Tadjmiabareas]
+On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.
+
 [Tsemipro]
 Uses location-based weighting, with item quality between that provided by pro and wildish.
+
+[Tstandardish]
+A weighted treasure distribution that boosts middle tiers more than high tiers.
 
 [Tvanillaish]
 Uses location-based weighting, with item quality approximately that of the vanilla game.
@@ -345,8 +378,17 @@ A basic randomization, allowing slightly stronger items than the standard random
 [Svanillaish]
 Shops will contain items of similar quality and quantity as their vanilla counterparts.
 
+[Splayable]
+Equipment sold in shops will be usable by at least one character that you can acquire in the seed.
+
 [Sunsafe]
 Normally, the randomizer guarantees Cure2 potions, Life potions and StarVeils are readily available, and that Cure3 potions are available in seeds without white mages. This flag removes those checks.
+
+[Smixed:shaken]
+This shuffle includes key items and other excluded items that have 0 GP as their buy/sell price.
+
+[Sethersell]
+Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.
 
 [Bstandard]
 The positions of bosses are shuffled. Boss stats are roughly scaled to match the battle it's replacing. For example, Rubicant in the Watery Pass would have the HP and speed of Octomamm. (Yes, this flag is janky, and a MegaNuke is still a MegaNuke. Save often.)
@@ -360,6 +402,12 @@ All boss battle enemies have the "boss bit" set.  The alternate win conditions a
 [Balt:gauntlet]
 Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area.
 
+[Bstats:j]
+Bosses (including Zeromus) have FF4j scripts, the Asura summon casts one of Armor/Cure3/Life like the boss does, and boss location stats scale with FF4j except the Karate slot's HP (scaled to 8000 instead of 62000).
+
+[Bstats:et]
+Bosses (including Zeromus) have FF4ET scripts and boss location stats scale with FF4ET.
+
 [@Brestrict]
 Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.
 
@@ -369,6 +417,9 @@ The replacement attack will be weaker than MegaNuke (unless <em>Bunsafe</em> is 
 [Bitburns]
 The replacement attack will include Meganuke, Big Bang, Zanteksuken, Full party charm, and Meteo
 
+[Bflatvern]
+In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the reflected Nukes and the counter MegaNuke did not get scaled, due to a typo in the code. This bug has been fixed, but this flag will restore the vanilla FE spell power for those attacks.
+
 [Bwoahdin]
 The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack.
 
@@ -377,6 +428,15 @@ Golbez does not use HoldGas or summon Shadow; he will immediately start cycling 
 
 [Bwhichbez]
 Each of Shadow's and Golbez's spells are replaced individually. If <em>Bunsafe</em> is enabled, Golbez has access to more powerful spells.
+
+[Bspellpower]
+Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.
+
+[Bremove:officer_slot]
+Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.
+
+[Bremove:kingqueen_slot]
+Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.
 
 [@G]
 The glitches explicitly referenced here are <em>disabled by default</em>; setting these flags enables them to act as they do in original FF4. Glitches not mentioned here remain intact and available.
@@ -401,6 +461,42 @@ Bosses and monster-in-a-box fights still award EXP.
 
 [Enodmachin]
 The D.Machin in the Searcher encounter is replaced by a Horseman.
+
+[Enomacgiant]
+The MacGiant in the Searcher encounter is replaced by a Machine.
+
+[Etable:shuffle7]
+The seven non-rare encounters in each area (i.e. those encounters not obtainable via Siren) are shuffled.
+
+[Etable:shuffle8]
+All encounters in each area are shuffled, so a Siren may pull a different formation than normal.
+
+[Etable:relocatedish]
+Encounter groups are shuffled amongst each other, within four zones: the overworld (no Hook route starting at Cave Eblana), the underworld, the moon (including LST), and the Hook route/Giant.
+
+[Etable:relocated]
+Encounter groups are shuffled amongst each other, based on the high byte of the formation IDs in those groups: the overworld (including the Giant and Hook route) and the underworld/moon.
+
+[Etable:wildish]
+Encounters are shuffled within four zones: the overworld (no Hook route starting at Cave Eblana), the underworld, the moon (including LST), and the Hook route/Giant.
+
+[Etable:wild]
+Encounters are shuffled within two groups, based on the high byte of the formation ID: the overworld (including the Giant and Hook route) and the underworld/moon.
+
+[Etable:chaos]
+Encounters are randomly assigned to encounter groups independently, within the overworld (including the Giant and Hook route) and the underworld/moon separately.
+
+[Etable:uniquelygood]
+Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
+
+[Hrandom]
+The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members.
+
+[Hvanilla]
+The song that Edward plays during the TwinHarp cutscene and fight is vanilla.
+
+[Hnone]
+No music plays during the TwinHarp cutscene and fight.
 
 [@kit]
 Starter kits allow you to begin the game with additional items in your inventory.
@@ -493,7 +589,10 @@ A Cursed Ring.
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
 [-kit:exit]
-5-10 Exits
+5-10 Exits.
+
+[-kit:egg]
+One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
 [-kit:random]
 One of the other kit options, selected at random.
@@ -586,7 +685,10 @@ A Cursed Ring.
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
 [-kit2:exit]
-5-10 Exits
+5-10 Exits.
+
+[-kit2:egg]
+One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
 [-kit2:random]
 One of the other kit options, selected at random.
@@ -679,7 +781,10 @@ A Cursed Ring.
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
 [-kit:exit]
-5-10 Exits
+5-10 Exits.
+
+[-kit3:egg]
+One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
 [-kit3:random]
 One of the other kit options, selected at random.
@@ -702,6 +807,15 @@ Instead of the Excalibur, Kokkol the Smith will forge a weapon from Final Fantas
 [-smith:playable]
 The item that Kokkol forges will be usable by a character you can acquire in the seed.
 
+[-smith:omni]
+If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).
+
+[-starting:blackchocobo]
+Instead of starting with the Enterprise, start at Baron with Black Chocobos available but no Enterprise. The Enterprise is obtained by completing Baron Castle.
+
+[-starting:dwarfcastle]
+Instead of starting at Baron with the Enterprise, start at Dwarf Castle with the Falcon. The Drill to get above ground is now a key item to be found and the Enterprise is not obtained upon completing the Super Cannon check.
+
 [@fusoya] 
 By default, Free Enterprise runs with the "FuSoYa Challenge", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.
 
@@ -718,15 +832,27 @@ Instead of learning spells randomly, FuSoYa will learn spells in order based on 
 FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.
 
 [-fusoya:nerfed] 
-FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual.
+FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.
+
+[-fusoya:slowstart]
+3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.
+
+[-fusoya:unlearn]
+FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.
+
+[-fusoya:uncapped]
+FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>.
+
+[-fusoya:randomhp]
+Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP). 
 
 [-fusoya:maybe] 
 Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.
 
-[-vintage]
-Enables the April Fools Day 2019 mode.
+[-fusoya:omnimage]
+Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells).
 
-[-doorsrando]
+[@doorsrando]
 Randomizes most doors in the game (including houses, etc).
 <ul>
     <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>
@@ -736,14 +862,14 @@ Randomizes most doors in the game (including houses, etc).
     <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>
 </ul>
 
-[-entrancesrando]
+[@entrancesrando]
 Randomizes most Entrances in the game. Doors inside towns remain intact.
 <ul>
-    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>
-    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>
-    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>
-    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>
-    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>
+    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>
+    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>
+    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>
+    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>
+    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>
 </ul>
 
 [-calmness]
@@ -761,11 +887,40 @@ Fighting the Sealed Cave boss is required before seeing the KI
     <li>(If a door goes somewhere you don't expect it to go, it was probably a "return" door, which takes you back to your previous location.)</li>
 </ul>
 
-[-vanilla:agility]
-FF4 scales the speed of combat based on the agility stat of your party's "agility anchor". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). However, in vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present. (Note that this overrides the <em>Chero</em> agility effect, if playing with the hero challenge.)
+[@agility]
+FF4 scales the speed of combat based on the agility stat of your party's "agility anchor". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). 
 
-[-vanilla:hobs]
-By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior.
+Note that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.
+
+[-agility:vanilla]
+In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present. 
+
+[-agility:fastest]
+This flag will double the Count timer.
+
+[-agility:average]
+Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility.
+
+[-agility:random]
+Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.
+
+[-agility:monster]
+Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.
+
+[-agility:flat]
+Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled).
+
+[-agility:750formula]
+Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer.
+
+[@anchor]
+Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.
+
+[@agilityscale]
+The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.
+
+[-speedmodbalance]
+In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).
 
 [@exp]
 To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.
@@ -778,9 +933,6 @@ Normally in Free Enterprise, in a full party, low-level party members (at least 
 
 [-exp:nokeybonus]
 By default in Free Enterprise, once 10 key items have been collected, earned EXP is doubled. Set this flag to remove this bonus.
-
-[-exp:kicheckbonus]
-Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each key item location checked earns you 12.5% more EXP from each battle.
 
 [-exp:crystalbonus]
 Under this flag, characters earn double EXP once you obtain the Crystal.
@@ -809,8 +961,23 @@ Normally, location of encounter does not increase EXP. Under this flag, encounte
 [-exp:maxlevelbonus]
 Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).
 
+[-exp:smallparty]
+Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.
+
 [@geometricexp]
 Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not "per slot" in battle.
+
+[-prng:random]
+To prevent softlocks, the randomized PRNG table will be such that all battle slots are available for random targetting.
+
+[-prng:mostlysingle]
+To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.
+
+[-miscbugfixes]
+This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, and incorrect victim history entries.
+
+[-vanilla:hobs]
+By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior.
 
 [-vanilla:growup]
 By default in Free Enterprise, the summons learned when Rydia ages are randomized. Set this flag to return to the vanilla summons learned at that time (Mist, Indra, Jinn, Shiva, and Titan).
@@ -851,11 +1018,17 @@ Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in
 [-z:vanillasprite]
 Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite.
 
-[-tweak:kainmagic] 
-Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black.
+[-vintage]
+Enables the April Fools Day 2019 mode.
 
-[-tweak:edwardheal] 
-Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available.
+[-pushbtojump]
+<ul>
+    <li>Enables the April Fools Day 2020 mode.</li>
+    <li>This flag does not affect the randomized placement of progression items.</li>
+    <li>Stability is absolutely not guaranteed.</li>
+    <li>Instability is absolutely guaranteed.</li>
+    <li>(If a door goes somewhere you don't expect it to go, it was probably a "return" door, which takes you back to your previous location.)</li>
+</ul>
 
 [@wacky]
 <ul>
@@ -871,7 +1044,28 @@ Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available.
 	<li>None of these modes can be used together: "3point", "afflicted", "battlescars", "menarepigs", "mirrormirror", "skywarriors", "unstackable", "zombies"</li>
 	<li>None of these modes can be used together: "afflicted", "friendlyfire"</li>
 	<li>None of these modes can be used together: "afflicted", "battlescars", "worthfighting", "zombies"</li>
-	<li>None of these modes can be used together: "darts", "musical"</li>
+	<li>None of these modes can be used together: "darts", "musical", "skillissue"</li>
 	<li>None of these modes can be used together: "3point", "tellahmaneuver"</li>	
 </ul>
 <p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>
+
+[-tweak:kainmagic] 
+Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets.
+
+[-tweak:harmspell]
+This flag replaces Sight with Harm, a damage-dealing holy spell slightly weaker than Virus.
+
+[-tweak:edwardheal] 
+Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available.
+
+[-tweak:darkpaladin]
+Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>
+
+[-tweak:cidairship]
+Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon.
+
+[-tweak:twinmeteo]
+Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the casting twins have a combined level of 70 or greater, then W.Meteo and self-target Stone are also possible options. W.Meteo is about half as likely as Comet, and Stone is half as likely as W.Meteo (with a corresponding reduction to Flare's chances).
+
+[-tweak:chocobosummon]
+The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there).

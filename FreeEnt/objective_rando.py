@@ -4,11 +4,13 @@ from .errors import *
 from . import util
 from .spoilers import SpoilerRow
 from . import character_rando
+from .core_rando import STARTING_ITEM_MAP
 
 MODES = {
     'Omode:classicforge'  : ['quest_forge'],
     'Omode:classicgiant'  : ['quest_giant'],
     'Omode:fiends'        : ['boss_milon', 'boss_milonz', 'boss_kainazzo', 'boss_valvalis', 'boss_rubicant', 'boss_elements'],
+    'Omode:external'      : ['internal_external']
 }
 
 OBJECTIVE_SLUGS_TO_IDS = {}
@@ -125,6 +127,9 @@ def setup(env):
         if env.options.flags.get_suffix('Omode:dkmatter'):
             env.meta['required_treasures'].setdefault('#item.DkMatter', 0)
             env.meta['required_treasures']['#item.DkMatter'] += 45
+        
+        if env.options.flags.has('objective_mode_external'):
+            env.meta['objective_starter_kit'] = [( 'fe_EagleEye', [1] )]
 
         random_objective_only_characters = set()
         for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
@@ -153,6 +158,10 @@ def setup(env):
                 raise BuildError(f"Flags stipulate generating gated objective #{gated_objective_specifier+1}, but there are only {len(objective_ids)} custom objectives")
             else:
                 env.meta['gated_objective_reward'] = target_objective['reward']
+                starting_key_items = env.options.flags.get_list(rf'^Kstart:')
+                for key_item in starting_key_items:
+                    if STARTING_ITEM_MAP.get(key_item,'zonk') == env.meta['gated_objective_reward']:
+                        raise BuildError(f"The starting item cannot also be the gated objective reward.")
                 env.meta['has_gated_objective'] = True
                 env.meta['gated_objective_id'] = target_objective_id                
             env.add_substitution('gated objective id', f'{target_objective_id:02X}')
@@ -453,6 +462,13 @@ def apply(env):
             text = text.replace('%t', 'items' if ki_count > 1 else 'item' )
 
         lines = _split_lines(text)
+        # add key to gated objective, add crystals to hard-required objectives;
+        # note that this step happens after the split/sanity check, so if a line is too long
+        # the text will overflow onto e.g. the tracker screen (capped at 24 chars per line).
+        # the pre-game screen has no border, so it gets an extra character, and the textbox 
+        # upon completion can have 26+ characters per line.
+        # so far, the only problematic objective for the tracker is Break the Dark Elf's spell
+        # with the TwinHarp.
         if env.meta['has_gated_objective'] and objective_id == env.meta['gated_objective_id']:
             lines[-1] = lines[-1] + ' [key]'
         elif objective_id in hard_required_objective_ids:
@@ -467,7 +483,12 @@ def apply(env):
 
         for j,line in enumerate(lines):
             addr = 0x23C000 + (i * 0x40) + (j * 0x20)          
-            env.add_binary(BusAddress(addr), [len(line)], as_script=True)            
+            if '[key]' in line:
+                env.add_binary(BusAddress(addr), [len(line)-4], as_script=True)
+            elif '[crystal]' in line:
+                env.add_binary(BusAddress(addr), [len(line)-8], as_script=True)
+            else:
+                env.add_binary(BusAddress(addr), [len(line)], as_script=True)            
             encoded_line = line.replace('(', '[$cc]').replace(')', '[$cd]')            
             env.add_script(f'text(${addr + 1:06X} bus) {{{encoded_line}}}')
 
@@ -508,12 +529,16 @@ def apply(env):
             request_text = f"Hi, I'm Kory! Could you\ndo me a favor and bring\nme {dkmatter_count} DkMatters?\n\nThere are 45 of them\nscattered in chests\nall across the world\nand the moon!\nBut I only need {dkmatter_count}.\nThanks!"
             env.add_substitution('kory dkmatter request', request_text) 
         env.add_file('scripts/dark_matter_hunt.f4c')
+        
     if OBJECTIVE_SLUGS_TO_IDS['internal_goldhunter'] in objective_ids:
         target_gold = gold_hunt_count * 1000
         target_bin = [((target_gold >> (i * 8)) & 0xFF) for i in range(4)]
         env.add_binary(BusAddress(0x21fa06), target_bin,  as_script=True)
         env.add_file('scripts/gold_hunt.f4c')
         env.add_script('text(map #AstroTower message 7) {\nHi, I\'m Tory! Could you \ndo me a favor and get me\n'+gold_hunt_text+' GP? \n\nI\'m trying to buy one of \nthose fancy airships...}')
+    
+    if OBJECTIVE_SLUGS_TO_IDS['internal_external'] in objective_ids:
+        env.add_file('scripts/external_objective.f4c')
 
     if OBJECTIVE_SLUGS_TO_IDS['internal_ki'] in objective_ids:
         env.add_toggle('ki_objective')

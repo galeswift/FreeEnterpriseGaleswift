@@ -1,0 +1,102 @@
+// Add functionality for a third spellset for FuSoYa
+
+// set the constant for Fu's Omni spellset, to improve code readability
+consts(spellset) {
+    $0e     FusoyaOmni
+}
+
+// Actually give Fu that spellset
+patch($13fe06 bus) { 0E }
+patch($14ffcb bus) { 0E }
+
+// rename $19 to be "Omni", since Fu will not use Regen/Bless now
+// (technically this just also associates #Omni to $19)
+consts(command)
+{
+    $19     Omni
+}
+
+// Add the menu data for "Omni" at the end of Bank 01,
+// right before the Menu Kit extra code
+patch($01fff0 bus) { F0 01 50 68 69 64 00 }
+
+// Add a check to ensure the game actually reads
+// the Omni data instead of Call in the menu
+// similar to CharEx__MenuSpells_NinjaCheck
+msfpatch {
+    .addr $01afa2
+        jml $=Fusoya__MenuSpells_OmniCheck
+        nop
+
+    .new 
+    Fusoya__MenuSpells_OmniCheck:
+        // first get the job value, like in NinjaCheck
+        // but we need to mimic $019007 because we can't
+        // jsl to it (no Bank01LongCall functionality)
+        lda $01e8
+        and #$0f
+        asl a
+        sta $43
+        ldx $43
+        rep #$20
+        .mx 0x00
+        lda $0fc625,x
+        tax
+        sep #$20
+        .mx 0x20
+
+        // by default, load Call
+        ldy #$b1fc
+        // now check for FuSoYa
+        lda $0001,x
+        and #$0f
+        cmp #$0d
+        bne $+NotOmni
+        ldy #$fff0
+    %NotOmni:
+        jml $01afaa
+}
+
+// Replace battle command name data for "Regen" with "Omni" in Bank 0F
+patch($0fa843 bus) { 50 68 69 64 FF }
+
+// Make the $19 command redirect to #Call (like #Ninja does)
+msfpatch {
+    .addr $02b9c1
+        jml $=NinjaOmni__CommandRedirect
+
+    .new
+    NinjaOmni__CommandRedirect:
+        // first do the displaced Ninja check
+        cmp #$18
+        bne $+CheckOmni
+        jml $02ba29
+    %CheckOmni:
+        cmp #$19
+        bne $+Done
+        jml $02ba36
+    %Done: 
+        jml $02b9c5
+}
+
+// for completeness, correct the command entry flag data
+// for $19 (was $28, should be $00)
+patch($13fddc bus) { 00 }
+
+// remove the pointer to execute_bless in bank 03,
+// to match other spell commands
+patch($03b3ae bus) { 00 00 }
+
+// if not j-abilities, add the $19 command
+// with j-abilities, we already have it
+// %flag japanese_abilities off%
+actor(#Fusoya) {
+    commands {
+        #Fight
+        #White
+        #Black
+        #Omni
+        #Item
+    }
+}
+// %end%

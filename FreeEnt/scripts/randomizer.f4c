@@ -95,3 +95,9 @@ patch($21f0fe bus) {
     0E
     // %end%
 }
+
+patch($21f100 bus) {
+    // %randomizer boss count%
+    22
+    // %end%
+}

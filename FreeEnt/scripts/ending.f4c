@@ -270,6 +270,10 @@ msfpatch {
         bne $03
         jmp $_Ending_TextCodes_Stats_MaxTreasures
 
+        cmp #$08
+        bne $03
+        jmp $_Ending_TextCodes_Stats_MaxBosses
+
         jmp $_Ending_TextCodes_Return
 
     Ending_TextCodes_Number_TwoDigitFromA:
@@ -443,6 +447,11 @@ msfpatch {
         jsr $_Ending_TextCodes_Number_TwoDigitFromA
         jmp $_Ending_TextCodes_Return
 
+    Ending_TextCodes_Stats_MaxBosses:
+        lda $21f100  // [hardcoded]
+        stz $3e  // erase leading zeroes
+        jsr $_Ending_TextCodes_Number_TwoDigitFromA
+        jmp $_Ending_TextCodes_Return
 
     Ending_TextCodes_Stats_EndTime:
         // get hours
@@ -569,7 +578,7 @@ text($21d500 bus) {
  Treasures:~~[$03][$02]/[$03][$07]
 
 
- Bosses:~~~~~~[$03][$03]/ 34
+ Bosses:~~~~~~[$03][$03]/ [$03][$08]
 
 
 

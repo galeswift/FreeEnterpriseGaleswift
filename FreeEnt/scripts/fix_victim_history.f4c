@@ -1,0 +1,23 @@
+// When you throw ThorRages and whatnot on monsters that
+// change their scripting if the last action was something
+// specific, the game fails to correctly update the monster
+// victim history, so that they do not react or change
+// script correctly unless they are the lowest-slot enemy
+// or you only target one monster. This code allows 
+// multi-target spells or items to "correctly" trigger 
+// those reactions/scripts.
+
+// The bug was putting a stz before the end of a loop, instead
+// of after the loop, so the code just gets rewritten a bit.
+
+msfpatch {
+    .addr $03b2a4
+        asl $a9
+        bcc $35 // instead of $38
+
+    .addr $03b2dd
+        inx
+        cpx #$0008
+        bne $c1 // instead of $be
+        stz $3600
+}

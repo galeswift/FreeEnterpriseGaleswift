@@ -233,52 +233,6 @@ msfpatch {
 }
 
 msfpatch {
-    // multiplies a 3-byte integer in $393d,$393e,$df by 9 and divides by 10,
-    // a number of times depending on the value in the Y register (Y-1 times).
-    // the result is in $393d,#393e,$df
-    Util__BattleGeometric__Mod:
-    %LoopStart:
-        cpy #$0002
-        bcc $+DoneMultiplying
-
-        lda #$09
-        sta $e1
-        sta $393f
-        stz $3940
-        jsr $_Util__BattleMultiply3941
-        jsr $_Util__BattleMultiplyE3
-        // the result of multiplying a 20-bit number by less than 16 is at most 24-bit
-        lda $e3
-        adc $3943
-        // now we set up a division in $3945-3948 for the top two bytes
-        sta $3946
-        lda $3942
-        sta $3945
-        lda #$0a
-        sta $3947
-        stz $3948
-        jsr $_Util__BattleDivide3949
-        // now we put the result for the top two bytes back
-        lda $394a
-        sta $df
-        lda $3949
-        sta $393e
-        // remainder is in $394b, make sure that gets included 
-        lda $394b
-        sta $3946
-        lda $3941
-        sta $3945
-        jsr $_Util__BattleDivide3949
-        lda $3949
-        sta $393d
-
-        dey
-        bra $-LoopStart
-    % DoneMultiplying:
-        rts
-}
-
-msfpatch {
     // replication of 038489 used for battle hacking
     Util__CalcBattleOffsets:
         sta $352f

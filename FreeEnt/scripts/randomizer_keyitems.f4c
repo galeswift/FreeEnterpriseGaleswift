@@ -4,8 +4,13 @@ consts(item) {
     $FC     fe_Hook
 }
 
+// %flag starting_underground off%
 text(item name #fe_Hook) {Hook}
-
+// %end%
+// %flag starting_underground on%
+// repurpose the Hook to act like the Drill
+text(item name #fe_Hook) {Drill}
+// %end%
 
 //-------------------------------------------------------------------
 // make PinkPuffs just directly drop Adamant Armor
@@ -52,7 +57,12 @@ msfpatch {
 
     KeyItemEx__KeyItemFlags:
         [[
+        // %flag starting_underground on%
+        FC 3D   // drill
+        // %end%
+        // %flag starting_underground off%
         FC 36   // hook
+        // %end%
         F5 60   // dark crystal
         F1 61   // earth crystal
         EE 63   // package
@@ -201,6 +211,10 @@ msfpatch {
         beq $+Shop__UnsellableItemCheck_Unsellable
         cmp #$c8  // Zeromus crystal
         beq $+Shop__UnsellableItemCheck_Unsellable
+        // %flag objective_mode_external on%
+        cmp #$e4  // EagleEye, used for objective purposes
+        beq $+Shop__UnsellableItemCheck_Unsellable
+        // %end%
 
         cmp #$ec  // Pass
         beq $+Shop__UnsellableItemCheck_PassCheck

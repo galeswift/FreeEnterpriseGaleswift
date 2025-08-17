@@ -650,7 +650,7 @@ order,area,map,index,memo,type,qual,fav,text,notes
 806,,#DwarfCastleThroneRoom,0x03,,unused,,,,
 807,DwarfCastle,#DwarfCastleThroneRoom,0x04,luca has something,event,,,,
 808,,#DwarfCastleThroneRoom,0x05,,unused,,,,
-809,,#DwarfCastleThroneRoom,0x06,,unused,,,,
+809,DwarfCastle,#DwarfCastleThroneRoom,0x06,let's go (underground),event,,,,
 810,,#DwarfCastleThroneRoom,0x07,,unused,,,,
 811,,#DwarfCastleThroneRoom,0x08,,unused,,,,
 812,,#DwarfCastleThroneRoom,0x09,,unused,,,,

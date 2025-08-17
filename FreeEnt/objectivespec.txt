@@ -73,7 +73,7 @@
     quest_curefever                          #item.SandRuby      Cure the fever with the SandRuby
    #find_legend_sword                        #item.Legend      Find the Legend Sword
     quest_unlocksewer                        #item.Baron      Unlock the sewer with the Baron Key
-    quest_music                              #item.TwinHarp      Break the Dark Elf's spell with the TwinHarp
+    quest_music                              #item.TwinHarp      Break Dark Elf's spell with the TwinHarp
     quest_toroiatreasury                     #item.EarthCrystal      Open the Toroia treasury with the Earth Crystal
     quest_magma                              #item.Magma      Drop the Magma Key into the Agart well
     quest_supercannon                        #item.Tower      Destroy the Super Cannon
@@ -88,8 +88,9 @@
    #find_spoon                               #item.Spoon      Find the Spoon
     quest_tradepink                          #item.Pink      Trade away the Pink Tail
     quest_pass                               #item.Pass      Unlock the Pass door in Toroia    
-    internal_ki                              none       Obtain %d key %t
+    internal_ki                              none      Obtain %d key %t
     internal_bosscollector                   none      Defeat %d %t
     internal_goldhunter                      none      Bring %d GP to Tory in Agart
     internal_dkmatter                        none      Bring DkMatters to Kory in Agart
+    internal_external                        none      Complete external goal and use EagleEye
 

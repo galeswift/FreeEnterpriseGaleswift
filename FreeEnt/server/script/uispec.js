@@ -30,7 +30,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@bosscollector",
                 "title": "Boss Collector",
-                "description": "Find and defeat the specified number of bosses to complete this objective. <a href=\"/fork_info#bosscollector\" class=\"nf nf-md-information\"></a>",
+                "description": "Find and defeat the specified number of bosses to complete this objective.",
                 "fork": true,
                 "subcontrols": [
                   {
@@ -105,13 +105,12 @@ var FLAG_UISPEC = [
               {
                 "flag": "@goldhunter",
                 "title": "Gold Hunter",
-                "description": "Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective. <a href=\"/fork_info#goldhunter\" class=\"nf nf-md-information\"></a>",
+                "description": "Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective.",
                 "fork": true,
                 "subcontrols": [
                   {
                     "flag": "@anon2",
                     "title": "Set type of gold hunt",
-                    "important": true,
                     "type": "select",
                     "subcontrols": [
                       {
@@ -141,6 +140,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon3",
                 "title": "Dark Matter Hunt",
+                "fork": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -193,6 +193,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon4",
                 "title": "Key Item Hunt",
+                "fork": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -281,6 +282,12 @@ var FLAG_UISPEC = [
                     "description": "Obtain 17 key items to complete this objective. Incompatible with <em>Owin:crystal</em>."
                   }
                 ]
+              },
+              {
+                "flag": "Omode:external",
+                "title": "External Objective",
+                "description": "Use the EagleEye provided to you at the start of the game to complete this objective. This objective is intended for external objectives that cannot be referenced in-game, such as bingo goals or meta objectives.",
+                "fork": true
               }
             ]
           },
@@ -592,7 +599,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O1:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O1:quest_toroiatreasury",
@@ -943,7 +950,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O2:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O2:quest_toroiatreasury",
@@ -1294,7 +1301,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O3:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O3:quest_toroiatreasury",
@@ -1645,7 +1652,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O4:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O4:quest_toroiatreasury",
@@ -1996,7 +2003,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O5:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O5:quest_toroiatreasury",
@@ -2347,7 +2354,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O6:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O6:quest_toroiatreasury",
@@ -2698,7 +2705,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O7:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O7:quest_toroiatreasury",
@@ -3049,7 +3056,7 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "O8:quest_music",
-                    "title": "Break the Dark Elf's spell with the TwinHarp"
+                    "title": "Break Dark Elf's spell with the TwinHarp"
                   },
                   {
                     "flag": "O8:quest_toroiatreasury",
@@ -3235,7 +3242,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Orandompool2",
             "title": "Random objectives pool #2",
-            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href=\"/fork_info#objective-pools\" class=\"nf nf-md-information\"></a>",
+            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types.",
             "fork": true,
             "subcontrols": [
               {
@@ -3369,7 +3376,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Orandompool3",
             "title": "Random objectives pool #3",
-            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types. <a href=\"/fork_info#objective-pools\" class=\"nf nf-md-information\"></a>",
+            "description": "An additinal pool of random objectives, enabling both more random objectives and different allowed types.",
             "fork": true,
             "subcontrols": [
               {
@@ -3554,7 +3561,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Ogated",
             "title": "Gated Objective",
-            "description": "A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set \"Complete the Tower of Zot\" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives. <a href=\"/fork_info#objectives-gated\" class=\"nf nf-md-information\"></a>",
+            "description": "A gated objective means that you will only get the reward for that objective upon completion of all required other objectives.  So if you set \"Complete the Tower of Zot\" as a gated objective, you will be granted the earth crystal automatically upon completion of the other objectives.",
             "fork": true,
             "subcontrols": [
               {
@@ -3641,7 +3648,7 @@ var FLAG_UISPEC = [
           {
             "flag": "@Ohardreq",
             "title": "Hard Required Objectives",
-            "description": "Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4. <a href=\"/fork_info#objectives-required\" class=\"nf nf-md-information\"></a>",
+            "description": "Hard required objectives are a # of objectives that must be completed in order to consider all objectives completed.  So if you require 4 out of 5 objectives, and 1 hard required, the hard objective must be included as part of the 4.",
             "compact": true,
             "fork": true,
             "subcontrols": [
@@ -3758,7 +3765,6 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon26",
                 "title": "Replace free key item in Toroia",
-                "hard": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -3771,13 +3777,15 @@ var FLAG_UISPEC = [
                     "flag": "Knofree:dwarf",
                     "title": "Move key item from Toroia to Dwarf Castle",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from talking to Cid in the Dwarf Castle hospital.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "Knofree:package",
                     "title": "Rydia's mom requires burning Mist to appear",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from Rydia's mom in Mist, who will appear after you have used the Package to burn Mist Village.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   }
                 ]
               }
@@ -3815,11 +3823,13 @@ var FLAG_UISPEC = [
                     "flag": "Kmiab:all",
                     "title": "All miabs (regardless of Kmoon or Kunsafe)",
                     "description": "All monster-in-a-box chests are included, regardless of any Kmoon or Kunsafe settings.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "@anon28",
                     "title": "Specific miab subgroupings",
+                    "fork": true,
                     "type": "select",
                     "subcontrols": [
                       {
@@ -3848,18 +3858,19 @@ var FLAG_UISPEC = [
                 "flag": "Kforge",
                 "title": "Forge provides a key item",
                 "description": "The reward for turning in the Legend Sword and Adamant to Kokkol is a key item. The vanilla Excalibur is added to the key items rewards pool. If the hero challenge is enabled, this overrides the normal <em>Chero</em> supersmith reward.",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "Kpink",
                 "title": "Pink Tail trades for a key item",
                 "description": "The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless adamant armors are disabled via <em>-noadamants</em>.",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
-                "flag": "@anon29",
+                "flag": "@anon26",
                 "title": "Replace free key item in Toroia",
-                "hard": true,
                 "type": "select",
                 "subcontrols": [
                   {
@@ -3872,18 +3883,20 @@ var FLAG_UISPEC = [
                     "flag": "Knofree:dwarf",
                     "title": "Move key item from Toroia to Dwarf Castle",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from talking to Cid in the Dwarf Castle hospital.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   },
                   {
                     "flag": "Knofree:package",
                     "title": "Rydia's mom requires burning Mist to appear",
                     "description": "Edward in Toroia will not give you a key item. Instead, a key item may be earned from Rydia's mom in Mist, who will appear after you have used the Package to burn Mist Village.",
-                    "hard": true
+                    "hard": true,
+                    "fork": true
                   }
                 ]
               },
               {
-                "flag": "@anon30",
+                "flag": "@anon29",
                 "title": "Underworld access",
                 "type": "select",
                 "subcontrols": [
@@ -3910,12 +3923,26 @@ var FLAG_UISPEC = [
                 "flag": "Kunsafer",
                 "title": "Force underground access via the moon",
                 "description": "As Kunsafe, but you will be <em>required</em> to obtain moon access prior to obtaining underground access.",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
-                "flag": "Klatedark",
-                "title": "Force Darkness Crystal to be gated by underground access",
-                "description": "The Darkness Crystal will be gated by underground access."
+                "flag": "@anon30",
+                "title": "Gated Darkness options",
+                "fork": true,
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Klatedark",
+                    "title": "Force Darkness Crystal to be gated by underground access",
+                    "description": "The Darkness Crystal will be gated by underground access."
+                  },
+                  {
+                    "flag": "Kunreliabledark",
+                    "title": "Encourage the Darkness Crystal to be gated by underground access",
+                    "description": "When <em>Kunsafe</em> and <em>Kunsafer</em> are not on, force the Darkness Crystal to be gated by underground access 25% of the time."
+                  }
+                ]
               },
               {
                 "flag": "@anon31",
@@ -3994,13 +4021,19 @@ var FLAG_UISPEC = [
                   {
                     "flag": "Kstart:crystal",
                     "title": "You start with the Crystal"
+                  },
+                  {
+                    "flag": "Kstart:zonk",
+                    "title": "You do not start with a key item",
+                    "description": "This flag takes priority over having the Spoon and/or the Pink Tail (in absence of Kpink), meaning this flag will remove one of those items if necessary."
                   }
                 ]
               },
               {
                 "flag": "Kunweighted",
                 "title": "Key items will be placed uniformly at random",
-                "description": "Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting."
+                "description": "Normally, key-item-enabled locations outside of the <em>Kmain</em> checks are weighted against in terms of placement. This flag removes that weighting.",
+                "fork": true
               }
             ]
           }
@@ -4053,7 +4086,6 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon33",
                 "title": "Limit number of distinct characters",
-                "hard": true,
                 "null": true,
                 "type": "select",
                 "subcontrols": [
@@ -4299,7 +4331,6 @@ var FLAG_UISPEC = [
               {
                 "flag": "@anon37",
                 "title": "Limit number of distinct characters",
-                "hard": true,
                 "null": true,
                 "type": "select",
                 "subcontrols": [
@@ -4616,6 +4647,7 @@ var FLAG_UISPEC = [
             "flag": "@Cthrifttier",
             "title": "Characters start with a full set of random gear",
             "description": "Characters start with a full set of gear: weapon(s), possibly a shield, and head/body/arms, all from at most the tier specified. (Duplicate characters will have the same starting gear. Cursed Rings are excluded.)",
+            "fork": true,
             "type": "select",
             "subcontrols": [
               {
@@ -4647,20 +4679,46 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "@anon44",
+        "title": "Spell options",
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Cspells:j",
+            "title": "Characters learn J-spells",
+            "description": "White mages will learn Armor, Shell, and Dispel. All mages learn spells at the levels they would in FF4j."
+          },
+          {
+            "flag": "Cspells:anti",
+            "title": "Characters learn US spells, with altered progression.",
+            "description": "Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.",
+            "fork": true
+          }
+        ]
+      },
+      {
+        "flag": "Cj:abilities",
+        "title": "Characters have J-commands",
+        "description": "Characters retain the battle commands from FF4j that were removed in FF4us."
+      },
+      {
+        "flag": "@anon45",
         "title": "Limit maximum party size",
         "type": "select",
         "subcontrols": [
           {
             "flag": "Cparty:1",
-            "title": "Maximum party size 1"
+            "title": "Maximum party size 1",
+            "hard": true
           },
           {
             "flag": "Cparty:2",
-            "title": "Maximum party size 2"
+            "title": "Maximum party size 2",
+            "hard": true
           },
           {
             "flag": "Cparty:3",
-            "title": "Maximum party size 3"
+            "title": "Maximum party size 3",
+            "hard": true
           },
           {
             "flag": "Cparty:4",
@@ -4669,7 +4727,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon45",
+        "flag": "@anon46",
         "title": "Permadeath options",
         "type": "select",
         "subcontrols": [
@@ -4684,11 +4742,24 @@ var FLAG_UISPEC = [
             "title": "Permadeader",
             "description": "Party members that are swoon or stone at the end of any battle are permanently removed from the game. (This includes the cutscene/story battles that you are normally allowed to lose; now you will game over if your party wipes during these battles.)",
             "hard": true
+          },
+          {
+            "flag": "Cmostlydead",
+            "title": "Characters reset to base level",
+            "description": "Party members that are swoon at the end of any battle are removed from your party, reset back to base level and equipment, and placed in the Tower of Wishes. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Cbrieflydead",
+            "title": "Characters go to the Tower of Wishes",
+            "description": "Party members that are swoon at the end of any battle are removed from your party and placed in the Tower of Wishes, in exactly the same state they left your party. (Does not apply to cutscene/story battles you are allowed to lose, as under <em>Cpermadeath</em>.)",
+            "fork": true
           }
         ]
       },
       {
-        "flag": "@anon46",
+        "flag": "@anon47",
         "title": "Hero Options",
         "type": "select",
         "subcontrols": [
@@ -4701,16 +4772,15 @@ var FLAG_UISPEC = [
           {
             "flag": "Csuperhero",
             "title": "Superhero challenge",
-            "description": "<ul><li>This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back. <a href=\"/fork_info#superhero\" class=\"nf nf-md-information\"></a></li></ul>",
+            "description": "<ul><li>This flag acts the same as Chero, except your starting character will obtain incredible stat boosts, until finding the earth crystal (their one weakness).  Once returning the crystal to Zot, you gain your powers back.</li></ul>",
             "hard": true,
             "fork": true
           }
         ]
       },
       {
-        "flag": "@anon47",
+        "flag": "@anon48",
         "title": "Difficulty modifiers",
-        "null": true,
         "subcontrols": [
           {
             "flag": "Cnofree",
@@ -4727,65 +4797,46 @@ var FLAG_UISPEC = [
           {
             "flag": "Cnopartner",
             "title": "No starting partner",
-            "description": "Your starting partner will not join your party. <a href=\"/fork_info#nopartner\" class=\"nf nf-md-information\"></a>",
+            "description": "Your starting partner will not join your party.",
             "hard": true,
             "fork": true
           }
         ]
       },
       {
-        "flag": "@anon48",
+        "flag": "@anon49",
         "title": "Characters in chests",
-        "null": true,
         "fork": true,
         "subcontrols": [
           {
             "flag": "Ctreasure:free",
             "title": "Free characters are found in treasure chests instead",
-            "description": "Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href=\"/fork_info#ctreasure-free\" class=\"nf nf-md-information\"></a>",
+            "description": "Free characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.",
             "hard": true
           },
           {
             "flag": "Ctreasure:earned",
             "title": "Earned characters are found in treasure chests instead",
-            "description": "Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs. <a href=\"/fork_info#ctreasure-earned\" class=\"nf nf-md-information\"></a>",
+            "description": "Earned characters will instead be found in treasure chests in the overworld. Restricted characters will be found in MIABs.",
             "hard": true
           },
           {
             "flag": "Ctreasure:relaxed",
             "title": "Restricted characters in all chests",
-            "description": "Restricted characters will be found in all chests.  No characters will be placed in MIAB chests. <a href=\"/fork_info#ctreasure-relaxed\" class=\"nf nf-md-information\"></a>",
+            "description": "Restricted characters will be found in all chests.  No characters will be placed in MIAB chests.",
             "hard": true
           },
           {
             "flag": "Ctreasure:unsafe",
             "title": "Unsafe characters in chests",
-            "description": "Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld. <a href=\"/fork_info#ctreasure-unsafe\" class=\"nf nf-md-information\"></a>",
+            "description": "Free characters will normally all be placed in treasures in the overworld only.  With this flag however, characters will be distributed throughout the underworld,overworld and moon.  This means you may end up with no characters in chests in the overworld.",
             "hard": true
-          }
-        ]
-      },
-      {
-        "flag": "@anon49",
-        "title": "J-commands and spells",
-        "null": true,
-        "subcontrols": [
-          {
-            "flag": "Cj:spells",
-            "title": "Characters learn J-spells",
-            "description": "White mages will learn Armor, Shell, and Dispel. All mages learn spells at the levels they would in FF4j."
-          },
-          {
-            "flag": "Cj:abilities",
-            "title": "Characters have J-commands",
-            "description": "Characters retain the battle commands from FF4j that were removed in FF4us."
           }
         ]
       },
       {
         "flag": "@anon50",
         "title": "Character Join Options",
-        "null": true,
         "subcontrols": [
           {
             "flag": "Cnodupes",
@@ -4819,7 +4870,7 @@ var FLAG_UISPEC = [
       {
         "flag": "Cpaladin",
         "title": "Cecil starts the game as a paladin",
-        "description": "Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check. <a href=\"/fork_info#cpaladin\" class=\"nf nf-md-information\"></a>",
+        "description": "Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check.",
         "fork": true
       }
     ]
@@ -4842,6 +4893,7 @@ var FLAG_UISPEC = [
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -4914,6 +4966,7 @@ var FLAG_UISPEC = [
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -4986,6 +5039,7 @@ var FLAG_UISPEC = [
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5107,31 +5161,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5141,11 +5183,13 @@ var FLAG_UISPEC = [
             "flag": "Tvanillaish",
             "title": "Vanilla-ish chest randomization",
             "description": "Uses location-based weighting, with item quality approximately that of the vanilla game.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5267,31 +5311,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5306,6 +5338,7 @@ var FLAG_UISPEC = [
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5427,31 +5460,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5461,11 +5482,13 @@ var FLAG_UISPEC = [
             "flag": "Tsemipro",
             "title": "Semi-pro chest randomization",
             "description": "Uses location-based weighting, with item quality between that provided by pro and wildish.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5587,31 +5610,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5626,6 +5637,7 @@ var FLAG_UISPEC = [
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5747,31 +5759,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
-                  },
-                  {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5786,6 +5786,7 @@ var FLAG_UISPEC = [
                 "flag": "@anon52",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
+                "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tsparsey:underground",
@@ -5907,31 +5908,169 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at minimum"
+                    "title": "Chests contain tier 2 items at worst"
                   },
                   {
                     "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at minimum"
+                    "title": "Chests contain tier 3 items at worst"
                   },
                   {
                     "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at minimum"
+                    "title": "Chests contain tier 4 items at worst"
                   },
                   {
                     "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at minimum"
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Tstandardish",
+            "title": "Standard-ish chest randomization",
+            "description": "A weighted treasure distribution that boosts middle tiers more than high tiers.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon52",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
                   },
                   {
-                    "flag": "Tmintier:6",
-                    "title": "Chests contain tier 6 items at minimum"
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
                   },
                   {
-                    "flag": "Tmintier:7",
-                    "title": "Chests contain tier 7 items at minimum"
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon53",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
                   },
                   {
-                    "flag": "Tmintier:8",
-                    "title": "Chests contain tier 8 items"
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon54",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
                   }
                 ]
               }
@@ -5951,7 +6090,14 @@ var FLAG_UISPEC = [
       {
         "flag": "Tplayable",
         "title": "Chests contain usable items",
-        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed."
+        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+        "fork": true
+      },
+      {
+        "flag": "Tadjmiabareas",
+        "title": "Areas with MIABs will have slightly worse items",
+        "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+        "fork": true
       },
       {
         "flag": "@anon57",
@@ -6006,7 +6152,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6025,7 +6172,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6033,6 +6181,7 @@ var FLAG_UISPEC = [
             "flag": "Swildish",
             "title": "Wild-ish shop randomization",
             "description": "A basic randomization, allowing slightly stronger items than the standard randomization to place in shops.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "Sunsafe",
@@ -6044,7 +6193,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6063,7 +6213,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6071,6 +6222,7 @@ var FLAG_UISPEC = [
             "flag": "Svanillaish",
             "title": "Vanilla-ish shop randomization",
             "description": "Shops will contain items of similar quality and quantity as their vanilla counterparts.",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "Sunsafe",
@@ -6082,7 +6234,8 @@ var FLAG_UISPEC = [
                 "flag": "Ssingles",
                 "title": "Shops sell only a single item",
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -6095,7 +6248,8 @@ var FLAG_UISPEC = [
             "flag": "Ssame",
             "title": "Shops sell only one type of item",
             "description": "Shops only sell a single item, and all shops in the game are the same.  The item chosen uses the same rules as Swild.",
-            "hard": true
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "Sempty",
@@ -6114,8 +6268,15 @@ var FLAG_UISPEC = [
             "title": "Shop items are free"
           },
           {
-            "flag": "Smixed",
-            "title": "Shop item prices are randomized"
+            "flag": "Smixed:stirred",
+            "title": "Shop item prices are shuffled within normal items",
+            "fork": true
+          },
+          {
+            "flag": "Smixed:shaken",
+            "title": "Shop item prices are fully shuffled within all items",
+            "description": "This shuffle includes key items and other excluded items that have 0 GP as their buy/sell price.",
+            "fork": true
           }
         ]
       },
@@ -6183,6 +6344,18 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "Splayable",
+        "title": "Shops contain usable items",
+        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+        "fork": true
+      },
+      {
+        "flag": "Sethersell",
+        "title": "Ethers and Elixirs sell like other items",
+        "description": "Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.",
+        "fork": true
+      },
+      {
         "flag": "@anon62",
         "title": "Remove Items",
         "compact": true,
@@ -6201,7 +6374,8 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "Sno:life",
-            "title": "No Life potions in shops"
+            "title": "No Life potions in shops",
+            "hard": true
           },
           {
             "flag": "Sno:vampires",
@@ -6547,9 +6721,29 @@ var FLAG_UISPEC = [
         "description": "Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area."
       },
       {
+        "flag": "@anon66",
+        "title": "Alternate boss stats/scripts",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Bstats:j",
+            "title": "FF4j boss stats and scripts",
+            "description": "Bosses (including Zeromus) have FF4j scripts, the Asura summon casts one of Armor/Cure3/Life like the boss does, and boss location stats scale with FF4j except the Karate slot's HP (scaled to 8000 instead of 62000).",
+            "hard": true
+          },
+          {
+            "flag": "Bstats:et",
+            "title": "FF4 Easy Type boss stats and scripts",
+            "description": "Bosses (including Zeromus) have FF4ET scripts and boss location stats scale with FF4ET."
+          }
+        ]
+      },
+      {
         "flag": "@Brestrict",
         "title": "Restrict required boss locations",
         "description": "Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "Brestrict:summon",
@@ -6582,7 +6776,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon66",
+        "flag": "@anon67",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -6604,13 +6798,21 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "Bwoahdin",
-        "title": "Replace Odin's first two Zantetsukens 1 and 2 with a random attack",
-        "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack."
+        "flag": "Bflatvern",
+        "title": "Wyvern will not scale spell power for Nuke",
+        "description": "In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the reflected Nukes and the counter MegaNuke did not get scaled, due to a typo in the code. This bug has been fixed, but this flag will restore the vanilla FE spell power for those attacks.",
+        "fork": true
       },
       {
-        "flag": "@anon67",
+        "flag": "Bwoahdin",
+        "title": "Replace Odin's first two Zantetsukens 1 and 2 with a random attack",
+        "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack.",
+        "fork": true
+      },
+      {
+        "flag": "@anon68",
         "title": "Change Golbez's behaviour",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "Bwhybez",
@@ -6623,6 +6825,33 @@ var FLAG_UISPEC = [
             "description": "Each of Shadow's and Golbez's spells are replaced individually. If <em>Bunsafe</em> is enabled, Golbez has access to more powerful spells."
           }
         ]
+      },
+      {
+        "flag": "Bspellpower",
+        "title": "All bosses gain scaled spell power",
+        "description": "Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "@anon69",
+        "title": "Remove certain boss slots",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Bremove:officer_slot",
+            "title": "Remove the Officer slot boss fight",
+            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.",
+            "fork": true
+          },
+          {
+            "flag": "Bremove:kingqueen_slot",
+            "title": "Remove the KQ Eblan slot boss fight",
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.",
+            "fork": true
+          }
+        ]
       }
     ]
   },
@@ -6630,16 +6859,11 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon68",
+        "flag": "@anon70",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
         "subcontrols": [
-          {
-            "flag": "Evanilla",
-            "title": "Original encounter rate",
-            "null": true
-          },
           {
             "flag": "Etoggle",
             "title": "Random encounters can be toggled",
@@ -6661,6 +6885,11 @@ var FLAG_UISPEC = [
                 "description": "Back attacks and \"Surprised!\" encounters will still occur, even when encounters are disabled via <em>Etoggle</em> or <em>Enoencounters</em>."
               }
             ]
+          },
+          {
+            "flag": "Evanilla",
+            "title": "Original encounter rate",
+            "null": true
           },
           {
             "flag": "Ereduce",
@@ -6703,7 +6932,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon69",
+        "flag": "@anon71",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6731,13 +6960,100 @@ var FLAG_UISPEC = [
       {
         "flag": "Enogp",
         "title": "No GP for random encounters",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "Enodmachin",
         "title": "Disable D.Machin encounters",
         "description": "The D.Machin in the Searcher encounter is replaced by a Horseman.",
-        "hard": true
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "Enomacgiant",
+        "title": "Disable MacGiant encounters",
+        "description": "The MacGiant in the Searcher encounter is replaced by a Machine.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "@anon72",
+        "title": "Change encounter tables",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Etable:shuffle7",
+            "title": "Shuffle non-rare encounters within group",
+            "description": "The seven non-rare encounters in each area (i.e. those encounters not obtainable via Siren) are shuffled."
+          },
+          {
+            "flag": "Etable:shuffle8",
+            "title": "Shuffle all encounters within group",
+            "description": "All encounters in each area are shuffled, so a Siren may pull a different formation than normal."
+          },
+          {
+            "flag": "Etable:relocatedish",
+            "title": "Shuffle encounter groups within large zones",
+            "description": "Encounter groups are shuffled amongst each other, within four zones: the overworld (no Hook route starting at Cave Eblana), the underworld, the moon (including LST), and the Hook route/Giant."
+          },
+          {
+            "flag": "Etable:relocated",
+            "title": "Shuffle encounter groups within map plane",
+            "description": "Encounter groups are shuffled amongst each other, based on the high byte of the formation IDs in those groups: the overworld (including the Giant and Hook route) and the underworld/moon."
+          },
+          {
+            "flag": "Etable:wildish",
+            "title": "Shuffle encounters within large zones",
+            "description": "Encounters are shuffled within four zones: the overworld (no Hook route starting at Cave Eblana), the underworld, the moon (including LST), and the Hook route/Giant."
+          },
+          {
+            "flag": "Etable:wild",
+            "title": "Shuffle encounters within map plane",
+            "description": "Encounters are shuffled within two groups, based on the high byte of the formation ID: the overworld (including the Giant and Hook route) and the underworld/moon."
+          },
+          {
+            "flag": "Etable:chaos",
+            "title": "Randomly assign encounters independently",
+            "description": "Encounters are randomly assigned to encounter groups independently, within the overworld (including the Giant and Hook route) and the underworld/moon separately."
+          },
+          {
+            "flag": "Etable:uniquelygood",
+            "title": "Each area has one hand-picked encounter",
+            "description": "Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "HARP OPTIONS",
+    "controls": [
+      {
+        "flag": "@anon73",
+        "title": "Harp randomization",
+        "important": true,
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Hrandom",
+            "title": "Edward plays a random song",
+            "description": "The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members."
+          },
+          {
+            "flag": "Hvanilla",
+            "title": "Edward plays the vanilla song",
+            "description": "The song that Edward plays during the TwinHarp cutscene and fight is vanilla.",
+            "null": true
+          },
+          {
+            "flag": "Hnone",
+            "title": "Edward plays nothing",
+            "description": "No music plays during the TwinHarp cutscene and fight."
+          }
+        ]
       }
     ]
   },
@@ -6786,66 +7102,87 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon70",
-        "title": "Doors Randomization Options",
+        "flag": "@anon74",
+        "title": "Warps Randomization Options",
         "type": "select",
         "subcontrols": [
           {
-            "flag": "-doorsrando:normal",
-            "title": "Doors Shuffle without Cross World",
-            "hard": true
+            "flag": "@doorsrando",
+            "title": "Randomize Doors",
+            "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "subcontrols": [
+              {
+                "flag": "@anon75",
+                "title": "Doors Randomization Options",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "-doorsrando:normal",
+                    "title": "Doors Shuffle without Cross World",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:gated",
+                    "title": "Underworld and Moon Doors shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:blueplanet",
+                    "title": "Overworld and Underworld Doors Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:why",
+                    "title": "Overworld and Moon Doors shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-doorsrando:all",
+                    "title": "All Doors shuffled",
+                    "hard": true
+                  }
+                ]
+              }
+            ]
           },
           {
-            "flag": "-doorsrando:gated",
-            "title": "Underworld and Moon Doors shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:blueplanet",
-            "title": "Overworld and Underworld Doors Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:why",
-            "title": "Overworld and Moon Doors shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-doorsrando:all",
-            "title": "All Doors shuffled",
-            "hard": true
-          }
-        ]
-      },
-      {
-        "flag": "@anon71",
-        "title": "Entrances Randomization Options",
-        "type": "select",
-        "subcontrols": [
-          {
-            "flag": "-entrancesrando:normal",
-            "title": "Entrances Shuffle without Cross World",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:gated",
-            "title": "Underworld and Moon Entrances Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:blueplanet",
-            "title": "Overworld and Underworld Entrances Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:why",
-            "title": "Overworld and Moon Entrances Shuffled",
-            "hard": true
-          },
-          {
-            "flag": "-entrancesrando:all",
-            "title": "All Entrances Shuffled",
-            "hard": true
+            "flag": "@entrancesrando",
+            "title": "Randomize Entrances",
+            "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "subcontrols": [
+              {
+                "flag": "@anon76",
+                "title": "Entrances Randomization Options",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "-entrancesrando:normal",
+                    "title": "Entrances Shuffle without Cross World",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:gated",
+                    "title": "Underworld and Moon Entrances Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:blueplanet",
+                    "title": "Overworld and Underworld Entrances Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:why",
+                    "title": "Overworld and Moon Entrances Shuffled",
+                    "hard": true
+                  },
+                  {
+                    "flag": "-entrancesrando:all",
+                    "title": "All Entrances Shuffled",
+                    "hard": true
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -6870,7 +7207,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon72",
+            "flag": "@anon77",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7002,27 +7339,38 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit:adamant",
                 "title": "Adamant kit",
-                "description": "An Adamant Armor."
+                "description": "An Adamant Armor.",
+                "fork": true
               },
               {
                 "flag": "-kit:cursed",
                 "title": "Cursed kit",
-                "description": "A Cursed Ring."
+                "description": "A Cursed Ring.",
+                "fork": true
               },
               {
                 "flag": "-kit:hero",
                 "title": "Hero kit",
-                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon."
+                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
               },
               {
                 "flag": "-kit:exit",
                 "title": "Exit kit",
-                "description": "5-10 Exits"
+                "description": "5-10 Exits.",
+                "fork": true
+              },
+              {
+                "flag": "-kit:egg",
+                "title": "Egg kit",
+                "description": "One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.",
+                "fork": true
               },
               {
                 "flag": "-kit:random",
@@ -7032,7 +7380,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon73",
+            "flag": "@anon78",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7164,27 +7512,38 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit2:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit2:adamant",
                 "title": "Adamant kit",
-                "description": "An Adamant Armor."
+                "description": "An Adamant Armor.",
+                "fork": true
               },
               {
                 "flag": "-kit2:cursed",
                 "title": "Cursed kit",
-                "description": "A Cursed Ring."
+                "description": "A Cursed Ring.",
+                "fork": true
               },
               {
                 "flag": "-kit2:hero",
                 "title": "Hero kit",
-                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon."
+                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
               },
               {
                 "flag": "-kit2:exit",
                 "title": "Exit kit",
-                "description": "5-10 Exits"
+                "description": "5-10 Exits.",
+                "fork": true
+              },
+              {
+                "flag": "-kit2:egg",
+                "title": "Egg kit",
+                "description": "One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.",
+                "fork": true
               },
               {
                 "flag": "-kit2:random",
@@ -7194,7 +7553,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon74",
+            "flag": "@anon79",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7326,26 +7685,37 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit3:atb",
                 "title": "ATB kit",
-                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions."
+                "description": "2-3 SilkWebs, 4-5 Hermes, 1 HrGlass1, and 3-4 Heal potions.",
+                "fork": true
               },
               {
                 "flag": "-kit3:adamant",
                 "title": "Adamant kit",
-                "description": "An Adamant Armor."
+                "description": "An Adamant Armor.",
+                "fork": true
               },
               {
                 "flag": "-kit3:cursed",
                 "title": "Cursed kit",
-                "description": "A Cursed Ring."
+                "description": "A Cursed Ring.",
+                "fork": true
               },
               {
                 "flag": "-kit3:hero",
                 "title": "Hero kit",
-                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon."
+                "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
               },
               {
                 "flag": "-kit3:exit",
-                "title": "Exit kit"
+                "title": "Exit kit",
+                "fork": true
+              },
+              {
+                "flag": "-kit3:egg",
+                "title": "Egg kit",
+                "description": "One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.",
+                "fork": true
               },
               {
                 "flag": "-kit3:random",
@@ -7373,12 +7743,14 @@ var FLAG_UISPEC = [
         "flag": "-monsterevade",
         "title": "Monsters get physical and magical evasion",
         "description": "Monsters will be able to evade both physical and magical attacks from your party based on their actual stats. (This change constitutes a significant damage reduction for many fights!)",
-        "hard": true
+        "hard": true,
+        "fork": true
       },
       {
         "flag": "-monsterflee",
         "title": "Monsters can flee from battle",
-        "description": "Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active."
+        "description": "Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active.",
+        "fork": true
       },
       {
         "flag": "@smithy",
@@ -7386,7 +7758,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon75",
+            "flag": "@anon80",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7404,45 +7776,227 @@ var FLAG_UISPEC = [
           {
             "flag": "-smith:playable",
             "title": "Kokkol's item will be usable",
-            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed."
+            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
+            "fork": true
+          },
+          {
+            "flag": "-smith:omni",
+            "title": "All characters can equip the FF4A weapon",
+            "description": "If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).",
+            "fork": true
           }
         ]
       },
       {
         "flag": "@fusoya",
-        "title": "Alternative FuSoYa challenges",
+        "title": "FuSoYa challenges",
         "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
+        "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon76",
-            "title": "Spell learning changes",
+            "flag": "@anon81",
+            "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
               {
+                "flag": "@normalfu",
+                "title": "Usual FuSoYa challenge",
+                "subcontrols": [
+                  {
+                    "flag": "@anon82",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon83",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
                 "flag": "-fusoya:vanilla",
                 "title": "Vanilla FuSoYa",
-                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset."
+                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon84",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:sequential_p",
                 "title": "Fixed spell order (Palom/Porom)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells."
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon82",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon83",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:sequential_r",
                 "title": "Fixed spell order (Rydia/Rosa)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit)."
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
+                "subcontrols": [
+                  {
+                    "flag": "@anon82",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon83",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:location",
                 "title": "Location-dependent spells",
-                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells."
+                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon85",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon86",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "flag": "-fusoya:nerfed",
                 "title": "Fixed starting spells, no learning",
-                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual.",
-                "hard": true
+                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
+                "hard": true,
+                "subcontrols": [
+                  {
+                    "flag": "@anon87",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -7451,12 +8005,144 @@ var FLAG_UISPEC = [
             "title": "Spells not guaranteed to be learned",
             "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
             "hard": true
+          },
+          {
+            "flag": "-fusoya:omnimage",
+            "title": "FuSoYa also learns summons/Twin/Ninja magic",
+            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
+          }
+        ]
+      },
+      {
+        "flag": "@agility",
+        "title": "Change the ATB system (or make it vanilla)",
+        "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.",
+        "fork": true,
+        "subcontrols": [
+          {
+            "flag": "@anon88",
+            "title": "Different anchoring or ATB formula",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-agility:vanilla",
+                "title": "Use vanilla agility anchoring",
+                "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present."
+              },
+              {
+                "flag": "-agility:slowest",
+                "title": "Use your slowest character as anchor"
+              },
+              {
+                "flag": "-agility:fastest",
+                "title": "Use your fastest character as anchor",
+                "description": "This flag will double the Count timer.",
+                "hard": true
+              },
+              {
+                "flag": "-agility:average",
+                "title": "Use your average agility for anchoring",
+                "description": "Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility."
+              },
+              {
+                "flag": "-agility:median",
+                "title": "Use your median agility for anchoring"
+              },
+              {
+                "flag": "-agility:random",
+                "title": "A random party slot is chosen for anchoring",
+                "description": "Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.",
+                "hard": true
+              },
+              {
+                "flag": "-agility:monster",
+                "title": "Use average monster agility for anchoring",
+                "description": "Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.",
+                "hard": true
+              },
+              {
+                "flag": "-agility:flat",
+                "title": "Everyone is the same agility",
+                "description": "Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled)."
+              },
+              {
+                "flag": "-agility:750formula",
+                "title": "Use a formula to determine agility",
+                "description": "Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer."
+              },
+              {
+                "flag": "@anchor",
+                "title": "Use a fixed agility anchor",
+                "description": "Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "@anon89",
+                    "title": "Anchor agility",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-agility:anchor7",
+                        "title": "7 Agility anchor"
+                      },
+                      {
+                        "flag": "-agility:anchor27",
+                        "title": "27 Agility anchor",
+                        "hard": true
+                      },
+                      {
+                        "flag": "-agility:anchor28",
+                        "title": "28 Agility anchor",
+                        "hard": true
+                      },
+                      {
+                        "flag": "-agility:anchor41",
+                        "title": "41 Agility anchor",
+                        "hard": true
+                      },
+                      {
+                        "flag": "-agility:anchor42",
+                        "title": "42 Agility anchor",
+                        "hard": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "@agilityscale",
+            "title": "Scale the base ATB",
+            "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
+            "subcontrols": [
+              {
+                "flag": "@anon90",
+                "title": "Base ATB for the anchor",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "-agility:scale1",
+                    "title": "Base ATB is 1 tick"
+                  },
+                  {
+                    "flag": "-agility:scale10",
+                    "title": "Base ATB is 10 ticks"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "-speedmodbalance",
+            "title": "Alter the speed modifier behaviour",
+            "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8)."
           }
         ]
       },
       {
         "flag": "@exp",
-        "title": "Restore vanilla EXP distribution",
+        "title": "Restore vanilla or change EXP distribution",
         "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.",
         "subcontrols": [
           {
@@ -7477,15 +8163,17 @@ var FLAG_UISPEC = [
           {
             "flag": "-exp:crystalbonus",
             "title": "Double EXP after obtaining the Crystal",
-            "description": "Under this flag, characters earn double EXP once you obtain the Crystal."
+            "description": "Under this flag, characters earn double EXP once you obtain the Crystal.",
+            "fork": true
           },
           {
             "flag": "@objectiveexp",
             "title": "Award extra EXP for completing objectives",
             "description": "Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each completed objective earns you more EXP from each battle.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon77",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7510,9 +8198,10 @@ var FLAG_UISPEC = [
             "flag": "@kicheckexp",
             "title": "Award extra EXP for completing key item checks",
             "description": "Normally, completing key item checks does not increase the amount of EXP received from battles. Under this flag, each completed key item check beyond the starting item earns you more EXP from each battle.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon78",
+                "flag": "@anon92",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7541,9 +8230,10 @@ var FLAG_UISPEC = [
             "flag": "@zonkbonusexp",
             "title": "Award extra EXP after non-KI rewards from KI checks",
             "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") you earn more EXP from future battles.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon79",
+                "flag": "@anon93",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7567,9 +8257,10 @@ var FLAG_UISPEC = [
             "flag": "@miabbonusexp",
             "title": "Award extra EXP during MIAB encounters",
             "description": "Normally, MIAB encounters have the same EXP calculation as other encounters. Under this flag, MIAB encounters award double or 1.5 times the usual EXP.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon80",
+                "flag": "@anon94",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7589,9 +8280,10 @@ var FLAG_UISPEC = [
             "flag": "@moonbonusexp",
             "title": "Award extra EXP when on the moon",
             "description": "Normally, location of encounter does not increase EXP. Under this flag, encounters on the moon award double or triple the usual EXP.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon81",
+                "flag": "@anon95",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -7610,56 +8302,64 @@ var FLAG_UISPEC = [
           {
             "flag": "-exp:maxlevelbonus",
             "title": "Award extra EXP when underlevelled",
-            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5)."
+            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).",
+            "fork": true
+          },
+          {
+            "flag": "-exp:smallparty",
+            "title": "Award extra EXP when your party is not full",
+            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
+            "fork": true
           },
           {
             "flag": "@geometricexp",
             "title": "Decrease EXP earned from repeated same-type monster kills",
             "description": "Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not \"per slot\" in battle.",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon82",
+                "flag": "@anon96",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:geometric90",
+                    "flag": "-exp:geometric_90",
                     "title": "Repeated monster kills scale down in EXP to 90%"
                   },
                   {
-                    "flag": "-exp:geometric80",
+                    "flag": "-exp:geometric_80",
                     "title": "Repeated monster kills scale down in EXP to 80%"
                   },
                   {
-                    "flag": "-exp:geometric70",
+                    "flag": "-exp:geometric_70",
                     "title": "Repeated monster kills scale down in EXP to 70%"
                   },
                   {
-                    "flag": "-exp:geometric60",
+                    "flag": "-exp:geometric_60",
                     "title": "Repeated monster kills scale down in EXP to 60%"
                   },
                   {
-                    "flag": "-exp:geometric50",
+                    "flag": "-exp:geometric_50",
                     "title": "Repeated monster kills scale down in EXP to 50%"
                   },
                   {
-                    "flag": "-exp:geometric40",
+                    "flag": "-exp:geometric_40",
                     "title": "Repeated monster kills scale down in EXP to 40%"
                   },
                   {
-                    "flag": "-exp:geometric30",
+                    "flag": "-exp:geometric_30",
                     "title": "Repeated monster kills scale down in EXP to 30%"
                   },
                   {
-                    "flag": "-exp:geometric20",
+                    "flag": "-exp:geometric_20",
                     "title": "Repeated monster kills scale down in EXP to 20%"
                   },
                   {
-                    "flag": "-exp:geometric10",
+                    "flag": "-exp:geometric_10",
                     "title": "Repeated monster kills scale down in EXP to 10%"
                   },
                   {
-                    "flag": "-exp:geometric0",
+                    "flag": "-exp:geometric_0",
                     "title": "Repeated monster kills do not award EXP"
                   }
                 ]
@@ -7669,14 +8369,42 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon83",
-        "title": "Restore vanilla behaviors",
+        "flag": "@anon97",
+        "title": "Change the PRNG table",
+        "fork": true,
+        "type": "select",
         "subcontrols": [
           {
-            "flag": "-vanilla:agility",
-            "title": "Vanilla agility anchoring",
-            "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). However, in vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present. (Note that this overrides the <em>Chero</em> agility effect, if playing with the hero challenge.)"
+            "flag": "-prng:shuffle",
+            "title": "Shuffle the PRNG table values"
           },
+          {
+            "flag": "-prng:random",
+            "title": "Randomize the PRNG values independently",
+            "description": "To prevent softlocks, the randomized PRNG table will be such that all battle slots are available for random targetting."
+          },
+          {
+            "flag": "-prng:consecutive",
+            "title": "Replace the PRNG table with the numbers 0 to 255 in order",
+            "hard": true
+          },
+          {
+            "flag": "-prng:mostlysingle",
+            "title": "Replace the PRNG table with (mostly) a single value",
+            "description": "To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "-miscbugfixes",
+        "title": "Include minor bug fixes",
+        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, and incorrect victim history entries."
+      },
+      {
+        "flag": "@anon98",
+        "title": "Restore vanilla behaviors",
+        "subcontrols": [
           {
             "flag": "-vanilla:hobs",
             "title": "Vanilla Hobs spell",
@@ -7705,11 +8433,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon84",
+        "flag": "@anon99",
         "title": "Zeromus fight changes",
+        "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon85",
+            "flag": "@anon100",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -7796,7 +8525,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon86",
+            "flag": "@anon101",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -7834,10 +8563,10 @@ var FLAG_UISPEC = [
       {
         "flag": "@wacky",
         "title": "Wacky challenge",
-        "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
+        "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon87",
+            "flag": "@anon102",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -7849,27 +8578,32 @@ var FLAG_UISPEC = [
               {
                 "flag": "-wacky:random2",
                 "title": "2 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random3",
                 "title": "3 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random4",
                 "title": "4 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random5",
                 "title": "5 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               },
               {
                 "flag": "-wacky:random6",
                 "title": "6 random wacky challenges",
-                "hard": true
+                "hard": true,
+                "fork": true
               }
             ]
           },
@@ -7889,7 +8623,8 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:dropitlikeitshot",
-            "title": "\"Drop It Like It's Hot\""
+            "title": "\"Drop It Like It's Hot\"",
+            "fork": true
           },
           {
             "flag": "-wacky:enemyunknown",
@@ -7958,7 +8693,8 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:mirrormirror",
-            "title": "\"Mirror, Mirror, on the Wall\""
+            "title": "\"Mirror, Mirror, on the Wall\"",
+            "fork": true
           },
           {
             "flag": "-wacky:mysteryjuice",
@@ -7988,8 +8724,20 @@ var FLAG_UISPEC = [
             "hard": true
           },
           {
+            "flag": "-wacky:scrambledstats",
+            "title": "\"Scrambled Stats\"",
+            "hard": true,
+            "fork": true
+          },
+          {
             "flag": "-wacky:sixleggedrace",
             "title": "\"Six-Legged Race\""
+          },
+          {
+            "flag": "-wacky:skillissue",
+            "title": "\"Skill Issue\"",
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "-wacky:skywarriors",
@@ -8013,6 +8761,11 @@ var FLAG_UISPEC = [
             "title": "\"Time is Money\""
           },
           {
+            "flag": "-wacky:advertising",
+            "title": "\"Truth in Advertising\"",
+            "fork": true
+          },
+          {
             "flag": "-wacky:darts",
             "title": "\"World Championship of Darts\""
           },
@@ -8023,32 +8776,67 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "-wacky:whatsmygear",
-            "title": "\"What's My Gear Again?\""
+            "title": "\"What's My Gear Again?\"",
+            "fork": true
+          },
+          {
+            "flag": "-wacky:workexperience",
+            "title": "\"Work Experience\"",
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "-wacky:zombies",
             "title": "\"Zombies!!!\""
           }
         ]
-      }
-    ]
-  },
-  {
-    "title": "TWEAKS",
-    "controls": [
+      },
       {
-        "flag": "@anon88",
+        "flag": "@anon103",
         "title": "Miscellaneous tweaks",
+        "fork": true,
         "subcontrols": [
           {
-            "flag": "-tweak:kainmagic",
-            "title": "Give Kain magic (with Lance)",
-            "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black."
+            "flag": "@anon104",
+            "title": "Sight replacements",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:kainmagic",
+                "title": "Give Kain magic (with Lance)",
+                "description": "Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets."
+              },
+              {
+                "flag": "-tweak:harmspell",
+                "title": "Replace Sight with Harm",
+                "description": "This flag replaces Sight with Harm, a damage-dealing holy spell slightly weaker than Virus."
+              }
+            ]
           },
           {
             "flag": "-tweak:edwardheal",
             "title": "Improve Edward's Heal command",
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
+          },
+          {
+            "flag": "-tweak:darkpaladin",
+            "title": "Cecil becomes a Dark Paladin",
+            "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+          },
+          {
+            "flag": "-tweak:cidairship",
+            "title": "Cid gains a target-all Raid command",
+            "description": "Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon."
+          },
+          {
+            "flag": "-tweak:twinmeteo",
+            "title": "Twin can also cast W.Meteo or self-Stone",
+            "description": "Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the casting twins have a combined level of 70 or greater, then W.Meteo and self-target Stone are also possible options. W.Meteo is about half as likely as Comet, and Stone is half as likely as W.Meteo (with a corresponding reduction to Flare's chances)."
+          },
+          {
+            "flag": "-tweak:chocobosummon",
+            "title": "Sometimes Call the Big Chocobo in battle",
+            "description": "The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there)."
           }
         ]
       }
@@ -8058,7 +8846,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon89",
+        "flag": "@anon105",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8112,7 +8900,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon90",
+            "flag": "@anon106",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8128,7 +8916,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon91",
+                "flag": "@anon107",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

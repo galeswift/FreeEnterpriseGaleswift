@@ -437,9 +437,9 @@ class FlagLogicCore {
         this._simple_disable(flagset, log, prefix, flagset.get_list(flags_regex));
     }
     fix(flagset) {
-        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, bad_gated_conditions, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, mode, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, required_chars, required_count, required_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
+        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, bad_gated_conditions, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, mode, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, required_chars, required_count, required_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
         log = [];
-        if ((flagset.has("Kunsafer") && (! flagset.has("Kmoon")))) {
+        if ((flagset.has("Kunsafer") && (! flagset.has_any("Kmoon", "Kmiab:lst", "Kmiab:all")))) {
             flagset.set("Kmoon");
             this._lib.push(log, ["correction", "Kunsafer requires placing key items on the moon; adding Kmoon"]);
         }
@@ -453,7 +453,6 @@ class FlagLogicCore {
             flagset.set("Kmain");
             this._lib.push(log, ["correction", "Advanced key item randomizations are enabled; forced to add Kmain"]);
         }
-        kmiab_flags = flagset.get_list("^Kmiab:");
         if ((flagset.has("Owin:crystal") && flagset.has("Omode:ki17"))) {
             flagset.unset("Omode:ki17");
             flagset.set("Omode:ki16");
@@ -461,6 +460,10 @@ class FlagLogicCore {
         }
         if (((! flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all")) && flagset.has("Omode:ki17"))) {
             this._simple_disable(flagset, log, "Cannot replace a key item if all of them are required", ["Pkey", "Kstart:pass"]);
+            this._simple_disable(flagset, log, "Cannot remove a key item reward slot if all of them are required", ["Kstart:zonk"]);
+        }
+        if (((((! flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all")) && flagset.has("Pkey")) && (! flagset.has("Owin:crystal"))) && flagset.has("Omode:ki16"))) {
+            this._simple_disable(flagset, log, "Cannot remove two key items if one of them is required", ["Kstart:zonk"]);
         }
         if (flagset.has("Kvanilla")) {
             this._simple_disable(flagset, log, "Key items not randomized", ["Kunsafe", "Kunsafer", "Kunweighted"]);
@@ -476,6 +479,7 @@ class FlagLogicCore {
             flagset.set("Pkey");
             this._lib.push(log, ["correction", "Kstart:pass implies Pkey"]);
         }
+        kmiab_flags = flagset.get_list("^Kmiab:");
         if ((_pj.in_es6("Kmiab:all", kmiab_flags) && (kmiab_flags.length > 1))) {
             this._simple_disable_regex(flagset, log, "All miabs already included", "^Kmiab:(standard|above|below|lst)");
         } else {
@@ -492,7 +496,7 @@ class FlagLogicCore {
             }
         }
         if (flagset.has("Chero")) {
-            this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:");
+            this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:(super|alt|playable)");
         }
         start_include_flags = flagset.get_list("^Cstart:(?!not_)");
         start_exclude_flags = flagset.get_list("^Cstart:not_");
@@ -539,6 +543,9 @@ class FlagLogicCore {
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmaxtier:");
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmintier:");
         }
+        if ((flagset.has("Tadjmiabareas") && (! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish")))) {
+            this._simple_disable(flagset, log, "Treasures are not weighted", ["Tadjmiabareas"]);
+        }
         if (flagset.has_any("Svanilla", "Scabins", "Sempty")) {
             this._simple_disable_regex(flagset, log, "Shops are not random", "^Sno:([^j]|j.)");
             this._simple_disable(flagset, log, "Shops are not random", ["Sunsafe"]);
@@ -556,6 +563,21 @@ class FlagLogicCore {
         if ((flagset.get_list("^-smith:playable").length === flagset.get_list("^-smith:").length)) {
             this._simple_disable(flagset, log, "No smith item requested", ["-smith:playable"]);
         }
+        if ((flagset.has("-smith:omni") && (! flagset.has_any("-smith:super", "Chero")))) {
+            this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni"]);
+        }
+        if ((flagset.has("-fusoya:slowstart") && flagset.has("-fusoya:uncapped"))) {
+            this._simple_disable(flagset, log, "Uncapped FuSoYa cannot also have slowstart", ["-fusoya:slowstart"]);
+        }
+        if ((flagset.has("-fusoya:location") && flagset.has("-fusoya:slowstart"))) {
+            this._simple_disable(flagset, log, "Location FuSoYa cannot have slowstart", ["-fusoya:slowstart"]);
+        }
+        if (flagset.has("-fusoya:nerfed")) {
+            this._simple_disable_regex(flagset, log, "Nerfed FuSoYa cannot have slowstart or unlearn spells", "^-fusoya:(slowstart|unlearn)");
+        }
+        if (flagset.has("-fusoya:vanilla")) {
+            this._simple_disable_regex(flagset, log, "Vanilla FuSoYa cannot have his HP or spells change", "^-fusoya:(slowstart|unlearn|randomhp)");
+        }
         if ((flagset.has("-monsterflee") && (! flagset.has("-monsterevade")))) {
             flagset.set("-monsterevade");
             this._lib.push(log, ["correction", "Monsters require evade to flee; forced to add -monsterevade"]);
@@ -571,6 +593,9 @@ class FlagLogicCore {
         }
         if ((! flagset.has_any("-entrancesrando:normal", "-entrancesrando:gated", "-entrancesrando:blueplanet", "-entrancesrando:why", "-entrancesrando:all", "-doorsrando:normal", "-doorsrando:gated", "-doorsrando:blueplanet", "-doorsrando:why", "-doorsrando:all"))) {
             this._simple_disable(flagset, log, "Removing doors rando related flags when no doors/entrances option is enabled ", ["-calmness", "-forcesealed"]);
+        }
+        if (flagset.has_any("-starting:underground", "-starting:blackchocobo")) {
+            this._lib.push(log, ["error", "Different starting location flags are not currently available; remove them and try again."]);
         }
         if ((flagset.has("-z:physical") && flagset.has("-z:whichbang"))) {
             this._simple_disable(flagset, log, "No guaranteed Big Bangs in script", ["-z:whichbang"]);
@@ -630,6 +655,13 @@ class FlagLogicCore {
                         this._lib.push(log, ["error", `Cannot have objective #${hard_required_index} be both gated AND hard required.`]);
                         break;
                     }
+                }
+                doors_entrances_rando = flagset.get_list("^-(doors|entrances)rando:");
+                for (var doors_entrances, _pj_f = 0, _pj_d = doors_entrances_rando, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                    doors_entrances = _pj_d[_pj_f];
+                    bad_gated_conditions = true;
+                    this._lib.push(log, ["error", "Doors and entrances rando does not currently support gated objectives."]);
+                    break;
                 }
                 if (bad_gated_conditions) {
                     break;
