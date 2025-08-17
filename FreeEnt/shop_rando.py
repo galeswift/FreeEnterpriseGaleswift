@@ -352,9 +352,10 @@ def apply(env):
             if not env.options.flags.has('shops_no_life'):
                 guaranteed_free_items.append('#item.Life')
 
-            if not env.options.flags.has('shops_no_j_items') and not env.options.flags.has('shops_no_starveil') and not env.options.flags.has('shops_no_damage_items'):
-                guaranteed_free_items.append('#item.StarVeil')
-                if not env.options.flags.has('bosses_unsafe'):
+            if not env.options.flags.has('shops_no_j_items'):
+                if not env.options.flags.has('shops_no_starveil'):
+                    guaranteed_free_items.append('#item.StarVeil')
+                if not env.options.flags.has('bosses_unsafe') and not env.options.flags.has('shops_no_damage_items'):
                     guaranteed_free_items.append('#item.ThorRage')
 
             if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
