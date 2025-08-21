@@ -1088,8 +1088,14 @@ def apply_skillissue(env, rom_address):
     skill_unlock_table.insert(0,0x00)
     if not env.options.flags.has('cidairship'):
         skill_unlock_table.insert(0x15,0x00)
+    # ensure that other wacky flags do not impact commands like
+    # "Off" (pt2 of Cover), "Show" (pt of Hide), etc. by inserting
+    # a buffer region of 0's (possibly unnecessary; to determine)
+    skill_unlock_table.extend([0x00] * 9)
 
     env.add_toggle('wacky_skillissue')
+    if 'bodyguard' not in env.meta.get('wacky_challenge', []):
+        env.add_toggle('wacky_skillissue_no_bodyguard')
     env.add_substitution('wacky skill issue max credits', f'#${num_skills+1:02X}')
     env.add_binary(rom_address, skill_unlock_table, as_script=True)
 

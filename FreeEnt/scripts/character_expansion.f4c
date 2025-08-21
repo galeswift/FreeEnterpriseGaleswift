@@ -1960,6 +1960,17 @@ msfpatch {
         sta $_CharEx__CoverAssignments,x
 
         // also init no-autohide flags since we gotta somewhere
+        // %if wacky_skillissue%
+        // if we don't have Hide unlocked,
+        // ensure PreventAutoHideFlags is set to #$1f
+        lda #$09
+        jsr $_Wacky__SkillIssueCheck
+        bcs $+InitHide
+        lda #$1f
+        sta $_PreventAutoHideFlags
+        bra $03
+    %InitHide:
+        // %end%
         stz $_PreventAutoHideFlags
 
         lda ($80),y
@@ -1974,6 +1985,22 @@ msfpatch {
         dey
         and #$0f
         sta $1680
+
+        // %if wacky_skillissue_no_bodyguard%
+        // if we don't have Cover unlocked,
+        // ensure CoverCapable,x is set to 0
+        pha
+        lda #$13
+        jsr $_Wacky__SkillIssueCheck
+        bcs $+CanCheckCover
+        pla
+        lda $a9
+        tax
+        lda #$00
+        bra $+MarkCover
+    %CanCheckCover:
+        pla
+        // %end%
 
         // %if ~wacky_all_characters_cover%
         cmp #$09
