@@ -363,7 +363,7 @@ EGG_METHODS = {
           'items' : [
               ('Siren', [1]),
               ('Glass', [1]),
-              ('DragoonArmor', [1]),
+              ('DragonArmor', [1]),
               ('Cursed', [1]) 
               ] },
 
@@ -603,6 +603,7 @@ def apply(env):
             env.add_substitution(f'starterkit{i} message enable', '')
         else:        
             kit = kits.pop(0)
+            print(kit)
 
             message_lines = []
             spoiler_rows = []
@@ -610,6 +611,8 @@ def apply(env):
             message_lines.append('Received supplies:')
             for entry in kit:
                 item,qty = entry
+                print(item)
+                print(qty)
                 if (item == 'GP'):
                     message_lines.append(f'    {qty} GP')
                     patch_lines.append(f'FE {qty & 0xFF:02X} {(qty >> 8) & 0xFF:02X} {(qty >> 16) & 0xFF:02X}')
