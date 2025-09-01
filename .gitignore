@@ -27,6 +27,7 @@ output/
 notes.txt
 getLatest.sh
 
+venv/**
 ENV/**
 FreeEnt/.build/**
 **/*.pyc
