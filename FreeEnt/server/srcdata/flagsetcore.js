@@ -621,7 +621,7 @@ class FlagLogicCore {
             this._simple_disable_regex(flagset, log, "No objectives set", "^O(win|req):");
             this._simple_disable_regex(flagset, log, "No objectives set", "^-exp:objectivebonus");
         } else {
-            if ((! flagset.get_list("^Oreq:"))) {
+            if ((flagset.get_list("^Oreq:").length === 0)) {
                 flagset.set("Oreq:all");
                 this._lib.push(log, ["correction", "Required number of objectives not specified; setting Oreq:all"]);
             }
@@ -755,7 +755,7 @@ class FlagLogicCore {
             }
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
-                if ((! flagset.get_list((`^${random_prefix}` + "\\d")))) {
+                if ((flagset.get_list((`^${random_prefix}` + "\\d")).length === 0)) {
                     this._simple_disable_regex(flagset, log, `No random objectives specified for pool ${random_prefix}`, (`^${random_prefix}` + "[^\\d]"));
                 }
             }
@@ -763,7 +763,7 @@ class FlagLogicCore {
             total_objective_count = 0;
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
-                if ((! flagset.get_list(`^${random_prefix}`))) {
+                if ((flagset.get_list(`^${random_prefix}`).length === 0)) {
                     continue;
                 }
                 all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));

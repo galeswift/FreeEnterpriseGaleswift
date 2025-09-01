@@ -582,7 +582,7 @@ class FlagLogicCore:
             self._simple_disable_regex(flagset, log, 'No objectives set', r'^-exp:objectivebonus')
         else:
             # Force Oreq:all if a req: flag is not specified
-            if not flagset.get_list(r'^Oreq:'):
+            if len(flagset.get_list(r'^Oreq:')) == 0:
                 flagset.set('Oreq:all')
                 self._lib.push(log, ['correction', 'Required number of objectives not specified; setting Oreq:all'])
 
@@ -689,13 +689,13 @@ class FlagLogicCore:
                     
             # remove random quest type specifiers if no random objectives specified
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-                if not flagset.get_list(f'^{random_prefix}' + r'\d'):
+                if len(flagset.get_list(f'^{random_prefix}' + r'\d')) == 0:
                     self._simple_disable_regex(flagset, log, f'No random objectives specified for pool {random_prefix}', f'^{random_prefix}'+ r'[^\d]')
 
             total_potential_bosses = 0
             total_objective_count = 0
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-                if not flagset.get_list(f'^{random_prefix}'):
+                if len(flagset.get_list(f'^{random_prefix}')) == 0:
                     continue
                 all_customized_random_flags = flagset.get_list(f'^{random_prefix}'+ r'[^\d]')
                 num_random_objectives = flagset.get_list(f'^{random_prefix}'+ r'[\d]')
