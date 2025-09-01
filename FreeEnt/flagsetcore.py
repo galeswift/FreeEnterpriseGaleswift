@@ -689,25 +689,25 @@ class FlagLogicCore:
                     
             # remove random quest type specifiers if no random objectives specified
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-                if not flagset.get_list(rf'^{random_prefix}\d'):
-                    self._simple_disable_regex(flagset, log, f'No random objectives specified for pool {random_prefix}', rf'^{random_prefix}[^\d]')
+                if not flagset.get_list(f'^{random_prefix}' + r'\d'):
+                    self._simple_disable_regex(flagset, log, f'No random objectives specified for pool {random_prefix}', f'^{random_prefix}'+ r'[^\d]')
 
             total_potential_bosses = 0
             total_objective_count = 0
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-                if not flagset.get_list(rf'^{random_prefix}'):
+                if not flagset.get_list(f'^{random_prefix}'):
                     continue
-                all_customized_random_flags = flagset.get_list(rf'^{random_prefix}[^\d]')
-                num_random_objectives = flagset.get_list(rf'^{random_prefix}\d')
+                all_customized_random_flags = flagset.get_list(f'^{random_prefix}'+ r'[^\d]')
+                num_random_objectives = flagset.get_list(f'^{random_prefix}'+ r'[\d]')
                 if len(num_random_objectives) == 0:
                     continue
 
-                flag_suffix = self._lib.re_sub(rf'^{random_prefix}', '', num_random_objectives[0])
+                flag_suffix = self._lib.re_sub(f'^{random_prefix}', '', num_random_objectives[0])
                 if len(all_customized_random_flags) == 0 or f'{random_prefix}boss' in all_customized_random_flags:                                        
                     total_potential_bosses += int(flag_suffix)
                 total_objective_count += int(flag_suffix)
-            specific_boss_objectives = flagset.get_list(rf'^O[\d]:boss_')
-            all_specific_objectives = flagset.get_list(rf'^O[\d]:')
+            specific_boss_objectives = flagset.get_list(r'^O[\d]:boss_')
+            all_specific_objectives = flagset.get_list(r'^O[\d]:')
             total_potential_bosses += len(specific_boss_objectives)
             total_objective_count += len(all_specific_objectives)
             if flagset.has('Omode:fiends'):
@@ -731,23 +731,23 @@ class FlagLogicCore:
             duplicate_check_count = 0
             character_pool = []
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:                         
-                if len(flagset.get_list(rf'^{random_prefix}')) == 0:
+                if len(flagset.get_list(f'^{random_prefix}')) == 0:
                     continue
 
-                random_only_char_flags = flagset.get_list(rf'{random_prefix}only')
+                random_only_char_flags = flagset.get_list(f'{random_prefix}only')
                 if not flagset.has(f'{random_prefix}char') and len(random_only_char_flags) > 0:
                     flagset.set(f'{random_prefix}char')
                     self._lib.push(log, ['correction', f'Random objectives requiring specific characters set without Orandom:char; setting {random_prefix}char'])
 
-                all_customized_random_flags = flagset.get_list(rf'^{random_prefix}[^\d]')
+                all_customized_random_flags = flagset.get_list(f'^{random_prefix}'+ r'[^\d]')
                 if len(all_customized_random_flags) != 0 and f'{random_prefix}char'not in all_customized_random_flags:
                     continue
 
-                all_random_flags = flagset.get_list(rf'^{random_prefix}')                
+                all_random_flags = flagset.get_list(f'^{random_prefix}')                
                 skip_pools = False
                 
                 for random_flag in all_random_flags:
-                    flag_suffix = self._lib.re_sub(rf'^{random_prefix}', '', random_flag)
+                    flag_suffix = self._lib.re_sub(f'^{random_prefix}', '', random_flag)
                     if self._lib.re_test(r'\d', flag_suffix):
                         required_objective_count = int(flag_suffix)
                     elif not self._lib.re_test(r'only', flag_suffix) and not self._lib.re_test(r'char', flag_suffix):
@@ -781,7 +781,7 @@ class FlagLogicCore:
                 actual_available_characters = desired_char_count - chars_to_remove
                 #print (f'actual_available_characters {actual_available_characters} desired_char_count {desired_char_count} chars_to_remove {chars_to_remove} duplicate_char_count {duplicate_char_count} duplicate_check_count {duplicate_check_count}')
                 if actual_available_characters < required_objective_count and skip_pools == False:
-                    self._lib.push(log, ['error', f'Not enough unique characters for pool {random_prefix}.  Another pool could potentially consume some or all of these characters {random_only_char_flags}' + ','.join(flagset.get_list(rf'^{random_prefix}'))])
+                    self._lib.push(log, ['error', f'Not enough unique characters for pool {random_prefix}.  Another pool could potentially consume some or all of these characters {random_only_char_flags}' + ','.join(flagset.get_list(f'^{random_prefix}'))])
                     break
                 duplicate_check_count += required_objective_count
                 

@@ -755,8 +755,8 @@ class FlagLogicCore {
             }
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
-                if ((! flagset.get_list(`^${random_prefix}\d`))) {
-                    this._simple_disable_regex(flagset, log, `No random objectives specified for pool ${random_prefix}`, `^${random_prefix}[^\d]`);
+                if ((! flagset.get_list((`^${random_prefix}` + "\\d")))) {
+                    this._simple_disable_regex(flagset, log, `No random objectives specified for pool ${random_prefix}`, (`^${random_prefix}` + "[^\\d]"));
                 }
             }
             total_potential_bosses = 0;
@@ -766,8 +766,8 @@ class FlagLogicCore {
                 if ((! flagset.get_list(`^${random_prefix}`))) {
                     continue;
                 }
-                all_customized_random_flags = flagset.get_list(`^${random_prefix}[^\d]`);
-                num_random_objectives = flagset.get_list(`^${random_prefix}\d`);
+                all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));
+                num_random_objectives = flagset.get_list((`^${random_prefix}` + "[\\d]"));
                 if ((num_random_objectives.length === 0)) {
                     continue;
                 }
@@ -777,8 +777,8 @@ class FlagLogicCore {
                 }
                 total_objective_count += Number.parseInt(flag_suffix);
             }
-            specific_boss_objectives = flagset.get_list(`^O[\d]:boss_`);
-            all_specific_objectives = flagset.get_list(`^O[\d]:`);
+            specific_boss_objectives = flagset.get_list("^O[\\d]:boss_");
+            all_specific_objectives = flagset.get_list("^O[\\d]:");
             total_potential_bosses += specific_boss_objectives.length;
             total_objective_count += all_specific_objectives.length;
             if (flagset.has("Omode:fiends")) {
@@ -812,7 +812,7 @@ class FlagLogicCore {
                     flagset.set(`${random_prefix}char`);
                     this._lib.push(log, ["correction", `Random objectives requiring specific characters set without Orandom:char; setting ${random_prefix}char`]);
                 }
-                all_customized_random_flags = flagset.get_list(`^${random_prefix}[^\d]`);
+                all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));
                 if (((all_customized_random_flags.length !== 0) && (! _pj.in_es6(`${random_prefix}char`, all_customized_random_flags)))) {
                     continue;
                 }
