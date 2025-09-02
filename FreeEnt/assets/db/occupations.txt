@@ -8933,12 +8933,12 @@ Pilot Writer
 Pin Cushion Designer
 Pin Fastener
 Pinafore Designer
-Piñata Craftsman
+Pinata Craftsman
 Pinata Filler
-Piñata Hanger
-Piñata Repairman
+Pinata Hanger
+Pinata Repairman
 Pinata Stuffer
-Piñata Tester
+Pinata Tester
 Pinball Collector
 Pinball Machine Mechanic
 Pinball Machine Repairer

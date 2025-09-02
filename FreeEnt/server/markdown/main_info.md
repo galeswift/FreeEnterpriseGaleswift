@@ -32,7 +32,7 @@ This flag requires you to turn in a certain amount of GP to Tory in Agart to com
 
 Vanilla FE requires you to obtain 30 DkMatters out of 45; this flag expansion by sgrunt allows you to configure the number of required DkMatters in multiples of 5.
 
-### `Omode:ki[N]`
+### `Omode:ki[N]` {: .h6 }
 
 - Idea: sgrunt
 - Design/Programming: sgrunt
@@ -548,7 +548,7 @@ Golbez's attack script will change similarly to Wyvern's script under `Bwhyburn`
 
 Golbez's spells are single-target damaging spells (and Weak), and can be worse if `Bunsafe` is on. Shadow's spells are single-target status spells that incapacitate your characters.
 
-!!! warning "Don't reflect Shadow's spells!"
+!!! warn "Don't reflect Shadow's spells!"
     Some of Shadow's spells can be bounced off Wall... which sounds great, until you reflect Beak onto Golbez and softlock the fight because Beak bypasses the boss bit.
 
 ### `Bspellpower` {: .h6 }
@@ -605,6 +605,8 @@ This flag replaces the MacGiant in the repeatable MacGiant grind encounter with 
 - Locations: encounter_rando.py
 
 These flags change the encounter tables; namely, which encounters are in which group. The "map ID to group" association is left unchanged (because that is patched by the Something Worth Fighting For wacky flag). The `shuffle` flags only shuffle the encounters within each group. The `relocated` flags shuffle the groups around, within certain zones. The `wild` flags shuffle the encounters around with no regard for group, only for zones or map plane. The `chaos` flag randomly assigns valid encounters with no regard for ensuring encounters are still there. The `uniquelygood` flag chooses one encounter from each group to be the only encounter that group has; the encounter will be a grind fight, an otherwise useful encounter, or a notable fight, without repeating an encounter from another group (e.g. double King-Ryus are in multiple groups, they will only show up once here).
+
+The Alt Gauntlet is not impacted by these flags.
 
 ## Harp Flags
 
