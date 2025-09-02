@@ -208,7 +208,7 @@ class Site:
             beta_changelog = None
 
         return self._env.get_template('make_react.html').render(
-            version=FreeEnt.VERSION_STR,
+            version=FreeEnt.SHOWN_VERSION_STR,
             production=(not cherrypy.request.app.config['FreeEnt']['debug']),
             initial_flags = (_json_escape_str(flags) if flags else ''),
             initial_seed = (seed if seed else ''),
