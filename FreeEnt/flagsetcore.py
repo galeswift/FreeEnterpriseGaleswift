@@ -495,7 +495,7 @@ class FlagLogicCore:
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmaxtier:')
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmintier:')
 
-        if flagset.has('Tadjmiabareas') and not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish'):
+        if flagset.has('Tadjmiabareas') and not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish', 'Tstandardish'):
             self._simple_disable(flagset, log, 'Treasures are not weighted', ['Tadjmiabareas'])
 
         if flagset.has_any('Svanilla', 'Scabins', 'Sempty'):
@@ -697,7 +697,7 @@ class FlagLogicCore:
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
                 if not flagset.get_list(rf'^{random_prefix}'):
                     continue
-                all_customized_random_flags = flagset.get_list(rf'^{random_prefix}[^\d]')
+                all_customized_random_flags = flagset.get_list(rf'^{random_prefix}\D')
                 num_random_objectives = flagset.get_list(rf'^{random_prefix}\d')
                 if len(num_random_objectives) == 0:
                     continue
@@ -713,6 +713,11 @@ class FlagLogicCore:
             if flagset.has('Omode:fiends'):
                 total_potential_bosses += 6
                 total_objective_count += 6
+            boss_collector_flags = flagset.get_suffix('Omode:bosscollector')
+            if boss_collector_flags:
+                boss_collector_flags = int(boss_collector_flags)
+                while total_potential_bosses < boss_collector_flags:
+                    total_potential_bosses += 1
             if flagset.has('Omode:classicforge'):
                 total_objective_count += 1
             if flagset.has('Omode:classicgiant'):
@@ -720,8 +725,18 @@ class FlagLogicCore:
             if len(flagset.get_list(r'^Omode:dkmatter')) > 0:
                 total_objective_count += 1
 
-            if total_potential_bosses > 34:
-                self._lib.push(log, ['error', "More than 34 potential bosses specified"])                           
+            max_bosses = 34
+            boss_slots_removed = 0
+            removed_bosses_flags = flagset.get_list(rf'^Bremove:')
+            for slot in removed_bosses_flags:
+                max_bosses -= 1
+                boss_slots_removed += 1
+            if total_potential_bosses > max_bosses:
+                if boss_slots_removed > 0:
+                    self._lib.push(log, ['error', f"More than {max_bosses} potential bosses specified ({boss_slots_removed} removed)"])        
+                else:
+                    self._lib.push(log, ['error', f"More than 34 potential bosses specified"])
+
             if total_objective_count > 32:
                 self._lib.push(log, ['error', "More than 32 objectives specified"])                           
             #print(f'Total potential bosses is {total_potential_bosses} Objectives is {total_objective_count}')            
@@ -797,7 +812,7 @@ class FlagLogicCore:
                 ['3point', 'afflicted', 'battlescars', 'menarepigs', 'mirrormirror', 'skywarriors', 'unstackable', 'zombies'],
                 ['afflicted', 'friendlyfire'],
                 ['battlescars', 'afflicted', 'zombies', 'worthfighting'],
-                ['darts', 'musical'],
+                ['darts', 'musical', 'skillissue'],
                 ['3point', 'tellahmaneuver'],
             ]
 
