@@ -363,7 +363,7 @@ EGG_METHODS = {
           'items' : [
               ('Siren', [1]),
               ('Glass', [1]),
-              ('DragoonArmor', [1]),
+              ('DragonArmor', [1]),
               ('Cursed', [1]) 
               ] },
 

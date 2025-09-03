@@ -432,10 +432,10 @@ Each of Shadow's and Golbez's spells are replaced individually. If <em>Bunsafe</
 [Bspellpower]
 Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.
 
-[Bremove:officer_slot]
+[Bremove:kaipo_slot]
 Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.
 
-[Bremove:kingqueen_slot]
+[Bremove:kqe_slot]
 Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.
 
 [@G]
@@ -487,7 +487,7 @@ Encounters are shuffled within two groups, based on the high byte of the formati
 Encounters are randomly assigned to encounter groups independently, within the overworld (including the Giant and Hook route) and the underworld/moon separately.
 
 [Etable:uniquelygood]
-Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
+Each group is assigned the same encounter in all eight slots; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
 
 [Hrandom]
 The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members.

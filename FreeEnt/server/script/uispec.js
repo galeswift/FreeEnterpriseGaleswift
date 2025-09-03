@@ -6837,19 +6837,16 @@ var FLAG_UISPEC = [
         "flag": "@anon69",
         "title": "Remove certain boss slots",
         "fork": true,
-        "type": "select",
         "subcontrols": [
           {
-            "flag": "Bremove:officer_slot",
+            "flag": "Bremove:kaipo_slot",
             "title": "Remove the Officer slot boss fight",
-            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.",
-            "fork": true
+            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool."
           },
           {
-            "flag": "Bremove:kingqueen_slot",
+            "flag": "Bremove:kqe_slot",
             "title": "Remove the KQ Eblan slot boss fight",
-            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.",
-            "fork": true
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
           }
         ]
       }
@@ -7021,7 +7018,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Etable:uniquelygood",
             "title": "Each area has one hand-picked encounter",
-            "description": "Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups."
+            "description": "Each group is assigned the same encounter in all eight slots; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups."
           }
         ]
       }
