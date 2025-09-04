@@ -724,6 +724,12 @@ class FlagLogicCore:
                 total_objective_count += 1
             if len(flagset.get_list(r'^Omode:dkmatter')) > 0:
                 total_objective_count += 1
+            if len(flagset.get_list(r'^Omode:ki')) > 0:
+                total_objective_count += 1
+            if len(flagset.get_list(r'^Omode:goldhunter')) > 0:
+                total_objective_count += 1
+            if flagset.has('Omode:external'):
+                total_objective_count += 1
 
             max_bosses = 34
             boss_slots_removed = 0
@@ -796,7 +802,7 @@ class FlagLogicCore:
                 actual_available_characters = desired_char_count - chars_to_remove
                 #print (f'actual_available_characters {actual_available_characters} desired_char_count {desired_char_count} chars_to_remove {chars_to_remove} duplicate_char_count {duplicate_char_count} duplicate_check_count {duplicate_check_count}')
                 if actual_available_characters < required_objective_count and skip_pools == False:
-                    self._lib.push(log, ['error', f'Not enough unique characters for pool {random_prefix}.  Another pool could potentially consume some or all of these characters {random_only_char_flags}' + ','.join(flagset.get_list(f'^{random_prefix}'))])
+                    self._lib.push(log, ['error', f'Not enough unique characters for pool {random_prefix}.  Another pool could potentially consume some or all of these characters {random_only_char_flags}'])
                     break
                 duplicate_check_count += required_objective_count
                 

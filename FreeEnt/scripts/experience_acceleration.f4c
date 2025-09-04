@@ -42,6 +42,22 @@ msfpatch {
         sta $af
         // %end%
 
+        // %if run_experience_penalty%
+        // if we are running and experience is halved or quartered,
+        // do that here
+        lda $a8 
+        and #$40
+        beq $+NextModifier__RunPenalty
+        ldy {% run penalty loop %}
+    %RunPenaltyLoop:
+        lsr $af
+        ror $ae
+        ror $ad
+        dey
+        bne $-RunPenaltyLoop
+    %NextModifier__RunPenalty:
+        // %end%
+
         // %if wacky_workexperience%
         // use average party level to build a scale factor to the experience;
         // do first to avoid potential obnoxious handling of overflow scenarios

@@ -801,6 +801,15 @@ class FlagLogicCore {
             if ((flagset.get_list("^Omode:dkmatter").length > 0)) {
                 total_objective_count += 1;
             }
+            if ((flagset.get_list("^Omode:ki").length > 0)) {
+                total_objective_count += 1;
+            }
+            if ((flagset.get_list("^Omode:goldhunter").length > 0)) {
+                total_objective_count += 1;
+            }
+            if (flagset.has("Omode:external")) {
+                total_objective_count += 1;
+            }
             max_bosses = 34;
             boss_slots_removed = 0;
             removed_bosses_flags = flagset.get_list(`^Bremove:`);
@@ -885,7 +894,7 @@ class FlagLogicCore {
                 }
                 actual_available_characters = (desired_char_count - chars_to_remove);
                 if (((actual_available_characters < required_objective_count) && (skip_pools === false))) {
-                    this._lib.push(log, ["error", (`Not enough unique characters for pool ${random_prefix}.  Another pool could potentially consume some or all of these characters ${random_only_char_flags}` + ",".join(flagset.get_list(`^${random_prefix}`)))]);
+                    this._lib.push(log, ["error", `Not enough unique characters for pool ${random_prefix}.  Another pool could potentially consume some or all of these characters ${random_only_char_flags}`]);
                     break;
                 }
                 duplicate_check_count += required_objective_count;

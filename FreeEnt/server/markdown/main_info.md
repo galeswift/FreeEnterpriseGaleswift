@@ -608,6 +608,15 @@ These flags change the encounter tables; namely, which encounters are in which g
 
 The Alt Gauntlet is not impacted by these flags.
 
+### `Erunspoils[100/50/25]` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design: CoffeeAndChocobos, ScytheMarshall, Wylem
+- Programming: Wylem, ScytheMarshall
+- Locations: encounter_run_spoils.f4c, experience_acceleration.f4c, encounter_rando.py
+
+These flags allow your party to gain experience and GP from partial progress of a battle, i.e. if you defeat some monsters but run away before the battle is over, then you will gain the percentage of spoils listed in the flag. If you defeat no monsters, then you can still possibly lose GP as usual.
+
 ## Harp Flags
 
 harumph, the leader of the #FadeHarp community, made some flags to change the TwinHarp behaviour. In vanilla FE, you will always get a randomized song instead of the vanilla Melody of Lute (Edward's theme) during the TwinHarp cutscene and subsequent fight. These flags change that behaviour.

@@ -489,6 +489,9 @@ Encounters are randomly assigned to encounter groups independently, within the o
 [Etable:uniquelygood]
 Each group is assigned the same encounter in all eight slots; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
 
+[@Erunspoils]
+FF4 keeps track of how many monsters you have defeated in a battle. Under these flags, if you defeat some but not all of the monsters in a formation and then run away, you will still get EXP and GP from the monsters you did defeat. The spoils can be reduced by half or by three quarters in this situation.
+
 [Hrandom]
 The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members.
 

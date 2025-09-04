@@ -623,7 +623,13 @@
 <> Drop tables
 .(Eno:sirens) Remove Sirens from drop/sneak tables
 .(Eno:jdrops) Use US version drop/sneak tables
-[Ecantrun]! Can't run from battles
+<> Running from battle
+.(Ecantrun)! Can't run from battles
+.<@Erunspoils>^ Earn battle spoils even when running away
+..<> Spoils penalty
+...(Erunspoils100) 100% EXP and GP earned
+...(Erunspoils50) 50% EXP and GP earned
+...(Erunspoils25) 25% EXP and GP earned
 [Enoexp]! No EXP for random encounters
 [Enogp]!^ No GP for random encounters
 [Enodmachin]!^ Disable D.Machin encounters

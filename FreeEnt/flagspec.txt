@@ -56,7 +56,7 @@ Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sn
 Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
 Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
-Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
+Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
