@@ -661,12 +661,14 @@ msfpatch {
         rtl
 
     %TreasureCharacter:
-        // still need to check if this miab could have been a key item;
+        // still need to check again if this miab could have been a key item;
         // if yes, then increment the zonk counter (since char != KI)
         pla
         beq $+SkipZonk
         inc $_Rewards__ZonkChecksCount
     %SkipZonk:
+        // also need to clear $c6 now
+        stz $c6
         rtl
 }
 
