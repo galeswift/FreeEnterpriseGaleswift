@@ -971,6 +971,9 @@
 ..(-tweak:kainmagic) Give Kain magic (with Lance)
 ..(-tweak:harmspell) Replace Sight with Harm
 .[-tweak:edwardheal] Improve Edward's Heal command
+.<> Improve Edward's Sing command
+..(-tweak:edwardsing) Sing only chooses Mute/Sleep/Charm that can work
+..(-tweak:edwardsingbetter) Sing chooses from a wider range of status spells
 .[-tweak:darkpaladin] Cecil becomes a Dark Paladin
 .[-tweak:cidairship] Cid gains a target-all Raid command
 .[-tweak:twinmeteo] Twin can also cast W.Meteo or self-Stone

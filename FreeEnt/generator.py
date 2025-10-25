@@ -901,6 +901,23 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/harm_spell.f4c')
     if options.flags.has('edwardheal'):
         env.add_file('scripts/improve_edward_heal.f4c')
+    if options.flags.has_any('edwardsing','edwardsing_better'):
+        env.add_file('scripts/edward_sing_upgrade.f4c')
+        sing_text_options = [
+            'Song of Molbols',
+            'Song of Ruin',
+            'Sick Beats',
+            'Samba de Status',
+            'Debuff Dirge',
+            'Evil Chorus',
+            'Vogon Poetry'
+            ]
+        env.rnd.shuffle(sing_text_options)
+        env.add_substitution('song of silence replacement text', sing_text_options[0])
+        if options.flags.has('edwardsing_better'):
+            env.add_substitution('edward sing status options', '#$bcff')
+        else:
+            env.add_substitution('edward sing status options', '#$1804')
     if options.flags.has('cidairship'):
         env.add_file('scripts/cidairship.f4c')
     if options.flags.has('twinmeteo'):

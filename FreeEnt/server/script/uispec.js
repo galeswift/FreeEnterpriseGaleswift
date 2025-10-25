@@ -8851,6 +8851,23 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
+            "flag": "@anon107",
+            "title": "Improve Edward's Sing command",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:edwardsing",
+                "title": "Sing only chooses Mute/Sleep/Charm that can work",
+                "description": "Normally, Sing uses Toad if Edward is a frog, or randomly chooses from Sleep/Mute/Charm/fail uniformly at random. Under this flag, Sing still only casts Toad if Edward is a frog, but otherwise it will pick randomly from the spells Sleep, Mute, Charm to which the target is vulnerable. If the target is immune to all three, then Sing will do nothing. Note that Sing will not bypass the boss bit."
+              },
+              {
+                "flag": "-tweak:edwardsingbetter",
+                "title": "Sing chooses from a wider range of status spells",
+                "description": "Sing will behave as in <em>-tweak:edwardsing</em>, but instead of only choosing from Sleep, Mute, and Charm, Sing can choose from: Venom, Powder (Blind), Mute, Piggy, Mini, Toad, Stone, Fatal, Bersk, Charm, Sleep, Hold, and Curse."
+              }
+            ]
+          },
+          {
             "flag": "-tweak:darkpaladin",
             "title": "Cecil becomes a Dark Paladin",
             "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
@@ -8878,7 +8895,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon107",
+        "flag": "@anon108",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8932,7 +8949,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon108",
+            "flag": "@anon109",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8948,7 +8965,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon109",
+                "flag": "@anon110",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -1131,6 +1131,16 @@ This flag replaces Sight with Harm, a holy-elemental damage-dealing spell slight
 
 This flag modifies Edward's Heal J-ability to use the best of Cure1, Cure2, Cure3 in your inventory instead of only Cure1s. 
 
+### `-tweak:edwardsing[/better]` {: .h6 }
+
+- Idea: ScytheMarshall, inspiration from IAmDMar
+- Design/Programming: ScytheMarshall
+- Locations: edward_sing_upgrade.f4c, generator.py
+
+These flags modify Edward's Sing command to randomly choose one of the available status spells to use that are not actively resisted by the target. Under the "normal" flag, Sing will choose one of Mute, Charm, or Sleep that the target does not resist; if the target resists all three, then nothing will happen. Under the "better" flag, Sing will choose from Venom, Powder (Darkness), Mute, Piggy, Mini, Toad, Stone, Fatal, Bersk, Charm, Sleep, Hold, and Curse (the spell, which inflicts the Curse status). If the Sing user is a frog, then Sing will always cast Toad.
+
+The battle alert textbox will now always be a fixed song name, one of a few sourced from community members.
+
 ### `-tweak:darkpaladin` {: .h6 }
 
 - Idea: various, but initial inspiration from PinkPuff (via Unprecedented Chaos) and F&I thread from Kindron Darkfire
