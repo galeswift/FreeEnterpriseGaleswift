@@ -415,131 +415,173 @@ def get_stats_mods(stats):
 
 item_equip_values = {}
 
+equip_items_by_entry = {}
+for i in range(0x20):
+    equip_items_by_entry[i] = []
+
 used_equip_table_indices = set()
 used_element_table_indices = set()
 
-with open('PATH-TO-ROM', 'rb') as infile:
-    infile.seek(0x7A590)
-    elements_table = []
-    for i in range(123):
-        data = infile.read(3)
-        elements_table.append(data[0] | (data[1] << 8) | (data[2] << 16))
+with open('mod_extracted_info.txt', 'w') as outfile:
+    with open('PATH-TO-ROM', 'rb') as infile:
+        infile.seek(0x7A590)
+        elements_table = []
+        for i in range(123):
+            data = infile.read(3)
+            elements_table.append(data[0] | (data[1] << 8) | (data[2] << 16))
 
-    infile.seek(0x7A550)
-    equip_table = []
-    for i in range(32):
-        data = infile.read(2)
-        equip_table.append(data[0] | (data[1] << 8))
+        infile.seek(0x7A550)
+        equip_table = []
+        for i in range(32):
+            data = infile.read(2)
+            equip_table.append(data[0] | (data[1] << 8))
 
-    for weapon_id,weapon_name in enumerate(WEAPONS):
-        weapon_id += 1
-        infile.seek(0x79100 + weapon_id * 0x08)
-        data = infile.read(8)
+        for weapon_id,weapon_name in enumerate(WEAPONS):
+            weapon_id += 1
+            infile.seek(0x79100 + weapon_id * 0x08)
+            data = infile.read(8)
 
-        properties = data[0]
-        attack = data[1]
-        hit_rate = data[2]
-        spell = data[3]
-        elements = elements_table[data[4]]
-        races = data[5]
-        equip = data[6]
-        stats = data[7]
+            properties = data[0]
+            attack = data[1]
+            hit_rate = data[2]
+            spell = data[3]
+            elements = elements_table[data[4]]
+            races = data[5]
+            equip = data[6]
+            stats = data[7]
 
-        used_equip_table_indices.add(equip & 0x1F)
-        used_element_table_indices.add(data[4])
+            used_equip_table_indices.add(equip & 0x1F)
+            used_element_table_indices.add(data[4])
 
-        print(f'<{weapon_id:02X}> // {weapon_name}')
+            outfile.write(f'<{weapon_id:02X}> // {weapon_name}\n')
+            outfile.write(f'  {attack}/{hit_rate & 0x7F}%\n')
+            # print(f'<{weapon_id:02X}> // {weapon_name}')
 
-        print(f'  {attack}/{hit_rate & 0x7F}%')
+            # print(f'  {attack}/{hit_rate & 0x7F}%')
 
-        stats_mods = get_stats_mods(stats)
-        if stats_mods:
-            print('  ' + ' '.join([f'{m[0]}{m[1]:+}' for m in stats_mods]))
+            stats_mods = get_stats_mods(stats)
+            if stats_mods:
+                outfile.write('  ' + ' '.join([f'{m[0]}{m[1]:+}' for m in stats_mods]) + '\n')
+                # print('  ' + ' '.join([f'{m[0]}{m[1]:+}' for m in stats_mods]))
 
-        if equip & 0x20:
-            print(f'  Two-handed')
-        equip = equip_table[equip & 0x1F]
-        item_equip_values[weapon_id] = equip
+            if equip & 0x20:
+                outfile.write(f'  Two-handed\n')
+                # print(f'  Two-handed')
+            equip_items_by_entry[equip & 0x1F].append(weapon_name)
+            equip = equip_table[equip & 0x1F]
+            item_equip_values[weapon_id] = equip
 
-        if properties & 0x20:
-            print(f'  Long range')
-        if properties & 0x40:
-            print(f'  Throwable')
-        if properties & 0x80:
-            print(f'  Magnetic')
+            if properties & 0x20:
+                outfile.write(f'  Long range\n')
+                # print(f'  Long range')
+            if properties & 0x40:
+                outfile.write(f'  Throwable\n')
+                # print(f'  Throwable')
+            if properties & 0x80:
+                outfile.write(f'  Magnetic\n')
+                # print(f'  Magnetic')
 
-        if spell:
-            print(f'  Casts {SPELLS[spell - 1]}')
-        if elements & 0x40:
-            print(f'  Absorbs HP')
-            elements ^= 0x40
-        if elements:
-            element_names = [e for i,e in enumerate(ELEMENTS) if (elements & (0x01 << i))]
-            print('  Inflicts ' + ', '.join(element_names))
-        if races:
-            race_names = [r for i,r in enumerate(RACES) if (races & (0x01 << i))]
-            print('  Strong against ' + ', '.join(race_names))
-        if equip:
-            job_names = [j for i,j in enumerate(JOBS) if (equip & (0x01 << i))]
-            print('  Usable by ' + ', '.join(job_names))
+            if spell:
+                outfile.write(f'  Casts {SPELLS[spell - 1]}\n')
+                # print(f'  Casts {SPELLS[spell - 1]}')
+            if elements & 0x40:
+                outfile.write(f'  Absorbs HP\n')
+                # print(f'  Absorbs HP')
+                elements ^= 0x40
+            if elements:
+                element_names = [e for i,e in enumerate(ELEMENTS) if (elements & (0x01 << i))]
+                outfile.write('  Inflicts ' + ', '.join(element_names) + '\n')
+                # print('  Inflicts ' + ', '.join(element_names))
+            if races:
+                race_names = [r for i,r in enumerate(RACES) if (races & (0x01 << i))]
+                outfile.write('  Strong against ' + ', '.join(race_names) + '\n')
+                # print('  Strong against ' + ', '.join(race_names))
+            if equip:
+                job_names = [j for i,j in enumerate(JOBS) if (equip & (0x01 << i))]
+                outfile.write('  Usable by ' + ', '.join(job_names) + '\n')
+                # print('  Usable by ' + ', '.join(job_names))
 
-        print()
+            outfile.write('\n')
+            # print()
 
-    for armor_id,armor_name in enumerate(ARMORS):
-        armor_id += 0x61
-        infile.seek(0x79100 + armor_id * 0x08)
-        data = infile.read(8)
+        for armor_id,armor_name in enumerate(ARMORS):
+            armor_id += 0x61
+            infile.seek(0x79100 + armor_id * 0x08)
+            data = infile.read(8)
 
-        magnetic = bool(data[0] & 0x80)
-        magic_evade = data[0] & 0x7F
-        physical_defense = data[1]
-        physical_evade = data[2]
-        magic_defense = data[3]
-        elements = elements_table[data[4] & 0x3F]
-        races = data[5]
-        equip = equip_table[data[6] & 0x1F]
-        stats = data[7]
+            magnetic = bool(data[0] & 0x80)
+            magic_evade = data[0] & 0x7F
+            physical_defense = data[1]
+            physical_evade = data[2]
+            magic_defense = data[3]
+            elements = elements_table[data[4] & 0x3F]
+            races = data[5]
+            equip = equip_table[data[6] & 0x1F]
+            stats = data[7]
 
-        used_equip_table_indices.add(equip)
-        used_element_table_indices.add(data[4] & 0x3F)
+            equip_items_by_entry[data[6] & 0x1F].append(armor_name)
+            used_equip_table_indices.add(data[6] & 0x1F)
+            used_element_table_indices.add(data[4] & 0x3F)
 
-        item_equip_values[armor_id] = equip
+            item_equip_values[armor_id] = equip
 
-        print(f'<{armor_id:02X}> // {armor_name}')
+            outfile.write(f'<{armor_id:02X}> // {armor_name}\n')
+            outfile.write(f'  {physical_defense}/{physical_evade}, {magic_defense}/{magic_evade}\n')
+            #print(f'<{armor_id:02X}> // {armor_name}')
 
-        print(f'  {physical_defense}/{physical_evade}, {magic_defense}/{magic_evade}')
+            #print(f'  {physical_defense}/{physical_evade}, {magic_defense}/{magic_evade}')
 
-        if magnetic:
-            print('  Magnetic')
+            if magnetic:
+                outfile.write('  Magnetic\n')
+                #print('  Magnetic')
 
-        stats_mods = get_stats_mods(stats)
-        if stats_mods:
-            print('  ' + ' '.join([f'{m[0]}{m[1]:+}' for m in stats_mods]))
+            stats_mods = get_stats_mods(stats)
+            if stats_mods:
+                outfile.write('  ' + ' '.join([f'{m[0]}{m[1]:+}' for m in stats_mods]) + '\n')
+                #print('  ' + ' '.join([f'{m[0]}{m[1]:+}' for m in stats_mods]))
 
-        if elements:
-            element_names = [e for i,e in enumerate(ELEMENTS) if (elements & (0x01 << i))]
-            print('  Defends against ' + ', '.join(element_names))
+            if elements:
+                element_names = [e for i,e in enumerate(ELEMENTS) if (elements & (0x01 << i))]
+                outfile.write('  Defends against ' + ', '.join(element_names) + '\n')
+                #print('  Defends against ' + ', '.join(element_names))
 
-        if races:
-            race_names = [r for i,r in enumerate(RACES) if (races & (0x01 << i))]
-            print('  Defends against ' + ', '.join(race_names))
+            if races:
+                race_names = [r for i,r in enumerate(RACES) if (races & (0x01 << i))]
+                outfile.write('  Defends against ' + ', '.join(race_names) + '\n')
+                #print('  Defends against ' + ', '.join(race_names))
 
-        if equip:
-            job_names = [j for i,j in enumerate(JOBS) if (equip & (0x01 << i))]
-            print('  Usable by ' + ', '.join(job_names))
+            if equip:
+                job_names = [j for i,j in enumerate(JOBS) if (equip & (0x01 << i))]
+                outfile.write('  Usable by ' + ', '.join(job_names) + '\n')
+                #print('  Usable by ' + ', '.join(job_names))
+            
+            outfile.write('\n')
+            #print()
 
-        print()
+    outfile.write('Equip table entries, in job class order left-to-right (DKC up to FuSoYa):\n\n')
+    for i in range(0x20):
+        equip_value = equip_table[i]
+        fields = [str((equip_value >> j) & 1) for j in range(len(JOBS))]
+        outfile.write(f'Equip table entry 0x{i:02X}: ' + ','.join(fields) + '\n  - ' + ', '.join(equip_items_by_entry[i]) + '\n\n')
+
+    # check for unused table indices
+    outfile.write('UNUSED EQUIP TABLE ENTRIES: ' +
+        ','.join([f'{b:02X}' for b in range(0x20) if b not in used_equip_table_indices])
+        + '\n') 
+    outfile.write('UNUSED (BY EQUIPMENT) ELEMENT TABLE ENTRIES: ' +
+        ','.join([f'{b:02X}' for b in range(0x40) if b not in used_element_table_indices])
+        + '\n')    
 
 # create CSV values to put in item DB
-for item_id in range(255):
-    equip_value = item_equip_values.get(item_id, 0)
-    fields = [str((equip_value >> i) & 1) for i in range(len(JOBS))]
-    print(','.join(fields))
+# for item_id in range(255):
+#     equip_value = item_equip_values.get(item_id, 0)
+#     fields = [str((equip_value >> i) & 1) for i in range(len(JOBS))]
+#     print(','.join(fields))
 
 # check for unused table indices
-print('UNUSED EQUIP TABLE ENTRIES: ' +
-    ','.join([f'{b:02X}' for b in range(0x20) if b not in used_equip_table_indices])
-    ) 
-print('UNUSED ELEMENT TABLE ENTRIES: ' +
-    ','.join([f'{b:02X}' for b in range(0x40) if b not in used_element_table_indices])
-    ) 
+# print('UNUSED EQUIP TABLE ENTRIES: ' +
+#     ','.join([f'{b:02X}' for b in range(0x20) if b not in used_equip_table_indices])
+#     ) 
+# print('UNUSED ELEMENT TABLE ENTRIES: ' +
+#     ','.join([f'{b:02X}' for b in range(0x40) if b not in used_element_table_indices])
+#     ) 
