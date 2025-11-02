@@ -365,6 +365,6 @@ def spellset_data(env):
         spset_script.append('}\n')
         spells_script.extend(spset_script)
 
-    print('\n'.join(spells_script))
+    #print('\n'.join(spells_script))
     env.add_script('\n'.join(spells_script))
     
