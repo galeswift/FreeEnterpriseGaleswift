@@ -30,7 +30,8 @@ Fork modifications via fork devs.
 21:89C0 - 21:89FF   : character alternate jobs
 21:8A00 - 21:8BFF   : dimmed job palettes
 21:8C00 - 21:8CFF   : extended names - code lookup table
-21:8D00 - 21:8D8F   : *** UNUSED ***
+21:8D00 - 21:8D0F  F: expanded Sing spell data 
+21:8D10 - 21:8D8F   : *** UNUSED ***
 21:8D90 - 21:8FFF   : extended names - extra names
 21:9000 - 21:AFFF   : NPC sprite lookup table
 21:B000 - 21:BFFF   : extended NPC palette table
