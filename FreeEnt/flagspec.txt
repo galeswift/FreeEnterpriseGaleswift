@@ -147,7 +147,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:skillissue
 -wacky:workexperience
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin/-tweak:rosadin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon 
--tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep
+-tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -429,7 +429,8 @@ G64                  glitch_allow_64
 -tweak:edwardsing        edwardsing
 -tweak:edwardsingbetter  edwardsing_better
 -tweak:darkpaladin   darkpaladin
--tweak:rosadin       rosa_paladin
+-tweak:rosadin       rosapaladin
+-tweak:rosapray      rosapray
 -tweak:cidairship    cidairship
 -tweak:cidpeep       cidpeep
 -tweak:harmspell     harmspell

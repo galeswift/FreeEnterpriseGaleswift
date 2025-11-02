@@ -1191,3 +1191,20 @@ This flag allows Twin to cast W.Meteo or self-target Stone, in addition to Flare
 This flag turns the Chocobo summon into a spell somewhat like Asura, in that sometimes it will instead Call the Big Chocobo to attack. The chance of the Big Chocobo attacking is 4% plus 2% for each distinct item stored with the Big Chocobo, maxing out at 100% at 48 distinct items. The spell power is described in the following way. The base spell power is 40. For each distinct item stored with the Big Chocobo, the spell power increases by 8, plus its item price (prices larger than 112000 GP count as 112000) divided by 16000, times 8. The largest increase per item is 64 points of spell power (e.g. Crystal Sword, Avenger, Adamant). The maximum total spell power is 2040. Carrots give +16 spell power instead of +8, and Whistles give +32 spell power instead of +16. The Grimoire's Chocobo summon is replaced with Big Chocobo.
 
 Since the Big Chocobo menu cannot be accessed with the Save Us Big Chocobo wacky active, the probability is a static 20% with 232 spell power (as if you stored 8 different items with an average of 24 bonus spell power each).
+
+### `-tweak:rosapray` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: improve_rosa_pray.f4c
+
+This flag, like the flag to improve Edward's Heal command, allows Pray to cast better spells than Cure1. As Rosa's level increases, the available spells change, getting better with higher levels:
+
+!!! info "Level/RNG ranges for Pray spells"
+    - "Prayer unanswered.": Level 10-20, RNG 0-31
+    - Cure1: Level 10-32, RNG 32-67
+    - Cure2: Level 13-57, RNG 68-143
+    - Cure3: Level 28-73, RNG 144-191
+    - Cure4: Level 38-99, RNG 192-255
+
+The rough probability of getting a particular spell is obtained by looking at the range 3xL-30 and 5xL+5, where L is Rosa's level (and the range is clamped to 0-255), and rolling a random number in that range; the outcome is determined by which range the random number lands in, listed above. So, even though Cure1 is possible at level 32, for example, it is highly unlikely.

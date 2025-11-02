@@ -8903,6 +8903,11 @@ var FLAG_UISPEC = [
             "flag": "-tweak:chocobosummon",
             "title": "Sometimes Call the Big Chocobo in battle",
             "description": "The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there)."
+          },
+          {
+            "flag": "-tweak:rosapray",
+            "title": "Improve Rosa's Pray commmand",
+            "description": "Rosa's Pray command now casts nothing/Cure1/Cure2/Cure3/Cure4 randomly depending on Rosa's level. The higher Rosa's level is, the better the spell tends to be, with Cure2/Cure3/Cure4 becoming available when Rosa normally learns them."
           }
         ]
       }

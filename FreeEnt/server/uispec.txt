@@ -981,6 +981,7 @@
 .[-tweak:cidpeep] Peep can hit boss bit monsters and Zeromus
 .[-tweak:twinmeteo] Twin can also cast W.Meteo or self-Stone
 .[-tweak:chocobosummon] Sometimes Call the Big Chocobo in battle
+.[-tweak:rosapray] Improve Rosa's Pray commmand
 
 == SPOILERS
 <> No spoiler log

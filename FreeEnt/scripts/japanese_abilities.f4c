@@ -40,10 +40,10 @@ actor(#Rosa1) {
     commands {
         #Fight
         #White
-        // %flag rosadin on%
+        // %flag rosapaladin on%
         #Cover
         // %end%
-        // %flag rosadin off%
+        // %flag rosapaladin off%
         #Aim
         #Pray
         // %end%
@@ -55,10 +55,10 @@ actor(#Rosa2) {
     commands {
         #Fight
         #White
-        // %flag rosadin on%
+        // %flag rosapaladin on%
         #Cover
         // %end%
-        // %flag rosadin off%
+        // %flag rosapaladin off%
         #Aim
         #Pray
         // %end%

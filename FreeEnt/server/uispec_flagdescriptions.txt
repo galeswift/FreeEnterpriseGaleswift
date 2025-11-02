@@ -1084,3 +1084,6 @@ Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the castin
 
 [-tweak:chocobosummon]
 The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there).
+
+[-tweak:rosapray]
+Rosa's Pray command now casts nothing/Cure1/Cure2/Cure3/Cure4 randomly depending on Rosa's level. The higher Rosa's level is, the better the spell tends to be, with Cure2/Cure3/Cure4 becoming available when Rosa normally learns them.

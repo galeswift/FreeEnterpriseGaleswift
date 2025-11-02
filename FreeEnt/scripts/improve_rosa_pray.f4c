@@ -1,0 +1,73 @@
+// make Pray viable by expanding the range of spells
+
+msfpatch {
+    .addr $03e852
+        jml $=ImprovedPray
+
+    .new
+    ImprovedPray:
+        // first, calculate lower bound = 3*Level - 30 -> X
+        // and upper bound = 5*Level + 5 -> A
+        // for the RNG based on the user's level
+        tdc
+        lda $2682
+        rep #$20
+        .mx 0x00
+        // use a dead-end register for storage
+        sta $1670
+        asl a
+        clc 
+        adc $1670
+        sec
+        sbc #$001e
+        bcs $01
+        tdc
+        tax
+        
+        lda $1670
+        asl a
+        asl a
+        clc
+        adc $1670
+        adc #$0005
+        cmp #$0100
+        bcc $03
+        lda #$00ff
+        sep #$20
+        .mx 0x20
+        
+        jsl $=Util__BattleRNG
+
+        // A contains a number between the lower and upper bounds
+        // which we can now compare to various ranges:
+        // Cure4: 192-255
+        // Cure3: 144-191
+        // Cure2: 68-143
+        // Cure1: 32-67
+        // Nothing: 0-31
+        cmp #$c0
+        bcc $04
+        lda #$11
+        bra $+SpellChosen
+
+        cmp #$90
+        bcc $04
+        lda #$10
+        bra $+SpellChosen
+
+        cmp #$44
+        bcc $04
+        lda #$0f
+        bra $+SpellChosen
+
+        cmp #$20
+        bcc $04
+        lda #$0e
+        bra $+SpellChosen
+
+        // do nothing, jump to the vanilla code
+        jml $03e859
+    %SpellChosen:
+        jml $03e865
+
+}

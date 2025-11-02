@@ -927,9 +927,11 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/big_chocobo_summon.f4c')
         if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
             env.add_toggle('save us big chocobo summon')
-    if options.flags.has('rosa_paladin'):
+    if options.flags.has('rosapaladin'):
         env.add_file('scripts/rosa_paladin.f4c')
         env.add_substitution('auto cover job class', '#$05')
+    if options.flags.has('rosapray'):
+        env.add_file('scripts/improve_rosa_pray.f4c')
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')

@@ -13,7 +13,7 @@ spellset(#Rosa) {
         // %end%
         15  #Mute
         18  #Heal
-        // %flag rosadin on%
+        // %flag rosapaladin on%
         19  #Exit
         // %end%
         20  #Bersk
@@ -26,10 +26,10 @@ spellset(#Rosa) {
         34  #Wall
         38  #Cure4
         42  #Life2
-        // %flag rosadin on%
+        // %flag rosapaladin on%
         56  #White
         // %end%
-        // %flag rosadin off%
+        // %flag rosapaladin off%
         55  #White
         // %end%
     }

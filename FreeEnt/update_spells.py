@@ -239,7 +239,7 @@ def spellset_data(env):
             '#White' : 57
         })
 
-    if env.options.flags.has('rosa_paladin'):
+    if env.options.flags.has('rosapaladin'):
         # Remove Exit from Cecil's spellset
         # and give it to Rosa's, since those are swapped
         # Also update Sight/Peep to be pre-learned by Rosa,
