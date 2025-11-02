@@ -1166,6 +1166,14 @@ This flag effectively swaps Paladin Cecil and Rosa's job classes, without changi
 
 This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.
 
+### `-tweak:cidpeep` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: improve_cid_peep.f4c
+
+This flag allows the Peep command (not the spell/Bestiary) to hit boss bit monsters. It can also hit Zeromus, since there's no exception for that fight, unlike the spell.
+
 ### `-tweak:twinmeteo` {: .h6 }
 
 - Idea: ScytheMarshall

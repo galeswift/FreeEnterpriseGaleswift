@@ -1076,6 +1076,9 @@ Cecil now becomes a White Mage upon class change on Ordeals and Rosa is now a Pa
 [-tweak:cidairship]
 Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon.
 
+[-tweak:cidpeep]
+Normally, Peep does not hit monster with the boss bit. This flag removes that restriction. Because the Peep command does not have an exception for the Zeromus fight like the spell does, Cid can use Peep in that battle as well.
+
 [-tweak:twinmeteo]
 Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the casting twins have a combined level of 70 or greater, then W.Meteo and self-target Stone are also possible options. W.Meteo is about half as likely as Comet, and Stone is half as likely as W.Meteo (with a corresponding reduction to Flare's chances).
 

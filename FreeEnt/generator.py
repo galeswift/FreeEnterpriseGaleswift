@@ -919,6 +919,8 @@ def build(romfile, options, force_recompile=False):
             env.add_substitution('edward sing status options', '#$1804')
     if options.flags.has('cidairship'):
         env.add_file('scripts/cidairship.f4c')
+    if options.flags.has('cidpeep'):
+        env.add_file('scripts/improve_cid_peep.f4c')
     if options.flags.has('twinmeteo'):
         env.add_file('scripts/twin_meteo_stone.f4c')
     if options.flags.has('bigchocobosummon'):

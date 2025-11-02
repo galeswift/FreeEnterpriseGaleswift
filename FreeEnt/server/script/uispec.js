@@ -8890,6 +8890,11 @@ var FLAG_UISPEC = [
             "description": "Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon."
           },
           {
+            "flag": "-tweak:cidpeep",
+            "title": "Peep can hit boss bit monsters and Zeromus",
+            "description": "Normally, Peep does not hit monster with the boss bit. This flag removes that restriction. Because the Peep command does not have an exception for the Zeromus fight like the spell does, Cid can use Peep in that battle as well."
+          },
+          {
             "flag": "-tweak:twinmeteo",
             "title": "Twin can also cast W.Meteo or self-Stone",
             "description": "Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the casting twins have a combined level of 70 or greater, then W.Meteo and self-target Stone are also possible options. W.Meteo is about half as likely as Comet, and Stone is half as likely as W.Meteo (with a corresponding reduction to Flare's chances)."
