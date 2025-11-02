@@ -69,8 +69,13 @@ actor(#Rosa1)
     commands {
         #Sing
         #White
+        // %flag rosadin on%
+        #Cover
+        // %end%
+        // %flag rosadin off%
         #Aim
-        // %flag japanese_abilities on%
+        // %end%
+        // %flags: ~rosadin japanese_abilities%
         #Pray
         // %end%
         #Item
@@ -123,12 +128,17 @@ actor(#PCecil)
         // %flags: darkpaladin japanese_abilities%
         #DarkWave
         // %end%
-        // %flag darkpaladin on%
+        // %if flags: darkpaladin%
         #Black
-        // %end%
-        // %flag darkpaladin off%
+        // %elif flags: rosadin%
+        #White
+        #Aim
+        // %else%
         #White
         #Cover
+        // %end%
+        // %flags: rosadin japanese_abilities%
+        #Pray
         // %end%
         #Item
     }

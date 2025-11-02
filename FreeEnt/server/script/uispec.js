@@ -8868,9 +8868,21 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "-tweak:darkpaladin",
-            "title": "Cecil becomes a Dark Paladin",
-            "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+            "flag": "@anon108",
+            "title": "Changes to Cecil's Paladin class",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:darkpaladin",
+                "title": "Cecil becomes a Dark Paladin",
+                "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+              },
+              {
+                "flag": "-tweak:rosadin",
+                "title": "Rosa and Paladin Cecil switch classes",
+                "description": "Cecil now becomes a White Mage upon class change on Ordeals and Rosa is now a Paladin. Armor options remain the same, but weapon and shield options are swapped (except for the FF4A weapons). Rosa gains Cover and will auto-Cover, but downgrades to Cecil's White magic spellset (excluding Exit, which remains event-based); Cecil gains Pray and Rosa's full White magic spellset (including Exit on level-up)."
+              }
+            ]
           },
           {
             "flag": "-tweak:cidairship",
@@ -8895,7 +8907,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon108",
+        "flag": "@anon109",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8949,7 +8961,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon109",
+            "flag": "@anon110",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8965,7 +8977,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon110",
+                "flag": "@anon111",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

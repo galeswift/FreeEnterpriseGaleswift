@@ -655,11 +655,10 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
-    if options.flags.has('japanese_spells'):
-        env.add_file('scripts/japanese_spells.f4c')
-    elif options.flags.has('antidale_spells_progression'):
-        env.add_file('scripts/reordered_spells.f4c')
-        update_spells.apply(env)
+    # handle all changes to spells/spellsets except for FuSoYa
+    if options.flags.has('antidale_spells_progression'):
+        update_spells.spell_data(env)
+    update_spells.spellset_data(env)
 
     if options.flags.has('japanese_abilities'):
         env.add_file('scripts/japanese_abilities.f4c')
@@ -926,6 +925,9 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/big_chocobo_summon.f4c')
         if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
             env.add_toggle('save us big chocobo summon')
+    if options.flags.has('rosa_paladin'):
+        env.add_file('scripts/rosa_paladin.f4c')
+        env.add_substitution('auto cover job class', '#$05')
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')

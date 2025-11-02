@@ -592,6 +592,10 @@ def apply(env):
 
     if env.options.flags.has('antidale_spells_progression'):
         excluded_spells.extend(['#spell.Weak'])
+        if not env.options.flags.has('fusoya_nerfed'):
+            env.add_scripts(
+            'spellset(#FusoyaBlack) {{ learned {{ 53  #spell.Weak }} }}'
+            )
 
     max_credits = 14
     if env.options.flags.has('uncapped_fusoya'):

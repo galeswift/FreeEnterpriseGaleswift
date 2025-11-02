@@ -15,6 +15,9 @@ spellset(#Rosa) {
         14  $17
         // %end%
         15  #Mute
+        // %flag rosadin on%
+        19  #Exit
+        // %end%
         18  #Heal
         20  #Bersk
         23  #Blink

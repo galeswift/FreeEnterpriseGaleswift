@@ -28,25 +28,7 @@ actor(#PCecil)
     arms #NoWeapon
 }
 
-// build new spell by revamping Paladin Cecil's old White set
-spellset(#PCecil) {
-    initial {
-        #Venom
-    }
-    learned {
-        3 #Sleep
-        5 #Piggy
-        8 #Drain
-        12 #Psych
-        15 #Toad
-        19 #Warp
-        22 #Stop
-        25 #Virus
-        33 #Weak
-        37 #Fatal
-        40 #Nuke
-    }
-}
+// handle spellsets in update_spells.py
 
 // assign this spell set to "Black" instead of "White"
 patch ($13fdf8 bus) { FF 00 FF }

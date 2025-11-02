@@ -1,0 +1,109 @@
+// effectively, swap Rosa and Cecil jobs but not stats
+// swap weapons, but not armour
+
+patch($0fa558 bus) { 22 04 } // $04, non-Paladin shields for Rosa
+patch($0fa55E bus) { 22 00 } // $07, swords for Rosa
+patch($0fa566 bus) { 0C 23 } // $0B, white mage staves for Cecil
+patch($0fa576 bus) { B6 18 } // $13, daggers for Rosa
+patch($0fa588 bus) { 20 00 } // $1C, holy swords/Paladin-only shields for Rosa
+
+// changes axes to point at the non-Paladin Shield equip field (so Cecil
+// loses them and Rosa gains them, due to the above shields change)
+patch($0f92c6 bus) { 04 }
+patch($0f92ce bus) { 04 }
+patch($0f92d6 bus) { 04 }
+patch($0f933e bus) { 24 }
+patch($0f9346 bus) { 24 }
+
+patch($0fa584 bus) { 00 04 } // $1A, Paladin-only armour for Cecil
+
+// change Paladin-only armour to point at this equip field ($1A, which
+// is normally an unused Rosa-only field) instead of the holy sword field 
+// ($1C, which was diverted to Rosa)
+patch($0f948e bus) { 5A }
+patch($0f94b6 bus) { 5A }
+patch($0f952e bus) { 9A }
+patch($0f9566 bus) { 9A }
+patch($0f9606 bus) { DA }
+patch($0f9636 bus) { 1A }
+
+// swap Rosa and Cecil's spellsets, in the menu and in battle
+
+patch($13fdec bus) { 00 ff ff }
+patch($13fdf8 bus) { 07 ff ff }
+patch($14ffb1 bus) { 00 ff ff }
+patch($14ffbd bus) { 07 ff ff }
+
+// do command changes for Cecil and Rosa; the wacky flags that
+// change commands take this flag into account
+
+actor(#Rosa1) {
+    commands {
+        #Fight
+        #White
+        #Cover
+        #Item
+    }
+}
+
+actor(#PCecil)
+{
+    commands {
+        #Fight
+        #White
+        #Aim
+        // %flag japanese_abilities on%
+        #Pray
+        // %end%
+        #Item
+    }
+}
+
+// handle spellset changes; Cecil needs Exit, which we'll put at his usual level,
+// and Rosa cannot learn Exit (conveniently, Rosa should have Exit automatically
+// placed in the correct spellset, even if it's not her normal spellset)
+// all changes happen in update_spells.py
+
+
+// swap Pally Cecil's and Rosa's class names
+
+patch($0fa787 bus) {51 5C 67 5C 5F 64 69}
+patch($0fa7a3 bus) {58 63 C1 58 64 75 FF}
+
+// change the Ordeals class-change text, depending
+// dupes/no dupes (this *should* override mtordeals.f4c)
+
+// %flag characters_no_duplicates on%
+text(bank 1 message $CB) {
+[Cecil] is already a 
+White Wizard!
+}
+
+text(bank 1 message $CD) {
+[Cecil] became a White
+Wizard!
+}
+
+text(bank 1 message $CC) {
+[Cecil] became a White
+Wizard, wherever he is!
+}
+// %end%
+
+// %flag characters_no_duplicates off%
+text(bank 1 message $CB) {
+All [Cecil]s are already 
+White Wizards!
+}
+
+text(bank 1 message $CD) {
+All [Cecil]s became
+White Wizards!
+}
+
+text(bank 1 message $CC) {
+All [Cecil]s became
+White Wizards, wherever
+they are!
+}
+// %end%

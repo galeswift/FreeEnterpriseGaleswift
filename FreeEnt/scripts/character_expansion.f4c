@@ -2003,7 +2003,7 @@ msfpatch {
         // %end%
 
         // %if ~wacky_all_characters_cover%
-        cmp #$09
+        cmp {% auto cover job class : #$09 %}
         beq $+IsPaladinCecil
         lda $a9
         tax

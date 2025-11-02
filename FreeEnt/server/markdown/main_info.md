@@ -1149,6 +1149,15 @@ The battle alert textbox will now always be a fixed song name, one of a few sour
 
 This flag makes widespread changes to Paladin Cecil's stats, equipment, and abilities, based loosely on the stronger DKC in Unprecedented Chaos. He retains Dark Wave upon class-change, as well as DKC equipment, and loses command Cover (but will still Cover low-HP characters). His stats become more attack-focused/Wisdom-heavy and his gear now boosts Wis instead of Wil. His white magic set is replaced with a black magic set that mostly has status spells and single-target magic. His equipment is renamed for thematic reasons. Holy swords are now dark elemental, and the Lightbringer (now "Deathbringer") specifically hits dragon weakness. Spoiler logs are updated to match the new names, as are the select button descriptions.
 
+### `-tweak:rosadin` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design: CoffeeAndChocobos, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: rosa_paladin.f4c, mtordeals.f4c, character_expansion.f4c, various command f4c's, generator.py
+
+This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot). They also swap weapons (except for the FF4A weapons), but *not* armour.
+
 ### `-tweak:cidairship` {: .h6 }
 
 - Idea: CoffeeAndChocobos, though the original FF4 devs may have considered doing something like this

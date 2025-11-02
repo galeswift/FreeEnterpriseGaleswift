@@ -380,7 +380,13 @@ event($82)  //Kain regaining his senses
     }
     
     player face down
+    // %flag rosa_paladin on%
+    // Rosa is using PCecil's White spellset
+    give spell #PCecil #Exit
+    // %end%
+    // %flag rosa_paladin off%
     give spell #Rosa #Exit
+    // %end%
     deactivate #ZotKain
     set #KainRegainedSenses
 }
