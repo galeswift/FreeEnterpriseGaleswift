@@ -1,0 +1,24 @@
+// the game checks for the vanilla FuSoYa actor...
+// not an axtor who happens to be FuSoYa.
+
+// (we'll leave the fact that it's the highest-priority
+// FuSoYa that gets checked alone; that quirk now becomes
+// tech, where you use Regen with a lower-priority Fu, knock them
+// out, and then reap the benefits of infinite healing as long as
+// your higher-priority Fu stays Regen-able.)
+
+msfpatch {
+    .addr $13ffbc
+        jsl $=CheckFusoyaRegen
+
+    .new
+    CheckFusoyaRegen:
+        // first displaced command
+        and #$1f
+        phx
+        jsr $_Lookup_AxtorToActor
+        plx
+        // second displaced command
+        cmp #$13
+        rtl
+}

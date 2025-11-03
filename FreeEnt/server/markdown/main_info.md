@@ -747,14 +747,18 @@ These flags restore functionality to monsters that the original devs removed bef
 
 - Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
 - Design/Programming: ScytheMarshall, cassidy/Wylem (for Hermes/Berserk)
-- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c
+- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c, fix_regen_slot_indexing.f4c, fix_regen_axtor_check.f4c
 
-This flag includes fixes for four vanilla FF4 bugs: 
+This flag includes fixes for a variety of vanilla FF4 bugs: 
 
 - The Hermes/Berserk glitch, where if you use a Hermes and then berserk that character before they take another action, they can hit swooned chararcters (because the game checks the subcommand for "can this actor hit swooned actors with their command?" and Hermes has the same subcommand as a monster spell that's used in the Zeromus cutscene to revive your party). The fix is to first check if the actor's command is magic; if it is, then load the subcommand, and if it isn't, put `FF FF` into the (16-bit) accumulator instead (preventing the check from ever succeeding).
 - The monster victim history bug, where multi-target spells do not update a monster's victim history except when the monster is in the lowest slot. The fix is to rewrite a loop in-place.
 - The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
 - The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
+- The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
+
+It also adds a fix for a vanilla FE bug: 
+- The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
 
 ### `-smith:playable` {: .h6 }
 

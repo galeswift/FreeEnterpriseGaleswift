@@ -875,7 +875,9 @@ def build(romfile, options, force_recompile=False):
         env.add_files(
             'scripts/fix_wisdom_will_timers.f4c',
             'scripts/fix_victim_history.f4c',
-            'scripts/fix_hermes_berserk.f4c'
+            'scripts/fix_hermes_berserk.f4c',
+            'scripts/fix_regen_axtor_check.f4c',
+            'scripts/fix_regen_slot_indexing.f4c'
             )
 
     if options.flags.has('vintage'):
