@@ -982,6 +982,7 @@
 .[-tweak:twinmeteo] Twin can also cast W.Meteo or self-Stone
 .[-tweak:chocobosummon] Sometimes Call the Big Chocobo in battle
 .[-tweak:rosapray] Improve Rosa's Pray commmand
+.[-tweak:fusoyaregen] FuSoYa's Regen command now heals MP instead of HP
 
 == SPOILERS
 <> No spoiler log

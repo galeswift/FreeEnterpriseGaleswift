@@ -934,6 +934,16 @@ def build(romfile, options, force_recompile=False):
         env.add_substitution('auto cover job class', '#$05')
     if options.flags.has('rosapray'):
         env.add_file('scripts/improve_rosa_pray.f4c')
+    if options.flags.has('fusoyaregen'):
+        if 'tellahmaneuver' in env.meta.get('wacky_challenge',[]):
+            env.add_binary(BusAddress(0x03E3FE), [0x32]) # 50 HP regen instead of 10 HP
+        else:
+            env.add_file('scripts/improve_fusoya_regen_mp.f4c')
+            env.add_toggle('fusoya_regen_mp')
+            if '3point' in env.meta.get('wacky_challenge',[]):
+                env.add_binary(BusAddress(0x03E3FE), [0x01]) # 1 MP regen instead of 10 MP
+                env.add_binary(BusAddress(0x03AAA7), [0x14]) # counter needs to hit 20 ticks instead of 5 ticks 
+                env.add_binary(BusAddress(0x13FEAB), [0x99]) # regen duration should be 25*RA ticks
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')

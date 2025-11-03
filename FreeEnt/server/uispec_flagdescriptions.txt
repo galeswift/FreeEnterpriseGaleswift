@@ -1087,3 +1087,6 @@ The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerfu
 
 [-tweak:rosapray]
 Rosa's Pray command now casts nothing/Cure1/Cure2/Cure3/Cure4 randomly depending on Rosa's level. The higher Rosa's level is, the better the spell tends to be, with Cure2/Cure3/Cure4 becoming available when Rosa normally learns them.
+
+[-tweak:fusoyaregen]
+Instead of healing HP, Regen now heals *MP* for party members (unless -wacky:tellahmaneuver is on, where it just heals more HP); the precise value depends on various flags.

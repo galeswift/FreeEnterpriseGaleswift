@@ -1212,3 +1212,13 @@ This flag, like the flag to improve Edward's Heal command, allows Pray to cast b
     - Cure4: Level 38-99, RNG 192-255
 
 The rough probability of getting a particular spell is obtained by looking at the range 3xL-30 and 5xL+5, where L is Rosa's level (and the range is clamped to 0-255), and rolling a random number in that range; the outcome is determined by which range the random number lands in, listed above. So, even though Cure1 is possible at level 32, for example, it is highly unlikely.
+
+### `-tweak:fusoyaregen` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: improve_fusoya_regen_mp.f4c, generator.py
+
+This flag changes FuSoYa's Regen command to heal MP instead (barring the Tellah Maneuver wacky). The amount of healing and duration depends on which wacky flags are in play: normally it will be 10 MP every 5 ticks for roughly 10x(Fu's RA) ticks. The Tellah Maneuver wacky makes that 50 HP instead. The 3 Point Challenge wacky makes it 1 MP and with a much longer duration/wait between each regen tick.
+
+Obviously this flag doesn't really do anything when paired with `-fusoya:omnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.

@@ -8908,6 +8908,11 @@ var FLAG_UISPEC = [
             "flag": "-tweak:rosapray",
             "title": "Improve Rosa's Pray commmand",
             "description": "Rosa's Pray command now casts nothing/Cure1/Cure2/Cure3/Cure4 randomly depending on Rosa's level. The higher Rosa's level is, the better the spell tends to be, with Cure2/Cure3/Cure4 becoming available when Rosa normally learns them."
+          },
+          {
+            "flag": "-tweak:fusoyaregen",
+            "title": "FuSoYa's Regen command now heals MP instead of HP",
+            "description": "Instead of healing HP, Regen now heals *MP* for party members (unless -wacky:tellahmaneuver is on, where it just heals more HP); the precise value depends on various flags."
           }
         ]
       }

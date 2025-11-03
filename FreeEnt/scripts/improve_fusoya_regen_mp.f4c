@@ -1,0 +1,53 @@
+// Idea: make Regen restore MP instead of HP!
+// Doable, but it's still not good lol.
+
+msfpatch {
+    .addr $03aabf
+        jml $=ImproveRegen
+        nop nop
+
+    .new
+    ImproveRegen:
+        // do displaced commands, to set up the
+        // *visual* MP restore (and get the indexing right)
+        phx
+        phy
+        tya
+        asl a
+        tax
+
+        lda $357d
+        sta $34d4,x
+        lda #$80
+        sta $34d5,x
+
+        // manually restore MP; pull Y, X earlier than
+        // in vanilla to get the index into the character
+        // battle stats back
+        tdc
+        lda $34d4,x
+        ply
+        plx
+        rep #$20
+        .mx 0x00
+        clc
+        adc $200b,x
+        cmp $200d,x
+        bcc $+NotFullMP
+        lda $200d,x
+    %NotFullMP:
+        sta $200b,x
+        
+        sep #$20
+        .mx 0x20
+        // rig the MP update flag/counter to always apply
+        lda #$01
+        sta $353e
+        sta $353f
+        jml $03aad1
+
+    .addr $03aae2
+        // update MP instead of applying the damage/status
+        jsr $805f
+        nop nop nop
+}
