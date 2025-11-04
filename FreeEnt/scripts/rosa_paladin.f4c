@@ -34,30 +34,7 @@ patch($13fdf8 bus) { 07 ff ff }
 patch($14ffb1 bus) { 00 ff ff }
 patch($14ffbd bus) { 07 ff ff }
 
-// do command changes for Cecil and Rosa; the wacky flags that
-// change commands take this flag into account
-
-actor(#Rosa1) {
-    commands {
-        #Fight
-        #White
-        #Cover
-        #Item
-    }
-}
-
-actor(#PCecil)
-{
-    commands {
-        #Fight
-        #White
-        #Aim
-        // %flag japanese_abilities on%
-        #Pray
-        // %end%
-        #Item
-    }
-}
+// do command changes for Cecil and Rosa in update_abilities.py
 
 // handle spellset changes; Cecil needs Exit, which we'll put at his usual level,
 // and Rosa cannot learn Exit (conveniently, Rosa should have Exit automatically

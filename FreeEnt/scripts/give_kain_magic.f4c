@@ -59,13 +59,4 @@ patch($0fa92d bus) { 14 }
 // %end%
 
 // sixth, actually give Kain the commands to use White/Black in battle
-actor(#Kain1)
-{
-    commands {
-        #Fight
-        #Jump
-        #White
-        #Black
-        #Item
-    }
-}
+// in update_abilities.py

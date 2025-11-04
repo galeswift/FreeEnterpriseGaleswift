@@ -45,6 +45,7 @@ from . import kit_rando
 from . import custom_weapon_rando
 from . import wacky_rando
 from . import update_spells
+from . import update_abilities
 
 from . import compile_item_prices
 from . import doors_rando
@@ -660,8 +661,8 @@ def build(romfile, options, force_recompile=False):
         update_spells.spell_data(env)
     update_spells.spellset_data(env)
 
-    if options.flags.has('japanese_abilities'):
-        env.add_file('scripts/japanese_abilities.f4c')
+    # handle all changes to command lists
+    update_abilities.command_lists(env)
 
     RANDO_MODULES = [
         character_rando,
