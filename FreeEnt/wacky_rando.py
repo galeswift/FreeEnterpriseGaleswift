@@ -333,6 +333,7 @@ def apply_neatfreak(env, rom_address):
 
 def apply_timeismoney(env, rom_address):
     env.add_file('scripts/sell_zero.f4c')
+    env.add_file('scripts/encounter_no_gp.f4c')
 
 def setup_mysteryjuice(env):
     juices = '''

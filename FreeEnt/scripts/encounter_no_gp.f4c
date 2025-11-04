@@ -1,9 +1,20 @@
 // no GP earned from enemies
+// (as in, your party GP does not increase,
+// because we are pretending the GP spoils number is 0)
 msfpatch {
-    .addr $03ecc7
-        lda #$00
-        nop nop
-    .addr $03ecd1
-        lda #$00
-        nop nop
+    .addr $03ed72
+        adc #$00
+        nop
+    .addr $03ed7b
+        adc #$00
+        nop
+    .addr $03ed84
+        adc #$00
+        nop
+}
+
+// always bypass the GP alert
+msfpatch {
+    .addr $03ee6d
+        bra $06
 }

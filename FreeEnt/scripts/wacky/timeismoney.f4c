@@ -51,13 +51,3 @@ msfpatch {
         lda $16a3 // displaced
         rtl
 }
-
-// no GP earned from enemies
-msfpatch {
-    .addr $03ecc7
-        lda #$00
-        nop nop
-    .addr $03ecd1
-        lda #$00
-        nop nop
-}
