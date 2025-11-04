@@ -146,6 +146,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:advertising
 -wacky:skillissue
 -wacky:workexperience
+-wacky:moneygains
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin/-tweak:rosadin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon 
 -tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen
 -spoil:all

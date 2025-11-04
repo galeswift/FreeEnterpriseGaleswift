@@ -48,6 +48,7 @@ WACKY_CHALLENGES = {
     'advertising'       : 'Truth in\nAdvertising',
     'skillissue'        : 'Skill Issue',
     'workexperience'    : 'Work Experience',
+    'moneygains'        : 'Big Money,\nLittle Gains'
 }
 
 WACKY_ROM_ADDRESS = BusAddress(0x268000)
@@ -95,6 +96,7 @@ WACKY_RAM_USAGE = {
     'advertising'       : 0,
     'skillissue'        : 2,
     'workexperience'    : 0,
+    'moneygains'        : 0,
 }
 
 WACKY_MUTUAL_INCOMPATIBILITIES = [
@@ -334,6 +336,9 @@ def apply_neatfreak(env, rom_address):
 def apply_timeismoney(env, rom_address):
     env.add_file('scripts/sell_zero.f4c')
     env.add_file('scripts/encounter_no_gp.f4c')
+
+def apply_moneygains(env, rom_address):
+    env.add_toggle('wacky_gp_exp_swap')
 
 def setup_mysteryjuice(env):
     juices = '''

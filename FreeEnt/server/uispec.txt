@@ -928,6 +928,7 @@
 ..(-wacky:random6)!^         6 random wacky challenges
 .[-wacky:afflicted]!        "Afflicted"
 .[-wacky:battlescars]!      "Battle Scars"
+.[-wacky:moneygains]!^      "Big Money, Little Gains"
 .[-wacky:bodyguard]         "The Bodyguard"
 .[-wacky:dropitlikeitshot]^ "Drop It Like It's Hot"
 .[-wacky:enemyunknown]!     "Enemy Unknown"

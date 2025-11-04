@@ -1107,6 +1107,14 @@ This wacky flag makes two changes to experience, to simulate what it's like to g
 
 The idea is that two characters can do the same work and get different experience, and that you need work experience to get work experience. Probably the most cynical wacky flag of the whole bunch.
 
+### `-wacky:moneygains` - Big Money, Little Gains {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design/Programming: ScytheMarshall
+- Locations: wacky_rando.py, moneygains.f4c, randomizer_boss.f4c
+
+This wacky flag swaps GP and EXP rewards from battle, as if the GP and EXP values for monsters were swapped. Meaning, the experience you get will be the GP rewards appropriately scaled by the experience flags (or ignored entirely by `Enoexp`), and the GP you get will be from the experience rewards, including the 3-byte rewards for some bosses (or ignored entirely by the Time is Money wacky or `Enogp`).
+
 ## Tweak Flags
 
 The "Tweak" flags are miscellaneous flags that modify the game in fairly large ways, to try out different mechanics, do proof-of-concepts for code changes or f4c usage, and so on.

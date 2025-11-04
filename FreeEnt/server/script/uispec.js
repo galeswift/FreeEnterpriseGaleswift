@@ -8650,6 +8650,12 @@ var FLAG_UISPEC = [
             "hard": true
           },
           {
+            "flag": "-wacky:moneygains",
+            "title": "\"Big Money, Little Gains\"",
+            "hard": true,
+            "fork": true
+          },
+          {
             "flag": "-wacky:bodyguard",
             "title": "\"The Bodyguard\""
           },
