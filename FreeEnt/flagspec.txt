@@ -40,7 +40,7 @@ Conly:cecil Conly:kain Conly:rydia Conly:tellah Conly:edward Conly:rosa Conly:ya
 Cno:cecil Cno:kain Cno:rydia Cno:tellah Cno:edward Cno:rosa Cno:yang Cno:palom Cno:porom Cno:cid Cno:edge Cno:fusoya
 Crestrict:cecil Crestrict:kain Crestrict:rydia Crestrict:tellah Crestrict:edward Crestrict:rosa Crestrict:yang Crestrict:palom Crestrict:porom Crestrict:cid Crestrict:edge Crestrict:fusoya
 Cthrift:2/Cthrift:3/Cthrift:4/Cthrift:5
-Cspells:j/Cspells:anti Cj:abilities Cpaladin Cnekkie Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader/Cmostlydead/Cbrieflydead Chero Csuperhero
+Cspells:j/Cspells:anti Cabilities:j/Cabilities:fullgood Cpaladin Cnekkie Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader/Cmostlydead/Cbrieflydead Chero Csuperhero
 Ctreasure:free Ctreasure:earned Ctreasure:unsafe Ctreasure:relaxed Chi Cfifo
 Tvanilla Tshuffle/Tstandard/Tpro/Tsemipro/Twild/Twildish/Tstandardish/Tvanillaish/Tempty
 Tsparse:10/Tsparse:20/Tsparse:30/Tsparse:40/Tsparse:50/Tsparse:60/Tsparse:70/Tsparse:80/Tsparse:90
@@ -230,7 +230,8 @@ Cnopartner           no_starting_partner
 Cmaybe               characters_not_guaranteed
 Cspells:j            japanese_spells
 Cspells:anti         antidale_spells_progression
-Cj:abilities         japanese_abilities
+Cabilities:j         japanese_abilities
+Cabilities:fullgood  all_good_abilities
 Cnodupes             characters_no_duplicates
 Cnekkie              characters_nekkie
 Cpaladin             characters_cecil_paladin

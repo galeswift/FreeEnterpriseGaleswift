@@ -271,6 +271,30 @@ Under this flag, when you are dismissing a character, you must dismiss the chara
 
 Cecil starts as a paladin on this flag, at the same stats as he normally would after his class change. Ordeals is still available as a key item check/etc. as usual and will restore Tellah's spells. Multiple files are changed in order to handle the class change, or lack thereof, under `Csuperhero`.
 
+### `Cabilities:fullgood` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: update_abilities.py
+
+Under this flag, mutually exclusive to the renamed `Cabilities:j` flag, each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list. There are some modifications due to wacky flags and tweak flags (since some of the tweak flags either add commands or make certain very useless commands significantly better); flags like `-tweak:kainmagic` take priority because they add useful commands for Kain, and then wacky flags like `-wacky:kleptomania` override those flags to force Sneak onto command lists. The base command lists are:
+
+!!! info "`Cabilities:fullgood` command lists"
+    - Dark Knight Cecil: Fight, Dark Wave, Hide, Dart, Item
+    - Kain: Fight, Jump, Dark Wave (or Raid if available), Sneak, Item
+    - Child Rydia: no change
+    - Tellah: vanilla with Recall until Ordeals, Regen/Pray/Bluff depending on tweak flags in that order
+    - Edward: Fight, Cry (or Sing if it has been improved), Hide, Aim (or Heal if it has been improved), Item
+    - Rosa: Fight, White, Aim, Cover (or Pray if it has been improved), Item
+    - Yang: no change
+    - Palom: no change
+    - Porom: no change
+    - Paladin Cecil: Fight, White, Cover, Bear, Item
+    - Cid: Fight, Power, Aim, Bear (or Raid if available, or Peep (in its normal slot) if that has been improved), Item
+    - Adult Rydia: Fight, Black, Call, Bluff, Item
+    - Edge: no change
+    - FuSoYa: Fight, White, Black, Bluff (or Omni if that's available, or Regen if that's been improved), Item
+
 ## Treasure Flags
 
 Courtesy of Antidale, the `Tpro` weights have been modified slightly, to reduce the chance of the lowest tiers in some areas and up the chance of the highest tier(s). The list of changes is as follows.

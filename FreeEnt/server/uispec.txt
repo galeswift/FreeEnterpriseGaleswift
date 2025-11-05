@@ -408,7 +408,9 @@
 <> Spell options
 .(Cspells:j) Characters learn J-spells
 .(Cspells:anti)^ Characters learn US spells, with altered progression.
-[Cj:abilities] Characters have J-commands
+<> Ability options
+.(Cabilities:j) Characters have J-commands
+.(Cabilities:fullgood) Characters have a full set of good commands
 <> Limit maximum party size
 .(Cparty:1)! Maximum party size 1
 .(Cparty:2)! Maximum party size 2
