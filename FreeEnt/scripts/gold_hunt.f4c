@@ -7,6 +7,15 @@ npc(#KaipoInn2FScholar)
     }
 }
 
+// remove "Tory" from Kaipo Cafe (where he hangs out
+// when not asking for GP!)
+placement($11 2)
+{
+    npc #KaipoInn2FScholar
+    position 31 0
+    intangible
+}
+
 patch($21fa05 bus) {
 // %gold hunt id%
     00
