@@ -69,3 +69,7 @@ msfpatch {
         ldy #$000b
         jml $01a61c
 }
+
+// make SomaDrops increase max MP by 1 only, instead of removing them
+// (note that they still won't appear in shops)
+patch($01a761 bus) { 01 }

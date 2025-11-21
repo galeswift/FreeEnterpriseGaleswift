@@ -568,9 +568,6 @@ def apply(env):
             if type(item_set) is str:
                 item_set = [item_set]
 
-            if '3point' in env.meta.get('wacky_challenge', []):
-                item_set = list(filter(lambda i: i != 'SomaDrop', item_set))
-
             qty_list = entry[1]
             items = env.rnd.sample(item_set, len(qty_list))
             for i,qty_spec in enumerate(qty_list):
