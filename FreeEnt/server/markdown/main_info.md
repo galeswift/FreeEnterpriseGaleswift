@@ -1072,6 +1072,10 @@ This flag is just `-vanilla:z` renamed.
 
 Wylem reworked the wacky challenge framework to allow for multiple wackies to be present at once, in his multi-wacky fork. Thanks, Wylem!
 
+Some existing wacky flags have been modified:
+- On Tellah Maneuver, SomaDrops now provide +30 max HP instead of the useless +10 max MP.
+- On 3-Point System, SomaDrops are now available normally (except in shops), but provide +1 max MP instead of +10.
+
 ### `-wacky:mirrormirror` - Mirror, Mirror, On the Wall {: .h6 }
 
 - Idea: ScytheMarshall
@@ -1119,7 +1123,7 @@ This wacky flag fully randomizes the stat bonuses that equipment items give (and
 - Design/Programming: ScytheMarshall, design suggestions by Guerin and Antidale 
 - Locations: wacky_rando.py, skillissue.f4c, eventextensions_randomizer.f4c, text_buffers.f4c, character_expansion.f4c, unused.f4c
 
-This wacky flag causes all commands except for Fight and Item to be locked at the beginning of the seed, and each boss defeated unlocks one of the commands (similarly to how Ultimecia's Castle works in FFVIII, except you cannot choose the command to unlock). If a magic command is locked, then you cannot use those spells outside of battle either. This wacky is compatible with Misspelled but not with FF4: The Musical or World Championship of Darts. On Push B to Jump, you can still push B to Jump even if you have not unlocked the Jump command.
+This wacky flag causes all commands except for Fight and Item to be locked at the beginning of the seed, and each boss defeated unlocks one of the commands (similarly to how Ultimecia's Castle works in FFVIII, except you cannot choose the command to unlock). If a magic command is locked, then you cannot use those spells outside of battle either. This wacky is compatible with Misspelled but not with FF4: The Musical or World Championship of Darts. On Push B to Jump, you can still push B to Jump even if you have not unlocked the Jump command. When not all abilities are accessible (say, without J abilities), then only those abilities that are accessible will be unlocked.
 
 ### `-wacky:workexperience` - Work Experience {: .h6 }
 
