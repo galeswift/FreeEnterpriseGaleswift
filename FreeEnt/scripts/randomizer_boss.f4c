@@ -461,7 +461,23 @@ msfpatch {
 
         // load XP value from table and add to total
         clc
-        // %if experience_geometric%
+        // %if wacky_gp_exp_swap%
+        // adding to GP directly instead of exp
+        lda $21f500,x
+        adc $3594
+        sta $3594
+        lda $21f501,x
+        adc $3595
+        sta $3595
+        lda $21f502,x
+        adc $3596
+        sta $3596
+        // *still* assume there's no overflow :>
+        // return to original code after XP lookup/addition
+        plx
+        jml $03ecb7
+
+        // %elif experience_geometric%
         // load the base experience and set the Y register equal to the current number of monsters left to handle
         lda $21f500,x
         sta $393d
@@ -487,9 +503,8 @@ msfpatch {
 
         plx
         jml $03ecb7
-        // %end%
 
-        // %if ~experience_geometric%
+        // %elif ~experience_geometric%
         lda $21f500,x
         adc $3591
         sta $3591
@@ -506,7 +521,22 @@ msfpatch {
         // %end%
 
     BreakXPLimit__NormalCase:
-        // %if experience_geometric%
+        // %if wacky_gp_exp_swap%
+        // adding to GP directly instead of exp
+        lda $0ea1c0,x
+        adc $3594
+        sta $3594
+        lda $0ea1c1,x
+        adc $3595
+        sta $3595
+        lda #$00
+        adc $3596
+        sta $3596
+        // *still* assume there's no overflow :>
+        // return to original code after XP lookup/addition
+        jml $03ecb7
+
+        // %elif experience_geometric%
         lda $0ea1c0,x
         sta $393d
         lda $0ea1c1,x
@@ -531,9 +561,8 @@ msfpatch {
 
         plx
         jml $03ecb7
-        // %end%
 
-        // %if ~experience_geometric%
+        // %elif ~experience_geometric%
         // perform displaced instruction and
         // return to original code
         clc

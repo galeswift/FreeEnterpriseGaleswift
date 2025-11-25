@@ -1,0 +1,47 @@
+// under Erunspoils[100/50/25], allow earning
+// GP and/or Exp even if running away from battle
+msfpatch {
+    .addr $03871e
+        jml $=CheckNoMonstersDefeated
+        nop
+
+    [03a0dc] = 0x50
+
+    .new
+    CheckNoMonstersDefeated:
+        lda $3585
+        ora $3586
+        ora $3587
+        bne $+GoToSpoils
+        jml $038723
+    %GoToSpoils:
+        jml $038757
+}
+
+// exp penalty happens in experience_acceleration.f4c
+
+// potentially apply a penalty to GP
+// %if run_gp_penalty%
+msfpatch{
+    .addr $03ed6e
+        jsl $=RunGP__CheckPenalty
+
+    .new
+    RunGP__CheckPenalty:
+        lda $a8 
+        and #$40
+        beq $+NoRunPenalty
+        ldy {% run penalty loop %}
+    %RunPenaltyLoop:
+        lsr $3596
+        ror $3595
+        ror $3594
+        dey
+        bne $-RunPenaltyLoop        
+    %NoRunPenalty:
+        // displace
+        clc
+        lda $3594
+        rtl        
+}
+// %end%

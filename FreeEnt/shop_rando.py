@@ -287,7 +287,13 @@ def apply(env):
 
         kokkol_shop_assignment = next(filter(lambda sa: sa.shop.level == 'kokkol', shop_assignments))
         kokkol_candidates = items_dbview.find_all(lambda it: can_be_in_shop(it, 'kokkol'))
-        kokkol_shop_assignment.add(*[it.const for it in env.rnd.sample(kokkol_candidates, min(len(kokkol_candidates), max_kokkol_items))])
+        if env.options.flags.has_any('shops_pro', 'shops_standard') and env.options.flags.has('shops_always_apples'):
+            apple_to_add = env.rnd.choice(['#item.AuApple', '#item.AgApple'])
+            kokkol_shop_assignment.add(apple_to_add)
+            max_kokkol_items -= 1
+            kokkol_candidates = [it for it in kokkol_candidates if it.const not in ['#item.AuApple', '#item.AgApple']]
+        if max_kokkol_items:
+            kokkol_shop_assignment.add(*[it.const for it in env.rnd.sample(kokkol_candidates, min(len(kokkol_candidates), max_kokkol_items))])
 
         # guaranteed items
         guaranteed_free_items = []

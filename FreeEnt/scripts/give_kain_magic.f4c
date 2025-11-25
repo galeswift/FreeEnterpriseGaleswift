@@ -1,27 +1,13 @@
 // Kain should be a mage. Let's make him a mage.
 // give him some white magic, black magic, and MP.
 
-// set the constant for Kain's new spellsets, to improve code readability
-consts(spellset) {
-    $01     KainBlack
-    $0d     KainWhite
-}
+// set up consts and spellsets in update_spells.py
 
 // first, assign his class the new white magic set and his (unused) black magic set
 patch($13fde0 bus) { 0d 01 ff } // battle?
 patch($14ffa5 bus) { 0d 01 ff } // menu?
 
-// second, overwrite the black magic set
-spellset(#KainBlack) {
-    initial {
-        #Fire2
-        #Ice2
-        #Lit2
-    }
-    learned {
-        25 #Weak
-    }
-}
+// second, overwrite the black magic set... in update_spells.py
 
 // 2.5th, make a fancy new spell out of Sight: Lance, a strong holy Drain spell
 // I'm just playing around, so it doesn't matter that other characters get it
@@ -52,56 +38,12 @@ patch($0fa366 bus) { 6C }
 // set the visual effect for this spell to be... I guess the same as Psych?
 patch($0fa0a8 bus) { 06 04 00 06 }
 
-// third, build the white magic set from scratch. 
-spellset(#KainWhite) {
-    initial {
-        #Cure2
-        #Heal
-        $17 // formerly #Sight, now #Lance
-    }
-    learned {
-        15 #Blink
-        17 #Bersk
-        30 #White
-    }
-}
+// third, build the white magic set from scratch... in update_spells.py
 
 // should also remove Lance from white mages/Cecil, since it's kind of broken.
-// Fu's change happens in fusoya_rando; Tellah's happens in mtordeals.f4c
+// Fu's change happens in fusoya_rando; Tellah's happens in mtordeals.f4c;
+// the rest happen in update_spells.py
 
-spellset(#PCecil) {
-    learned {
-        8  #Peep
-        15  #Cure2
-        19  #Exit
-        24  #Heal
-    }
-}
-
-spellset(#RydiaWhite) {
-    learned {
-        3  #Cure1
-        7  #Hold
-    }
-}
-
-spellset(#Rosa) {
-    initial {
-        #Cure1
-        #Hold
-        #Peep
-        #Slow
-    }
-}
-
-spellset(#Porom) {
-    initial {
-        #Cure1
-        #Hold
-        #Peep
-        #Slow
-    }
-}
 
 // fourth, make sure the game does a full initialization of the spellsets to include Kain's
 // patch($15c271 bus) { 50 } // 38 + 18 = 50
@@ -117,13 +59,4 @@ patch($0fa92d bus) { 14 }
 // %end%
 
 // sixth, actually give Kain the commands to use White/Black in battle
-actor(#Kain1)
-{
-    commands {
-        #Fight
-        #Jump
-        #White
-        #Black
-        #Item
-    }
-}
+// in update_abilities.py

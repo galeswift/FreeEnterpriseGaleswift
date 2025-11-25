@@ -289,3 +289,14 @@ msfpatch {
         adc $270b
         rtl
 }
+
+// make SomaDrops give 30 HP (since they're cheaper than apples)
+msfpatch {
+    .addr $01a75a
+        ldy #$0009
+    
+    .addr $01a760
+        .mx 0x00
+        adc #$001e
+        jmp $a73c
+}

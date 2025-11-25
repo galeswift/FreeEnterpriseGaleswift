@@ -1,0 +1,59 @@
+// swap GP and Exp rewards for all monsters
+// more technical than it really should be,
+// but we've done a lot of fiddling with exp rewards
+
+// toggle: wacky_gp_exp_swap
+
+// add GP into the exp spoils, with a geometric scaling
+// if necessary
+
+msfpatch {
+    .addr $03ecc7
+        jml $=BigMoneyLittleGains__GPScaling
+
+    .new
+    BigMoneyLittleGains__GPScaling:
+        // use the same-ish code as the normal case of the exp addition
+        // from randomizer_boss.f4c
+        // %if experience_geometric%
+        lda $0ea000,x
+        sta $393d
+        lda $0ea001,x
+        sta $393e
+        stz $df
+        ldy #$0000
+        lda $b1
+        tay
+        phx
+        jsr $_BattleGeometric__Mod
+
+        // add in the scaled gp to the exp spoils
+        lda $393d
+        adc $3591
+        sta $3591
+        lda $393e
+        adc $3592
+        sta $3592
+        lda $df
+        adc $3593
+        sta $3593
+
+        plx
+        jml $03ece3
+        // %end%
+
+        // %if ~experience_geometric%
+        // add gp to exp spoils instead
+        lda $0ea000,x
+        adc $3591
+        sta $3591
+        lda $0ea001,x
+        adc $3592
+        sta $3592
+        lda #$00
+        adc $3593
+        sta $3593
+        jml $03ece3
+        // %end%
+}
+

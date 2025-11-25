@@ -29,7 +29,11 @@ Flustered the enemy!
 }
 
 text(alert message $36) {
+// %if fusoya_regen_mp%
+Regenerating MP!
+// %else%
 Regenerating HP!
+// %end%
 }
 
 text(alert message $39) {

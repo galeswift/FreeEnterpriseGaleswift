@@ -48,6 +48,7 @@ WACKY_CHALLENGES = {
     'advertising'       : 'Truth in\nAdvertising',
     'skillissue'        : 'Skill Issue',
     'workexperience'    : 'Work Experience',
+    'moneygains'        : 'Big Money,\nLittle Gains'
 }
 
 WACKY_ROM_ADDRESS = BusAddress(0x268000)
@@ -95,6 +96,7 @@ WACKY_RAM_USAGE = {
     'advertising'       : 0,
     'skillissue'        : 2,
     'workexperience'    : 0,
+    'moneygains'        : 0,
 }
 
 WACKY_MUTUAL_INCOMPATIBILITIES = [
@@ -333,6 +335,10 @@ def apply_neatfreak(env, rom_address):
 
 def apply_timeismoney(env, rom_address):
     env.add_file('scripts/sell_zero.f4c')
+    env.add_file('scripts/encounter_no_gp.f4c')
+
+def apply_moneygains(env, rom_address):
+    env.add_toggle('wacky_gp_exp_swap')
 
 def setup_mysteryjuice(env):
     juices = '''
@@ -1078,20 +1084,18 @@ def setup_saveusbigchocobo(env):
     env.meta['wacky_starter_kit'] = [( 'Carrot', [5] )]
 
 def apply_skillissue(env, rom_address):
-    skill_unlock_table = list(range(0x01,0x18))
-    num_skills = len(skill_unlock_table)
-    if env.options.flags.has('cidairship'):
-        skill_unlock_table.append(0x18)
-        num_skills += 1
+    all_skills = list(range(0x00,0x23))
+    # start with non-Fight/Item commands available
+    available_skills = env.meta['available_abilities'].difference({0x00,0x01})
+    num_skills = len(available_skills)
+    skill_unlock_table = list(range(0x01,num_skills+1))
     env.rnd.shuffle(skill_unlock_table)
-    skill_unlock_table.insert(0,0x00)
-    skill_unlock_table.insert(0,0x00)
-    if not env.options.flags.has('cidairship'):
-        skill_unlock_table.insert(0x15,0x00)
-    # ensure that other wacky flags do not impact commands like
-    # "Off" (pt2 of Cover), "Show" (pt of Hide), etc. by inserting
-    # a buffer region of 0's (possibly unnecessary; to determine)
-    skill_unlock_table.extend([0x00] * 9)
+    # place 0x00 in the table for each unavailable skill,
+    # at the index corresponding to that skill (which is just the skill number);
+    # include part-2 commands like Off and Show to ensure they remain available
+    for s in all_skills:
+        if s not in available_skills:
+            skill_unlock_table.insert(s,0x00)
 
     env.add_toggle('wacky_skillissue')
     if 'bodyguard' not in env.meta.get('wacky_challenge', []):

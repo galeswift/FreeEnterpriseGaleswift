@@ -57,7 +57,7 @@
     quest_zot                                #item.EarthCrystal      Complete the Tower of Zot
     quest_dwarfcastle                        #item.Magma       Defeat the bosses of Dwarf Castle
     quest_lowerbabil                         #item.Magma       Defeat the boss of Lower Bab-il
-    quest_falcon                             #item.Hook      Launch the Falcon
+    quest_falcon                             #item.fe_Hook     Launch the Falcon
     quest_sealedcave                         #item.Luca     Complete the Sealed Cave
     quest_monsterqueen                       #item.Magma       Defeat the queen at the Town of Monsters
     quest_monsterking                        #item.Magma       Defeat the king at the Town of Monsters

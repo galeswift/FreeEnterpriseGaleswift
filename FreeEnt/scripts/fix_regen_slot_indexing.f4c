@@ -1,0 +1,8 @@
+// per Aexoden, Regen fails if the middle slot is empty;
+// the fix is simply to index the empty slot array correctly
+// instead of always looking at $3540
+
+msfpatch {
+    .addr $03aab3
+        lda $3540,y
+}

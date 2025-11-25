@@ -187,8 +187,6 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: (it.category not in ['weapon', 'armor']))   
-    if '3points' in env.meta.get('wacky_challenge',[]):
-        dbview.refine(lambda it: it.const != '#item.SomaDrop')
 
     # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
     if env.options.flags.has('treasure_playable') and not 'omnidextrous' in (env.meta.get('wacky_challenge',[])):

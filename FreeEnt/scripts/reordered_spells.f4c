@@ -13,6 +13,9 @@ spellset(#Rosa) {
         // %end%
         15  #Mute
         18  #Heal
+        // %flag rosapaladin on%
+        19  #Exit
+        // %end%
         20  #Bersk
         23  #Blink
         24  #Charm
@@ -23,9 +26,37 @@ spellset(#Rosa) {
         34  #Wall
         38  #Cure4
         42  #Life2
+        // %flag rosapaladin on%
+        56  #White
+        // %end%
+        // %flag rosapaladin off%
         55  #White
+        // %end%
     }
 }
+
+// %flag darkpaladin on%
+// adhere to Nuke/Weak restrictions; Weak is post-260k exp
+// and Nuke is post 1.3mil exp
+spellset(#PCecil) {
+    initial {
+        #Venom
+    }
+    learned {
+        3 #Sleep
+        5 #Piggy
+        8 #Drain
+        12 #Psych
+        15 #Toad
+        19 #Warp
+        22 #Stop
+        25 #Virus
+        38 #Weak
+        45 #Fatal
+        57 #Nuke
+    }
+}
+// %end%
 
 spellset(#RydiaBlack) {
     learned {

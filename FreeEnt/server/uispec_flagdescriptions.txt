@@ -260,8 +260,11 @@ White mages will learn Armor, Shell, and Dispel. All mages learn spells at the l
 [Cspells:anti]
 Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.
 
-[Cj:abilities]
+[Cabilities:j]
 Characters retain the battle commands from FF4j that were removed in FF4us.
+
+[Cabilities:fullgood]
+Each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list.
 
 [Cnodupes]
 If a duplicate character tries to join your party, instead nothing happens.
@@ -432,10 +435,10 @@ Each of Shadow's and Golbez's spells are replaced individually. If <em>Bunsafe</
 [Bspellpower]
 Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.
 
-[Bremove:officer_slot]
+[Bremove:kaipo_slot]
 Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.
 
-[Bremove:kingqueen_slot]
+[Bremove:kqe_slot]
 Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.
 
 [@G]
@@ -487,7 +490,10 @@ Encounters are shuffled within two groups, based on the high byte of the formati
 Encounters are randomly assigned to encounter groups independently, within the overworld (including the Giant and Hook route) and the underworld/moon separately.
 
 [Etable:uniquelygood]
-Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
+Each group is assigned the same encounter in all eight slots; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups.
+
+[@Erunspoils]
+FF4 keeps track of how many monsters you have defeated in a battle. Under these flags, if you defeat some but not all of the monsters in a formation and then run away, you will still get EXP and GP from the monsters you did defeat. The spoils can be reduced by half or by three quarters in this situation.
 
 [Hrandom]
 The song that Edward plays during the TwinHarp cutscene and fight is randomly chosen from a selection of songs arranged and contributed by community members.
@@ -974,7 +980,7 @@ To prevent softlocks, the randomized PRNG table will be such that all battle slo
 To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.
 
 [-miscbugfixes]
-This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, and incorrect victim history entries.
+This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.
 
 [-vanilla:hobs]
 By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior.
@@ -1058,14 +1064,32 @@ This flag replaces Sight with Harm, a damage-dealing holy spell slightly weaker 
 [-tweak:edwardheal] 
 Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available.
 
+[-tweak:edwardsing] 
+Normally, Sing uses Toad if Edward is a frog, or randomly chooses from Sleep/Mute/Charm/fail uniformly at random. Under this flag, Sing still only casts Toad if Edward is a frog, but otherwise it will pick randomly from the spells Sleep, Mute, Charm to which the target is vulnerable. If the target is immune to all three, then Sing will do nothing. Note that Sing will not bypass the boss bit.
+
+[-tweak:edwardsingbetter] 
+Sing will behave as in <em>-tweak:edwardsing</em>, but instead of only choosing from Sleep, Mute, and Charm, Sing can choose from: Venom, Powder (Blind), Mute, Piggy, Mini, Toad, Stone, Fatal, Bersk, Charm, Sleep, Hold, and Curse.
+
 [-tweak:darkpaladin]
 Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>
 
+[-tweak:rosadin]
+Cecil now becomes a White Mage upon class change on Ordeals and Rosa is now a Paladin. Armor options remain the same, but weapon and shield options are swapped (except for the FF4A weapons). Rosa gains Cover and will auto-Cover, but downgrades to Cecil's White magic spellset (excluding Exit, which remains event-based); Cecil gains Pray and Rosa's full White magic spellset (including Exit on level-up).
+
 [-tweak:cidairship]
 Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon.
+
+[-tweak:cidpeep]
+Normally, Peep does not hit monster with the boss bit. This flag removes that restriction. Because the Peep command does not have an exception for the Zeromus fight like the spell does, Cid can use Peep in that battle as well.
 
 [-tweak:twinmeteo]
 Normally, Twin can cast Comet or Flare (or fail). Under this flag, if the casting twins have a combined level of 70 or greater, then W.Meteo and self-target Stone are also possible options. W.Meteo is about half as likely as Comet, and Stone is half as likely as W.Meteo (with a corresponding reduction to Flare's chances).
 
 [-tweak:chocobosummon]
 The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there).
+
+[-tweak:rosapray]
+Rosa's Pray command now casts nothing/Cure1/Cure2/Cure3/Cure4 randomly depending on Rosa's level. The higher Rosa's level is, the better the spell tends to be, with Cure2/Cure3/Cure4 becoming available when Rosa normally learns them.
+
+[-tweak:fusoyaregen]
+Instead of healing HP, Regen now heals *MP* for party members (unless -wacky:tellahmaneuver is on, where it just heals more HP); the precise value depends on various flags.

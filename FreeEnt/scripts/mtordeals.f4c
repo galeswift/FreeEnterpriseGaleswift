@@ -527,12 +527,12 @@ event($62)  //Cecil's transformation, Tellah remembering
     music #Mountain
 }
 
+// %flag characters_no_duplicates on%
 text(bank 1 message $CB) {
 [Cecil] is already a 
 Paladin!
 }
 
-// %flag characters_no_duplicates on%
 text(bank 1 message $CD) {
 [Cecil] became a Paladin!
 }
@@ -564,6 +564,11 @@ wherever he is![music $29][pause 40]
 // %end%
 
 // %flag characters_no_duplicates off%
+text(bank 1 message $CB) {
+All [Cecil]s are already 
+Paladins!
+}
+
 text(bank 1 message $CD) {
 All [Cecil]s became
 Paladins!

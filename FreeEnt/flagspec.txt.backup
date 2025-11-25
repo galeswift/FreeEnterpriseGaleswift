@@ -40,7 +40,7 @@ Conly:cecil Conly:kain Conly:rydia Conly:tellah Conly:edward Conly:rosa Conly:ya
 Cno:cecil Cno:kain Cno:rydia Cno:tellah Cno:edward Cno:rosa Cno:yang Cno:palom Cno:porom Cno:cid Cno:edge Cno:fusoya
 Crestrict:cecil Crestrict:kain Crestrict:rydia Crestrict:tellah Crestrict:edward Crestrict:rosa Crestrict:yang Crestrict:palom Crestrict:porom Crestrict:cid Crestrict:edge Crestrict:fusoya
 Cthrift:2/Cthrift:3/Cthrift:4/Cthrift:5
-Cspells:j/Cspells:anti Cj:abilities Cpaladin Cnekkie Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader/Cmostlydead/Cbrieflydead Chero Csuperhero
+Cspells:j/Cspells:anti Cabilities:j/Cabilities:fullgood Cpaladin Cnekkie Cnodupes Cparty:1/Cparty:2/Cparty:3/Cparty:4 Cbye Cpermajoin Cpermadeath/Cpermadeader/Cmostlydead/Cbrieflydead Chero Csuperhero
 Ctreasure:free Ctreasure:earned Ctreasure:unsafe Ctreasure:relaxed Chi Cfifo
 Tvanilla Tshuffle/Tstandard/Tpro/Tsemipro/Twild/Twildish/Tstandardish/Tvanillaish/Tempty
 Tsparse:10/Tsparse:20/Tsparse:30/Tsparse:40/Tsparse:50/Tsparse:60/Tsparse:70/Tsparse:80/Tsparse:90
@@ -56,7 +56,7 @@ Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sn
 Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
 Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
-Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
+Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
@@ -146,7 +146,9 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:advertising
 -wacky:skillissue
 -wacky:workexperience
--tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon
+-wacky:moneygains
+-tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin/-tweak:rosadin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon 
+-tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -228,7 +230,8 @@ Cnopartner           no_starting_partner
 Cmaybe               characters_not_guaranteed
 Cspells:j            japanese_spells
 Cspells:anti         antidale_spells_progression
-Cj:abilities         japanese_abilities
+Cabilities:j         japanese_abilities
+Cabilities:fullgood  all_good_abilities
 Cnodupes             characters_no_duplicates
 Cnekkie              characters_nekkie
 Cpaladin             characters_cecil_paladin
@@ -425,8 +428,14 @@ G64                  glitch_allow_64
 
 -tweak:kainmagic     kainmagic
 -tweak:edwardheal    edwardheal
+-tweak:edwardsing        edwardsing
+-tweak:edwardsingbetter  edwardsing_better
 -tweak:darkpaladin   darkpaladin
+-tweak:rosadin       rosapaladin
+-tweak:rosapray      rosapray
 -tweak:cidairship    cidairship
+-tweak:cidpeep       cidpeep
 -tweak:harmspell     harmspell
 -tweak:twinmeteo     twinmeteo
 -tweak:chocobosummon bigchocobosummon
+-tweak:fusoyaregen   fusoyaregen

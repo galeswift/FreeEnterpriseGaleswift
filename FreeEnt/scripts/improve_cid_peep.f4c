@@ -1,0 +1,9 @@
+// make Cid's Peep command bypass the boss bit
+// ... which has the fun side effect of letting you
+// HP-scan Zeromus! Because the command does not have
+// the carve-out for the Z fight formation.
+
+msfpatch {
+    .addr $03e156
+        bra $03
+}
