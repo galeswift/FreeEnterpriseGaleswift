@@ -30,6 +30,24 @@ msfpatch{
         jml $03a2c8
 }
 
+// avoid Edward softlocking from auto-Hide by
+// forcing Show to be enabled regardless
+msfpatch{
+    .addr $03e88c
+        jml $=Wacky__SkillIssueHideShowCommand
+
+    .new
+    Wacky__SkillIssueHideShowCommand:
+        // displaced
+        lda #$1c
+        sta $3303,x
+        // unset the disabled flag, always
+        lda $3302,x 
+        and #$7f
+        sta $3302,x
+        jml $03e89b
+}
+
 // hook into the "draw the spell name in the menu"
 // function to check if the correct command has been unlocked
 msfpatch{

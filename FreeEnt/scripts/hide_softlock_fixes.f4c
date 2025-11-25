@@ -89,6 +89,15 @@ msfpatch {
 
     %NotCritical:
         // clear associated autohide flag
+        // %if wacky_skillissue%
+        // if we don't have Hide unlocked,
+        // do not clear any flags
+        lda #$09
+        jsr $_Wacky__SkillIssueCheck
+        bcs $+CanClearHideFlags
+        jml $03aba1
+    %CanClearHideFlags:
+        // %end%
         tdc
         lda $8e
         tax
