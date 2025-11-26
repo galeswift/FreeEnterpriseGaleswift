@@ -1,6 +1,6 @@
 MAJOR = 4
 MINOR = 6
-PATCH = 2
+PATCH = 3
 # The VERSION.STR cannot be more than 14 total characters long.
 # It gets pre-pended with "v" and postpended with "[$00]" for use in-game.
 # Beta versions tack on a ".b" at the end, so you only get 12 actual characters.
