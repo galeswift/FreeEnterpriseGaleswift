@@ -148,7 +148,7 @@ msfpatch {
         lda $_Util__Divide_Quotient2
         adc $af
         bcc $03
-        jml $_MaxExp
+        jmp $_MaxExp
         sta $af
 
     %NextModifier__WackyWorkExp:
