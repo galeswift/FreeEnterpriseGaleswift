@@ -9,7 +9,7 @@
 // 0xE0 (0 ticks cast time, targetting like Virus)
 // 0x19 (100 spell power)
 // 0x64 (100 accuracy)
-// 0x01 (damage plus sap if weakness)
+// 0x01 (damage plus sap; this effect explicitly checks for White/Crystal only)
 // 0x85 (same as White)
 // 0x0F (same MP cost as tier 2s, bounces off Walls)
 
@@ -45,3 +45,21 @@ patch($0fa0a8 bus) { 06 0B 06 00 }
 // Let Cecil get it at level 17 (along with Porom, Rosa at 14 for utility);
 // remove from Rydia's learned spells
 // all changes happen in update_spells.py
+
+// ensure that Harm only inflicts Sap on undead, like White
+msfpatch{
+    .addr $03d3e0
+        jml $=DamageSap__CheckWhiteHarm
+        nop nop
+
+    .new
+    DamageSap__CheckWhiteHarm:
+        // still check for White
+        cmp #$0b 
+        beq $+IsWhiteHarm
+        cmp #$17
+        beq $+IsWhiteHarm
+        jml $03d3f4
+    %IsWhiteHarm:
+        jml $03d3ed
+}
