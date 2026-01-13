@@ -575,12 +575,6 @@ def apply(env):
                 ]
             })
 
-    # potentially remove boss spots again; boss_rando pulls the original BOSS_SLOTS and turns it into a list
-    if env.options.flags.has('no_officer_slot'):
-        BOSS_SLOTS.remove('officer_slot')
-    if env.options.flags.has('no_kq_eblan_slot'):
-        BOSS_SLOTS.remove('kingqueen_slot')
-
     assignment = {k : env.assignments[k] for k in env.assignments if k in BOSS_SLOTS}
 
     for slot in assignment:
@@ -979,8 +973,11 @@ def apply(env):
     missing_bosses = set(BOSSES)
     for slot in assignment:
         boss = assignment[slot]
-        missing_bosses.remove(boss)
-        boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], obscurable=True) )
+        # remove Officer slot and/or KQ Eblan slot if relevant
+        if not ((slot == 'officer_slot' and env.options.flags.has('no_officer_slot'))
+                or (slot == 'kingqueen_slot' and env.options.flags.has('no_kq_eblan_slot'))):
+            missing_bosses.remove(boss)
+            boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], obscurable=True) )
     for boss in missing_bosses:
         boss_spoilers.append( SpoilerRow("(not available)", BOSS_SPOILER_NAMES[boss], obscurable=True) )
     env.spoilers.add_table("BOSSES", boss_spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:bosses'))
