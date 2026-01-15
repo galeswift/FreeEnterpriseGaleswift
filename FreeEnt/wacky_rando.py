@@ -565,6 +565,7 @@ def apply_afflicted(env, rom_address):
     env.add_toggle('wacky_status_enforcement_uses_axtor')
     env.add_toggle('wacky_status_enforcement_uses_battleinit_context')
     env.add_toggle('wacky_spell_filter_hook')
+    env.add_file('scripts/wacky/spell_filter_hook.f4c')
     env.add_toggle('wacky_post_battle_hook')
 
     STATUSES = {
