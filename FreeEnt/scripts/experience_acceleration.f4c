@@ -742,6 +742,11 @@ msfpatch {
         sta $1038,x
         lda $1039,x
         adc $af
+        // the original code didn't check for overflows when adding exp
+        // to characters, because it didn't need to. ... we do.
+        bcc $+NoCharExpOverflow
+        jml $03eecd
+    %NoCharExpOverflow:
         sta $1039,x
 
         // return

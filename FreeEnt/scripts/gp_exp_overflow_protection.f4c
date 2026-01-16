@@ -1,0 +1,85 @@
+// Vanilla FF4 does not implement overflow protection
+// for adding too much exp or GP to the temporary exp/GP
+// totals in battle, nor to adding exp to your characters
+// or GP to your party's GP. FE needs some of that.
+
+// randomizer_boss.f4c handles adding exp to exp total (or
+// GP total, for -wacky:moneygains), except in the normal case
+// of exp to exp without breaking the two-byte exp limit, 
+// which is handled here.
+
+msfpatch{
+    .addr $03ecb2
+        jsl $=OverflowProtection__Exp
+        nop
+
+    .new
+    OverflowProtection__Exp:
+        // displaced
+        adc #$00
+        bcc $+NoNormalExpExpOverflow
+        lda #$ff
+        sta $3591
+        sta $3592
+    %NoNormalExpExpOverflow:
+        sta $3593
+        rtl
+}
+
+// experience_acceleration.f4c handles adding the exp total to each
+// character's individual exp, and now has overflow protection.
+
+// GP per monster currently never exceeds two bytes, and there are 
+// no formations in the game with at least two monster types whose
+// GP rewards sum to more than two bytes and who can be life2-grinded
+// (which rules out Blue/Red D., Behemoths, etc.), so for now
+// we do not have to worry about overflowing the temporary
+// GP total (or exp, for -wacky:moneygains, which is in moneygains.f4c). 
+// we *do* need to worry about overflowing the party's GP.
+// (capping at #$ffffff is fine; the game then drops it to 9999999)
+
+msfpatch{
+    .addr $03ed84
+        jsl $=OverflowProtection__GP
+
+    .new
+    OverflowProtection__GP:
+        // displaced
+        adc $3596
+        bcc $+NoGPOverflow
+        lda #$ff
+        sta $16a0
+        sta $16a1
+    %NoGPOverflow:
+        sta $16a2
+        rtl
+}
+
+// the game correctly caps your GP at 9999999 after battles... but fails
+// at this task when selling items. here, we overwrite the vanilla code
+// in the sell menu with part of the battle spoils code, and then jsl
+// away to finish the calculation.
+
+msfpatch{
+    .addr $01ca36
+        sec
+        lda $16a0
+        sbc #$7f
+        lda $16a1
+        sbc #$96
+        lda $16a2
+        sbc #$98
+        jsl $=OverflowProtection__SellGP
+    
+    .new
+    OverflowProtection__SellGP:
+        bcc $+NoSellGPOverflow
+        lda #$7f
+        sta $16a0
+        lda #$96
+        sta $16a1
+        lda #$98
+        sta $16a2
+    %NoSellGPOverflow:
+        rtl
+}

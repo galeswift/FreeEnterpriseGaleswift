@@ -160,6 +160,7 @@ F4C_FILES = '''
     scripts/extra_item_descriptions.f4c
     scripts/stats.f4c
     scripts/level_up_summary.f4c
+    scripts/gp_exp_overflow_protection.f4c
     scripts/treasure_discard.f4c
     scripts/treasure_character.f4c
     scripts/custom_item_effects.f4c
