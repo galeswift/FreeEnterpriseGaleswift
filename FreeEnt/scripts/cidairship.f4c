@@ -199,6 +199,11 @@ msfpatch{
         sta $c9 // total damage is in $c9-$ca
         sep #$20
         .mx 0x20
+        // %if wacky_isthisrandomized%
+        ldx $c9
+        jsl $=Wacky__IsThisRandomized_DoRounding
+        stx $c9
+        // %end%
         tdc
         // restore the attack base from the stack
         plx

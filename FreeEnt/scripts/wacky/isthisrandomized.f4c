@@ -1,6 +1,15 @@
 msfpatch {
+    // regular physical and magical damage
     .addr $03ca4c
         jsl $=Wacky__IsThisRandomized_DoRounding
+
+    // Dart
+    .addr $03e3b4
+        jsl $=Wacky__IsThisRandomized_DoRounding
+        nop nop nop nop
+
+    // Kick/Dark Wave is handled in dark_wave_damage.f4c
+    // Raid is handled in cidairship.f4c
 
     .new
     Wacky__IsThisRandomized_DoRounding:

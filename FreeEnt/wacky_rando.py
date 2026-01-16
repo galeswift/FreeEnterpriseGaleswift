@@ -813,6 +813,10 @@ def apply_batman(env, rom_address):
     env.add_binary(rom_address, data, as_script=True)
     return len(data)
 
+def apply_isthisrandomized(env, rom_address):
+    env.add_toggle('wacky_isthisrandomized')
+    env.add_file('scripts/dark_wave_damage.f4c')
+
 def apply_advertising(env, rom_address):
     MONSTER_DATA_CHANGES = {
         0x01 : {'weak' : '#Ice'}, # Basilisk
