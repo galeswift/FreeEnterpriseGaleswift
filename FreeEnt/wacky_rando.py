@@ -371,7 +371,10 @@ def apply_mysteryjuice(env, rom_address):
 
 def apply_misspelled(env, rom_address):
     spells_dbview = databases.get_spells_dbview()
-    remappable_spells = spells_dbview.find_all(lambda sp: (sp.code >= 0x01 and sp.code <= 0x47 and sp.code not in [0x40,0x41]))
+    if env.options.flags.has('add_spells_fusoya'):
+        remappable_spells = spells_dbview.find_all(lambda sp: (sp.code >= 0x01 and sp.code <= 0x47))
+    else:
+        remappable_spells = spells_dbview.find_all(lambda sp: (sp.code >= 0x01 and sp.code <= 0x47 and sp.code not in [0x40,0x41]))
     shuffled_spells = list(remappable_spells)
     env.rnd.shuffle(shuffled_spells)
 
@@ -489,11 +492,13 @@ def apply_misspelled(env, rom_address):
             as_script=True
             )   
 
-    # For the purposes of -fusoya:omnimage (where he gets Comet and Flare), assign those two
-    # spells their normal spells (since they can't be remapped due to Twin), so that Fu is
-    # still given the spells
-    remap_data[0x40] = 0x40 # Comet
-    remap_data[0x41] = 0x41 # Flare    
+    # It turns out that there isn't really a technical reason not to remap Comet and Flare; Twin can easily
+    # handle the spells having different names and MP costs. It's simply a design decision.
+    # For the purpose of not putting a $00 into the slot for each spell only, just make them un-randomized, 
+    # if Fu isn't getting them in Omni.
+    if not env.options.flags.has('add_spells_fusoya'):
+        remap_data[0x40] = 0x40 # Comet
+        remap_data[0x41] = 0x41 # Flare    
 
     env.add_binary(rom_address, remap_data, as_script=True)
     env.add_toggle('wacky_misspelled')
