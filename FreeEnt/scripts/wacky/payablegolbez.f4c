@@ -1,10 +1,10 @@
-event(#event.fe_WackyEvent)
+event(#event.fe_WackyEventPayableGolbez)
 {
-    message #msg.fe_WackyDialogue
+    message #msg.fe_WackyDialoguePayableGolbez
 }
 
 
-text(bank 1 message #msg.fe_WackyDialogue) {
+text(bank 1 message #msg.fe_WackyDialoguePayableGolbez) {
 Bribe the boss for
 [amount]GP?[next]
 }

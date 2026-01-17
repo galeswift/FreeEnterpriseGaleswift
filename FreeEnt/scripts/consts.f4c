@@ -84,14 +84,16 @@ consts(msg) {
     $12E  fe_WackyChallengeTitle16
 	$12F  fe_WackyChallengeTitle17
 
-    $14B  fe_WackyDialogue
+    $14B  fe_WackyDialoguePayableGolbez
+    $14D  fe_WackyDialogueNightMode
 }
 
 consts(event) {
     $08   fe_ProcessObjectives
     $1C   fe_Ending
     $40   fe_GuidingwayIntro
-    $88   fe_WackyEvent
+    $88   fe_WackyEventPayableGolbez
+    $8A   fe_WackyEventNightMode
 }
 
 text(bank 1 message $107) {

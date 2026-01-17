@@ -205,16 +205,16 @@ npc(#fe_WackyNPCOverworld)
     sprite #Transparent
     default active
     eventcall {
-        #event.fe_WackyEvent
+        #event.fe_WackyEventNightMode
     }
 }
 
-event(#event.fe_WackyEvent)
+event(#event.fe_WackyEventNightMode)
 {
-    message #msg.fe_WackyDialogue
+    message #msg.fe_WackyDialogueNightMode
 }
 
-text(bank 1 message #msg.fe_WackyDialogue) {
+text(bank 1 message #msg.fe_WackyDialogueNightMode) {
 Closed for the night.
 }
 
