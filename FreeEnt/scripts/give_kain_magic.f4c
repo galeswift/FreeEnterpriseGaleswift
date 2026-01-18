@@ -29,8 +29,9 @@ text( spell name $17 ) {
 //    mp cost 15
 //    ignore wall True
 //}
-// there's no compiler for spell blocks, so just directly write the six bytes, shrug:
-patch($0f982a bus) { A1 19 64 04 85 8F }
+// there's no compiler for spell blocks, so just directly write the five non-MP/wall bytes, shrug
+// the MP/wall byte, $8F, is handled by update_spells or wacky_rando
+patch($0f982a bus) { A1 19 64 04 85 }
 
 // set the audio effect for this spell to be the same as White
 patch($0fa366 bus) { 6C }

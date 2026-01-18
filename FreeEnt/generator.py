@@ -657,9 +657,8 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
-    # handle all changes to spells/spellsets except for FuSoYa
-    if options.flags.has('antidale_spells_progression'):
-        update_spells.spell_data(env)
+    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
+    update_spells.spell_data(env)
     update_spells.spellset_data(env)
 
     # handle all changes to command lists

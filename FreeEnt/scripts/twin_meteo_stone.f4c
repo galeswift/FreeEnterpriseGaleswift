@@ -1,8 +1,8 @@
 // Let the Twins cast Meteo... and sometimes
 // self-target Stone, for thematic purposes/balancing.
 
-// make W.Meteo cost 99 MP
-patch($0f99d9 bus) { E3 } 
+// making W.Meteo cost 99 MP is handled in update_spells
+// (or it costs 1 MP and is handled in wacky_rando)
 
 // add in a level-based check, etc.,
 // and change targetting if necessary
