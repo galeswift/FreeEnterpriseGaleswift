@@ -575,12 +575,6 @@ def apply(env):
                 ]
             })
 
-    # potentially remove boss spots again; boss_rando pulls the original BOSS_SLOTS and turns it into a list
-    if env.options.flags.has('no_officer_slot'):
-        BOSS_SLOTS.remove('officer_slot')
-    if env.options.flags.has('no_kq_eblan_slot'):
-        BOSS_SLOTS.remove('kingqueen_slot')
-
     assignment = {k : env.assignments[k] for k in env.assignments if k in BOSS_SLOTS}
 
     for slot in assignment:
@@ -811,11 +805,15 @@ def apply(env):
                             # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
                             # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
                             # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
-                            # (Technically this algorithm will not give Waterhag (0,0,0) defense at exactly the Antlion spot, but it's close enough.)
-                            diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
-                            scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
-                            stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
-                            closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+                            # (Incidentally, it's better just to carve out an exception for Waterhag, and just make the resulting stats (0,0,0) to avoid
+                            # getting (0,0,1) at the Antlion spot.)
+                                if stats_scripted == (0,0,0) and boss == 'waterhag':
+                                    closest_index, closest_value = 0x60, (0,0,0)
+                                else:
+                                    diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                    scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
+                                    stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                    closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1, 0.03, 0.165))
                         env.add_substitution(f'{monster_name} script {stat} change ${value:02X}', f'set {stat} index ${closest_index:02X}')
                         csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
 
@@ -979,8 +977,11 @@ def apply(env):
     missing_bosses = set(BOSSES)
     for slot in assignment:
         boss = assignment[slot]
-        missing_bosses.remove(boss)
-        boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], obscurable=True) )
+        # remove Officer slot and/or KQ Eblan slot if relevant
+        if not ((slot == 'officer_slot' and env.options.flags.has('no_officer_slot'))
+                or (slot == 'kingqueen_slot' and env.options.flags.has('no_kq_eblan_slot'))):
+            missing_bosses.remove(boss)
+            boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], obscurable=True) )
     for boss in missing_bosses:
         boss_spoilers.append( SpoilerRow("(not available)", BOSS_SPOILER_NAMES[boss], obscurable=True) )
     env.spoilers.add_table("BOSSES", boss_spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:bosses'))
@@ -1019,6 +1020,21 @@ if __name__ == '__main__':
     # from .boss_rando_formation_data_et import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
     # from .boss_rando_formation_data_j import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
 
+    # ET
+    # MONSTER_SCRIPTED_CHANGES.update({          
+    #     0x98 : ['wyvern',
+    #         ('spell power', 14),
+    #         ]
+    #     })
+    # J/US
+    MONSTER_SCRIPTED_CHANGES.update({          
+        0x98 : ['wyvern',
+            ('spell power', 12),
+            ('spell power', 8),
+            ('spell power', 6),
+            ]
+        })
+
     for boss in BOSSES:
         for slot in BOSS_SLOTS:
 
@@ -1028,16 +1044,16 @@ if __name__ == '__main__':
             source_formation_id_list = (source_formation_id if type(source_formation_id) is list else [source_formation_id])
             target_formation_id_list = (target_formation_id if type(target_formation_id) is list else [target_formation_id])
 
-            source_formation = _get_cumulative_formation(source_formation_id_list)
-            target_formation = _get_cumulative_formation(target_formation_id_list)
+            source_formation = _get_cumulative_formation(source_formation_id_list, FORMATION_DATA)
+            target_formation = _get_cumulative_formation(target_formation_id_list, FORMATION_DATA)
 
             # get reference stats from original formation in slot
-            ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation)
-            ref_leader = _get_leader(source_formation)
+            ref_hp, ref_xp, ref_gp, ref_qty = _get_total_hp_xp_gp_qty(source_formation, FORMATION_DATA)
+            ref_leader = _get_leader(source_formation, FORMATION_DATA)
 
             # calculate and apply new values for formation going into slot
-            total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation)
-            leader = _get_leader(target_formation)
+            total_hp, total_xp, total_gp, total_qty = _get_total_hp_xp_gp_qty(target_formation, FORMATION_DATA)
+            leader = _get_leader(target_formation, FORMATION_DATA)
 
             for monster_id in target_formation:
                 monster = target_formation[monster_id]
@@ -1118,11 +1134,17 @@ if __name__ == '__main__':
                                 # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
                                 # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
                                 # (Technically this algorithm will not give Waterhag (0,0,0) defense at exactly the Antlion spot, but it's close enough.)
-                                diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
-                                scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
-                                stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
-                                closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+                                if stats_scripted == (0,0,0) and boss == 'waterhag':
+                                    closest_index, closest_value = 0x60, (0,0,0)
+                                else:
+                                    diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                    scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
+                                    stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                    closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1, 0.03, 0.165))
                             csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+                            # debugging to make sure the stat changes are monotonic increasing
+                            if min([closest_value[i] - monster_scaled_stats[stat][i] for i in range(len(closest_value))]) < 0:
+                                print(boss + ' - ' + slot + ' - ' + stat + f' : {"-".join([str(v) for v in monster_scaled_stats[stat]])} to {"-".join([str(v) for v in closest_value])}')
 
 
                 boss_stats.write(','.join([str(v) for v in csv_row]) + '\n')

@@ -10,12 +10,8 @@ BigChoco
 // in which case we simply use a default 20% chance
 // to happen and base spell power 232 = 8 * 29 (byte 1D)
 // (we're not using this value, but just in case)
-// %if wacky_misspelled%
-// don't patch the MP/wall byte, since wacky_rando will
+// the MP/wall byte, $87, is handled by update_spells or wacky_rando
 patch ($0f99da bus) { 80 1D 64 00 00 }
-// %else%
-patch ($0f99da bus) { 80 1D 64 00 00 87 }
-// %end%
 
 // For graphics:
 // Spell visual properties

@@ -101,7 +101,9 @@ ai_script($E5)
 
 // no compile_spells yet, so directly patch
 // $5A = Cure2, $5B = Cure3, $5C = Life1
-patch($0f99c2 bus) { 40 01 64 0D 00 B2 }
+// don't patch the Wall/MP byte, since it's
+// not changing ($B2) and wacky_rando might anyway.
+patch($0f99c2 bus) { 40 01 64 0D 00 }
 
 // patch visuals; $5A = Cure2 visuals,
 // $5B = Cure3 visuals, $5C = Armor visuals

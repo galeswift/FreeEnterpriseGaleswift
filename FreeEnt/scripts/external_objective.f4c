@@ -31,10 +31,41 @@ msfpatch {
         jml $=EagleEyeNotTrashable
 }
 
+// add an exception to let the EagleEye not
+// be greyed-out in the inventory, like the Whistle and Sort
+
+msfpatch{
+    .addr $01a17c
+        jml $=EagleEyeSortException
+
+    .new
+    EagleEyeSortException:
+        // displaced
+        cmp #$fe
+        beq $+IsSort
+
+        cmp #$e4
+        beq $+IsEagleEye
+        jml $01a18b
+    %IsSort:
+        jml $01a180
+    %IsEagleEye:
+        pha
+        // check if we can actually use the EagleEye here!
+        // if not, grey it out; if yes, don't!
+        lda $1a04
+        and #$80
+        beq $+GreyOutEagleEye
+        pla
+        bra $-IsSort
+    %GreyOutEagleEye:
+        pla
+        jml $01a18b
+}
+
 // Removal from shops is in shop_rando
 // Removal from chests is in treasure_rando
 // Unsellable/non-discardable is in randomizer_keyitems.f4c
-// (not going to worry about its greyed-out colour in the menu)
 // Not-trashable is in items.f4c (quick-trash) and here (normal trash)
 // Place one in a starter kit via objective_rando and kit_rando
 // Avoid changing things in call_orbs.f4c and elsewhere

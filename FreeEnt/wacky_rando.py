@@ -371,7 +371,10 @@ def apply_mysteryjuice(env, rom_address):
 
 def apply_misspelled(env, rom_address):
     spells_dbview = databases.get_spells_dbview()
-    remappable_spells = spells_dbview.find_all(lambda sp: (sp.code >= 0x01 and sp.code <= 0x47 and sp.code not in [0x40,0x41]))
+    if env.options.flags.has('add_spells_fusoya'):
+        remappable_spells = spells_dbview.find_all(lambda sp: (sp.code >= 0x01 and sp.code <= 0x47))
+    else:
+        remappable_spells = spells_dbview.find_all(lambda sp: (sp.code >= 0x01 and sp.code <= 0x47 and sp.code not in [0x40,0x41]))
     shuffled_spells = list(remappable_spells)
     env.rnd.shuffle(shuffled_spells)
 
@@ -401,13 +404,17 @@ def apply_misspelled(env, rom_address):
         else:
             summon_effects_linked[effect.code - 0x1C] = effect
 
+    # identify the name of spell 0x17 (normally Sight, could be Harm or Lance)
+    sight_name = ('[whitemagic]Lance' if env.options.flags.has('kainmagic') 
+                  else ('[whitemagic]Harm' if env.options.flags.has('harmspell') 
+                        else '[whitemagic]Sight'))
 
     pairings = zip(remappable_spells, shuffled_spells)
     remap_data = [0x00] * 0x100
     for pair in pairings:
         remap_data[pair[0].code] = pair[1].code
         env.add_script(f'''
-            text(spell name {pair[1].const}) {{{pair[0].name}}}
+            text(spell name {pair[1].const}) {{{(pair[0].name if pair[0].code != 0x17 else sight_name)}}}
         ''')
         # rename effects of summon spells as well
         if (pair[1].code == 0x35):
@@ -436,64 +443,72 @@ def apply_misspelled(env, rom_address):
             env.add_script(f'''
                 text(spell name $5D) {{{pair[0].name}}}
             ''')
-        
-        # trade MP costs
-        env.add_binary(
-            BusAddress(0xF97A5 + (0x06 * pair[1].code)),
-            [(pair[0].data[5] & 0x7F) | (pair[1].data[5] & 0x80)],
-            as_script=True
-        )
 
-        # trade summon effect MP costs as well
-        if (pair[1].code == 0x35):
-            # possibly two Chocobo effects, both of which ignore Walls
+        if '3point' not in env.meta.get('wacky_challenge', []):
+            # set values for spell 0x17's MP cost/wall bit; 
+            # it's 15 MP if it's actually Harm or Lance, and Lance ignores walls
+            sight_mp = (0x0F if env.options.flags.has_any('kainmagic','harmspell') else 0x02)
+            sight_hi_bit = (0x08 if env.options.flags.has('kainmagic') else 0x00)  
+
+            # trade MP costs, taking special care with Sight/Harm/Lance
             env.add_binary(
-                BusAddress(0xF97A5 + (0x06 * 0x51)),
-                [(pair[0].data[5] & 0x7F) | 0x80],
+                BusAddress(0xF97A5 + (0x06 * pair[1].code)),
+                [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | ((pair[1].data[5] & 0x80) if pair[1].code != 0x17 else sight_hi_bit)],
                 as_script=True
             )
-            if len(summon_effects_linked[0x35]) > 1:
+
+            # trade summon effect MP costs as well
+            if (pair[1].code == 0x35):
+                # possibly two Chocobo effects, both of which ignore Walls
                 env.add_binary(
-                    BusAddress(0xF97A5 + (0x06 * 0x5F)),
-                    [(pair[0].data[5] & 0x7F) | 0x80],
+                    BusAddress(0xF97A5 + (0x06 * 0x51)),
+                    [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | 0x80],
                     as_script=True
                 )
-        elif (pair[1].code >= 0x31 and pair[1].code <= 0x3D):
-            env.add_binary(
-                BusAddress(0xF97A5 + (0x06 * (pair[1].code + 0x1C))),
-                [(pair[0].data[5] & 0x7F) | (summon_effects_linked[pair[1].code].data[5] & 0x80)],
-                as_script=True
-            )
-        elif (pair[1].code == 0x3E):
-            # three Asura effects
-            env.add_binary(
-                BusAddress(0xF97A5 + (0x06 * 0x5A)),
-                [(pair[0].data[5] & 0x7F) | (summon_effects_linked[0x3E][0].data[5] & 0x80)],
-                as_script=True
-            )
-            env.add_binary(
-                BusAddress(0xF97A5 + (0x06 * 0x5B)),
-                [(pair[0].data[5] & 0x7F) | (summon_effects_linked[0x3E][1].data[5] & 0x80)],
-                as_script=True
-            )
-            env.add_binary(
-            BusAddress(0xF97A5 + (0x06 * 0x5C)),
-            [(pair[0].data[5] & 0x7F) | (summon_effects_linked[0x3E][2].data[5] & 0x80)],
-            as_script=True
-            )
-        elif (pair[1].code == 0x3F):
-            # Bahamut
-            env.add_binary(
-            BusAddress(0xF97A5 + (0x06 * 0x5D)),
-            [(pair[0].data[5] & 0x7F) | (summon_effects_linked[0x3F].data[5] & 0x80)],
-            as_script=True
-            )   
+                if len(summon_effects_linked[0x35]) > 1:
+                    env.add_binary(
+                        BusAddress(0xF97A5 + (0x06 * 0x5F)),
+                        [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | 0x80],
+                        as_script=True
+                    )
+            elif (pair[1].code >= 0x31 and pair[1].code <= 0x3D):
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * (pair[1].code + 0x1C))),
+                    [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | (summon_effects_linked[pair[1].code].data[5] & 0x80)],
+                    as_script=True
+                )
+            elif (pair[1].code == 0x3E):
+                # three Asura effects
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x5A)),
+                    [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | (summon_effects_linked[0x3E][0].data[5] & 0x80)],
+                    as_script=True
+                )
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x5B)),
+                    [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | (summon_effects_linked[0x3E][1].data[5] & 0x80)],
+                    as_script=True
+                )
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x5C)),
+                    [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | (summon_effects_linked[0x3E][2].data[5] & 0x80)],
+                    as_script=True
+                )
+            elif (pair[1].code == 0x3F):
+                # Bahamut
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x5D)),
+                    [((pair[0].data[5] & 0x7F) if pair[0].code != 0x17 else sight_mp) | (summon_effects_linked[0x3F].data[5] & 0x80)],
+                    as_script=True
+                )   
 
-    # For the purposes of -fusoya:omnimage (where he gets Comet and Flare), assign those two
-    # spells their normal spells (since they can't be remapped due to Twin), so that Fu is
-    # still given the spells
-    remap_data[0x40] = 0x40 # Comet
-    remap_data[0x41] = 0x41 # Flare    
+    # It turns out that there isn't really a technical reason not to remap Comet and Flare; Twin can easily
+    # handle the spells having different names and MP costs. It's simply a design decision.
+    # For the purpose of not putting a $00 into the slot for each spell only, just make them un-randomized, 
+    # if Fu isn't getting them in Omni.
+    if not env.options.flags.has('add_spells_fusoya'):
+        remap_data[0x40] = 0x40 # Comet
+        remap_data[0x41] = 0x41 # Flare    
 
     env.add_binary(rom_address, remap_data, as_script=True)
     env.add_toggle('wacky_misspelled')
@@ -565,6 +580,7 @@ def apply_afflicted(env, rom_address):
     env.add_toggle('wacky_status_enforcement_uses_axtor')
     env.add_toggle('wacky_status_enforcement_uses_battleinit_context')
     env.add_toggle('wacky_spell_filter_hook')
+    env.add_file('scripts/wacky/spell_filter_hook.f4c')
     env.add_toggle('wacky_post_battle_hook')
 
     STATUSES = {
@@ -674,6 +690,19 @@ def apply_3point(env, rom_address):
             [(spell.data[5] & 0x80) | 0x01],
             as_script=True
         )
+    # directly set the relevant bytes, because we know which spells are changing
+    if env.options.flags.has('bigchocobosummon'):
+        env.add_binary(
+            BusAddress(0xF97A5 + (0x06 * 0x5F)), # BigChoco
+            [0x81], 
+            as_script=True
+        )
+    if env.options.flags.has('twinmeteo'):
+        env.add_binary(
+            BusAddress(0xF97A5 + (0x06 * 0x5E)), # W.Meteo
+            [0x81],
+            as_script=True
+        )        
 
 def apply_friendlyfire(env, rom_address):
     env.add_toggle('wacky_spell_filter_hook')
@@ -811,6 +840,10 @@ def apply_batman(env, rom_address):
     ]
     env.add_binary(rom_address, data, as_script=True)
     return len(data)
+
+def apply_isthisrandomized(env, rom_address):
+    env.add_toggle('wacky_isthisrandomized')
+    env.add_file('scripts/dark_wave_damage.f4c')
 
 def apply_advertising(env, rom_address):
     MONSTER_DATA_CHANGES = {

@@ -5,14 +5,49 @@ def spell_data(env):
     spells_dbview = databases.get_spells_dbview()
     update_spells_dbview = databases.get_update_spells_dbview()
 
-    for update in update_spells_dbview:
-        matching_spell = spells_dbview.find_one(lambda sp: sp.code == update.code)
-        # update casting time/targeting data
-        env.add_binary(
-            BusAddress(0xF97A0 + (0x06 * matching_spell.code)),
-            [(update.data[0])],
-            as_script=True
-        )
+    # first, handle the changes to spell data from Cspells:anti, which is only cast time (in byte 0)
+    if env.options.flags.has('antidale_spells_progression'):
+        for update in update_spells_dbview:
+            matching_spell = spells_dbview.find_one(lambda sp: sp.code == update.code)
+            # update casting time/targeting data
+            env.add_binary(
+                BusAddress(0xF97A0 + (0x06 * matching_spell.code)),
+                [(update.data[0])],
+                as_script=True
+            )
+
+    # next, handle changes to MP costs arising from -tweak:harmspell/kainmagic,
+    # -tweak:twinmeteo, and -tweak:chocobosummon (if 3point and misspelled 
+    # don't already handle them)
+    if '3point' not in env.meta.get('wacky_challenge', []):
+        # W.Meteo is not Misspelled, so just give it 99 MP
+        if env.options.flags.has('twinmeteo'):
+            spell = spells_dbview.find_one(lambda sp: sp.code == 0x5E)
+            env.add_binary(
+                BusAddress(0xF97A5 + (0x06 * 0x5E)),
+                [(spell.data[5] & 0x80) | 0x63],
+                as_script=True
+            )   
+
+        if 'misspelled' not in env.meta.get('wacky_challenge', []):
+            # set values for spell 0x17's MP cost/wall bit; 
+            # it's 15 MP if it's actually Harm or Lance, and Lance ignores walls
+            sight_mp = (0x0F if env.options.flags.has_any('kainmagic','harmspell') else 0x02)
+            sight_hi_bit = (0x08 if env.options.flags.has('kainmagic') else 0x00)  
+
+            if env.options.flags.has('bigchocobosummon'):
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x5F)),
+                    [0x87],
+                    as_script=True
+                )        
+            if env.options.flags.has_any('kainmagic','harmspell'):
+                spell = spells_dbview.find_one(lambda sp: sp.code == 0x17)
+                env.add_binary(
+                    BusAddress(0xF97A5 + (0x06 * 0x17)),
+                    [sight_hi_bit | sight_mp],
+                    as_script=True
+                )                    
 
 def spellset_data(env):
     # collect all changes to all spellsets except for FuSoYa, 

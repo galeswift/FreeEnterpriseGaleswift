@@ -160,6 +160,7 @@ F4C_FILES = '''
     scripts/extra_item_descriptions.f4c
     scripts/stats.f4c
     scripts/level_up_summary.f4c
+    scripts/gp_exp_overflow_protection.f4c
     scripts/treasure_discard.f4c
     scripts/treasure_character.f4c
     scripts/custom_item_effects.f4c
@@ -656,9 +657,8 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
-    # handle all changes to spells/spellsets except for FuSoYa
-    if options.flags.has('antidale_spells_progression'):
-        update_spells.spell_data(env)
+    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
+    update_spells.spell_data(env)
     update_spells.spellset_data(env)
 
     # handle all changes to command lists

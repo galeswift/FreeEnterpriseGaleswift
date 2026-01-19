@@ -590,7 +590,8 @@ def apply(env):
         no_lance = False
         excluded_spells.extend(['#spell.Sight'])
 
-    if env.options.flags.has('antidale_spells_progression'):
+    if env.options.flags.has('antidale_spells_progression') and not env.options.flags.has('unlearn_fusoya'):
+        # -fusoya:unlearn overrides Cspells:anti re: Weak.
         excluded_spells.extend(['#spell.Weak'])
         if not env.options.flags.has('fusoya_nerfed'):
             env.add_scripts(

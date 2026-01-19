@@ -201,18 +201,22 @@ msfpatch {
     TextBuffer__LoadSpellName:
         stx $_TextBuffer__TargetBuffer
 
+        // Sometimes Fu only learns one or two spells,
+        // so if A contains FF (which is the default value in
+        // that area of ROM and doesn't happen anywhere else), 
+        // then send to blank name
+        cmp #$ff
+        beq $+BlankName
+
+        // %if wacky_misspelled%
+          jsl $=Wacky__Misspell
+        // %end%
         // %if wacky_spell_filter_hook%
           jsl $=Wacky__SpellFilterHook
           bcs $+CanLearn
           jmp $_BlankName
         %CanLearn:
         // %end%
-        
-        // Sometimes Fu only learns one or two spells,
-        // so if A contains FF (no spell), then send to
-        // blank name
-        cmp #$ff
-        beq $+BlankName
 
         cmp #$48
         bcs $+LongName

@@ -471,8 +471,14 @@ msfpatch {
         sta $3595
         lda $21f502,x
         adc $3596
+        // not still assuming no overflow; this code caps
+        // the temporary GP total at #$ffffff
+        bcc $+NoBreakExpGPOverflow
+        lda #$ff
+        sta $3594
+        sta $3595
+    %NoBreakExpGPOverflow:
         sta $3596
-        // *still* assume there's no overflow :>
         // return to original code after XP lookup/addition
         plx
         jml $03ecb7
@@ -513,8 +519,14 @@ msfpatch {
         sta $3592
         lda $21f502,x
         adc $3593
+        // not still assuming no overflow; this code caps
+        // the temporary Exp total at #$ffffff
+        bcc $+NoBreakExpExpOverflow
+        lda #$ff
+        sta $3591
+        sta $3592
+    %NoBreakExpExpOverflow:
         sta $3593
-        // assume there is no overflow :>
         // return to original code after XP lookup/addition
         plx
         jml $03ecb7
@@ -531,8 +543,14 @@ msfpatch {
         sta $3595
         lda #$00
         adc $3596
+        // not still assuming no overflow; this code caps
+        // the temporary GP total at #$ffffff
+        bcc $+NoNormalExpGPOverflow
+        lda #$ff
+        sta $3594
+        sta $3595
+    %NoNormalExpGPOverflow:
         sta $3596
-        // *still* assume there's no overflow :>
         // return to original code after XP lookup/addition
         jml $03ecb7
 
