@@ -162,7 +162,9 @@ Under `Cthrift[n]`, where `n` can be from 2 to 5, characters will start with a f
 - Design/Programming: Antidale (with some tweaks by ScytheMarshall)
 - Locations: reordered_spells.f4c, update_spells.py, updated_spells.csvdb, fusoya_rando.py, mtordeals.f4c
 
-These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. The other details of the changes are as follows:
+These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. However, if `-fusoya:unlearn` is active, then Fu will simply start with Weak and lose it as usual for that flag. 
+
+The other details of the changes are as follows:
 
 Rosa
 :   White 48 -> 55
@@ -487,7 +489,14 @@ This flag bypasses the override that the vanilla game does to make Ether1s/Ether
 
 ## Boss Flags
 
-For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now).
+For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now). 
+
+For v4.6.3.Gale (post-bugfix-patch) and onwards, the scripted stat changes are calculated slightly differently, to ensure that if a monster's stats are supposed to increase, they actually *do* increase (which wasn't the case on the previous attempt). Note that Valvalis in a late-game spot is now an absolute monster.
+
+!!! warn "Valvalis is a huge threat!"
+    We all know that Valvalis actually gets the scripted defense/magic defense stats that are supposed to occur in this fight. However, the original FE scripted stat scaling is janky (in a specific way), and boss slots that have minimal defense or magic defense will not really have much more in tornado form (including the vanilla spot). The scaling algorithm for scripted stat changes implemented here is janky in a much different way, in that bosses with very high levels get a *lot* of defense and magic defense in tornado form. Be *very* careful dealing with Valvalis.
+
+    (The original algorithm on the fork was janky in a third way, in that some bosses actually *lost* defense or magic defense stats in tornado form. That only really mattered on `-monsterevade`, but here we are.)
 
 ### `Bstats:[j/et]` {: .h6 }
 
@@ -960,11 +969,11 @@ Earn extra experience based on how many objectives you have completed up until t
 
 ### `-exp:kicheckbonus[10/5/2/_num]` {: .h6 }
 
-Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num), not counting the starting key item check. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
+Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num). The starting key item check does not count towards the number of checks you have completed. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
 
 ### `-exp:zonkbonus[10/5/2]` {: .h6 }
 
-A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had, not counting what happens with the starting key item. The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
+A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had. The starting key item check, if it is a zonk, does not count towards the number of zonks (because you cannot choose to do this check or not). The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
 
 ### `-exp:miabbonus[100/50]` {: .h6 }
 
@@ -1075,6 +1084,11 @@ Wylem reworked the wacky challenge framework to allow for multiple wackies to be
 Some existing wacky flags have been modified:
 - On Tellah Maneuver, SomaDrops now provide +30 max HP instead of the useless +10 max MP.
 - On 3-Point System, SomaDrops are now available normally (except in shops), but provide +1 max MP instead of +10.
+- On Time is Money, an overflow glitch has been fixed (your GP would overflow if it capped out).
+- On Afflicted, Heal is no longer learned via level-up (that was a bug).
+- On Is This Even Randomized?, Kick/Dark Wave/Dart/Raid now all obey the damage rounding.
+- On Misspelled, spells learned directly before an axtor has been initialized get misspelled correctly. The spell names used in textboxes are also misspelled correctly. In combination with Afflicted and Friendly Fire, the spells filtered out are those that *cast* the forbidden spells (not the nominal forbidden spells).
+- On Misspelled, when playing with `-fusoya:omnimage` the spells Comet and Flare *will* be Misspelled now (as of the bugfix patch on v4.6.3). Twin will still cast those spells; they will just have a different name and cost potentially different MP amounts.
 
 ### `-wacky:mirrormirror` - Mirror, Mirror, On the Wall {: .h6 }
 
