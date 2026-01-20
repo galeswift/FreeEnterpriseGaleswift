@@ -37,7 +37,10 @@ msfpatch{
 // GP total (or exp, for -wacky:moneygains, which is in moneygains.f4c). 
 // we *do* need to worry about overflowing the party's GP.
 // (capping at #$ffffff is fine; the game then drops it to 9999999)
+// ... but only if we're getting GP in the first place (Enogp and
+// Time is Money just add 0 to the party's GP).
 
+// %if ~no_gp_from_encounters%
 msfpatch{
     .addr $03ed84
         jsl $=OverflowProtection__GP
@@ -54,6 +57,7 @@ msfpatch{
         sta $16a2
         rtl
 }
+// %end%
 
 // the game correctly caps your GP at 9999999 after battles... but fails
 // at this task when selling items. here, we overwrite the vanilla code

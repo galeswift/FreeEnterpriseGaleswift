@@ -160,6 +160,7 @@ def apply(env):
 
     if env.options.flags.has('no_gp_for_random_encounters'):
         env.add_file('scripts/encounter_no_gp.f4c')
+        env.add_toggle('no_gp_from_encounters')
 
     if env.options.flags.has('encounter_no_dmachin'):
         env.add_file('scripts/encounter_no_dmachin.f4c')
