@@ -336,6 +336,7 @@ def apply_neatfreak(env, rom_address):
 def apply_timeismoney(env, rom_address):
     env.add_file('scripts/sell_zero.f4c')
     env.add_file('scripts/encounter_no_gp.f4c')
+    env.add_toggle('no_gp_from_encounters')
 
 def apply_moneygains(env, rom_address):
     env.add_toggle('wacky_gp_exp_swap')
