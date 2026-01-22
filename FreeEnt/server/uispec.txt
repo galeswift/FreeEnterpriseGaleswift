@@ -478,22 +478,22 @@
 ...(Tmintier:3) Chests contain tier 3 items at worst
 ...(Tmintier:4) Chests contain tier 4 items at worst
 ...(Tmintier:5) Chests contain tier 5 items at worst
-.(Tvanillaish)^ Vanilla-ish chest randomization
-..[ECHO:Tstandard]
-.(Tpro) Pro chest randomization
-..[ECHO:Tstandard]
-.(Tsemipro)^ Semi-pro chest randomization
-..[ECHO:Tstandard]
-.(Twild) Wild chest randomization
-..[ECHO:Tstandard]
-.(Twildish) Wild-ish chest randomization
-..[ECHO:Tstandard]
+..[Tplayable]^ Chests contain usable items
 .(Tstandardish)^ Standard-ish chest randomization
+..[ECHO:Tstandard]
+..[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
+.(Tvanillaish)^ Vanilla-ish chest randomization
+..[ECHO:Tstandardish]
+.(Tpro) Pro chest randomization
+..[ECHO:Tstandardish]
+.(Tsemipro)^ Semi-pro chest randomization
+..[ECHO:Tstandardish]
+.(Twildish) Wild-ish chest randomization
+..[ECHO:Tstandardish]
+.(Twild) Wild chest randomization
 ..[ECHO:Tstandard]
 .(Tempty)! Chests are empty
 [Tno:j] No J-items in chests
-[Tplayable]^ Chests contain usable items
-[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
 <> Junk management
 .[Tjunk] Keep junk
 .[Tmoney] Everything is junk
@@ -505,6 +505,31 @@
 .(Sstandard) Standard shop randomization
 ..[Sunsafe]! No safety checks
 ..[Ssingles]!^ Shops sell only a single item
+..[Splayable]^ Shops contain usable items
+..()#^ Guarantee Items
+...[Salways:apples] Apples/Soma Drops always sold in shops
+...[Salways:sirens] Sirens always sold in shops
+...[Salways:vampires] Vampires always sold in shops
+...[Salways:hrglass] HrGlass2 always sold in shops
+...[Salways:bacchus] Bacchus always sold in shops
+...[Salways:starveil] Starveils always sold in shops
+...[Salways:cure3] Cure3 always sold in shops
+...[Salways:illusion] Illusions always sold in shops
+...[Salways:coffin] Coffins always sold in shops
+...[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
+..()# Remove Items
+...[Sno:j] No J-items in shops
+...[Sno:apples] No Apples/Soma Drops in shops
+...[Sno:sirens] No Sirens in shops
+...[Sno:life]! No Life potions in shops
+...[Sno:vampires]^ No Vampires in shops
+...[Sno:hrglass]^ No HrGlass2 in shops
+...[Sno:bacchus]^ No Bacchus in shops
+...[Sno:starveil]^ No Starveils in shops
+...[Sno:cure3]^ No Cure3 in shops
+...[Sno:illusion]^ No Illusions in shops
+...[Sno:coffin]^ No Coffins in shops
+...[Sno:damage_items]^ No Damage items (BigBomb,ThorRage,etc) in shops
 .(Spro) Pro shop randomization
 ..[ECHO:Sstandard]
 .(Swildish)^ Wild-ish shop randomization
@@ -515,7 +540,22 @@
 ..[ECHO:Sstandard]
 .(Scabins)! Shops sell only cabins
 .(Ssame)!^ Shops sell only one type of item
+..[Splayable]^ Shops contain usable items
+..()# Remove Items
+...[Sno:j] No J-items in shops
+...[Sno:apples] No Apples/Soma Drops in shops
+...[Sno:sirens] No Sirens in shops
+...[Sno:life]! No Life potions in shops
+...[Sno:vampires]^ No Vampires in shops
+...[Sno:hrglass]^ No HrGlass2 in shops
+...[Sno:bacchus]^ No Bacchus in shops
+...[Sno:starveil]^ No Starveils in shops
+...[Sno:cure3]^ No Cure3 in shops
+...[Sno:illusion]^ No Illusions in shops
+...[Sno:coffin]^ No Coffins in shops
+...[Sno:damage_items]^ No Damage items (BigBomb,ThorRage,etc) in shops
 .(Sempty)! Shops sell nothing
+
 <> Buy prices
 .(Sfree) Shop items are free
 .(Smixed:stirred)^ Shop item prices are shuffled within normal items
@@ -523,33 +563,6 @@
 <> Sell prices
 .(Ssell:quarter) Items sell for 1/4 price
 .(Ssell:0) Items sell for 0 GP
-()#^ Guarantee Items
-.[Salways:apples] Apples/Soma Drops always sold in shops
-.[Salways:sirens] Sirens always sold in shops
-.[Salways:vampires] Vampires always sold in shops
-.[Salways:hrglass] HrGlass2 always sold in shops
-.[Salways:bacchus] Bacchus always sold in shops
-.[Salways:starveil] Starveils always sold in shops
-.[Salways:cure3] Cure3 always sold in shops
-.[Salways:illusion] Illusions always sold in shops
-.[Salways:coffin] Coffins always sold in shops
-.[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
-[Splayable]^ Shops contain usable items
-[Sethersell]^ Ethers and Elixirs sell like other items
-
-()# Remove Items
-.[Sno:j] No J-items in shops
-.[Sno:apples] No Apples/Soma Drops in shops
-.[Sno:sirens] No Sirens in shops
-.[Sno:life]! No Life potions in shops
-.[Sno:vampires]^ No Vampires in shops
-.[Sno:hrglass]^ No HrGlass2 in shops
-.[Sno:bacchus]^ No Bacchus in shops
-.[Sno:starveil]^ No Starveils in shops
-.[Sno:cure3]^ No Cure3 in shops
-.[Sno:illusion]^ No Illusions in shops
-.[Sno:coffin]^ No Coffins in shops
-.[Sno:damage_items]^ No Damage items (BigBomb,ThorRage,etc) in shops
 
 <>^ Shop price adjustments
 .(Sprice:20) Shop prices are adjusted to 20% of their normal value
@@ -575,6 +588,8 @@
 ..[ECHO:Sprice:20]
 .(Sprice:400)! Shop prices are adjusted to 400% of their normal value
 ..[ECHO:Sprice:20]
+
+[Sethersell]^ Ethers and Elixirs sell like other items
 
 == BOSSES
 <>* Bosses
@@ -788,6 +803,7 @@
 [-spoon] Edward can equip the Spoon
 [-monsterevade]!^ Monsters get physical and magical evasion
 [-monsterflee]^ Monsters can flee from battle
+[-speedmodbalance] Alter the speed modifier behaviour
 [@smithy] Smithy reward
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
@@ -844,7 +860,6 @@
 ..<> Base ATB for the anchor
 ...(-agility:scale1) Base ATB is 1 tick 
 ...(-agility:scale10) Base ATB is 10 ticks 
-.[-speedmodbalance] Alter the speed modifier behaviour
 [@exp] Restore vanilla or change EXP distribution
 .[-exp:split] Split EXP distribution
 .[-exp:noboost] No low-level EXP boost
@@ -854,6 +869,7 @@
 ..<> Amount of bonus EXP 
 ...(-exp:objectivebonus25) Each completed objective gives 25% extra EXP
 ...(-exp:objectivebonus10) Each completed objective gives 10% extra EXP
+...(-exp:objectivebonus5) Each completed objective gives 5% extra EXP
 ...(-exp:objectivebonus_num) Each completed objective gives extra EXP
 .[@kicheckexp]^ Award extra EXP for completing key item checks
 ..<> Amount of bonus EXP

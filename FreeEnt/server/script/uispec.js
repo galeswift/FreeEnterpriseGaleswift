@@ -5188,753 +5188,12 @@ var FLAG_UISPEC = [
                     "title": "Chests contain tier 5 items at worst"
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "flag": "Tvanillaish",
-            "title": "Vanilla-ish chest randomization",
-            "description": "Uses location-based weighting, with item quality approximately that of the vanilla game.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
               },
               {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Tpro",
-            "title": "Pro chest randomization",
-            "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Tsemipro",
-            "title": "Semi-pro chest randomization",
-            "description": "Uses location-based weighting, with item quality between that provided by pro and wildish.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Twild",
-            "title": "Wild chest randomization",
-            "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Twildish",
-            "title": "Wild-ish chest randomization",
-            "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
               }
             ]
           },
@@ -6085,6 +5344,819 @@ var FLAG_UISPEC = [
                     "title": "Chests contain tier 5 items at worst"
                   }
                 ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Tvanillaish",
+            "title": "Vanilla-ish chest randomization",
+            "description": "Uses location-based weighting, with item quality approximately that of the vanilla game.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon53",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon54",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Tpro",
+            "title": "Pro chest randomization",
+            "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
+            "subcontrols": [
+              {
+                "flag": "@anon53",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon54",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Tsemipro",
+            "title": "Semi-pro chest randomization",
+            "description": "Uses location-based weighting, with item quality between that provided by pro and wildish.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon53",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon54",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Twildish",
+            "title": "Wild-ish chest randomization",
+            "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
+            "subcontrols": [
+              {
+                "flag": "@anon53",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon54",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Twild",
+            "title": "Wild chest randomization",
+            "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
+            "subcontrols": [
+              {
+                "flag": "@anon53",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon54",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
               }
             ]
           },
@@ -6098,18 +6170,6 @@ var FLAG_UISPEC = [
       {
         "flag": "Tno:j",
         "title": "No J-items in chests"
-      },
-      {
-        "flag": "Tplayable",
-        "title": "Chests contain usable items",
-        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
-        "fork": true
-      },
-      {
-        "flag": "Tadjmiabareas",
-        "title": "Areas with MIABs will have slightly worse items",
-        "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
-        "fork": true
       },
       {
         "flag": "@anon58",
@@ -6166,6 +6226,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "@anon60",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon61",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6186,6 +6364,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "@anon60",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon61",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6207,6 +6503,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "@anon60",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon61",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6227,6 +6641,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "@anon60",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon61",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6248,6 +6780,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "@anon60",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon61",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6261,7 +6911,79 @@ var FLAG_UISPEC = [
             "title": "Shops sell only one type of item",
             "description": "Shops only sell a single item, and all shops in the game are the same.  The item chosen uses the same rules as Swild.",
             "hard": true,
-            "fork": true
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "@anon62",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
           },
           {
             "flag": "Sempty",
@@ -6271,7 +6993,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon60",
+        "flag": "@anon63",
         "title": "Buy prices",
         "type": "select",
         "subcontrols": [
@@ -6293,7 +7015,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon61",
+        "flag": "@anon64",
         "title": "Sell prices",
         "type": "select",
         "subcontrols": [
@@ -6308,131 +7030,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon62",
-        "title": "Guarantee Items",
-        "compact": true,
-        "fork": true,
-        "subcontrols": [
-          {
-            "flag": "Salways:apples",
-            "title": "Apples/Soma Drops always sold in shops"
-          },
-          {
-            "flag": "Salways:sirens",
-            "title": "Sirens always sold in shops"
-          },
-          {
-            "flag": "Salways:vampires",
-            "title": "Vampires always sold in shops"
-          },
-          {
-            "flag": "Salways:hrglass",
-            "title": "HrGlass2 always sold in shops"
-          },
-          {
-            "flag": "Salways:bacchus",
-            "title": "Bacchus always sold in shops"
-          },
-          {
-            "flag": "Salways:starveil",
-            "title": "Starveils always sold in shops"
-          },
-          {
-            "flag": "Salways:cure3",
-            "title": "Cure3 always sold in shops"
-          },
-          {
-            "flag": "Salways:illusion",
-            "title": "Illusions always sold in shops"
-          },
-          {
-            "flag": "Salways:coffin",
-            "title": "Coffins always sold in shops"
-          },
-          {
-            "flag": "Salways:damage_items",
-            "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
-          }
-        ]
-      },
-      {
-        "flag": "Splayable",
-        "title": "Shops contain usable items",
-        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
-        "fork": true
-      },
-      {
-        "flag": "Sethersell",
-        "title": "Ethers and Elixirs sell like other items",
-        "description": "Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.",
-        "fork": true
-      },
-      {
-        "flag": "@anon63",
-        "title": "Remove Items",
-        "compact": true,
-        "subcontrols": [
-          {
-            "flag": "Sno:j",
-            "title": "No J-items in shops"
-          },
-          {
-            "flag": "Sno:apples",
-            "title": "No Apples/Soma Drops in shops"
-          },
-          {
-            "flag": "Sno:sirens",
-            "title": "No Sirens in shops"
-          },
-          {
-            "flag": "Sno:life",
-            "title": "No Life potions in shops",
-            "hard": true
-          },
-          {
-            "flag": "Sno:vampires",
-            "title": "No Vampires in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:hrglass",
-            "title": "No HrGlass2 in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:bacchus",
-            "title": "No Bacchus in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:starveil",
-            "title": "No Starveils in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:cure3",
-            "title": "No Cure3 in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:illusion",
-            "title": "No Illusions in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:coffin",
-            "title": "No Coffins in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:damage_items",
-            "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
-            "fork": true
-          }
-        ]
-      },
-      {
-        "flag": "@anon64",
+        "flag": "@anon65",
         "title": "Shop price adjustments",
         "fork": true,
         "type": "select",
@@ -6442,7 +7040,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 20% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6467,7 +7065,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 40% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6492,7 +7090,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 60% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6517,7 +7115,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 80% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6542,7 +7140,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 120% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6567,7 +7165,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 140% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6592,7 +7190,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 160% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6617,7 +7215,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 180% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6642,7 +7240,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 200% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6668,7 +7266,7 @@ var FLAG_UISPEC = [
             "hard": true,
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon66",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6689,6 +7287,12 @@ var FLAG_UISPEC = [
             ]
           }
         ]
+      },
+      {
+        "flag": "Sethersell",
+        "title": "Ethers and Elixirs sell like other items",
+        "description": "Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.",
+        "fork": true
       }
     ]
   },
@@ -6696,7 +7300,7 @@ var FLAG_UISPEC = [
     "title": "BOSSES",
     "controls": [
       {
-        "flag": "@anon66",
+        "flag": "@anon67",
         "title": "Bosses",
         "important": true,
         "type": "select",
@@ -6733,7 +7337,7 @@ var FLAG_UISPEC = [
         "description": "Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area."
       },
       {
-        "flag": "@anon67",
+        "flag": "@anon68",
         "title": "Alternate boss stats/scripts",
         "fork": true,
         "type": "select",
@@ -6788,7 +7392,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon68",
+        "flag": "@anon69",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -6822,7 +7426,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon69",
+        "flag": "@anon70",
         "title": "Change Golbez's behaviour",
         "fork": true,
         "subcontrols": [
@@ -6846,7 +7450,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon70",
+        "flag": "@anon71",
         "title": "Remove certain boss slots",
         "fork": true,
         "subcontrols": [
@@ -6868,7 +7472,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon71",
+        "flag": "@anon72",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -6941,7 +7545,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon72",
+        "flag": "@anon73",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6956,7 +7560,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon73",
+        "flag": "@anon74",
         "title": "Running from battle",
         "type": "select",
         "subcontrols": [
@@ -6973,7 +7577,7 @@ var FLAG_UISPEC = [
             "type": "select",
             "subcontrols": [
               {
-                "flag": "@anon74",
+                "flag": "@anon75",
                 "title": "Spoils penalty",
                 "type": "select",
                 "subcontrols": [
@@ -7022,7 +7626,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon75",
+        "flag": "@anon76",
         "title": "Change encounter tables",
         "fork": true,
         "type": "select",
@@ -7075,7 +7679,7 @@ var FLAG_UISPEC = [
     "title": "HARP OPTIONS",
     "controls": [
       {
-        "flag": "@anon76",
+        "flag": "@anon77",
         "title": "Harp randomization",
         "important": true,
         "fork": true,
@@ -7146,7 +7750,7 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon77",
+        "flag": "@anon78",
         "title": "Warps Randomization Options",
         "type": "select",
         "subcontrols": [
@@ -7156,7 +7760,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon78",
+                "flag": "@anon79",
                 "title": "Doors Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -7195,7 +7799,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon79",
+                "flag": "@anon80",
                 "title": "Entrances Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -7251,7 +7855,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon80",
+            "flag": "@anon81",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7424,7 +8028,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon81",
+            "flag": "@anon82",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7597,7 +8201,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon82",
+            "flag": "@anon83",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7802,7 +8406,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon83",
+            "flag": "@anon84",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7838,7 +8442,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon84",
+            "flag": "@anon85",
             "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
@@ -7847,7 +8451,7 @@ var FLAG_UISPEC = [
                 "title": "Usual FuSoYa challenge",
                 "subcontrols": [
                   {
-                    "flag": "@anon85",
+                    "flag": "@anon86",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7865,7 +8469,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon86",
+                    "flag": "@anon87",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7888,7 +8492,7 @@ var FLAG_UISPEC = [
                 "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
                 "subcontrols": [
                   {
-                    "flag": "@anon87",
+                    "flag": "@anon88",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7906,7 +8510,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon85",
+                    "flag": "@anon86",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7924,7 +8528,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon86",
+                    "flag": "@anon87",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7947,7 +8551,7 @@ var FLAG_UISPEC = [
                 "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
                 "subcontrols": [
                   {
-                    "flag": "@anon85",
+                    "flag": "@anon86",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -7965,7 +8569,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon86",
+                    "flag": "@anon87",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -7988,7 +8592,7 @@ var FLAG_UISPEC = [
                 "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
                 "subcontrols": [
                   {
-                    "flag": "@anon88",
+                    "flag": "@anon89",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
@@ -8001,7 +8605,7 @@ var FLAG_UISPEC = [
                     ]
                   },
                   {
-                    "flag": "@anon89",
+                    "flag": "@anon90",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -8025,7 +8629,7 @@ var FLAG_UISPEC = [
                 "hard": true,
                 "subcontrols": [
                   {
-                    "flag": "@anon90",
+                    "flag": "@anon91",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -8064,7 +8668,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon91",
+            "flag": "@anon92",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -8121,7 +8725,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon92",
+                    "flag": "@anon93",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -8161,7 +8765,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon94",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -8217,7 +8821,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon94",
+                "flag": "@anon95",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8228,6 +8832,10 @@ var FLAG_UISPEC = [
                   {
                     "flag": "-exp:objectivebonus10",
                     "title": "Each completed objective gives 10% extra EXP"
+                  },
+                  {
+                    "flag": "-exp:objectivebonus5",
+                    "title": "Each completed objective gives 5% extra EXP"
                   },
                   {
                     "flag": "-exp:objectivebonus_num",
@@ -8245,7 +8853,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon95",
+                "flag": "@anon96",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8273,11 +8881,11 @@ var FLAG_UISPEC = [
           {
             "flag": "@zonkbonusexp",
             "title": "Award extra EXP after non-KI rewards from KI checks",
-            "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") you earn more EXP from future battles.",
+            "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") beyond the starting item you earn more EXP from future battles.",
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon96",
+                "flag": "@anon97",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8304,7 +8912,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon97",
+                "flag": "@anon98",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8327,7 +8935,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon98",
+                "flag": "@anon99",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8362,7 +8970,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon99",
+                "flag": "@anon100",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -8413,7 +9021,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon100",
+        "flag": "@anon101",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -8446,7 +9054,7 @@ var FLAG_UISPEC = [
         "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen."
       },
       {
-        "flag": "@anon101",
+        "flag": "@anon102",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -8477,12 +9085,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon102",
+        "flag": "@anon103",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon103",
+            "flag": "@anon104",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -8569,7 +9177,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon104",
+            "flag": "@anon105",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -8610,7 +9218,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon105",
+            "flag": "@anon106",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8842,12 +9450,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon106",
+        "flag": "@anon107",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon107",
+            "flag": "@anon108",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8869,7 +9477,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon108",
+            "flag": "@anon109",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -8886,7 +9494,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon109",
+            "flag": "@anon110",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -8940,7 +9548,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon110",
+        "flag": "@anon111",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8994,7 +9602,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon111",
+            "flag": "@anon112",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -9010,7 +9618,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon112",
+                "flag": "@anon113",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

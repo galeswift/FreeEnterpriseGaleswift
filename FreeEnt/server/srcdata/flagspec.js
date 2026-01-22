@@ -2,7 +2,7 @@ const _FE_FLAGSPEC = {
     "version": [
         4,
         6,
-        2
+        4
     ],
     "order": [
         "Onone",
@@ -1057,19 +1057,6 @@ const _FE_FLAGSPEC = {
         "Tmintier:5",
         "Tmoney",
         "Tjunk",
-        "Sprice:20",
-        "Sprice:40",
-        "Sprice:60",
-        "Sprice:80",
-        "Sprice:120",
-        "Sprice:140",
-        "Sprice:160",
-        "Sprice:180",
-        "Sprice:200",
-        "Sprice:400",
-        "Spricey:items",
-        "Spricey:weapons",
-        "Spricey:armor",
         "Svanilla",
         "Sshuffle",
         "Sstandard",
@@ -1089,6 +1076,19 @@ const _FE_FLAGSPEC = {
         "Ssell:0",
         "Splayable",
         "Sethersell",
+        "Sprice:20",
+        "Sprice:40",
+        "Sprice:60",
+        "Sprice:80",
+        "Sprice:120",
+        "Sprice:140",
+        "Sprice:160",
+        "Sprice:180",
+        "Sprice:200",
+        "Sprice:400",
+        "Spricey:items",
+        "Spricey:weapons",
+        "Spricey:armor",
         "Salways:apples",
         "Salways:sirens",
         "Salways:vampires",
@@ -1303,7 +1303,6 @@ const _FE_FLAGSPEC = {
         "-agility:anchor28",
         "-agility:anchor41",
         "-agility:anchor42",
-        "",
         "-agility:scale1",
         "-agility:scale10",
         "-speedmodbalance",
@@ -2411,18 +2410,6 @@ const _FE_FLAGSPEC = {
             "Tjunk"
         ],
         [
-            "Sprice:20",
-            "Sprice:40",
-            "Sprice:60",
-            "Sprice:80",
-            "Sprice:120",
-            "Sprice:140",
-            "Sprice:160",
-            "Sprice:180",
-            "Sprice:200",
-            "Sprice:400"
-        ],
-        [
             "Sshuffle",
             "Sstandard",
             "Spro",
@@ -2441,6 +2428,18 @@ const _FE_FLAGSPEC = {
         [
             "Ssell:quarter",
             "Ssell:0"
+        ],
+        [
+            "Sprice:20",
+            "Sprice:40",
+            "Sprice:60",
+            "Sprice:80",
+            "Sprice:120",
+            "Sprice:140",
+            "Sprice:160",
+            "Sprice:180",
+            "Sprice:200",
+            "Sprice:400"
         ],
         [
             "Bstats:j",
@@ -2611,8 +2610,7 @@ const _FE_FLAGSPEC = {
             "-agility:anchor27",
             "-agility:anchor28",
             "-agility:anchor41",
-            "-agility:anchor42",
-            ""
+            "-agility:anchor42"
         ],
         [
             "-agility:scale1",
@@ -9007,187 +9005,187 @@ const _FE_FLAGSPEC = {
             "value": 2
         },
         {
-            "flag": "Sprice:20",
-            "offset": 315,
-            "size": 4,
-            "value": 1
-        },
-        {
-            "flag": "Sprice:40",
-            "offset": 315,
-            "size": 4,
-            "value": 2
-        },
-        {
-            "flag": "Sprice:60",
-            "offset": 315,
-            "size": 4,
-            "value": 3
-        },
-        {
-            "flag": "Sprice:80",
-            "offset": 315,
-            "size": 4,
-            "value": 4
-        },
-        {
-            "flag": "Sprice:120",
-            "offset": 315,
-            "size": 4,
-            "value": 5
-        },
-        {
-            "flag": "Sprice:140",
-            "offset": 315,
-            "size": 4,
-            "value": 6
-        },
-        {
-            "flag": "Sprice:160",
-            "offset": 315,
-            "size": 4,
-            "value": 7
-        },
-        {
-            "flag": "Sprice:180",
-            "offset": 315,
-            "size": 4,
-            "value": 8
-        },
-        {
-            "flag": "Sprice:200",
-            "offset": 315,
-            "size": 4,
-            "value": 9
-        },
-        {
-            "flag": "Sprice:400",
-            "offset": 315,
-            "size": 4,
-            "value": 10
-        },
-        {
-            "flag": "Spricey:items",
-            "offset": 319,
-            "size": 1,
-            "value": 1
-        },
-        {
-            "flag": "Spricey:weapons",
-            "offset": 320,
-            "size": 1,
-            "value": 1
-        },
-        {
-            "flag": "Spricey:armor",
-            "offset": 321,
-            "size": 1,
-            "value": 1
-        },
-        {
             "flag": "Sshuffle",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 1
         },
         {
             "flag": "Sstandard",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 2
         },
         {
             "flag": "Spro",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 3
         },
         {
             "flag": "Swild",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 4
         },
         {
             "flag": "Swildish",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 5
         },
         {
             "flag": "Scabins",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 6
         },
         {
             "flag": "Svanillaish",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 7
         },
         {
             "flag": "Sempty",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 8
         },
         {
             "flag": "Ssame",
-            "offset": 322,
+            "offset": 315,
             "size": 4,
             "value": 9
         },
         {
             "flag": "Ssingles",
-            "offset": 326,
+            "offset": 319,
             "size": 1,
             "value": 1
         },
         {
             "flag": "Sfree",
-            "offset": 327,
+            "offset": 320,
             "size": 2,
             "value": 1
         },
         {
             "flag": "Smixed:shaken",
-            "offset": 327,
+            "offset": 320,
             "size": 2,
             "value": 2
         },
         {
             "flag": "Smixed:stirred",
-            "offset": 327,
+            "offset": 320,
             "size": 2,
             "value": 3
         },
         {
             "flag": "Sunsafe",
-            "offset": 329,
+            "offset": 322,
             "size": 1,
             "value": 1
         },
         {
             "flag": "Ssell:quarter",
-            "offset": 330,
+            "offset": 323,
             "size": 2,
             "value": 1
         },
         {
             "flag": "Ssell:0",
-            "offset": 330,
+            "offset": 323,
             "size": 2,
             "value": 2
         },
         {
             "flag": "Splayable",
-            "offset": 332,
+            "offset": 325,
             "size": 1,
             "value": 1
         },
         {
             "flag": "Sethersell",
+            "offset": 326,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "Sprice:20",
+            "offset": 327,
+            "size": 4,
+            "value": 1
+        },
+        {
+            "flag": "Sprice:40",
+            "offset": 327,
+            "size": 4,
+            "value": 2
+        },
+        {
+            "flag": "Sprice:60",
+            "offset": 327,
+            "size": 4,
+            "value": 3
+        },
+        {
+            "flag": "Sprice:80",
+            "offset": 327,
+            "size": 4,
+            "value": 4
+        },
+        {
+            "flag": "Sprice:120",
+            "offset": 327,
+            "size": 4,
+            "value": 5
+        },
+        {
+            "flag": "Sprice:140",
+            "offset": 327,
+            "size": 4,
+            "value": 6
+        },
+        {
+            "flag": "Sprice:160",
+            "offset": 327,
+            "size": 4,
+            "value": 7
+        },
+        {
+            "flag": "Sprice:180",
+            "offset": 327,
+            "size": 4,
+            "value": 8
+        },
+        {
+            "flag": "Sprice:200",
+            "offset": 327,
+            "size": 4,
+            "value": 9
+        },
+        {
+            "flag": "Sprice:400",
+            "offset": 327,
+            "size": 4,
+            "value": 10
+        },
+        {
+            "flag": "Spricey:items",
+            "offset": 331,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "Spricey:weapons",
+            "offset": 332,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "Spricey:armor",
             "offset": 333,
             "size": 1,
             "value": 1
@@ -10451,12 +10449,6 @@ const _FE_FLAGSPEC = {
             "offset": 444,
             "size": 4,
             "value": 14
-        },
-        {
-            "flag": "",
-            "offset": 444,
-            "size": 4,
-            "value": 15
         },
         {
             "flag": "-agility:scale1",

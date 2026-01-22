@@ -956,7 +956,7 @@ Normally, completing key item checks does not increase the amount of EXP receive
 The EXP bonus is 100% divided by the number of potential key item checks in the seed; e.g. with the 21 non-starting main and summon checks on, each objective gives you about 4.7% extra EXP (subject to some truncation).
 
 [@zonkbonusexp]
-Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a "zonk") you earn more EXP from future battles.
+Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a "zonk") beyond the starting item you earn more EXP from future battles.
 
 [@miabbonusexp]
 Normally, MIAB encounters have the same EXP calculation as other encounters. Under this flag, MIAB encounters award double or 1.5 times the usual EXP.
