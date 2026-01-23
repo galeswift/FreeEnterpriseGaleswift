@@ -15,7 +15,7 @@ patch($0f92d6 bus) { 04 }
 patch($0f933e bus) { 24 }
 patch($0f9346 bus) { 24 }
 
-patch($0fa584 bus) { 00 04 } // $1A, Paladin-only armour for Cecil
+patch($0fa584 bus) { 00 02 } // $1A, Paladin-only armour for Cecil
 
 // change Paladin-only armour to point at this equip field ($1A, which
 // is normally an unused Rosa-only field) instead of the holy sword field 
