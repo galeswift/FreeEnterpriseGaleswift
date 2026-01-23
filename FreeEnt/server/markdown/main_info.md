@@ -1145,7 +1145,7 @@ This wacky flag causes all commands except for Fight and Item to be locked at th
 - Design/Programming: ScytheMarshall 
 - Locations: wacky_rando.py, experience_acceleration.f4c
 
-This wacky flag makes two changes to experience, to simulate what it's like to get work experience in real life: 1. Each distinct character instance gets an experience modifier of 0.5-1.5x in increments of 0.25, and 2. Your average party level determines a second modifier to all character's experience, by computing (average party level / 8) + 1 and then using that divided by 6 as the modifier, so that you only start gaining full experience at average party level 40. Base level Rydia, Edward, and Paladin Cecil start with 1/6 experience; a party with most of the usual characters will start with roughly 1/3 experience.
+This wacky flag makes two changes to experience, to simulate what it's like to get work experience in real life: 1. Each distinct character instance gets an experience modifier of 0.5-1.5x in increments of 0.25, determined by the formation ID (like status effects on Afflicted), and 2. Your average party level determines a second modifier to all character's experience, by computing (average party level / 8) + 1 and then using that divided by 6 as the modifier, so that you only start gaining full experience at average party level 40. Base level Rydia, Edward, and Paladin Cecil start with 1/6 experience; a party with most of the usual characters will start with roughly 1/3 experience.
 
 The idea is that two characters can do the same work and get different experience, and that you need work experience to get work experience. Probably the most cynical wacky flag of the whole bunch.
 
