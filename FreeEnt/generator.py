@@ -564,7 +564,7 @@ def check_prng_safe(list_of_bytes):
     check_0_4 = set(range(0,5)).issubset(set([i % 5 for i in list_of_bytes]))
     check_0_7 = set(range(0,8)).issubset(set([i % 8 for i in list_of_bytes]))
     check_0_12 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
-    check_0_47 = set(range(0,47)).issubset(set([i % 48 for i in list_of_bytes]))
+    check_0_47 = set(range(0,48)).issubset(set([i % 48 for i in list_of_bytes]))
 
     return (check_0_4 and check_0_7 and check_0_12 and check_0_47)
 
