@@ -1007,13 +1007,15 @@ The options are multiples of 10 from 90 down to 0, resulting in 90% exp scaling,
 
 These flags change the PRNG table for the game (a table of 256 bytes from 0-255, shuffled).
 
+Note: The game's battle system has many places where it rolls random numbers until it finds a valid option, which means it needs to be able to eventually roll all possible options in case there is only one valid option. The worst offender is the game's Charm code, when it chooses a spell for your character to attempt to cast from all possible white *and* black spells, 48 total. ... But if you only have one spell, say, like Paladin Cecil does at base level, then it needs to roll exactly that value. Thus, `-prng:random` and `-prng:mostlysingle` are crafted to ensure that the game does not softlock through not having enough possible RNG options.
+
 ### `-prng:shuffle` {: .h6 }
 
 This flag provides a differently shuffled table of the bytes 0-255.
 
 ### `-prng:random` {: .h6 }
 
-This flag independently randomizes each of the 256 bytes of the table, so that there is no guarantee that every number shows up and there are probably repeats. There is a safety check made to ensure that the table allows for every battle slot to be selected. Otherwise, the game will softlock in battle because it cannot choose a valid target.
+This flag independently randomizes each of the 256 bytes of the table, so that there is no guarantee that every number shows up and there are probably repeats. There is a safety check made to ensure that the table allows for every battle slot to be selected (and every black/white spell slot, for Charm). Otherwise, the game will softlock in battle because it cannot choose a valid target/spell.
 
 ### `-prng:consecutive` {: .h6 }
 
@@ -1021,7 +1023,7 @@ This flag replaces the table with the numbers 0-255 in ascending order.
 
 ### `-prng:mostlysingle` {: .h6 }
 
-This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 12 of the entries are replaced with 12 numbers near the random integer in order to allow every battle slot to be targettable. (Hence, "mostly single".) 
+This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 47 of the entries are replaced with 47 numbers near the random integer in order to allow every battle slot to be targettable and every black/white spell slot to be checked. (Hence, "mostly single".) 
 
 ## Zeromus Flags
 
@@ -1242,7 +1244,7 @@ This flag allows Twin to cast W.Meteo or self-target Stone, in addition to Flare
 - Design/Programming: CoffeeAndChocobos (design), ScytheMarshall (design and programming), others in the Discord thread
 - Locations: big_chocobo_summon.f4c
 
-This flag turns the Chocobo summon into a spell somewhat like Asura, in that sometimes it will instead Call the Big Chocobo to attack. The chance of the Big Chocobo attacking is 4% plus 2% for each distinct item stored with the Big Chocobo, maxing out at 100% at 48 distinct items. The spell power is described in the following way. The base spell power is 40. For each distinct item stored with the Big Chocobo, the spell power increases by 8, plus its item price (prices larger than 112000 GP count as 112000) divided by 16000, times 8. The largest increase per item is 64 points of spell power (e.g. Crystal Sword, Avenger, Adamant). The maximum total spell power is 2040. Carrots give +16 spell power instead of +8, and Whistles give +32 spell power instead of +16. The Grimoire's Chocobo summon is replaced with Big Chocobo.
+This flag turns the Chocobo summon into a spell somewhat like Asura, in that sometimes it will instead Call the Big Chocobo to attack. The chance of the Big Chocobo attacking is 4% plus 2% for each distinct item stored with the Big Chocobo, maxing out at 100% at 48 distinct items. The spell power is described in the following way. The base spell power is 40. For each distinct item stored with the Big Chocobo, the spell power increases by 8, plus its item buy price (prices larger than 112000 GP count as 112000) divided by 16000, times 8. The largest increase per item is 64 points of spell power (e.g. Crystal Sword, Avenger, Adamant). The maximum total spell power is 2040. Carrots give +16 spell power instead of +8, and Whistles give +32 spell power instead of +16. The Grimoire's Chocobo summon is replaced with Big Chocobo.
 
 Since the Big Chocobo menu cannot be accessed with the Save Us Big Chocobo wacky active, the probability is a static 20% with 232 spell power (as if you stored 8 different items with an average of 24 bonus spell power each).
 

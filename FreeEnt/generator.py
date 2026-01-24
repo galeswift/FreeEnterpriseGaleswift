@@ -563,9 +563,10 @@ def check_prng_safe(list_of_bytes):
     # for "safe" prng, need to ensure that every battle slot can be obtained
     check_0_4 = set(range(0,5)).issubset(set([i % 5 for i in list_of_bytes]))
     check_0_7 = set(range(0,8)).issubset(set([i % 8 for i in list_of_bytes]))
-    check_0_13 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
+    check_0_12 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
+    check_0_47 = set(range(0,47)).issubset(set([i % 48 for i in list_of_bytes]))
 
-    return (check_0_4 and check_0_7 and check_0_13)
+    return (check_0_4 and check_0_7 and check_0_12 and check_0_47)
 
 #--------------------------------------------------------------------------
 
@@ -861,15 +862,17 @@ def build(romfile, options, force_recompile=False):
         elif prng_mod == 'consecutive':
             prng_bytes = list(range(0,256))
         elif prng_mod == 'mostlysingle':
+            # Charm spell selection needs a range of 48 values; "center" at 24 (23 below, 24 above),
+            # unless we roll too low or too high
             random_integer = env.rnd.randrange(0,256)
-            lower_bound = max(random_integer-6,0)
-            if min(random_integer+6,255) == 255:
-                lower_bound = 243
-            extra_ints = list(range(lower_bound,lower_bound+13))
+            lower_bound = max(random_integer-23,0)
+            if min(random_integer+24,255) == 255:
+                lower_bound = 255-47 # 208
+            extra_ints = list(range(lower_bound,lower_bound+48))
             extra_ints.remove(random_integer)
             env.rnd.shuffle(extra_ints)
-            prng_bytes = [(extra_ints[(i // 20) - 1] if i % 20 == 0 and i // 20 > 0 else random_integer) for i in range(0,256)]
-
+            # place the other bytes equally spaced (every 5), leaving 13 at the front and 12 at the back
+            prng_bytes = [(extra_ints[(i // 5) - 2] if i % 5 == 3 and i // 5 > 1 and i // 5 < 49 else random_integer) for i in range(0,256)]
         env.add_binary(BusAddress(0x14EE00), prng_bytes, as_script=False)
 
     if options.flags.has('bug_fixes'):
