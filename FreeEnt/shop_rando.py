@@ -122,7 +122,20 @@ def apply(env):
         if 'fistfight' in wacky:
             items_dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(it.equip).isdisjoint(user_set)) or (it.subtype == 'claw'))
         else:
-            items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
+            # Remove Dark Knight Cecil from users if on Cpaladin without Dark Paladin
+            if env.options.flags.has('characters_cecil_paladin') and not env.options.flags.has('darkpaladin'):
+                user_set.difference_update(set(['dkcecil']))
+            if env.options.flags.has('rosapaladin'):
+                # When Rosa and Paladin Cecil swap weapons/shields, need to handle that
+                weapons_user_set = user_set.copy()
+                for c in ['pcecil', 'rosa']:
+                    if c in weapons_user_set:
+                        weapons_user_set.remove(c)
+                        weapons_user_set.add([d for d in ['pcecil', 'rosa'] if d != c][0])
+                items_dbview.refine(lambda it: it.category == 'item' or (it.category == 'armor' and it.subtype != 'shield' and not set(it.equip).isdisjoint(user_set))
+                                                               or ((it.category == 'weapon' or it.subtype == 'shield') and not set(it.equip).isdisjoint(weapons_user_set)))
+            else:
+                items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))      
 
     if 'kleptomania' in wacky:
         items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']) or (it.tier == 1))
