@@ -881,7 +881,8 @@ def build(romfile, options, force_recompile=False):
             'scripts/fix_victim_history.f4c',
             'scripts/fix_hermes_berserk.f4c',
             'scripts/fix_regen_axtor_check.f4c',
-            'scripts/fix_regen_slot_indexing.f4c'
+            'scripts/fix_regen_slot_indexing.f4c',
+            'scripts/fix_edward_sing_check.f4c'
             )
 
     if options.flags.has('vintage'):
