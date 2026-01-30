@@ -1,0 +1,229 @@
+// prevent seeing any formation in random battles
+// more than once (miabs/boss battles/Worth Fighting For
+// are exempted, of course), while still allowing toggled encounters
+
+// use a $40 byte table located at $1DC0-1DFF, indexed
+// by bits, split in half between formations $0xx and $1xx
+// at $1DE0
+
+// idea: once the first attempted formation offset
+// is obtained, check it, cycle until we find one or don't,
+// then pass it back or fail
+// to check it: 1. get the lo byte from the outdoor or indoor table
+// (identify that from map area $1700 = 3 or not)
+// 2. get the hi byte from map plane $1701 = 0 or not (0 = 0, not = 1)
+// 3. check/set a bit field using Tracker utility functions
+// use a scratch register to keep track of when indexing should roll over.
+
+msfpatch{
+    .addr $008b05
+        jml $=EncNoRepeats__CheckFormation
+
+    .new
+    EncNoRepeats__CheckFormation:
+        // %if wacky_worthfighting%
+        pha
+        lda $_Wacky__RAM_worthfighting
+        beq $+NotTreasureBattle
+
+        // let Something Worth Fighting For encounters
+        // bypass the formation restriction
+        // so, perform displaced commands and return
+        pla
+        cmp #$2b
+        bcc $+TreasureBattleDone
+        jml $008b09
+    %TreasureBattleDone:
+        jml $008b28
+
+    %NotTreasureBattle:
+        pla
+        // %end%        
+
+        // let Siren encounters bypass this check as well
+        pha
+        lda $06c0
+        beq $+NotSiren
+        pla
+        inx
+        inx
+        inx
+        inx
+        inx
+        inx
+        inx
+        jml $008b28
+
+    %NotSiren:
+        pla
+        // initialize loop variables
+        ldy #$0000
+        stz $1694
+
+        // mimic the old code, but with added changes to $1694
+        cmp #$2b
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        cmp #$56
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        cmp #$81
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        cmp #$ac
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        cmp #$cc
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        cmp #$ec
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        cmp #$fc
+        bcc $+CheckFormationLoopStart
+        inx
+        inc $1694
+        // right now, X is the initial formation offset,
+        // Y is 0, and $1694 is 0-7 based on how X changed
+    %CheckFormationLoopStart:
+        cpy #$0008
+        beq $+EncNoRepeats__NoEnc
+
+        // first, determine outdoor/indoor data
+        // to get the lo byte of the formation
+        lda $1700
+        cmp #$03
+        bne $+OutdoorFormations
+        lda $0ec816,x
+        bra $+MapPlane
+    %OutdoorFormations:
+        lda $0ec796,x
+    %MapPlane:
+
+        jsr $_EncNoRepeats__CheckSetBit
+        bcc $+FormationGood
+
+        // %flag encounter_dangerous on%
+        // let dangerous encounters *also* go through
+        // i.e. if this formation *would* give you a dangerous encounter
+        // on the current RNG, let it happen regardless of formation restrictions
+        // (which means we'll end up checking *all* possible formations for
+        // dangerous encounters here, which is a fun quirk)
+        // note: on Enorepeats, the danger check does *not* short-out if encounters
+        // are toggled on.
+        pha
+        phx
+        phy
+        jsl $=EncounterDangerous__CheckFormation
+        cmp #$ff
+        beq $+ContinueNoRepeats
+        // this encounter is dangerous; keep it
+        ply
+        plx
+        pla
+        bra $+FormationGood
+    %ContinueNoRepeats:
+        ply
+        plx
+        pla
+        // %end%
+
+        // cycle to next formation offset
+        iny
+        inx
+        inc $1694
+        lda $1694
+        cmp #$08
+        bne $+NormalCycle
+        // if the next offset is "supposed" to be 8, cycle back to 0
+        stz $1694
+        dex
+        dex
+        dex
+        dex
+        dex
+        dex
+        dex
+        dex
+    %NormalCycle:
+        bra $-CheckFormationLoopStart
+
+    %FormationGood:
+        // X is an acceptable formation offset, carry on
+        // %flag encounter_dangerous on%
+        // on Edanger, we need to bypass the encounter check that's currently
+        // after this jml. so, store the lo byte of the formation, pop the short
+        // return address (to bypass rts'ing from _get_formation_offset), then
+        // jump to the correct outdoor/indoor branch
+        sta $1800
+        pla
+        pla
+        lda $1700
+        cmp #$03
+        bne $+OutdoorEncounter
+        jml $008a85
+    %OutdoorEncounter:
+        jml $008a19
+        // %end%
+        // %flag encounter_dangerous off%
+        jml $008b28
+        // %end%
+
+    %EncNoRepeats__NoEnc:
+        // clear formation ID and jump to playing the Siren-fail sound
+        stz $1800
+        stz $1801
+        // %flag encounter_dangerous on%
+        // if we dodged all dangerous encounters and encounters are turned off,
+        // then just fizzle silently
+        lda $_EncounterSetting
+        beq $+EncountersOn
+        pla
+        pla
+        jml $00894c
+    %EncountersOn:
+        // %end%
+        // hacky: pull the rts address from the stack to leave _get_formation_offset
+        pla
+        pla
+        jml $00893c         
+
+    // given a formation in A and map area/plane data
+    // already set (in $1700-1701), determines if that formation
+    // has been checked already. if no, sets the bit for that
+    // formation and clears the carry; if yes, sets the carry.
+    // preserves the value of X (the formation offset) and A (the formation),
+    // as well as Y (which is a loop variable above)
+    EncNoRepeats__CheckSetBit:
+        // store the lo byte and formation offset and loop var for later
+        phx
+        phy
+        pha
+        pha
+        // next, use map plane to determine
+        // where in the bit field to start looking
+        lda $1701
+        beq $+OverworldFormations
+        ldx #$1de0
+        bra $+CheckFormationBitField
+    %OverworldFormations:
+        ldx #$1dc0
+    %CheckFormationBitField:
+        pla
+        jsl $=Tracker__CheckBit
+        bcs $+DoneChecking
+        jsl $=Tracker__SetBit
+        clc
+    %DoneChecking:
+        // retrieve the formation offset that we checked
+        pla
+        ply
+        plx
+        rts
+}

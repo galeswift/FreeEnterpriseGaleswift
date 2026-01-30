@@ -56,7 +56,7 @@ Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sn
 Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
 Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
-Evanilla Etoggle/Ereduce/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
+Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
@@ -169,7 +169,7 @@ Cvanilla : ~Cstandard & ~Crelaxed
 Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Tsemipro & ~Twild & ~Twildish & ~Tstandardish & ~Tvanillaish & ~Tempty
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Swildish & ~Scabins & ~Svanillaish & ~Sempty & ~Ssame
 Bvanilla : ~Bstandard
-Etoggle  : ~Evanilla & ~Ereduce & ~Enoencounters
+Etoggle  : ~Evanilla & ~Ereduce & ~Enorepeats & ~Enoencounters
 Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
 ----- SLUGS
@@ -341,6 +341,7 @@ Bremove:kaipo_slot   no_officer_slot
 Evanilla             encounter_vanilla
 Etoggle              encounter_toggle
 Ereduce              encounter_reduction
+Enorepeats           encounter_norepeats
 Enoencounters        encounter_off
 Ekeep:doors          encounter_keep_doors
 Ekeep:behemoths      encounter_keep_behemoths

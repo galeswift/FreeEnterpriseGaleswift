@@ -633,6 +633,10 @@
 .(Ereduce) Random encounters reduced by 50%
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights
+.(Enorepeats)^ Each formation can only be encountered once
+..[Ekeep:doors] Preserve TrapDoor fights
+..[Ekeep:behemoths] Preserve forced Behemoth fights
+..[Edanger] Keep dangerous encounters
 .(Enoencounters)! No random encounters
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights

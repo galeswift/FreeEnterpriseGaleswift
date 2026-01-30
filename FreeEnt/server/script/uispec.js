@@ -7521,6 +7521,29 @@ var FLAG_UISPEC = [
             ]
           },
           {
+            "flag": "Enorepeats",
+            "title": "Each formation can only be encountered once",
+            "description": "Each encounter formation can only be encountered once through regular means (encounters from Sirens and events do not count, nor do encounters arising from <em>Edanger</em>). Encounters can be toggled as in <em>Etoggle</em>.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Ekeep:doors",
+                "title": "Preserve TrapDoor fights",
+                "description": "Prevents the above encounter rate setting from applying to the TrapDoor fights in the Sealed Cave."
+              },
+              {
+                "flag": "Ekeep:behemoths",
+                "title": "Preserve forced Behemoth fights",
+                "description": "Prevents the above encounter rate setting from applying to the forced Behemoth fights in Cave Bahamut."
+              },
+              {
+                "flag": "Edanger",
+                "title": "Keep dangerous encounters",
+                "description": "Back attacks and \"Surprised!\" encounters will still occur, even when encounters are disabled via <em>Etoggle</em> or <em>Enoencounters</em>."
+              }
+            ]
+          },
+          {
             "flag": "Enoencounters",
             "title": "No random encounters",
             "hard": true,
@@ -8401,6 +8424,11 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "-speedmodbalance",
+        "title": "Alter the speed modifier behaviour",
+        "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8)."
+      },
+      {
         "flag": "@smithy",
         "title": "Smithy reward",
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
@@ -8780,11 +8808,6 @@ var FLAG_UISPEC = [
                 ]
               }
             ]
-          },
-          {
-            "flag": "-speedmodbalance",
-            "title": "Alter the speed modifier behaviour",
-            "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8)."
           }
         ]
       },

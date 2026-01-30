@@ -65,11 +65,10 @@ msfpatch {
 }
 
 // patch checks for menu wraparound
-// %flag encounter_toggle on%
+// %if toggled_encounters%
 patch($01d292 bus) { 08 }
 patch($01d2a1 bus) { 09 }
-// %end%
-// %flag encounter_toggle off%
+// %else%
 patch($01d292 bus) { 07 }
 patch($01d2a1 bus) { 08 }
 // %end%
@@ -97,7 +96,7 @@ msfpatch {
 // get added settings and display additional finger cursors
 msfpatch {
     CustomMenu__ShowOnOffCursors:
-        // %flag encounter_toggle on%
+        // %if toggled_encounters%
         lda $_EncounterSetting
         bne $+EncountersOff
         ldx #$1888

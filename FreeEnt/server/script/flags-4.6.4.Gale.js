@@ -1135,9 +1135,10 @@ const _FE_FLAGSPEC = {
         "Bspellpower",
         "Bremove:kaipo_slot",
         "Bremove:kqe_slot",
-        "Evanilla",
         "Etoggle",
+        "Evanilla",
         "Ereduce",
+        "Enorepeats",
         "Enoencounters",
         "Ekeep:doors",
         "Ekeep:behemoths",
@@ -2451,8 +2452,9 @@ const _FE_FLAGSPEC = {
             "Bitburns"
         ],
         [
-            "Etoggle",
+            "Evanilla",
             "Ereduce",
+            "Enorepeats",
             "Enoencounters"
         ],
         [
@@ -9463,20 +9465,26 @@ const _FE_FLAGSPEC = {
         {
             "flag": "Evanilla",
             "offset": 378,
-            "size": 1,
+            "size": 3,
             "value": 1
         },
         {
             "flag": "Ereduce",
-            "offset": 379,
-            "size": 2,
-            "value": 1
+            "offset": 378,
+            "size": 3,
+            "value": 2
+        },
+        {
+            "flag": "Enorepeats",
+            "offset": 378,
+            "size": 3,
+            "value": 3
         },
         {
             "flag": "Enoencounters",
-            "offset": 379,
-            "size": 2,
-            "value": 2
+            "offset": 378,
+            "size": 3,
+            "value": 4
         },
         {
             "flag": "Ekeep:doors",
@@ -12223,6 +12231,10 @@ const _FE_FLAGSPEC = {
             [
                 "not",
                 "Ereduce"
+            ],
+            [
+                "not",
+                "Enorepeats"
             ],
             [
                 "not",

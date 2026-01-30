@@ -117,3 +117,5 @@ WRAM:
 7E:16B4             : flashing custom setting
 7E:16B5             : encounter custom setting
 7E:16B6             : dash custom setting
+
+7E:1DC0 - 7E:1DFF  F: Enorepeats formation bit field

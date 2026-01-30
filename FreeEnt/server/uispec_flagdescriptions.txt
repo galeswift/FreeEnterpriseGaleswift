@@ -450,6 +450,9 @@ When enabled, casting Sylph will only deduct MP from the caster if they are in t
 [Etoggle]
 Encounters can be enabled/disabled from the in-game Custom menu.
 
+[Enorepeats]
+Each encounter formation can only be encountered once through regular means (encounters from Sirens and events do not count, nor do encounters arising from <em>Edanger</em>). Encounters can be toggled as in <em>Etoggle</em>.
+
 [Ekeep:doors]
 Prevents the above encounter rate setting from applying to the TrapDoor fights in the Sealed Cave.
 

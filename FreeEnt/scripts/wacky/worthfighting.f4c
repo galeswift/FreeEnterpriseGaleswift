@@ -83,6 +83,20 @@ msfpatch {
     Wacky__WannaFight_OutdoorTableCheck2:
         lda $_(Wacky__RAM_worthfighting+1)
         bne $+UseOutdoorTable
+        // %flag encounter_dangerous on%
+        // confirm if we're in a treasure battle or not; if yes,
+        // then let it go as normal, otherwise we still
+        // need to check for dangerous encounters
+        lda $_Wacky__RAM_worthfighting
+        bne $+NoDangerEnc
+        // hacky: pop return address from stack
+        pla
+        pla
+        pla
+        jml $=EncounterDangerous__Indoors
+    %NoDangerEnc:
+        // treasure battle, load as usual
+        // %end%
         lda $0ec816,x
         rtl
     %UseOutdoorTable:

@@ -769,6 +769,7 @@ def apply_gottagofast(env, rom_address):
 def apply_worthfighting(env, rom_address):
     env.add_toggle('wacky_post_treasure_hook')
     env.add_toggle('wacky_post_battle_hook')
+    env.add_toggle('wacky_worthfighting')
 
 def apply_batman(env, rom_address):
     # Fun fact, we only get 10 digits to work with

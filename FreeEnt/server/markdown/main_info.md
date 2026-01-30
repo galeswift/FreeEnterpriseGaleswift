@@ -604,7 +604,14 @@ These flags will remove the specified boss slot from the game entirely. No objec
 
 The default `E` flag is now `Etoggle`.
 
-******* remember to get ap7's encounter shuffle flags?
+### `Enorepeats` {: .h6 }
+
+- Idea: Marshal
+- Design: Marshal, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: encounter_norepeats.f4c, encounter_rando.py, encounter_dangerous.f4c, wacky_rando.py, worthfighting.f4c, custom_menu.f4c
+
+This flag is a middle ground between `Etoggle` and `Enoencounters`: encounters are toggleable, and each formation can only be encountered once via the normal random encounters logic. If the game tries to give a repeat encounter, instead it will try the next formation listed in the encounter group data (i.e. the next rarest encounter, or cycle back to the most common). `Edanger` encounters can still happen (and the game will check all formations in the group for dangerous encounters before giving up). This flag does not impact Siren encounters or box encounters on the Something Worth Fighting For wacky. If no encounters are available in a group, then the game will play the same Indra sound effect that plays when a Siren fails.
 
 ### `Enogp` {: .h6 }
 
