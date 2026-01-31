@@ -1,0 +1,8 @@
+// in _menu_backup_oam, the game
+// copies more bytes than it actually ever
+// needs to (56 more, to be precise), so by
+// changing the below bytes from 57 to 1F, 
+// we free up RAM bytes $0520-05FF.
+
+patch($01b958 bus) { 1F }
+patch($01b969 bus) { 1F }

@@ -179,6 +179,7 @@ F4C_FILES = '''
     scripts/hide_softlock_fixes.f4c
     scripts/rom_header.f4c
     scripts/sram_expansion.f4c
+    scripts/fix_dma_extra_copy.f4c
     scripts/character_expansion.f4c
     scripts/character_retrieval.f4c
     scripts/pregame_screen.f4c
