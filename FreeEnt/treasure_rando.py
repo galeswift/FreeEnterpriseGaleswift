@@ -434,12 +434,16 @@ def apply(env):
     if sparse_level:
         sparse_level = int(sparse_level)
         target_worlds = []
-        if env.options.flags.has('treasure_sparse_underground'):
-            target_worlds.append('Underworld')            
-        if env.options.flags.has('treasure_sparse_moon'):
-            target_worlds.append('Moon')
-        if env.options.flags.has('treasure_sparse_overworld'):
-            target_worlds.append('Overworld')
+        # if Tsparse is on but no Tsparsey flags are on, add all worlds
+        if not env.options.flags.has_any('treasure_sparse_underground', 'treasure_sparse_moon', 'treasure_sparse_overworld'):
+            target_worlds.extend(['Underworld', 'Moon', 'Overworld'])
+        else:
+            if env.options.flags.has('treasure_sparse_underground'):
+                target_worlds.append('Underworld')            
+            if env.options.flags.has('treasure_sparse_moon'):
+                target_worlds.append('Moon')
+            if env.options.flags.has('treasure_sparse_overworld'):
+                target_worlds.append('Overworld')
         sparse_db_view = plain_chests_dbview.find_all(lambda t: t.world in target_worlds)
         empty_count = (len(sparse_db_view) * (100 - sparse_level)) // 100
         for t in env.rnd.sample(sparse_db_view, empty_count):

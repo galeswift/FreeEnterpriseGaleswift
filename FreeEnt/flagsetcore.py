@@ -470,7 +470,7 @@ class FlagLogicCore:
             self._lib.push(log, ['correction', 'Ctreasure:unsafe/wild set, auto-assigning Ctreasure:free and Ctreasure:earned'])            
 
         if flagset.get_list(r'^Ctreasure:') and (flagset.has('Tvanilla') or flagset.has('Tshuffle') or flagset.has('Tempty')):
-            self._simple_disable_regex(flagset, log, 'Ctreasure: with vanilla-ish or empty chests', r'^Ctreasure:')
+            self._simple_disable_regex(flagset, log, 'Ctreasure: with vanilla, shuffled, or empty chests', r'^Ctreasure:')
 
         if flagset.has('Ctreasure:earned') and not flagset.has('Cnoearned'):                            
             flagset.set('Cnoearned')
@@ -482,11 +482,6 @@ class FlagLogicCore:
 
         if flagset.has('Tempty'):
             self._simple_disable_regex(flagset, log, 'Treasures are empty', r'^Tsparse:')
-
-        if flagset.get_list(r'^Tsparse:') and not flagset.get_list(r'^Tsparsey:'):
-            flagset.set('Tsparsey:overworld')
-            flagset.set('Tsparsey:underground')
-            flagset.set('Tsparsey:moon')
 
         if flagset.get_list(r'^Tsparsey:') and not flagset.get_list(r'^Tsparse:'):
             self._simple_disable_regex(flagset, log, 'Tsparsey specified without Tsparse', r'^Tsparsey:')            
@@ -598,7 +593,7 @@ class FlagLogicCore:
                     if len(hard_required_objectives) > required_objective_count:
                         self._simple_disable_regex(flagset, log, 'Changing required count', r'^Oreq:')
                         flagset.set(f'Oreq:{len(hard_required_objectives)}')
-                        self._lib.push(log, ['correction', 'More hard required objectives set than number of objectives required, increasing required objective count to {len(hard_required_objectives)}.'])
+                        self._lib.push(log, ['correction', f'More hard required objectives set than number of objectives required, increasing required objective count to {len(hard_required_objectives)}.'])
 
             gated_objectives = flagset.get_list(r'^Ogated:')
             for gated in gated_objectives:
@@ -679,7 +674,7 @@ class FlagLogicCore:
                         if distinct_count < len(required_chars):
                             self._lib.push(log, ['error', "More character objectives are set than distinct characters allowed in the randomization."])
 
-                if flagset.has('Cnofree') and flagset.has('Cnoearned'):
+                if flagset.has('Cnofree') and flagset.has('Cnoearned') and not (flagset.has('Ctreasure:free') or flagset.has('Ctreasure:earned')):
                     self._lib.push(log, ['error', "Character objectives are set while no character slots will be filled"])                           
             
             for random_prefix in ['Orandom:char', 'Orandom2:char', 'Orandom3:char']:    
@@ -770,15 +765,16 @@ class FlagLogicCore:
                 for random_flag in all_random_flags:
                     flag_suffix = self._lib.re_sub(f'^{random_prefix}', '', random_flag)
                     if self._lib.re_test(r'\d', flag_suffix):
-                        required_objective_count = int(flag_suffix)
+                        required_random_objective_count = int(flag_suffix)
                     elif not self._lib.re_test(r'only', flag_suffix) and not self._lib.re_test(r'char', flag_suffix):
                         skip_pools = True
                         break
                                 
                 duplicate_char_count = 0
                 desired_char_count = 0
-                if len(random_only_char_flags) > 0 and len(random_only_char_flags) < required_objective_count:
-                    self._lib.push(log, ['error', f'Random objectives requiring less specific characters ({len(random_only_char_flags)}) than number of objectives ({required_objective_count})'])
+                # objective_rando can handle filling in a random pool with boss or quest objectives; just not if only character objectives are specified
+                if len(random_only_char_flags) > 0 and len(random_only_char_flags) < required_random_objective_count and skip_pools == False:
+                    self._lib.push(log, ['error', f'Random objectives requiring fewer specific characters ({len(random_only_char_flags)}) than number of objectives ({required_random_objective_count})'])
                     break
                 elif len(random_only_char_flags) > 0 :
                     for random_flag in random_only_char_flags:
@@ -801,10 +797,10 @@ class FlagLogicCore:
                     chars_to_remove = duplicate_char_count
                 actual_available_characters = desired_char_count - chars_to_remove
                 #print (f'actual_available_characters {actual_available_characters} desired_char_count {desired_char_count} chars_to_remove {chars_to_remove} duplicate_char_count {duplicate_char_count} duplicate_check_count {duplicate_check_count}')
-                if actual_available_characters < required_objective_count and skip_pools == False:
+                if actual_available_characters < required_random_objective_count and skip_pools == False:
                     self._lib.push(log, ['error', f'Not enough unique characters for pool {random_prefix}.  Another pool could potentially consume some or all of these characters {random_only_char_flags}'])
                     break
-                duplicate_check_count += required_objective_count
+                duplicate_check_count += required_random_objective_count
                 
         challenges = flagset.get_list(r'^-wacky:')
         if challenges:
