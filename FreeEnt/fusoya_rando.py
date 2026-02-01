@@ -684,7 +684,7 @@ def apply(env):
         if env.options.flags.has('randomhp_fusoya'):
             # in this case, either the HP max is 3900 or it's 1100, no slowstart option
             hp_gains = get_random_hp_gains(env, max_credits, max_credits, 0, (5 if max_credits > 14 else 2))
-            env.add_substitution('fusoya challenge hp gains', ' '.join([f'${gain:02X}' for gain in hp_gains]))
+            env.add_substitution('fusoya challenge hp gains', ' '.join([f'{gain:02X}' for gain in hp_gains]))
     
         env.add_substitution('fusoya initial spells', '')
         env.add_scripts(
