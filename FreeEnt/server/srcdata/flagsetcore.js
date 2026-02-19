@@ -437,7 +437,7 @@ class FlagLogicCore {
         this._simple_disable(flagset, log, prefix, flagset.get_list(flags_regex));
     }
     fix(flagset) {
-        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, bad_gated_conditions, boss_collector_flags, boss_slots_removed, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, max_bosses, mode, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, required_random_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
+        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss_collector_flags, boss_slots_removed, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, mandatory_char_objective_slots, max_bosses, mode, nonstarting_character_slots, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, required_random_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
         log = [];
         if ((flagset.has("Kunsafer") && (! flagset.has_any("Kmoon", "Kmiab:lst", "Kmiab:all")))) {
             flagset.set("Kmoon");
@@ -689,17 +689,15 @@ class FlagLogicCore {
                     has_unavailable_characters = false;
                     if (_pj.in_es6("cecil", required_chars)) {
                         has_unavailable_characters = true;
-                    } else {
-                        if (flagset.has("Cnofree")) {
-                            if ((((_pj.in_es6("edward", required_chars) || _pj.in_es6("tellah", required_chars)) || _pj.in_es6("palom", required_chars)) || _pj.in_es6("porom", required_chars))) {
-                                has_unavailable_characters = true;
-                            }
-                        } else {
-                            if (flagset.has("Cnoearned")) {
-                                if (((((((_pj.in_es6("rydia", required_chars) || _pj.in_es6("kain", required_chars)) || _pj.in_es6("rosa", required_chars)) || _pj.in_es6("yang", required_chars)) || _pj.in_es6("cid", required_chars)) || _pj.in_es6("edge", required_chars)) || _pj.in_es6("fusoya", required_chars))) {
-                                    has_unavailable_characters = true;
-                                }
-                            }
+                    }
+                    if ((flagset.has("Cnofree") && (! flagset.has("Ctreasure:free")))) {
+                        if ((((_pj.in_es6("edward", required_chars) || _pj.in_es6("tellah", required_chars)) || _pj.in_es6("palom", required_chars)) || _pj.in_es6("porom", required_chars))) {
+                            has_unavailable_characters = true;
+                        }
+                    }
+                    if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
+                        if (((((((_pj.in_es6("rydia", required_chars) || _pj.in_es6("kain", required_chars)) || _pj.in_es6("rosa", required_chars)) || _pj.in_es6("yang", required_chars)) || _pj.in_es6("cid", required_chars)) || _pj.in_es6("edge", required_chars)) || _pj.in_es6("fusoya", required_chars))) {
+                            has_unavailable_characters = true;
                         }
                     }
                     if (has_unavailable_characters) {
@@ -825,6 +823,18 @@ class FlagLogicCore {
             }
             duplicate_check_count = 0;
             character_pool = [];
+            nonstarting_character_slots = 16;
+            if ((flagset.has("Cnofree") && (! flagset.has("Ctreasure:free")))) {
+                nonstarting_character_slots -= 5;
+            }
+            if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
+                nonstarting_character_slots -= 11;
+            } else {
+                if (flagset.has("Omode:classicforge")) {
+                    nonstarting_character_slots -= 1;
+                }
+            }
+            mandatory_char_objective_slots = char_objective_flags.length;
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
                 if ((flagset.get_list(`^${random_prefix}`).length === 0)) {
@@ -836,7 +846,7 @@ class FlagLogicCore {
                     this._lib.push(log, ["correction", `Random objectives requiring specific characters set without Orandom:char; setting ${random_prefix}char`]);
                 }
                 all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));
-                if (((all_customized_random_flags.length !== 0) && (! _pj.in_es6(`${random_prefix}char`, all_customized_random_flags)))) {
+                if (((all_customized_random_flags.length !== 1) || (! _pj.in_es6(`${random_prefix}char`, all_customized_random_flags)))) {
                     continue;
                 }
                 all_random_flags = flagset.get_list(`^${random_prefix}`);
@@ -853,6 +863,7 @@ class FlagLogicCore {
                         }
                     }
                 }
+                mandatory_char_objective_slots += required_random_objective_count;
                 duplicate_char_count = 0;
                 desired_char_count = 0;
                 if ((((random_only_char_flags.length > 0) && (random_only_char_flags.length < required_random_objective_count)) && (skip_pools === false))) {
@@ -893,6 +904,28 @@ class FlagLogicCore {
                     break;
                 }
                 duplicate_check_count += required_random_objective_count;
+            }
+            if ((mandatory_char_objective_slots > nonstarting_character_slots)) {
+                this._lib.push(log, ["error", `Not enough available non-starting character slots for all of the mandatory character objectives specified (between fixed objectives and random pools). Either add more character slots back in, remove character objectives, or allow other objective types for some random pools.`]);
+            } else {
+                if (flagset.has("Cvanilla")) {
+                    available_vanilla_chars = 11;
+                    if ((flagset.has("Cnofree") && (! flagset.has("Ctreasure:free")))) {
+                        available_vanilla_chars -= 4;
+                    }
+                    if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
+                        available_vanilla_chars -= 7;
+                    }
+                    if ((mandatory_char_objective_slots > available_vanilla_chars)) {
+                        this._lib.push(log, ["error", `Not enough available non-starting vanilla characters for all of the mandatory character objectives specified (between fixed objectives and random pools). Either add more character slots back in, remove character objectives, or allow other objective types for some random pools.`]);
+                    }
+                } else {
+                    distinct_flags = flagset.get_list("^Cdistinct:");
+                    distinct_count = distinct_flags.length;
+                    if ((distinct_count && (mandatory_char_objective_slots > distinct_count))) {
+                        this._lib.push(log, ["error", `Too few distinct characters specified for the mandatory character objectives. Either increase the number of distinct characters, or remove character objectives.`]);
+                    }
+                }
             }
         }
         challenges = flagset.get_list("^-wacky:");

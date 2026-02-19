@@ -113,12 +113,14 @@ def setup(env):
         if env.options.flags.get_suffix('Omode:goldhunter'):
             specified_objectives['internal_goldhunter'] = True
 
+        mandatory_random_objective_char_count = 0
         for objective_id in OBJECTIVES:
             objective = OBJECTIVES[objective_id]
             slug = objective['slug']            
             if specified_objectives.get(slug, False):
                 if slug.startswith(CHAR_OBJECTIVE_PREFIX):
                     env.meta['objective_required_characters'].add(slug[len(CHAR_OBJECTIVE_PREFIX):])
+                    mandatory_random_objective_char_count += 1
                 elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
                     env.meta['objective_required_bosses'].add(slug[len(BOSS_OBJECTIVE_PREFIX):])
                 elif slug == 'quest_tradepink':
@@ -133,13 +135,19 @@ def setup(env):
 
         random_objective_only_characters = set()
         for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
+            for f in env.options.flags.get_list(rf'^{random_prefix}[\d]'):
+                random_prefix_count = int(f[len(random_prefix):])
+            random_prefix_flags = env.options.flags.get_list(rf'^{random_prefix}[^\d]')
             for f in env.options.flags.get_list(rf'^{random_prefix}[^\d]'):               
                 allowed_type = f[len(random_prefix):]
                 if allowed_type.startswith('only'):                
                     random_objective_only_characters.add(allowed_type[len('only'):])
+            if len(random_prefix_flags) == 1 and (random_prefix + 'char') in random_prefix_flags:
+                mandatory_random_objective_char_count += random_prefix_count
+
         for random_char in random_objective_only_characters:
             env.meta['objective_required_characters'].add(random_char)
-        
+        env.meta['objective_req_char_count'] = mandatory_random_objective_char_count
 
         # Handle gated objectives
         objective_ids = get_unique_objective_ids(env)
@@ -217,101 +225,139 @@ def apply(env):
     if not env.meta['zeromus_required']:
         env.add_file('scripts/zeromus_trigger_reassign.f4c')
 
-    objective_ids = get_unique_objective_ids(env)
-    # generate random objectives    
-    for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-        random_objective_count = 0
-        for f in env.options.flags.get_list(rf'^{random_prefix}\d'):            
-            random_objective_count = int(f[len(random_prefix):])
+    # objective_ids = get_unique_objective_ids(env)
+    # generate random objectives
+    # try multiple times, in case the chosen objectives in the first groups
+    # do not allow all objectives to be chosen in the latter groups
+    # (e.g. too many character objectives in early groups and only character objectives in the last group)
+    MAX_OBJECTIVE_ATTEMPTS = 100
+    rand_objective_attempts = 0
+    found_valid_objective_set = False
+    while not found_valid_objective_set and rand_objective_attempts < MAX_OBJECTIVE_ATTEMPTS:
+        objective_ids = get_unique_objective_ids(env)
+        restart_all_groups = False
+        # print("Objectives randomization attempt number " + f"{rand_objective_attempts}")
+        for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
+            # print("Now handling group " + random_prefix)
+            random_objective_count = 0
+            for f in env.options.flags.get_list(rf'^{random_prefix}\d'):            
+                random_objective_count = int(f[len(random_prefix):])
 
-        #print(f"Random objective count is {random_objective_count} for {random_prefix}")
-        random_objective_allowed_types = set()
-        random_objective_allowed_characters = set()
-        tough_quests_only = False
-        specific_random_chars_only = False
-        for f in env.options.flags.get_list(rf'^{random_prefix}[^\d]'):
-            allowed_type = f[len(random_prefix):]   
-            if (allowed_type == 'tough_quest'):
-                allowed_type = 'quest'
-                tough_quests_only = True
-            if allowed_type.startswith('only'): 
-                specific_random_chars_only = True               
-                random_objective_allowed_characters.add(allowed_type[len('only'):])
-            else:
-                random_objective_allowed_types.add(allowed_type)
-        
-        only_characters = []
-        allowed_characters = list(character_rando.CHARACTERS)
-        for ch in list(character_rando.CHARACTERS):
-            if env.options.flags.has(f'Conly:{ch}'):
-                only_characters.append(ch)            
-            if env.options.flags.has(f'Cno:{ch}'):
-                allowed_characters.remove(ch)
-        
-        # if any Conly flags were specified, count them to make sure the # of random objectives doesn't exceed the total chars allowed
-        unique_hero_list = []
-        for slot in env.assignments:
-            assignment = env.assignments[slot]
-            if slot in character_rando.SLOTS and assignment is not None and assignment not in unique_hero_list:
-                unique_hero_list.append(assignment)
+            #print(f"Random objective count is {random_objective_count} for {random_prefix}")
+            random_objective_allowed_types = set()
+            random_objective_allowed_characters = set()
+            tough_quests_only = False
+            specific_random_chars_only = False
+            for f in env.options.flags.get_list(rf'^{random_prefix}[^\d]'):
+                allowed_type = f[len(random_prefix):]   
+                if (allowed_type == 'tough_quest'):
+                    allowed_type = 'quest'
+                    tough_quests_only = True
+                if allowed_type.startswith('only'): 
+                    specific_random_chars_only = True               
+                    random_objective_allowed_characters.add(allowed_type[len('only'):])
+                else:
+                    random_objective_allowed_types.add(allowed_type)
+            
+            only_characters = []
+            allowed_characters = list(character_rando.CHARACTERS)
+            for ch in list(character_rando.CHARACTERS):
+                if env.options.flags.has(f'Conly:{ch}'):
+                    only_characters.append(ch)            
+                if env.options.flags.has(f'Cno:{ch}'):
+                    allowed_characters.remove(ch)
+            
+            # if any Conly flags were specified, count them to make sure the # of random objectives doesn't exceed the total chars allowed
+            unique_hero_list = []
+            for slot in env.assignments:
+                assignment = env.assignments[slot]
+                if slot in character_rando.SLOTS and assignment is not None and assignment not in unique_hero_list:
+                    unique_hero_list.append(assignment)
 
-        total_char_count = len(unique_hero_list)
-        # Check if the number of random character objectives desired exceed the amount specified via Orandomonly, and there is only character quests allowed
-        if len(random_objective_allowed_types) == 1 and 'char' in random_objective_allowed_types and random_objective_count > total_char_count:
-            raise BuildError(f"Flags stipulate generating ({random_objective_count}) random objectives with specific characters, but only {total_char_count} unique characters were found {','.join(unique_hero_list)}")
+            total_char_count = len(unique_hero_list)
+            # Check if the number of random character objectives desired exceed the amount specified via Orandomonly, and there is only character quests allowed
+            if len(random_objective_allowed_types) == 1 and 'char' in random_objective_allowed_types and random_objective_count > total_char_count:
+                raise BuildError(f"Flags stipulate generating ({random_objective_count}) random objectives with specific characters, but only {total_char_count} unique characters were found {','.join(unique_hero_list)}")
 
-        random_objective_pool = {}
-        for objective_id in OBJECTIVES:
-            obj = OBJECTIVES[objective_id]
-            category = obj['slug'].split('_')[0]
+            random_objective_pool = {}
+            for objective_id in OBJECTIVES:
+                obj = OBJECTIVES[objective_id]
+                category = obj['slug'].split('_')[0]
 
-            if (not random_objective_allowed_types) or (category in random_objective_allowed_types):
-                if (category != 'quest') or (not tough_quests_only) or (obj['slug'] not in TOUGH_QUEST_OBJECTIVES_EXCLUDED):
-                    if obj['slug'] in TOUGH_QUEST_OBJECTIVES_WEIGHTED and env.rnd.random() < 0.40:
-                        continue
-                    random_objective_pool.setdefault(category, []).append(objective_id)
+                if (not random_objective_allowed_types) or (category in random_objective_allowed_types):
+                    if (category != 'quest') or (not tough_quests_only) or (obj['slug'] not in TOUGH_QUEST_OBJECTIVES_EXCLUDED):
+                        if obj['slug'] in TOUGH_QUEST_OBJECTIVES_WEIGHTED and env.rnd.random() < 0.40:
+                            continue
+                        random_objective_pool.setdefault(category, []).append(objective_id)
 
-        random_category_weights = RANDOM_CATEGORY_WEIGHTS
-        if random_objective_allowed_types:
-            random_category_weights = { k : RANDOM_CATEGORY_WEIGHTS[k] for k in RANDOM_CATEGORY_WEIGHTS if k in random_objective_allowed_types }
-        random_category_distribution = util.Distribution(**random_category_weights)
+            random_category_weights = RANDOM_CATEGORY_WEIGHTS
+            if random_objective_allowed_types:
+                random_category_weights = { k : RANDOM_CATEGORY_WEIGHTS[k] for k in RANDOM_CATEGORY_WEIGHTS if k in random_objective_allowed_types }
+            random_category_distribution = util.Distribution(**random_category_weights)
 
-        MAX_CHARACTER_RANDOMIZATION_ATTEMPTS = 10000
-        retry_count = 0
-        for i in range(random_objective_count):
-            while True and retry_count < MAX_CHARACTER_RANDOMIZATION_ATTEMPTS:     
-                retry_count += 1         
-                category = random_category_distribution.choose(env.rnd)
-                q = env.rnd.choice(random_objective_pool[category])
-                slug = OBJECTIVES[q]['slug']    
-                #print(f'Considering {slug}')            
-                if q in objective_ids:
-                    continue
-                if slug.startswith(CHAR_OBJECTIVE_PREFIX):
-                    char = slug[len(CHAR_OBJECTIVE_PREFIX):]
-                    if char not in env.meta['available_nonstarting_characters']:
+            # 10k is probably overkill. Try 100 attempts to choose the objectives.
+            MAX_CHARACTER_RANDOMIZATION_ATTEMPTS = 100
+            retry_count = 0
+            for i in range(random_objective_count):
+                while retry_count <= MAX_CHARACTER_RANDOMIZATION_ATTEMPTS:     
+                    retry_count += 1         
+                    category = random_category_distribution.choose(env.rnd)
+                    q = env.rnd.choice(random_objective_pool[category])
+                    slug = OBJECTIVES[q]['slug']    
+                    # print(f'Considering {slug}')            
+                    if q in objective_ids:
                         continue
-                    if len(random_objective_allowed_characters) != 0 and (char not in random_objective_allowed_characters):
-                        print(f'{char} not allowed in types {random_objective_allowed_characters}')
+                    if slug.startswith(CHAR_OBJECTIVE_PREFIX):
+                        char = slug[len(CHAR_OBJECTIVE_PREFIX):]
+                        if char not in env.meta['available_nonstarting_characters']:
+                            # print(f'{char} is only a starting/partner character, or is not available at all')
+                            continue
+                        if len(random_objective_allowed_characters) != 0 and (char not in random_objective_allowed_characters):
+                            # print(f'{char} not allowed in types {random_objective_allowed_characters}')
+                            continue
+                    elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
+                        boss = slug[len(BOSS_OBJECTIVE_PREFIX):]
+                        if boss not in env.meta['available_bosses'] or boss in env.meta['banned_objective_bosses']:
+                            continue
+                    elif slug == 'quest_tradepink':
+                        if '#item.Pink' not in env.meta['available_key_items']:
+                            continue
+                    elif slug == 'quest_pass':
+                        if env.options.flags.has('pass_none'):
+                            continue
+                    elif slug.startswith(INTERNAL_OBJECTIVE_PREFIX):
+                        # don't allow internal objectives to be selected as random ones
                         continue
-                elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
-                    boss = slug[len(BOSS_OBJECTIVE_PREFIX):]
-                    if boss not in env.meta['available_bosses'] or boss in env.meta['banned_objective_bosses']:
-                        continue
-                elif slug == 'quest_tradepink':
-                    if '#item.Pink' not in env.meta['available_key_items']:
-                        continue
-                elif slug == 'quest_pass':
-                    if env.options.flags.has('pass_none'):
-                        continue
-                elif slug.startswith(INTERNAL_OBJECTIVE_PREFIX):
-                    # don't allow internal objectives to be selected as random ones
-                    continue
+                    break
+                if retry_count > MAX_CHARACTER_RANDOMIZATION_ATTEMPTS:
+                    # give up on this objectives assignment, and try again from the beginning of all three groups
+                    # (yes, the attempt where retry_count == MAX_... is ignored; suboptimal coding)
+                    # raise BuildError(f"Failed to generate {random_objective_count} randomized objectives after many attempts. ({total_char_count} total unique characters)")
+                    # print(f"Failed to generate {random_objective_count} randomized objectives after {MAX_CHARACTER_RANDOMIZATION_ATTEMPTS} attempts. ({total_char_count} total unique characters)")
+                    rand_objective_attempts += 1
+                    found_valid_objective_set = False
+                    restart_all_groups = True
+                    break
+                else:
+                    objective_ids.append(q)
+                    # print(objective_ids)
+                    # print("Attempts: " + f"{retry_count}")
+                # print(f"i = {i}")
+
+            if restart_all_groups:
+                restart_all_groups = False
+                # print("Restarting all three groups over")
                 break
-            if retry_count >= MAX_CHARACTER_RANDOMIZATION_ATTEMPTS:
-                raise BuildError(f"Failed to generate {random_objective_count} randomized objectives after many attempts. ({total_char_count} total unique characters)")
             else:
-                objective_ids.append(q)
+                found_valid_objective_set = True
+
+
+
+
+    if not found_valid_objective_set or rand_objective_attempts >= MAX_OBJECTIVE_ATTEMPTS:
+        raise BuildError(f"Failed to generate randomized objectives after {MAX_OBJECTIVE_ATTEMPTS} attempts; aborting")
+    # else:
+    #     print("Successfully randomized objectives! It took " + f"{rand_objective_attempts+1} attempts.")
 
     if env.options.test_settings.get('objectives'):
         objective_ids = [OBJECTIVE_SLUGS_TO_IDS[s.strip()] for s in env.options.test_settings.get('objectives').split(',')]

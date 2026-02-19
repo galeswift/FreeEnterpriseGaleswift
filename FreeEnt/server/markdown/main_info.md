@@ -8,6 +8,8 @@ This page lists out, in some detail, the new/non-vanilla flags offered by the fo
 
 ## Objective Flags
 
+The number of objectives required for the reward has been expanded to 1-31 and all, instead of just 1-10 and all.
+
 ### `Omode:bosscollector[N]` {: .h6 }
 
 - Idea: sgrunt
@@ -147,6 +149,8 @@ When operating with minimal key item checks, `Kstart:zonk` will take priority ov
 FE normally has a weighted Key Item placement algorithm, that prioritizes `Kmain` checks over every other check; basically only half (or a few more) of the flags-possible `Ksummon`/`Kmoon` checks actually get added to the slots to which key items are assigned, and similarly for each area with monster boxes under Kmiab, where the first two are added and then maybe more, randomly. This flag removes that weighting, so that every check has the same chance of having a key item. 
 
 ## Character Flags
+
+Safeguards have been added to character/random objective selection so that the generator can handle situations where some random groups must be composed entirely of character objectives and others could have non-character objectives, and that there are enough characters included in the seed (say, on `Cmaybe` and/or `Chero`) to satisfy all mandatory character objectives. Objectives will take precedence over certain character selection criteria: for example, the hero will show up elsewhere in the seed if you have 12 character objectives on `Cstandard/hero` (with all 18 character slots in use). Beyond that, the make page will throw an error if you attempt to have too many guaranteed character objectives for the character flags you are using.
 
 ### `Cthrift[n]` {: .h6 }
 
@@ -1066,7 +1070,7 @@ The flag is named after the Lavos Shell, the first form of the final boss of Chr
 
 ### `-z:whichbang` {: .h6 }
 
-For Z scripts that include Big Bangs, this flag replaces each instance Big Bang with a similar target-all spell chosen from a small list (including Big Bang itself). It could be a different spell for each Big Bang instance.
+For Z scripts that include Big Bangs, this flag replaces each instance of Big Bang with a similar target-all spell chosen from a small list (including Big Bang itself). It could be a different spell for each Big Bang instance.
 
 ### `-z:phaseshift` {: .h6 }
 
@@ -1091,6 +1095,7 @@ This flag is just `-vanilla:z` renamed.
 Wylem reworked the wacky challenge framework to allow for multiple wackies to be present at once, in his multi-wacky fork. Thanks, Wylem!
 
 Some existing wacky flags have been modified:
+
 - On Tellah Maneuver, SomaDrops now provide +30 max HP instead of the useless +10 max MP.
 - On 3-Point System, SomaDrops are now available normally (except in shops), but provide +1 max MP instead of +10.
 - On Time is Money, an overflow glitch has been fixed (your GP would overflow if it capped out).

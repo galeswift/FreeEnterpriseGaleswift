@@ -163,7 +163,7 @@
 .....[Orandom3:onlyfusoya] Only include Fusoya
 .<> Set number of objectives required to earn reward
 ..(Oreq:all) Complete all objectives for reward
-..(Oreq:1) Complete 1 objectives for reward
+..(Oreq:1) Complete 1 objective for reward
 ..(Oreq:2) Complete 2 objectives for reward
 ..(Oreq:3) Complete 3 objectives for reward
 ..(Oreq:4) Complete 4 objectives for reward
@@ -173,6 +173,27 @@
 ..(Oreq:8) Complete 8 objectives for reward
 ..(Oreq:9) Complete 9 objectives for reward
 ..(Oreq:10) Complete 10 objectives for reward
+..(Oreq:11) Complete 11 objectives for reward
+..(Oreq:12) Complete 12 objectives for reward
+..(Oreq:13) Complete 13 objectives for reward
+..(Oreq:14) Complete 14 objectives for reward
+..(Oreq:15) Complete 15 objectives for reward
+..(Oreq:16) Complete 16 objectives for reward
+..(Oreq:17) Complete 17 objectives for reward
+..(Oreq:18) Complete 18 objectives for reward
+..(Oreq:19) Complete 19 objectives for reward
+..(Oreq:20) Complete 20 objectives for reward
+..(Oreq:21) Complete 21 objectives for reward
+..(Oreq:22) Complete 22 objectives for reward
+..(Oreq:23) Complete 23 objectives for reward
+..(Oreq:24) Complete 24 objectives for reward
+..(Oreq:25) Complete 25 objectives for reward
+..(Oreq:26) Complete 26 objectives for reward
+..(Oreq:27) Complete 27 objectives for reward
+..(Oreq:28) Complete 28 objectives for reward
+..(Oreq:29) Complete 29 objectives for reward
+..(Oreq:30) Complete 30 objectives for reward
+..(Oreq:31) Complete 31 objectives for reward
 .[@Ogated]^ Gated Objective
 ..<> Pick an objective
 ...(Ogated:1) Objective #1 is gated behind other objectives

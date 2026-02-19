@@ -3518,7 +3518,7 @@ var FLAG_UISPEC = [
               },
               {
                 "flag": "Oreq:1",
-                "title": "Complete 1 objectives for reward"
+                "title": "Complete 1 objective for reward"
               },
               {
                 "flag": "Oreq:2",
@@ -3555,6 +3555,90 @@ var FLAG_UISPEC = [
               {
                 "flag": "Oreq:10",
                 "title": "Complete 10 objectives for reward"
+              },
+              {
+                "flag": "Oreq:11",
+                "title": "Complete 11 objectives for reward"
+              },
+              {
+                "flag": "Oreq:12",
+                "title": "Complete 12 objectives for reward"
+              },
+              {
+                "flag": "Oreq:13",
+                "title": "Complete 13 objectives for reward"
+              },
+              {
+                "flag": "Oreq:14",
+                "title": "Complete 14 objectives for reward"
+              },
+              {
+                "flag": "Oreq:15",
+                "title": "Complete 15 objectives for reward"
+              },
+              {
+                "flag": "Oreq:16",
+                "title": "Complete 16 objectives for reward"
+              },
+              {
+                "flag": "Oreq:17",
+                "title": "Complete 17 objectives for reward"
+              },
+              {
+                "flag": "Oreq:18",
+                "title": "Complete 18 objectives for reward"
+              },
+              {
+                "flag": "Oreq:19",
+                "title": "Complete 19 objectives for reward"
+              },
+              {
+                "flag": "Oreq:20",
+                "title": "Complete 20 objectives for reward"
+              },
+              {
+                "flag": "Oreq:21",
+                "title": "Complete 21 objectives for reward"
+              },
+              {
+                "flag": "Oreq:22",
+                "title": "Complete 22 objectives for reward"
+              },
+              {
+                "flag": "Oreq:23",
+                "title": "Complete 23 objectives for reward"
+              },
+              {
+                "flag": "Oreq:24",
+                "title": "Complete 24 objectives for reward"
+              },
+              {
+                "flag": "Oreq:25",
+                "title": "Complete 25 objectives for reward"
+              },
+              {
+                "flag": "Oreq:26",
+                "title": "Complete 26 objectives for reward"
+              },
+              {
+                "flag": "Oreq:27",
+                "title": "Complete 27 objectives for reward"
+              },
+              {
+                "flag": "Oreq:28",
+                "title": "Complete 28 objectives for reward"
+              },
+              {
+                "flag": "Oreq:29",
+                "title": "Complete 29 objectives for reward"
+              },
+              {
+                "flag": "Oreq:30",
+                "title": "Complete 30 objectives for reward"
+              },
+              {
+                "flag": "Oreq:31",
+                "title": "Complete 31 objectives for reward"
               }
             ]
           },

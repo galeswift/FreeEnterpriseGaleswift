@@ -205,7 +205,12 @@ def apply(env):
             if not allowed_starting_characters:
                 raise Exception("No character can be chosen as the starting character under these flags")
 
+            # in particular, start_character is *never* None from here on out
             start_character = env.rnd.choice(allowed_starting_characters)
+
+        # flag for later usage during character assignment
+        keep_starter_in_pool_early = False
+        mandatory_objective_required_char_count = env.meta['objective_req_char_count']
 
         # ensure characters required by manual objectives are present
         for char in env.meta['objective_required_characters']:
@@ -229,8 +234,7 @@ def apply(env):
                 distinct_characters.add(c)
 
             # count starting character against distinct count
-            if start_character is not None:
-                distinct_characters.add(start_character)
+            distinct_characters.add(start_character)
             
             # pad character list if more distinct characters are needed
             if len(distinct_characters) < distinct_count:
@@ -239,15 +243,37 @@ def apply(env):
                     distinct_characters.add(c)
 
             # after pool is filled, prevent reassignment of starting character if not allowed by flags
-            # and not required by objectives
-            if start_character is not None and start_character not in forced_characters and start_character not in allowed_characters and len(distinct_characters) > 1:
+            # and not required by objectives (including handling all possible random character objectives)
+            if start_character not in forced_characters and start_character not in allowed_characters and len(distinct_characters) > 1 and len(distinct_characters) > mandatory_objective_required_char_count:
                 distinct_characters.remove(start_character)
 
             allowed_characters = sorted(list(distinct_characters))        
-        # remove starting slot if start character specified, but after we've already
+
+        elif mandatory_objective_required_char_count > 0:
+            # also pad the character list in this case; if Cdistinct is on, we're guaranteed to have at least this number of distinct characters
+            forced_characters = sorted(list(env.meta['objective_required_characters']))
+            distinct_characters = set()
+            for c in forced_characters:
+                distinct_characters.add(c)    
+
+            distinct_characters.add(start_character)
+
+            if len(distinct_characters) < mandatory_objective_required_char_count:
+                remaining_characters = [ch for ch in allowed_characters if ch not in distinct_characters]
+                for c in env.rnd.sample(remaining_characters, min(len(remaining_characters), mandatory_objective_required_char_count - len(distinct_characters))):
+                    distinct_characters.add(c)
+
+            # after pool is filled, prevent reassignment of starting character if not allowed by flags
+            # and not required by objectives... which includes potentially having a duplicate of the hero available if that's the only way
+            # to successfully fill all of the objectives, so only remove if that doesn't cause us to run into issues.
+            if start_character not in forced_characters and start_character not in allowed_characters and len(distinct_characters) > 1 and len(distinct_characters) > mandatory_objective_required_char_count:
+                distinct_characters.remove(start_character)
+
+            allowed_characters = sorted(list(distinct_characters))
+
+        # remove starting slot now that the start character is specified, but after we've already
         # done the total available character count
-        if start_character is not None:
-            assignable_slots.remove('dkcecil_slot')
+        assignable_slots.remove('dkcecil_slot')
         
         num_easy_slots = len([s for s in assignable_slots if s not in HARD_SLOTS])
 
@@ -261,14 +287,16 @@ def apply(env):
         # violating the fewest constraints
         possible_assignments = []
 
-        for attempt in range( len(SLOTS) ):
+        for attempt in range( 2*len(SLOTS) ):
             characters = []
             if not env.options.flags.has('characters_not_guaranteed'):
                 characters.extend(allowed_characters)
-                if start_character is not None and start_character in characters:
+                if start_character in characters and len(allowed_characters) > mandatory_objective_required_char_count:
                     characters.remove(start_character)
             else:
+                # need to ensure that even on Cmaybe, we put in enough characters for random objectives
                 characters.extend(env.meta['objective_required_characters'])
+                characters.extend(env.rnd.sample(list(set(allowed_characters).difference(set(env.meta['objective_required_characters']))),mandatory_objective_required_char_count-len(env.meta['objective_required_characters'])))
 
             # pre-cull characters if Cnoearned is on            
             if env.options.flags.has('no_earned_characters') and not env.options.flags.has('characters_in_treasure_earned'):
@@ -296,9 +324,7 @@ def apply(env):
                 # if no duplicates, try to ensure that there is 
                 # a different starting partner character
                 if env.options.flags.has('characters_no_duplicates'):
-                    if start_character is None and not characters:
-                        subtract_if_able(character_choices, set([start_character]))
-                    elif start_character is not None and len(set(characters)) == 1:
+                    if len(set(characters)) == 1:
                         subtract_if_able(character_choices, set(characters))
 
                 characters.append(env.rnd.choice(sorted(character_choices)))            
@@ -307,7 +333,7 @@ def apply(env):
             if start_character is not None:
                 cur_assignment['dkcecil_slot'] = start_character
 
-            def calculate_slot_score(slot, ch):
+            def calculate_slot_score(slot, ch, cur_assign, req_num, char_num_2):
                 slot_score = 0.0
                 if not env.options.flags.has('characters_relaxed') and ch in RESTRICTED_CHARACTERS and slot not in HARD_SLOTS:
                     slot_score += 1.0
@@ -319,6 +345,15 @@ def apply(env):
                                 if slot != other_slot and other_slot in cur_assignment and cur_assignment[other_slot] == ch:
                                     slot_score += 0.5
                                     break
+                
+                # assign a small positive score in the case that there are many objective characters required (more than half of allowed chars)
+                # and we are duplicating a non-starting/partner character, so that we ensure that we do actually put
+                # enough characters in the seed, but only until we've got all the characters required
+                if req_num > char_num_2:
+                    assigned_chars = set([cur_assign[s] for s in cur_assign if s not in STARTING_SLOTS])
+                    if len(assigned_chars) < req_num and ch in assigned_chars:
+                        slot_score += 0.05
+                        # print(f'ch: {ch} s: {slot} slot_score: {slot_score}')
 
                 return slot_score
 
@@ -326,12 +361,15 @@ def apply(env):
             if not env.options.flags.has('characters_relaxed'):
                 characters.sort(key=lambda ch: (ch not in RESTRICTED_CHARACTERS))
 
+            # print(characters)
+
             for ch in characters:
                 scored_slots = []
                 for slot in assignable_slots:
                     if slot in cur_assignment:
                         continue                    
-                    scored_slots.append( (calculate_slot_score(slot, ch), slot) )
+                    scored_slots.append( (calculate_slot_score(slot, ch, cur_assignment, 
+                                                               mandatory_objective_required_char_count, len(allowed_characters) // 2), slot) )
 
                 scored_slots.sort()
                 eligible_slots = [pair for pair in scored_slots if pair[0] == scored_slots[0][0]]
@@ -349,6 +387,12 @@ def apply(env):
                         break
                 if not character_is_findable:
                     assignment_impossible = True
+            nonstarting_chars = set()
+            for slot in [s for s in assignable_slots if slot not in STARTING_SLOTS]:
+                # build set of viable objective characters, needs to have the mandatory number of objective characters to be valid
+                nonstarting_chars.add(cur_assignment[slot])
+            if len(nonstarting_chars) < mandatory_objective_required_char_count:
+                assignment_impossible = True
 
             if not assignment_impossible:
                 possible_assignments.append( (cur_assignment_score, cur_assignment) )

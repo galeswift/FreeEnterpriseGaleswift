@@ -641,10 +641,10 @@ class FlagLogicCore:
                     has_unavailable_characters = False
                     if 'cecil' in required_chars:
                         has_unavailable_characters = True
-                    elif (flagset.has('Cnofree')):
+                    if (flagset.has('Cnofree') and not flagset.has('Ctreasure:free')):
                         if 'edward' in required_chars or 'tellah' in required_chars or 'palom' in required_chars or 'porom' in required_chars:
                             has_unavailable_characters = True
-                    elif (flagset.has('Cnoearned')):
+                    if (flagset.has('Cnoearned') and not flagset.has('Ctreasure:earned')):
                         if 'rydia' in required_chars or 'kain' in required_chars or 'rosa' in required_chars or 'yang' in required_chars or 'cid' in required_chars or 'edge' in required_chars or 'fusoya' in required_chars:
                             has_unavailable_characters = True
 
@@ -744,8 +744,18 @@ class FlagLogicCore:
 
             # test if # of random req quests exceeds the random only characters count
             # test if the total amount of avail chararcters exceeds the required_character_count
+            # test if there are enough slots for all mandatory character objectives (between Od: ones and OrandomD:char ones)
             duplicate_check_count = 0
             character_pool = []
+            nonstarting_character_slots = 16
+            if flagset.has('Cnofree') and not flagset.has('Ctreasure:free'):
+                nonstarting_character_slots -= 5
+            if flagset.has('Cnoearned') and not flagset.has('Ctreasure:earned'):
+                nonstarting_character_slots -= 11
+            elif flagset.has('Omode:classicforge'):
+                nonstarting_character_slots -= 1
+            mandatory_char_objective_slots = len(char_objective_flags)
+
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:                         
                 if len(flagset.get_list(f'^{random_prefix}')) == 0:
                     continue
@@ -755,8 +765,10 @@ class FlagLogicCore:
                     flagset.set(f'{random_prefix}char')
                     self._lib.push(log, ['correction', f'Random objectives requiring specific characters set without Orandom:char; setting {random_prefix}char'])
 
+                # if this random group cannot choose character objectives, or if it can but it has many other options,
+                # skip the next part where we make restrictions based on possible character objectives running out
                 all_customized_random_flags = flagset.get_list(f'^{random_prefix}'+ r'[^\d]')
-                if len(all_customized_random_flags) != 0 and f'{random_prefix}char'not in all_customized_random_flags:
+                if len(all_customized_random_flags) != 1 or f'{random_prefix}char'not in all_customized_random_flags:
                     continue
 
                 all_random_flags = flagset.get_list(f'^{random_prefix}')                
@@ -769,6 +781,8 @@ class FlagLogicCore:
                     elif not self._lib.re_test(r'only', flag_suffix) and not self._lib.re_test(r'char', flag_suffix):
                         skip_pools = True
                         break
+                # this objective group can only pick character objectives, so add to the total
+                mandatory_char_objective_slots += required_random_objective_count
                                 
                 duplicate_char_count = 0
                 desired_char_count = 0
@@ -801,6 +815,28 @@ class FlagLogicCore:
                     self._lib.push(log, ['error', f'Not enough unique characters for pool {random_prefix}.  Another pool could potentially consume some or all of these characters {random_only_char_flags}'])
                     break
                 duplicate_check_count += required_random_objective_count
+
+            # ensure that there are actually enough character slots being filled to satisfy the objective requirements
+            if mandatory_char_objective_slots > nonstarting_character_slots:
+                self._lib.push(log, ['error', f'Not enough available non-starting character slots for all of the mandatory character objectives specified (between fixed objectives and random pools). Either add more character slots back in, remove character objectives, or allow other objective types for some random pools.'])
+            elif flagset.has('Cvanilla'):
+                # on Cvanilla, we know exactly which characters are in the seed, so we need to cap the number of character objectives
+                # at how many distinct characters there are.
+                available_vanilla_chars = 11
+                if (flagset.has('Cnofree') and not flagset.has('Ctreasure:free')):
+                    available_vanilla_chars -= 4
+                if (flagset.has('Cnoearned') and not flagset.has('Ctreasure:earned')):
+                    available_vanilla_chars -= 7
+                if mandatory_char_objective_slots > available_vanilla_chars:
+                    self._lib.push(log, ['error', f'Not enough available non-starting vanilla characters for all of the mandatory character objectives specified (between fixed objectives and random pools). Either add more character slots back in, remove character objectives, or allow other objective types for some random pools.'])
+            else: 
+                distinct_flags = flagset.get_list(r'^Cdistinct:')
+                if len(distinct_flags) > 0:
+                    # we've already ensured that *specified* objective characters are available, but we need to ensure that the random objectives
+                    # don't insist on too many other characters
+                    distinct_count =  int(self._lib.re_sub(r'^Cdistinct:', '', distinct_flags[0]))
+                    if mandatory_char_objective_slots > distinct_count:
+                        self._lib.push(log, ['error', f'Too few distinct characters specified for the mandatory character objectives. Either increase the number of distinct characters, or remove character objectives.'])
                 
         challenges = flagset.get_list(r'^-wacky:')
         if challenges:

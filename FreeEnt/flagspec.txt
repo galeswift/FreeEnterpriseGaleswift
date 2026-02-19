@@ -25,7 +25,7 @@ Orandom3:1/Orandom3:2/Orandom3:3/Orandom3:4/Orandom3:5/Orandom3:6/Orandom3:7/Ora
 Orandom:onlycecil Orandom:onlykain Orandom:onlyrydia Orandom:onlytellah Orandom:onlyedward Orandom:onlyrosa Orandom:onlyyang Orandom:onlypalom Orandom:onlyporom Orandom:onlycid Orandom:onlyedge Orandom:onlyfusoya 
 Orandom2:onlycecil Orandom2:onlykain Orandom2:onlyrydia Orandom2:onlytellah Orandom2:onlyedward Orandom2:onlyrosa Orandom2:onlyyang Orandom2:onlypalom Orandom2:onlyporom Orandom2:onlycid Orandom2:onlyedge Orandom2:onlyfusoya 
 Orandom3:onlycecil Orandom3:onlykain Orandom3:onlyrydia Orandom3:onlytellah Orandom3:onlyedward Orandom3:onlyrosa Orandom3:onlyyang Orandom3:onlypalom Orandom3:onlyporom Orandom3:onlycid Orandom3:onlyedge Orandom3:onlyfusoya 
-Oreq:all/Oreq:1/Oreq:2/Oreq:3/Oreq:4/Oreq:5/Oreq:6/Oreq:7/Oreq:8/Oreq:9/Oreq:10
+Oreq:all/Oreq:1/Oreq:2/Oreq:3/Oreq:4/Oreq:5/Oreq:6/Oreq:7/Oreq:8/Oreq:9/Oreq:10/Oreq:11/Oreq:12/Oreq:13/Oreq:14/Oreq:15/Oreq:16/Oreq:17/Oreq:18/Oreq:19/Oreq:20/Oreq:21/Oreq:22/Oreq:23/Oreq:24/Oreq:25/Oreq:26/Oreq:27/Oreq:28/Oreq:29/Oreq:30/Oreq:31
 Ohardreq:1 Ohardreq:2 Ohardreq:3 Ohardreq:4 Ohardreq:5 Ohardreq:6 Ohardreq:7 Ohardreq:8 Ohardreq:9 Ohardreq:10 Ohardreq:11 Ohardreq:12 Ohardreq:13 Ohardreq:14 Ohardreq:15 Ohardreq:16 Ohardreq:17 Ohardreq:18
 Ogated:1/Ogated:2/Ogated:3/Ogated:4/Ogated:5/Ogated:6/Ogated:7/Ogated:8/Ogated:9/Ogated:10/Ogated:11/Ogated:12/Ogated:13/Ogated:14/Ogated:15/Ogated:16/Ogated:17/Ogated:18
 Owin:game/Owin:crystal
