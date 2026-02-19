@@ -89,6 +89,7 @@ def setup(env):
     env.meta.setdefault('objective_required_bosses', set())
     env.meta.setdefault('required_treasures', {})
     env.meta.setdefault('objective_required_key_items', set())
+    env.meta['objective_req_char_count'] = 0
     if not env.options.flags.has('objective_none'):
         env.meta['has_objectives'] = True
         env.meta['zeromus_required'] = env.options.flags.has("objective_zeromus")
@@ -147,7 +148,7 @@ def setup(env):
 
         for random_char in random_objective_only_characters:
             env.meta['objective_required_characters'].add(random_char)
-        env.meta['objective_req_char_count'] = mandatory_random_objective_char_count
+        env.meta['objective_req_char_count'] += mandatory_random_objective_char_count
 
         # Handle gated objectives
         objective_ids = get_unique_objective_ids(env)
