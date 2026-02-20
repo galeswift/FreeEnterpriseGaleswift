@@ -493,12 +493,14 @@ class FlagLogicCore:
         if flagset.has('Tadjmiabareas') and not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish', 'Tstandardish'):
             self._simple_disable(flagset, log, 'Treasures are not weighted', ['Tadjmiabareas'])
 
-        if flagset.has_any('Svanilla', 'Scabins', 'Sempty'):
-            self._simple_disable_regex(flagset, log, 'Shops are not random', r'^Sno:([^j]|j.)')
-            self._simple_disable(flagset, log, 'Shops are not random', ['Sunsafe'])
+        if flagset.has_any('Svanilla', 'Sshuffle', 'Scabins', 'Sempty'):
+            self._simple_disable_regex(flagset, log, 'Shops are not random', r'^(Sno:([^j]|j.)|Salways:([^j]|j.))')
+            if not flagset.has('Sshuffle'):
+                self._simple_disable(flagset, log, 'Shops are not random', ['Sunsafe'])
 
-        if flagset.has('Sshuffle'):
-            self._simple_disable(flagset, log, 'Shops are only shuffled', ['Sno:life'])
+        for f in ['apples', 'sirens', 'vampires', 'hrglass', 'bacchus', 'starveil', 'cure3', 'illusion', 'coffin', 'damage_items']:
+            if flagset.has('Salways:' + f) and flagset.has('Sno:' + f):
+                self._simple_disable(flagset, log, 'Salways: overrides Sno:', ['Sno:' + f])
 
         if flagset.has('Bvanilla'):
             self._simple_disable(flagset, log, 'Bosses not randomized', ['Bunsafe'])

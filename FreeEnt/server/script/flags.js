@@ -12977,12 +12977,17 @@ class FlagLogicCore {
         if ((flagset.has("Tadjmiabareas") && (! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish", "Tstandardish")))) {
             this._simple_disable(flagset, log, "Treasures are not weighted", ["Tadjmiabareas"]);
         }
-        if (flagset.has_any("Svanilla", "Scabins", "Sempty")) {
-            this._simple_disable_regex(flagset, log, "Shops are not random", "^Sno:([^j]|j.)");
-            this._simple_disable(flagset, log, "Shops are not random", ["Sunsafe"]);
+        if (flagset.has_any("Svanilla", "Sshuffle", "Scabins", "Sempty")) {
+            this._simple_disable_regex(flagset, log, "Shops are not random", "^(Sno:([^j]|j.)|Salways:([^j]|j.))");
+            if ((! flagset.has("Sshuffle"))) {
+                this._simple_disable(flagset, log, "Shops are not random", ["Sunsafe"]);
+            }
         }
-        if (flagset.has("Sshuffle")) {
-            this._simple_disable(flagset, log, "Shops are only shuffled", ["Sno:life"]);
+        for (var f, _pj_c = 0, _pj_a = ["apples", "sirens", "vampires", "hrglass", "bacchus", "starveil", "cure3", "illusion", "coffin", "damage_items"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            f = _pj_a[_pj_c];
+            if ((flagset.has(("Salways:" + f)) && flagset.has(("Sno:" + f)))) {
+                this._simple_disable(flagset, log, "Salways: overrides Sno:", [("Sno:" + f)]);
+            }
         }
         if (flagset.has("Bvanilla")) {
             this._simple_disable(flagset, log, "Bosses not randomized", ["Bunsafe"]);
@@ -13357,9 +13362,11 @@ class FlagLogicCore {
                     }
                 } else {
                     distinct_flags = flagset.get_list("^Cdistinct:");
-                    distinct_count = distinct_flags.length;
-                    if ((distinct_count && (mandatory_char_objective_slots > distinct_count))) {
-                        this._lib.push(log, ["error", `Too few distinct characters specified for the mandatory character objectives. Either increase the number of distinct characters, or remove character objectives.`]);
+                    if ((distinct_flags.length > 0)) {
+                        distinct_count = Number.parseInt(this._lib.re_sub("^Cdistinct:", "", distinct_flags[0]));
+                        if ((mandatory_char_objective_slots > distinct_count)) {
+                            this._lib.push(log, ["error", `Too few distinct characters specified for the mandatory character objectives. Either increase the number of distinct characters, or remove character objectives.`]);
+                        }
                     }
                 }
             }
