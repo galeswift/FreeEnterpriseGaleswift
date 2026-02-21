@@ -566,17 +566,17 @@ class FlagLogicCore {
         if ((flagset.has("-smith:omni") && (! flagset.has_any("-smith:super", "Chero")))) {
             this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni"]);
         }
-        if ((flagset.has("-fusoya:slowstart") && flagset.has("-fusoya:uncapped"))) {
-            this._simple_disable(flagset, log, "Uncapped FuSoYa cannot also have slowstart", ["-fusoya:slowstart"]);
+        if ((flagset.has("Fslowstart") && flagset.has("Funcapped"))) {
+            this._simple_disable(flagset, log, "Uncapped FuSoYa cannot also have slowstart", ["Fslowstart"]);
         }
-        if ((flagset.has("-fusoya:location") && flagset.has("-fusoya:slowstart"))) {
-            this._simple_disable(flagset, log, "Location FuSoYa cannot have slowstart", ["-fusoya:slowstart"]);
+        if ((flagset.has("Flocation") && flagset.has("Fslowstart"))) {
+            this._simple_disable(flagset, log, "Location FuSoYa cannot have slowstart", ["Fslowstart"]);
         }
-        if (flagset.has("-fusoya:nerfed")) {
-            this._simple_disable_regex(flagset, log, "Nerfed FuSoYa cannot have slowstart or unlearn spells", "^-fusoya:(slowstart|unlearn)");
+        if (flagset.has("Fnerfed")) {
+            this._simple_disable_regex(flagset, log, "Nerfed FuSoYa cannot have slowstart or unlearn spells", "^F(slowstart|unlearn)");
         }
-        if (flagset.has("-fusoya:vanilla")) {
-            this._simple_disable_regex(flagset, log, "Vanilla FuSoYa cannot have his HP or spells change", "^-fusoya:(slowstart|unlearn|randomhp)");
+        if (flagset.has("Fvanilla")) {
+            this._simple_disable_regex(flagset, log, "Vanilla FuSoYa cannot have his HP or spells change", "^F(slowstart|unlearn|randomhp)");
         }
         if ((flagset.has("-monsterflee") && (! flagset.has("-monsterevade")))) {
             flagset.set("-monsterevade");
@@ -597,11 +597,11 @@ class FlagLogicCore {
         if (flagset.has_any("-starting:underground", "-starting:blackchocobo")) {
             this._lib.push(log, ["error", "Different starting location flags are not currently available; remove them and try again."]);
         }
-        if ((flagset.has("-z:physical") && flagset.has("-z:whichbang"))) {
-            this._simple_disable(flagset, log, "No guaranteed Big Bangs in script", ["-z:whichbang"]);
+        if ((flagset.has("Zphysical") && flagset.has("Zwhichbang"))) {
+            this._simple_disable(flagset, log, "No guaranteed Big Bangs in script", ["Zwhichbang"]);
         }
-        if ((flagset.has_any("-z:chaos", "-z:lavosshell") && flagset.has("-z:phaseshift"))) {
-            this._simple_disable(flagset, log, "Random phases take precedence over shuffled phases", ["-z:phaseshift"]);
+        if ((flagset.has_any("Zchaos", "Zlavosshell") && flagset.has("Zphaseshift"))) {
+            this._simple_disable(flagset, log, "Random phases take precedence over shuffled phases", ["Zphaseshift"]);
         }
         all_spoiler_flags = flagset.get_list("^-spoil:");
         sparse_spoiler_flags = flagset.get_list("^-spoil:sparse");
@@ -619,7 +619,7 @@ class FlagLogicCore {
         }
         if (flagset.has("Onone")) {
             this._simple_disable_regex(flagset, log, "No objectives set", "^O(win|req):");
-            this._simple_disable_regex(flagset, log, "No objectives set", "^-exp:objectivebonus");
+            this._simple_disable_regex(flagset, log, "No objectives set", "^Xobjectivebonus");
         } else {
             if ((flagset.get_list("^Oreq:").length === 0)) {
                 flagset.set("Oreq:all");

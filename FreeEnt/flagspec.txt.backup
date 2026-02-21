@@ -70,24 +70,24 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -monsterflee
 -smith:super/-smith:alt -smith:playable -smith:omni
 -starting:blackchocobo/-starting:underground
--fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
--fusoya:slowstart/-fusoya:unlearn
--fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
--agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:random/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42
--agility:scale1/-agility:scale10
+Fweighted/Fvanilla/Flocation/Fsequential:p/Fsequential:r/Fnerfed
+Fslowstart/Funlearn
+Fmaybe Funcapped Frandomhp Fomnimage
+Aagnostic/Avanilla/Aslowest/Afastest/Aaverage/Amedian/Arandom/Amonster/Aflat/A750formula/Aanchor:7/Aanchor:27/Aanchor:28/Aanchor:41/Aanchor:42
+Ascale:1/Ascale:10
 -speedmodbalance
--exp:split
--exp:noboost
--exp:nokeybonus
--exp:crystalbonus
--exp:objectivebonus25/-exp:objectivebonus10/-exp:objectivebonus5/-exp:objectivebonus_num
--exp:kicheckbonus10/-exp:kicheckbonus5/-exp:kicheckbonus2/-exp:kicheckbonus_num
--exp:zonkbonus10/-exp:zonkbonus5/-exp:zonkbonus2
--exp:miabbonus100/-exp:miabbonus50
--exp:moonbonus200/-exp:moonbonus100
--exp:maxlevelbonus
--exp:smallparty
--exp:geometric90/-exp:geometric80/-exp:geometric70/-exp:geometric60/-exp:geometric50/-exp:geometric40/-exp:geometric30/-exp:geometric20/-exp:geometric10/-exp:geometric0
+Xsplit
+Xnoboost
+Xnokeybonus
+Xcrystalbonus
+Xobjectivebonus:25/Xobjectivebonus:10/Xobjectivebonus:5/Xobjectivebonus:num
+Xkicheckbonus:10/Xkicheckbonus:5/Xkicheckbonus:2/Xkicheckbonus:num
+Xzonkbonus:10/Xzonkbonus:5/Xzonkbonus:2
+Xmiabbonus:100/Xmiabbonus:50
+Xmoonbonus:200/Xmoonbonus:100
+Xmaxlevelbonus
+Xsmallparty
+Xgeometric:90/Xgeometric:80/Xgeometric:70/Xgeometric:60/Xgeometric:50/Xgeometric:40/Xgeometric:30/Xgeometric:20/Xgeometric:10/Xgeometric:0
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
 -vanilla:hobs
@@ -95,11 +95,11 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -vanilla:fashion
 -vanilla:miabs
 -vanilla:giant
--z:physical/-z:physmag/-z:chaos/-z:lavosshell
--z:whichbang
--z:phaseshift
--z:nonerfs/-z:mustnerf
--z:vanillasprite
+Zvanilla/Zphysical/Zphysmag/Zchaos/Zlavosshell
+Zwhichbang
+Zphaseshift
+Znonerfs/Zmustnerf
+Znocosplay
 -vintage
 -pushbtojump
 -doorsrando/-doorsrando:normal/-doorsrando:gated/-doorsrando:blueplanet/-doorsrando:why/-doorsrando:all
@@ -172,6 +172,10 @@ Bvanilla : ~Bstandard
 Etoggle  : ~Evanilla & ~Ereduce & ~Enorepeats & ~Enoencounters
 Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
+Fweighted : ~Fvanilla & ~Flocation & ~Fsequential:p & ~Fsequential:r & ~Fnerfed
+Aagnostic : ~Avanilla & ~Aslowest & ~Afastest & ~Aaverage & ~Amedian & ~Arandom & ~Amonster & ~Aflat & ~A750formula & ~Aanchor:7 & ~Aanchor:27 & ~Aanchor:28 & ~Aanchor:41 & ~Aanchor:42
+Zvanilla : ~Zphysical & ~Zphysmag & ~Zchaos & ~Zlavosshell
+
 ----- SLUGS
 
 Onone                objective_none
@@ -366,6 +370,18 @@ Gsylph               glitch_allow_sylph
 Gbackrow             glitch_allow_backrow
 G64                  glitch_allow_64
 
+Fvanilla       vanilla_fusoya
+Flocation      location_fusoya
+Fsequential:p  sequential_p_fusoya
+Fsequential:r  sequential_r_fusoya
+Fnerfed        nerfed_fusoya
+Fmaybe         maybe_fusoya
+Fslowstart     slowstart_fusoya
+Funlearn       unlearn_fusoya
+Funcapped      uncapped_fusoya
+Frandomhp      randomhp_fusoya
+Fomnimage      add_spells_fusoya
+
 -noadamants          no_adamants
 -nocursed            no_cursed_rings
 -vintage             vintage
@@ -379,35 +395,23 @@ G64                  glitch_allow_64
 -starting:blackchocobo  starting_blackchocobo
 -starting:underground   starting_underground
 
--fusoya:vanilla       vanilla_fusoya
--fusoya:location      location_fusoya
--fusoya:sequential_p  sequential_p_fusoya
--fusoya:sequential_r  sequential_r_fusoya
--fusoya:nerfed        nerfed_fusoya
--fusoya:maybe         maybe_fusoya
--fusoya:slowstart     slowstart_fusoya
--fusoya:unlearn       unlearn_fusoya
--fusoya:uncapped      uncapped_fusoya
--fusoya:randomhp      randomhp_fusoya
--fusoya:omnimage      add_spells_fusoya
-
--agility:vanilla     vanilla_agility
--agility:slowest     slowest_agility
--agility:fastest     fastest_agility
--agility:average     average_agility
--agility:median      median_agility
--agility:random      random_agility
--agility:monster     monster_agility
--agility:flat        flat_agility
--agility:750formula  formula_agility
+Avanilla     vanilla_agility
+Aslowest     slowest_agility
+Afastest     fastest_agility
+Aaverage     average_agility
+Amedian      median_agility
+Arandom      random_agility
+Amonster     monster_agility
+Aflat        flat_agility
+A750formula  formula_agility
 -speedmodbalance     balance_speed_mod_range
 
--exp:split           experience_split
--exp:noboost         experience_no_boost
--exp:nokeybonus      experience_no_key_item_bonus
--exp:crystalbonus    experience_crystal_bonus
--exp:maxlevelbonus   experience_max_level_bonus
--exp:smallparty      experience_small_party
+Xsplit           experience_split
+Xnoboost         experience_no_boost
+Xnokeybonus      experience_no_key_item_bonus
+Xcrystalbonus    experience_crystal_bonus
+Xmaxlevelbonus   experience_max_level_bonus
+Xsmallparty      experience_small_party
 -miscbugfixes        bug_fixes
 -vanilla:hobs        vanilla_hobs
 -vanilla:growup      vanilla_dwarf_summons
@@ -415,15 +419,16 @@ G64                  glitch_allow_64
 -vanilla:miabs       vanilla_miabs
 -vanilla:giant       vanilla_giant
 
--z:vanillasprite     vanilla_z
--z:physical          z_physical_script
--z:physmag           z_physical_or_magical_script
--z:chaos             z_chaos_script
--z:lavosshell        z_random_scripts
--z:whichbang         z_random_bigbangs
--z:phaseshift        z_random_phases
--z:nonerfs           z_no_nerfs
--z:mustnerf          z_must_nerf
+Znocosplay         vanilla_z
+Zvanilla           z_vanilla_script
+Zphysical          z_physical_script
+Zphysmag           z_physical_or_magical_script
+Zchaos             z_chaos_script
+Zlavosshell        z_random_scripts
+Zwhichbang         z_random_bigbangs
+Zphaseshift        z_random_phases
+Znonerfs           z_no_nerfs
+Zmustnerf          z_must_nerf
 
 -pushbtojump         jump
 

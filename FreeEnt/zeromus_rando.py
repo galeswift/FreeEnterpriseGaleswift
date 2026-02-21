@@ -185,7 +185,7 @@ POSSIBLE_CHAOS_REACTIONS = {
 }
 
 def apply(env):
-    # if not env.options.flags.has_any('z_physical_script','z_physical_or_magical_script','-z:chaos','-z:lavosshell','z_random_bigbangs','z_random_phases','z_no_nerfs','z_must_nerf'):
+    # if not env.options.flags.has_any('z_physical_script','z_physical_or_magical_script','Zchaos','Zlavosshell','z_random_bigbangs','z_random_phases','z_no_nerfs','z_must_nerf'):
     #     return
     
     bigbang_replacements = [[], [], [], [], [], []]
@@ -577,7 +577,7 @@ def apply(env):
 
     elif env.options.flags.has('z_random_scripts'):
         # assign three random scripts from the game, avoiding condition changes
-        # mutually exclusive with z_shuffle_scripts/-z:phaseshift
+        # mutually exclusive with z_shuffle_scripts/Zphaseshift
         # requires a patch for Z to load both normal and alternate scripts
         env.add_file('scripts/zeromus_mimicscript.f4c')
 
@@ -746,7 +746,7 @@ def apply(env):
             )
 
     if env.options.flags.has('z_random_phases'):
-        # mutually exclusive with -z:lavosshell and -z:chaos; handled by flagsetcore
+        # mutually exclusive with Zlavosshell and Zchaos; handled by flagsetcore
         phases = [0x4C, 0x55, 0x57]
         env.rnd.shuffle(phases)
         # manual bytes for attack phase shuffle:

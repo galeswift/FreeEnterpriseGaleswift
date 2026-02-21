@@ -687,10 +687,10 @@
 .(Etable:uniquelygood) Each area has one hand-picked encounter
 
 == HARP OPTIONS
-<>*^ Harp randomization
+<>* Harp randomization
 .(Hrandom) Edward plays a random song
-.(Hvanilla)- Edward plays the vanilla song
-.(Hnone) Edward plays nothing
+.(Hvanilla)^- Edward plays the vanilla song
+.(Hnone)^ Edward plays nothing
 
 == GLITCHES
 [@G] Enable major glitches
@@ -703,7 +703,7 @@
 .[G64] Allow 64-floor glitch
 
 == DOORS
-<> Warps Randomization Options
+<>^ Warps Randomization Options
 .(@doorsrando) Randomize Doors
 ..<> Doors Randomization Options
 ...(-doorsrando:normal)!           Doors Shuffle without Cross World
@@ -718,128 +718,126 @@
 ...(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
 ...(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
 ...(-entrancesrando:all)!          All Entrances Shuffled
-[-calmness] Disable the Panic Button (Select + R)
-[-forcesealed] Disable skipping the Sealed Cave Boss
+[-calmness]^ Disable the Panic Button (Select + R)
+[-forcesealed]^ Disable skipping the Sealed Cave Boss
 
 == FUSOYA
-[@fusoya]^ FuSoYa challenges
-.<> Spell learning categories
-..(@normalfu) Usual FuSoYa challenge
-...<> Learning modifications
-....(-fusoya:slowstart) 5 of the first 12 bosses defeated will not reward spells or HP
-....(-fusoya:unlearn)! FuSoYa will lose spells instead of learning them
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
-..(-fusoya:vanilla) Vanilla FuSoYa
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-..(-fusoya:sequential_p) Fixed spell order (Palom/Porom)
-...[ECHO:@normalfu]
-..(-fusoya:sequential_r) Fixed spell order (Rydia/Rosa)
-...[ECHO:@normalfu]
-..(-fusoya:location) Location-dependent spells
-...<> Learning modifications
-....(-fusoya:unlearn)! FuSoYa will lose spells instead of learning them
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
-..(-fusoya:nerfed)! Fixed starting spells, no learning
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
-.[-fusoya:maybe]! Spells not guaranteed to be learned
-.[-fusoya:omnimage] FuSoYa also learns summons/Twin/Ninja magic
+<@fusoya>* FuSoYa challenges
+.(Fweighted) Usual FuSoYa challenge
+..<> Learning modifications
+...(Fslowstart)^ 5 of the first 12 bosses defeated will not reward spells or HP
+...(Funlearn)!^ FuSoYa will lose spells instead of learning them
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
+.(Fvanilla) Vanilla FuSoYa
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+.(Fsequential:p)^ Fixed spell order (Palom/Porom)
+..[ECHO:Fweighted]
+.(Fsequential:r)^ Fixed spell order (Rydia/Rosa)
+..[ECHO:Fweighted]
+.(Flocation)^ Location-dependent spells
+..<> Learning modifications
+...(Funlearn)!^ FuSoYa will lose spells instead of learning them
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
+.(Fnerfed)!^ Fixed starting spells, no learning
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
+[Fmaybe]!^ Spells not guaranteed to be learned
+[Fomnimage]^ FuSoYa also learns summons/Twin/Ninja magic
 
 == AGILITY
-[@agility]^ Change the ATB system (or make it vanilla)
-.<> Different anchoring or ATB formula
-..(-agility:vanilla) Use vanilla agility anchoring
-..(-agility:slowest) Use your slowest character as anchor
-..(-agility:fastest)! Use your fastest character as anchor
-..(-agility:average) Use your average agility for anchoring
-..(-agility:median) Use your median agility for anchoring
-..(-agility:random)! A random party slot is chosen for anchoring
-..(-agility:monster)! Use average monster agility for anchoring
-..(-agility:flat) Everyone is the same agility
-..(-agility:750formula) Use a formula to determine agility
-..<@anchor> Use a fixed agility anchor
-...<> Anchor agility
-....(-agility:anchor7) 7 Agility anchor
-....(-agility:anchor27)! 27 Agility anchor
-....(-agility:anchor28)! 28 Agility anchor
-....(-agility:anchor41)! 41 Agility anchor
-....(-agility:anchor42)! 42 Agility anchor
-.[@agilityscale] Scale the base ATB
-..<> Base ATB for the anchor
-...(-agility:scale1) Base ATB is 1 tick 
-...(-agility:scale10) Base ATB is 10 ticks 
+<@agility>* Specify agility anchoring
+.(Aagnostic) Use the first occupied party slot for anchoring
+.(Avanilla) Use vanilla agility anchoring
+.(Aslowest)^ Use your slowest character as anchor
+.(Afastest)!^ Use your fastest character as anchor
+.(Aaverage)^ Use your average agility for anchoring
+.(Amedian)^ Use your median agility for anchoring
+.(Arandom)!^ A random party slot is chosen for anchoring
+.(Amonster)!^ Use average monster agility for anchoring
+.(Aflat)^ Everyone is the same agility
+.(A750formula)^ Use a formula to determine agility
+.<@anchor>^ Use a fixed agility anchor
+..<> Anchor agility
+...(Aanchor:7) 7 Agility anchor
+...(Aanchor:27)! 27 Agility anchor
+...(Aanchor:28)! 28 Agility anchor
+...(Aanchor:41)! 41 Agility anchor
+...(Aanchor:42)! 42 Agility anchor
+[@agilityscale]^ Scale the base ATB
+.<> Base ATB for the anchor
+..(Ascale:1) Base ATB is 1 tick 
+..(Ascale:10) Base ATB is 10 ticks 
 
 == EXPERIENCE
 [@exp] Restore vanilla or change EXP distribution
-.[-exp:split] Split EXP distribution
-.[-exp:noboost] No low-level EXP boost
-.[-exp:nokeybonus] No EXP bonus after 10 key items
-.[-exp:crystalbonus]^ Double EXP after obtaining the Crystal
+.[Xsplit] Split EXP distribution
+.[Xnoboost] No low-level EXP boost
+.[Xnokeybonus] No EXP bonus after 10 key items
+.[Xcrystalbonus]^ Double EXP after obtaining the Crystal
 .[@objectiveexp]^ Award extra EXP for completing objectives
 ..<> Amount of bonus EXP 
-...(-exp:objectivebonus25) Each completed objective gives 25% extra EXP
-...(-exp:objectivebonus10) Each completed objective gives 10% extra EXP
-...(-exp:objectivebonus5) Each completed objective gives 5% extra EXP
-...(-exp:objectivebonus_num) Each completed objective gives extra EXP
+...(Xobjectivebonus:25) Each completed objective gives 25% extra EXP
+...(Xobjectivebonus:10) Each completed objective gives 10% extra EXP
+...(Xobjectivebonus:5) Each completed objective gives 5% extra EXP
+...(Xobjectivebonus:num) Each completed objective gives extra EXP
 .[@kicheckexp]^ Award extra EXP for completing key item checks
 ..<> Amount of bonus EXP
-...(-exp:kicheckbonus10) Each completed KI check gives 10% extra EXP
-...(-exp:kicheckbonus5) Each completed KI check gives 5% extra EXP
-...(-exp:kicheckbonus2) Each completed KI check gives 2% extra EXP
-...(-exp:kicheckbonus_num) Each completed KI check gives extra EXP
+...(Xkicheckbonus:10) Each completed KI check gives 10% extra EXP
+...(Xkicheckbonus:5) Each completed KI check gives 5% extra EXP
+...(Xkicheckbonus:2) Each completed KI check gives 2% extra EXP
+...(Xkicheckbonus:num) Each completed KI check gives extra EXP
 .[@zonkbonusexp]^ Award extra EXP after non-KI rewards from KI checks
 ..<> Amount of bonus EXP
-...(-exp:zonkbonus10) Each non-KI reward gives 10% extra EXP
-...(-exp:zonkbonus5) Each non-KI reward gives 5% extra EXP
-...(-exp:zonkbonus2) Each non-KI reward gives 2% extra EXP
+...(Xzonkbonus:10) Each non-KI reward gives 10% extra EXP
+...(Xzonkbonus:5) Each non-KI reward gives 5% extra EXP
+...(Xzonkbonus:2) Each non-KI reward gives 2% extra EXP
 .[@miabbonusexp]^ Award extra EXP during MIAB encounters
 ..<> Amount of bonus EXP
-...(-exp:miabbonus100) MIAB encounters give double EXP
-...(-exp:miabbonus50) MIAB encounters give 50% extra EXP
+...(Xmiabbonus:100) MIAB encounters give double EXP
+...(Xmiabbonus:50) MIAB encounters give 50% extra EXP
 .[@moonbonusexp]^ Award extra EXP when on the moon
 ..<> Amount of bonus EXP
-...(-exp:moonbonus200) Moon encounters give triple EXP
-...(-exp:moonbonus100) Moon encounters give double EXP
-.[-exp:maxlevelbonus]^ Award extra EXP when underlevelled
-.[-exp:smallparty]^ Award extra EXP when your party is not full
+...(Xmoonbonus:200) Moon encounters give triple EXP
+...(Xmoonbonus:100) Moon encounters give double EXP
+.[Xmaxlevelbonus]^ Award extra EXP when underlevelled
+.[Xsmallparty]^ Award extra EXP when your party is not full
 .[@geometricexp]^ Decrease EXP earned from repeated same-type monster kills
 ..<> Per-monster-kill percentage reduction
-...(-exp:geometric_90) Repeated monster kills scale down in EXP to 90%
-...(-exp:geometric_80) Repeated monster kills scale down in EXP to 80%
-...(-exp:geometric_70) Repeated monster kills scale down in EXP to 70%
-...(-exp:geometric_60) Repeated monster kills scale down in EXP to 60%
-...(-exp:geometric_50) Repeated monster kills scale down in EXP to 50%
-...(-exp:geometric_40) Repeated monster kills scale down in EXP to 40%
-...(-exp:geometric_30) Repeated monster kills scale down in EXP to 30%
-...(-exp:geometric_20) Repeated monster kills scale down in EXP to 20%
-...(-exp:geometric_10) Repeated monster kills scale down in EXP to 10%
-...(-exp:geometric_0) Repeated monster kills do not award EXP
+...(Xgeometric:90) Repeated monster kills scale down in EXP to 90%
+...(Xgeometric:80) Repeated monster kills scale down in EXP to 80%
+...(Xgeometric:70) Repeated monster kills scale down in EXP to 70%
+...(Xgeometric:60) Repeated monster kills scale down in EXP to 60%
+...(Xgeometric:50) Repeated monster kills scale down in EXP to 50%
+...(Xgeometric:40) Repeated monster kills scale down in EXP to 40%
+...(Xgeometric:30) Repeated monster kills scale down in EXP to 30%
+...(Xgeometric:20) Repeated monster kills scale down in EXP to 20%
+...(Xgeometric:10) Repeated monster kills scale down in EXP to 10%
+...(Xgeometric:0) Repeated monster kills do not award EXP
 
 == ZEROMUS
-[]^ Zeromus fight changes
-.<> Script category
-..(@vanilla) Vanilla Z script
-...[-z:whichbang]! Replace every Big Bang with another spell
-...[-z:phaseshift]! Shuffle the three main Z fight phases
-..(-z:physical)! Physical Z script
-...[-z:phaseshift]! Shuffle the three main Z fight phases
-..(-z:physmag)! Random physical or magical Z script
-...[-z:whichbang]! Replace every Big Bang with another spell
-...[-z:phaseshift]! Shuffle the three main Z fight phases
-..(-z:chaos)! Fully random attack and reaction scripts
-...[-z:whichbang]! Replace every Big Bang with another spell
-..(-z:lavosshell)! Three random attack phases
-...[-z:whichbang]! Replace every Big Bang with another spell
-.<> Nerfing of Big Bangs
-..(-z:nonerfs)! Prevent nerfing of Big Bangs
-..(-z:mustnerf)! 9999 damage Big Bangs
-.[-z:vanillasprite] Vanilla Z sprite
+<>* Zeromus fight script
+.(Zvanilla) Vanilla Z script
+..[Zwhichbang]!^ Replace every Big Bang with another spell
+..[Zphaseshift]!^ Shuffle the three main Z fight phases
+.(Zphysical)!^ Physical Z script
+..[Zphaseshift]!^ Shuffle the three main Z fight phases
+.(Zphysmag)!^ Random physical or magical Z script
+..[Zwhichbang]!^ Replace every Big Bang with another spell
+..[Zphaseshift]!^ Shuffle the three main Z fight phases
+.(Zchaos)!^ Fully random attack and reaction scripts
+..[Zwhichbang]!^ Replace every Big Bang with another spell
+.(Zlavosshell)!^ Three random attack phases
+..[Zwhichbang]!^ Replace every Big Bang with another spell
+<>^ Nerfing of Big Bangs
+.(Znonerfs)! Prevent nerfing of Big Bangs
+.(Zmustnerf)! 9999 damage Big Bangs
+[Znocosplay] Vanilla Z sprite
 
 == OTHER
 [@kit] Starter kits
@@ -947,7 +945,7 @@
 [-spoon] Edward can equip the Spoon
 [-monsterevade]!^ Monsters get physical and magical evasion
 [-monsterflee]^ Monsters can flee from battle
-[-speedmodbalance] Alter the speed modifier behaviour
+[-speedmodbalance]^ Alter the speed modifier behaviour
 [@smithy] Smithy reward
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
@@ -959,7 +957,7 @@
 .(-prng:random) Randomize the PRNG values independently
 .(-prng:consecutive)! Replace the PRNG table with the numbers 0 to 255 in order
 .(-prng:mostlysingle)! Replace the PRNG table with (mostly) a single value
-[-miscbugfixes] Include minor bug fixes
+[-miscbugfixes]^ Include minor bug fixes
 [] Restore vanilla behaviors
 .[-vanilla:hobs] Vanilla Hobs spell
 .[-vanilla:growup] Vanilla Dwarf Castle summons

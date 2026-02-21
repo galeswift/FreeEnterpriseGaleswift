@@ -1264,7 +1264,7 @@ def apply(env):
             potential_key_item_slots.remove(RewardSlot.pink_trade_item)
         if miab_flags:
             potential_key_item_slots.extend(potential_miabs)
-    # put this information in env to facilitate -exp:kicheckbonus_num
+    # put this information in env to facilitate Xkicheckbonus:num
     env.meta['number_key_item_slots'] = len(potential_key_item_slots)
     env.add_binary(BusAddress(0x21dc00), [1 if s in potential_key_item_slots else 0 for s in range(RewardSlot.MAX_COUNT)], as_script=True)
     env.add_substitution('randomizer key item count', '{:02X}'.format(rewards_assignment.count_key_items()))

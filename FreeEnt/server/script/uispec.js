@@ -7789,7 +7789,6 @@ var FLAG_UISPEC = [
         "flag": "@anon77",
         "title": "Harp randomization",
         "important": true,
-        "fork": true,
         "type": "select",
         "subcontrols": [
           {
@@ -7801,12 +7800,14 @@ var FLAG_UISPEC = [
             "flag": "Hvanilla",
             "title": "Edward plays the vanilla song",
             "description": "The song that Edward plays during the TwinHarp cutscene and fight is vanilla.",
-            "null": true
+            "null": true,
+            "fork": true
           },
           {
             "flag": "Hnone",
             "title": "Edward plays nothing",
-            "description": "No music plays during the TwinHarp cutscene and fight."
+            "description": "No music plays during the TwinHarp cutscene and fight.",
+            "fork": true
           }
         ]
       }
@@ -7859,6 +7860,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@anon78",
         "title": "Warps Randomization Options",
+        "fork": true,
         "type": "select",
         "subcontrols": [
           {
@@ -7944,12 +7946,14 @@ var FLAG_UISPEC = [
       {
         "flag": "-calmness",
         "title": "Disable the Panic Button (Select + R)",
-        "description": "Disables the use of the Panic button (Select + R)"
+        "description": "Disables the use of the Panic button (Select + R)",
+        "fork": true
       },
       {
         "flag": "-forcesealed",
         "title": "Disable skipping the Sealed Cave Boss",
-        "description": "Fighting the Sealed Cave boss is required before seeing the KI"
+        "description": "Fighting the Sealed Cave boss is required before seeing the KI",
+        "fork": true
       }
     ]
   },
@@ -7959,228 +7963,246 @@ var FLAG_UISPEC = [
       {
         "flag": "@fusoya",
         "title": "FuSoYa challenges",
-        "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
-        "fork": true,
+        "important": true,
+        "type": "select",
         "subcontrols": [
           {
-            "flag": "@anon81",
-            "title": "Spell learning categories",
-            "type": "select",
+            "flag": "Fweighted",
+            "title": "Usual FuSoYa challenge",
+            "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
             "subcontrols": [
               {
-                "flag": "@normalfu",
-                "title": "Usual FuSoYa challenge",
+                "flag": "@anon81",
+                "title": "Learning modifications",
+                "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon82",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
+                    "flag": "Fslowstart",
+                    "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                    "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.",
+                    "fork": true
                   },
                   {
-                    "flag": "@anon83",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
                   }
                 ]
               },
               {
-                "flag": "-fusoya:vanilla",
-                "title": "Vanilla FuSoYa",
-                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+                "flag": "@anon82",
+                "title": "HP gain modifications",
                 "subcontrols": [
                   {
-                    "flag": "@anon84",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:sequential_p",
-                "title": "Fixed spell order (Palom/Porom)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon82",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
                   },
                   {
-                    "flag": "@anon83",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:sequential_r",
-                "title": "Fixed spell order (Rydia/Rosa)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
-                "subcontrols": [
-                  {
-                    "flag": "@anon82",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon83",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:location",
-                "title": "Location-dependent spells",
-                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon85",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon86",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:nerfed",
-                "title": "Fixed starting spells, no learning",
-                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "@anon87",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
                   }
                 ]
               }
             ]
           },
           {
-            "flag": "-fusoya:maybe",
-            "title": "Spells not guaranteed to be learned",
-            "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
-            "hard": true
+            "flag": "Fvanilla",
+            "title": "Vanilla FuSoYa",
+            "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+            "subcontrols": [
+              {
+                "flag": "@anon83",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
           },
           {
-            "flag": "-fusoya:omnimage",
-            "title": "FuSoYa also learns summons/Twin/Ninja magic",
-            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
+            "flag": "Fsequential:p",
+            "title": "Fixed spell order (Palom/Porom)",
+            "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon81",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Fslowstart",
+                    "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                    "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon82",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Fsequential:r",
+            "title": "Fixed spell order (Rydia/Rosa)",
+            "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon81",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Fslowstart",
+                    "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                    "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon82",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Flocation",
+            "title": "Location-dependent spells",
+            "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon84",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon85",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Fnerfed",
+            "title": "Fixed starting spells, no learning",
+            "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon86",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
           }
         ]
+      },
+      {
+        "flag": "Fmaybe",
+        "title": "Spells not guaranteed to be learned",
+        "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "Fomnimage",
+        "title": "FuSoYa also learns summons/Twin/Ninja magic",
+        "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>Funcapped</em> or <em>Flocation</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells).",
+        "fork": true
       }
     ]
   },
@@ -8189,121 +8211,129 @@ var FLAG_UISPEC = [
     "controls": [
       {
         "flag": "@agility",
-        "title": "Change the ATB system (or make it vanilla)",
-        "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.",
-        "fork": true,
+        "title": "Specify agility anchoring",
+        "important": true,
+        "type": "select",
         "subcontrols": [
           {
-            "flag": "@anon88",
-            "title": "Different anchoring or ATB formula",
+            "flag": "Aagnostic",
+            "title": "Use the first occupied party slot for anchoring",
+            "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, by default the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under the other flags, the anchoring system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for <em>Aagnostic</em> will override the <em>Chero</em> agility effect, if playing with the hero challenge."
+          },
+          {
+            "flag": "Avanilla",
+            "title": "Use vanilla agility anchoring",
+            "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present."
+          },
+          {
+            "flag": "Aslowest",
+            "title": "Use your slowest character as anchor",
+            "fork": true
+          },
+          {
+            "flag": "Afastest",
+            "title": "Use your fastest character as anchor",
+            "description": "This flag will double the Count timer.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Aaverage",
+            "title": "Use your average agility for anchoring",
+            "description": "Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility.",
+            "fork": true
+          },
+          {
+            "flag": "Amedian",
+            "title": "Use your median agility for anchoring",
+            "fork": true
+          },
+          {
+            "flag": "Arandom",
+            "title": "A random party slot is chosen for anchoring",
+            "description": "Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Amonster",
+            "title": "Use average monster agility for anchoring",
+            "description": "Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Aflat",
+            "title": "Everyone is the same agility",
+            "description": "Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled).",
+            "fork": true
+          },
+          {
+            "flag": "A750formula",
+            "title": "Use a formula to determine agility",
+            "description": "Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer.",
+            "fork": true
+          },
+          {
+            "flag": "@anchor",
+            "title": "Use a fixed agility anchor",
+            "description": "Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.",
+            "fork": true,
             "type": "select",
             "subcontrols": [
               {
-                "flag": "-agility:vanilla",
-                "title": "Use vanilla agility anchoring",
-                "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present."
-              },
-              {
-                "flag": "-agility:slowest",
-                "title": "Use your slowest character as anchor"
-              },
-              {
-                "flag": "-agility:fastest",
-                "title": "Use your fastest character as anchor",
-                "description": "This flag will double the Count timer.",
-                "hard": true
-              },
-              {
-                "flag": "-agility:average",
-                "title": "Use your average agility for anchoring",
-                "description": "Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility."
-              },
-              {
-                "flag": "-agility:median",
-                "title": "Use your median agility for anchoring"
-              },
-              {
-                "flag": "-agility:random",
-                "title": "A random party slot is chosen for anchoring",
-                "description": "Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.",
-                "hard": true
-              },
-              {
-                "flag": "-agility:monster",
-                "title": "Use average monster agility for anchoring",
-                "description": "Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.",
-                "hard": true
-              },
-              {
-                "flag": "-agility:flat",
-                "title": "Everyone is the same agility",
-                "description": "Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled)."
-              },
-              {
-                "flag": "-agility:750formula",
-                "title": "Use a formula to determine agility",
-                "description": "Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer."
-              },
-              {
-                "flag": "@anchor",
-                "title": "Use a fixed agility anchor",
-                "description": "Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.",
+                "flag": "@anon87",
+                "title": "Anchor agility",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon89",
-                    "title": "Anchor agility",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-agility:anchor7",
-                        "title": "7 Agility anchor"
-                      },
-                      {
-                        "flag": "-agility:anchor27",
-                        "title": "27 Agility anchor",
-                        "hard": true
-                      },
-                      {
-                        "flag": "-agility:anchor28",
-                        "title": "28 Agility anchor",
-                        "hard": true
-                      },
-                      {
-                        "flag": "-agility:anchor41",
-                        "title": "41 Agility anchor",
-                        "hard": true
-                      },
-                      {
-                        "flag": "-agility:anchor42",
-                        "title": "42 Agility anchor",
-                        "hard": true
-                      }
-                    ]
+                    "flag": "Aanchor:7",
+                    "title": "7 Agility anchor"
+                  },
+                  {
+                    "flag": "Aanchor:27",
+                    "title": "27 Agility anchor",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Aanchor:28",
+                    "title": "28 Agility anchor",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Aanchor:41",
+                    "title": "41 Agility anchor",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Aanchor:42",
+                    "title": "42 Agility anchor",
+                    "hard": true
                   }
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "flag": "@agilityscale",
+        "title": "Scale the base ATB",
+        "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
+        "fork": true,
+        "subcontrols": [
           {
-            "flag": "@agilityscale",
-            "title": "Scale the base ATB",
-            "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
+            "flag": "@anon88",
+            "title": "Base ATB for the anchor",
+            "type": "select",
             "subcontrols": [
               {
-                "flag": "@anon90",
-                "title": "Base ATB for the anchor",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-agility:scale1",
-                    "title": "Base ATB is 1 tick"
-                  },
-                  {
-                    "flag": "-agility:scale10",
-                    "title": "Base ATB is 10 ticks"
-                  }
-                ]
+                "flag": "Ascale:1",
+                "title": "Base ATB is 1 tick"
+              },
+              {
+                "flag": "Ascale:10",
+                "title": "Base ATB is 10 ticks"
               }
             ]
           }
@@ -8320,22 +8350,22 @@ var FLAG_UISPEC = [
         "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.",
         "subcontrols": [
           {
-            "flag": "-exp:split",
+            "flag": "Xsplit",
             "title": "Split EXP distribution",
             "description": "Normally in Free Enterprise, earned EXP is not divided among the party, and each member receives the full amount. Set this flag to restore the original FF4 EXP distribution scheme (ie. earned EXP is divided among the surviving party members)."
           },
           {
-            "flag": "-exp:noboost",
+            "flag": "Xnoboost",
             "title": "No low-level EXP boost",
             "description": "Normally in Free Enterprise, in a full party, low-level party members (at least 5 levels below the median level) earn double EXP. Set this flag to remove this bonus."
           },
           {
-            "flag": "-exp:nokeybonus",
+            "flag": "Xnokeybonus",
             "title": "No EXP bonus after 10 key items",
             "description": "By default in Free Enterprise, once 10 key items have been collected, earned EXP is doubled. Set this flag to remove this bonus."
           },
           {
-            "flag": "-exp:crystalbonus",
+            "flag": "Xcrystalbonus",
             "title": "Double EXP after obtaining the Crystal",
             "description": "Under this flag, characters earn double EXP once you obtain the Crystal.",
             "fork": true
@@ -8347,24 +8377,24 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon91",
+                "flag": "@anon89",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:objectivebonus25",
+                    "flag": "Xobjectivebonus:25",
                     "title": "Each completed objective gives 25% extra EXP"
                   },
                   {
-                    "flag": "-exp:objectivebonus10",
+                    "flag": "Xobjectivebonus:10",
                     "title": "Each completed objective gives 10% extra EXP"
                   },
                   {
-                    "flag": "-exp:objectivebonus5",
+                    "flag": "Xobjectivebonus:5",
                     "title": "Each completed objective gives 5% extra EXP"
                   },
                   {
-                    "flag": "-exp:objectivebonus_num",
+                    "flag": "Xobjectivebonus:num",
                     "title": "Each completed objective gives extra EXP",
                     "description": "The EXP bonus is 100% divided by the number of available objectives in the seed; e.g. with 7 objectives, each objective gives you about 14% extra EXP (subject to some truncation)."
                   }
@@ -8379,24 +8409,24 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon92",
+                "flag": "@anon90",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:kicheckbonus10",
+                    "flag": "Xkicheckbonus:10",
                     "title": "Each completed KI check gives 10% extra EXP"
                   },
                   {
-                    "flag": "-exp:kicheckbonus5",
+                    "flag": "Xkicheckbonus:5",
                     "title": "Each completed KI check gives 5% extra EXP"
                   },
                   {
-                    "flag": "-exp:kicheckbonus2",
+                    "flag": "Xkicheckbonus:2",
                     "title": "Each completed KI check gives 2% extra EXP"
                   },
                   {
-                    "flag": "-exp:kicheckbonus_num",
+                    "flag": "Xkicheckbonus:num",
                     "title": "Each completed KI check gives extra EXP",
                     "description": "The EXP bonus is 100% divided by the number of potential key item checks in the seed; e.g. with the 21 non-starting main and summon checks on, each objective gives you about 4.7% extra EXP (subject to some truncation)."
                   }
@@ -8411,20 +8441,20 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:zonkbonus10",
+                    "flag": "Xzonkbonus:10",
                     "title": "Each non-KI reward gives 10% extra EXP"
                   },
                   {
-                    "flag": "-exp:zonkbonus5",
+                    "flag": "Xzonkbonus:5",
                     "title": "Each non-KI reward gives 5% extra EXP"
                   },
                   {
-                    "flag": "-exp:zonkbonus2",
+                    "flag": "Xzonkbonus:2",
                     "title": "Each non-KI reward gives 2% extra EXP"
                   }
                 ]
@@ -8438,16 +8468,16 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon94",
+                "flag": "@anon92",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:miabbonus100",
+                    "flag": "Xmiabbonus:100",
                     "title": "MIAB encounters give double EXP"
                   },
                   {
-                    "flag": "-exp:miabbonus50",
+                    "flag": "Xmiabbonus:50",
                     "title": "MIAB encounters give 50% extra EXP"
                   }
                 ]
@@ -8461,16 +8491,16 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon95",
+                "flag": "@anon93",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:moonbonus200",
+                    "flag": "Xmoonbonus:200",
                     "title": "Moon encounters give triple EXP"
                   },
                   {
-                    "flag": "-exp:moonbonus100",
+                    "flag": "Xmoonbonus:100",
                     "title": "Moon encounters give double EXP"
                   }
                 ]
@@ -8478,13 +8508,13 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "-exp:maxlevelbonus",
+            "flag": "Xmaxlevelbonus",
             "title": "Award extra EXP when underlevelled",
             "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).",
             "fork": true
           },
           {
-            "flag": "-exp:smallparty",
+            "flag": "Xsmallparty",
             "title": "Award extra EXP when your party is not full",
             "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
             "fork": true
@@ -8496,48 +8526,48 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon96",
+                "flag": "@anon94",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "-exp:geometric_90",
+                    "flag": "Xgeometric:90",
                     "title": "Repeated monster kills scale down in EXP to 90%"
                   },
                   {
-                    "flag": "-exp:geometric_80",
+                    "flag": "Xgeometric:80",
                     "title": "Repeated monster kills scale down in EXP to 80%"
                   },
                   {
-                    "flag": "-exp:geometric_70",
+                    "flag": "Xgeometric:70",
                     "title": "Repeated monster kills scale down in EXP to 70%"
                   },
                   {
-                    "flag": "-exp:geometric_60",
+                    "flag": "Xgeometric:60",
                     "title": "Repeated monster kills scale down in EXP to 60%"
                   },
                   {
-                    "flag": "-exp:geometric_50",
+                    "flag": "Xgeometric:50",
                     "title": "Repeated monster kills scale down in EXP to 50%"
                   },
                   {
-                    "flag": "-exp:geometric_40",
+                    "flag": "Xgeometric:40",
                     "title": "Repeated monster kills scale down in EXP to 40%"
                   },
                   {
-                    "flag": "-exp:geometric_30",
+                    "flag": "Xgeometric:30",
                     "title": "Repeated monster kills scale down in EXP to 30%"
                   },
                   {
-                    "flag": "-exp:geometric_20",
+                    "flag": "Xgeometric:20",
                     "title": "Repeated monster kills scale down in EXP to 20%"
                   },
                   {
-                    "flag": "-exp:geometric_10",
+                    "flag": "Xgeometric:10",
                     "title": "Repeated monster kills scale down in EXP to 10%"
                   },
                   {
-                    "flag": "-exp:geometric_0",
+                    "flag": "Xgeometric:0",
                     "title": "Repeated monster kills do not award EXP"
                   }
                 ]
@@ -8552,122 +8582,128 @@ var FLAG_UISPEC = [
     "title": "ZEROMUS",
     "controls": [
       {
-        "flag": "@anon97",
-        "title": "Zeromus fight changes",
-        "fork": true,
+        "flag": "@anon95",
+        "title": "Zeromus fight script",
+        "important": true,
+        "type": "select",
         "subcontrols": [
           {
-            "flag": "@anon98",
-            "title": "Script category",
-            "type": "select",
+            "flag": "Zvanilla",
+            "title": "Vanilla Z script",
             "subcontrols": [
               {
-                "flag": "@vanilla",
-                "title": "Vanilla Z script",
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  },
-                  {
-                    "flag": "-z:phaseshift",
-                    "title": "Shuffle the three main Z fight phases",
-                    "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
-                    "hard": true
-                  }
-                ]
+                "flag": "Zwhichbang",
+                "title": "Replace every Big Bang with another spell",
+                "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
+                "hard": true,
+                "fork": true
               },
               {
-                "flag": "-z:physical",
-                "title": "Physical Z script",
-                "description": "Enable this flag to replace Zeromus' magic-based damaging attacks with physical attacks (Fight, Dark Wave, Needle/Counter). Zeromus now counters some physical commands instead of magic.",
+                "flag": "Zphaseshift",
+                "title": "Shuffle the three main Z fight phases",
+                "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
                 "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:phaseshift",
-                    "title": "Shuffle the three main Z fight phases",
-                    "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:physmag",
-                "title": "Random physical or magical Z script",
-                "description": "In half the seeds rolled with this flag, Zeromus will have the physical script from <em>-z:physical</em>, and in the other half Zeromus will have the usual magic script.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  },
-                  {
-                    "flag": "-z:phaseshift",
-                    "title": "Shuffle the three main Z fight phases",
-                    "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:chaos",
-                "title": "Fully random attack and reaction scripts",
-                "description": "In each attack phase, Zeromus will have a handful of random attacks (one or two possibly stronger, with a shake). Four attacks are chosen as reactions. The attacks are mostly curated.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:lavosshell",
-                "title": "Three random attack phases",
-                "description": "The three main attack phases are replaced by three random monster scripts that do not automatically progress to another script.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  }
-                ]
+                "fork": true
               }
             ]
           },
           {
-            "flag": "@anon99",
-            "title": "Nerfing of Big Bangs",
-            "type": "select",
+            "flag": "Zphysical",
+            "title": "Physical Z script",
+            "description": "Enable this flag to replace Zeromus' magic-based damaging attacks with physical attacks (Fight, Dark Wave, Needle/Counter). Zeromus now counters some physical commands instead of magic.",
+            "hard": true,
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "-z:nonerfs",
-                "title": "Prevent nerfing of Big Bangs",
-                "description": "Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a counter-Nuke between the tick that Z sets spell power for Big Bang and the tick when Big Bang goes off. Enable this flag to prevent that happening by implementing chains.",
-                "hard": true
-              },
-              {
-                "flag": "-z:mustnerf",
-                "title": "9999 damage Big Bangs",
-                "description": "Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).",
-                "hard": true
+                "flag": "Zphaseshift",
+                "title": "Shuffle the three main Z fight phases",
+                "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
+                "hard": true,
+                "fork": true
               }
             ]
           },
           {
-            "flag": "-z:vanillasprite",
-            "title": "Vanilla Z sprite",
-            "description": "Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite."
+            "flag": "Zphysmag",
+            "title": "Random physical or magical Z script",
+            "description": "In half the seeds rolled with this flag, Zeromus will have the physical script from <em>Zphysical</em>, and in the other half Zeromus will have the usual magic script.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Zwhichbang",
+                "title": "Replace every Big Bang with another spell",
+                "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
+                "hard": true,
+                "fork": true
+              },
+              {
+                "flag": "Zphaseshift",
+                "title": "Shuffle the three main Z fight phases",
+                "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
+                "hard": true,
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Zchaos",
+            "title": "Fully random attack and reaction scripts",
+            "description": "In each attack phase, Zeromus will have a handful of random attacks (one or two possibly stronger, with a shake). Four attacks are chosen as reactions. The attacks are mostly curated.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Zwhichbang",
+                "title": "Replace every Big Bang with another spell",
+                "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
+                "hard": true,
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Zlavosshell",
+            "title": "Three random attack phases",
+            "description": "The three main attack phases are replaced by three random monster scripts that do not automatically progress to another script.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Zwhichbang",
+                "title": "Replace every Big Bang with another spell",
+                "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
+                "hard": true,
+                "fork": true
+              }
+            ]
           }
         ]
+      },
+      {
+        "flag": "@anon96",
+        "title": "Nerfing of Big Bangs",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Znonerfs",
+            "title": "Prevent nerfing of Big Bangs",
+            "description": "Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a counter-Nuke between the tick that Z sets spell power for Big Bang and the tick when Big Bang goes off. Enable this flag to prevent that happening by implementing chains.",
+            "hard": true
+          },
+          {
+            "flag": "Zmustnerf",
+            "title": "9999 damage Big Bangs",
+            "description": "Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "Znocosplay",
+        "title": "Vanilla Z sprite",
+        "description": "Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite."
       }
     ]
   },
@@ -8680,7 +8716,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon100",
+            "flag": "@anon97",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -8853,7 +8889,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon101",
+            "flag": "@anon98",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -9026,7 +9062,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon102",
+            "flag": "@anon99",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -9228,7 +9264,8 @@ var FLAG_UISPEC = [
       {
         "flag": "-speedmodbalance",
         "title": "Alter the speed modifier behaviour",
-        "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8)."
+        "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).",
+        "fork": true
       },
       {
         "flag": "@smithy",
@@ -9236,7 +9273,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon103",
+            "flag": "@anon100",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -9266,7 +9303,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon104",
+        "flag": "@anon101",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -9296,10 +9333,11 @@ var FLAG_UISPEC = [
       {
         "flag": "-miscbugfixes",
         "title": "Include minor bug fixes",
-        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen."
+        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.",
+        "fork": true
       },
       {
-        "flag": "@anon105",
+        "flag": "@anon102",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9350,7 +9388,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon106",
+            "flag": "@anon103",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9587,12 +9625,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon107",
+        "flag": "@anon104",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon108",
+            "flag": "@anon105",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -9614,7 +9652,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon109",
+            "flag": "@anon106",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -9631,7 +9669,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon110",
+            "flag": "@anon107",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -9685,7 +9723,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon111",
+        "flag": "@anon108",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -9739,7 +9777,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon112",
+            "flag": "@anon109",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -9755,7 +9793,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon113",
+                "flag": "@anon110",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

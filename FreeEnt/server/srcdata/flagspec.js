@@ -1300,65 +1300,67 @@ const _FE_FLAGSPEC = {
         "-smith:omni",
         "-starting:blackchocobo",
         "-starting:underground",
-        "-fusoya:vanilla",
-        "-fusoya:location",
-        "-fusoya:sequential_p",
-        "-fusoya:sequential_r",
-        "-fusoya:nerfed",
-        "-fusoya:slowstart",
-        "-fusoya:unlearn",
-        "-fusoya:maybe",
-        "-fusoya:uncapped",
-        "-fusoya:randomhp",
-        "-fusoya:omnimage",
-        "-agility:vanilla",
-        "-agility:slowest",
-        "-agility:fastest",
-        "-agility:average",
-        "-agility:median",
-        "-agility:random",
-        "-agility:monster",
-        "-agility:flat",
-        "-agility:750formula",
-        "-agility:anchor7",
-        "-agility:anchor27",
-        "-agility:anchor28",
-        "-agility:anchor41",
-        "-agility:anchor42",
-        "-agility:scale1",
-        "-agility:scale10",
+        "Fweighted",
+        "Fvanilla",
+        "Flocation",
+        "Fsequential:p",
+        "Fsequential:r",
+        "Fnerfed",
+        "Fslowstart",
+        "Funlearn",
+        "Fmaybe",
+        "Funcapped",
+        "Frandomhp",
+        "Fomnimage",
+        "Aagnostic",
+        "Avanilla",
+        "Aslowest",
+        "Afastest",
+        "Aaverage",
+        "Amedian",
+        "Arandom",
+        "Amonster",
+        "Aflat",
+        "A750formula",
+        "Aanchor:7",
+        "Aanchor:27",
+        "Aanchor:28",
+        "Aanchor:41",
+        "Aanchor:42",
+        "Ascale:1",
+        "Ascale:10",
         "-speedmodbalance",
-        "-exp:split",
-        "-exp:noboost",
-        "-exp:nokeybonus",
-        "-exp:crystalbonus",
-        "-exp:objectivebonus25",
-        "-exp:objectivebonus10",
-        "-exp:objectivebonus5",
-        "-exp:objectivebonus_num",
-        "-exp:kicheckbonus10",
-        "-exp:kicheckbonus5",
-        "-exp:kicheckbonus2",
-        "-exp:kicheckbonus_num",
-        "-exp:zonkbonus10",
-        "-exp:zonkbonus5",
-        "-exp:zonkbonus2",
-        "-exp:miabbonus100",
-        "-exp:miabbonus50",
-        "-exp:moonbonus200",
-        "-exp:moonbonus100",
-        "-exp:maxlevelbonus",
-        "-exp:smallparty",
-        "-exp:geometric90",
-        "-exp:geometric80",
-        "-exp:geometric70",
-        "-exp:geometric60",
-        "-exp:geometric50",
-        "-exp:geometric40",
-        "-exp:geometric30",
-        "-exp:geometric20",
-        "-exp:geometric10",
-        "-exp:geometric0",
+        "Xsplit",
+        "Xnoboost",
+        "Xnokeybonus",
+        "Xcrystalbonus",
+        "Xobjectivebonus:25",
+        "Xobjectivebonus:10",
+        "Xobjectivebonus:5",
+        "Xobjectivebonus:num",
+        "Xkicheckbonus:10",
+        "Xkicheckbonus:5",
+        "Xkicheckbonus:2",
+        "Xkicheckbonus:num",
+        "Xzonkbonus:10",
+        "Xzonkbonus:5",
+        "Xzonkbonus:2",
+        "Xmiabbonus:100",
+        "Xmiabbonus:50",
+        "Xmoonbonus:200",
+        "Xmoonbonus:100",
+        "Xmaxlevelbonus",
+        "Xsmallparty",
+        "Xgeometric:90",
+        "Xgeometric:80",
+        "Xgeometric:70",
+        "Xgeometric:60",
+        "Xgeometric:50",
+        "Xgeometric:40",
+        "Xgeometric:30",
+        "Xgeometric:20",
+        "Xgeometric:10",
+        "Xgeometric:0",
         "-prng:shuffle",
         "-prng:random",
         "-prng:consecutive",
@@ -1369,15 +1371,16 @@ const _FE_FLAGSPEC = {
         "-vanilla:fashion",
         "-vanilla:miabs",
         "-vanilla:giant",
-        "-z:physical",
-        "-z:physmag",
-        "-z:chaos",
-        "-z:lavosshell",
-        "-z:whichbang",
-        "-z:phaseshift",
-        "-z:nonerfs",
-        "-z:mustnerf",
-        "-z:vanillasprite",
+        "Zvanilla",
+        "Zphysical",
+        "Zphysmag",
+        "Zchaos",
+        "Zlavosshell",
+        "Zwhichbang",
+        "Zphaseshift",
+        "Znonerfs",
+        "Zmustnerf",
+        "Znocosplay",
         "-vintage",
         "-pushbtojump",
         "-doorsrando",
@@ -2630,72 +2633,74 @@ const _FE_FLAGSPEC = {
             "-starting:underground"
         ],
         [
-            "-fusoya:vanilla",
-            "-fusoya:location",
-            "-fusoya:sequential_p",
-            "-fusoya:sequential_r",
-            "-fusoya:nerfed"
+            "Fweighted",
+            "Fvanilla",
+            "Flocation",
+            "Fsequential:p",
+            "Fsequential:r",
+            "Fnerfed"
         ],
         [
-            "-fusoya:slowstart",
-            "-fusoya:unlearn"
+            "Fslowstart",
+            "Funlearn"
         ],
         [
-            "-agility:vanilla",
-            "-agility:slowest",
-            "-agility:fastest",
-            "-agility:average",
-            "-agility:median",
-            "-agility:random",
-            "-agility:monster",
-            "-agility:flat",
-            "-agility:750formula",
-            "-agility:anchor7",
-            "-agility:anchor27",
-            "-agility:anchor28",
-            "-agility:anchor41",
-            "-agility:anchor42"
+            "Aagnostic",
+            "Avanilla",
+            "Aslowest",
+            "Afastest",
+            "Aaverage",
+            "Amedian",
+            "Arandom",
+            "Amonster",
+            "Aflat",
+            "A750formula",
+            "Aanchor:7",
+            "Aanchor:27",
+            "Aanchor:28",
+            "Aanchor:41",
+            "Aanchor:42"
         ],
         [
-            "-agility:scale1",
-            "-agility:scale10"
+            "Ascale:1",
+            "Ascale:10"
         ],
         [
-            "-exp:objectivebonus25",
-            "-exp:objectivebonus10",
-            "-exp:objectivebonus5",
-            "-exp:objectivebonus_num"
+            "Xobjectivebonus:25",
+            "Xobjectivebonus:10",
+            "Xobjectivebonus:5",
+            "Xobjectivebonus:num"
         ],
         [
-            "-exp:kicheckbonus10",
-            "-exp:kicheckbonus5",
-            "-exp:kicheckbonus2",
-            "-exp:kicheckbonus_num"
+            "Xkicheckbonus:10",
+            "Xkicheckbonus:5",
+            "Xkicheckbonus:2",
+            "Xkicheckbonus:num"
         ],
         [
-            "-exp:zonkbonus10",
-            "-exp:zonkbonus5",
-            "-exp:zonkbonus2"
+            "Xzonkbonus:10",
+            "Xzonkbonus:5",
+            "Xzonkbonus:2"
         ],
         [
-            "-exp:miabbonus100",
-            "-exp:miabbonus50"
+            "Xmiabbonus:100",
+            "Xmiabbonus:50"
         ],
         [
-            "-exp:moonbonus200",
-            "-exp:moonbonus100"
+            "Xmoonbonus:200",
+            "Xmoonbonus:100"
         ],
         [
-            "-exp:geometric90",
-            "-exp:geometric80",
-            "-exp:geometric70",
-            "-exp:geometric60",
-            "-exp:geometric50",
-            "-exp:geometric40",
-            "-exp:geometric30",
-            "-exp:geometric20",
-            "-exp:geometric10",
-            "-exp:geometric0"
+            "Xgeometric:90",
+            "Xgeometric:80",
+            "Xgeometric:70",
+            "Xgeometric:60",
+            "Xgeometric:50",
+            "Xgeometric:40",
+            "Xgeometric:30",
+            "Xgeometric:20",
+            "Xgeometric:10",
+            "Xgeometric:0"
         ],
         [
             "-prng:shuffle",
@@ -2704,14 +2709,15 @@ const _FE_FLAGSPEC = {
             "-prng:mostlysingle"
         ],
         [
-            "-z:physical",
-            "-z:physmag",
-            "-z:chaos",
-            "-z:lavosshell"
+            "Zvanilla",
+            "Zphysical",
+            "Zphysmag",
+            "Zchaos",
+            "Zlavosshell"
         ],
         [
-            "-z:nonerfs",
-            "-z:mustnerf"
+            "Znonerfs",
+            "Zmustnerf"
         ],
         [
             "-doorsrando",
@@ -10477,163 +10483,163 @@ const _FE_FLAGSPEC = {
             "value": 2
         },
         {
-            "flag": "-fusoya:vanilla",
+            "flag": "Fvanilla",
             "offset": 437,
             "size": 3,
             "value": 1
         },
         {
-            "flag": "-fusoya:location",
+            "flag": "Flocation",
             "offset": 437,
             "size": 3,
             "value": 2
         },
         {
-            "flag": "-fusoya:sequential_p",
+            "flag": "Fsequential:p",
             "offset": 437,
             "size": 3,
             "value": 3
         },
         {
-            "flag": "-fusoya:sequential_r",
+            "flag": "Fsequential:r",
             "offset": 437,
             "size": 3,
             "value": 4
         },
         {
-            "flag": "-fusoya:nerfed",
+            "flag": "Fnerfed",
             "offset": 437,
             "size": 3,
             "value": 5
         },
         {
-            "flag": "-fusoya:slowstart",
+            "flag": "Fslowstart",
             "offset": 440,
             "size": 2,
             "value": 1
         },
         {
-            "flag": "-fusoya:unlearn",
+            "flag": "Funlearn",
             "offset": 440,
             "size": 2,
             "value": 2
         },
         {
-            "flag": "-fusoya:maybe",
+            "flag": "Fmaybe",
             "offset": 442,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-fusoya:uncapped",
+            "flag": "Funcapped",
             "offset": 443,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-fusoya:randomhp",
+            "flag": "Frandomhp",
             "offset": 444,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-fusoya:omnimage",
+            "flag": "Fomnimage",
             "offset": 445,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-agility:vanilla",
+            "flag": "Avanilla",
             "offset": 446,
             "size": 4,
             "value": 1
         },
         {
-            "flag": "-agility:slowest",
+            "flag": "Aslowest",
             "offset": 446,
             "size": 4,
             "value": 2
         },
         {
-            "flag": "-agility:fastest",
+            "flag": "Afastest",
             "offset": 446,
             "size": 4,
             "value": 3
         },
         {
-            "flag": "-agility:average",
+            "flag": "Aaverage",
             "offset": 446,
             "size": 4,
             "value": 4
         },
         {
-            "flag": "-agility:median",
+            "flag": "Amedian",
             "offset": 446,
             "size": 4,
             "value": 5
         },
         {
-            "flag": "-agility:random",
+            "flag": "Arandom",
             "offset": 446,
             "size": 4,
             "value": 6
         },
         {
-            "flag": "-agility:monster",
+            "flag": "Amonster",
             "offset": 446,
             "size": 4,
             "value": 7
         },
         {
-            "flag": "-agility:flat",
+            "flag": "Aflat",
             "offset": 446,
             "size": 4,
             "value": 8
         },
         {
-            "flag": "-agility:750formula",
+            "flag": "A750formula",
             "offset": 446,
             "size": 4,
             "value": 9
         },
         {
-            "flag": "-agility:anchor7",
+            "flag": "Aanchor:7",
             "offset": 446,
             "size": 4,
             "value": 10
         },
         {
-            "flag": "-agility:anchor27",
+            "flag": "Aanchor:27",
             "offset": 446,
             "size": 4,
             "value": 11
         },
         {
-            "flag": "-agility:anchor28",
+            "flag": "Aanchor:28",
             "offset": 446,
             "size": 4,
             "value": 12
         },
         {
-            "flag": "-agility:anchor41",
+            "flag": "Aanchor:41",
             "offset": 446,
             "size": 4,
             "value": 13
         },
         {
-            "flag": "-agility:anchor42",
+            "flag": "Aanchor:42",
             "offset": 446,
             "size": 4,
             "value": 14
         },
         {
-            "flag": "-agility:scale1",
+            "flag": "Ascale:1",
             "offset": 450,
             "size": 2,
             "value": 1
         },
         {
-            "flag": "-agility:scale10",
+            "flag": "Ascale:10",
             "offset": 450,
             "size": 2,
             "value": 2
@@ -10645,187 +10651,187 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "-exp:split",
+            "flag": "Xsplit",
             "offset": 453,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-exp:noboost",
+            "flag": "Xnoboost",
             "offset": 454,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-exp:nokeybonus",
+            "flag": "Xnokeybonus",
             "offset": 455,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-exp:crystalbonus",
+            "flag": "Xcrystalbonus",
             "offset": 456,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-exp:objectivebonus25",
+            "flag": "Xobjectivebonus:25",
             "offset": 457,
             "size": 3,
             "value": 1
         },
         {
-            "flag": "-exp:objectivebonus10",
+            "flag": "Xobjectivebonus:10",
             "offset": 457,
             "size": 3,
             "value": 2
         },
         {
-            "flag": "-exp:objectivebonus5",
+            "flag": "Xobjectivebonus:5",
             "offset": 457,
             "size": 3,
             "value": 3
         },
         {
-            "flag": "-exp:objectivebonus_num",
+            "flag": "Xobjectivebonus:num",
             "offset": 457,
             "size": 3,
             "value": 4
         },
         {
-            "flag": "-exp:kicheckbonus10",
+            "flag": "Xkicheckbonus:10",
             "offset": 460,
             "size": 3,
             "value": 1
         },
         {
-            "flag": "-exp:kicheckbonus5",
+            "flag": "Xkicheckbonus:5",
             "offset": 460,
             "size": 3,
             "value": 2
         },
         {
-            "flag": "-exp:kicheckbonus2",
+            "flag": "Xkicheckbonus:2",
             "offset": 460,
             "size": 3,
             "value": 3
         },
         {
-            "flag": "-exp:kicheckbonus_num",
+            "flag": "Xkicheckbonus:num",
             "offset": 460,
             "size": 3,
             "value": 4
         },
         {
-            "flag": "-exp:zonkbonus10",
+            "flag": "Xzonkbonus:10",
             "offset": 463,
             "size": 2,
             "value": 1
         },
         {
-            "flag": "-exp:zonkbonus5",
+            "flag": "Xzonkbonus:5",
             "offset": 463,
             "size": 2,
             "value": 2
         },
         {
-            "flag": "-exp:zonkbonus2",
+            "flag": "Xzonkbonus:2",
             "offset": 463,
             "size": 2,
             "value": 3
         },
         {
-            "flag": "-exp:miabbonus100",
+            "flag": "Xmiabbonus:100",
             "offset": 465,
             "size": 2,
             "value": 1
         },
         {
-            "flag": "-exp:miabbonus50",
+            "flag": "Xmiabbonus:50",
             "offset": 465,
             "size": 2,
             "value": 2
         },
         {
-            "flag": "-exp:moonbonus200",
+            "flag": "Xmoonbonus:200",
             "offset": 467,
             "size": 2,
             "value": 1
         },
         {
-            "flag": "-exp:moonbonus100",
+            "flag": "Xmoonbonus:100",
             "offset": 467,
             "size": 2,
             "value": 2
         },
         {
-            "flag": "-exp:maxlevelbonus",
+            "flag": "Xmaxlevelbonus",
             "offset": 469,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-exp:smallparty",
+            "flag": "Xsmallparty",
             "offset": 470,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-exp:geometric90",
+            "flag": "Xgeometric:90",
             "offset": 471,
             "size": 4,
             "value": 1
         },
         {
-            "flag": "-exp:geometric80",
+            "flag": "Xgeometric:80",
             "offset": 471,
             "size": 4,
             "value": 2
         },
         {
-            "flag": "-exp:geometric70",
+            "flag": "Xgeometric:70",
             "offset": 471,
             "size": 4,
             "value": 3
         },
         {
-            "flag": "-exp:geometric60",
+            "flag": "Xgeometric:60",
             "offset": 471,
             "size": 4,
             "value": 4
         },
         {
-            "flag": "-exp:geometric50",
+            "flag": "Xgeometric:50",
             "offset": 471,
             "size": 4,
             "value": 5
         },
         {
-            "flag": "-exp:geometric40",
+            "flag": "Xgeometric:40",
             "offset": 471,
             "size": 4,
             "value": 6
         },
         {
-            "flag": "-exp:geometric30",
+            "flag": "Xgeometric:30",
             "offset": 471,
             "size": 4,
             "value": 7
         },
         {
-            "flag": "-exp:geometric20",
+            "flag": "Xgeometric:20",
             "offset": 471,
             "size": 4,
             "value": 8
         },
         {
-            "flag": "-exp:geometric10",
+            "flag": "Xgeometric:10",
             "offset": 471,
             "size": 4,
             "value": 9
         },
         {
-            "flag": "-exp:geometric0",
+            "flag": "Xgeometric:0",
             "offset": 471,
             "size": 4,
             "value": 10
@@ -10891,55 +10897,55 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "-z:physical",
+            "flag": "Zphysical",
             "offset": 484,
             "size": 3,
             "value": 1
         },
         {
-            "flag": "-z:physmag",
+            "flag": "Zphysmag",
             "offset": 484,
             "size": 3,
             "value": 2
         },
         {
-            "flag": "-z:chaos",
+            "flag": "Zchaos",
             "offset": 484,
             "size": 3,
             "value": 3
         },
         {
-            "flag": "-z:lavosshell",
+            "flag": "Zlavosshell",
             "offset": 484,
             "size": 3,
             "value": 4
         },
         {
-            "flag": "-z:whichbang",
+            "flag": "Zwhichbang",
             "offset": 487,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-z:phaseshift",
+            "flag": "Zphaseshift",
             "offset": 488,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-z:nonerfs",
+            "flag": "Znonerfs",
             "offset": 489,
             "size": 2,
             "value": 1
         },
         {
-            "flag": "-z:mustnerf",
+            "flag": "Zmustnerf",
             "offset": 489,
             "size": 2,
             "value": 2
         },
         {
-            "flag": "-z:vanillasprite",
+            "flag": "Znocosplay",
             "offset": 491,
             "size": 1,
             "value": 1
@@ -12431,6 +12437,107 @@ const _FE_FLAGSPEC = {
                 "Gsylph",
                 "Gbackrow",
                 "G64"
+            ]
+        ],
+        "Fweighted": [
+            "and",
+            [
+                "not",
+                "Fvanilla"
+            ],
+            [
+                "not",
+                "Flocation"
+            ],
+            [
+                "not",
+                "Fsequential:p"
+            ],
+            [
+                "not",
+                "Fsequential:r"
+            ],
+            [
+                "not",
+                "Fnerfed"
+            ]
+        ],
+        "Aagnostic": [
+            "and",
+            [
+                "not",
+                "Avanilla"
+            ],
+            [
+                "not",
+                "Aslowest"
+            ],
+            [
+                "not",
+                "Afastest"
+            ],
+            [
+                "not",
+                "Aaverage"
+            ],
+            [
+                "not",
+                "Amedian"
+            ],
+            [
+                "not",
+                "Arandom"
+            ],
+            [
+                "not",
+                "Amonster"
+            ],
+            [
+                "not",
+                "Aflat"
+            ],
+            [
+                "not",
+                "A750formula"
+            ],
+            [
+                "not",
+                "Aanchor:7"
+            ],
+            [
+                "not",
+                "Aanchor:27"
+            ],
+            [
+                "not",
+                "Aanchor:28"
+            ],
+            [
+                "not",
+                "Aanchor:41"
+            ],
+            [
+                "not",
+                "Aanchor:42"
+            ]
+        ],
+        "Zvanilla": [
+            "and",
+            [
+                "not",
+                "Zphysical"
+            ],
+            [
+                "not",
+                "Zphysmag"
+            ],
+            [
+                "not",
+                "Zchaos"
+            ],
+            [
+                "not",
+                "Zlavosshell"
             ]
         ]
     }

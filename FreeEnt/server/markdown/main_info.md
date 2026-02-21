@@ -166,7 +166,7 @@ Under `Cthrift[n]`, where `n` can be from 2 to 5, characters will start with a f
 - Design/Programming: Antidale (with some tweaks by ScytheMarshall)
 - Locations: reordered_spells.f4c, update_spells.py, updated_spells.csvdb, fusoya_rando.py, mtordeals.f4c
 
-These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. However, if `-fusoya:unlearn` is active, then Fu will simply start with Weak and lose it as usual for that flag. 
+These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. However, if `Funlearn` is active, then Fu will simply start with Weak and lose it as usual for that flag. 
 
 The other details of the changes are as follows:
 
@@ -833,61 +833,65 @@ Or, at least, these flags _would_ do that, but because Doors Rando is a thing on
 
 ## FuSoYa Flags
 
-- Idea: ScytheMarshall (except `-fusoya:slowstart`, `-fusoya:unlearn`, `-fusoya:omnimage`)
+- Idea: ScytheMarshall (except `Fslowstart`, `Funlearn`, `Fomnimage`)
 - Design/Programming: ScytheMarshall
 - Locations: fusoya_rando.py, fusoya_challenge.f4c; some wacky f4c files where command menus change
 
-These flags are intended to change how FuSoYa's spell-learning works, with the goal of making the character more balanced and less of an instant exclusion from "competitive" flagsets. 
+These flags are intended to change how FuSoYa's spell-learning works, with the goal of making the character more balanced and less of an instant exclusion from "competitive" flagsets. (Note that on v4.6.4.Gale, these flags were renamed to `F` from `-fusoya:`.)
 
-### `-fusoya:vanilla` {: .h6 }
+### `Fweighted {: .h6 }
+
+This flag is just the normal FE FuSoYa behaviour given a flag name (for UI purposes, and to point out to new players that Fu is not vanilla anymore).
+
+### `Fvanilla` {: .h6 }
 
 This flag is just the `-vanilla:fusoya` flag but renamed; Fu starts at full power with all spells learned.
 
-### `-fusoya:sequential_p` {: .h6 }
+### `Fsequential:p` {: .h6 }
 
 Under this flag, FuSoYa learns spells in a fixed order: the order in which Porom and Palom learn their spells by level-up. If spells are learned at the same level, there is an arbitrary choice for which spells come first (mostly for minor balancing).
 
-### `-fusoya:sequential_r` {: .h6 }
+### `Fsequential:r` {: .h6 }
 
 - Idea: Deathlike
 
 Under this flag, FuSoYa learns spells in a fixed order: the order in which Rosa and Rydia learn their spells by level-up. If spells are learned at the same level, there is an arbitrary choice for which spells come first (mostly for minor balancing). Since Rosa and Rydia don't learn all of their spells by level-up (no Exit, Fire1, Fire/Ice/Lit2), FuSoYa will not learn the missing spells.
 
-### `-fusoya:location` {: .h6 }
+### `Flocation` {: .h6 }
 
 Under this flag, FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.
 
 Spells are broken into four tiers based on power/usefulness and boss spots are divided into eight tiers based on strength/out-of-the-way-ness. Each spell tier has a weighting for which boss spots spells can go; the stronger spells are weighted to go in the more powerful boss spots. Each spell is then assigned to a boss spot until all the spells are used up, and then it repeats, going until all the boss spots are assigned three spells (skipping spells that cannot be placed into a remaining boss spot due to weighting restrictions).
 
-### `-fusoya:nerfed` {: .h6 }
+### `Fnerfed` {: .h6 }
 
 FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual. The spells chosen are the same as the spells that FuSoYa would start with on the old F1 FuSoYa challenge flag (where he would get the rest of his spells at Ordeals).
 
-### `-fusoya:maybe` {: .h6 }
+### `Fmaybe` {: .h6 }
 
 FuSoYa will not necessarily learn every spell. Each spell is independently kept with a probability of 85%. Vanilla and nerfed FuSoYa will have possibly fewer starting spells and other FuSoYas will learn fewer spells/learn some spells a bit earlier.
 
-### `-fusoya:uncapped` {: .h6 }
+### `Funcapped` {: .h6 }
 
-FuSoYa will gain, or start with, up to 3900 HP (500 plus 100 HP for every boss in the seed). This flag interacts with `Bremove` and `-fusoya:omnimage` to lower the total HP threshold.
+FuSoYa will gain, or start with, up to 3900 HP (500 plus 100 HP for every boss in the seed). This flag interacts with `Bremove` and `Fomnimage` to lower the total HP threshold.
 
-### `-fusoya:slowstart` {: h6 }
+### `Fslowstart` {: h6 }
 
 - Idea: Guerin
 
 FuSoYa will skip learning spells and gaining HP after three of the first six and two of the next six boss fights. The boss fight numbers are random each seed. Fu will eventually learn all available spells, just five bosses later than usual.
 
-### `-fusoya:randomhp` {: h6 }
+### `Frandomhp` {: h6 }
 
 FuSoYa will gain the same amount of HP in the same amount of levels, but will possibly not gain any HP after some bosses and more than 100 HP after some bosses. The HP gains will be integer multiples of 100. 
 
-### `-fusoya:unlearn` {: h6 }
+### `Funlearn` {: h6 }
 
 - Idea: Galeswift
 
-FuSoYa will start with all possible spells and then lose spells after each boss fight until he's down to six spells. Spell loss happens in reverse order of the usual spell learning, so he will lose more powerful spells earlier; the exception is under `-fusoya:location`, where he loses the spells he would gain at those bosses (meaning he loses more powerful spells after more powerful boss spots).
+FuSoYa will start with all possible spells and then lose spells after each boss fight until he's down to six spells. Spell loss happens in reverse order of the usual spell learning, so he will lose more powerful spells earlier; the exception is under `Flocation`, where he loses the spells he would gain at those bosses (meaning he loses more powerful spells after more powerful boss spots).
 
-### `-fusoya:omnimage` {: h6 }
+### `Fomnimage` {: h6 }
 
 - Idea: Guerin
 
@@ -895,7 +899,7 @@ FuSoYa is given a third spellset potentially containing every non-Black/White sp
 
 ## Agility Flags
 
-- Idea: ScytheMarshall (except `-agility:random`, `-agility:750formula`, and `-speedmodbalance`)
+- Idea: ScytheMarshall (except `Arandom`, `A750formula`, and `-speedmodbalance`)
 - Design/Programming: ScytheMarshall (except for the above)
 - Locations: agility.f4c (mostly)
 
@@ -903,41 +907,47 @@ These flags are for changing how the agility system works. Some flags choose dif
 
 For agility flags that tend to increase the base ATB, the Count spell duration is lengthened to make it significantly more reasonable (otherwise back attack Plague is nearly impossible). 
 
-### `-agility:vanilla` {: .h6 }
+Up until v4.6.4.Gale, these flags were called `-agility:` instead of `F`.
+
+### `Aagnostic` {: .h6 }
+
+This flag is just the default FE agility anchoring behaviour (with the highest priority slot as the anchor) given a flag name.
+
+### `Avanilla` {: .h6 }
 
 This flag is simply `-vanilla:agility` renamed (so your anchor will always be the Cecil in the earliest slot, or else the character in the earliest slot).
 
-### `-agility:slowest` {: .h6 }
+### `Aslowest` {: .h6 }
 
 The character with the lowest agility stat is chosen as the anchor (including 0 Agility, which could potentially be advantageous).
 
-### `-agility:fastest` {: .h6 }
+### `Afastest` {: .h6 }
 
 The character with the largest agility stat is chosen as the anchor. This flag doubles the Count timer.
 
-### `-agility:average` {: .h6 }
+### `Aaverage` {: .h6 }
 
 The average agility of your party (rounded down, of course) is the value used for anchoring. Empty slots do not count.
 
-### `-agility:median` {: .h6 }
+### `Amedian` {: .h6 }
 
 The median agility of your party (the agility stat in the middle, or the lower of the two in the middle for an even number of characters) is the value used for anchoring. Empty slots do not count.
 
-### `-agility:random` {: .h6 }
+### `Arandom` {: .h6 }
 
 - Idea: Found in rivers's dev ideas document
 
 The anchor slot is randomly determined (like Afflicted, it is fixed for each formation); for that battle, the agility anchor is chosen by taking the first non-empty party slot starting at the randomly determined slot, cycling around to lower party slots if necessary.
 
-### `-agility:monster` {: .h6 }
+### `Amonster` {: .h6 }
 
 The average agility of the _monsters_ in the battle (including pre-swooned/hidden monsters) is the value used for anchoring. This flag is incredibly dangerous, because most later-game monsters are much faster than your party members.
 
-### `-agility:flat` {: .h6 }
+### `Aflat` {: .h6 }
 
 Every character and monster will have the same base ATB (5 ticks, unless scaled by another flag), regardless of their agility stat. 
 
-### `-agility:750formula` {: .h6 }
+### `A750formula` {: .h6 }
 
 - Idea: S3
 - Design: S3
@@ -946,11 +956,11 @@ Every character and monster will have the same base ATB (5 ticks, unless scaled 
 
 The agility formula is completely reworked to be dependent on the absolute speed stat instead of relative to an anchor. The base ATB is now (15 * 5 * 10) / (Agi + 32) ticks, where the 5 can be scaled up to 10 or down to 1 by another flag (the 750 in the flag name comes from the numerator). This flag will tend to increase the number of empty ticks/ticks between actions. This flag triples the Count timer.
 
-### `-agility:anchor[7/27/28/41/42]` {: .h6 }
+### `Aanchor:[7/27/28/41/42]` {: .h6 }
 
 The specified value will be the agility value used for anchoring. The values are chosen to either let most characters at endgame level be RA1 (via 7), force Zeromus to be RA2 or RA3 (28, 42), or force Zeromus to be the worst possible RA1 or RA2 (27, 41). Other fights, especially at lower levels, may be very slow or difficult. The Count timer is doubled for 27/28 and tripled for 41/42.
 
-### `-agility:scale[1/10]` {: .h6 }
+### `Ascale:[1/10]` {: .h6 }
 
 This flag will scale the base ATB for the anchor up to 10 ticks or down to 1 tick (which also impacts flat agility and the 750formula agility). Battles will either feel very slow or very fast. Under 10 tick scaling, the Count timer is doubled.
 
@@ -968,43 +978,43 @@ This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now inc
 - Design/Programming: ScytheMarshall
 - Locations: experience_acceleration.f4c, generator.py
 
-These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. 
+These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags (on v4.x), all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `Xcrystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. Up to v4.6.4.Gale, these flags were still called `-exp:`, but now they follow the same naming convention as on the alpha (`X`).
 
-### `-exp:crystalbonus` {: .h6 }
+### `Xcrystalbonus` {: .h6 }
 
 Earn double experience after obtaining the Crystal.
 
-### `-exp:objectivebonus[25/10/_num]` {: .h6 }
+### `Xobjectivebonus:[25/10/5/num]` {: .h6 }
 
-Earn extra experience based on how many objectives you have completed up until the end of the battle (not including any potential objectives you complete _after_ the battle ends). The options are 25% per objective (25), 10% per objective (10), and a percentage depending on the percentage of the available objectives you have completed (_num). For example, if there are 7 objectives in the seed and you complete 3 of them, then you will earn 42% bonus experience (no matter how many objectives you need to complete to get the objective completion reward). This flag is forced off if there are no objectives,
+Earn extra experience based on how many objectives you have completed up until the end of the battle (not including any potential objectives you complete _after_ the battle ends). The options are 25% per objective (25), 10% per objective (10), 5% per objective (5) and a percentage depending on the percentage of the available objectives you have completed (_num). For example, if there are 7 objectives in the seed and you complete 3 of them, then you will earn 42% bonus experience (no matter how many objectives you need to complete to get the objective completion reward). This flag is forced off if there are no objectives,
 
-### `-exp:kicheckbonus[10/5/2/_num]` {: .h6 }
+### `Xkicheckbonus:[10/5/2/_num]` {: .h6 }
 
 Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num). The starting key item check does not count towards the number of checks you have completed. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
 
-### `-exp:zonkbonus[10/5/2]` {: .h6 }
+### `Xzonkbonus:[10/5/2]` {: .h6 }
 
 A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had. The starting key item check, if it is a zonk, does not count towards the number of zonks (because you cannot choose to do this check or not). The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
 
-### `-exp:miabbonus[100/50]` {: .h6 }
+### `Xmiabbonus:[100/50]` {: .h6 }
 
 Under this flag, MIAB encounters award double or 1.5 times the usual EXP.
 
-### `-exp:moonbonus[200/100]` {: .h6 }
+### `Xmoonbonus:[200/100]` {: .h6 }
 
 Under this flag, encounters on the moon (the surface, Cave Bahamut, or LST) award double or triple the usual EXP.
 
-### `-exp:maxlevelbonus` {: .h6 }
+### `Xmaxlevelbonus` {: .h6 }
 
 Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5). For example, a pack of 3 Warlocks has smallest monster level 73, so if your largest level is 25 (base level Edge), then we compute 5 + 2*25 = 55, and take 73-55 = 18. 18 divided by 5 is 3.6, so there are 3 deficits of 5, so you would receive 3 * 20% = 60% bonus experience.
 
-### `-exp:smallparty` {: .h6 }
+### `Xsmallparty` {: .h6 }
 
 Under this flag, encounters give more EXP when your party is not full. If you can have `N` characters and you don't, then you get `6-N` bonuses of 10%, which sums over `N` from 1 to the maximum party size. For example, if you have 2 characters but you could have 5, then you get 1+2+3 = 6 bonuses of 10% (with contributions from `N` being 5,4,3), for 60% total bonus EXP. 
 
 Since the battle spoils function runs after permadeath/etc. occurs, any characters that leave your party do not count as being part of your party for the purposes of this calculation.
 
-### `-exp:geometric[90/80/.../10/0]` {: .h6 }
+### `Xgeometric:[90/80/.../10/0]` {: .h6 }
 
 In vanilla FF4, each instance of a monster type killed in battle gives the same amount of EXP; there are at most three monster types, and their exp gains get added up separately. (Meaning that the graphical position of the monster doesn't matter; e.g. if there are three Warlocks on screen, they are all just Warlocks, independent of "which" Warlocks they are.) Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not per graphical position in battle (as above).
 
@@ -1044,51 +1054,55 @@ This flag replaces the PRNG table with one random integer chosen from 0 to 255. 
 
 These flags handle the randomization of Zeromus and the relevant battle scripts. The intent is to refresh the Zeromus fight experience, so that there's something new to experience at the end of the game.
 
-There are four main script change flags: `-z:physical`, `-z:physmag`, `-z:chaos`, and `-z:lavosshell`. Within those flags are two other flags that modify the scripts: `-z:whichbang` and `-z:phaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `-z:nonerfs` and `-z:mustnerf`.
+There are four main script change flags: `Zphysical`, `Zphysmag`, `Zchaos`, and `Zlavosshell`. Within those flags are two other flags that modify the scripts: `Zwhichbang` and `Zphaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `Znonerfs` and `Zmustnerf`.
 
-### `-z:physical` {: .h6 }
+### `Zvanilla` {: .h6 }
+
+This flag just gives a name to the usual vanilla Zeromus fight script.
+
+### `Zphysical` {: .h6 }
 
 Replaces Big Bang and Meteo with Dark Wave, direct Virus with Needle-all, and direct Nuke with Jump. Yes, thanks to the Kain cutscene fight in vanilla, monsters can Jump. The counter attacks are changed so that Fight, Aim, Jump, and Dart are countered by Fight, Counter-all, a very strong Fight, and a very strong single-target Counter; the latter two do not nerf Dark Wave but the first two do. Zeromus's attack stats are set/changed so that damage is roughly equivalent to the vanilla damage, but since Dark Wave is unblockable, it's possibly much more dangerous.
 
 It turns out that spells do not correctly retarget when the only monsters left in the battle are in the back row, so the game softlocks. Normally this isn't an issue, since monsters can't temporarily disappear from battle (and Cecil does not have spells in the cutscene fight), but since Zeromus is Jumping, we need to patch this behaviour.
 
-### `-z:physmag` {: .h6 }
+### `Zphysmag` {: .h6 }
 
-50% of the time, this flag does nothing. The other 50% of the time, Zeromus gets the physical scripting from `-z:physical`. The point of this flag is to introduce uncertainty as to what Zeromus is going to do.
+50% of the time, this flag does nothing. The other 50% of the time, Zeromus gets the physical scripting from `Zphysical`. The point of this flag is to introduce uncertainty as to what Zeromus is going to do.
 
-### `-z:chaos` {: .h6 }
+### `Zchaos` {: .h6 }
 
 This flag replaces Zeromus's three main attack phases with three new phases consisting of 2-5 attacks (1-3 for the third phase), floor(n/2) of which are "shake" attacks (stronger target-all nerfable attacks preceded by a shake, just like Big Bang; no shakes in third phase), and at most two Black Holes potentially following some attacks. Each phase has at least one damaging move, so that you will eventually lose the battle if you do nothing. The counter attacks are chosen at random, though the triggers for those counters are unchanged.
 
 The flag is named after Chaos, the final boss of FF1 and notorious casino simulator in speedruns.
 
-### `-z:lavosshell` {: .h6 }
+### `Zlavosshell` {: .h6 }
 
 This flag replaces Zeromus's three main attack phases with three random scripts from other monsters (or their reactions), as long as those phases do not modify condition/reaction flags and do not automatically end the battle (among other things). These scripts will be able to defeat you if you do nothing. Some of these scripts are _significantly_ more dangerous than others.
 
 The flag is named after the Lavos Shell, the first form of the final boss of Chrono Trigger (which copies bosses in increasing order of power throughout the game before swapping to its own attack script).
 
-### `-z:whichbang` {: .h6 }
+### `Zwhichbang` {: .h6 }
 
 For Z scripts that include Big Bangs, this flag replaces each instance of Big Bang with a similar target-all spell chosen from a small list (including Big Bang itself). It could be a different spell for each Big Bang instance.
 
-### `-z:phaseshift` {: .h6 }
+### `Zphaseshift` {: .h6 }
 
 For the non-random-phase scripts, this flag shuffles the order of the three attack phases, so you could see Meteo phase first, then Virus phase, then Nuke phase. The HP thresholds and reactions do not change.
 
-### `-z:nonerfs` {: .h6 }
+### `Znonerfs` {: .h6 }
 
 This flag places chains around every Big Bang type attack that Zeromus does, so that you cannot modify the stat used for the attack (i.e. you cannot nerf Big Bangs). No extra turns have been added, so Zeromus will be significantly more dangerous.
 
-### `-z:mustnerf` {: .h6 }
+### `Zmustnerf` {: .h6 }
 
 This flag changes Zeromus's base spell power to 255 (or attack stats to (255,99,255), if physical scripting is enabled) and changes the scripted stat changes for Big Bang type attacks to be 253 for spell power and (255,99,255) for physical scripting. In this way, Zeromus will do 9999 damage almost guaranteed, unless you nerf the Big Bangs/Dark Waves.
 
 Dark Wave is normally bugged; it does not cap its damage, so it breaks the graphical display/can heal by overflowing 14-bit damage. So, we need to patch that issue.
 
-### `-z:vanillasprite` {: .h6 }
+### `Znocosplay` {: .h6 }
 
-This flag is just `-vanilla:z` renamed.
+This flag is just `-vanilla:z` renamed; prior to v4.6.4.Gale, this flag was called `-z:vanillasprite`.
 
 ## Wacky Flags
 
@@ -1102,7 +1116,7 @@ Some existing wacky flags have been modified:
 - On Afflicted, Heal is no longer learned via level-up (that was a bug).
 - On Is This Even Randomized?, Kick/Dark Wave/Dart/Raid now all obey the damage rounding.
 - On Misspelled, spells learned directly before an axtor has been initialized get misspelled correctly. The spell names used in textboxes are also misspelled correctly. In combination with Afflicted and Friendly Fire, the spells filtered out are those that *cast* the forbidden spells (not the nominal forbidden spells).
-- On Misspelled, when playing with `-fusoya:omnimage` the spells Comet and Flare *will* be Misspelled now (as of the bugfix patch on v4.6.3). Twin will still cast those spells; they will just have a different name and cost potentially different MP amounts.
+- On Misspelled, when playing with `Fomnimage` the spells Comet and Flare *will* be Misspelled now (as of the bugfix patch on v4.6.3). Twin will still cast those spells; they will just have a different name and cost potentially different MP amounts.
 
 ### `-wacky:mirrormirror` - Mirror, Mirror, On the Wall {: .h6 }
 
@@ -1285,4 +1299,4 @@ The rough probability of getting a particular spell is obtained by looking at th
 
 This flag changes FuSoYa's Regen command to heal MP instead (barring the Tellah Maneuver wacky). The amount of healing and duration depends on which wacky flags are in play: normally it will be 10 MP every 5 ticks for roughly 10x(Fu's RA) ticks. The Tellah Maneuver wacky makes that 50 HP instead. The 3 Point Challenge wacky makes it 1 MP and with a much longer duration/wait between each regen tick.
 
-Obviously this flag doesn't really do anything when paired with `-fusoya:omnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.
+Obviously this flag doesn't really do anything when paired with `Fomnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.

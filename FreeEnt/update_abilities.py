@@ -33,7 +33,7 @@ def command_lists(env):
     # situations to care about:
     # -- command changes wackies (Darts, Musical, Klepto)
     # -- j-abilities
-    # -- added abilities from e.g. -tweak flags, -fusoya:omnimage
+    # -- added abilities from e.g. -tweak flags, Fomnimage
     # -- other flags that give/change ability lists
 
     # start with vanilla (non-J) command lists, minus #Item

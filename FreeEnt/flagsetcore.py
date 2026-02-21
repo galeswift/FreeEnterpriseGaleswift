@@ -515,14 +515,14 @@ class FlagLogicCore:
             self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni'])
 
         # add restrictions in case people try to fudge the fusoya flags
-        if flagset.has('-fusoya:slowstart') and flagset.has('-fusoya:uncapped'):
-            self._simple_disable(flagset, log, 'Uncapped FuSoYa cannot also have slowstart', ['-fusoya:slowstart'])
-        if flagset.has('-fusoya:location') and flagset.has('-fusoya:slowstart'):
-            self._simple_disable(flagset, log, 'Location FuSoYa cannot have slowstart', ['-fusoya:slowstart'])
-        if flagset.has('-fusoya:nerfed'):
-            self._simple_disable_regex(flagset, log, 'Nerfed FuSoYa cannot have slowstart or unlearn spells', r'^-fusoya:(slowstart|unlearn)')
-        if flagset.has('-fusoya:vanilla'):
-            self._simple_disable_regex(flagset, log, 'Vanilla FuSoYa cannot have his HP or spells change', r'^-fusoya:(slowstart|unlearn|randomhp)')
+        if flagset.has('Fslowstart') and flagset.has('Funcapped'):
+            self._simple_disable(flagset, log, 'Uncapped FuSoYa cannot also have slowstart', ['Fslowstart'])
+        if flagset.has('Flocation') and flagset.has('Fslowstart'):
+            self._simple_disable(flagset, log, 'Location FuSoYa cannot have slowstart', ['Fslowstart'])
+        if flagset.has('Fnerfed'):
+            self._simple_disable_regex(flagset, log, 'Nerfed FuSoYa cannot have slowstart or unlearn spells', r'^F(slowstart|unlearn)')
+        if flagset.has('Fvanilla'):
+            self._simple_disable_regex(flagset, log, 'Vanilla FuSoYa cannot have his HP or spells change', r'^F(slowstart|unlearn|randomhp)')
 
         if flagset.has('-monsterflee') and not flagset.has('-monsterevade'):
             flagset.set('-monsterevade')
@@ -550,11 +550,11 @@ class FlagLogicCore:
         if flagset.has_any('-starting:underground','-starting:blackchocobo'):
             self._lib.push(log, ['error', "Different starting location flags are not currently available; remove them and try again."])
 
-        if flagset.has('-z:physical') and flagset.has('-z:whichbang'):
-            self._simple_disable(flagset, log, 'No guaranteed Big Bangs in script', ['-z:whichbang'])
+        if flagset.has('Zphysical') and flagset.has('Zwhichbang'):
+            self._simple_disable(flagset, log, 'No guaranteed Big Bangs in script', ['Zwhichbang'])
 
-        if flagset.has_any('-z:chaos', '-z:lavosshell') and flagset.has('-z:phaseshift'):
-            self._simple_disable(flagset, log, 'Random phases take precedence over shuffled phases', ['-z:phaseshift'])
+        if flagset.has_any('Zchaos', 'Zlavosshell') and flagset.has('Zphaseshift'):
+            self._simple_disable(flagset, log, 'Random phases take precedence over shuffled phases', ['Zphaseshift'])
 
         # add in a couple other restrictions about Z fight stuff
 
@@ -576,7 +576,7 @@ class FlagLogicCore:
         # Objectives logic
         if flagset.has('Onone'):
             self._simple_disable_regex(flagset, log, 'No objectives set', r'^O(win|req):')
-            self._simple_disable_regex(flagset, log, 'No objectives set', r'^-exp:objectivebonus')
+            self._simple_disable_regex(flagset, log, 'No objectives set', r'^Xobjectivebonus')
         else:
             # Force Oreq:all if a req: flag is not specified
             if len(flagset.get_list(r'^Oreq:')) == 0:

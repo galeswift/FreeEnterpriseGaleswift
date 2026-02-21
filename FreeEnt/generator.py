@@ -771,24 +771,24 @@ def build(romfile, options, force_recompile=False):
         random_offset = env.rnd.randrange(0x100)
         env.add_substitution('random agility PRNG offset', f'#${random_offset:02X}')
 
-    scale_agility_mod = env.options.flags.get_suffix('-agility:scale') # either 1 or 10; 5 is default
+    scale_agility_mod = env.options.flags.get_suffix('Ascale:') # either 1 or 10; 5 is default
     if scale_agility_mod:
         scale_agility_mod = int(scale_agility_mod)
         env.add_substitution('scale agility parameter', f'#$00{10*scale_agility_mod:02X}')
         env.add_toggle('scale_agility')
 
-    fixed_anchor_agi = env.options.flags.get_suffix('-agility:anchor')
+    fixed_anchor_agi = env.options.flags.get_suffix('Aanchor:')
     if fixed_anchor_agi:
         fixed_anchor_agi = int(fixed_anchor_agi)
         env.add_toggle('fixed_anchor')
         env.add_substitution('fixed anchor agility', f'#${fixed_anchor_agi:02X}')
 
     count_timer = 2
-    if env.options.flags.get_suffix('-agility:scale') == '10':
+    if env.options.flags.get_suffix('Ascale:') == '10':
         count_timer *= 2
-    if env.options.flags.has_any('fastest_agility') or env.options.flags.get_suffix('-agility:anchor2'): # matches 27 or 28
+    if env.options.flags.has_any('fastest_agility') or env.options.flags.get_suffix('Aanchor:2'): # matches 27 or 28
         count_timer *= 2
-    elif env.options.flags.has_any('monster_agility', 'formula_agility') or env.options.flags.get_suffix('-agility:anchor4'): # matches 41 or 42
+    elif env.options.flags.has_any('monster_agility', 'formula_agility') or env.options.flags.get_suffix('Aanchor:4'): # matches 41 or 42
         count_timer *= 3
     if count_timer != 2:
         env.add_toggle('rescale_inner_count_timer') # goal: make Count not completely broken
@@ -799,7 +799,7 @@ def build(romfile, options, force_recompile=False):
 
     # experience flag substitutions and toggles
     # split, noboost, nokeyboost, crystalbonus, and maxlevelbonus are all handled directly via f4c scripts
-    exp_objective_bonus = env.options.flags.get_suffix('-exp:objectivebonus')
+    exp_objective_bonus = env.options.flags.get_suffix('Xobjectivebonus:')
     if exp_objective_bonus:
         if not (exp_objective_bonus == '_num'):
             exp_objective_bonus = 100 // int(exp_objective_bonus)
@@ -809,7 +809,7 @@ def build(romfile, options, force_recompile=False):
             env.add_substitution('experience objective bonus divisor', '#$' + num_obj)
         env.add_toggle('experience_objective_bonus')
 
-    exp_kicheck_bonus = env.options.flags.get_suffix('-exp:kicheckbonus')
+    exp_kicheck_bonus = env.options.flags.get_suffix('Xkicheckbonus:')
     if exp_kicheck_bonus:
         if not (exp_kicheck_bonus == '_num'):
             exp_kicheck_bonus = 100 // int(exp_kicheck_bonus)
@@ -820,7 +820,7 @@ def build(romfile, options, force_recompile=False):
             env.add_substitution('experience key item check bonus divisor', f'#${(num_kichecks-1):02X}')
         env.add_toggle('experience_kicheck_bonus')
 
-    exp_zonk_bonus = env.options.flags.get_suffix('-exp:zonkbonus')
+    exp_zonk_bonus = env.options.flags.get_suffix('Xzonkbonus:')
     if exp_zonk_bonus:
         exp_zonk_bonus = 100 // int(exp_zonk_bonus)
         # need to check for the starting key item here, using the rewards assignment;
@@ -832,19 +832,19 @@ def build(romfile, options, force_recompile=False):
         env.add_substitution('experience zonk bonus divisor', f'#${exp_zonk_bonus:02X}')
         env.add_toggle('experience_zonk_bonus')
 
-    exp_miab_bonus = env.options.flags.get_suffix('-exp:miabbonus')
+    exp_miab_bonus = env.options.flags.get_suffix('Xmiabbonus:')
     if exp_miab_bonus:
         exp_miab_bonus = int(exp_miab_bonus) // 50
         env.add_substitution('experience miab bonus multiplier', f'#${exp_miab_bonus:04X}')
         env.add_toggle('experience_miab_bonus')
 
-    exp_moon_bonus = env.options.flags.get_suffix('-exp:moonbonus')
+    exp_moon_bonus = env.options.flags.get_suffix('Xmoonbonus:')
     if exp_moon_bonus:
         exp_moon_bonus = int(exp_moon_bonus) // 100
         env.add_substitution('experience moon bonus multiplier', f'#${exp_moon_bonus:04X}')
         env.add_toggle('experience_moon_bonus')
 
-    exp_geometric_mod = env.options.flags.get_suffix('-exp:geometric')
+    exp_geometric_mod = env.options.flags.get_suffix('Xgeometric:')
     if exp_geometric_mod:
         exp_geometric_mod = int(exp_geometric_mod) // 10
         env.add_substitution('experience geometric numerator', f'        lda #${exp_geometric_mod:02X}')

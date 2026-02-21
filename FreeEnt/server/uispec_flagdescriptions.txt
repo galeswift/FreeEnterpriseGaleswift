@@ -825,41 +825,41 @@ Instead of starting with the Enterprise, start at Baron with Black Chocobos avai
 [-starting:dwarfcastle]
 Instead of starting at Baron with the Enterprise, start at Dwarf Castle with the Falcon. The Drill to get above ground is now a key item to be found and the Enterprise is not obtained upon completing the Super Cannon check.
 
-[@fusoya] 
+[Fweighted] 
 By default, Free Enterprise runs with the "FuSoYa Challenge", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.
 
-[-fusoya:vanilla] 
+[Fvanilla] 
 Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.
 
-[-fusoya:sequential_p] 
+[Fsequential:p] 
 Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.
 
-[-fusoya:sequential_r] 
+[Fsequential:r] 
 Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).
 
-[-fusoya:location] 
+[Flocation] 
 FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.
 
-[-fusoya:nerfed] 
+[Fnerfed] 
 FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.
 
-[-fusoya:slowstart]
+[Fslowstart]
 3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.
 
-[-fusoya:unlearn]
+[Funlearn]
 FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.
 
-[-fusoya:uncapped]
-FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>.
+[Funcapped]
+FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.
 
-[-fusoya:randomhp]
+[Frandomhp]
 Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP). 
 
-[-fusoya:maybe] 
+[Fmaybe] 
 Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.
 
-[-fusoya:omnimage]
-Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells).
+[Fomnimage]
+Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>Funcapped</em> or <em>Flocation</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells).
 
 [@doorsrando]
 Randomizes most doors in the game (including houses, etc).
@@ -896,30 +896,30 @@ Fighting the Sealed Cave boss is required before seeing the KI
     <li>(If a door goes somewhere you don't expect it to go, it was probably a "return" door, which takes you back to your previous location.)</li>
 </ul>
 
-[@agility]
-FF4 scales the speed of combat based on the agility stat of your party's "agility anchor". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). 
+[Aagnostic]
+FF4 scales the speed of combat based on the agility stat of your party's "agility anchor". In Free Enterprise, by default the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under the other flags, the anchoring system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). 
 
-Note that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.
+Note that any of these flags except for <em>Aagnostic</em> will override the <em>Chero</em> agility effect, if playing with the hero challenge.
 
-[-agility:vanilla]
+[Avanilla]
 In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present. 
 
-[-agility:fastest]
+[Afastest]
 This flag will double the Count timer.
 
-[-agility:average]
+[Aaverage]
 Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility.
 
-[-agility:random]
+[Arandom]
 Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.
 
-[-agility:monster]
+[Amonster]
 Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.
 
-[-agility:flat]
+[Aflat]
 Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled).
 
-[-agility:750formula]
+[A750formula]
 Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer.
 
 [@anchor]
@@ -934,28 +934,28 @@ In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided 
 [@exp]
 To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.
 
-[-exp:split]
+[Xsplit]
 Normally in Free Enterprise, earned EXP is not divided among the party, and each member receives the full amount. Set this flag to restore the original FF4 EXP distribution scheme (ie. earned EXP is divided among the surviving party members).
 
-[-exp:noboost]
+[Xnoboost]
 Normally in Free Enterprise, in a full party, low-level party members (at least 5 levels below the median level) earn double EXP. Set this flag to remove this bonus.
 
-[-exp:nokeybonus]
+[Xnokeybonus]
 By default in Free Enterprise, once 10 key items have been collected, earned EXP is doubled. Set this flag to remove this bonus.
 
-[-exp:crystalbonus]
+[Xcrystalbonus]
 Under this flag, characters earn double EXP once you obtain the Crystal.
 
 [@objectiveexp]
 Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each completed objective earns you more EXP from each battle.
 
-[-exp:objectivebonus_num]
+[Xobjectivebonus:num]
 The EXP bonus is 100% divided by the number of available objectives in the seed; e.g. with 7 objectives, each objective gives you about 14% extra EXP (subject to some truncation).
 
 [@kicheckexp]
 Normally, completing key item checks does not increase the amount of EXP received from battles. Under this flag, each completed key item check beyond the starting item earns you more EXP from each battle.
 
-[-exp:kicheckbonus_num]
+[Xkicheckbonus:num]
 The EXP bonus is 100% divided by the number of potential key item checks in the seed; e.g. with the 21 non-starting main and summon checks on, each objective gives you about 4.7% extra EXP (subject to some truncation).
 
 [@zonkbonusexp]
@@ -967,10 +967,10 @@ Normally, MIAB encounters have the same EXP calculation as other encounters. Und
 [@moonbonusexp]
 Normally, location of encounter does not increase EXP. Under this flag, encounters on the moon award double or triple the usual EXP.
 
-[-exp:maxlevelbonus]
+[Xmaxlevelbonus]
 Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).
 
-[-exp:smallparty]
+[Xsmallparty]
 Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.
 
 [@geometricexp]
@@ -1000,31 +1000,31 @@ By default, monster-in-a-box chests are relocated randomly within the same dunge
 [-vanilla:giant]
 Removes the added exit at the start of the Giant of Bab-il, forcing you to complete it in order to return to the Big Whale. (Be careful not to get stuck with your only save file being inside the Giant.) This exit is restored once the Giant is completed.
 
-[-z:physical]
+[Zphysical]
 Enable this flag to replace Zeromus' magic-based damaging attacks with physical attacks (Fight, Dark Wave, Needle/Counter). Zeromus now counters some physical commands instead of magic.
 
-[-z:physmag]
-In half the seeds rolled with this flag, Zeromus will have the physical script from <em>-z:physical</em>, and in the other half Zeromus will have the usual magic script.
+[Zphysmag]
+In half the seeds rolled with this flag, Zeromus will have the physical script from <em>Zphysical</em>, and in the other half Zeromus will have the usual magic script.
 
-[-z:chaos]
+[Zchaos]
 In each attack phase, Zeromus will have a handful of random attacks (one or two possibly stronger, with a shake). Four attacks are chosen as reactions. The attacks are mostly curated.
 
-[-z:lavosshell]
+[Zlavosshell]
 The three main attack phases are replaced by three random monster scripts that do not automatically progress to another script.
 
-[-z:whichbang]
+[Zwhichbang]
 Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.
 
-[-z:phaseshift]
+[Zphaseshift]
 Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).
 
-[-z:nonerfs]
+[Znonerfs]
 Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a counter-Nuke between the tick that Z sets spell power for Big Bang and the tick when Big Bang goes off. Enable this flag to prevent that happening by implementing chains.
 
-[-z:mustnerf]
+[Zmustnerf]
 Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).
 
-[-z:vanillasprite]
+[Znocosplay]
 Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite.
 
 [-vintage]
