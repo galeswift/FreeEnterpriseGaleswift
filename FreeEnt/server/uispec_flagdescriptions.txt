@@ -603,6 +603,9 @@ One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting c
 [-kit:egg]
 One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
+[-kit:zelda]
+A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.
+
 [-kit:random]
 One of the other kit options, selected at random.
 
@@ -699,6 +702,9 @@ One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting c
 [-kit2:egg]
 One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
 
+[-kit2:zelda]
+A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.
+
 [-kit2:random]
 One of the other kit options, selected at random.
 
@@ -794,6 +800,9 @@ One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting c
 
 [-kit3:egg]
 One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.
+
+[-kit3:zelda]
+A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.
 
 [-kit3:random]
 One of the other kit options, selected at random.

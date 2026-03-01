@@ -218,7 +218,16 @@ KIT_SPECS = {
 
     'hero' : None, # special case handling
      
-    'egg' : None, # special case handling
+    'egg' : None, # special case handling,
+
+    'zelda': [
+        ( ['SilverSword', 'FireBrand', 'IceBrand', 'Sleep', 'Light'],  [1] ),
+        ( ['IronShield', 'SilverShield', 'FireShield', 'IceShield', 'DiamondShield'],  [1] ),
+        ( 'Boomrang',  [1] ),
+        ( 'BigBomb',    [4] ),
+        ( 'Strength',   [1] ),
+        ( 'Whistle',    [1] ),
+        ],
 }
 
 EGG_METHODS = {

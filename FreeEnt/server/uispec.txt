@@ -873,6 +873,7 @@
 ..(-kit:hero)^        Hero kit
 ..(-kit:exit)^        Exit kit
 ..(-kit:egg)^         Egg kit
+..(-kit:zelda)^       Zelda kit
 ..(-kit:random)       Select a random kit
 .<> Kit 2
 ..(-kit2:basic)        Basic kit
@@ -906,6 +907,7 @@
 ..(-kit2:hero)^        Hero kit
 ..(-kit2:exit)^        Exit kit
 ..(-kit2:egg)^         Egg kit
+..(-kit2:zelda)^       Zelda kit
 ..(-kit2:random)       Select a random kit
 .<> Kit 3
 ..(-kit3:basic)        Basic kit
@@ -939,6 +941,7 @@
 ..(-kit3:hero)^        Hero kit
 ..(-kit3:exit)^        Exit kit
 ..(-kit3:egg)^         Egg kit
+..(-kit3:zelda)^       Zelda kit
 ..(-kit3:random)       Select a random kit
 [-noadamants] No Adamant Armors
 [-nocursed] No Cursed Rings

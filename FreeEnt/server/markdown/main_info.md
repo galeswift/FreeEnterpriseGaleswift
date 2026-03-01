@@ -783,6 +783,15 @@ This kit gives you 5-10 Exits.
 
 This kit gives you one Siren and a selection of items that your starting character can use to successfully defeat a Yellow D egg. It's possible that resets are necessary or that the fights will be very long. Depending on the starting character, there may be many possible selections of items or only a few. The probability of a specific selection of items is smaller if the Yellow D fight will be long/etc. or if the items contribute to your party's power afterwards.
 
+### `-kit:zelda` {: .h6 }
+
+- Idea: IAmDMar
+- Design: IAmDMar, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: kit_rando.py
+
+This kit gives you a sword (one of Fire/Ice/Slumber/Silver/Light), a shield (Iron/Silver/Fire/Ice/Diamond), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle. It's themed after Zelda 1.
+
 ### `-monsterevade`, `-monsterflee` {: .h6 }
 
 - Idea: ScytheMarshall (but also probably others)

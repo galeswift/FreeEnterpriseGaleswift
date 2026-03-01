@@ -8882,6 +8882,12 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit:zelda",
+                "title": "Zelda kit",
+                "description": "A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.",
+                "fork": true
+              },
+              {
                 "flag": "-kit:random",
                 "title": "Select a random kit",
                 "description": "One of the other kit options, selected at random."
@@ -9055,6 +9061,12 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit2:zelda",
+                "title": "Zelda kit",
+                "description": "A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.",
+                "fork": true
+              },
+              {
                 "flag": "-kit2:random",
                 "title": "Select a random kit",
                 "description": "One of the other kit options, selected at random."
@@ -9224,6 +9236,12 @@ var FLAG_UISPEC = [
                 "flag": "-kit3:egg",
                 "title": "Egg kit",
                 "description": "One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.",
+                "fork": true
+              },
+              {
+                "flag": "-kit3:zelda",
+                "title": "Zelda kit",
+                "description": "A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.",
                 "fork": true
               },
               {
