@@ -437,11 +437,11 @@ class FlagLogicCore {
         this._simple_disable(flagset, log, prefix, flagset.get_list(flags_regex));
     }
     fix(flagset) {
-        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss_collector_flags, boss_slots_removed, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, mandatory_char_objective_slots, max_bosses, mode, nonstarting_character_slots, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, required_random_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
+        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_customized_rand_flags, all_customized_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss, boss_slots_removed, bosses_available, ch, ch_count_cap, ch_list, challenges, char_objective_flags, character_pool, current_boss, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, flags_objective_chars, flags_objective_chars_num, flexible_char_count, flexible_char_pool, flexible_random_objective_count, gated_objective_index, gated_objectives, group_obj_num, group_scores, grp_obj_num, grp_sc, hard_required_index, hard_required_objectives, has_unavailable_characters, just_in_case_mandatory_char_pool, kmiab_flags, log, max_bosses, max_char_objectives, max_non_tough_quests, max_tough_quests, min_non_char_objectives, mode, non_tough_quest_room, nonstarting_character_slots, num_rand_objectives, num_random_objectives, only_char_objectives, only_chars_list, only_flags, pass_quest_flags, qu, rand_category_flags, rand_only_char_flags, random_category_flags, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, sorted_groups, sparse_spoiler_flags, specific_boss_objectives, specific_tough_quest_objectives, start_exclude_flags, start_include_flags, theoretical_available_characters, total_char_count, total_flexible_bosses, total_flexible_non_tough_quests, total_flexible_tough_quests, total_mandatory_bosses, total_mandatory_non_tough_quests, total_mandatory_tough_quests, total_objective_count, tough_quest_room, win_flags;
         log = [];
-        if ((flagset.has("Kunsafer") && (! flagset.has_any("Kmoon", "Kmiab:lst", "Kmiab:all")))) {
+        if ((flagset.has("Kunsafer") && (! flagset.has_any("Ksummon", "Kmoon", "Kmiab:above", "Kmiab:lst", "Kmiab:standard", "Kmiab:all")))) {
             flagset.set("Kmoon");
-            this._lib.push(log, ["correction", "Kunsafer requires placing key items on the moon; adding Kmoon"]);
+            this._lib.push(log, ["correction", "Kunsafer requires placing key items on the moon/Giant, and Knofree does not count; adding Kmoon (but you can instead add any Darkness-locked checks)"]);
         }
         if ((flagset.has("Kforge") && flagset.has("Omode:classicforge"))) {
             this._simple_disable(flagset, log, "Classic forge is incompatible with Kforge", ["Kforge"]);
@@ -682,7 +682,48 @@ class FlagLogicCore {
                 flagset.set("Pkey");
                 this._lib.push(log, ["correction", "Pass objective is set without a pass flag; forced to add Pkey"]);
             }
+            flags_objective_chars = [];
+            if (flagset.has("Cvanilla")) {
+                if ((! (flagset.has("Cnofree") && (! flagset.has("Ctreasure:free"))))) {
+                    for (var c, _pj_c = 0, _pj_a = ["edward", "tellah", "palom", "porom"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                        c = _pj_a[_pj_c];
+                        this._lib.push(flags_objective_chars, c);
+                    }
+                }
+                if ((! (flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned"))))) {
+                    for (var c, _pj_c = 0, _pj_a = ["rydia", "kain", "rosa", "yang", "cid", "edge", "fusoya"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                        c = _pj_a[_pj_c];
+                        this._lib.push(flags_objective_chars, c);
+                    }
+                }
+                flags_objective_chars_num = flags_objective_chars.length;
+            } else {
+                only_flags = flagset.get_list("^Conly:");
+                if ((only_flags.length > 0)) {
+                    for (var f, _pj_c = 0, _pj_a = only_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                        f = _pj_a[_pj_c];
+                        ch = this._lib.re_sub("^Conly:", "", f);
+                        this._lib.push(flags_objective_chars, ch);
+                    }
+                } else {
+                    flags_objective_chars = ["cecil", "kain", "rydia", "edward", "tellah", "rosa", "yang", "palom", "porom", "cid", "edge", "fusoya"];
+                    for (var f, _pj_c = 0, _pj_a = flagset.get_list("^Cno:"), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                        f = _pj_a[_pj_c];
+                        ch = this._lib.re_sub("^Cno:", "", f);
+                        this._lib.remove(flags_objective_chars, ch);
+                    }
+                }
+                flags_objective_chars_num = flags_objective_chars.length;
+                distinct_flags = flagset.get_list("^Cdistinct:");
+                if ((distinct_flags.length > 0)) {
+                    distinct_count = Number.parseInt(this._lib.re_sub("^Cdistinct:", "", distinct_flags[0]));
+                    while ((flags_objective_chars_num > distinct_count)) {
+                        flags_objective_chars_num -= 1;
+                    }
+                }
+            }
             char_objective_flags = flagset.get_list("^O\\d+:char_");
+            character_pool = [];
             if ((char_objective_flags.length > 0)) {
                 required_chars = [];
                 for (var f, _pj_c = 0, _pj_a = char_objective_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
@@ -690,58 +731,29 @@ class FlagLogicCore {
                     ch = this._lib.re_sub("^O\\d+:char_", "", f);
                     this._lib.push(required_chars, ch);
                 }
-                if (flagset.has("Cvanilla")) {
-                    has_unavailable_characters = false;
-                    if (_pj.in_es6("cecil", required_chars)) {
+                has_unavailable_characters = false;
+                for (var ch, _pj_c = 0, _pj_a = required_chars, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                    ch = _pj_a[_pj_c];
+                    if ((! _pj.in_es6(ch, flags_objective_chars))) {
                         has_unavailable_characters = true;
                     }
-                    if ((flagset.has("Cnofree") && (! flagset.has("Ctreasure:free")))) {
-                        if ((((_pj.in_es6("edward", required_chars) || _pj.in_es6("tellah", required_chars)) || _pj.in_es6("palom", required_chars)) || _pj.in_es6("porom", required_chars))) {
-                            has_unavailable_characters = true;
-                        }
-                    }
-                    if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
-                        if (((((((_pj.in_es6("rydia", required_chars) || _pj.in_es6("kain", required_chars)) || _pj.in_es6("rosa", required_chars)) || _pj.in_es6("yang", required_chars)) || _pj.in_es6("cid", required_chars)) || _pj.in_es6("edge", required_chars)) || _pj.in_es6("fusoya", required_chars))) {
-                            has_unavailable_characters = true;
-                        }
-                    }
-                    if (has_unavailable_characters) {
+                }
+                if (has_unavailable_characters) {
+                    if (flagset.has("Cvanilla")) {
                         this._lib.push(log, ["error", "Character objectives are set for characters that cannot be found in vanilla character assignment"]);
-                    }
-                } else {
-                    only_flags = flagset.get_list("^Conly:");
-                    pool = [];
-                    if ((only_flags.length > 0)) {
-                        for (var f, _pj_c = 0, _pj_a = only_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                            f = _pj_a[_pj_c];
-                            ch = this._lib.re_sub("^Conly:", "", f);
-                            this._lib.push(pool, ch);
-                        }
                     } else {
-                        pool = ["cecil", "kain", "rydia", "edward", "tellah", "rosa", "yang", "palom", "porom", "cid", "edge", "fusoya"];
-                        for (var f, _pj_c = 0, _pj_a = flagset.get_list("^Cno:"), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                            f = _pj_a[_pj_c];
-                            ch = this._lib.re_sub("^Cno:", "", f);
-                            this._lib.remove(pool, ch);
-                        }
+                        this._lib.push(log, ["error", "Character objectives are set for characters excluded from the randomization."]);
                     }
-                    for (var ch, _pj_c = 0, _pj_a = required_chars, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                        ch = _pj_a[_pj_c];
-                        if ((! _pj.in_es6(ch, pool))) {
-                            this._lib.push(log, ["error", "Character objectives are set for characters excluded from the randomization."]);
-                            break;
-                        }
-                    }
-                    distinct_flags = flagset.get_list("^Cdistinct:");
-                    if ((distinct_flags.length > 0)) {
-                        distinct_count = Number.parseInt(this._lib.re_sub("^Cdistinct:", "", distinct_flags[0]));
-                        if ((distinct_count < required_chars.length)) {
-                            this._lib.push(log, ["error", "More character objectives are set than distinct characters allowed in the randomization."]);
-                        }
-                    }
+                }
+                if ((flags_objective_chars_num < required_chars.length)) {
+                    this._lib.push(log, ["error", "More character objectives are set than distinct characters allowed in the randomization."]);
                 }
                 if (((flagset.has("Cnofree") && flagset.has("Cnoearned")) && (! (flagset.has("Ctreasure:free") || flagset.has("Ctreasure:earned"))))) {
                     this._lib.push(log, ["error", "Character objectives are set while no character slots will be filled"]);
+                }
+                for (var ch, _pj_c = 0, _pj_a = required_chars, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                    ch = _pj_a[_pj_c];
+                    this._lib.push(character_pool, ch);
                 }
             }
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:char", "Orandom2:char", "Orandom3:char"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
@@ -757,43 +769,69 @@ class FlagLogicCore {
                     this._simple_disable_regex(flagset, log, `No random objectives specified for pool ${random_prefix}`, (`^${random_prefix}` + "[^\\d]"));
                 }
             }
-            total_potential_bosses = 0;
+            total_mandatory_bosses = 0;
+            total_flexible_bosses = 0;
+            total_mandatory_tough_quests = 0;
+            total_flexible_tough_quests = 0;
+            total_mandatory_non_tough_quests = 0;
+            total_flexible_non_tough_quests = 0;
+            flexible_random_objective_count = 0;
             total_objective_count = 0;
-            for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                random_prefix = _pj_a[_pj_c];
-                if ((flagset.get_list(`^${random_prefix}`).length === 0)) {
-                    continue;
-                }
-                all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));
-                num_random_objectives = flagset.get_list((`^${random_prefix}` + "[\\d]"));
-                if ((num_random_objectives.length === 0)) {
-                    continue;
-                }
-                flag_suffix = this._lib.re_sub(`^${random_prefix}`, "", num_random_objectives[0]);
-                if (((all_customized_random_flags.length === 0) || _pj.in_es6(`${random_prefix}boss`, all_customized_random_flags))) {
-                    total_potential_bosses += Number.parseInt(flag_suffix);
-                }
-                total_objective_count += Number.parseInt(flag_suffix);
+            max_tough_quests = 22;
+            max_non_tough_quests = 17;
+            total_char_count = char_objective_flags.length;
+            flexible_char_count = 0;
+            flexible_char_pool = [];
+            nonstarting_character_slots = 16;
+            if ((flagset.has("Cnofree") && (! flagset.has("Ctreasure:free")))) {
+                nonstarting_character_slots -= 5;
             }
-            specific_boss_objectives = flagset.get_list("^O[\\d]:boss_");
+            if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
+                nonstarting_character_slots -= 11;
+            } else {
+                if (flagset.has("Omode:classicgiant")) {
+                    nonstarting_character_slots -= 1;
+                }
+            }
+            while ((flags_objective_chars_num > nonstarting_character_slots)) {
+                flags_objective_chars_num -= 1;
+            }
+            specific_boss_objectives = [];
+            for (var fl, _pj_c = 0, _pj_a = flagset.get_list("^O[\\d]:boss_"), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                fl = _pj_a[_pj_c];
+                boss = this._lib.re_sub("^O\\d+:boss_", "", fl);
+                this._lib.push(specific_boss_objectives, boss);
+            }
+            specific_tough_quest_objectives = [];
+            for (var fl, _pj_c = 0, _pj_a = flagset.get_list("^O[\\d]:quest_"), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                fl = _pj_a[_pj_c];
+                qu = this._lib.re_sub("^O\\d+:", "", fl);
+                this._lib.push(specific_tough_quest_objectives, qu);
+            }
+            if (((! flagset.has_any("Pkey", "Pchests", "Pshop")) && (! _pj.in_es6("quest_pass", specific_tough_quest_objectives)))) {
+                max_non_tough_quests -= 1;
+            }
+            for (var f, _pj_c = 0, _pj_a = ["quest_mistcave", "quest_waterfall", "quest_antlionnest", "quest_hobs", "quest_fabul", "quest_ordeals", "quest_baroninn", "quest_pass", "quest_dwarfcastle", "quest_lowerbabil", "quest_unlocksewer", "quest_music", "quest_toroiatreasury", "quest_magma", "quest_unlocksealedcave", "quest_bigwhale", "quest_wakeyang"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                f = _pj_a[_pj_c];
+                if (_pj.in_es6(f, specific_tough_quest_objectives)) {
+                    total_mandatory_non_tough_quests += 1;
+                }
+                this._lib.remove(specific_tough_quest_objectives, f);
+            }
             all_specific_objectives = flagset.get_list("^O[\\d]:");
-            total_potential_bosses += specific_boss_objectives.length;
+            total_mandatory_bosses += specific_boss_objectives.length;
+            total_mandatory_tough_quests += specific_tough_quest_objectives.length;
             total_objective_count += all_specific_objectives.length;
             if (flagset.has("Omode:fiends")) {
-                total_potential_bosses += 6;
+                total_mandatory_bosses += 6;
                 total_objective_count += 6;
             }
-            boss_collector_flags = flagset.get_suffix("Omode:bosscollector");
-            if (boss_collector_flags) {
-                boss_collector_flags = Number.parseInt(boss_collector_flags);
-                while ((total_potential_bosses < boss_collector_flags)) {
-                    total_potential_bosses += 1;
-                }
-            }
             if (flagset.has("Omode:classicforge")) {
+                total_mandatory_tough_quests += 1;
                 total_objective_count += 1;
             }
             if (flagset.has("Omode:classicgiant")) {
+                total_mandatory_tough_quests += 1;
                 total_objective_count += 1;
             }
             if ((flagset.get_list("^Omode:dkmatter").length > 0)) {
@@ -808,6 +846,472 @@ class FlagLogicCore {
             if (flagset.has("Omode:external")) {
                 total_objective_count += 1;
             }
+            if (flagset.has("Kvanilla")) {
+                if ((! _pj.in_es6("quest_tradepink", specific_tough_quest_objectives))) {
+                    max_tough_quests -= 1;
+                } else {
+                    this._lib.push(log, ["error", "The objective-required Pink Tail is not available with vanilla key item placement"]);
+                }
+            } else {
+                if (((((! flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all")) && flagset.has("Pkey")) && (! flagset.has("Owin:crystal"))) && flagset.has("Kstart:zonk"))) {
+                    if ((! _pj.in_es6("quest_tradepink", specific_tough_quest_objectives))) {
+                        max_tough_quests -= 1;
+                    } else {
+                        this._lib.push(log, ["error", "Both non-essential key items are removed on these flags, so the objective-required Pink Tail is not available"]);
+                    }
+                }
+            }
+            if (flagset.has("Bvanilla")) {
+                for (var fl, _pj_c = 0, _pj_a = specific_boss_objectives, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                    fl = _pj_a[_pj_c];
+                    current_boss = this._lib.re_sub("^O\\d+:boss_", "", fl);
+                    if ((current_boss === "waterhag")) {
+                        this._lib.push(log, ["error", `Objective boss specified (${current_boss}) when that boss is not in the vanilla boss assignment`]);
+                    } else {
+                        if ((((current_boss === "kingqueen") && flagset.has("Bremove:kqe_slot")) || ((current_boss === "officer") && flagset.has("Bremove:kaipo_slot")))) {
+                            this._lib.push(log, ["error", `Objective specified for a boss removed from the vanilla boss assignment by Bremove: (${current_boss})`]);
+                        }
+                    }
+                }
+            }
+            group_scores = [];
+            for (var rand_pref, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                rand_pref = _pj_a[_pj_c];
+                rand_only_char_flags = flagset.get_list(`${rand_pref}only`);
+                if ((rand_only_char_flags.length > 0)) {
+                    for (var fl, _pj_f = 0, _pj_d = rand_only_char_flags, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                        fl = _pj_d[_pj_f];
+                        ch = this._lib.re_sub(`${rand_pref}only`, "", fl);
+                        if ((! _pj.in_es6(ch, flags_objective_chars))) {
+                            flagset.unset(fl);
+                            this._lib.push(log, ["correction", `Random character objective restrictions set for characters guaranteed not to appear in the seed; removing ${fl}`]);
+                        }
+                        if (_pj.in_es6(ch, required_chars)) {
+                            flagset.unset(fl);
+                            this._lib.push(log, ["correction", `Random character objective restrictions set for characters with custom objectives set; removing ${fl}`]);
+                        }
+                    }
+                }
+                if (((! flagset.has(`${rand_pref}char`)) && (rand_only_char_flags.length > 0))) {
+                    flagset.set(`${rand_pref}char`);
+                    this._lib.push(log, ["correction", `Random objectives requiring specific characters set without Orandom:char; setting ${rand_pref}char`]);
+                }
+                all_customized_rand_flags = flagset.get_list((`^${rand_pref}` + "[^\\d]"));
+                num_rand_objectives = flagset.get_list((`^${rand_pref}` + "[\\d]"));
+                if ((num_rand_objectives.length === 0)) {
+                    this._lib.push(group_scores, 0);
+                    continue;
+                }
+                grp_obj_num = Number.parseInt(this._lib.re_sub(`^${rand_pref}`, "", num_rand_objectives[0]));
+                rand_category_flags = [];
+                for (var fl, _pj_f = 0, _pj_d = all_customized_rand_flags, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                    fl = _pj_d[_pj_f];
+                    if ((! _pj.in_es6(fl, rand_only_char_flags))) {
+                        this._lib.push(rand_category_flags, fl);
+                    }
+                }
+                if (((rand_category_flags.length === 0) || _pj.in_es6(`${rand_pref}boss`, rand_category_flags))) {
+                    this._lib.push(group_scores, 100);
+                    continue;
+                }
+                grp_sc = 0;
+                if (_pj.in_es6(`${rand_pref}char`, rand_category_flags)) {
+                    if (((rand_only_char_flags.length > 0) && (rand_only_char_flags.length < flags_objective_chars_num))) {
+                        grp_sc += rand_only_char_flags.length;
+                    } else {
+                        grp_sc += flags_objective_chars_num;
+                    }
+                }
+                if (_pj.in_es6(`${rand_pref}tough_quest`, rand_category_flags)) {
+                    grp_sc += max_tough_quests;
+                } else {
+                    if (_pj.in_es6(`${rand_pref}quest`, rand_category_flags)) {
+                        grp_sc += ((max_tough_quests + max_non_tough_quests) + 20);
+                    }
+                }
+                grp_sc += (grp_obj_num - 4);
+                this._lib.push(group_scores, grp_sc);
+            }
+            if ((group_scores[0] <= group_scores[1])) {
+                if ((group_scores[2] < group_scores[0])) {
+                    sorted_groups = ["Orandom3:", "Orandom:", "Orandom2:"];
+                } else {
+                    if ((group_scores[2] >= group_scores[1])) {
+                        sorted_groups = ["Orandom:", "Orandom2:", "Orandom3:"];
+                    } else {
+                        sorted_groups = ["Orandom:", "Orandom3:", "Orandom2:"];
+                    }
+                }
+            } else {
+                if ((group_scores[2] < group_scores[1])) {
+                    sorted_groups = ["Orandom3:", "Orandom2:", "Orandom:"];
+                } else {
+                    if ((group_scores[2] >= group_scores[0])) {
+                        sorted_groups = ["Orandom2:", "Orandom:", "Orandom3:"];
+                    } else {
+                        sorted_groups = ["Orandom2:", "Orandom3:", "Orandom:"];
+                    }
+                }
+            }
+            for (var random_prefix, _pj_c = 0, _pj_a = sorted_groups, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                random_prefix = _pj_a[_pj_c];
+                if ((flagset.get_list(`^${random_prefix}`).length === 0)) {
+                    continue;
+                }
+                random_only_char_flags = flagset.get_list(`${random_prefix}only`);
+                all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));
+                num_random_objectives = flagset.get_list((`^${random_prefix}` + "[\\d]"));
+                if ((num_random_objectives.length === 0)) {
+                    continue;
+                }
+                group_obj_num = Number.parseInt(this._lib.re_sub(`^${random_prefix}`, "", num_random_objectives[0]));
+                total_objective_count += group_obj_num;
+                random_category_flags = [];
+                for (var fl, _pj_f = 0, _pj_d = all_customized_random_flags, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                    fl = _pj_d[_pj_f];
+                    if ((! _pj.in_es6(fl, random_only_char_flags))) {
+                        this._lib.push(random_category_flags, fl);
+                    }
+                }
+                bosses_available = false;
+                if ((_pj.in_es6(`${random_prefix}boss`, random_category_flags) || (random_category_flags.length === 0))) {
+                    bosses_available = true;
+                }
+                only_chars_list = [];
+                for (var fl, _pj_f = 0, _pj_d = random_only_char_flags, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                    fl = _pj_d[_pj_f];
+                    this._lib.push(only_chars_list, fl.slice(`${random_prefix}only`.length));
+                }
+                just_in_case_mandatory_char_pool = [];
+                only_char_objectives = false;
+                if ((_pj.in_es6(`${random_prefix}char`, random_category_flags) && (random_category_flags.length === 1))) {
+                    only_char_objectives = true;
+                }
+                theoretical_available_characters = 0;
+                actual_available_characters = 0;
+                duplicate_char_count = 0;
+                if (_pj.in_es6(`${random_prefix}char`, random_category_flags)) {
+                    if ((((random_only_char_flags.length > 0) && (random_only_char_flags.length < group_obj_num)) && (only_char_objectives === true))) {
+                        this._lib.push(log, ["error", `Random objectives requiring fewer specific characters (${random_only_char_flags.length}) than number of objectives (${group_obj_num})`]);
+                        break;
+                    } else {
+                        if (((flags_objective_chars_num < group_obj_num) && (only_char_objectives === true))) {
+                            this._lib.push(log, ["error", `Fewer characters available (${flags_objective_chars_num}) than required number of random character objectives (${group_obj_num})`]);
+                            break;
+                        } else {
+                            if ((random_only_char_flags.length > 0)) {
+                                ch_list = only_chars_list;
+                                ch_count_cap = random_only_char_flags.length;
+                            } else {
+                                ch_list = flags_objective_chars;
+                                ch_count_cap = flags_objective_chars_num;
+                            }
+                            for (var current_char, _pj_f = 0, _pj_d = ch_list, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                                current_char = _pj_d[_pj_f];
+                                theoretical_available_characters += 1;
+                                if (_pj.in_es6(current_char, character_pool)) {
+                                    duplicate_char_count += 1;
+                                } else {
+                                    if ((only_char_objectives && (ch_count_cap === group_obj_num))) {
+                                        this._lib.push(character_pool, current_char);
+                                        this._lib.remove(flexible_char_pool, current_char);
+                                    } else {
+                                        this._lib.push(just_in_case_mandatory_char_pool, current_char);
+                                        if ((! _pj.in_es6(current_char, flexible_char_pool))) {
+                                            this._lib.push(flexible_char_pool, current_char);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if ((theoretical_available_characters > flags_objective_chars_num)) {
+                        theoretical_available_characters = flags_objective_chars_num;
+                    }
+                    if (((total_char_count > duplicate_char_count) && (random_only_char_flags.length === 0))) {
+                        duplicate_char_count = total_char_count;
+                    }
+                    actual_available_characters = (theoretical_available_characters - duplicate_char_count);
+                    if (((actual_available_characters < group_obj_num) && (only_char_objectives === true))) {
+                        this._lib.push(log, ["error", `Not enough unique characters for pool ${random_prefix}. Other pools and custom objectives have consumed too many characters by now`]);
+                        break;
+                    }
+                }
+                min_non_char_objectives = 0;
+                if ((actual_available_characters < group_obj_num)) {
+                    min_non_char_objectives = (group_obj_num - actual_available_characters);
+                }
+                max_char_objectives = actual_available_characters;
+                while ((max_char_objectives > group_obj_num)) {
+                    max_char_objectives -= 1;
+                }
+                if (bosses_available) {
+                    if ((random_category_flags.length === 1)) {
+                        total_mandatory_bosses += group_obj_num;
+                    } else {
+                        if (((random_category_flags.length === 2) && _pj.in_es6(`${random_prefix}char`, random_category_flags))) {
+                            total_mandatory_bosses += min_non_char_objectives;
+                            total_flexible_bosses += (group_obj_num - min_non_char_objectives);
+                            flexible_char_count += max_char_objectives;
+                            flexible_random_objective_count += (group_obj_num - min_non_char_objectives);
+                        } else {
+                            if (((random_category_flags.length === 2) && (! _pj.in_es6(`${random_prefix}char`, random_category_flags)))) {
+                                if (_pj.in_es6(`${random_prefix}quest`, random_category_flags)) {
+                                    non_tough_quest_room = ((max_non_tough_quests - total_mandatory_non_tough_quests) - total_flexible_non_tough_quests);
+                                    tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                                    if (((non_tough_quest_room < group_obj_num) && (tough_quest_room >= group_obj_num))) {
+                                        total_flexible_non_tough_quests += non_tough_quest_room;
+                                        total_flexible_tough_quests += group_obj_num;
+                                        total_flexible_bosses += group_obj_num;
+                                        flexible_random_objective_count += group_obj_num;
+                                    } else {
+                                        if (((non_tough_quest_room >= group_obj_num) && (tough_quest_room < group_obj_num))) {
+                                            total_flexible_non_tough_quests += group_obj_num;
+                                            total_flexible_tough_quests += tough_quest_room;
+                                            total_flexible_bosses += group_obj_num;
+                                            flexible_random_objective_count += group_obj_num;
+                                        } else {
+                                            if (((non_tough_quest_room < group_obj_num) && (tough_quest_room < group_obj_num))) {
+                                                total_flexible_non_tough_quests += non_tough_quest_room;
+                                                total_flexible_tough_quests += tough_quest_room;
+                                                if (((non_tough_quest_room + tough_quest_room) < group_obj_num)) {
+                                                    total_mandatory_bosses += ((group_obj_num - non_tough_quest_room) - tough_quest_room);
+                                                    total_flexible_bosses += (non_tough_quest_room + tough_quest_room);
+                                                    flexible_random_objective_count += (non_tough_quest_room + tough_quest_room);
+                                                } else {
+                                                    total_flexible_bosses += group_obj_num;
+                                                    flexible_random_objective_count += group_obj_num;
+                                                }
+                                            } else {
+                                                total_flexible_non_tough_quests += group_obj_num;
+                                                total_flexible_tough_quests += group_obj_num;
+                                                total_flexible_bosses += group_obj_num;
+                                                flexible_random_objective_count += group_obj_num;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (_pj.in_es6(`${random_prefix}tough_quest`, random_category_flags)) {
+                                        tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                                        if ((tough_quest_room < group_obj_num)) {
+                                            total_flexible_tough_quests += tough_quest_room;
+                                            total_mandatory_bosses += (group_obj_num - tough_quest_room);
+                                            total_flexible_bosses += tough_quest_room;
+                                            flexible_random_objective_count += tough_quest_room;
+                                        } else {
+                                            total_flexible_tough_quests += group_obj_num;
+                                            total_flexible_bosses += group_obj_num;
+                                            flexible_random_objective_count += group_obj_num;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (((random_category_flags.length === 3) && _pj.in_es6(`${random_prefix}tough_quest`, random_category_flags))) {
+                                    tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                                    if (((tough_quest_room < group_obj_num) && (min_non_char_objectives === 0))) {
+                                        total_flexible_tough_quests += tough_quest_room;
+                                        flexible_char_count += max_char_objectives;
+                                        total_flexible_bosses += group_obj_num;
+                                        flexible_random_objective_count += group_obj_num;
+                                    } else {
+                                        if (((tough_quest_room < group_obj_num) && (min_non_char_objectives > 0))) {
+                                            total_flexible_tough_quests += tough_quest_room;
+                                            flexible_char_count += max_char_objectives;
+                                            if (((tough_quest_room + max_char_objectives) < group_obj_num)) {
+                                                total_mandatory_bosses += ((group_obj_num - tough_quest_room) - max_char_objectives);
+                                                total_flexible_bosses += (tough_quest_room + max_char_objectives);
+                                                flexible_random_objective_count += (tough_quest_room + max_char_objectives);
+                                            } else {
+                                                total_flexible_bosses += group_obj_num;
+                                                flexible_random_objective_count += group_obj_num;
+                                            }
+                                        } else {
+                                            flexible_char_count += max_char_objectives;
+                                            total_flexible_tough_quests += group_obj_num;
+                                            total_flexible_bosses += group_obj_num;
+                                            flexible_random_objective_count += group_obj_num;
+                                        }
+                                    }
+                                } else {
+                                    non_tough_quest_room = ((max_non_tough_quests - total_mandatory_non_tough_quests) - total_flexible_non_tough_quests);
+                                    tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                                    if ((non_tough_quest_room < group_obj_num)) {
+                                        total_flexible_non_tough_quests += non_tough_quest_room;
+                                    } else {
+                                        total_flexible_non_tough_quests += group_obj_num;
+                                    }
+                                    if ((tough_quest_room < group_obj_num)) {
+                                        total_flexible_non_tough_quests += tough_quest_room;
+                                    } else {
+                                        total_flexible_tough_quests += group_obj_num;
+                                    }
+                                    flexible_char_count += max_char_objectives;
+                                    total_flexible_bosses += group_obj_num;
+                                    flexible_random_objective_count += group_obj_num;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ((random_category_flags.length === 1)) {
+                        if (_pj.in_es6(`${random_prefix}char`, random_category_flags)) {
+                            total_char_count += group_obj_num;
+                        } else {
+                            if (_pj.in_es6(`${random_prefix}quest`, random_category_flags)) {
+                                non_tough_quest_room = ((max_non_tough_quests - total_mandatory_non_tough_quests) - total_flexible_non_tough_quests);
+                                tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                                if (((non_tough_quest_room + tough_quest_room) < group_obj_num)) {
+                                    this._lib.push(log, ["error", `Too many quests (tough and non-tough) have been consumed by now (${random_prefix}), between custom objectives and other pools`]);
+                                    break;
+                                }
+                                if (((non_tough_quest_room < group_obj_num) && (tough_quest_room >= group_obj_num))) {
+                                    total_flexible_non_tough_quests += non_tough_quest_room;
+                                    total_mandatory_tough_quests += (group_obj_num - non_tough_quest_room);
+                                    total_flexible_tough_quests += non_tough_quest_room;
+                                    flexible_random_objective_count += non_tough_quest_room;
+                                } else {
+                                    if (((non_tough_quest_room >= group_obj_num) && (tough_quest_room < group_obj_num))) {
+                                        total_flexible_tough_quests += tough_quest_room;
+                                        total_mandatory_non_tough_quests += (group_obj_num - tough_quest_room);
+                                        total_flexible_non_tough_quests += tough_quest_room;
+                                        flexible_random_objective_count += tough_quest_room;
+                                    } else {
+                                        if (((non_tough_quest_room < group_obj_num) && (tough_quest_room < group_obj_num))) {
+                                            total_mandatory_non_tough_quests += (group_obj_num - tough_quest_room);
+                                            total_flexible_non_tough_quests += (non_tough_quest_room - (group_obj_num - tough_quest_room));
+                                            total_mandatory_tough_quests += (group_obj_num - non_tough_quest_room);
+                                            total_flexible_tough_quests += (tough_quest_room - (group_obj_num - non_tough_quest_room));
+                                            flexible_random_objective_count += ((non_tough_quest_room + tough_quest_room) - group_obj_num);
+                                        } else {
+                                            total_flexible_non_tough_quests += group_obj_num;
+                                            total_flexible_tough_quests += group_obj_num;
+                                            flexible_random_objective_count += group_obj_num;
+                                        }
+                                    }
+                                }
+                            } else {
+                                tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                                if ((tough_quest_room < group_obj_num)) {
+                                    if (((tough_quest_room + total_flexible_tough_quests) < group_obj_num)) {
+                                        this._lib.push(log, ["error", `Too many tough quests have been consumed by now (${random_prefix}), between custom objectives and other pools`]);
+                                        break;
+                                    } else {
+                                        total_mandatory_tough_quests += tough_quest_room;
+                                        total_flexible_tough_quests -= (group_obj_num - tough_quest_room);
+                                    }
+                                } else {
+                                    total_mandatory_tough_quests += group_obj_num;
+                                }
+                            }
+                        }
+                    } else {
+                        if (_pj.in_es6(`${random_prefix}tough_quest`, random_category_flags)) {
+                            tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                            if (((tough_quest_room + max_char_objectives) < group_obj_num)) {
+                                if ((((tough_quest_room + max_char_objectives) + total_flexible_tough_quests) < group_obj_num)) {
+                                    this._lib.push(log, ["error", `Too many tough quests and characters have been consumed by now (${random_prefix}), between custom objectives and other pools`]);
+                                    break;
+                                } else {
+                                    total_mandatory_tough_quests += tough_quest_room;
+                                    total_flexible_tough_quests -= ((group_obj_num - tough_quest_room) - max_char_objectives);
+                                    total_char_count += max_char_objectives;
+                                }
+                            } else {
+                                if ((tough_quest_room < min_non_char_objectives)) {
+                                    if (((tough_quest_room + total_flexible_tough_quests) < min_non_char_objectives)) {
+                                        this._lib.push(log, ["error", `Too many tough quest objectives are required for the number of character objectives that are left (${random_prefix})`]);
+                                        break;
+                                    } else {
+                                        total_mandatory_tough_quests += tough_quest_room;
+                                        total_flexible_tough_quests -= (min_non_char_objectives - tough_quest_room);
+                                        total_char_count += max_char_objectives;
+                                    }
+                                } else {
+                                    if ((min_non_char_objectives === 0)) {
+                                        if ((tough_quest_room < group_obj_num)) {
+                                            total_char_count += (group_obj_num - tough_quest_room);
+                                            flexible_char_count += tough_quest_room;
+                                            total_flexible_tough_quests += tough_quest_room;
+                                            if ((actual_available_characters === group_obj_num)) {
+                                                for (var ch, _pj_f = 0, _pj_d = just_in_case_mandatory_char_pool, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
+                                                    ch = _pj_d[_pj_f];
+                                                    this._lib.push(character_pool, ch);
+                                                    this._lib.remove(flexible_char_pool, ch);
+                                                }
+                                            } else {
+                                                flexible_random_objective_count += tough_quest_room;
+                                            }
+                                        } else {
+                                            flexible_char_count += group_obj_num;
+                                            total_flexible_tough_quests += group_obj_num;
+                                            flexible_random_objective_count += group_obj_num;
+                                        }
+                                    } else {
+                                        if ((tough_quest_room < group_obj_num)) {
+                                            if (((tough_quest_room + total_flexible_tough_quests) < group_obj_num)) {
+                                                total_char_count += (group_obj_num - (tough_quest_room + total_flexible_tough_quests));
+                                                flexible_char_count += (max_char_objectives - ((group_obj_num - tough_quest_room) - total_flexible_tough_quests));
+                                                total_mandatory_tough_quests += min_non_char_objectives;
+                                                flexible_random_objective_count += ((tough_quest_room + total_flexible_tough_quests) - min_non_char_objectives);
+                                                total_flexible_tough_quests += (tough_quest_room - min_non_char_objectives);
+                                            } else {
+                                                if ((tough_quest_room < min_non_char_objectives)) {
+                                                    total_mandatory_tough_quests += tough_quest_room;
+                                                    total_flexible_tough_quests += ((group_obj_num - min_non_char_objectives) - (min_non_char_objectives - tough_quest_room));
+                                                    flexible_char_count += max_char_objectives;
+                                                    flexible_random_objective_count += (group_obj_num - min_non_char_objectives);
+                                                } else {
+                                                    total_mandatory_tough_quests += min_non_char_objectives;
+                                                    total_flexible_tough_quests += (group_obj_num - min_non_char_objectives);
+                                                    flexible_char_count += max_char_objectives;
+                                                    flexible_random_objective_count += (group_obj_num - min_non_char_objectives);
+                                                }
+                                            }
+                                        } else {
+                                            total_mandatory_tough_quests += min_non_char_objectives;
+                                            total_flexible_tough_quests += (group_obj_num - min_non_char_objectives);
+                                            flexible_char_count += max_char_objectives;
+                                            flexible_random_objective_count += (group_obj_num - min_non_char_objectives);
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            non_tough_quest_room = ((max_non_tough_quests - total_mandatory_non_tough_quests) - total_flexible_non_tough_quests);
+                            tough_quest_room = ((max_tough_quests - total_mandatory_tough_quests) - total_flexible_tough_quests);
+                            if ((min_non_char_objectives === 0)) {
+                                flexible_char_count += group_obj_num;
+                                flexible_random_objective_count += group_obj_num;
+                                if ((non_tough_quest_room < group_obj_num)) {
+                                    total_flexible_non_tough_quests += non_tough_quest_room;
+                                } else {
+                                    total_flexible_non_tough_quests += group_obj_num;
+                                }
+                                if ((tough_quest_room < group_obj_num)) {
+                                    total_flexible_tough_quests += tough_quest_room;
+                                } else {
+                                    total_flexible_tough_quests += group_obj_num;
+                                }
+                            } else {
+                                flexible_char_count += (group_obj_num - min_non_char_objectives);
+                                flexible_random_objective_count += group_obj_num;
+                                if ((non_tough_quest_room < group_obj_num)) {
+                                    total_flexible_non_tough_quests += non_tough_quest_room;
+                                    total_flexible_tough_quests += group_obj_num;
+                                } else {
+                                    if ((tough_quest_room < group_obj_num)) {
+                                        total_flexible_non_tough_quests += group_obj_num;
+                                        total_flexible_tough_quests += tough_quest_room;
+                                    } else {
+                                        total_flexible_non_tough_quests += group_obj_num;
+                                        total_flexible_tough_quests += group_obj_num;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             max_bosses = 34;
             boss_slots_removed = 0;
             removed_bosses_flags = flagset.get_list(`^Bremove:`);
@@ -816,101 +1320,16 @@ class FlagLogicCore {
                 max_bosses -= 1;
                 boss_slots_removed += 1;
             }
-            if ((total_potential_bosses > max_bosses)) {
-                if ((boss_slots_removed > 0)) {
-                    this._lib.push(log, ["error", `More than ${max_bosses} potential bosses specified (${boss_slots_removed} removed)`]);
-                } else {
-                    this._lib.push(log, ["error", `More than 34 potential bosses specified`]);
-                }
+            if ((total_mandatory_bosses > max_bosses)) {
+                this._lib.push(log, ["error", `${total_mandatory_bosses} guaranteed boss objectives specified with only ${max_bosses} bosses available (${boss_slots_removed} bosses removed)`]);
+            }
+            if ((total_mandatory_tough_quests > max_tough_quests)) {
+                this._lib.push(log, ["error", `${total_mandatory_tough_quests} guaranteed tough quest objectives specified with only ${max_tough_quests} tough quests available`]);
             }
             if ((total_objective_count > 32)) {
                 this._lib.push(log, ["error", "More than 32 objectives specified"]);
             }
-            duplicate_check_count = 0;
-            character_pool = [];
-            nonstarting_character_slots = 16;
-            if ((flagset.has("Cnofree") && (! flagset.has("Ctreasure:free")))) {
-                nonstarting_character_slots -= 5;
-            }
-            if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
-                nonstarting_character_slots -= 11;
-            } else {
-                if (flagset.has("Omode:classicforge")) {
-                    nonstarting_character_slots -= 1;
-                }
-            }
-            mandatory_char_objective_slots = char_objective_flags.length;
-            for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                random_prefix = _pj_a[_pj_c];
-                if ((flagset.get_list(`^${random_prefix}`).length === 0)) {
-                    continue;
-                }
-                random_only_char_flags = flagset.get_list(`${random_prefix}only`);
-                if (((! flagset.has(`${random_prefix}char`)) && (random_only_char_flags.length > 0))) {
-                    flagset.set(`${random_prefix}char`);
-                    this._lib.push(log, ["correction", `Random objectives requiring specific characters set without Orandom:char; setting ${random_prefix}char`]);
-                }
-                all_customized_random_flags = flagset.get_list((`^${random_prefix}` + "[^\\d]"));
-                if (((all_customized_random_flags.length !== 1) || (! _pj.in_es6(`${random_prefix}char`, all_customized_random_flags)))) {
-                    continue;
-                }
-                all_random_flags = flagset.get_list(`^${random_prefix}`);
-                skip_pools = false;
-                for (var random_flag, _pj_f = 0, _pj_d = all_random_flags, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
-                    random_flag = _pj_d[_pj_f];
-                    flag_suffix = this._lib.re_sub(`^${random_prefix}`, "", random_flag);
-                    if (this._lib.re_test("\\d", flag_suffix)) {
-                        required_random_objective_count = Number.parseInt(flag_suffix);
-                    } else {
-                        if (((! this._lib.re_test("only", flag_suffix)) && (! this._lib.re_test("char", flag_suffix)))) {
-                            skip_pools = true;
-                            break;
-                        }
-                    }
-                }
-                mandatory_char_objective_slots += required_random_objective_count;
-                duplicate_char_count = 0;
-                desired_char_count = 0;
-                if ((((random_only_char_flags.length > 0) && (random_only_char_flags.length < required_random_objective_count)) && (skip_pools === false))) {
-                    this._lib.push(log, ["error", `Random objectives requiring fewer specific characters (${random_only_char_flags.length}) than number of objectives (${required_random_objective_count})`]);
-                    break;
-                } else {
-                    if ((random_only_char_flags.length > 0)) {
-                        for (var random_flag, _pj_f = 0, _pj_d = random_only_char_flags, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
-                            random_flag = _pj_d[_pj_f];
-                            desired_char_count += 1;
-                            current_char = random_flag.slice(`${random_prefix}only`.length);
-                            if ((! _pj.in_es6(current_char, character_pool))) {
-                                this._lib.push(character_pool, current_char);
-                            } else {
-                                duplicate_char_count += 1;
-                            }
-                        }
-                    } else {
-                        all_character_pool = ["cecil", "kain", "rydia", "edward", "tellah", "rosa", "yang", "palom", "porom", "cid", "edge", "fusoya"];
-                        desired_char_count = all_character_pool.length;
-                        for (var current_char, _pj_f = 0, _pj_d = all_character_pool, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
-                            current_char = _pj_d[_pj_f];
-                            if ((! _pj.in_es6(current_char, character_pool))) {
-                                this._lib.push(character_pool, current_char);
-                            } else {
-                                duplicate_char_count += 1;
-                            }
-                        }
-                    }
-                }
-                chars_to_remove = duplicate_check_count;
-                if ((duplicate_char_count < duplicate_check_count)) {
-                    chars_to_remove = duplicate_char_count;
-                }
-                actual_available_characters = (desired_char_count - chars_to_remove);
-                if (((actual_available_characters < required_random_objective_count) && (skip_pools === false))) {
-                    this._lib.push(log, ["error", `Not enough unique characters for pool ${random_prefix}.  Another pool could potentially consume some or all of these characters ${random_only_char_flags}`]);
-                    break;
-                }
-                duplicate_check_count += required_random_objective_count;
-            }
-            if ((mandatory_char_objective_slots > nonstarting_character_slots)) {
+            if ((total_char_count > nonstarting_character_slots)) {
                 this._lib.push(log, ["error", `Not enough available non-starting character slots for all of the mandatory character objectives specified (between fixed objectives and random pools). Either add more character slots back in, remove character objectives, or allow other objective types for some random pools.`]);
             } else {
                 if (flagset.has("Cvanilla")) {
@@ -921,18 +1340,30 @@ class FlagLogicCore {
                     if ((flagset.has("Cnoearned") && (! flagset.has("Ctreasure:earned")))) {
                         available_vanilla_chars -= 7;
                     }
-                    if ((mandatory_char_objective_slots > available_vanilla_chars)) {
+                    if ((total_char_count > available_vanilla_chars)) {
                         this._lib.push(log, ["error", `Not enough available non-starting vanilla characters for all of the mandatory character objectives specified (between fixed objectives and random pools). Either add more character slots back in, remove character objectives, or allow other objective types for some random pools.`]);
                     }
                 } else {
                     distinct_flags = flagset.get_list("^Cdistinct:");
                     if ((distinct_flags.length > 0)) {
                         distinct_count = Number.parseInt(this._lib.re_sub("^Cdistinct:", "", distinct_flags[0]));
-                        if ((mandatory_char_objective_slots > distinct_count)) {
+                        if ((total_char_count > distinct_count)) {
                             this._lib.push(log, ["error", `Too few distinct characters specified for the mandatory character objectives. Either increase the number of distinct characters, or remove character objectives.`]);
                         }
                     }
                 }
+            }
+            while (((total_mandatory_tough_quests + total_flexible_tough_quests) > max_tough_quests)) {
+                total_flexible_tough_quests -= 1;
+            }
+            while (((total_mandatory_non_tough_quests + total_flexible_non_tough_quests) > max_non_tough_quests)) {
+                total_flexible_non_tough_quests -= 1;
+            }
+            while (((total_mandatory_bosses + total_flexible_bosses) > max_bosses)) {
+                total_flexible_bosses -= 1;
+            }
+            if (((((flexible_char_count + total_flexible_bosses) + total_flexible_non_tough_quests) + total_flexible_tough_quests) < flexible_random_objective_count)) {
+                this._lib.push(log, ["error", `There are too many restrictions on the types of random objectives to select enough random objectives satisfying the flags.`]);
             }
         }
         challenges = flagset.get_list("^-wacky:");

@@ -8,7 +8,7 @@ This page lists out, in some detail, the new/non-vanilla flags offered by the fo
 
 ## Objective Flags
 
-The number of objectives required for the reward has been expanded to 1-31 and all, instead of just 1-10 and all.
+The number of objectives required for the reward has been expanded to 1-31 and all, instead of just 1-10 and all. The logic to check whether your flagset is viable has been overhauled and made more permissive regarding objective combinations, so that more flexibility is possible with the three random objective groups.
 
 ### `Omode:bosscollector[N]` {: .h6 }
 
@@ -16,7 +16,7 @@ The number of objectives required for the reward has been expanded to 1-31 and a
 - Design/Programming: Galeswift
 - Locations: objective_rando.py, flagsetcore.py, objectives.f4c, eventextensions_randomizer.f4c
 
-This flag requires you to defeat some number of bosses to complete the objective (independent of any boss hunt objectives).
+This flag requires you to defeat some number of bosses to complete the objective (independent of any boss hunt objectives). For N = 34, if `Bremove` removes bosses from the game, then the required number of bosses drops to 33 or 32.
 
 ### `Omode:goldhunter[N]` {: .h6 }
 
@@ -84,11 +84,15 @@ This flag forces you to complete certain objectives to complete the seed. For ex
 
 ## Key Item Flags
 
+`Kforce:magma` has been modified to prevent D.Mist at the Rubicant spot gating the Magma Key at Rydia's Mom.
+
 ### `Knofree[dwarf,package]` {: .h6 }
 
 - Idea: sgrunt (probably others)
 - Design/Programming: sgrunt
-- Locations: 
+- Locations: core_rando.py, generator.py
+
+These flags move the free key item in the Toroia Hospital (the one Edward gives you) to either the Dwarf Castle Hospital (where Cid gives it to you) or to Rydia's Mom... but where the trigger for Rydia's Mom to give you the item is burning Mist with the Package, instead of defeating D.Mist. The Dwarf Castle item is treated as a gated quest, for the purposes of weighted non-KI rewards.
 
 ### `Kmiab:[standard,all,above,below,lst]` {: .h6 }
 
@@ -120,7 +124,7 @@ This flag adds the Pink Tail trade reward to the available key item slots. The v
 - Design/Programming: sgrunt
 - Locations: core_rando.py
 
-Under this flag, you will be _required_ to obtain moon access prior to obtaining underground access, meaning you will find your underground access somewhere accessible using the Darkness crystal (either on the moon somewhere or via the Giant).
+Under this flag, you will be _required_ to obtain moon access prior to obtaining underground access, meaning you will find your underground access somewhere accessible using the Darkness crystal (either on the moon somewhere or via the Giant). On `-vanilla:giant`, you will not need to complete the Giant unless one of `Bvanilla` or `Bunsafe` is also on (similar to the Odin spot gotcha).
 
 ### `Klatedark`, `Kunreliabledark` {: .h6 }
 

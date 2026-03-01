@@ -30,7 +30,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@bosscollector",
                 "title": "Boss Collector",
-                "description": "Find and defeat the specified number of bosses to complete this objective.",
+                "description": "Find and defeat the specified number of bosses to complete this objective. If some bosses are removed by <em>Bremove</em>, then the minimum of the specified number and the total number of bosses available will be used for the goal.",
                 "fork": true,
                 "subcontrols": [
                   {
@@ -96,7 +96,7 @@ var FLAG_UISPEC = [
                       },
                       {
                         "flag": "Omode:bosscollector34",
-                        "title": "Collect 34 bosses"
+                        "title": "Collect 34/all bosses"
                       }
                     ]
                   }
@@ -3987,7 +3987,7 @@ var FLAG_UISPEC = [
                   {
                     "flag": "Kforce:magma",
                     "title": "Guarantee underworld access via Magma Key",
-                    "description": "You are guaranteed that there is a path to the underworld via the Magma Key, without needing to use the Hook route through Cave Eblan."
+                    "description": "You are guaranteed that there is a path to the underworld via the Magma Key, without needing to defeat the Rubicant spot boss."
                   },
                   {
                     "flag": "Kforce:hook",
@@ -4000,7 +4000,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Kunsafe",
                 "title": "No safety checks",
-                "description": "<ul>\n    <li>Normally, you are guaranteed a path to the underworld that does not require first going to the moon. This flag removes that check.</li>\n    <li>If Kmiab is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>\n</ul>",
+                "description": "<ul>\n    <li>Normally, you are guaranteed a path to the underworld that does not require first going to the moon/Giant. This flag removes that check.</li>\n    <li>If </em>Kmiab:standard</em> is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>\n</ul>",
                 "hard": true
               },
               {

@@ -20,7 +20,7 @@
 ....(Omode:bosscollector20) Collect 20 bosses
 ....(Omode:bosscollector25) Collect 25 bosses
 ....(Omode:bosscollector30) Collect 30 bosses
-....(Omode:bosscollector34) Collect 34 bosses
+....(Omode:bosscollector34) Collect 34/all bosses
 ..[@goldhunter]^ Gold Hunter
 ...<> Set type of gold hunt
 ....(Omode:goldhunter100) Have 100,000 gold

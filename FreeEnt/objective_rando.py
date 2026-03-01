@@ -97,8 +97,9 @@ def setup(env):
         specified_objectives = dict()
         for i in range(CUSTOM_OBJECTIVE_COUNT):
             slug = env.options.flags.get_suffix(f"O{i+1}:")
-            env.meta['objectives_from_flags'].append(slug)
-            specified_objectives[slug] = True 
+            if slug:
+                env.meta['objectives_from_flags'].append(slug)
+                specified_objectives[slug] = True 
 
         for mode in MODES:
             if env.options.flags.has(mode):
@@ -114,14 +115,14 @@ def setup(env):
         if env.options.flags.get_suffix('Omode:goldhunter'):
             specified_objectives['internal_goldhunter'] = True
 
-        mandatory_random_objective_char_count = 0
+        total_char_count = 0
         for objective_id in OBJECTIVES:
             objective = OBJECTIVES[objective_id]
             slug = objective['slug']            
             if specified_objectives.get(slug, False):
                 if slug.startswith(CHAR_OBJECTIVE_PREFIX):
                     env.meta['objective_required_characters'].add(slug[len(CHAR_OBJECTIVE_PREFIX):])
-                    mandatory_random_objective_char_count += 1
+                    total_char_count += 1
                 elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
                     env.meta['objective_required_bosses'].add(slug[len(BOSS_OBJECTIVE_PREFIX):])
                 elif slug == 'quest_tradepink':
@@ -134,21 +135,487 @@ def setup(env):
         if env.options.flags.has('objective_mode_external'):
             env.meta['objective_starter_kit'] = [( 'fe_EagleEye', [1] )]
 
-        random_objective_only_characters = set()
-        for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-            for f in env.options.flags.get_list(rf'^{random_prefix}[\d]'):
-                random_prefix_count = int(f[len(random_prefix):])
-            random_prefix_flags = env.options.flags.get_list(rf'^{random_prefix}[^\d]')
-            for f in env.options.flags.get_list(rf'^{random_prefix}[^\d]'):               
-                allowed_type = f[len(random_prefix):]
-                if allowed_type.startswith('only'):                
-                    random_objective_only_characters.add(allowed_type[len('only'):])
-            if len(random_prefix_flags) == 1 and (random_prefix + 'char') in random_prefix_flags:
-                mandatory_random_objective_char_count += random_prefix_count
+        # copy some of the logic from flagsetcore, in order to say exactly how many distinct characters we need
+        # and how many tough quests we need, so that we have enough characters for character_rando
+        # and save enough tough quests for the apply phase
 
-        for random_char in random_objective_only_characters:
-            env.meta['objective_required_characters'].add(random_char)
-        env.meta['objective_req_char_count'] += mandatory_random_objective_char_count
+        flags_objective_chars = []
+        if env.options.flags.has('Cvanilla'):
+            if not (env.options.flags.has('Cnofree') and not env.options.flags.has('Ctreasure:free')):
+                for c in ['edward', 'tellah', 'palom', 'porom']:
+                    flags_objective_chars.append(c)
+            if not (env.options.flags.has('Cnoearned') and not env.options.flags.has('Ctreasure:earned')):
+                for c in ['rydia', 'kain', 'rosa', 'yang', 'cid', 'edge', 'fusoya']:
+                    flags_objective_chars.append(c)
+            flags_objective_chars_num = len(flags_objective_chars)
+        else:
+            only_flags = env.options.flags.get_list(r'^Conly:')
+            if len(only_flags) > 0:
+                for f in only_flags:
+                    ch = f[len('Conly:'):]
+                    flags_objective_chars.append(ch)
+            else:
+                flags_objective_chars = ['cecil', 'kain', 'rydia', 'edward', 'tellah', 'rosa', 'yang', 'palom', 'porom', 'cid', 'edge', 'fusoya']
+                for f in env.options.flags.get_list(r'^Cno:'):
+                    ch = f[len('Cno:'):]
+                    flags_objective_chars.remove(ch)
+            flags_objective_chars_num = len(flags_objective_chars)
+            distinct_flags = env.options.flags.get_list(r'^Cdistinct:')
+            if len(distinct_flags) > 0:
+                distinct_count = int(distinct_flags[0][len('Cdistinct:'):])
+                flags_objective_chars_num = min(flags_objective_chars_num, distinct_count)
+
+        max_non_tough_quests = len(TOUGH_QUEST_OBJECTIVES_EXCLUDED)
+        if not specified_objectives.get('quest_pass', False) and not env.options.flags.has_any('Pkey', 'Pchests', 'Pshop'):
+            max_non_tough_quests -= 1
+        max_tough_quests = 22
+        if not specified_objectives.get('quest_tradepink', False):
+            if env.options.flags.has('Kvanilla') or (not env.options.flags.has_any('Ksummon', 'Kmoon', 'Kforge', 'Kpink', 'Kmiab:standard', 'Kmiab:above', 'Kmiab:below', 'Kmiab:lst', 'Kmiab:all') and env.options.flags.has('Pkey') and not env.options.flags.has('Owin:crystal') and env.options.flags.has('Kstart:zonk')):
+                max_tough_quests -= 1
+        group_scores = []
+        for rand_pref in ['Orandom:', 'Orandom2:', 'Orandom3:']:
+            rand_only_char_flags = env.options.flags.get_list(f'{rand_pref}only')
+
+            all_customized_rand_flags = env.options.flags.get_list(f'^{rand_pref}'+ r'[^\d]')
+            num_rand_objectives = env.options.flags.get_list(f'^{rand_pref}'+ r'[\d]')
+            if len(num_rand_objectives) == 0:
+                group_scores.append(0)
+                continue
+            grp_obj_num = int(num_rand_objectives[0][len(rand_pref):])
+
+            # strip out only[char] flags to get only: boss, quest or tough_quest, char
+            rand_category_flags = []
+            for fl in all_customized_rand_flags:
+                if fl not in rand_only_char_flags:
+                    rand_category_flags.append(fl)
+
+            if len(rand_category_flags) == 0 or f'{rand_pref}boss' in rand_category_flags:
+                group_scores.append(100)
+                continue
+
+            # only len == 1 or 2 cases left, so just check and add
+            grp_sc = 0
+            if f'{rand_pref}char' in rand_category_flags:
+                if len(rand_only_char_flags) > 0 and len(rand_only_char_flags) < flags_objective_chars_num:
+                    grp_sc += len(rand_only_char_flags)
+                else:
+                    grp_sc += flags_objective_chars_num
+            if f'{rand_pref}tough_quest' in rand_category_flags:
+                grp_sc += max_tough_quests
+            elif f'{rand_pref}quest' in rand_category_flags:
+                grp_sc += max_tough_quests + max_non_tough_quests + 20
+
+            grp_sc += (grp_obj_num - 4)
+            group_scores.append(grp_sc)
+
+        # sort the groups by score (lower score -> harder to place -> do first)
+        sorted_prefixes_scores = sorted(zip(['Orandom:', 'Orandom2:', 'Orandom3:'], group_scores), key=(lambda p : p[1]))
+        sorted_groups = [pair[0] for pair in sorted_prefixes_scores]
+        env.meta['objective_group_order'] = sorted_groups
+
+        total_mandatory_bosses = 0
+        total_flexible_bosses = 0
+        total_mandatory_tough_quests = 0
+        total_flexible_tough_quests = 0
+        total_mandatory_non_tough_quests = 0
+        total_flexible_non_tough_quests = 0
+        flexible_random_objective_count = 0
+        total_objective_count = len(specified_objectives)
+
+        flexible_char_count = 0
+        flexible_char_pool = set()
+        nonstarting_character_slots = 16
+        if env.options.flags.has('Cnofree') and not env.options.flags.has('Ctreasure:free'):
+            nonstarting_character_slots -= 5
+        if env.options.flags.has('Cnoearned') and not env.options.flags.has('Ctreasure:earned'):
+            nonstarting_character_slots -= 11
+        elif env.options.flags.has('Omode:classicgiant'):
+            nonstarting_character_slots -= 1
+        # cap the number of characters we can actually have objectives for by the number of slots there are available
+        flags_objective_chars_num = min(flags_objective_chars_num, nonstarting_character_slots)
+
+        specific_boss_objectives = env.options.flags.get_list(r'^O[\d]:boss_')
+        specific_tough_quest_objectives = env.options.flags.get_list(r'^O[\d]:quest_')
+        for f in TOUGH_QUEST_OBJECTIVES_EXCLUDED:
+            if f in specific_tough_quest_objectives:
+                total_mandatory_non_tough_quests += 1
+                specific_tough_quest_objectives.remove(f)
+        total_mandatory_bosses += len(specific_boss_objectives)
+        total_mandatory_tough_quests += len(specific_tough_quest_objectives)
+        if env.options.flags.has('Omode:fiends'):
+            total_mandatory_bosses += 6
+        if env.options.flags.has('Omode:classicforge'):
+            total_mandatory_tough_quests += 1
+        if env.options.flags.has('Omode:classicgiant'):
+            total_mandatory_tough_quests += 1
+
+
+        # here's the big counting section from flagsetcore
+        for random_prefix in sorted_groups:
+            if len(env.options.flags.get_list(f'^{random_prefix}')) == 0:
+                continue
+
+            random_only_char_flags = env.options.flags.get_list(f'{random_prefix}only')
+
+            # skip if no number of objectives has been set
+            all_customized_random_flags = env.options.flags.get_list(f'^{random_prefix}'+ r'[^\d]')
+            num_random_objectives = env.options.flags.get_list(f'^{random_prefix}'+ r'[\d]')
+            if len(num_random_objectives) == 0:
+                continue
+            group_obj_num = int(num_random_objectives[0][len(random_prefix):])
+            total_objective_count += group_obj_num
+
+            # strip out only[char] flags to get only: boss, quest or tough_quest, char
+            random_category_flags = []
+            for fl in all_customized_random_flags:
+                if fl not in random_only_char_flags:
+                    random_category_flags.append(fl)
+
+            # if bosses are available, they allow all other objective types to be skipped because there are >=32 of them
+            # (if we run into issues with too many boss objectives, then we've already hit the objective cap)
+            # note: this logic does not survive into 5.0, but that's already got a different objective group system
+            bosses_available = False
+            if f'{random_prefix}boss' in random_category_flags or len(random_category_flags) == 0:
+                bosses_available = True
+
+            # identify how many character objectives are *actually* available for this group, based on only[char] flags
+            # and the characters available/seen so far
+            only_chars_list = []
+            for fl in random_only_char_flags:
+                only_chars_list.append(fl[len(f'{random_prefix}only'):])
+            just_in_case_mandatory_char_pool = set()
+
+            # identify if there are only character objectives or not
+            only_char_objectives = False
+            if f'{random_prefix}char' in random_category_flags and len(random_category_flags) == 1:
+                only_char_objectives = True
+
+            # the next section only matters if we even have character objectives: otherwise, default
+            # to no available character objectives (which makes sense)
+            theoretical_available_characters = 0
+            actual_available_characters = 0
+            duplicate_char_count = 0 # len(character_pool)
+            if f'{random_prefix}char' in random_category_flags:
+                if len(random_only_char_flags) > 0:
+                    # at this point, the character *can* be in the game (is in flags_objective_chars)
+                    ch_list = only_chars_list
+                    ch_count_cap = len(random_only_char_flags)
+                else:
+                    # start with the number of possible character objectives in the seed (possibly smaller than the number
+                    # of characters that are available, due to slot restrictions/character uncertainty)
+                    ch_list = flags_objective_chars
+                    ch_count_cap = flags_objective_chars_num
+                for current_char in ch_list:
+                    # at this point, the character *can* be in the game (is in flags_objective_chars)
+                    theoretical_available_characters += 1
+                    # is this character already a mandatory char objective? 
+                    if current_char in env.meta['objective_required_characters']:
+                        duplicate_char_count += 1
+                    else:
+                        # if this is a guaranteed character objective, and it *must* be chosen, push to character_pool
+                        if only_char_objectives and ch_count_cap == group_obj_num:
+                            env.meta['objective_required_characters'].add(current_char)
+                            flexible_char_pool.discard(current_char)
+                        else:
+                            just_in_case_mandatory_char_pool.add(current_char)
+                            if current_char not in flexible_char_pool:
+                                flexible_char_pool.add(current_char)
+
+                # ensure that we can't actually have try to assign too many character objectives
+                if theoretical_available_characters > flags_objective_chars_num:
+                    theoretical_available_characters = flags_objective_chars_num
+                # and ensure that we're counting the real number of character objectives that we've already assigned,
+                # given by total_char_count: if total_char_count > duplicate_char_count, then increase duplicate_char_count,
+                # but only if we weren't restricting characters to only specific ones
+                if total_char_count > duplicate_char_count and len(random_only_char_flags) == 0:
+                    duplicate_char_count = total_char_count
+                # theoretical_available_characters - duplicate_char_count is the number of new potential char objectives that
+                # this group can assign that we haven't already guaranteed
+                actual_available_characters = theoretical_available_characters - duplicate_char_count
+
+            # if we're here, then either it's not only character objectives, or there are 
+            # at least as many actual_available_characters as group_obj_num.
+            # in the former case, it's possible that we have a minimum number of required non-charater objectives,
+            # which is hyper relevant if we don't have bosses. If we didn't have character objectives to begin with,
+            # min_non_char_objectives will always be group_obj_num
+            min_non_char_objectives = 0
+            if actual_available_characters < group_obj_num:
+                min_non_char_objectives = group_obj_num - actual_available_characters
+            max_char_objectives = actual_available_characters
+            # in addition, there may be all characters available, but of course we can only pick out so many objectives total
+            while max_char_objectives > group_obj_num:
+                max_char_objectives -= 1
+
+            # now we start adding to our objective counts.
+            # key thing to keep in mind: if we have mandatory objective types and we run out of room (which would otherwise
+            # throw an error), we can use some of the flexible objectives to compensate (until we use them up)
+            if bosses_available:
+                # when bosses are available, everything is flexible (unless we're hitting the 32 objective cap,
+                # which takes priority)
+                if len(random_category_flags) == 1:
+                    # in this case, there are only boss objectives
+                    total_mandatory_bosses += group_obj_num
+                elif len(random_category_flags) == 2 and f'{random_prefix}char' in random_category_flags:
+                    # here, we have bosses and characters only, so some bosses may be required
+                    total_mandatory_bosses += min_non_char_objectives
+                    total_flexible_bosses += group_obj_num - min_non_char_objectives
+                    flexible_char_count += max_char_objectives
+                    flexible_random_objective_count += group_obj_num - min_non_char_objectives
+                elif len(random_category_flags) == 2 and f'{random_prefix}char' not in random_category_flags:
+                    # here we have bosses and either quests or tough quests
+                    if f'{random_prefix}quest' in random_category_flags:
+                        # here we need to ensure that our flexible counts are not exceeding the max
+                        # allowed counts for these objectives: 22 for tough quests, 17 for non-tough quests
+                        non_tough_quest_room = max_non_tough_quests - total_mandatory_non_tough_quests - total_flexible_non_tough_quests
+                        tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                        # we have four cases (and one subcase), depending on how many quests/tough quests we can have
+                        if non_tough_quest_room < group_obj_num and tough_quest_room >= group_obj_num:
+                            total_flexible_non_tough_quests += non_tough_quest_room
+                            total_flexible_tough_quests += group_obj_num
+                            total_flexible_bosses += group_obj_num
+                            flexible_random_objective_count += group_obj_num
+                        elif non_tough_quest_room >= group_obj_num and tough_quest_room < group_obj_num:
+                            total_flexible_non_tough_quests += group_obj_num
+                            total_flexible_tough_quests += tough_quest_room
+                            total_flexible_bosses += group_obj_num
+                            flexible_random_objective_count += group_obj_num
+                        elif non_tough_quest_room < group_obj_num and tough_quest_room < group_obj_num:
+                            total_flexible_non_tough_quests += non_tough_quest_room
+                            total_flexible_tough_quests += tough_quest_room
+                            if non_tough_quest_room + tough_quest_room < group_obj_num:
+                                total_mandatory_bosses += group_obj_num - non_tough_quest_room - tough_quest_room
+                                total_flexible_bosses += non_tough_quest_room + tough_quest_room
+                                flexible_random_objective_count += non_tough_quest_room + tough_quest_room
+                            else:
+                                total_flexible_bosses += group_obj_num
+                                flexible_random_objective_count += group_obj_num
+                        else:
+                            total_flexible_non_tough_quests += group_obj_num
+                            total_flexible_tough_quests += group_obj_num
+                            total_flexible_bosses += group_obj_num
+                            flexible_random_objective_count += group_obj_num
+                    elif f'{random_prefix}tough_quest' in random_category_flags:
+                        # same, but only for tough_quests, which decreases the number of cases
+                        tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                        if tough_quest_room < group_obj_num:
+                            total_flexible_tough_quests += tough_quest_room
+                            total_mandatory_bosses += group_obj_num - tough_quest_room
+                            total_flexible_bosses += tough_quest_room
+                            flexible_random_objective_count += tough_quest_room
+                        else:
+                            total_flexible_tough_quests += group_obj_num
+                            total_flexible_bosses += group_obj_num
+                            flexible_random_objective_count += group_obj_num
+                elif len(random_category_flags) == 3 and f'{random_prefix}tough_quest' in random_category_flags:
+                    # here, we have all possible objectives available except non-tough quests
+                    tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                    # so, we have three cases
+                    if tough_quest_room < group_obj_num and min_non_char_objectives == 0:
+                        total_flexible_tough_quests += tough_quest_room
+                        flexible_char_count += max_char_objectives # which in this case is group_obj_num
+                        total_flexible_bosses += group_obj_num
+                        flexible_random_objective_count += group_obj_num
+                    elif tough_quest_room < group_obj_num and min_non_char_objectives > 0:
+                        # possibly have mandatory bosses here
+                        total_flexible_tough_quests += tough_quest_room
+                        flexible_char_count += max_char_objectives
+                        if tough_quest_room + max_char_objectives < group_obj_num:
+                            total_mandatory_bosses += group_obj_num - tough_quest_room - max_char_objectives
+                            total_flexible_bosses += tough_quest_room + max_char_objectives
+                            flexible_random_objective_count += tough_quest_room + max_char_objectives
+                        else:
+                            total_flexible_bosses += group_obj_num
+                            flexible_random_objective_count += group_obj_num
+                    else: 
+                        # tough_quest_room >= group_obj_num means we don't care what min_non_char_objectives does
+                        flexible_char_count += max_char_objectives
+                        total_flexible_tough_quests += group_obj_num
+                        total_flexible_bosses += group_obj_num
+                        flexible_random_objective_count += group_obj_num
+                else:
+                    # all types of objectives are available
+                    non_tough_quest_room = max_non_tough_quests - total_mandatory_non_tough_quests - total_flexible_non_tough_quests
+                    tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                    if non_tough_quest_room < group_obj_num:
+                        total_flexible_non_tough_quests += non_tough_quest_room
+                    else:
+                        total_flexible_non_tough_quests += group_obj_num
+                    if tough_quest_room < group_obj_num:
+                        total_flexible_non_tough_quests += tough_quest_room
+                    else:
+                        total_flexible_tough_quests += group_obj_num
+                    flexible_char_count += max_char_objectives
+                    total_flexible_bosses += group_obj_num
+                    flexible_random_objective_count += group_obj_num
+
+            # now bosses are *not* available, which means we either have just characters, just quests/tough quests,
+            # or both of those categories.
+            elif len(random_category_flags) == 1:
+                if f'{random_prefix}char' in random_category_flags:
+                    # only characters! so we have mandatory character objectives, and we've already
+                    # confirmed that we have enough characters available for them, and handled with
+                    # mandatory/flexible character pool stuff
+                    total_char_count += group_obj_num
+                elif f'{random_prefix}quest' in random_category_flags:
+                    # quests and tough quests, do similar to the above
+                    non_tough_quest_room = max_non_tough_quests - total_mandatory_non_tough_quests - total_flexible_non_tough_quests
+                    tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                    # now, we carefully add to totals
+                    if non_tough_quest_room < group_obj_num and tough_quest_room >= group_obj_num:
+                        total_flexible_non_tough_quests += non_tough_quest_room
+                        total_mandatory_tough_quests += group_obj_num - non_tough_quest_room
+                        total_flexible_tough_quests += non_tough_quest_room
+                        flexible_random_objective_count += non_tough_quest_room
+                    elif non_tough_quest_room >= group_obj_num and tough_quest_room < group_obj_num:
+                        total_flexible_tough_quests += tough_quest_room
+                        total_mandatory_non_tough_quests += group_obj_num - tough_quest_room
+                        total_flexible_non_tough_quests += tough_quest_room
+                        flexible_random_objective_count += tough_quest_room
+                    elif non_tough_quest_room < group_obj_num and tough_quest_room < group_obj_num:
+                        total_mandatory_non_tough_quests += group_obj_num - tough_quest_room
+                        total_flexible_non_tough_quests += non_tough_quest_room - (group_obj_num - tough_quest_room)
+                        total_mandatory_tough_quests += group_obj_num - non_tough_quest_room
+                        total_flexible_tough_quests += tough_quest_room - (group_obj_num - non_tough_quest_room)
+                        flexible_random_objective_count += non_tough_quest_room + tough_quest_room - group_obj_num
+                    else:
+                        total_flexible_non_tough_quests += group_obj_num
+                        total_flexible_tough_quests += group_obj_num
+                        flexible_random_objective_count += group_obj_num
+                else:
+                    # just tough quests! that's the only case left
+                    tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                    if tough_quest_room < group_obj_num:
+                        total_mandatory_tough_quests += tough_quest_room
+                        total_flexible_tough_quests -= (group_obj_num - tough_quest_room)
+                    else:
+                        total_mandatory_tough_quests += group_obj_num
+            
+            else:
+                # we have characters and either all quests or just tough quests.
+                if f'{random_prefix}tough_quest' in random_category_flags:
+                    tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                    if tough_quest_room + max_char_objectives < group_obj_num:
+                        total_mandatory_tough_quests += tough_quest_room
+                        total_flexible_tough_quests -= (group_obj_num - tough_quest_room - max_char_objectives)
+                        total_char_count += max_char_objectives
+                    elif tough_quest_room < min_non_char_objectives:
+                        total_mandatory_tough_quests += tough_quest_room
+                        total_flexible_tough_quests -= (min_non_char_objectives - tough_quest_room)
+                        total_char_count += max_char_objectives
+                    elif min_non_char_objectives == 0:
+                        # we can fill the entire group with character objectives!
+                        # but we might have *guaranteed* char objectives
+                        if tough_quest_room < group_obj_num:
+                            total_char_count += group_obj_num - tough_quest_room
+                            flexible_char_count += tough_quest_room
+                            total_flexible_tough_quests += tough_quest_room
+                            # if tough_quest_room was actually just 0, then these are *mandatory* character objectives,
+                            # so if actual_available_characters is equal to group_obj_num, then we need to
+                            # push all of the characters to character_pool (possibly removing from flexible_char_pool)
+                            if actual_available_characters == group_obj_num:
+                                for ch in just_in_case_mandatory_char_pool:
+                                    env.meta['objective_required_characters'].add(current_char)
+                                    flexible_char_pool.discard(current_char)
+                            else:
+                                flexible_random_objective_count += tough_quest_room
+                        else:
+                            flexible_char_count += group_obj_num
+                            total_flexible_tough_quests += group_obj_num
+                            flexible_random_objective_count += group_obj_num
+                    else:
+                        # we *must* have non-character objectives.
+                        if tough_quest_room < group_obj_num:
+                            # keeping flexibility in tough quests in mind, we might not have character objectives at all
+                            if tough_quest_room + total_flexible_tough_quests < group_obj_num:
+                                # we also *must* have some character objectives
+                                total_char_count += group_obj_num - (tough_quest_room + total_flexible_tough_quests)
+                                flexible_char_count += max_char_objectives - (group_obj_num - tough_quest_room - total_flexible_tough_quests)
+                                total_mandatory_tough_quests += min_non_char_objectives
+                                # before we change total_flexible_tough_quests, we need to up the flexible random objective count;
+                                # the amount we add is just group_obj_num minus the amounts we added to total_char_count and total_mandatory_tough_quests
+                                flexible_random_objective_count += tough_quest_room + total_flexible_tough_quests - min_non_char_objectives
+                                total_flexible_tough_quests += tough_quest_room - min_non_char_objectives
+                            else:
+                                # we can use flexible tough quests to handle everything
+                                if tough_quest_room < min_non_char_objectives:
+                                    total_mandatory_tough_quests += tough_quest_room
+                                    total_flexible_tough_quests += (group_obj_num - min_non_char_objectives) - (min_non_char_objectives - tough_quest_room)
+                                    flexible_char_count += max_char_objectives
+                                    flexible_random_objective_count += group_obj_num - min_non_char_objectives
+                                else:
+                                    total_mandatory_tough_quests += min_non_char_objectives
+                                    total_flexible_tough_quests += group_obj_num - min_non_char_objectives
+                                    flexible_char_count += max_char_objectives
+                                    flexible_random_objective_count += group_obj_num - min_non_char_objectives
+                        else:
+                            # some mandatory tough_quests, and the rest are flexible
+                            total_mandatory_tough_quests += min_non_char_objectives
+                            total_flexible_tough_quests += group_obj_num - min_non_char_objectives
+                            flexible_char_count += max_char_objectives
+                            flexible_random_objective_count += group_obj_num - min_non_char_objectives
+                
+                else:
+                    # chars, non-tough quests, and tough quests are what's left. This should never
+                    # pose issues, given how many non-tough quests there are. In particular, 
+                    # even in the last group, you can only have 2+8+8+8 = 26 quest/tough quests used up, and 39-26 = 13 > 8,
+                    # so non_tough_quest_room + tough_quest_room will always be larger than group_obj_num here.
+                    non_tough_quest_room = max_non_tough_quests - total_mandatory_non_tough_quests - total_flexible_non_tough_quests
+                    tough_quest_room = max_tough_quests - total_mandatory_tough_quests - total_flexible_tough_quests
+                    if min_non_char_objectives == 0:
+                        # can fill with char objectives; we'll never *need* char objectives, but
+                        # there might be caps on non/tough quests
+                        flexible_char_count += group_obj_num
+                        flexible_random_objective_count += group_obj_num
+                        if non_tough_quest_room < group_obj_num:
+                            total_flexible_non_tough_quests += non_tough_quest_room
+                        else:  
+                            total_flexible_non_tough_quests += group_obj_num
+                        if tough_quest_room < group_obj_num:
+                            total_flexible_tough_quests += tough_quest_room
+                        else:
+                            total_flexible_tough_quests += group_obj_num
+                    else:
+                        # there are guaranteed non-char objectives.
+                        # which mostly just means that we cap the char objective addition,
+                        # and exactly one of tough/non-tough quests because of the above calculation
+                        flexible_char_count += group_obj_num - min_non_char_objectives
+                        flexible_random_objective_count += group_obj_num
+                        if non_tough_quest_room < group_obj_num:
+                            total_flexible_non_tough_quests += non_tough_quest_room
+                            total_flexible_tough_quests += group_obj_num
+                        elif tough_quest_room < group_obj_num:
+                            total_flexible_non_tough_quests += group_obj_num
+                            total_flexible_tough_quests += tough_quest_room
+                        else:
+                            # can fill the group with either non/tough quests
+                            total_flexible_non_tough_quests += group_obj_num
+                            total_flexible_tough_quests += group_obj_num
+
+            # we have now, finally, hopefully, added to all of the relevant counts as required
+            # by the flags and what we've seen previously
+
+        env.meta['objective_req_char_count'] += total_char_count # at least as many as the required objective characters
+        env.meta['allowable_removed_tough_quests'] = min(max_tough_quests - total_mandatory_tough_quests, 8) # possibly none, up to 8
+        # edge case handling: *if* the Pink Tail can potentially be removed from this seed given the KI slots, then do the following:
+        #  - if max_tough_quests - total_mandatory_tough_quests == 0, then guarantee the Pink Tail into the seed as an objective-required item
+        #  - if it's > 0, then subtract 1 from this value to ensure that we save a tough quest in case the Pink Tail gets randomly removed
+        #    by core_rando's priority assigner. 
+        if not env.options.flags.has_any('Ksummon', 'Kmoon', 'Kpink', 'Kmiab:standard', 'Kmiab:above', 'Kmiab:below', 'Kmiab:lst', 'Kmiab:all'):
+            slots_num_pink = 0
+            if env.options.flags.has('Kforge'):
+                slots_num_pink += 1
+            if env.options.flags.has('Pkey'):
+                slots_num_pink -= 1
+            if not env.options.flags.has('Owin:crystal'):
+                slots_num_pink -= 1
+            if env.options.flags.has('Kstart:zonk'):
+                slots_num_pink -= 1
+            if slots_num_pink < 0:
+                if max_non_tough_quests - total_mandatory_tough_quests == 0:
+                    env.meta['objective_required_key_items'].add('#item.Pink')
+                else:
+                    # that difference is positive, so the min of that value and 8 is positive
+                    env.meta['allowable_removed_tough_quests'] -= 1
 
         # Handle gated objectives
         objective_ids = get_unique_objective_ids(env)
@@ -234,17 +701,25 @@ def apply(env):
     MAX_OBJECTIVE_ATTEMPTS = 100
     rand_objective_attempts = 0
     found_valid_objective_set = False
+
     while not found_valid_objective_set and rand_objective_attempts < MAX_OBJECTIVE_ATTEMPTS:
         objective_ids = get_unique_objective_ids(env)
         restart_all_groups = False
-        # print("Objectives randomization attempt number " + f"{rand_objective_attempts}")
-        for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
-            # print("Now handling group " + random_prefix)
+
+        # prune the allowable tough quests here, using env.meta['allowable_removed_tough_quests']
+        potential_removed_tough_quest_num = env.meta['allowable_removed_tough_quests']
+        tough_quests_to_remove = env.rnd.sample(TOUGH_QUEST_OBJECTIVES_WEIGHTED, potential_removed_tough_quest_num)
+        print(tough_quests_to_remove)
+        
+
+        print("Objectives randomization attempt number " + f"{rand_objective_attempts}")
+        for random_prefix in env.meta['objective_group_order']:
+            print("Now handling group " + random_prefix)
             random_objective_count = 0
             for f in env.options.flags.get_list(rf'^{random_prefix}\d'):            
                 random_objective_count = int(f[len(random_prefix):])
 
-            #print(f"Random objective count is {random_objective_count} for {random_prefix}")
+            print(f"Random objective count is {random_objective_count} for {random_prefix}")
             random_objective_allowed_types = set()
             random_objective_allowed_characters = set()
             tough_quests_only = False
@@ -287,34 +762,34 @@ def apply(env):
 
                 if (not random_objective_allowed_types) or (category in random_objective_allowed_types):
                     if (category != 'quest') or (not tough_quests_only) or (obj['slug'] not in TOUGH_QUEST_OBJECTIVES_EXCLUDED):
-                        if obj['slug'] in TOUGH_QUEST_OBJECTIVES_WEIGHTED and env.rnd.random() < 0.40:
+                        if obj['slug'] in tough_quests_to_remove and env.rnd.random() < 0.40:
+                            # only possibly remove tough quests that we specified could be removed earlier
                             continue
                         random_objective_pool.setdefault(category, []).append(objective_id)
-
             random_category_weights = RANDOM_CATEGORY_WEIGHTS
             if random_objective_allowed_types:
                 random_category_weights = { k : RANDOM_CATEGORY_WEIGHTS[k] for k in RANDOM_CATEGORY_WEIGHTS if k in random_objective_allowed_types }
             random_category_distribution = util.Distribution(**random_category_weights)
 
-            # 10k is probably overkill. Try 100 attempts to choose the objectives.
-            MAX_CHARACTER_RANDOMIZATION_ATTEMPTS = 100
+            # 10k is probably overkill. Try 100 attempts to choose the objectives. or some smaller number.
+            MAX_RANDOMIZATION_ATTEMPTS = 200
             retry_count = 0
             for i in range(random_objective_count):
-                while retry_count <= MAX_CHARACTER_RANDOMIZATION_ATTEMPTS:     
+                while retry_count <= MAX_RANDOMIZATION_ATTEMPTS:     
                     retry_count += 1         
                     category = random_category_distribution.choose(env.rnd)
                     q = env.rnd.choice(random_objective_pool[category])
                     slug = OBJECTIVES[q]['slug']    
-                    # print(f'Considering {slug}')            
+                    print(f'Considering {slug}')            
                     if q in objective_ids:
                         continue
                     if slug.startswith(CHAR_OBJECTIVE_PREFIX):
                         char = slug[len(CHAR_OBJECTIVE_PREFIX):]
                         if char not in env.meta['available_nonstarting_characters']:
-                            # print(f'{char} is only a starting/partner character, or is not available at all')
+                            print(f'{char} is only a starting/partner character, or is not available at all')
                             continue
                         if len(random_objective_allowed_characters) != 0 and (char not in random_objective_allowed_characters):
-                            # print(f'{char} not allowed in types {random_objective_allowed_characters}')
+                            print(f'{char} not allowed in types {random_objective_allowed_characters}')
                             continue
                     elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
                         boss = slug[len(BOSS_OBJECTIVE_PREFIX):]
@@ -330,24 +805,25 @@ def apply(env):
                         # don't allow internal objectives to be selected as random ones
                         continue
                     break
-                if retry_count > MAX_CHARACTER_RANDOMIZATION_ATTEMPTS:
+                if retry_count > MAX_RANDOMIZATION_ATTEMPTS:
                     # give up on this objectives assignment, and try again from the beginning of all three groups
                     # (yes, the attempt where retry_count == MAX_... is ignored; suboptimal coding)
                     # raise BuildError(f"Failed to generate {random_objective_count} randomized objectives after many attempts. ({total_char_count} total unique characters)")
-                    # print(f"Failed to generate {random_objective_count} randomized objectives after {MAX_CHARACTER_RANDOMIZATION_ATTEMPTS} attempts. ({total_char_count} total unique characters)")
+                    print(f"Failed to generate {random_objective_count} randomized objectives after {MAX_RANDOMIZATION_ATTEMPTS} attempts. ({total_char_count} total unique characters)")
                     rand_objective_attempts += 1
                     found_valid_objective_set = False
                     restart_all_groups = True
                     break
                 else:
                     objective_ids.append(q)
-                    # print(objective_ids)
-                    # print("Attempts: " + f"{retry_count}")
-                # print(f"i = {i}")
+                    print(objective_ids)
+                    print("Attempts: " + f"{retry_count}")
+                print(f"i = {i}")
+                input()
 
             if restart_all_groups:
                 restart_all_groups = False
-                # print("Restarting all three groups over")
+                print("Restarting all three groups over")
                 break
             else:
                 found_valid_objective_set = True
@@ -382,6 +858,12 @@ def apply(env):
     
     if env.options.flags.get_suffix(f"Omode:bosscollector") != None:
         boss_hunt_count = int(env.options.flags.get_suffix(f"Omode:bosscollector"))
+        if boss_hunt_count == 34:
+            # let Omode:bosscollector34 also function as "all"
+            if env.options.flags.has('no_kq_eblan_slot'):
+                boss_hunt_count -= 1
+            if env.options.flags.has('no_officer_slot'):
+                boss_hunt_count -= 1
 
     if env.options.flags.get_suffix(f"Omode:goldhunter") != None:
         gold_hunt_count = int(env.options.flags.get_suffix(f"Omode:goldhunter"))

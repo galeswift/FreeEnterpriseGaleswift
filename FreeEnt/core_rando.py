@@ -428,11 +428,11 @@ def apply(env):
     #  3 - remaining slots
 
     # item tiers:
-    #  0 - items that cannot be in MIABs under any circumstances
+    #  0 - items that cannot be in MIABs under any circumstances ... which nothing uses now, probably.
     #  1 - progression items
     #  2 - non-progression key items
     #  3 - good non-progression items
-    #  4 - less good non-progression items
+    #  4 - less good non-progression items ... which nothing uses.
 
     keyitem_assigner.item_tier(0).set_max_slot_bucket(0)
     keyitem_assigner.item_tier(1).set_max_slot_bucket(1)
@@ -500,7 +500,7 @@ def apply(env):
 
     for item in env.meta.get('objective_required_key_items', []):
         reward = KeyItemReward(item)
-        for item_tier in range(2, 5):
+        for item_tier in range(2, 4):
             if reward in keyitem_assigner.item_tier(item_tier):
                 keyitem_assigner.item_tier(item_tier).remove(reward)
                 keyitem_assigner.item_tier(1).append(reward)
@@ -508,14 +508,17 @@ def apply(env):
 
     keyitem_capable_fight_slots = []
     keyitem_incapable_fight_slots = []
+    moon_fight_slots_available = False
 
     if env.options.flags.has('key_items_in_summon_quests'):
         keyitem_capable_fight_slots.extend(SUMMON_QUEST_SLOTS)
+        moon_fight_slots_available = True
     else:
         keyitem_incapable_fight_slots.extend(SUMMON_QUEST_SLOTS)
 
     if env.options.flags.has('key_items_in_moon_bosses'):
         keyitem_capable_fight_slots.extend(MOON_BOSS_SLOTS)
+        moon_fight_slots_available = True
     else:
         keyitem_incapable_fight_slots.extend(MOON_BOSS_SLOTS)
 
@@ -587,8 +590,25 @@ def apply(env):
 
             if 'all' in miab_flags or 'standard' in miab_flags or len(miab_flags) != 1:
                 env.rnd.shuffle(good_miabs)
-                bad_miabs.extend(good_miabs[:3])
-                good_miabs = good_miabs[3:]
+                if env.options.flags.has('key_items_unsafer') and not moon_fight_slots_available:
+                    def ensure_moon(miab_list):
+                        ensured = False
+                        for slot in miab_list:
+                            if 'moon?' in CHEST_ITEM_SLOTS[slot]:
+                                if (slot == RewardSlot.giant_chest and env.options.flags.has('vanilla_giant')
+                                    and not env.options.flags.has_any('bosses_unsafe', 'vanilla_bosses')):
+                                    continue
+                                else:
+                                    ensured = True
+                                    break
+                        return ensured
+                    while not ensure_moon(good_miabs[3:]):
+                        env.rnd.shuffle(good_miabs)
+                    bad_miabs.extend(good_miabs[:3])
+                    good_miabs = good_miabs[3:]
+                else:
+                    bad_miabs.extend(good_miabs[:3])
+                    good_miabs = good_miabs[3:]
 
         else:
             for group in good_miab_groups:
@@ -819,6 +839,7 @@ def apply(env):
             if not env.options.flags.has('bosses_vanilla') and not env.options.flags.has('bosses_unsafe'):
                 # must be able to access underground without encountering, golbez, wyvern, valvalis or odin replacement
                 # (or Dark Cecil in NFL2)
+                # ... or having to go through the Giant bosses, on -vanilla:giant
                 mean_bosses = ['golbez', 'wyvern', 'valvalis', boss_assignment['odin_slot']]
 
                 if env.options.flags.has('no_free_bosses') and 'mirrorcecil' not in mean_bosses:
@@ -830,12 +851,22 @@ def apply(env):
                 if env.options.flags.has('no_free_key_item') and boss_assignment['guard_slot'] == 'dmist' and boss_assignment['karate_slot'] in mean_bosses:
                     mean_bosses.append('dmist')
 
+                # you should not have to go through the Giant to get your underground access from Last Arm (or D.Mist, obviously)
+                # ... but, vanilla Elements and CPU are exploitable, like vanilla Odin is.
+                if env.options.flags.has('vanilla_giant'):
+                    mean_bosses.extend([boss_assignment['elements_slot'], boss_assignment['cpu_slot']])
+
                 underground_path_disallowed.extend(mean_bosses)
 
             if not env.options.flags.has('key_items_vanilla') and not unsafe:
                 # must be able to access underground without accessing moon
                 underground_path_disallowed.append('moon')
-            
+
+            if env.options.flags.has('key_items_force_magma'):
+                # bypass the prevent_hook_route code to directly rule out D.Mist at Rubicant,
+                # so that not-Kforce:magma seeds can have uncertainty (and memes)
+                underground_path_disallowed.append(boss_assignment['rubicant_slot'])
+
             if underground_path_disallowed:
                 tests.append(['underground', underground_path_disallowed])
 

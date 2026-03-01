@@ -29,7 +29,7 @@ Defeat Milon, Milon Z., Kainazzo, Valvalis, Rubicant, and Elements to complete t
 45 Dark Matters are randomly placed in chests (MIABs excluded); bring 30 of them to Kory in Agart to complete this objective.
 
 [@bosscollector]
-Find and defeat the specified number of bosses to complete this objective.
+Find and defeat the specified number of bosses to complete this objective. If some bosses are removed by <em>Bremove</em>, then the minimum of the specified number and the total number of bosses available will be used for the goal.
 
 [@goldhunter]
 Collect the specified amount of GP and bring them to Tory (he's below Kory) in Agart to complete this objective.
@@ -183,15 +183,15 @@ Edward in Toroia will not give you a key item. Instead, a key item may be earned
 Edward in Toroia will not give you a key item. Instead, a key item may be earned from Rydia's mom in Mist, who will appear after you have used the Package to burn Mist Village. 
 
 [Kforce:magma]
-You are guaranteed that there is a path to the underworld via the Magma Key, without needing to use the Hook route through Cave Eblan.
+You are guaranteed that there is a path to the underworld via the Magma Key, without needing to defeat the Rubicant spot boss.
 
 [Kforce:hook]
 You are guaranteed that the Hook route through Cave Eblan is the only way to access the underworld.
 
 [Kunsafe]
 <ul>
-    <li>Normally, you are guaranteed a path to the underworld that does not require first going to the moon. This flag removes that check.</li>
-    <li>If Kmiab is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>
+    <li>Normally, you are guaranteed a path to the underworld that does not require first going to the moon/Giant. This flag removes that check.</li>
+    <li>If </em>Kmiab:standard</em> is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>
 </ul>
 
 [Kstart:zonk]
