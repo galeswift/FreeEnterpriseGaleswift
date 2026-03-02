@@ -38,6 +38,17 @@ msfpatch{
         .mx 0x00
         lda $272b
         eor #$ffff
+        // also check for machine/spirit/undead, which cannot be hit by Fatal
+        pha
+        lda $2740
+        and #$008a
+        beq $+NotMachSpirUnd
+        pla
+        and #$ff7f
+        bra $+WasMachSpirUnd
+    %NotMachSpirUnd:
+        pla
+    %WasMachSpirUnd:
         and {% edward sing status options %}
         beq $+NothingHappened
 
