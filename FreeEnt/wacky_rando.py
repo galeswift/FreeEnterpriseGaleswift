@@ -854,19 +854,23 @@ def apply_advertising(env, rom_address):
         0x08 : {'resist status' : '#Mini'}, # TinyMage
         0x0A : {'weak' : None}, # SandMoth
         0x0D : {'trait' : None}, # CaveToad
-        0x0F : {'attack element' : '#Absorb'}, # Zombie
+        0x0F : {'resist status' : '#Poison #Piggy #Mini #Toad #Sleep #Stun', 'attack element' : '#Absorb'}, # Zombie
         0x12 : {'trait' : None}, # Mad Toad
         0x18 : {'weak' : '#Holy'}, # Dark Imp
         0x1C : {'weak' : '#Holy'}, # Slime
         0x20 : {'weak' : '#Lit #Air'}, # Tricker
+        0x32 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Skelton
         0x25 : {'trait' : None}, # Gargoyle
         0x27 : {'trait' : None}, # Hooligan
         0x2A : {'trait' : '#Reptile'}, # Aligator
         0x2C : {'resist element' : None}, # Fighter
-        0x30 : {'attack element' : '#Absorb'}, # Ghoul
-        0x32 : {'attack element' : '#Absorb'}, # Revenant
-        0x33 : {'resist element' : None, 'attack element' : '#Absorb', 'weak' : '#Fire #Holy #Air #Immune'}, # VampGirl
+        0x2F : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Red Bone
+        0x30 : {'resist status' : '#Poison #Piggy #Mini #Toad #Sleep #Stun', 'attack element' : '#Absorb'}, # Ghoul
+        0x31 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Skull
+        0x32 : {'resist status' : '#Poison #Piggy #Mini #Toad #Sleep #Stun', 'attack element' : '#Absorb'}, # Revenant
+        0x33 : {'resist status' : None, 'resist element' : None, 'attack element' : '#Absorb', 'weak' : '#Fire #Holy #Air #Immune'}, # VampGirl
         0x34 : {'weak' : None}, # CaveNaga
+        0x35 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Sleep #Stun #Float #Curse'}, # D.Bone
         0x37 : {'trait' : '#Reptile'}, # Crocdile
         0x38 : {'weak' : '#Ice'}, # Hydra
         0x3D : {'trait' : '#Reptile', 'weak' : '#Ice'}, # Python
@@ -881,6 +885,7 @@ def apply_advertising(env, rom_address):
         0x4A : {'trait' : '#Spirit'}, # Screamer
         0x4E : {'weak' : None, 'trait' : None}, # BladeMan
         0x50 : {'attack status' : '#Stone'}, # Medusa
+        0x51 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Sleep #Stun #Float #Curse'}, # D.Fossil
         0x54 : {'weak' : '#Holy #Immune', 'trait' : '#Spirit'}, # Ghost
         0x55 : {'weak' : '#Ice', 'resist element' : '#Fire #Absorb'}, # Bomb
         0x56 : {'weak' : '#Fire', 'resist element' : '#Ice #Absorb'}, # GrayBomb
@@ -946,6 +951,7 @@ def apply_advertising(env, rom_address):
         0xC5 : {'trait' : '#Robot', 'weak' : '#Lit #Air'}, # CPU
         0xC6 : {'trait' : '#Robot', 'weak' : '#Lit #Air'}, # Defender
         0xCD : {'weak' : '#Holy', 'resist element' : '#Dark'}, # D.Knight
+        0xD3 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Ghast
         0xD4 : {'trait' : '#Robot #Zombie'}, # Balnab-Z
         0xD5 : {'trait' : '#Robot', 'weak' : '#Lit #Air'}, # Attacker
         0xD6 : {'weak' : '#Ice', 'resist element' : '#Fire #Absorb'}, # Bomb boss version

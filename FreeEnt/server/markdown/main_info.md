@@ -1162,7 +1162,7 @@ This wacky flag shuffles the roles of the five main stats (Str, Agi, Vit, Wis, W
 - Programming: ScytheMarshall
 - Locations: wacky_rando.py, wacky/advertising.f4c, custom_weapon_rando.py
 
-This wacky flag makes widespread changes to equipment, spells, and monsters in order to make them "more true to what they seem like". For example, all ice weapons now hit reptile weakness, all bolt weapons now hit robot weakness (and robots are weak to bolt as well), Dwarf Axe now hits air weakness, monsters are weak to air if and only if they are visibly floating, the Quake enemy spell is now also 200 power, the Gigant Axe hits giant weakness, etc. The full list is split up between wacky_rando.py and advertising.f4c.
+This wacky flag makes widespread changes to equipment, spells, and monsters in order to make them "more true to what they seem like". For example, all ice weapons now hit reptile weakness, all bolt weapons now hit robot weakness (and robots are weak to bolt as well), non-boss-bit undead monsters are now weak to Life1/Life2 (normally VampLady is the only undead that is also not immune to swoon; this change still does not allow for swoon procs, which have a separate additional check), Dwarf Axe now hits air weakness, monsters are weak to air if and only if they are visibly floating, the Quake enemy spell is now also 200 power, the Gigant Axe hits giant weakness, etc. The full list is split up between wacky_rando.py and advertising.f4c.
 
 ### `-wacky:whatsmygear` - What's My Gear Again? {: .h6 }
 
