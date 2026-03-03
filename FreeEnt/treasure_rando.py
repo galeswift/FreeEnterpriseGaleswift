@@ -455,11 +455,11 @@ def apply(env):
         pass_chest = env.rnd.choice(remaining_chests.find_all())
         treasure_assignment.assign(pass_chest, '#item.Pass')
         remaining_chests.refine(lambda t: t.world != 'Overworld' and t.area != pass_chest.area)
-        pass_chest = env.rnd.choice(remaining_chests.find_all())
-        treasure_assignment.assign(pass_chest, '#item.Pass')
-        remaining_chests.refine(lambda t: t.area != pass_chest.area)
-        pass_chest = env.rnd.choice(remaining_chests.find_all())
-        treasure_assignment.assign(pass_chest, '#item.Pass')
+        pass_chest2 = env.rnd.choice(remaining_chests.find_all())
+        treasure_assignment.assign(pass_chest2, '#item.Pass')
+        remaining_chests.refine(lambda t: t.area != pass_chest2.area)
+        pass_chest3 = env.rnd.choice(remaining_chests.find_all())
+        treasure_assignment.assign(pass_chest3, '#item.Pass')
 
     # apply required objective treasures
     if env.meta['required_treasures']:
