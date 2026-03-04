@@ -43,6 +43,7 @@ from . import summons_rando
 from . import objective_rando
 from . import kit_rando
 from . import custom_weapon_rando
+from . import tweak_rando
 from . import wacky_rando
 from . import update_spells
 from . import update_abilities
@@ -897,59 +898,7 @@ def build(romfile, options, force_recompile=False):
     if options.flags.has('jump'):
         env.add_file('scripts/jump.f4c')
 
-    # misc/creative tweaks
-    if options.flags.has('kainmagic'):
-        env.add_file('scripts/give_kain_magic.f4c')
-        mp_script = '\n'
-        for level in range(1,51):
-            mp_script = mp_script + f'patch (${(0x0FB65E + (0x05 * (level-1))):06X} bus) {{ {2:02X} }}\n'
-        env.add_substitution('kain mp script', mp_script)
-    elif options.flags.has('harmspell'):
-        env.add_file('scripts/harm_spell.f4c')
-    if options.flags.has('edwardheal'):
-        env.add_file('scripts/improve_edward_heal.f4c')
-    if options.flags.has_any('edwardsing','edwardsing_better'):
-        env.add_file('scripts/edward_sing_upgrade.f4c')
-        sing_text_options = [
-            'Song of Molbols',
-            'Song of Ruin',
-            'Sick Beats',
-            'Samba de Status',
-            'Debuff Dirge',
-            'Evil Chorus',
-            'Vogon Poetry'
-            ]
-        env.rnd.shuffle(sing_text_options)
-        env.add_substitution('song of silence replacement text', sing_text_options[0])
-        if options.flags.has('edwardsing_better'):
-            env.add_substitution('edward sing status options', '#$bcff')
-        else:
-            env.add_substitution('edward sing status options', '#$1804')
-    if options.flags.has('cidairship'):
-        env.add_file('scripts/cidairship.f4c')
-    if options.flags.has('cidpeep'):
-        env.add_file('scripts/improve_cid_peep.f4c')
-    if options.flags.has('twinmeteo'):
-        env.add_file('scripts/twin_meteo_stone.f4c')
-    if options.flags.has('bigchocobosummon'):
-        env.add_file('scripts/big_chocobo_summon.f4c')
-        if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
-            env.add_toggle('save us big chocobo summon')
-    if options.flags.has('rosapaladin'):
-        env.add_file('scripts/rosa_paladin.f4c')
-        env.add_substitution('auto cover job class', '#$05')
-    if options.flags.has('rosapray'):
-        env.add_file('scripts/improve_rosa_pray.f4c')
-    if options.flags.has('fusoyaregen'):
-        if 'tellahmaneuver' in env.meta.get('wacky_challenge',[]):
-            env.add_binary(BusAddress(0x03E3FE), [0x32]) # 50 HP regen instead of 10 HP
-        else:
-            env.add_file('scripts/improve_fusoya_regen_mp.f4c')
-            env.add_toggle('fusoya_regen_mp')
-            if '3point' in env.meta.get('wacky_challenge',[]):
-                env.add_binary(BusAddress(0x03E3FE), [0x01]) # 1 MP regen instead of 10 MP
-                env.add_binary(BusAddress(0x03AAA7), [0x14]) # counter needs to hit 20 ticks instead of 5 ticks 
-                env.add_binary(BusAddress(0x13FEAB), [0x99]) # regen duration should be 25*RA ticks
+    tweak_rando.apply(env)
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')

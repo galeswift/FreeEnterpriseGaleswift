@@ -663,8 +663,8 @@ class FlagLogicCore:
             char_objective_flags = flagset.get_list(r'^O\d+:char_')
             # for later, start building the list of mandatory character objectives
             character_pool = []
+            required_chars = []
             if len(char_objective_flags) > 0:
-                required_chars = []
                 for f in char_objective_flags:
                     ch = self._lib.re_sub(r'^O\d+:char_', '', f)
                     self._lib.push(required_chars, ch)
@@ -689,10 +689,9 @@ class FlagLogicCore:
                 for ch in required_chars:
                     self._lib.push(character_pool, ch)                  
             
-            for random_prefix in ['Orandom:char', 'Orandom2:char', 'Orandom3:char']:    
-                if flagset.has(random_prefix) and flagset.has('Cnoearned') and flagset.has('Cnofree') and not flagset.has('Ctreasure:free') and not flagset.has('Ctreasure:earned'):
-                    flagset.unset(random_prefix)
-                    self._lib.push(log, ['correction', f'Random character objectives in the pool while no character slots will be filled. Removed {random_prefix}.'])
+            for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:    
+                if len(flagset.get_list(f'^{random_prefix}' + r'(char|only)')) > 0 and flagset.has('Cnoearned') and flagset.has('Cnofree') and not flagset.has('Ctreasure:free') and not flagset.has('Ctreasure:earned'):
+                    self._lib.push(log, ['error', f"Random character objectives specified in the {random_prefix} pool while no character slots will be filled."])
                     
             # remove random quest type specifiers if no random objectives specified
             for random_prefix in ['Orandom:', 'Orandom2:', 'Orandom3:']:
@@ -813,7 +812,7 @@ class FlagLogicCore:
                             flagset.unset(fl)
                             self._lib.push(log, ['correction', f'Random character objective restrictions set for characters guaranteed not to appear in the seed; removing {fl}'])
                         # ... and if those characters already have custom objectives set for them
-                        if ch in required_chars:
+                        elif ch in required_chars:
                             flagset.unset(fl)
                             self._lib.push(log, ['correction', f'Random character objective restrictions set for characters with custom objectives set; removing {fl}'])
 

@@ -148,7 +148,8 @@ Znocosplay
 -wacky:workexperience
 -wacky:moneygains
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin/-tweak:rosadin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon 
--tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen
+-tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen -tweak:yanghp -tweak:tellahrecall
+-tweak:edgedart -tweak:magicwhips
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -445,3 +446,7 @@ Zmustnerf          z_must_nerf
 -tweak:twinmeteo     twinmeteo
 -tweak:chocobosummon bigchocobosummon
 -tweak:fusoyaregen   fusoyaregen
+-tweak:yanghp        yanghp
+-tweak:tellahrecall  tellahrecall
+-tweak:edgedart      edgedart
+-tweak:magicwhips    magicwhips

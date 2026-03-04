@@ -1459,6 +1459,10 @@ const _FE_FLAGSPEC = {
         "-tweak:cidpeep",
         "-tweak:rosapray",
         "-tweak:fusoyaregen",
+        "-tweak:yanghp",
+        "-tweak:tellahrecall",
+        "-tweak:edgedart",
+        "-tweak:magicwhips",
         "-spoil:all",
         "-spoil:keyitems",
         "-spoil:rewards",
@@ -11425,116 +11429,140 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "-spoil:all",
+            "flag": "-tweak:yanghp",
             "offset": 558,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:keyitems",
+            "flag": "-tweak:tellahrecall",
             "offset": 559,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:rewards",
+            "flag": "-tweak:edgedart",
             "offset": 560,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:chars",
+            "flag": "-tweak:magicwhips",
             "offset": 561,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:treasure",
+            "flag": "-spoil:all",
             "offset": 562,
-            "size": 2,
+            "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:miabs",
-            "offset": 562,
-            "size": 2,
-            "value": 2
+            "flag": "-spoil:keyitems",
+            "offset": 563,
+            "size": 1,
+            "value": 1
         },
         {
-            "flag": "-spoil:shops",
+            "flag": "-spoil:rewards",
             "offset": 564,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:bosses",
+            "flag": "-spoil:chars",
             "offset": 565,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:encounters",
+            "flag": "-spoil:treasure",
             "offset": 566,
+            "size": 2,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:miabs",
+            "offset": 566,
+            "size": 2,
+            "value": 2
+        },
+        {
+            "flag": "-spoil:shops",
+            "offset": 568,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:bosses",
+            "offset": 569,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:encounters",
+            "offset": 570,
             "size": 1,
             "value": 1
         },
         {
             "flag": "-spoil:misc",
-            "offset": 567,
+            "offset": 571,
             "size": 1,
             "value": 1
         },
         {
             "flag": "-spoil:sparse10",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 1
         },
         {
             "flag": "-spoil:sparse20",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 2
         },
         {
             "flag": "-spoil:sparse30",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 3
         },
         {
             "flag": "-spoil:sparse40",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 4
         },
         {
             "flag": "-spoil:sparse50",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 5
         },
         {
             "flag": "-spoil:sparse60",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 6
         },
         {
             "flag": "-spoil:sparse70",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 7
         },
         {
             "flag": "-spoil:sparse80",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 8
         },
         {
             "flag": "-spoil:sparse90",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 9
         }
@@ -13291,8 +13319,8 @@ class FlagLogicCore {
             }
             char_objective_flags = flagset.get_list("^O\\d+:char_");
             character_pool = [];
+            required_chars = [];
             if ((char_objective_flags.length > 0)) {
-                required_chars = [];
                 for (var f, _pj_c = 0, _pj_a = char_objective_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                     f = _pj_a[_pj_c];
                     ch = this._lib.re_sub("^O\\d+:char_", "", f);
@@ -13323,11 +13351,10 @@ class FlagLogicCore {
                     this._lib.push(character_pool, ch);
                 }
             }
-            for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:char", "Orandom2:char", "Orandom3:char"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
-                if (((((flagset.has(random_prefix) && flagset.has("Cnoearned")) && flagset.has("Cnofree")) && (! flagset.has("Ctreasure:free"))) && (! flagset.has("Ctreasure:earned")))) {
-                    flagset.unset(random_prefix);
-                    this._lib.push(log, ["correction", `Random character objectives in the pool while no character slots will be filled. Removed ${random_prefix}.`]);
+                if ((((((flagset.get_list((`^${random_prefix}` + "(char|only)")).length > 0) && flagset.has("Cnoearned")) && flagset.has("Cnofree")) && (! flagset.has("Ctreasure:free"))) && (! flagset.has("Ctreasure:earned")))) {
+                    this._simple_disable_regex(flagset, log, `Random character objectives in the pool while no character slots will be filled`, (`^${random_prefix}` + "(char|only)"));
                 }
             }
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
@@ -13452,10 +13479,11 @@ class FlagLogicCore {
                         if ((! _pj.in_es6(ch, flags_objective_chars))) {
                             flagset.unset(fl);
                             this._lib.push(log, ["correction", `Random character objective restrictions set for characters guaranteed not to appear in the seed; removing ${fl}`]);
-                        }
-                        if (_pj.in_es6(ch, required_chars)) {
-                            flagset.unset(fl);
-                            this._lib.push(log, ["correction", `Random character objective restrictions set for characters with custom objectives set; removing ${fl}`]);
+                        } else {
+                            if (_pj.in_es6(ch, required_chars)) {
+                                flagset.unset(fl);
+                                this._lib.push(log, ["correction", `Random character objective restrictions set for characters with custom objectives set; removing ${fl}`]);
+                            }
                         }
                     }
                 }

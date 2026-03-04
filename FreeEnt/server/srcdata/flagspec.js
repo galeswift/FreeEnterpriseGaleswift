@@ -1459,6 +1459,10 @@ const _FE_FLAGSPEC = {
         "-tweak:cidpeep",
         "-tweak:rosapray",
         "-tweak:fusoyaregen",
+        "-tweak:yanghp",
+        "-tweak:tellahrecall",
+        "-tweak:edgedart",
+        "-tweak:magicwhips",
         "-spoil:all",
         "-spoil:keyitems",
         "-spoil:rewards",
@@ -11425,116 +11429,140 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "-spoil:all",
+            "flag": "-tweak:yanghp",
             "offset": 558,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:keyitems",
+            "flag": "-tweak:tellahrecall",
             "offset": 559,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:rewards",
+            "flag": "-tweak:edgedart",
             "offset": 560,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:chars",
+            "flag": "-tweak:magicwhips",
             "offset": 561,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:treasure",
+            "flag": "-spoil:all",
             "offset": 562,
-            "size": 2,
+            "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:miabs",
-            "offset": 562,
-            "size": 2,
-            "value": 2
+            "flag": "-spoil:keyitems",
+            "offset": 563,
+            "size": 1,
+            "value": 1
         },
         {
-            "flag": "-spoil:shops",
+            "flag": "-spoil:rewards",
             "offset": 564,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:bosses",
+            "flag": "-spoil:chars",
             "offset": 565,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "-spoil:encounters",
+            "flag": "-spoil:treasure",
             "offset": 566,
+            "size": 2,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:miabs",
+            "offset": 566,
+            "size": 2,
+            "value": 2
+        },
+        {
+            "flag": "-spoil:shops",
+            "offset": 568,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:bosses",
+            "offset": 569,
+            "size": 1,
+            "value": 1
+        },
+        {
+            "flag": "-spoil:encounters",
+            "offset": 570,
             "size": 1,
             "value": 1
         },
         {
             "flag": "-spoil:misc",
-            "offset": 567,
+            "offset": 571,
             "size": 1,
             "value": 1
         },
         {
             "flag": "-spoil:sparse10",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 1
         },
         {
             "flag": "-spoil:sparse20",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 2
         },
         {
             "flag": "-spoil:sparse30",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 3
         },
         {
             "flag": "-spoil:sparse40",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 4
         },
         {
             "flag": "-spoil:sparse50",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 5
         },
         {
             "flag": "-spoil:sparse60",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 6
         },
         {
             "flag": "-spoil:sparse70",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 7
         },
         {
             "flag": "-spoil:sparse80",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 8
         },
         {
             "flag": "-spoil:sparse90",
-            "offset": 568,
+            "offset": 572,
             "size": 4,
             "value": 9
         }

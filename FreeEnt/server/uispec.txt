@@ -1038,6 +1038,10 @@
 .[-tweak:chocobosummon] Sometimes Call the Big Chocobo in battle
 .[-tweak:rosapray] Improve Rosa's Pray commmand
 .[-tweak:fusoyaregen] FuSoYa's Regen command now heals MP instead of HP
+.[-tweak:yanghp] Yang continues to gain HP after level 60
+.[-tweak:tellahrecall] Improve Tellah's Recall command
+.[-tweak:edgedart] Improve Edge's Dart command for Shuriken/Ninja Star
+.[-tweak:magicwhips] Whips increase summon spell power
 
 == SPOILERS
 <> No spoiler log

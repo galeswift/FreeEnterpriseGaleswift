@@ -1313,3 +1313,36 @@ The rough probability of getting a particular spell is obtained by looking at th
 This flag changes FuSoYa's Regen command to heal MP instead (barring the Tellah Maneuver wacky). The amount of healing and duration depends on which wacky flags are in play: normally it will be 10 MP every 5 ticks for roughly 10x(Fu's RA) ticks. The Tellah Maneuver wacky makes that 50 HP instead. The 3 Point Challenge wacky makes it 1 MP and with a much longer duration/wait between each regen tick.
 
 Obviously this flag doesn't really do anything when paired with `Fomnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.
+
+### `-tweak:yanghp` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag gives Yang 152-171 HP for levels 61-69, and 160-180 HP for levels 70+, where normally he stops gaining HP after level 60.
+
+### `-tweak:tellahrecall` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag changes Tellah's Recall command to be more uniform in how it chooses the spells, and removes the bad options. In particular, the eight spells are chosen uniformly at random, there is no failure chance, and the tier-1 elemental spells are upgraded to tier-3.
+
+### `-tweak:edgedart` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag makes Darting Shurikens and Ninja Stars have special behaviour: the damage is based on the larger of level and agility, instead of level. All other darts calculate damage as usual.
+
+### `-tweak:magicwhips` {: .h6 }
+
+- Idea: Marshal
+- Design: Marshal, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag makes whips add their attack power to the base damage of most summons, regardless of which hand the whip is in (which matters on Omnidextrous). For Bomb and Mist, the base damage is scaled by (50+total whip attack power)/50 instead. Summons which do not deal damage/heal are unaffected.

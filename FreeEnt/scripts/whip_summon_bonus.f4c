@@ -1,0 +1,147 @@
+// for each whip that a character has,
+// increase a normal summon's spell power by the
+// weapon power, after multiplying the internal 
+// spell power by 8.
+
+msfpatch{
+    .addr $03d06a
+        jsl $=MagicWhipSummonBonus
+
+    .new
+    MagicWhipSummonBonus:
+        // displaced
+        asl $a9
+        rol $aa
+
+        ldy #$0000
+    %HandLoopStart:
+        lda $26b3,y
+        cmp #$33
+        bcc $+HandLoopEnd
+        cmp #$38
+        bcc $+IsWhip
+        // %custom weapon enabled%
+        cmp #$46
+        bne $+HandLoopEnd
+        // check the proxy ID for the
+        // custom weapon (is it the Mist Whip,
+        // which has the Dragon Whip as its proxy?)
+        lda $=CustomWeapon__ProxyIDAddr
+        cmp #$37
+        bne $+HandLoopEnd
+        lda #$46
+        // %end%
+    %IsWhip:
+        // pull the weapon power, but to do it we
+        // need to index into the equipment table
+        sta $df
+        lda #$08
+        sta $e1
+        jsr $_Util__BattleMultiplyE3
+        ldx $e3
+        lda $0f9101,x
+        // add to base damage (spell power * 8)
+        clc
+        adc $a9
+        sta $a9
+        lda $aa
+        adc #$00
+        sta $aa
+    %HandLoopEnd:
+        iny
+        iny
+        cpy #$0004
+        bcc $-HandLoopStart
+        rtl
+}
+
+// ... of course, Bomb and Mist have different
+// formulas, so let's give them a multiplier on
+// the damage
+
+msfpatch{
+    .addr $03d9c5
+        jsl $=MagicWhipsHPSummonBonus
+        nop nop
+
+    .new
+    MagicWhipsHPSummonBonus:
+        // check if the spell is Bomb or Mist;
+        // everything else shouldn't be impacted
+        lda $26d2
+        cmp #$4e
+        beq $+GetBonus
+        cmp #$56
+        bne $+NoBonus
+    %GetBonus:
+        // transfer the base damage to the first muliplication variable
+        // and set up 50+total whip attack as the second
+        ldx $3949
+        stx $393d
+        ldx #$0032
+        stx $393f
+
+        ldy #$0000
+    %HandLoopStart:
+        lda $26b3,y
+        cmp #$33
+        bcc $+HandLoopEnd
+        cmp #$38
+        bcc $+IsWhip
+        // %custom weapon enabled%
+        cmp #$46
+        bne $+HandLoopEnd
+        // check the proxy ID for the
+        // custom weapon (is it the Mist Whip,
+        // which has the Dragon Whip as its proxy?)
+        lda $=CustomWeapon__ProxyIDAddr
+        cmp #$37
+        bne $+HandLoopEnd
+        lda #$46
+        // %end%
+    %IsWhip:
+        // pull the weapon power, but to do it we
+        // need to index into the equipment table
+        sta $df
+        lda #$08
+        sta $e1
+        jsr $_Util__BattleMultiplyE3
+        ldx $e3
+        lda $0f9101,x
+        clc
+        adc $393f
+        sta $393f
+        lda $3940
+        adc #$00
+        sta $3940
+    %HandLoopEnd:
+        iny
+        iny
+        cpy #$0004
+        bcc $-HandLoopStart
+
+        // save time on mult/division if no whips were equipped
+        ldx $393f
+        cpx #$0033
+        bcc $+NoBonus
+        jsr $_Util__BattleMultiply3941
+        ldx $3941
+        stx $1670
+        lda $3943
+        sta $1672
+        ldx #$0032
+        stx $1674
+        jsr $_Util__Divide
+        // make sure we don't overflow; 
+        // guaranteed 16-bit quotient, at least
+        ldx $1678
+        cpx #$270f
+        bcc $+StoreDamage
+        ldx #$270f
+    %StoreDamage:
+        stx $3949
+    %NoBonus:
+        ldx $3949
+        stx $3902
+        rtl
+}

@@ -724,8 +724,8 @@ class FlagLogicCore {
             }
             char_objective_flags = flagset.get_list("^O\\d+:char_");
             character_pool = [];
+            required_chars = [];
             if ((char_objective_flags.length > 0)) {
-                required_chars = [];
                 for (var f, _pj_c = 0, _pj_a = char_objective_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                     f = _pj_a[_pj_c];
                     ch = this._lib.re_sub("^O\\d+:char_", "", f);
@@ -756,11 +756,10 @@ class FlagLogicCore {
                     this._lib.push(character_pool, ch);
                 }
             }
-            for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:char", "Orandom2:char", "Orandom3:char"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
-                if (((((flagset.has(random_prefix) && flagset.has("Cnoearned")) && flagset.has("Cnofree")) && (! flagset.has("Ctreasure:free"))) && (! flagset.has("Ctreasure:earned")))) {
-                    flagset.unset(random_prefix);
-                    this._lib.push(log, ["correction", `Random character objectives in the pool while no character slots will be filled. Removed ${random_prefix}.`]);
+                if ((((((flagset.get_list((`^${random_prefix}` + "(char|only)")).length > 0) && flagset.has("Cnoearned")) && flagset.has("Cnofree")) && (! flagset.has("Ctreasure:free"))) && (! flagset.has("Ctreasure:earned")))) {
+                    this._simple_disable_regex(flagset, log, `Random character objectives in the pool while no character slots will be filled`, (`^${random_prefix}` + "(char|only)"));
                 }
             }
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
@@ -885,10 +884,11 @@ class FlagLogicCore {
                         if ((! _pj.in_es6(ch, flags_objective_chars))) {
                             flagset.unset(fl);
                             this._lib.push(log, ["correction", `Random character objective restrictions set for characters guaranteed not to appear in the seed; removing ${fl}`]);
-                        }
-                        if (_pj.in_es6(ch, required_chars)) {
-                            flagset.unset(fl);
-                            this._lib.push(log, ["correction", `Random character objective restrictions set for characters with custom objectives set; removing ${fl}`]);
+                        } else {
+                            if (_pj.in_es6(ch, required_chars)) {
+                                flagset.unset(fl);
+                                this._lib.push(log, ["correction", `Random character objective restrictions set for characters with custom objectives set; removing ${fl}`]);
+                            }
                         }
                     }
                 }

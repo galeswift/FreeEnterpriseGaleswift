@@ -9732,6 +9732,26 @@ var FLAG_UISPEC = [
             "flag": "-tweak:fusoyaregen",
             "title": "FuSoYa's Regen command now heals MP instead of HP",
             "description": "Instead of healing HP, Regen now heals *MP* for party members (unless -wacky:tellahmaneuver is on, where it just heals more HP); the precise value depends on various flags."
+          },
+          {
+            "flag": "-tweak:yanghp",
+            "title": "Yang continues to gain HP after level 60",
+            "description": "Normally, Yang stops gaining HP at level 60; this flag provides HP gains for levels 61+."
+          },
+          {
+            "flag": "-tweak:tellahrecall",
+            "title": "Improve Tellah's Recall command",
+            "description": "Tellah's Recall command now has a flat distribution for the eight spells it can cast and cannot fail unless Tellah lacks MP for the spell. The tier-1 elemental spells are replaced with the corresponding tier-3 spells."
+          },
+          {
+            "flag": "-tweak:edgedart",
+            "title": "Improve Edge's Dart command for Shuriken/Ninja Star",
+            "description": "When Darting a Shuriken or a Ninja Star, the damage is calculated using the larger of level and agility, instead of just level."
+          },
+          {
+            "flag": "-tweak:magicwhips",
+            "title": "Whips increase summon spell power",
+            "description": "When a character casts a summon, the attack power of any whip equipped (in either hand) is added to the summon's base damage."
           }
         ]
       }
