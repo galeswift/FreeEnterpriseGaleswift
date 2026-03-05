@@ -375,7 +375,12 @@ event($8C)  //Meeting Giott, Calbrena battle, rejoining Rydia
 
     [#B #AgeRydia]
 
+    // %flag rydiaredmage on%
+    sound #WhiteMagic
+    // %end%
+    // %flag rydiaredmage off%
     sound #BlackMagic
+    // %end%
     [#B #If #Character #character.Rydia] {
         message $116
     }
@@ -499,12 +504,22 @@ wherever they are!
 }
 // %end%
 
+// %flag rydiaredmage on%
+text(bank 1 message $11D) {
+All [Rydia]s learned
+[whitemagic]Cure2, [whitemagic]Life1, [whitemagic]Heal,
+[name $e0], [name $e1], [name $e2],
+[name $e3], and [name $e4]!
+}
+// %end%
+// %flag rydiaredmage off%
 text(bank 1 message $11D) {
 All [Rydia]s learned 
 [name $e0], [name $e1],
 [name $e2], [name $e3],
 and [name $e4]!
 }
+// %end%
 
 text(map #DwarfCastleThroneRoom message 4) {
 Giott:My daughter has

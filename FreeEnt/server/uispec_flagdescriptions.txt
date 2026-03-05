@@ -1117,3 +1117,6 @@ When Darting a Shuriken or a Ninja Star, the damage is calculated using the larg
 
 [-tweak:magicwhips]
 When a character casts a summon, the attack power of any whip equipped (in either hand) is added to the summon's base damage.
+
+[-tweak:rydiaredmage]
+Adult Rydia keeps her White magic spellset, and learns eight additional White magic spells during the Dwarf cutscene. She also gains access to non-holy swords and shields, as well as retaining the White mage gear to which she normally loses access.

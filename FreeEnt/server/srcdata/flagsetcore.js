@@ -617,6 +617,16 @@ class FlagLogicCore {
         if ((flagset.has("Cpermajoin") && flagset.has("Cfifo"))) {
             this._simple_disable(flagset, log, "Permajoin and Remove Oldest are incompatible", ["Cfifo"]);
         }
+        if (flagset.has("-tweak:rydiaredmage")) {
+            if ((! flagset.has("-vanilla:hobs"))) {
+                flagset.set("-vanilla:hobs");
+                this._lib.push(log, ["correction", "Rydia must learn Fire1 at Mt. Hobs as a Red Mage; forced to add -vanilla:hobs"]);
+            }
+            if (flagset.has("-vanilla:growup")) {
+                flagset.unset("-vanilla:growup");
+                this._lib.push(log, ["correction", "Rydia must learn white magic at Dwarf Castle as a Red Mage; forced to remove -vanilla:growup"]);
+            }
+        }
         if (flagset.has("Onone")) {
             this._simple_disable_regex(flagset, log, "No objectives set", "^O(win|req):");
             this._simple_disable_regex(flagset, log, "No objectives set", "^Xobjectivebonus");
@@ -759,7 +769,7 @@ class FlagLogicCore {
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 random_prefix = _pj_a[_pj_c];
                 if ((((((flagset.get_list((`^${random_prefix}` + "(char|only)")).length > 0) && flagset.has("Cnoearned")) && flagset.has("Cnofree")) && (! flagset.has("Ctreasure:free"))) && (! flagset.has("Ctreasure:earned")))) {
-                    this._simple_disable_regex(flagset, log, `Random character objectives in the pool while no character slots will be filled`, (`^${random_prefix}` + "(char|only)"));
+                    this._lib.push(log, ["error", `Random character objectives specified in the ${random_prefix} pool while no character slots will be filled.`]);
                 }
             }
             for (var random_prefix, _pj_c = 0, _pj_a = ["Orandom:", "Orandom2:", "Orandom3:"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {

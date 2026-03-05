@@ -997,8 +997,8 @@
 .[-wacky:kleptomania]       "Kleptomania"
 .[-wacky:menarepigs]!       "Men Are Pigs"
 .[-wacky:misspelled]        "Misspelled"
-.[-wacky:biggermagnet]!     "A Much Bigger Magnet"
 .[-wacky:mirrormirror]^     "Mirror, Mirror, on the Wall"
+.[-wacky:biggermagnet]!     "A Much Bigger Magnet"
 .[-wacky:mysteryjuice]      "Mystery Juice"
 .[-wacky:neatfreak]!        "Neat Freak"
 .[-wacky:nightmode]!        "Night Mode"
@@ -1014,10 +1014,10 @@
 .[-wacky:3point]            "The 3-Point System"
 .[-wacky:timeismoney]       "Time is Money"
 .[-wacky:advertising]^      "Truth in Advertising"
-.[-wacky:darts]             "World Championship of Darts"
 .[-wacky:unstackable]!      "Unstackable"
 .[-wacky:whatsmygear]^      "What's My Gear Again?"
 .[-wacky:workexperience]!^  "Work Experience"
+.[-wacky:darts]             "World Championship of Darts"
 .[-wacky:zombies]           "Zombies!!!"
 
 == TWEAKS
@@ -1042,6 +1042,7 @@
 .[-tweak:tellahrecall] Improve Tellah's Recall command
 .[-tweak:edgedart] Improve Edge's Dart command for Shuriken/Ninja Star
 .[-tweak:magicwhips] Whips increase summon spell power
+.[-tweak:rydiaredmage] Adult Rydia keeps White and gains extra spells/gear
 
 == SPOILERS
 <> No spoiler log

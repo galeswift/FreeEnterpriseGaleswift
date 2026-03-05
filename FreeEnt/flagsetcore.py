@@ -572,6 +572,14 @@ class FlagLogicCore:
         if flagset.has('Cpermajoin') and flagset.has('Cfifo'):
             self._simple_disable(flagset, log, 'Permajoin and Remove Oldest are incompatible', ['Cfifo'])
 
+        # tweaks are intended to avoid conflicts, but Rydia's Red Mage flag interacts with Hobs/Dwarf Castle
+        if flagset.has('-tweak:rydiaredmage'):
+            if not flagset.has('-vanilla:hobs'):
+                flagset.set('-vanilla:hobs')
+                self._lib.push(log, ['correction', 'Rydia must learn Fire1 at Mt. Hobs as a Red Mage; forced to add -vanilla:hobs'])
+            if flagset.has('-vanilla:growup'):
+                flagset.unset('-vanilla:growup')
+                self._lib.push(log, ['correction', 'Rydia must learn white magic at Dwarf Castle as a Red Mage; forced to remove -vanilla:growup'])
 
         # Objectives logic
         if flagset.has('Onone'):

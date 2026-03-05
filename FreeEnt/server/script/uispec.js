@@ -9533,14 +9533,14 @@ var FLAG_UISPEC = [
             "title": "\"Misspelled\""
           },
           {
-            "flag": "-wacky:biggermagnet",
-            "title": "\"A Much Bigger Magnet\"",
-            "hard": true
-          },
-          {
             "flag": "-wacky:mirrormirror",
             "title": "\"Mirror, Mirror, on the Wall\"",
             "fork": true
+          },
+          {
+            "flag": "-wacky:biggermagnet",
+            "title": "\"A Much Bigger Magnet\"",
+            "hard": true
           },
           {
             "flag": "-wacky:mysteryjuice",
@@ -9612,10 +9612,6 @@ var FLAG_UISPEC = [
             "fork": true
           },
           {
-            "flag": "-wacky:darts",
-            "title": "\"World Championship of Darts\""
-          },
-          {
             "flag": "-wacky:unstackable",
             "title": "\"Unstackable\"",
             "hard": true
@@ -9630,6 +9626,10 @@ var FLAG_UISPEC = [
             "title": "\"Work Experience\"",
             "hard": true,
             "fork": true
+          },
+          {
+            "flag": "-wacky:darts",
+            "title": "\"World Championship of Darts\""
           },
           {
             "flag": "-wacky:zombies",
@@ -9752,6 +9752,11 @@ var FLAG_UISPEC = [
             "flag": "-tweak:magicwhips",
             "title": "Whips increase summon spell power",
             "description": "When a character casts a summon, the attack power of any whip equipped (in either hand) is added to the summon's base damage."
+          },
+          {
+            "flag": "-tweak:rydiaredmage",
+            "title": "Adult Rydia keeps White and gains extra spells/gear",
+            "description": "Adult Rydia keeps her White magic spellset, and learns eight additional White magic spells during the Dwarf cutscene. She also gains access to non-holy swords and shields, as well as retaining the White mage gear to which she normally loses access."
           }
         ]
       }

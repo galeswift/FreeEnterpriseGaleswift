@@ -1,4 +1,7 @@
 from .address import *
+from . import databases
+
+DWARF_CASTLE_WHITE_POOL = ['Mute', 'Charm', 'Blink', 'Slow', 'Fast', 'Bersk', 'Wall', 'Peep', 'Cure3', 'Size', 'Exit', 'Float']
 
 def apply(env):
     # misc/creative tweaks
@@ -117,3 +120,27 @@ def apply(env):
 
     if env.options.flags.has('magicwhips'):
         env.add_file('scripts/whip_summon_bonus.f4c')
+
+    if env.options.flags.has('rydiaredmage'):
+        # Rydia gets Life1, Heal... and the vanilla game already gives her Cure2. Funny that. She gets Harm if it's available.
+        fixed_white_to_add = ['Life1', 'Heal'] + (['Harm'] if env.options.flags.has('harmspell') else [])
+        # identify the 5 random spells Rydia gets at Dwarf Castle
+        if env.options.flags.has('japanese_spells'):
+            DWARF_CASTLE_WHITE_POOL.extend(['Armor', 'Shell', 'Dspel'])
+        random_white_to_add = env.rnd.sample(DWARF_CASTLE_WHITE_POOL, (4 if env.options.flags.has('harmspell') else 5))
+        spell_names = (fixed_white_to_add + random_white_to_add)[2:]
+        spoiler_names = ['Cure2'] + fixed_white_to_add + random_white_to_add
+        
+        dwarf_white_script_lines = (
+            [f'give spell #RydiaWhite #{spell}' for spell in fixed_white_to_add + random_white_to_add]
+            + [f'[#B #Text_LoadSpellName {index} #spell.{spell}]' for index,spell in enumerate(spell_names)]
+            + ['message $11d']
+            )
+    
+        env.add_substitution('dwarf summon rando', '\n'.join(dwarf_white_script_lines))
+
+        env.spoilers.add_table("MISC", 
+            [["Dwarf castle white magic", ', '.join([databases.get_spell_spoiler_name(f"#spell.{spell}") for spell in spoiler_names])]], 
+            public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
+        
+        env.add_file('scripts/rydiaredmage.f4c')

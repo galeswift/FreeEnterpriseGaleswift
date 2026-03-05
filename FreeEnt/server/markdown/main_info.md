@@ -1346,3 +1346,14 @@ This flag makes Darting Shurikens and Ninja Stars have special behaviour: the da
 - Locations: generator.py
 
 This flag makes whips add their attack power to the base damage of most summons, regardless of which hand the whip is in (which matters on Omnidextrous). For Bomb and Mist, the base damage is scaled by (50+total whip attack power)/50 instead. Summons which do not deal damage/heal are unaffected.
+
+### `-tweak:rydiaredmage` {: .h6 }
+
+- Idea: IAmDMar
+- Design: IAmDMar, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag turns Adult Rydia into a Red Mage, by letting her keep her White Magic spellset and granting her 8 additional White magic spells (Life1/Cure2/Heal and 5 additional spells that are not Life2/Cure4/Holy; if Harm is available, then she will get Harm and 4 other random spells). She also retains her White mage gear, and gains access to non-holy swords (including dark swords) and shields (some FF Red Mages do get shields). Yes, that means she can Avenger-glitch the Dragon Whip. She will not learn 5 summons at Dwarf, and she will learn Fire1 at Mt. Hobs.
+
+If a wacky flag insists on adding a command that does not remove Fight (e.g. Kleptomania), then Rydia will lose her White magic during battle, but retain the expanded equipment pool and can cast White magic in the field.

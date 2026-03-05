@@ -47,6 +47,7 @@ from . import tweak_rando
 from . import wacky_rando
 from . import update_spells
 from . import update_abilities
+from . import update_equipment
 
 from . import compile_item_prices
 from . import doors_rando
@@ -666,6 +667,11 @@ def build(romfile, options, force_recompile=False):
 
     # handle all changes to command lists
     update_abilities.command_lists(env)
+
+    # handle all changes to equipment and the equipment index table
+    # except for the Spoon and the custom FF4A weapon
+    update_equipment.equip_table(env)
+    update_equipment.equipment(env)
 
     RANDO_MODULES = [
         character_rando,

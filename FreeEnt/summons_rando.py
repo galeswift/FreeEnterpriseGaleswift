@@ -29,10 +29,10 @@ DWARF_CASTLE_SUMMONS_POOL = ['Mist', 'Jinn', 'Indra', 'Shiva', 'Titan', 'Levia',
 
 
 def apply(env):
-    if not env.options.flags.has('vanilla_hobs'):
+    if not env.options.flags.has('vanilla_hobs') and not env.options.flags.has('rydiaredmage'):
         apply_hobs_rando(env)
 
-    if not env.options.flags.has('vanilla_dwarf_summons'):
+    if not env.options.flags.has('vanilla_dwarf_summons') and not env.options.flags.has('rydiaredmage'):
         apply_dwarf_castle_summons_rando(env)
 
 
