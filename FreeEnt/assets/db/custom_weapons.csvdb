@@ -22,5 +22,5 @@ id,name,spoilername,disabled,equip,use,attack,accuracy,metallic,throwable,longra
 0x115,[staff]Seraphim,Seraphim's Mace,,"porom,fusoya",,50,70,,,,,,,,,,,15,,Heal,8,,,,,,,,,0x1B,0x01,0x0A,0x02,#item.Silence
 0x116,[staff]Nirvana,Nirvana,,"porom,tellah",,80,90,,,,,,,,15,,,15,,Wall,8,,,,,,,,,0x21,0x01,0x0A,0x02,#item.Silence
 0x117,[harp]Apollo,Apollo's Harp,,edward,,98,80,,,y,y,,,15,,15,,15,fire,,,y,,,,,,,,0x20,0x0A,0x13,0x09,#item.CharmHarp
-0x118,[harp]Requiem,Requiem Harp,,edward,,130,85,,,y,y,,,-5,-5,-5,-5,-5,,,,,,,,,,,,0x1F,0x0A,0x13,0x09,#item.CharmHarp
+0x118,[harp]Requiem,Requiem Harp,,edward,,130,85,,,y,y,,,-5,-5,-5,-5,-5,drain,,,,,,,,,,,0x1F,0x0A,0x13,0x09,#item.CharmHarp
 0x119,[harp]Loki,Loki's Lute,,edward,,150,99,,,y,y,,,15,15,15,,,,,,y,y,y,y,y,,y,y,0x1F,0x0A,0x13,0x09,#item.CharmHarp
