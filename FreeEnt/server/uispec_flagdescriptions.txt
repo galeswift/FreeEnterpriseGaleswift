@@ -908,10 +908,13 @@ Fighting the Sealed Cave boss is required before seeing the KI
 [Aagnostic]
 FF4 scales the speed of combat based on the agility stat of your party's "agility anchor". In Free Enterprise, by default the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under the other flags, the anchoring system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). 
 
-Note that any of these flags except for <em>Aagnostic</em> will override the <em>Chero</em> agility effect, if playing with the hero challenge.
+Note that <em>Chero</em> will force <em>Ahero</em> on over <em>Aagnostic</em>, but not over any other <em>A</em> flags.
 
 [Avanilla]
 In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present. 
+
+[Ahero]
+This flag implements <em>Chero</em> anchoring, where your agility anchor will be your starting character if they are in your party, and otherwise the character in the first non-empty slot.
 
 [Afastest]
 This flag will double the Count timer.

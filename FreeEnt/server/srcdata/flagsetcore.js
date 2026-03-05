@@ -497,6 +497,10 @@ class FlagLogicCore {
         }
         if (flagset.has("Chero")) {
             this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:(super|alt|playable)");
+            if (flagset.has("Aagnostic")) {
+                flagset.set("Ahero");
+                this._lib.push(log, ["correction", "In the absence of other agility flags, Chero implies Ahero; replaced Aagnostic with Ahero"]);
+            }
         }
         start_include_flags = flagset.get_list("^Cstart:(?!not_)");
         start_exclude_flags = flagset.get_list("^Cstart:not_");

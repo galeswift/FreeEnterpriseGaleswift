@@ -8218,12 +8218,18 @@ var FLAG_UISPEC = [
           {
             "flag": "Aagnostic",
             "title": "Use the first occupied party slot for anchoring",
-            "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, by default the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under the other flags, the anchoring system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for <em>Aagnostic</em> will override the <em>Chero</em> agility effect, if playing with the hero challenge."
+            "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, by default the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under the other flags, the anchoring system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that <em>Chero</em> will force <em>Ahero</em> on over <em>Aagnostic</em>, but not over any other <em>A</em> flags."
           },
           {
             "flag": "Avanilla",
             "title": "Use vanilla agility anchoring",
             "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present."
+          },
+          {
+            "flag": "Ahero",
+            "title": "Use your starting/hero character as anchor, if available",
+            "description": "This flag implements <em>Chero</em> anchoring, where your agility anchor will be your starting character if they are in your party, and otherwise the character in the first non-empty slot.",
+            "fork": true
           },
           {
             "flag": "Aslowest",

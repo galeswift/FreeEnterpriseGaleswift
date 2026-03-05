@@ -451,6 +451,9 @@ class FlagLogicCore:
 
         if flagset.has('Chero'):
             self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:(super|alt|playable)')
+            if flagset.has('Aagnostic'):
+                flagset.set('Ahero')
+                self._lib.push(log, ['correction', 'In the absence of other agility flags, Chero implies Ahero; replaced Aagnostic with Ahero'])
 
         start_include_flags = flagset.get_list(r'^Cstart:(?!not_)')
         start_exclude_flags = flagset.get_list(r'^Cstart:not_')

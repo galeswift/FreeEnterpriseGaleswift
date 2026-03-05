@@ -63,7 +63,7 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 Fweighted/Fvanilla/Flocation/Fsequential:p/Fsequential:r/Fnerfed
 Fslowstart/Funlearn
 Fmaybe Funcapped Frandomhp Fomnimage
-Aagnostic/Avanilla/Aslowest/Afastest/Aaverage/Amedian/Arandom/Amonster/Aflat/A750formula/Aanchor:7/Aanchor:27/Aanchor:28/Aanchor:41/Aanchor:42
+Aagnostic/Avanilla/Ahero/Aslowest/Afastest/Aaverage/Amedian/Arandom/Amonster/Aflat/A750formula/Aanchor:7/Aanchor:27/Aanchor:28/Aanchor:41/Aanchor:42
 Ascale:1/Ascale:10
 Xsplit
 Xnoboost
@@ -174,7 +174,7 @@ Etoggle  : ~Evanilla & ~Ereduce & ~Enorepeats & ~Enoencounters
 Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
 Fweighted : ~Fvanilla & ~Flocation & ~Fsequential:p & ~Fsequential:r & ~Fnerfed
-Aagnostic : ~Avanilla & ~Aslowest & ~Afastest & ~Aaverage & ~Amedian & ~Arandom & ~Amonster & ~Aflat & ~A750formula & ~Aanchor:7 & ~Aanchor:27 & ~Aanchor:28 & ~Aanchor:41 & ~Aanchor:42
+Aagnostic : ~Avanilla & ~Ahero & ~Aslowest & ~Afastest & ~Aaverage & ~Amedian & ~Arandom & ~Amonster & ~Aflat & ~A750formula & ~Aanchor:7 & ~Aanchor:27 & ~Aanchor:28 & ~Aanchor:41 & ~Aanchor:42
 Zvanilla : ~Zphysical & ~Zphysmag & ~Zchaos & ~Zlavosshell
 
 ----- SLUGS
@@ -397,6 +397,7 @@ Fomnimage      add_spells_fusoya
 -starting:underground   starting_underground
 
 Avanilla     vanilla_agility
+Ahero        hero_agility
 Aslowest     slowest_agility
 Afastest     fastest_agility
 Aaverage     average_agility

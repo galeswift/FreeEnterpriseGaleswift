@@ -1207,6 +1207,7 @@ const _FE_FLAGSPEC = {
         "Fomnimage",
         "Aagnostic",
         "Avanilla",
+        "Ahero",
         "Aslowest",
         "Afastest",
         "Aaverage",
@@ -2545,6 +2546,7 @@ const _FE_FLAGSPEC = {
         [
             "Aagnostic",
             "Avanilla",
+            "Ahero",
             "Aslowest",
             "Afastest",
             "Aaverage",
@@ -9924,82 +9926,88 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "Aslowest",
+            "flag": "Ahero",
             "offset": 417,
             "size": 4,
             "value": 2
         },
         {
-            "flag": "Afastest",
+            "flag": "Aslowest",
             "offset": 417,
             "size": 4,
             "value": 3
         },
         {
-            "flag": "Aaverage",
+            "flag": "Afastest",
             "offset": 417,
             "size": 4,
             "value": 4
         },
         {
-            "flag": "Amedian",
+            "flag": "Aaverage",
             "offset": 417,
             "size": 4,
             "value": 5
         },
         {
-            "flag": "Arandom",
+            "flag": "Amedian",
             "offset": 417,
             "size": 4,
             "value": 6
         },
         {
-            "flag": "Amonster",
+            "flag": "Arandom",
             "offset": 417,
             "size": 4,
             "value": 7
         },
         {
-            "flag": "Aflat",
+            "flag": "Amonster",
             "offset": 417,
             "size": 4,
             "value": 8
         },
         {
-            "flag": "A750formula",
+            "flag": "Aflat",
             "offset": 417,
             "size": 4,
             "value": 9
         },
         {
-            "flag": "Aanchor:7",
+            "flag": "A750formula",
             "offset": 417,
             "size": 4,
             "value": 10
         },
         {
-            "flag": "Aanchor:27",
+            "flag": "Aanchor:7",
             "offset": 417,
             "size": 4,
             "value": 11
         },
         {
-            "flag": "Aanchor:28",
+            "flag": "Aanchor:27",
             "offset": 417,
             "size": 4,
             "value": 12
         },
         {
-            "flag": "Aanchor:41",
+            "flag": "Aanchor:28",
             "offset": 417,
             "size": 4,
             "value": 13
         },
         {
-            "flag": "Aanchor:42",
+            "flag": "Aanchor:41",
             "offset": 417,
             "size": 4,
             "value": 14
+        },
+        {
+            "flag": "Aanchor:42",
+            "offset": 417,
+            "size": 4,
+            "value": 15
         },
         {
             "flag": "Ascale:1",
@@ -12529,6 +12537,10 @@ const _FE_FLAGSPEC = {
             ],
             [
                 "not",
+                "Ahero"
+            ],
+            [
+                "not",
                 "Aslowest"
             ],
             [
@@ -13099,6 +13111,10 @@ class FlagLogicCore {
         }
         if (flagset.has("Chero")) {
             this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:(super|alt|playable)");
+            if (flagset.has("Aagnostic")) {
+                flagset.set("Ahero");
+                this._lib.push(log, ["correction", "In the absence of other agility flags, Chero implies Ahero; replaced Aagnostic with Ahero"]);
+            }
         }
         start_include_flags = flagset.get_list("^Cstart:(?!not_)");
         start_exclude_flags = flagset.get_list("^Cstart:not_");

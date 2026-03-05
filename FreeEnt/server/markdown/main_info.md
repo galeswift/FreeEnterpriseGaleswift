@@ -930,6 +930,10 @@ This flag is just the default FE agility anchoring behaviour (with the highest p
 
 This flag is simply `-vanilla:agility` renamed (so your anchor will always be the Cecil in the earliest slot, or else the character in the earliest slot).
 
+### `Ahero` {: .h6 }
+
+This flag implements the normal "hero" agility anchoring, even without `Chero`. If your starting character is in your party, then they are the anchor; otherwise, it is the usual FE anchoring behaviour. If dupes are enabled, then the hero will still be the specific copy of the character that was the starting character (axtor ID 0x01). If `Chero` is on, it will guarantee `Ahero` in the absence of `A` flags other than `Aagnostic`.
+
 ### `Aslowest` {: .h6 }
 
 The character with the lowest agility stat is chosen as the anchor (including 0 Agility, which could potentially be advantageous).

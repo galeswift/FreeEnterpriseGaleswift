@@ -754,6 +754,7 @@
 <@agility>* Specify agility anchoring
 .(Aagnostic) Use the first occupied party slot for anchoring
 .(Avanilla) Use vanilla agility anchoring
+.(Ahero)^ Use your starting/hero character as anchor, if available
 .(Aslowest)^ Use your slowest character as anchor
 .(Afastest)!^ Use your fastest character as anchor
 .(Aaverage)^ Use your average agility for anchoring

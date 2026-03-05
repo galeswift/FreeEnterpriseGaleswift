@@ -209,7 +209,6 @@ msfpatch {
         beq $+EndLoop
         jsr $_Util__XPlus80
         bra $-CheckRandomLoopStart
-        bra $+Accept 
     %EndLoop:
         jml $038d7a        
 
@@ -223,7 +222,7 @@ msfpatch {
         // %elif fixed_anchor%
         bra $+Accept // doesn't matter who the anchor is
 
-        // %elif flags: hero_challenge%
+        // %elif flags: hero_agility%
         lda $2000,x // check axtor ID, looking for 01/starting character
         and #$1f
         cmp #$01
