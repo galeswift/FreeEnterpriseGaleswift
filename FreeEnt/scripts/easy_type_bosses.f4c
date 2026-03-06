@@ -19,6 +19,13 @@ monster($B3)   // Calbrena
 // for that counter
 patch($0ee396 bus) { 00 }
 
+// ... and Cal is now a boss. okay; this doesn't
+// collide with Bnofree.
+monster($B2)
+{
+    boss
+}
+
 
 // Lugae/Balnab/Balnab-Z/Lugae form 2 are stats only
 // but (11,11) -> (10,10) speed for Lugae form 1
