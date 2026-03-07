@@ -5,10 +5,15 @@ from .spoilers import SpoilerRow
 from .address import *
 from .errors import BuildError
 
-CUSTOM_WEAPON_ITEM_ID = 0x46  # Dummy Legend sword
+CUSTOM_WEAPON_ITEM_ID = 0x46  # Dummy Crystal sword
 CUSTOM_WEAPON_ITEM_CONST = '#item.fe_CustomWeapon'
 CUSTOM_WEAPON_EQUIP_TABLE_INDEX = 0x10
 CUSTOM_WEAPON_ELEMENT_TABLE_INDEX = 0x3B
+
+# Lightbringer, Piggy Stick, Abel's Lance, Gigant Axe, Perseus Bow, Perseus Arrow, Mist Whip, Sasuke Katana, Mutsunokami, Rising Sun, Tiger Claw, Dragon Claw, Godhand, Thor's Hammer, Fiery Hammer, Nirvana, Apollo Harp, Loki's Lute
+GOOD_CUSTOM_WEAPONS = [0x103, 0x104, 0x105, 0x106, 0x107, 0x108, 0x109, 0x10B, 0x10C, 0x10E, 0x10F, 0x110, 0x111, 0x112, 0x113, 0x116, 0x117, 0x118, 0x119]
+# Adamant, CS, Excal, Avenger, MoonVeil, Dragoon Spear, Arty Arrows, Masamune, White Shirt
+ORDERED_GOOD_ALT_ITEMS = [0x9A, 0x3F, 0x1B, 0x4C, 0xC5, 0x27, 0x5F, 0x30, 0x93]
 
 _CAST_TABLE = {
     'White' : 0x0B,
@@ -93,16 +98,30 @@ def apply(env):
     elif 'custom_weapon' in env.options.test_settings:
         custom_weapon = databases.get_custom_weapons_dbview().find_one(lambda cw: env.options.test_settings['custom_weapon'].lower() in f"{cw.name}|{cw.spoilername}".lower())
     elif env.options.flags.has('hero_challenge') or env.options.flags.has('superhero_challenge'):
-        available_weapons = databases.get_custom_weapons_dbview().find_all(lambda cw: not cw.disabled and _is_user(cw, env.meta['starting_character']))
+        # you should expect to get a weapon associated to your hero, regardless of anything else
+        weapons_dbview = databases.get_custom_weapons_dbview()
+        if env.options.flags.has('goodsmith'):
+            if env.meta['starting_character'] not in ['palom', 'fusoya']:
+                # Palom and Fu do not have "good" custom weapons, per the list above
+                weapons_dbview.refine(lambda cw: cw.id in GOOD_CUSTOM_WEAPONS)
+        available_weapons = weapons_dbview.find_all(lambda cw: not cw.disabled and _is_user(cw, env.meta['starting_character']))
         custom_weapon = env.rnd.choice(available_weapons)
     elif env.options.flags.has('supersmith'):
-        if env.options.flags.has('playablesmith') and 'omnidextrous' not in env.meta.get('wacky_challenge',[]):
-            if 'fistfight' in env.meta.get('wacky_challenge',[]):
-                available_weapons = databases.get_custom_weapons_dbview().find_all(lambda cw: not cw.disabled and _is_user(cw, 'yang'))
-            else:
-                available_weapons = databases.get_custom_weapons_dbview().find_all(lambda cw: not cw.disabled and _are_users(cw, env.meta['available_characters']))
+        weapons_dbview = databases.get_custom_weapons_dbview()
+        if 'omnidextrous' in env.meta.get('wacky_challenge',[]) or env.options.flags.has('omnismith'):
+            if env.options.flags.has('goodsmith'):
+                # Perseus bow/arrow aren't good on Omnidex/when you can't necessarily equip the other required item.
+                weapons_dbview.refine(lambda cw: cw.id in GOOD_CUSTOM_WEAPONS and not cw.id in [0x107, 0x108])
+        elif 'fistfight' in env.meta.get('wacky_challenge',[]):
+            if env.options.flags.has_any('playablesmith', 'goodsmith'):
+                # all of the Claws are considered good
+                weapons_dbview.refine(lambda cw: _is_user(cw, 'yang'))
         else:
-            available_weapons = databases.get_custom_weapons_dbview().find_all(lambda cw: not cw.disabled)
+            if env.options.flags.has_any('playablesmith', 'goodsmith'):
+                weapons_dbview.refine(lambda cw: _are_users(cw, env.meta['available_characters']))
+                if env.options.flags.has('goodsmith') and not set(env.meta['available_characters']).issubset(set(['palom', 'fusoya'])):
+                    weapons_dbview.refine(lambda cw: cw.id in GOOD_CUSTOM_WEAPONS)
+        available_weapons = weapons_dbview.find_all(lambda cw: not cw.disabled)
         custom_weapon = env.rnd.choice(available_weapons)
     elif env.options.flags.has('altsmith'):
         items_dbview = databases.get_items_dbview()
@@ -111,17 +130,29 @@ def apply(env):
             items_dbview.refine(lambda it: not it.j)
         if env.options.flags.has('no_adamants'):
             items_dbview.refine(lambda it: it.const != '#item.AdamantArmor')
-        if env.options.flags.has('playablesmith') and not 'omnidextrous' in env.meta.get('wacky_challenge',[]):
+        if env.options.flags.has_any('playablesmith', 'goodsmith') and not 'omnidextrous' in env.meta.get('wacky_challenge',[]):
             # alt smith item can't be a MoonVeil if Tno:j is on! So restricting to Yang-only without Adamants would be bad; don't restrict in that case.
+            # also, all of these items *are* good, even the White Shirt. Have you looked at its defensive stats recently?
             if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
                     and (env.meta['available_characters']).issubset(set(['yang']) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
                 items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(env.meta['available_characters']))
         items = items_dbview.find_all(lambda it: it.tier in [7, 8])
-        smith_reward = env.rnd.choice(items)
+        if env.options.flags.has('goodsmith'):
+            # if we want "good" items, take the best according to the list above (we've already guaranteed there's something available)
+            smith_reward = None
+            for desired_item in ORDERED_GOOD_ALT_ITEMS:
+                for it in items:
+                    if it.code == desired_item:
+                        smith_reward = it
+                        break
+                if smith_reward:
+                    break
+        else:
+            smith_reward = env.rnd.choice(items)
         env.meta['rewards_assignment'][RewardSlot.forge_item] = ItemReward(smith_reward.const)
         env.spoilers.add_table("MISC", [SpoilerRow("Smithy item", smith_reward.spoilername, obscurable=True)],
             public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
-    else:
+    else: 
         env.meta['rewards_assignment'][RewardSlot.forge_item] = ItemReward('#item.Excalibur')
 
     if custom_weapon is None:

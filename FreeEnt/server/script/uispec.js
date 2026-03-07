@@ -9313,10 +9313,23 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "-smith:playable",
-            "title": "Kokkol's item will be usable",
-            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
-            "fork": true
+            "flag": "@anon101",
+            "title": "Restrictions on forge items",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-smith:playable",
+                "title": "Kokkol's item will be usable",
+                "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "-smith:good",
+                "title": "Kokkol's item will be usable and strong, if possible",
+                "description": "The item that Kokkol forges will not only be usable by a character you can acquire in the seed, but also will be a strong item if possible, given other restrictions.",
+                "fork": true
+              }
+            ]
           },
           {
             "flag": "-smith:omni",
@@ -9327,7 +9340,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon101",
+        "flag": "@anon102",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -9361,7 +9374,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon102",
+        "flag": "@anon103",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9412,7 +9425,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon103",
+            "flag": "@anon104",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9649,12 +9662,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon104",
+        "flag": "@anon105",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon105",
+            "flag": "@anon106",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -9676,7 +9689,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon106",
+            "flag": "@anon107",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -9693,7 +9706,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon107",
+            "flag": "@anon108",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -9772,7 +9785,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon108",
+        "flag": "@anon109",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -9826,7 +9839,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon109",
+            "flag": "@anon110",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -9842,7 +9855,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon110",
+                "flag": "@anon111",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -825,6 +825,18 @@ It also adds a fix for a vanilla FE bug:
 
 Under this flag, the forge item will be usable by one of the characters you can get in the seed, whether it's an FF4A weapon or a regular tier 7-8 item. This flag does nothing when it's just the vanilla Excalbur (and on `Omode:classicforge`) or if it would otherwise give nothing (only Yang and no j-items or Adamants). 
 
+### `-smith:good` {: .h6 }
+
+- Idea: various (perhaps mostly ScytheMarshall)
+- Design: ScytheMarshall, Wylem
+- Programming: ScytheMarshall
+- Locations: custom_weapon_rando.py
+
+Under this flag, the forge item will not only be usable by one of the characters you can get in the seed (FF4A weapon or otherwise), but it will *also* be strong. For example, most of the good melee FF4A weapons, or an Adamant armour if those are available, or a MoonVeil if available, etc. The goal is to avoid feeling bad about spending the time to forge. On `-smith:alt`, the tier 7-8 items are given a fixed order and the best item in that order that is available (depending on the characters in the seed and other flags) will be given:
+
+!!! info "`-smith:alt,good` item order"
+    - Adamant Armour, Crystal Sword, Excalibur, Avenger, MoonVeil, Dragoon Spear, Artemis Arrows, Masamune, White Shirt
+
 ### `-smith:omni` {: .h6 }
 
 - Idea: CoffeeAndChocobos
@@ -832,6 +844,8 @@ Under this flag, the forge item will be usable by one of the characters you can 
 - Locations: custom_weapon_rando.py, flagsetcore.py
 
 This flag allows every character in the seed to equip the FF4A weapon, if there is one. It will not, however, also allow anyone who cannot equip bows or arrows to equip the other hand to use Rosa's weapons.
+
+Note that under this flag or under the Omnidextrous wacky flag, any sort of playable/good restriction will not restrict by character, because all characters can equip whatever the FF4A weapon ends up being.
 
 ### `-starting:blackchocobo,underground` {: .h6 }
 

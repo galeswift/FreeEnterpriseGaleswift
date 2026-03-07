@@ -954,7 +954,9 @@
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
 ..(-smith:super) Kokkol crafts a weapon from FF4 Advance
-.[-smith:playable]^ Kokkol's item will be usable
+.<> Restrictions on forge items
+..(-smith:playable)^ Kokkol's item will be usable
+..(-smith:good)^ Kokkol's item will be usable and strong, if possible
 .[-smith:omni]^ All characters can equip the FF4A weapon 
 <>^ Change the PRNG table
 .(-prng:shuffle) Shuffle the PRNG table values

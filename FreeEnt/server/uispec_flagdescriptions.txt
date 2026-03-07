@@ -825,6 +825,9 @@ Instead of the Excalibur, Kokkol the Smith will forge a weapon from Final Fantas
 [-smith:playable]
 The item that Kokkol forges will be usable by a character you can acquire in the seed.
 
+[-smith:good]
+The item that Kokkol forges will not only be usable by a character you can acquire in the seed, but also will be a strong item if possible, given other restrictions.
+
 [-smith:omni]
 If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).
 

@@ -564,8 +564,8 @@ class FlagLogicCore {
         if (flagset.has("Evanilla")) {
             this._simple_disable(flagset, log, "Encounters are vanilla", ["Ekeep:behemoths", "Ekeep:doors", "Edanger"]);
         }
-        if ((flagset.get_list("^-smith:playable").length === flagset.get_list("^-smith:").length)) {
-            this._simple_disable(flagset, log, "No smith item requested", ["-smith:playable"]);
+        if ((flagset.get_list("^-smith:(playable|good)").length === flagset.get_list("^-smith:").length)) {
+            this._simple_disable(flagset, log, "No smith item requested", ["-smith:playable", "-smith:good"]);
         }
         if ((flagset.has("-smith:omni") && (! flagset.has_any("-smith:super", "Chero")))) {
             this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni"]);

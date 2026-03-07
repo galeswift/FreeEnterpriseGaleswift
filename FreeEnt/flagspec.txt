@@ -90,7 +90,7 @@ Znocosplay
 -spoon
 -monsterevade
 -monsterflee
--smith:super/-smith:alt -smith:playable -smith:omni
+-smith:super/-smith:alt -smith:playable/-smith:good -smith:omni
 -starting:blackchocobo/-starting:underground
 -speedmodbalance
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
@@ -392,6 +392,7 @@ Fomnimage      add_spells_fusoya
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith
+-smith:good          goodsmith
 -smith:omni          omnismith
 -starting:blackchocobo  starting_blackchocobo
 -starting:underground   starting_underground

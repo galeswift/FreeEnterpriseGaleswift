@@ -450,6 +450,7 @@ class FlagLogicCore:
                 self._simple_disable_regex(flagset, log, 'Conly:* flag(s) are specified', r'^Cno:')
 
         if flagset.has('Chero'):
+            # note: it's fine to keep -smith:good, to make sure the weapon is strong
             self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:(super|alt|playable)')
             if flagset.has('Aagnostic'):
                 flagset.set('Ahero')
@@ -512,8 +513,8 @@ class FlagLogicCore:
         if flagset.has('Evanilla'):
             self._simple_disable(flagset, log, 'Encounters are vanilla', ['Ekeep:behemoths', 'Ekeep:doors', 'Edanger'])
 
-        if len(flagset.get_list(r'^-smith:playable')) == len(flagset.get_list(r'^-smith:')):
-            self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable'])
+        if len(flagset.get_list(r'^-smith:(playable|good)')) == len(flagset.get_list(r'^-smith:')):
+            self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable', '-smith:good'])
         if flagset.has('-smith:omni') and not (flagset.has_any('-smith:super', 'Chero')):
             self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni'])
 
