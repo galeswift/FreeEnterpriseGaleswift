@@ -10,6 +10,36 @@ CUSTOM_WEAPON_ITEM_CONST = '#item.fe_CustomWeapon'
 CUSTOM_WEAPON_EQUIP_TABLE_INDEX = 0x10
 CUSTOM_WEAPON_ELEMENT_TABLE_INDEX = 0x3B
 
+CUSTOM_LEGEND_ITEM_ID = 0x19  # still the Legend Sword, #item.Legend, use the Custom Weapon's equip table index 0x10
+CUSTOM_LEGEND_ELEMENT_TABLE_INDEX = 0x3E # 0x3C and 0x3D are used for -wacky:advertising
+CUSTOM_WEAPON_TO_LEGEND = {
+    0x101 : 0x201, # holy swords
+    0x102 : 0x201,
+    0x103 : 0x201,
+    0x104 : 0x202, # sword
+    0x105 : 0x203, # spear
+    0x106 : 0x204, # axe
+    0x107 : 0x205, # bow
+    0x108 : 0x206, # arrow
+    0x109 : 0x207, # whip
+    0x10A : 0x208, # dagger
+    0x10B : 0x209, # katanas
+    0x10C : 0x209,
+    0x10D : 0x20A, # shuriken
+    0x10E : 0x20B, # boomerang
+    0x10F : 0x20C, # claws
+    0x110 : 0x20C,
+    0x111 : 0x20C,
+    0x112 : 0x20D, # wrenches
+    0x113 : 0x20D,
+    0x114 : 0x20E, # rod
+    0x115 : 0x20F, # staves
+    0x116 : 0x20F,
+    0x117 : 0x210, # harps
+    0x118 : 0x210,
+    0x119 : 0x210,
+}
+
 # Lightbringer, Piggy Stick, Abel's Lance, Gigant Axe, Perseus Bow, Perseus Arrow, Mist Whip, Sasuke Katana, Mutsunokami, Rising Sun, Tiger Claw, Dragon Claw, Godhand, Thor's Hammer, Fiery Hammer, Nirvana, Apollo Harp, Loki's Lute
 GOOD_CUSTOM_WEAPONS = [0x103, 0x104, 0x105, 0x106, 0x107, 0x108, 0x109, 0x10B, 0x10C, 0x10E, 0x10F, 0x110, 0x111, 0x112, 0x113, 0x116, 0x117, 0x118, 0x119]
 # Adamant, CS, Excal, Avenger, MoonVeil, Dragoon Spear, Arty Arrows, Masamune, White Shirt
@@ -25,6 +55,10 @@ _CAST_TABLE = {
     'Heal' : 0x12,
     'Wall' : 0x0A,
     'Fatal' : 0x2B,
+    'Stop' : 0x2C,
+    'Cure2' : 0x0F,
+    'Virus' : 0x26,
+    'Float' : 0x18,
 }
 
 _EQUIP = ['dkcecil', 'kain', 'crydia', 'tellah', 'edward', 'rosa', 'yang', 'palom', 'porom', 'pcecil', 'cid', 'arydia', 'edge', 'fusoya']
@@ -168,6 +202,7 @@ def apply(env):
         custom_weapon.dragons = 'y'
         custom_weapon.spirits = ''
         custom_weapon.undead = ''
+        custom_weapon.anim0 = 0x1C # Black Sword palette
 
     if custom_weapon.id == 0x106 and 'advertising'  in env.meta.get('wacky_challenge',[]):
         custom_weapon.giants = 'y'
@@ -260,3 +295,71 @@ def apply(env):
     # spoiler
     env.spoilers.add_table("MISC", [SpoilerRow("Supersmith weapon", custom_weapon.spoilername, obscurable=True)],
         public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
+
+    # for -smith:superspoiler, we need to update the Legend Sword to have many of the same properties, including animations/etc.
+    # also override the word "sword" with the correct weapon type if necessary
+    # animation note: palette (colours!), weapon_sprite (the thing your character is holding), effect_sprite (), effect; table for weapons is at $0F9E10
+    # -- go with holy palette 0x20, tailored weapon_sprite per type, similar effect_sprite per type, and effect routine
+    if env.options.flags.has('spoilsmith'):
+        custom_legend = databases.get_custom_legend_dbview().find_one(lambda cl : cl.id == CUSTOM_WEAPON_TO_LEGEND[custom_weapon.id])
+
+        if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
+            custom_legend.name = '[darksword]Legend'
+            custom_legend.elements = ['holy', 'dark', 'poison']
+            custom_legend.anim1 = 0x06
+            custom_legend.anim2 = 0x03
+            custom_legend.proxy = '#item.BlackSword'
+        elif custom_legend.id == 0x201:
+            # making no changes if it's a holy sword
+            return 
+        
+        # write item name
+        env.add_script(f'text(item name ${CUSTOM_LEGEND_ITEM_ID:02X}) {{{custom_legend.name}}}')
+
+        # change required equipment bytes: $00 (metallic bit 7/long-range bit 5), sometimes $03 (spell), $04 (elem/status, always 0x3C), $05 (trait weakness), $06 (bow bit 7, arrow bit 6, two-handed bit 5, equip index bits 0-4)
+        legend_bytes = [0x80, 0x28, 0x63, 
+                        _CAST_TABLE.get(custom_legend.cast, 0x00), 
+                        CUSTOM_LEGEND_ELEMENT_TABLE_INDEX, 
+                        0x00, CUSTOM_WEAPON_EQUIP_TABLE_INDEX, 0x08]
+
+        if custom_legend.longrange:
+            legend_bytes[0] |= 0x20
+        for i,race in enumerate(_RACES):
+            if getattr(custom_legend, race):
+                legend_bytes[5] |= (1 << i)
+        if custom_legend.bow:
+            legend_bytes[6] |= 0x80
+        if custom_legend.arrow:
+            legend_bytes[6] |= 0x40
+        if custom_legend.twohanded:
+            legend_bytes[6] |= 0x20
+
+        # don't need to patch the stats byte, to save What's My Gear Again? effort
+        env.add_binary(UnheaderedAddress(0x79100 + CUSTOM_LEGEND_ITEM_ID * 0x08), legend_bytes[0:7], as_script=True)
+
+        # write spell data
+        env.add_binary(UnheaderedAddress(0x79070 + CUSTOM_LEGEND_ITEM_ID), [custom_legend.spellpower], as_script=True)
+        env.add_binary(UnheaderedAddress(0x7D4E0 + CUSTOM_LEGEND_ITEM_ID), [_CAST_TABLE.get(custom_legend.cast, 0x00)], as_script=True)
+
+        # write animation data
+        env.add_binary(UnheaderedAddress(0x79E10 + CUSTOM_LEGEND_ITEM_ID * 0x04), [custom_legend.anim0, custom_legend.anim1, custom_legend.anim2, custom_legend.anim3], as_script=True)
+
+        # write element table entry
+        legend_element_value = 0x000000
+        for i,elem in enumerate(_ELEMENTS):
+            if elem in custom_legend.elements:
+                legend_element_value |= (1 << i)
+        env.add_binary(UnheaderedAddress(0x7A590 + CUSTOM_LEGEND_ELEMENT_TABLE_INDEX * 0x03), [legend_element_value & 0xFF, (legend_element_value >> 8) & 0xFF, (legend_element_value >> 16) & 0xFF], as_script=True)
+
+        # set override item description; unfortunately, we need to modify the description no matter what, due to weapon properties.
+        if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
+            with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
+                description_data = infile.read()
+        else: 
+            with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
+                description_data = infile.read()
+        env.meta.setdefault('item_description_overrides', {})[CUSTOM_LEGEND_ITEM_ID] = description_data
+
+        # add protection from losing the Legend Arrow
+        if custom_legend.id == 0x206:
+            env.add_toggle('legend_arrow')

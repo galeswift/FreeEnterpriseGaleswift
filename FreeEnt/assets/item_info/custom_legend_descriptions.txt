@@ -1,0 +1,79 @@
+<201> // [darksword]Legend
+  WIL+3. Deals holy and dark
+  damage. Inflicts Poison.
+  Forge with Adamant.
+
+<202> // [sword]Legend
+  WIL+3. Deals holy damage.
+  Inflicts Mini. Forge
+  with Adamant.
+
+<203> // [spear]Legend
+  WIL+3. Deals holy damage.
+  Strong vs. flying. Forge
+  with Adamant.
+
+<204> // [axe]Legend
+  WIL+3. Deals holy damage.
+  Two-handed. Forge
+  with Adamant.
+
+<205> // [bow]Legend
+  WIL+3. Deals holy damage.
+  Strong vs. flying. Forge
+  with Adamant.
+
+<206> // [arrow]Legend
+  WIL+3. Deals holy damage.
+  Strong vs. undead. Forge
+  with Adamant.
+
+<207> // [whip]Legend
+  WIL+3. Deals holy damage.
+  Inflicts Paralyze. Forge
+  with Adamant.
+
+<208> // [knife]Legend
+  WIL+3. Deals holy damage.
+  Casts [blackmagic]Virus. Forge
+  with Adamant.
+
+<209> // [katana]Legend
+  WIL+3. Deals holy damage.
+  Casts [whitemagic]Float. Forge
+  with Adamant.
+
+<20A> // [shuriken]Legend
+  WIL+3. Deals holy damage.
+  Strong vs. flying. Forge
+  with Adamant.
+
+<20B> // [boomerang]Legend
+  WIL+3. Deals holy damage.
+  Strong vs. flying. Forge
+  with Adamant.
+
+<20C> // [claw]Legend
+  WIL+3. Deals holy damage.
+  Strong vs. undead. Forge
+  with Adamant.
+
+<20D> // [wrench]Legend
+  WIL+3. Deals holy damage.
+  2-handed. Strong v. robots.
+  Forge with Adamant.
+
+<20E> // [rod]Legend
+  WIL+3. Deals holy damage.
+  Casts [blackmagic]Stop. Forge
+  with Adamant.
+
+<20F> // [staff]Legend
+  WIL+3. Deals holy damage.
+  Casts [whitemagic]Cure2. Forge
+  with Adamant.
+
+<210> // [harp]Legend
+  WIL+3. Deals holy damage.
+  2-handed. Inflicts Blind.
+  Forge with Adamant.

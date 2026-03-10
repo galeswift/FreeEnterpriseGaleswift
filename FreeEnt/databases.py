@@ -93,6 +93,16 @@ _custom_weapons_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_weapons.csvdb'), 
     'anim3' : csvdb.HexInt,
     })
 
+_custom_legend_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_legend.csvdb'), {
+    'id' : csvdb.HexInt,
+    'spellpower' : int,
+    'elements' : csvdb.List(','),
+    'anim0' : csvdb.HexInt,
+    'anim1' : csvdb.HexInt,
+    'anim2' : csvdb.HexInt,
+    'anim3' : csvdb.HexInt,
+    })
+
 def get_curves_dbview():
     return _curves_db.create_view()
 
@@ -122,6 +132,9 @@ def get_encounter_groups_dbview():
 
 def get_custom_weapons_dbview():
     return _custom_weapons_db.create_view()
+
+def get_custom_legend_dbview():
+    return _custom_legend_db.create_view()
 
 # helper function that some things need, maybe relocate?
 _item_spoiler_names = {}

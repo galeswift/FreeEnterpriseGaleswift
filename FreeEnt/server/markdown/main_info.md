@@ -847,6 +847,34 @@ This flag allows every character in the seed to equip the FF4A weapon, if there 
 
 Note that under this flag or under the Omnidextrous wacky flag, any sort of playable/good restriction will not restrict by character, because all characters can equip whatever the FF4A weapon ends up being.
 
+### `-smith:spoilsuper` {: .h6 }
+
+- Idea: Pushwall
+- Design: Pushwall, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: custom_weapon_rando.py, custom_weapon_support.f4c, item_delivery_quantity.f4c
+
+This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power, 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item). It will also match animations. The full list of additional properties is below:
+
+!!! info "Alternate Legend weapon properties"
+    - Legend Claw, for Tiger Fang, Dragon Claw, Godhand: hits Undead weakness.
+    - Legend Rod, for Asura Rod: casts Stop upon use as an item.
+    - Legend Staff, for Seraphim Mace, Nirvana: casts Cure2 upon use as an item.
+    - Legend (dark) Sword, for Deathbringer: also dark elemental, inflicts Poison. 
+    - Legend (holy) Sword, for Caliburn, Flandango, Lightbringer: no change.
+    - Legend (normal) Sword, for Piggy Stick: inflicts Mini.
+    - Legend Spear, for Abel's Lance: also hits air weakness.
+    - Legend Katana, for Sasuke's Katana and Mutsunokami: casts Float upon use as an item.
+    - Legend Dagger, for Triton's Dagger: cast Virus upon use as an item.
+    - Legend Whip, for Mist Whip: long-range, inflicts Paralyze.
+    - Legend Axe, for Gigant Axe: two-handed.
+    - Legend Star, for Scrap Metal: long-range, hits air weakness (but is not Dartable).
+    - Legend Boomerang, for Rising Sun: long-range, hits air weakness.
+    - Legend Harp, for Requiem Harp, Apollo's Harp, Loki's Lute: long-range, two-handed, inflicts Blind.
+    - Legend Hammer, for Thor's Hammer, Fiery Hammer: two-handed, hits Machine weakness.
+    - Legend Bow, for Perseus Bow: long-range, hits air weakness.
+    - Legend Arrow, for Perseus Arrow: long-range, hits Undead weakness.
+
 ### `-starting:blackchocobo,underground` {: .h6 }
 
 - Idea: Deathlike, Skarcerer, others in the past

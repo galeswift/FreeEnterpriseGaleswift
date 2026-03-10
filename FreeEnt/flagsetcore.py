@@ -450,7 +450,7 @@ class FlagLogicCore:
                 self._simple_disable_regex(flagset, log, 'Conly:* flag(s) are specified', r'^Cno:')
 
         if flagset.has('Chero'):
-            # note: it's fine to keep -smith:good, to make sure the weapon is strong
+            # note: it's fine to keep -smith:good, to make sure the weapon is strong, and -smith:spoilsuper, for preview fun
             self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:(super|alt|playable)')
             if flagset.has('Aagnostic'):
                 flagset.set('Ahero')

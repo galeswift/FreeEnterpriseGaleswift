@@ -2,7 +2,7 @@ id,name,spoilername,disabled,equip,use,attack,accuracy,metallic,throwable,longra
 0x101,[lightsword]Caliburn,Caliburn,,pcecil,,1,99,y,y,,,,,,,,,,,,,,,,,,,,,0x20,0x04,0x04,0x01,#item.CrystalSword
 0x102,[lightsword]Flan,Flan Sword,,pcecil,,60,99,y,,,,,,,,,,,,,,,,,,,y,,,0x1F,0x04,0x04,0x01,#item.CrystalSword
 0x103,[lightsword]Bringer,Lightbringer,,pcecil,,255,99,y,,y,,,,15,15,15,,,holy,White,2,,,,y,,,,y,0x1F,0x04,0x04,0x01,#item.CrystalSword
-0x104,[sword]Piggy,Piggy Stick,,"pcecil,kain",,150,99,,,,,,,,,,,,piggy,,,,,,,,,,,0x21,0x04,0x00,0x01,#item.Ancient
+0x104,[sword]Piggy,Piggy Stick,,"pcecil,kain",,150,99,,,,,,,,,,,,piggy,,,,,,,,,,,0x21,0x04,0x00,0x01,#item.Sleep
 0x105,[spear]Abel,Abel's Lance,,kain,,230,85,y,,,,,,15,15,15,,,"lightning,air",Weak,8,,,,,,,,,0x1A,0x02,0x04,0x01,#item.WhiteSpear
 0x106,[axe]Gigant,Gigant Axe,,"pcecil,kain,cid",,200,75,y,,,y,,,15,,,,,poison,,,,,,,,,,,0x1E,0x07,0x00,0x01,#item.RuneAxe
 0x107,[bow]Perseus,Perseus Bow,,rosa,,110,85,,,y,,y,,,,,,15,air,,,,,,,,,,,0x1C,0x17,0x08,0x04,#item.ArtemisBow

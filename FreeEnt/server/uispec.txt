@@ -958,6 +958,7 @@
 ..(-smith:playable)^ Kokkol's item will be usable
 ..(-smith:good)^ Kokkol's item will be usable and strong, if possible
 .[-smith:omni]^ All characters can equip the FF4A weapon 
+.[-smith:spoilsuper]^ The Legend Sword previews the FF4A weapon
 <>^ Change the PRNG table
 .(-prng:shuffle) Shuffle the PRNG table values
 .(-prng:random) Randomize the PRNG values independently

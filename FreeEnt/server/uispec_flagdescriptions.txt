@@ -831,6 +831,9 @@ The item that Kokkol forges will not only be usable by a character you can acqui
 [-smith:omni]
 If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).
 
+[-smith:spoilsuper]
+If Kokkol forges a weapon from FF4 Advance, then the Legend Sword becomes the Legend "Weapon" of the same type as the FF4 Advance weapon, with additional properties shared by most weapons of that type.
+
 [-starting:blackchocobo]
 Instead of starting with the Enterprise, start at Baron with Black Chocobos available but no Enterprise. The Enterprise is obtained by completing Baron Castle.
 
