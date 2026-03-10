@@ -59,7 +59,7 @@ Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Br
 Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
-Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
+Gnone Gdupe Gmp Gwarp Glife/Glife2f/Gnolifer Gsylph Gbackrow G64
 Fweighted/Fvanilla/Flocation/Fsequential:p/Fsequential:r/Fnerfed
 Fslowstart/Funlearn
 Fmaybe Funcapped Frandomhp Fomnimage
@@ -367,6 +367,8 @@ Gdupe                glitch_allow_duplication
 Gmp                  glitch_allow_mp_underflow
 Gwarp                glitch_allow_dwarf_warp
 Glife                glitch_allow_life
+Glife2f              glitch_modified_life
+Gnolifer             glitch_prevent_life2
 Gsylph               glitch_allow_sylph
 Gbackrow             glitch_allow_backrow
 G64                  glitch_allow_64

@@ -608,6 +608,26 @@ Under `Bspellpower`, all bosses are treated as having at least 1 spell power. Th
 
 These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc.
 
+## Glitch Flags
+
+### `Glife2f` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: 
+
+This flag makes Life1 and Life potions restore HP to swooned monsters depending on their $2F stat, specifically (1 + ($2F / 32)) times (max HP / 4), with all divisions being integer division. Hence, there will be minor truncation errors. Characters are not affected by the change.
+
+Note that Cry does lower the $2F of every monster in battle, even ones that are swooned. 
+
+### `Gnolifer` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: 
+
+This flag makes Life2 fail against monsters (and removes the usual Life glitch), so that you can only ever defeat a single monster once unless the monsters revive each other.
+
 ## Encounter Flags
 
 The default `E` flag is now `Etoggle`.
@@ -852,7 +872,7 @@ Note that under this flag or under the Omnidextrous wacky flag, any sort of play
 - Idea: Pushwall
 - Design: Pushwall, ScytheMarshall
 - Programming: ScytheMarshall
-- Locations: custom_weapon_rando.py, custom_weapon_support.f4c, item_delivery_quantity.f4c
+- Locations: custom_weapon_rando.py, custom_weapon_support.f4c
 
 This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power, 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item). It will also match animations. The full list of additional properties is below:
 

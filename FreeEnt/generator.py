@@ -755,7 +755,10 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/remove_mp_underflow.f4c')
     if not options.flags.has('glitch_allow_dwarf_warp'):
         env.add_file('scripts/remove_dark_crystal_skip.f4c')
-    if not options.flags.has('glitch_allow_life'):
+    if env.options.flags.has('glitch_modified_life'):
+        env.add_file('scripts/modify_life_monsters.f4c')
+    elif not options.flags.has('glitch_allow_life'):
+        # this case handles both the absence of any Glife flags and Gnolifer
         env.add_file('scripts/remove_life_glitch.f4c')
     if (not options.flags.has('glitch_allow_backrow')) or 'sixleggedrace' in env.meta.get('wacky_challenge', []):
         env.add_file('scripts/remove_backrow_glitch.f4c')

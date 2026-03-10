@@ -447,6 +447,12 @@ The glitches explicitly referenced here are <em>disabled by default</em>; settin
 [Gsylph]
 When enabled, casting Sylph will only deduct MP from the caster if they are in the middle party slot.
 
+[Glife2f]
+When used on monsters, Life1 and Life potions will restore a fraction of their max HP depending on their $2F stat (one of 1/4, 2/4, 3/4, or 4/4 of the monster's max HP, with a higher $2F stat giving more HP).
+
+[Gnolifer]
+Normally, Life2 will still work on monsters to revive them at full HP, even without the Life glitch active. This flag removes that functionality.
+
 [Etoggle]
 Encounters can be enabled/disabled from the in-game Custom menu.
 

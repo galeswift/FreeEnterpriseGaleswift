@@ -697,7 +697,10 @@
 .[Gdupe] Allow item duplication
 .[Gmp] Allow MP underflow
 .[Gwarp] Allow Dwarf Castle warp
-.[Glife] Allow Life glitch 
+.<> Life glitch options
+..(Glife) Allow Life glitch
+..(Glife2f) Change how Life works for monsters
+..(Gnolifer) Prevent Life2 working on monsters
 .[Gsylph] Allow Sylph MP glitch
 .[Gbackrow] Allow backrow glitch 
 .[G64] Allow 64-floor glitch
