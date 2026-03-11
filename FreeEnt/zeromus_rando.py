@@ -26,7 +26,8 @@ BIGBANG_5_COMMANDS = {
     '#spell.Enemy_Dancing' : (False, 'spell power', 20, 'all characters'), # script-breaking but it's fine if it's only the very last BB
 }
 
-# Ailment data used for Zailments
+# Ailment data used for Zailments; note that we're also giving Zeromus status protection here,
+# so we can use funkier spells
 POSSIBLE_STATUS_SPELLS = {
     '#spell.Mute' : 'all characters',
     '#spell.Slow' : 'all characters',
@@ -38,17 +39,24 @@ POSSIBLE_STATUS_SPELLS = {
     '#spell.Stone' : 'random character',
     '#spell.Fatal' : 'random character',
     '#spell.Stop' : 'random character',
+    '#spell.Enemy_Gaze' : 'all_characters',
+    '#spell.Enemy_Bluster' : 'front row / back row',
     '#spell.Enemy_Slap' : 'all characters',
     '#spell.Enemy_Powder' : 'all characters',
     '#spell.Enemy_Glance' : 'random character',
     '#spell.Enemy_Tongue' : 'front row / back row',
     '#spell.Enemy_Curse' : 'all characters',
     '#spell.Enemy_Ray' : 'all characters',
+    '#spell.Enemy_Beak' : 'random character',
     '#spell.Enemy_Petrify' : 'front row / back row',
-    '#spell.Enemy_Whisper' : 'random character',
+    '#spell.Enemy_Blast' : 'front row / back row',
+    '#spell.Enemy_Hug' : 'random character',
+    '#spell.Enemy_Breath' : 'front row / back row / all characters',
+    '#spell.Enemy_Whisper' : 'random character / front row / back row',
     '#spell.Enemy_Entangle' : 'front row / back row',
     '#spell.Enemy_HoldGas' : 'front row / back row',
     '#spell.Enemy_Gas' : 'front row / back row',
+    '#spell.Enemy_Poison' : 'front row / back row / all characters',
     '#spell.Enemy_Demolish' : 'random character',
     '#spell.Enemy_Crush' : 'random character',
 }
@@ -455,6 +463,9 @@ def apply(env):
                     '    use #Enemy_BigBang\n',
                 ])  
 
+        # add status protection, for added danger... to us
+        env.add_substitution('zeromus status protection',
+                             'resist #Poison #Blind #Mute #Piggy #Mini #Toad #Stone #Swoon #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Curse')
         env.spoilers.add_table("MISC", ailments_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))    
 
     elif script_category == 'chaos':

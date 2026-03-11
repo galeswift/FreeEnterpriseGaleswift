@@ -208,6 +208,8 @@ monster($C9)   // Zeromus
     // %end%
     // %zeromus initial spell power%
     spell power 30
+    // %end%    
+    // %zeromus status protection%
     // %end%
 }
 
