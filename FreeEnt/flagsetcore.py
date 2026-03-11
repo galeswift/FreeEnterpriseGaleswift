@@ -554,13 +554,18 @@ class FlagLogicCore:
         if flagset.has_any('-starting:underground','-starting:blackchocobo'):
             self._lib.push(log, ['error', "Different starting location flags are not currently available; remove them and try again."])
 
+        unsure_flags = flagset.get_list(r'^Zunsure:')
+        for fl in unsure_flags:
+            fl_cat = 'Z' + self._lib.re_sub(r'^Zunsure:', '', fl)
+            if flagset.has(fl_cat):
+                flagset.unset(fl)
+                self._lib.push(log, ['correction', f'Cannot use {fl} when {fl_cat} is set; removed {fl}'])
+
         if flagset.has('Zphysical') and flagset.has('Zwhichbang'):
             self._simple_disable(flagset, log, 'No guaranteed Big Bangs in script', ['Zwhichbang'])
 
-        if flagset.has_any('Zchaos', 'Zlavosshell') and flagset.has('Zphaseshift'):
+        if flagset.has_any('Zchaos', 'Zlavosshell') and not flagset.has_any('Zunsure:vanilla', 'Zunsure:physical', 'Zunsure:ailments'):
             self._simple_disable(flagset, log, 'Random phases take precedence over shuffled phases', ['Zphaseshift'])
-
-        # add in a couple other restrictions about Z fight stuff
 
         all_spoiler_flags = flagset.get_list(r'^-spoil:')
         sparse_spoiler_flags = flagset.get_list(r'^-spoil:sparse')

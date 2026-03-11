@@ -1145,9 +1145,17 @@ Replaces Big Bang and Meteo with Dark Wave, direct Virus with Needle-all, and di
 
 It turns out that spells do not correctly retarget when the only monsters left in the battle are in the back row, so the game softlocks. Normally this isn't an issue, since monsters can't temporarily disappear from battle (and Cecil does not have spells in the cutscene fight), but since Zeromus is Jumping, we need to patch this behaviour.
 
-### `Zphysmag` {: .h6 }
+### `Zailments` {: .h6 }
 
-50% of the time, this flag does nothing. The other 50% of the time, Zeromus gets the physical scripting from `Zphysical`. The point of this flag is to introduce uncertainty as to what Zeromus is going to do.
+- Idea: IAmDMar
+
+This flag replaces all six Virus or Nuke casts (script or counter) with status spells, with various targetting options. 
+
+### `Zunsure:[vanilla,physical,ailments,chaos,lavosshell]` {: .h6 }
+
+To increase uncertainty about the Zeromus fight, these flags add the possibility of randomly choosing one of the specified script categories in addition to the main script category chosen. (flagsetcore will remove `Zunsure:[option]` if `Z[that option]` is already enabled). If `Zwhichbang` or `Zphaseshift` are on and a script category is chosen that makes one or both of those flags irrelevant, then they will do nothing.
+
+These flags replace the old flag `Zphysmag`, where 50% of the time, the flag did nothing, and the other 50% of the time, Zeromus got the physical scripting from `Zphysical`.
 
 ### `Zchaos` {: .h6 }
 

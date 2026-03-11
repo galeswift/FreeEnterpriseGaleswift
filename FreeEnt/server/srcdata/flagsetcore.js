@@ -437,7 +437,7 @@ class FlagLogicCore {
         this._simple_disable(flagset, log, prefix, flagset.get_list(flags_regex));
     }
     fix(flagset) {
-        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_customized_rand_flags, all_customized_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss, boss_slots_removed, bosses_available, ch, ch_count_cap, ch_list, challenges, char_objective_flags, character_pool, current_boss, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, flags_objective_chars, flags_objective_chars_num, flexible_char_count, flexible_char_pool, flexible_random_objective_count, gated_objective_index, gated_objectives, group_obj_num, group_scores, grp_obj_num, grp_sc, hard_required_index, hard_required_objectives, has_unavailable_characters, just_in_case_mandatory_char_pool, kmiab_flags, log, max_bosses, max_char_objectives, max_non_tough_quests, max_tough_quests, min_non_char_objectives, mode, non_tough_quest_room, nonstarting_character_slots, num_rand_objectives, num_random_objectives, only_char_objectives, only_chars_list, only_flags, pass_quest_flags, qu, rand_category_flags, rand_only_char_flags, random_category_flags, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, sorted_groups, sparse_spoiler_flags, specific_boss_objectives, specific_tough_quest_objectives, start_exclude_flags, start_include_flags, theoretical_available_characters, total_char_count, total_flexible_bosses, total_flexible_non_tough_quests, total_flexible_tough_quests, total_mandatory_bosses, total_mandatory_non_tough_quests, total_mandatory_tough_quests, total_objective_count, tough_quest_room, win_flags;
+        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_customized_rand_flags, all_customized_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss, boss_slots_removed, bosses_available, ch, ch_count_cap, ch_list, challenges, char_objective_flags, character_pool, current_boss, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, fl_cat, flags_objective_chars, flags_objective_chars_num, flexible_char_count, flexible_char_pool, flexible_random_objective_count, gated_objective_index, gated_objectives, group_obj_num, group_scores, grp_obj_num, grp_sc, hard_required_index, hard_required_objectives, has_unavailable_characters, just_in_case_mandatory_char_pool, kmiab_flags, log, max_bosses, max_char_objectives, max_non_tough_quests, max_tough_quests, min_non_char_objectives, mode, non_tough_quest_room, nonstarting_character_slots, num_rand_objectives, num_random_objectives, only_char_objectives, only_chars_list, only_flags, pass_quest_flags, qu, rand_category_flags, rand_only_char_flags, random_category_flags, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, sorted_groups, sparse_spoiler_flags, specific_boss_objectives, specific_tough_quest_objectives, start_exclude_flags, start_include_flags, theoretical_available_characters, total_char_count, total_flexible_bosses, total_flexible_non_tough_quests, total_flexible_tough_quests, total_mandatory_bosses, total_mandatory_non_tough_quests, total_mandatory_tough_quests, total_objective_count, tough_quest_room, unsure_flags, win_flags;
         log = [];
         if ((flagset.has("Kunsafer") && (! flagset.has_any("Ksummon", "Kmoon", "Kmiab:above", "Kmiab:lst", "Kmiab:standard", "Kmiab:all")))) {
             flagset.set("Kmoon");
@@ -601,10 +601,19 @@ class FlagLogicCore {
         if (flagset.has_any("-starting:underground", "-starting:blackchocobo")) {
             this._lib.push(log, ["error", "Different starting location flags are not currently available; remove them and try again."]);
         }
+        unsure_flags = flagset.get_list("^Zunsure:");
+        for (var fl, _pj_c = 0, _pj_a = unsure_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            fl = _pj_a[_pj_c];
+            fl_cat = ("Z" + this._lib.re_sub("^Zunsure:", "", fl));
+            if (flagset.has(fl_cat)) {
+                flagset.unset(fl);
+                this._lib.push(log, ["correction", `Cannot use ${fl} when ${fl_cat} is set; removed ${fl}`]);
+            }
+        }
         if ((flagset.has("Zphysical") && flagset.has("Zwhichbang"))) {
             this._simple_disable(flagset, log, "No guaranteed Big Bangs in script", ["Zwhichbang"]);
         }
-        if ((flagset.has_any("Zchaos", "Zlavosshell") && flagset.has("Zphaseshift"))) {
+        if ((flagset.has_any("Zchaos", "Zlavosshell") && (! flagset.has_any("Zunsure:vanilla", "Zunsure:physical", "Zunsure:ailments")))) {
             this._simple_disable(flagset, log, "Random phases take precedence over shuffled phases", ["Zphaseshift"]);
         }
         all_spoiler_flags = flagset.get_list("^-spoil:");

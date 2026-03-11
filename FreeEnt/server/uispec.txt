@@ -733,7 +733,7 @@
 ..[] HP gain modifications
 ...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
 ...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
-.(Fvanilla) Vanilla FuSoYa
+.(Fvanilla)- Vanilla FuSoYa
 ..[] HP gain modifications
 ...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
 .(Fsequential:p)^ Fixed spell order (Palom/Porom)
@@ -756,7 +756,7 @@
 == AGILITY
 <@agility>* Specify agility anchoring
 .(Aagnostic) Use the first occupied party slot for anchoring
-.(Avanilla) Use vanilla agility anchoring
+.(Avanilla)- Use vanilla agility anchoring
 .(Ahero)^ Use your starting/hero character as anchor, if available
 .(Aslowest)^ Use your slowest character as anchor
 .(Afastest)!^ Use your fastest character as anchor
@@ -826,18 +826,19 @@
 
 == ZEROMUS
 <>* Zeromus fight script
-.(Zvanilla) Vanilla Z script
-..[Zwhichbang]!^ Replace every Big Bang with another spell
-..[Zphaseshift]!^ Shuffle the three main Z fight phases
+.(Zvanilla)- Vanilla Z script
 .(Zphysical)!^ Physical Z script
-..[Zphaseshift]!^ Shuffle the three main Z fight phases
-.(Zphysmag)!^ Random physical or magical Z script
-..[Zwhichbang]!^ Replace every Big Bang with another spell
-..[Zphaseshift]!^ Shuffle the three main Z fight phases
+.(Zailments)!^ Status ailments Z script
 .(Zchaos)!^ Fully random attack and reaction scripts
-..[Zwhichbang]!^ Replace every Big Bang with another spell
 .(Zlavosshell)!^ Three random attack phases
-..[Zwhichbang]!^ Replace every Big Bang with another spell
+[@Zunsure] Random category selection
+.[Zunsure:vanilla]^ Possible vanilla script
+.[Zunsure:physical]!^ Possible physical script
+.[Zunsure:ailments]!^ Possible status script
+.[Zunsure:chaos]!^ Possible chaos script
+.[Zunsure:lavosshell]!^ Possible copycat script
+[Zwhichbang]!^ Replace every Big Bang with another spell
+[Zphaseshift]!^ Shuffle the three main Z fight phases
 <>^ Nerfing of Big Bangs
 .(Znonerfs)! Prevent nerfing of Big Bangs
 .(Zmustnerf)! 9999 damage Big Bangs

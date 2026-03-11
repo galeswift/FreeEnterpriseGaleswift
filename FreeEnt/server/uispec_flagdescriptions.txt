@@ -1027,14 +1027,17 @@ Removes the added exit at the start of the Giant of Bab-il, forcing you to compl
 [Zphysical]
 Enable this flag to replace Zeromus' magic-based damaging attacks with physical attacks (Fight, Dark Wave, Needle/Counter). Zeromus now counters some physical commands instead of magic.
 
-[Zphysmag]
-In half the seeds rolled with this flag, Zeromus will have the physical script from <em>Zphysical</em>, and in the other half Zeromus will have the usual magic script.
+[Zailments]
+Replaces Nuke and Virus (direct and counter) with status ailment spells, possibly with different targetting.
 
 [Zchaos]
 In each attack phase, Zeromus will have a handful of random attacks (one or two possibly stronger, with a shake). Four attacks are chosen as reactions. The attacks are mostly curated.
 
 [Zlavosshell]
 The three main attack phases are replaced by three random monster scripts that do not automatically progress to another script.
+
+[@Zunsure]
+Each script category specified here, together with the main script chosen above, will have an equal probability of being the script category that Zeromus will use in the seed. The <em>Zwhichbang</em> and <em>Zphaseshift</em> flags will not apply if the script category chosen is incompatible with those flags.
 
 [Zwhichbang]
 Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.

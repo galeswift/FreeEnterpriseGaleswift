@@ -77,7 +77,8 @@ Xmoonbonus:200/Xmoonbonus:100
 Xmaxlevelbonus
 Xsmallparty
 Xgeometric:90/Xgeometric:80/Xgeometric:70/Xgeometric:60/Xgeometric:50/Xgeometric:40/Xgeometric:30/Xgeometric:20/Xgeometric:10/Xgeometric:0
-Zvanilla/Zphysical/Zphysmag/Zchaos/Zlavosshell
+Zvanilla/Zphysical/Zailments/Zchaos/Zlavosshell
+Zunsure:vanilla Zunsure:physical Zunsure:ailments Zunsure:chaos Zunsure:lavosshell
 Zwhichbang
 Zphaseshift
 Znonerfs/Zmustnerf
@@ -174,8 +175,8 @@ Etoggle  : ~Evanilla & ~Ereduce & ~Enorepeats & ~Enoencounters
 Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
 Fweighted : ~Fvanilla & ~Flocation & ~Fsequential:p & ~Fsequential:r & ~Fnerfed
-Aagnostic : ~Avanilla & ~Ahero & ~Aslowest & ~Afastest & ~Aaverage & ~Amedian & ~Arandom & ~Amonster & ~Aflat & ~A750formula & ~Aanchor:7 & ~Aanchor:27 & ~Aanchor:28 & ~Aanchor:41 & ~Aanchor:42
-Zvanilla : ~Zphysical & ~Zphysmag & ~Zchaos & ~Zlavosshell
+Aagnostic : ~Avanilla & ~Ahero & ~Aslowest & ~Afastest & ~Aaverage & ~Amedian & ~Arandom & ~Amonster & ~Aflat & ~A750formula & ~/^Aanchor:/
+Zvanilla : ~Zphysical & ~Zailments & ~Zchaos & ~Zlavosshell 
 
 ----- SLUGS
 
@@ -426,11 +427,6 @@ Xsmallparty      experience_small_party
 -vanilla:giant       vanilla_giant
 
 Znocosplay         vanilla_z
-Zvanilla           z_vanilla_script
-Zphysical          z_physical_script
-Zphysmag           z_physical_or_magical_script
-Zchaos             z_chaos_script
-Zlavosshell        z_random_scripts
 Zwhichbang         z_random_bigbangs
 Zphaseshift        z_random_phases
 Znonerfs           z_no_nerfs
