@@ -969,9 +969,16 @@
 .(-prng:consecutive)! Replace the PRNG table with the numbers 0 to 255 in order
 .(-prng:mostlysingle)! Replace the PRNG table with (mostly) a single value
 [-miscbugfixes]^ Include minor bug fixes
+[] Call options
+.<> Spellset options
+..(-call:levelup)^ Rydia learns summons by level-up
+..(-call:all)^ Rydia starts with all summons learned
+.[-call:vanillahobs] Vanilla Hobs spell
+.<> Dwarf Castle spell learning
+..(-call:vanillagrowup) Vanilla Dwarf Castle summons
+..(-call:nogrowup)^ Rydia learns no spells in place of summons
+.[-call:noorbs]!^ Call orbs are removed from rewards, boxes, and shops
 [] Restore vanilla behaviors
-.[-vanilla:hobs] Vanilla Hobs spell
-.[-vanilla:growup] Vanilla Dwarf Castle summons
 .[-vanilla:fashion] Vanilla fashion
 .[-vanilla:miabs] Vanilla monster-in-a-box locations
 .[-vanilla:giant] Vanilla Giant

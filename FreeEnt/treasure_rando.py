@@ -183,6 +183,8 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.AdamantArmor')
     if env.options.flags.has('no_cursed_rings'):
         dbview.refine(lambda it: it.const != '#item.Cursed')
+    if env.options.flags.has('no_call_orbs'):
+        dbview.refine(lambda it: it.subtype != 'summon')
     if env.options.flags.has('objective_mode_external'):
         dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):

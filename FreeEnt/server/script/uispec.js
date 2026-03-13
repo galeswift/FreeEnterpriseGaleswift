@@ -9392,18 +9392,61 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "@anon104",
-        "title": "Restore vanilla behaviors",
+        "title": "Call options",
         "subcontrols": [
           {
-            "flag": "-vanilla:hobs",
+            "flag": "@anon105",
+            "title": "Spellset options",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-call:levelup",
+                "title": "Rydia learns summons by level-up",
+                "fork": true
+              },
+              {
+                "flag": "-call:all",
+                "title": "Rydia starts with all summons learned",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "-call:vanillahobs",
             "title": "Vanilla Hobs spell",
             "description": "By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior."
           },
           {
-            "flag": "-vanilla:growup",
-            "title": "Vanilla Dwarf Castle summons",
-            "description": "By default in Free Enterprise, the summons learned when Rydia ages are randomized. Set this flag to return to the vanilla summons learned at that time (Mist, Indra, Jinn, Shiva, and Titan)."
+            "flag": "@anon106",
+            "title": "Dwarf Castle spell learning",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-call:vanillagrowup",
+                "title": "Vanilla Dwarf Castle summons",
+                "description": "By default in Free Enterprise, the summons learned when Rydia ages are randomized. Set this flag to return to the vanilla summons learned at that time (Mist, Indra, Jinn, Shiva, and Titan)."
+              },
+              {
+                "flag": "-call:nogrowup",
+                "title": "Rydia learns no spells in place of summons",
+                "description": "Set this flag to prevent Rydia from learning any summons at Dwarf Castle (she will still learn Fire2/Ice-2/Lit-2).",
+                "fork": true
+              }
+            ]
           },
+          {
+            "flag": "-call:noorbs",
+            "title": "Call orbs are removed from rewards, boxes, and shops",
+            "description": "Set this flag to remove all Call orbs from the game. Rydia can still learn summons in other ways.",
+            "hard": true,
+            "fork": true
+          }
+        ]
+      },
+      {
+        "flag": "@anon107",
+        "title": "Restore vanilla behaviors",
+        "subcontrols": [
           {
             "flag": "-vanilla:fashion",
             "title": "Vanilla fashion",
@@ -9442,7 +9485,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon105",
+            "flag": "@anon108",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9679,12 +9722,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon106",
+        "flag": "@anon109",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon107",
+            "flag": "@anon110",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -9706,7 +9749,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon108",
+            "flag": "@anon111",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -9723,7 +9766,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon109",
+            "flag": "@anon112",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -9802,7 +9845,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon110",
+        "flag": "@anon113",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -9856,7 +9899,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon111",
+            "flag": "@anon114",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -9872,7 +9915,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon112",
+                "flag": "@anon115",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

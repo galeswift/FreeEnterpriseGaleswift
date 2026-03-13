@@ -365,6 +365,55 @@ def spellset_data(env):
                 '#White' : 56
             })      
 
+    if env.options.flags.has('call_level_up'):
+        spellsets['RydiaCall'].update({
+            '#spell.Imp'   : 3,
+            '#spell.Bomb'  : 10,
+            '#spell.Mage'  : 15,
+            '#spell.Odin'  : 23,
+            '#spell.Sylph' : 27,
+            '#spell.Shiva' : 28,
+            '#spell.Jinn'  : 29,
+            '#spell.Indra' : 30,
+            '#spell.Titan' : 32,
+            '#spell.Mist'  : 34,
+            '#spell.Asura' : 39,
+            '#spell.Levia' : 46,
+            '#spell.Baham' : 53,
+        })
+        if env.options.flags.has('japanese_spells'):
+            spellsets['RydiaCall'].update({
+                '#spell.Cocka' : 21,
+                '#spell.Levia' : 49,
+                '#spell.Baham' : 57,
+            })
+        elif env.options.flags.has('antidale_spells_progression'):
+            spellsets['RydiaCall'].update({
+            '#spell.Shiva' : 26,
+            '#spell.Jinn'  : 26,
+            '#spell.Indra' : 26,
+            })            
+    elif env.options.flags.has('call_start_all'):
+        spellsets['RydiaCall'].update({
+            '#spell.Imp'   : 0,
+            '#spell.Bomb'  : 0,
+            '#spell.Mage'  : 0,
+            '#spell.Odin'  : 0,
+            '#spell.Sylph' : 0,
+            '#spell.Shiva' : 0,
+            '#spell.Jinn'  : 0,
+            '#spell.Indra' : 0,
+            '#spell.Titan' : 0,
+            '#spell.Mist'  : 0,
+            '#spell.Asura' : 0,
+            '#spell.Levia' : 0,
+            '#spell.Baham' : 0,
+        })       
+        if env.options.flags.has('japanese_spells'):
+            spellsets['RydiaCall'].update({
+                '#spell.Cocka' : 0,
+            })
+
     spells_script = []
     # set up spell name consts for #Lance and #Harm
     spells_script.extend([

@@ -105,6 +105,12 @@ def apply(env):
         banned_items.append('#item.AdamantArmor')
     if env.options.flags.has('no_cursed_rings'):
         banned_items.append('#item.Cursed')
+    if env.options.flags.has('no_call_orbs'):
+        banned_items.append('#item.Sylph')
+        banned_items.append('#item.Odin')
+        banned_items.append('#item.Asura')
+        banned_items.append('#item.Levia')
+        banned_items.append('#item.Baham')
     if env.options.flags.has('objective_mode_external'):
         banned_items.append('#item.fe_EagleEye')
     if banned_items:

@@ -1125,6 +1125,64 @@ This flag replaces the table with the numbers 0-255 in ascending order.
 
 This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 47 of the entries are replaced with 47 numbers near the random integer in order to allow every battle slot to be targettable and every black/white spell slot to be checked. (Hence, "mostly single".) 
 
+## Call Flags
+
+- Idea/Design: ScytheMarshall (except otherwise noted)
+- Programming: ScytheMarshall
+
+Note that the vanilla FF4 bug where spells learned at the same level but from different lists are broken (only spells for the first list save) has been fixed, to accommodate Rydia learning Call spells by level-up. The fix is in character_expansion.f4c.
+
+### `-call:levelup` {: .h6 }
+
+- Idea: Deathlike (and probably others)
+- Design: Deathlike, Marshal, ScytheMarshall
+- Location: update_spells.py
+
+This flag lets Rydia learn summons by level-up. She learns each spell at the following levels:
+
+!!! info "`-call:levelup` Call spells and levels"
+    - Imp    : 3
+    - Bomb   : 10
+    - Mage   : 15
+    - Cocka  : 21 (only on J-spells)
+    - Odin   : 23
+    - Sylph  : 27
+    - Shiva  : 28 (26 on `Cspells:anti`)
+    - Jinn   : 29 (26 on `Cspells:anti`)
+    - Indra  : 30 (26 on `Cspells:anti`)
+    - Titan  : 32
+    - Mist   : 34
+    - Asura  : 39
+    - Levia  : 46 (49 on J-spells)
+    - Baham  : 53 (57 on J-spells)
+
+### `-call:all` {: .h6 }
+
+- Location: update_spells.py
+
+Rydia starts with all of the Call spells available (except Cocka, since that's apparently a J-spell).
+
+### `-call:vanillahobs` {: .h6 }
+
+This flag is just `-vanilla:hobs` renamed.
+
+### `-call:vanillagrowup` {: .h6 }
+
+This flag is just `-vanilla:growup` renamed.
+
+### `-call:nogrowup` {: .h6 }
+
+- Location: summons_rando.py
+
+Under this flag, Rydia does not learn any summons at Dwarf. This flag, as well as the vanilla growup flag, are ignored in favour of `-tweak:rydiaredmage`, if that flag is on.
+
+### `-call:noorbs` {: .h6 }
+
+- Idea: Marshal had a note about removing summon orbs
+- Location: shop_rando.py, treasure_rando.py
+
+This flag removes summon orbs from shops, boxes/miabs, and quest rewards. You can still get them in starting kits.
+
 ## Zeromus Flags
 
 - Idea: various folks over the years, surely

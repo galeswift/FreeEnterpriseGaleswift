@@ -1009,11 +1009,17 @@ To prevent softlocks, the PRNG table will have a small number of entries cluster
 [-miscbugfixes]
 This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.
 
-[-vanilla:hobs]
+[-call:vanillahobs]
 By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior.
 
-[-vanilla:growup]
+[-call:vanillagrowup]
 By default in Free Enterprise, the summons learned when Rydia ages are randomized. Set this flag to return to the vanilla summons learned at that time (Mist, Indra, Jinn, Shiva, and Titan).
+
+[-call:noorbs]
+Set this flag to remove all Call orbs from the game. Rydia can still learn summons in other ways.
+
+[-call:nogrowup]
+Set this flag to prevent Rydia from learning any summons at Dwarf Castle (she will still learn Fire2/Ice-2/Lit-2).
 
 [-vanilla:fashion]
 To help distinguish duplicate characters, Free Enterprise randomizes the battle palettes of each character. Enabling this flag preserves each character's original battle colors.

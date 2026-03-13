@@ -631,13 +631,8 @@ class FlagLogicCore {
             this._simple_disable(flagset, log, "Permajoin and Remove Oldest are incompatible", ["Cfifo"]);
         }
         if (flagset.has("-tweak:rydiaredmage")) {
-            if ((! flagset.has("-vanilla:hobs"))) {
-                flagset.set("-vanilla:hobs");
-                this._lib.push(log, ["correction", "Rydia must learn Fire1 at Mt. Hobs as a Red Mage; forced to add -vanilla:hobs"]);
-            }
-            if (flagset.has("-vanilla:growup")) {
-                flagset.unset("-vanilla:growup");
-                this._lib.push(log, ["correction", "Rydia must learn white magic at Dwarf Castle as a Red Mage; forced to remove -vanilla:growup"]);
+            if (flagset.has_any("-call:vanillagrowup", "-call:nogrowup")) {
+                this._simple_disable(flagset, log, "Rydia must learn white magic at Dwarf Castle as a Red Mage", ["-call:vanillagrowup", "-call:nogrowup"]);
             }
         }
         if (flagset.has("Onone")) {

@@ -96,8 +96,7 @@ Znocosplay
 -speedmodbalance
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
--vanilla:hobs
--vanilla:growup
+-call:levelup/-call:all -call:vanillahobs -call:vanillagrowup/-call:nogrowup -call:noorbs
 -vanilla:fashion
 -vanilla:miabs
 -vanilla:giant
@@ -420,8 +419,12 @@ Xcrystalbonus    experience_crystal_bonus
 Xmaxlevelbonus   experience_max_level_bonus
 Xsmallparty      experience_small_party
 -miscbugfixes        bug_fixes
--vanilla:hobs        vanilla_hobs
--vanilla:growup      vanilla_dwarf_summons
+-call:levelup        call_level_up
+-call:all            call_start_all 
+-call:vanillahobs    vanilla_hobs
+-call:vanillagrowup  vanilla_dwarf_summons
+-call:nogrowup       no_dwarf_summons
+-call:noorbs         no_call_orbs
 -vanilla:fashion     vanilla_fashion
 -vanilla:miabs       vanilla_miabs
 -vanilla:giant       vanilla_giant
