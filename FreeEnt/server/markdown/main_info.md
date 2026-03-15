@@ -608,6 +608,21 @@ Under `Bspellpower`, all bosses are treated as having at least 1 spell power. Th
 
 These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc.
 
+### `Bslots` {: .h6 }
+
+- Idea: Pushwall (with inadvertent inspiration from ScytheMarshall)
+- Design: Pushwall
+- Programming: ScytheMarshall
+- Locations: boss_rando.py, core_rando.py
+
+This flag shuffles the *stats* of the boss slots within four different zones. Watch out. The Odin slot (Baron Basement) is shuffled with the Gated Overworld slots on `Bunsafe`.
+
+!!! info "`Bslots` zones"
+    - Ungated Overworld: Mist Cave, Waterfall, Antlion Nest, Mt. Hobs, Fabul Defense, Ordeals 1/2/3, Baron Inn 1/2, Zot 1 
+    - Gated Overworld: Kaipo Inn (Package), Baron Castle 1/2, Cave Magnes, Zot 2, Hook 1/2
+    - Underworld: Dwarf 1/2, Lower Bab-il (top), Super Cannon, Sealed Cave, Asura spot, Levia spot, Baron Basement
+    - Darkness: Giant 1/2, Cave Bahamut, Murasame altar, Crystal Sword altar, White Spear altar, Ribbon altar, Masamune altar
+
 ## Glitch Flags
 
 ### `Glife2f` {: .h6 }

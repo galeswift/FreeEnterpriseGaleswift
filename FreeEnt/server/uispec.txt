@@ -622,6 +622,7 @@
 <>^ Alternate boss stats/scripts
 .(Bstats:j)! FF4j boss stats and scripts
 .(Bstats:et) FF4 Easy Type boss stats and scripts
+[Bslots]!^ Shuffle the stats of boss slots within zones
 (@Brestrict)^ Restrict required boss locations
 .[Brestrict:summon] Required bosses cannot be at summon spots
 .[Brestrict:moon] Required bosses cannot be at moon spots

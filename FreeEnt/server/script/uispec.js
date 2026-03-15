@@ -7440,6 +7440,13 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "Bslots",
+        "title": "Shuffle the stats of boss slots within zones",
+        "description": "The stats of the boss slots are shuffled within four different zones: ungated overworld slots, gated overworld slots, underworld slots (and Baron basement), and Darkness-locked slots. For example, you can find a boss with the Magus Sisters slot stats at Antlion Cave. On <em>Bunsafe</em>, the Odin slot is shuffled with the gated overworld slots.",
+        "hard": true,
+        "fork": true
+      },
+      {
         "flag": "@Brestrict",
         "title": "Restrict required boss locations",
         "description": "Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.",

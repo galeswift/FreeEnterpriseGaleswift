@@ -411,6 +411,9 @@ Bosses (including Zeromus) have FF4j scripts, the Asura summon casts one of Armo
 [Bstats:et]
 Bosses (including Zeromus) have FF4ET scripts and boss location stats scale with FF4ET.
 
+[Bslots]
+The stats of the boss slots are shuffled within four different zones: ungated overworld slots, gated overworld slots, underworld slots (and Baron basement), and Darkness-locked slots. For example, you can find a boss with the Magus Sisters slot stats at Antlion Cave. On <em>Bunsafe</em>, the Odin slot is shuffled with the gated overworld slots.
+
 [@Brestrict]
 Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.
 

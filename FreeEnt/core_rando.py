@@ -330,6 +330,14 @@ BOSSES = [
     'ogopogo',
     ]
 
+BOSS_SLOT_SHUFFLE_ZONES = {
+    'ungated_overworld' : ['dmist_slot', 'octomamm_slot', 'antlion_slot', 'mombomb_slot', 'fabulgauntlet_slot',
+                           'milon_slot', 'milonz_slot', 'mirrorcecil_slot', 'karate_slot', 'guard_slot', 'magus_slot'],
+    'gated_overworld'   : ['officer_slot', 'baigan_slot', 'kainazzo_slot', 'darkelf_slot', 'valvalis_slot', 'kingqueen_slot', 'rubicant_slot'],
+    'underworld'        : ['calbrena_slot', 'golbez_slot', 'lugae_slot', 'darkimp_slot', 'evilwall_slot', 'asura_slot', 'leviatan_slot', 'odin_slot'],
+    'darkness'          : ['elements_slot', 'cpu_slot', 'bahamut_slot', 'paledim_slot', 'wyvern_slot', 'plague_slot', 'dlunar_slot', 'ogopogo_slot']
+}
+
 QUEST_REWARD_CURVES = {
     'Ungated_Quest' : [
         RewardSlot.starting_item,
@@ -643,9 +651,6 @@ def apply(env):
                                                                                   + drill_description_row3 
                                                                                   + '[$00][$fa]                            [$fb][$00]')
 
-    assignable_boss_slots = BOSS_SLOTS.copy()
-    bosses = list(BOSSES)
-
     if env.options.flags.has('key_items_force_magma'):
         prevent_hook_seed = True
     elif not (env.options.flags.has_any('key_items_in_summon_quests', 'key_items_in_moon_bosses') or miab_flags) and not forced_hook_route:
@@ -657,12 +662,17 @@ def apply(env):
     if env.options.flags.has('no_kq_eblan_slot'):
         HOOK_UNDERGROUND_BRANCH.remove('kingqueen_slot')
 
+    # set up boss assignment parameters
+    assignable_boss_slots = BOSS_SLOTS.copy()
+    bosses = list(BOSSES)
+
     # perform assignment
     attempts = 0
     found_valid_assignment = False
     while not found_valid_assignment and attempts < MAX_RANDOMIZATION_ATTEMPTS:
         boss_assignment = {}
         rewards_assignment = RewardsAssignment()
+        boss_stats_slots = {}
 
         # Assume no gated objective by default
         rewards_assignment[RewardSlot.gated_objective] = EmptyReward()
@@ -733,6 +743,25 @@ def apply(env):
 
             if not set(env.meta['objective_required_bosses']).issubset(used_bosses):
                 raise Exception("Objective required boss is not present in vanilla boss assignment.")
+
+        # shuffle boss slot stats; under Bremove, some slots might be unused, and that's fine
+        if env.options.flags.has('boss_slot_shuffle'):
+            if env.options.flags.has('bosses_unsafe'):
+                BOSS_SLOT_SHUFFLE_ZONES['underworld'].remove('odin_slot')
+                BOSS_SLOT_SHUFFLE_ZONES['gated_overworld'].append('odin_slot')
+            for zone in BOSS_SLOT_SHUFFLE_ZONES:
+                shuffled_slots_in_zone = BOSS_SLOT_SHUFFLE_ZONES[zone].copy()
+                env.rnd.shuffle(shuffled_slots_in_zone)
+                print(shuffled_slots_in_zone)
+                print(BOSS_SLOT_SHUFFLE_ZONES[zone])
+                for i, slot in enumerate(BOSS_SLOT_SHUFFLE_ZONES[zone]):
+                    # key: visible slot, value: the new stats
+                    boss_stats_slots[slot] = shuffled_slots_in_zone[i]
+        else:
+            for slot in assignable_boss_slots:
+                boss_stats_slots[slot] = slot
+        env.meta['boss_stats_slots'] = boss_stats_slots
+        print(boss_stats_slots)
 
         if DEBUG:
             print('assignment {}:'.format(attempts))
@@ -866,6 +895,19 @@ def apply(env):
                 # bypass the prevent_hook_route code to directly rule out D.Mist at Rubicant,
                 # so that not-Kforce:magma seeds can have uncertainty (and memes)
                 underground_path_disallowed.append(boss_assignment['rubicant_slot'])
+
+            if prevent_hook_seed:
+                # you probably also shouldn't need to beat the boss with Rubi's stats;
+                # we'll ensure this is the case whenever the Magma Key is ensured available
+                if env.options.flags.has('boss_slot_shuffle'):
+                    rubi_stats_slot = None
+                    for slot in boss_stats_slots:
+                        if boss_stats_slots[slot] == 'rubicant_slot':
+                            rubi_stats_slot = slot
+                            break
+                    if (not (env.options.flags.has('no_kq_eblan_slot') and slot == 'kingqueen_slot')
+                        and not (env.options.flags.has('no_officer_slot') and slot == 'officer_slot')):
+                        underground_path_disallowed.append(boss_assignment[rubi_stats_slot])
 
             if underground_path_disallowed:
                 tests.append(['underground', underground_path_disallowed])
