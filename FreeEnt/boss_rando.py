@@ -984,7 +984,7 @@ def apply(env):
         boss = assignment[slot]
         # remove Officer slot and/or KQ Eblan slot if relevant
         if not ((slot == 'officer_slot' and env.options.flags.has('no_officer_slot'))
-                or (slot == 'kingqueen_slot' and env.options.flags.has('no_kq_eblan_slot'))):
+                or (slot == 'kingqueen_slot' and env.options.flags.has('no_kingqueen_slot'))):
             missing_bosses.remove(boss)
             if env.options.flags.has('boss_slot_shuffle'):
                 boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], 'Stats: ' + BOSS_SPOILER_NAMES[shuffled_stats_slots[slot][:-5]], obscurable=True) )

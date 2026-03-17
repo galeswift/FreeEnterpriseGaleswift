@@ -860,7 +860,7 @@ def apply(env):
         boss_hunt_count = int(env.options.flags.get_suffix(f"Omode:bosscollector"))
         if boss_hunt_count == 34:
             # let Omode:bosscollector34 also function as "all"
-            if env.options.flags.has('no_kq_eblan_slot'):
+            if env.options.flags.has('no_kingqueen_slot'):
                 boss_hunt_count -= 1
             if env.options.flags.has('no_officer_slot'):
                 boss_hunt_count -= 1

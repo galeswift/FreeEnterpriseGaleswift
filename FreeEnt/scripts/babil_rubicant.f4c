@@ -104,13 +104,13 @@ event($A1)  //Fighting Edge's parents
     }
     // autodetected map #BabilB5
     player face up
-    // %flag no_kq_eblan_slot on%
+    // %flag no_kingqueen_slot on%
     pause 2
     music #None
     player move up
     player move up
     // %end%
-    // %flag no_kq_eblan_slot off%
+    // %flag no_kingqueen_slot off%
     sound $7E
     batch 20 {
         screen flash

@@ -604,7 +604,7 @@ def apply(env):
         max_credits = 34
         if env.options.flags.has('no_officer_slot'):
             max_credits -= 1
-        if env.options.flags.has('no_kq_eblan_slot'):
+        if env.options.flags.has('no_kingqueen_slot'):
             max_credits -= 1
     elif all_spells and not env.options.flags.has('location_fusoya'):
         max_credits = (27 if env.options.flags.has('slowstart_fusoya') else 22)
@@ -709,7 +709,7 @@ def apply(env):
         if env.options.flags.has('no_officer_slot'):
             LOCATION_SLOTS.pop('officer_slot')
             MOD_BOSS_SLOT_SPOILER_NAMES.pop('officer_slot')
-        if env.options.flags.has('no_kq_eblan_slot'):
+        if env.options.flags.has('no_kingqueen_slot'):
             LOCATION_SLOTS.pop('kingqueen_slot')
             MOD_BOSS_SLOT_SPOILER_NAMES.pop('kingqueen_slot')
         
@@ -795,7 +795,7 @@ def apply(env):
             learned_spells.insert(3, 'FF') # Officer is the second slot, so its spells would normally start at index 3
             learned_spells.insert(4, 'FF')
             learned_spells.insert(5, 'FF') 
-        if env.options.flags.has('no_kq_eblan_slot'):
+        if env.options.flags.has('no_kingqueen_slot'):
             learned_spells.insert(60, 'FF') # King/Queen Eblan is the twenty-first slot, so its spells would normally start at index 60
             learned_spells.insert(61, 'FF')
             learned_spells.insert(62, 'FF') 

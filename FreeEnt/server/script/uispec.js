@@ -7546,14 +7546,14 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "Bremove:kaipo_slot",
+            "flag": "Bremove:officer_slot",
             "title": "Remove the Officer slot boss fight",
             "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool."
           },
           {
-            "flag": "Bremove:kqe_slot",
+            "flag": "Bremove:kingqueen_slot",
             "title": "Remove the KQ Eblan slot boss fight",
-            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based on the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
           }
         ]
       }

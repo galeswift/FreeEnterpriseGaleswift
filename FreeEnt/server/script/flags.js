@@ -1155,8 +1155,8 @@ const _FE_FLAGSPEC = {
         "Bwhichbez",
         "Bwoahdin",
         "Bspellpower",
-        "Bremove:kaipo_slot",
-        "Bremove:kqe_slot",
+        "Bremove:officer_slot",
+        "Bremove:kingqueen_slot",
         "Etoggle",
         "Evanilla",
         "Ereduce",
@@ -9675,13 +9675,13 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "Bremove:kaipo_slot",
+            "flag": "Bremove:officer_slot",
             "offset": 379,
             "size": 1,
             "value": 1
         },
         {
-            "flag": "Bremove:kqe_slot",
+            "flag": "Bremove:kingqueen_slot",
             "offset": 380,
             "size": 1,
             "value": 1

@@ -659,7 +659,7 @@ def apply(env):
         prevent_hook_seed = False
 
     # need to possibly modify HOOK_UNDERGROUND_BRANCH in case the KQ Eblan slot isn't fought
-    if env.options.flags.has('no_kq_eblan_slot'):
+    if env.options.flags.has('no_kingqueen_slot'):
         HOOK_UNDERGROUND_BRANCH.remove('kingqueen_slot')
 
     # set up boss assignment parameters

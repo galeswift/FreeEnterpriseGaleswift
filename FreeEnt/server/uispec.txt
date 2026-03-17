@@ -642,8 +642,8 @@
 .[Bwhichbez] Replace Golbez's and Shadow's spells with random spells
 [Bspellpower]!^ All bosses gain scaled spell power
 []^ Remove certain boss slots
-.[Bremove:kaipo_slot] Remove the Officer slot boss fight
-.[Bremove:kqe_slot] Remove the KQ Eblan slot boss fight
+.[Bremove:officer_slot] Remove the Officer slot boss fight
+.[Bremove:kingqueen_slot] Remove the KQ Eblan slot boss fight
 
 == ENCOUNTERS
 <>* Random encounter rate

@@ -606,7 +606,7 @@ Under `Bspellpower`, all bosses are treated as having at least 1 spell power. Th
 - Design/Programming: ScytheMarshall
 - Locations: boss_rando.py, kaipo_rydia.f4c, babil_rubicant.f4c
 
-These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc.
+These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc. (These flags were previously known as `Bremove[kaipo_slot,kqe_slot]`; now they are consistent with other flags/etc.)
 
 ### `Bslots` {: .h6 }
 
@@ -929,7 +929,7 @@ Or, at least, these flags _would_ do that, but because Doors Rando is a thing on
 
 These flags are intended to change how FuSoYa's spell-learning works, with the goal of making the character more balanced and less of an instant exclusion from "competitive" flagsets. (Note that on v4.6.4.Gale, these flags were renamed to `F` from `-fusoya:`.)
 
-### `Fweighted {: .h6 }
+### `Fweighted` {: .h6 }
 
 This flag is just the normal FE FuSoYa behaviour given a flag name (for UI purposes, and to point out to new players that Fu is not vanilla anymore).
 
