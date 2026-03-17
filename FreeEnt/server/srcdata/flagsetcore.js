@@ -786,6 +786,18 @@ class FlagLogicCore {
                     this._simple_disable_regex(flagset, log, `No random objectives specified for pool ${random_prefix}`, (`^${random_prefix}` + "[^\\d]"));
                 }
             }
+            if (flagset.has("Omode:classicforge")) {
+                this._simple_disable_regex(flagset, log, "Classic Forge takes priority over the normal Forge quest", "^O[\\d]:quest_forge");
+            }
+            if (flagset.has("Omode:classicgiant")) {
+                this._simple_disable_regex(flagset, log, "Classic Giant takes priority over the normal Giant quest", "^O[\\d]:quest_giant");
+            }
+            if (flagset.has("Omode:fiends")) {
+                for (var b_fl, _pj_c = 0, _pj_a = ["milon", "kainazzo", "valvalis", "rubicant", "elements"], _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                    b_fl = _pj_a[_pj_c];
+                    this._simple_disable_regex(flagset, log, `The specified boss is already an objective because of Omode:fiends`, ("^O[\\d]:boss_" + b_fl));
+                }
+            }
             total_mandatory_bosses = 0;
             total_flexible_bosses = 0;
             total_mandatory_tough_quests = 0;

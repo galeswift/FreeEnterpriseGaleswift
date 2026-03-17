@@ -711,6 +711,17 @@ class FlagLogicCore:
                 if len(flagset.get_list(f'^{random_prefix}' + r'\d')) == 0:
                     self._simple_disable_regex(flagset, log, f'No random objectives specified for pool {random_prefix}', f'^{random_prefix}'+ r'[^\d]')
 
+            # remove duplicate objectives relative to Omodes, since they take priority regardless (e.g. Omode:classicforge takes priority
+            # over Od:quest_forge, in the sense that you will get no reward)
+            if flagset.has('Omode:classicforge'):
+                self._simple_disable_regex(flagset, log, 'Classic Forge takes priority over the normal Forge quest', r'^O[\d]:quest_forge')
+            if flagset.has('Omode:classicgiant'):
+                self._simple_disable_regex(flagset, log, 'Classic Giant takes priority over the normal Giant quest', r'^O[\d]:quest_giant')
+            if flagset.has('Omode:fiends'):
+                for b_fl in ['milon', 'kainazzo', 'valvalis', 'rubicant', 'elements']:
+                    # milon will match milonz as well
+                    self._simple_disable_regex(flagset, log, f'The specified boss is already an objective because of Omode:fiends', r'^O[\d]:boss_' + b_fl)
+
             total_mandatory_bosses = 0
             total_flexible_bosses = 0
             total_mandatory_tough_quests = 0
