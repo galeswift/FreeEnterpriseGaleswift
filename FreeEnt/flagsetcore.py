@@ -782,6 +782,8 @@ class FlagLogicCore:
                 total_objective_count += 1
             if len(flagset.get_list(r'^Omode:goldhunter')) > 0:
                 total_objective_count += 1
+            if len(flagset.get_list(r'^Omode:bosscollector')) > 0:
+                total_objective_count += 1
             if flagset.has('Omode:external'):
                 total_objective_count += 1
             # special handling for the situation where the Pink Tail does not exist, to correctly count available tough quests

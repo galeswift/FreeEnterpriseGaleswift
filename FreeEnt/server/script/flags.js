@@ -13593,6 +13593,9 @@ class FlagLogicCore {
             if ((flagset.get_list("^Omode:goldhunter").length > 0)) {
                 total_objective_count += 1;
             }
+            if ((flagset.get_list("^Omode:bosscollector").length > 0)) {
+                total_objective_count += 1;
+            }
             if (flagset.has("Omode:external")) {
                 total_objective_count += 1;
             }
