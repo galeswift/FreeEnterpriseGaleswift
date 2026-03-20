@@ -330,7 +330,7 @@ BOSSES = [
     'ogopogo',
     ]
 
-BOSS_SLOT_SHUFFLE_ZONES = {
+BOSS_SLOT_SHUFFLE_GROUPS = {
     'ungated_overworld' : ['dmist_slot', 'octomamm_slot', 'antlion_slot', 'mombomb_slot', 'fabulgauntlet_slot',
                            'milon_slot', 'milonz_slot', 'mirrorcecil_slot', 'karate_slot', 'guard_slot', 'magus_slot'],
     'gated_overworld'   : ['officer_slot', 'baigan_slot', 'kainazzo_slot', 'darkelf_slot', 'valvalis_slot', 'kingqueen_slot', 'rubicant_slot'],
@@ -664,7 +664,30 @@ def apply(env):
 
     # set up boss assignment parameters
     assignable_boss_slots = BOSS_SLOTS.copy()
-    bosses = list(BOSSES)
+    removed_boss_slots = set()
+    if env.options.flags.has('no_officer_slot'):
+        removed_boss_slots.add('officer_slot')
+    if env.options.flags.has('no_kingqueen_slot'):
+        removed_boss_slots.add('kingqueen_slot')
+    restricted_boss_slots = set()
+    if env.options.flags.has('bosses_no_required_at_summon'):
+        restricted_boss_slots.update({'asura_slot', 'leviatan_slot', 'odin_slot', 'bahamut_slot'})
+    if env.options.flags.has('bosses_no_required_on_moon'):
+        restricted_boss_slots.update({'bahamut_slot', 'paledim_slot', 'wyvern_slot', 'plague_slot', 'dlunar_slot', 'ogopogo_slot'})
+    if env.options.flags.has('bosses_no_required_in_zot'):
+        restricted_boss_slots.update({'magus_slot', 'valvalis_slot'})
+    if env.options.flags.has('bosses_no_required_on_hook'):
+        restricted_boss_slots.update({'kingqueen_slot', 'rubicant_slot'})
+    if env.options.flags.has('bosses_no_required_in_giant'):
+        restricted_boss_slots.update({'elements_slot', 'cpu_slot'})
+    if env.options.flags.has('bosses_no_required_in_sealedcave'):
+        restricted_boss_slots.update({'evilwall_slot'})
+    if env.options.flags.has('bosses_no_required_at_package'):
+        restricted_boss_slots.update({'officer_slot'})
+    available_unrestricted_boss_slots = [s for s in assignable_boss_slots if s not in removed_boss_slots and s not in restricted_boss_slots]
+    required_bosses = list(env.meta['objective_required_bosses'])
+    if env.options.flags.has('no_free_key_item') and 'dmist' not in required_bosses:
+        required_bosses.append('dmist')
 
     # perform assignment
     attempts = 0
@@ -717,10 +740,43 @@ def apply(env):
             rewards_assignment.update(keyitem_assignment)
 
         # assign bosses
+        bosses_in_restricted_slots = set()
+        bosses_in_removed_slots = set()
         if not env.options.flags.has('bosses_vanilla'):
-            env.rnd.shuffle(bosses)
-            for i,k in enumerate(assignable_boss_slots):
-                boss_assignment[k] = bosses[i]
+            # first, assign required bosses to unrestricted slots
+            env.rnd.shuffle(required_bosses)
+            env.rnd.shuffle(available_unrestricted_boss_slots)
+            remaining_boss_slots = [s for s in assignable_boss_slots if s not in removed_boss_slots]
+            for i in range(min(len(required_bosses), len(available_unrestricted_boss_slots))):
+                boss_assignment[available_unrestricted_boss_slots[i]] = required_bosses[i]
+                remaining_boss_slots.remove(available_unrestricted_boss_slots[i])
+
+            env.rnd.shuffle(remaining_boss_slots)
+            if len(available_unrestricted_boss_slots) < len(required_bosses):
+                # if we fill the slots first, then all remaining bosses go somewhere
+                # (ensuring required bosses get placed first)
+                for i,b in enumerate(required_bosses[len(available_unrestricted_boss_slots):]):
+                    boss_assignment[remaining_boss_slots[i]] = b
+                    bosses_in_restricted_slots.add(b)
+                slot_idx = len(required_bosses[len(available_unrestricted_boss_slots):])
+                remaining_bosses = [b for b in BOSSES if b not in required_bosses]
+                env.rnd.shuffle(remaining_bosses)
+                for i,s in enumerate(remaining_boss_slots[slot_idx:] + list(removed_boss_slots)):
+                    boss_assignment[s] = remaining_bosses[i]
+                    if s in removed_boss_slots:
+                        bosses_in_removed_slots.add(b)
+                    else:
+                        bosses_in_restricted_slots.add(b)
+            else:
+                # otherwise we just place all remaining bosses into remaining slots
+                remaining_bosses = [b for b in BOSSES if b not in required_bosses]
+                env.rnd.shuffle(remaining_bosses)
+                for i,s in enumerate(remaining_boss_slots + list(removed_boss_slots)):
+                    boss_assignment[s] = remaining_bosses[i]
+                    if s in removed_boss_slots:
+                        bosses_in_removed_slots.add(remaining_bosses[i])
+                    elif s in restricted_boss_slots:
+                        bosses_in_restricted_slots.add(remaining_bosses[i])
 
             if 'boss' in env.options.test_settings:
                 for force_slot in env.options.test_settings['boss']:
@@ -739,7 +795,12 @@ def apply(env):
             for k in assignable_boss_slots:
                 boss = k.replace('_slot', '')
                 boss_assignment[k] = boss
-                used_bosses.add(boss)
+                if not k in removed_boss_slots:
+                    used_bosses.add(boss)
+                    if k in restricted_boss_slots:
+                        bosses_in_restricted_slots.add(boss)
+                else:
+                    bosses_in_removed_slots.add(boss)
 
             if not set(env.meta['objective_required_bosses']).issubset(used_bosses):
                 raise Exception("Objective required boss is not present in vanilla boss assignment.")
@@ -747,21 +808,18 @@ def apply(env):
         # shuffle boss slot stats; under Bremove, some slots might be unused, and that's fine
         if env.options.flags.has('boss_slot_shuffle'):
             if env.options.flags.has('bosses_unsafe'):
-                BOSS_SLOT_SHUFFLE_ZONES['underworld'].remove('odin_slot')
-                BOSS_SLOT_SHUFFLE_ZONES['gated_overworld'].append('odin_slot')
-            for zone in BOSS_SLOT_SHUFFLE_ZONES:
-                shuffled_slots_in_zone = BOSS_SLOT_SHUFFLE_ZONES[zone].copy()
-                env.rnd.shuffle(shuffled_slots_in_zone)
-                print(shuffled_slots_in_zone)
-                print(BOSS_SLOT_SHUFFLE_ZONES[zone])
-                for i, slot in enumerate(BOSS_SLOT_SHUFFLE_ZONES[zone]):
+                BOSS_SLOT_SHUFFLE_GROUPS['underworld'].remove('odin_slot')
+                BOSS_SLOT_SHUFFLE_GROUPS['gated_overworld'].append('odin_slot')
+            for group in BOSS_SLOT_SHUFFLE_GROUPS:
+                shuffled_slots_in_group = BOSS_SLOT_SHUFFLE_GROUPS[group].copy()
+                env.rnd.shuffle(shuffled_slots_in_group)
+                for i, slot in enumerate(BOSS_SLOT_SHUFFLE_GROUPS[group]):
                     # key: visible slot, value: the new stats
-                    boss_stats_slots[slot] = shuffled_slots_in_zone[i]
+                    boss_stats_slots[slot] = shuffled_slots_in_group[i]
         else:
             for slot in assignable_boss_slots:
                 boss_stats_slots[slot] = slot
         env.meta['boss_stats_slots'] = boss_stats_slots
-        print(boss_stats_slots)
 
         if DEBUG:
             print('assignment {}:'.format(attempts))
@@ -840,9 +898,6 @@ def apply(env):
         if env.options.flags.has('key_items_vanilla'):
             if '#item.Crystal' in tests:
                 tests.remove('#item.Crystal')
-
-        if env.options.flags.has('no_free_key_item'):
-            tests.append('dmist')
 
         if env.options.flags.has('key_item_from_pink_tail'):
             tests.append('#item.Pink')
@@ -931,52 +986,10 @@ def apply(env):
             if not unsafe and env.options.flags.has('key_items_unreliable_darkness') and (env.rnd.random() < 0.25):
                 tests.append(['#item.DarkCrystal', [], 'underground'])
 
-        # must be able to encounter all bosses required of forced objective flags
-        required_bosses = env.meta.get('objective_required_bosses', [])
+        # must be able to encounter all bosses required of forced objective flags (and possibly d.mist)
         tests.extend(required_bosses)
-        if env.options.flags.has('no_free_key_item'):
-            required_bosses.add('dmist')
-
-        banned_required_boss_slots = set() 
-        if env.options.flags.has('bosses_no_required_at_summon'):
-            banned_required_boss_slots.update([boss_assignment['asura_slot'],
-                                               boss_assignment['leviatan_slot'],
-                                               boss_assignment['odin_slot'],
-                                               boss_assignment['bahamut_slot']])
-        if env.options.flags.has('bosses_no_required_on_moon'):
-            banned_required_boss_slots.update([boss_assignment['bahamut_slot'],
-                                               boss_assignment['paledim_slot'],
-                                               boss_assignment['wyvern_slot'],
-                                               boss_assignment['plague_slot'],
-                                               boss_assignment['dlunar_slot'],
-                                               boss_assignment['ogopogo_slot']])
-        if env.options.flags.has('bosses_no_required_in_zot'):
-            banned_required_boss_slots.update([boss_assignment['magus_slot'],
-                                               boss_assignment['valvalis_slot']])
-        if env.options.flags.has('bosses_no_required_on_hook'):
-            banned_required_boss_slots.update([boss_assignment['kingqueen_slot'],
-                                               boss_assignment['rubicant_slot']])
-        if env.options.flags.has('bosses_no_required_in_giant'):
-            banned_required_boss_slots.update([boss_assignment['elements_slot'],
-                                               boss_assignment['cpu_slot']])
-        if env.options.flags.has('bosses_no_required_in_sealedcave'):
-            banned_required_boss_slots.update([boss_assignment['evilwall_slot']])
-        if env.options.flags.has('bosses_no_required_at_package'):
-            banned_required_boss_slots.update([boss_assignment['officer_slot']])
 
         found_valid_assignment = True
-
-        if banned_required_boss_slots:
-            for required_boss in required_bosses:
-                if required_boss in banned_required_boss_slots:
-                    if DEBUG:
-                        print(f'Boss {required_boss} is in a restricted spot')
-                    found_valid_assignment = False
-                    break
-
-        if not found_valid_assignment:
-            attempts += 1
-            continue
 
         for test in tests:
             if type(test) is list:
@@ -1347,10 +1360,15 @@ def apply(env):
     env.meta['available_bosses'] = set()
     for slot in BOSS_SLOTS:
         boss_objective_consts.append(f'#objective.boss_{boss_assignment[slot]}')
-        env.meta['available_bosses'].add(boss_assignment[slot])
+        if slot not in removed_boss_slots:
+            env.meta['available_bosses'].add(boss_assignment[slot])
     env.add_script('patch($21f860 bus) {\n' + '\n'.join(boss_objective_consts) + '\n}')
-    env.meta['banned_objective_bosses'] = banned_required_boss_slots
-    env.add_substitution('randomizer boss count', '{:02X}'.format(len(BOSS_SLOTS)))
+    env.meta['bosses_in_restricted_slots'] = bosses_in_restricted_slots
+    env.meta['unrestricted_non_objective_bosses'] = (
+        env.meta['available_bosses'].difference(env.meta['objective_required_bosses'].union(bosses_in_restricted_slots))
+    )
+    # if we are removing boss slots, then we don't necessarily have all 34 slots anymore
+    env.add_substitution('randomizer boss count', '{:02X}'.format(len(assignable_boss_slots)-len(removed_boss_slots)))
 
     # remove golbez item delivery if not needed
     if (RewardSlot.fallen_golbez_item not in rewards_assignment):

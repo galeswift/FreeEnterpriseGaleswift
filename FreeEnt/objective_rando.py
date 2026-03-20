@@ -702,6 +702,8 @@ def apply(env):
     rand_objective_attempts = 0
     found_valid_objective_set = False
 
+    bosses_in_restricted_slots = env.meta['bosses_in_restricted_slots']
+
     while not found_valid_objective_set and rand_objective_attempts < MAX_OBJECTIVE_ATTEMPTS:
         objective_ids = get_unique_objective_ids(env)
         restart_all_groups = False
@@ -709,28 +711,27 @@ def apply(env):
         # prune the allowable tough quests here, using env.meta['allowable_removed_tough_quests']
         potential_removed_tough_quest_num = env.meta['allowable_removed_tough_quests']
         tough_quests_to_remove = env.rnd.sample(TOUGH_QUEST_OBJECTIVES_WEIGHTED, potential_removed_tough_quest_num)
-        print(tough_quests_to_remove)
-        
+        # print(tough_quests_to_remove)
 
-        print("Objectives randomization attempt number " + f"{rand_objective_attempts}")
+        unrestricted_non_objective_bosses = env.meta['unrestricted_non_objective_bosses'].copy()
+
+        # print("Objectives randomization attempt number " + f"{rand_objective_attempts}")
         for random_prefix in env.meta['objective_group_order']:
-            print("Now handling group " + random_prefix)
+            # print("Now handling group " + random_prefix)
             random_objective_count = 0
             for f in env.options.flags.get_list(rf'^{random_prefix}\d'):            
                 random_objective_count = int(f[len(random_prefix):])
 
-            print(f"Random objective count is {random_objective_count} for {random_prefix}")
+            # print(f"Random objective count is {random_objective_count} for {random_prefix}")
             random_objective_allowed_types = set()
             random_objective_allowed_characters = set()
             tough_quests_only = False
-            specific_random_chars_only = False
             for f in env.options.flags.get_list(rf'^{random_prefix}[^\d]'):
                 allowed_type = f[len(random_prefix):]   
                 if (allowed_type == 'tough_quest'):
                     allowed_type = 'quest'
                     tough_quests_only = True
                 if allowed_type.startswith('only'): 
-                    specific_random_chars_only = True               
                     random_objective_allowed_characters.add(allowed_type[len('only'):])
                 else:
                     random_objective_allowed_types.add(allowed_type)
@@ -765,13 +766,16 @@ def apply(env):
                         if obj['slug'] in tough_quests_to_remove and env.rnd.random() < 0.40:
                             # only possibly remove tough quests that we specified could be removed earlier
                             continue
+                        if objective_id in objective_ids:
+                            # pre-cull objectives we've already specified, to help the randomizer
+                            continue
                         random_objective_pool.setdefault(category, []).append(objective_id)
             random_category_weights = RANDOM_CATEGORY_WEIGHTS
             if random_objective_allowed_types:
                 random_category_weights = { k : RANDOM_CATEGORY_WEIGHTS[k] for k in RANDOM_CATEGORY_WEIGHTS if k in random_objective_allowed_types }
             random_category_distribution = util.Distribution(**random_category_weights)
 
-            # 10k is probably overkill. Try 100 attempts to choose the objectives. or some smaller number.
+            # 10k is probably overkill. Try 100 attempts to choose the objectives (per group). or some smaller number.
             MAX_RANDOMIZATION_ATTEMPTS = 200
             retry_count = 0
             for i in range(random_objective_count):
@@ -780,21 +784,25 @@ def apply(env):
                     category = random_category_distribution.choose(env.rnd)
                     q = env.rnd.choice(random_objective_pool[category])
                     slug = OBJECTIVES[q]['slug']    
-                    print(f'Considering {slug}')            
+                    # print(f'Considering {slug}')            
                     if q in objective_ids:
                         continue
                     if slug.startswith(CHAR_OBJECTIVE_PREFIX):
                         char = slug[len(CHAR_OBJECTIVE_PREFIX):]
                         if char not in env.meta['available_nonstarting_characters']:
-                            print(f'{char} is only a starting/partner character, or is not available at all')
+                            # print(f'{char} is only a starting/partner character, or is not available at all')
                             continue
                         if len(random_objective_allowed_characters) != 0 and (char not in random_objective_allowed_characters):
-                            print(f'{char} not allowed in types {random_objective_allowed_characters}')
+                            # print(f'{char} not allowed in types {random_objective_allowed_characters}')
                             continue
                     elif slug.startswith(BOSS_OBJECTIVE_PREFIX):
                         boss = slug[len(BOSS_OBJECTIVE_PREFIX):]
-                        if boss not in env.meta['available_bosses'] or boss in env.meta['banned_objective_bosses']:
+                        if boss not in env.meta['available_bosses']:
                             continue
+                        if (boss in bosses_in_restricted_slots) and unrestricted_non_objective_bosses:
+                            continue
+                        # keep this boss objective; update set if we need to
+                        unrestricted_non_objective_bosses.difference_update(set([boss]))
                     elif slug == 'quest_tradepink':
                         if '#item.Pink' not in env.meta['available_key_items']:
                             continue
@@ -809,21 +817,20 @@ def apply(env):
                     # give up on this objectives assignment, and try again from the beginning of all three groups
                     # (yes, the attempt where retry_count == MAX_... is ignored; suboptimal coding)
                     # raise BuildError(f"Failed to generate {random_objective_count} randomized objectives after many attempts. ({total_char_count} total unique characters)")
-                    print(f"Failed to generate {random_objective_count} randomized objectives after {MAX_RANDOMIZATION_ATTEMPTS} attempts. ({total_char_count} total unique characters)")
+                    # print(f"Failed to generate {random_objective_count} randomized objectives after {MAX_RANDOMIZATION_ATTEMPTS} attempts. ({total_char_count} total unique characters)")
                     rand_objective_attempts += 1
                     found_valid_objective_set = False
                     restart_all_groups = True
                     break
                 else:
                     objective_ids.append(q)
-                    print(objective_ids)
-                    print("Attempts: " + f"{retry_count}")
-                print(f"i = {i}")
-                input()
+                #     print(objective_ids)
+                #     print("Attempts: " + f"{retry_count}")
+                # print(f"i = {i}")
 
             if restart_all_groups:
                 restart_all_groups = False
-                print("Restarting all three groups over")
+                # print("Restarting all three groups over")
                 break
             else:
                 found_valid_objective_set = True
@@ -835,6 +842,20 @@ def apply(env):
         raise BuildError(f"Failed to generate randomized objectives after {MAX_OBJECTIVE_ATTEMPTS} attempts; aborting")
     # else:
     #     print("Successfully randomized objectives! It took " + f"{rand_objective_attempts+1} attempts.")
+
+    # shuffle boss objectives so that it's not obvious which bosses are in restricted slots (the algorithm above,
+    # combined with the printing of the boss objectives in order, means bosses in restricted slots are listed last,
+    # if there are any)
+    all_boss_objectives = []
+    for obj_id in objective_ids:
+        if 'boss' in OBJECTIVES[obj_id]['slug']:
+            all_boss_objectives.append(obj_id)
+    env.rnd.shuffle(all_boss_objectives)
+    boss_idx = 0
+    for i in range(len(objective_ids)):
+        if 'boss' in OBJECTIVES[objective_ids[i]]['slug']:
+            objective_ids[i] = all_boss_objectives[boss_idx]
+            boss_idx += 1
 
     if env.options.test_settings.get('objectives'):
         objective_ids = [OBJECTIVE_SLUGS_TO_IDS[s.strip()] for s in env.options.test_settings.get('objectives').split(',')]
@@ -916,8 +937,6 @@ def apply(env):
     #print(f'hard_required_objective_count {hard_required_objective_count} hard_required_objective_ids {hard_required_objective_ids} {f'{b:02X}}')
     env.add_substitution('hard required objective ids', ' '.join([f'{b:02X}' for b in hard_required_objective_ids]))
     env.add_substitution('hard objective required count', f'{hard_required_objective_count:02X}')
-    boss_required_objective_count = 1
-    env.add_substitution('boss objective required count', f'{boss_required_objective_count:02X}')    
     env.add_substitution('objective required count', f'{required_objective_count:02X}')
     if required_objective_count > total_objective_count:
         raise BuildError(f"Flags stipulate that {required_objective_count} objectives must be completed, but there are only {total_objective_count} objectives specified.")

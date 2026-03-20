@@ -528,7 +528,7 @@ The `-z` flags interact with these flags in the following ways:
 - Design/Programming: sgrunt
 - Locations: core_rando.py, objective_rando.py
 
-This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can appear.
+This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can appear, if possible. Pre-v4.6.4.Gale, these required bosses would never be placed in the restricted slots, which would prevent seeds from generating if there were too many required bosses and too many restricted slots. As of v4.6.4.Gale, these slots are deprioritized, much like how `Crestrict` prefers to not placed restricted characters in ungated slots, meaning you can potentially find required bosses in restricted slots if there are too many required bosses to fit in the unrestricted slots.
 
 ### `Bitburns` {: .h6 }
 
@@ -615,9 +615,9 @@ These flags will remove the specified boss slot from the game entirely. No objec
 - Programming: ScytheMarshall
 - Locations: boss_rando.py, core_rando.py
 
-This flag shuffles the *stats* of the boss slots within four different zones. Watch out. The Odin slot (Baron Basement) is shuffled with the Gated Overworld slots on `Bunsafe`.
+This flag shuffles the *stats* of the boss slots within four different groups. Watch out. The Odin slot (Baron Basement) is shuffled with the Gated Overworld slots on `Bunsafe`.
 
-!!! info "`Bslots` zones"
+!!! info "`Bslots` groups"
     - Ungated Overworld: Mist Cave, Waterfall, Antlion Nest, Mt. Hobs, Fabul Defense, Ordeals 1/2/3, Baron Inn 1/2, Zot 1 
     - Gated Overworld: Kaipo Inn (Package), Baron Castle 1/2, Cave Magnes, Zot 2, Hook 1/2
     - Underworld: Dwarf 1/2, Lower Bab-il (top), Super Cannon, Sealed Cave, Asura spot, Levia spot, Baron Basement

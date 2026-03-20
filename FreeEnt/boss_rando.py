@@ -9,7 +9,6 @@ CSV_OUTPUT = False
 
 BOSS_SLOTS = list(core_rando.BOSS_SLOTS)
 BOSSES = list(core_rando.BOSSES)
-BOSS_SLOT_SHUFFLE_ZONES = core_rando.BOSS_SLOT_SHUFFLE_ZONES
 
 SLOTS_WITH_BOSS_DEATH = [
     'milonz_slot', 'kainazzo_slot', 'valvalis_slot', 'rubicant_slot', 'elements_slot'
@@ -576,8 +575,8 @@ def apply(env):
                 ]
             })
 
-    assignment = {k : env.assignments[k] for k in env.assignments if k in BOSS_SLOTS}
-    # if Bslots is not on, this dictionary is just the identity
+    assignment = {k : env.assignments[k] for k in BOSS_SLOTS}
+    # if Bslots is not on, the shuffled_stats_slots dictionary is just the identity
     shuffled_stats_slots = env.meta['boss_stats_slots']
 
     for slot in assignment:
