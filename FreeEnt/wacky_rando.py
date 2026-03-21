@@ -1118,6 +1118,7 @@ def apply_advertising(env, rom_address):
     # (but not if What's My Gear Again? is on; deal with that when we merge multi-wacky)
     if not ('whatsmygear' in env.meta.get('wacky_challenge', [])):
         env.meta['wacky_gear_descriptions'] = gear_description_bytes
+    # ... but, we need to make hammers look like hammers now (put this in generator.py)
 
     env.add_script('\n'.join(advertising_script))
     

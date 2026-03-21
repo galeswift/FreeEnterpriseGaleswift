@@ -308,3 +308,7 @@ Frost
 // Item changes; can't do this without just patching bytes.
 // Patches written in wacky_rando.py under apply_advertising
 // to make address arithmetic easy.
+// ... except, of course, changing the item icons for the hammers:
+text(item name $49) {[hammer]Silver}
+text(item name $4A) {[hammer]Earth}
+text(item name $4B) {[hammer]Wooden}

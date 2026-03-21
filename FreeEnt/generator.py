@@ -979,7 +979,11 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/black_shirt_fix.f4c') # Black Shirt doesn't change
     else:
         env.add_file('scripts/black_shirt_fix.f4c') # cannot double-patch the Black Shirt!
-    
+    if 'advertising' in env.meta.get('wacky_challenge',[]):
+        # manually change the Wrench icons to Hammer icons for Silver/Earth/Wooden hammers, since they're in the first row, not rows 2-4
+        for item_id in [0x49, 0x4A, 0x4B]:
+            item_description_data[0x80 * item_id + 0x02] = 0x39
+
     env.add_binary(UnheaderedAddress(0x120000), item_description_data)
 
     # pregame text

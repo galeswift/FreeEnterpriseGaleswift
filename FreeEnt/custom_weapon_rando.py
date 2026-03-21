@@ -204,8 +204,11 @@ def apply(env):
         custom_weapon.undead = ''
         custom_weapon.anim0 = 0x1C # Black Sword palette
 
-    if custom_weapon.id == 0x106 and 'advertising'  in env.meta.get('wacky_challenge',[]):
-        custom_weapon.giants = 'y'
+    if 'advertising' in env.meta.get('wacky_challenge',[]):
+        if custom_weapon.id == 0x106:
+            custom_weapon.giants = 'y'
+        elif custom_weapon.id in [0x112, 0x113]:
+            custom_weapon.name = '[hammer]' + custom_weapon.name[8:]
 
     # write item name
     env.add_script(f'text(item name ${CUSTOM_WEAPON_ITEM_ID:02X}) {{{custom_weapon.name}}}')
@@ -275,7 +278,7 @@ def apply(env):
     if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
         with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
             description_data = infile.read()
-    elif custom_weapon.id == 0x106 and 'advertising' in env.meta.get('wacky_challenge',[]):
+    elif custom_weapon.id in [0x106, 0x112, 0x113] and 'advertising' in env.meta.get('wacky_challenge',[]):
         with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'advertising_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
             description_data = infile.read()
     else: 
@@ -313,6 +316,9 @@ def apply(env):
             # making no changes if it's a holy sword
             return 
         
+        if custom_legend.id == 0x20D and 'advertising' in env.meta.get('wacky_challenge', []):
+            custom_legend.name = '[hammer]Legend'
+
         # write item name
         env.add_script(f'text(item name ${CUSTOM_LEGEND_ITEM_ID:02X}) {{{custom_legend.name}}}')
 
@@ -354,6 +360,9 @@ def apply(env):
         # set override item description; unfortunately, we need to modify the description no matter what, due to weapon properties.
         if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
             with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
+                description_data = infile.read()
+        elif custom_legend.id == 0x20D and 'advertising' in env.meta.get('wacky_challenge',[]):
+            with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'advertising_custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
                 description_data = infile.read()
         else: 
             with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
