@@ -122,7 +122,6 @@ text(bank 1 message $FF) {X}
 
 // 103-105 are FuSoYa spell-learning messages
 
-text(bank 1 message $10D) {X}
 text(bank 1 message $10E) {X}
 
 // message $11C is the harp song text

@@ -921,6 +921,20 @@ These flags provide alternate starting conditions for the seed: either starting 
 
 Or, at least, these flags _would_ do that, but because Doors Rando is a thing on the fork and modifying it to work with a different starting location is highly non-trivial, these flags will remain inactive for now. Once Doors Rando has been modified to work with these flags, these flags will become active. For now, while the flags are not accessible, all of the logic is available to look at in the various files, for when things are ready.
 
+### `-vanilla:zot` {: .h6 }
+
+- Idea: IAmDMar (relaying an idea from WeffJebster's chat)
+- Design: IAmDMar, Wylem, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: zot_rando.py, zot_top.f4c
+
+As of v4.6.4.Gale, by default Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). This flag removes that behaviour.
+
+!!! info "Possible Zot spells for Rosa"
+    Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
+
+On `-tweak:rosadin`, Rosa will learn a random spell, but because she cannot learn any of the non-Exit spells, she will not learn Exit. Cecil's white magic is unchanged.
+
 ## FuSoYa Flags
 
 - Idea: ScytheMarshall (except `Fslowstart`, `Funlearn`, `Fomnimage`)

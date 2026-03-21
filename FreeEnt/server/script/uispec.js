@@ -9455,6 +9455,11 @@ var FLAG_UISPEC = [
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
+            "flag": "-vanilla:zot",
+            "title": "Vanilla Zot spell",
+            "description": "By default, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell. This flag removes that behavior."
+          },
+          {
             "flag": "-vanilla:fashion",
             "title": "Vanilla fashion",
             "description": "To help distinguish duplicate characters, Free Enterprise randomizes the battle palettes of each character. Enabling this flag preserves each character's original battle colors."

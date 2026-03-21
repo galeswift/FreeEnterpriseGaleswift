@@ -97,6 +97,7 @@ Znocosplay
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
 -call:levelup/-call:all -call:vanillahobs -call:vanillagrowup/-call:nogrowup -call:noorbs
+-vanilla:zot
 -vanilla:fashion
 -vanilla:miabs
 -vanilla:giant
@@ -426,6 +427,7 @@ Xsmallparty      experience_small_party
 -call:vanillagrowup  vanilla_dwarf_summons
 -call:nogrowup       no_dwarf_summons
 -call:noorbs         no_call_orbs
+-vanilla:zot         vanilla_zot
 -vanilla:fashion     vanilla_fashion
 -vanilla:miabs       vanilla_miabs
 -vanilla:giant       vanilla_giant

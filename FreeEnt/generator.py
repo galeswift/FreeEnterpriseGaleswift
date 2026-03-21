@@ -40,6 +40,7 @@ from . import golbez_rando
 from . import zeromus_rando
 from . import sprite_rando
 from . import summons_rando
+from . import zot_rando
 from . import objective_rando
 from . import kit_rando
 from . import custom_weapon_rando
@@ -661,18 +662,6 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
-    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
-    update_spells.spell_data(env)
-    update_spells.spellset_data(env)
-
-    # handle all changes to command lists
-    update_abilities.command_lists(env)
-
-    # handle all changes to equipment and the equipment index table
-    # except for the Spoon and the custom FF4A weapon
-    update_equipment.equip_table(env)
-    update_equipment.equipment(env)
-
     RANDO_MODULES = [
         character_rando,
         core_rando,
@@ -685,6 +674,7 @@ def build(romfile, options, force_recompile=False):
         encounter_rando,
         sprite_rando,
         summons_rando,
+        zot_rando,
         wyvern_rando,
         odin_rando,
         golbez_rando,
@@ -702,6 +692,18 @@ def build(romfile, options, force_recompile=False):
                 continue
 
             method(env)
+
+    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
+    update_spells.spell_data(env)
+    update_spells.spellset_data(env)
+
+    # handle all changes to command lists
+    update_abilities.command_lists(env)
+
+    # handle all changes to equipment and the equipment index table
+    # except for the Spoon and the custom FF4A weapon
+    update_equipment.equip_table(env)
+    update_equipment.equipment(env)
 
     if not options.flags.has('vanilla_z') or options.flags.has('vintage'):
         ZEROMUS_PICS_DIR = os.path.join(os.path.dirname(__file__), 'compiled_zeromus_pics')

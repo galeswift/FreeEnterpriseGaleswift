@@ -980,6 +980,7 @@
 ..(-call:nogrowup)^ Rydia learns no spells in place of summons
 .[-call:noorbs]!^ Call orbs are removed from rewards, boxes, and shops
 [] Restore vanilla behaviors
+.[-vanilla:zot] Vanilla Zot spell
 .[-vanilla:fashion] Vanilla fashion
 .[-vanilla:miabs] Vanilla monster-in-a-box locations
 .[-vanilla:giant] Vanilla Giant

@@ -319,6 +319,14 @@ def spellset_data(env):
                 '#Fatal' : 45,
                 '#Nuke'  : 57
             })
+    rosa_exit_replacement = env.meta['zot_spell']
+    if not env.options.flags.has('rosapaladin') and rosa_exit_replacement != '#Exit':
+        # swap #Exit into the replacement spell's level-up slot
+        # if Rosa is learning something else
+        spellsets['Rosa'].update({
+            '#Exit'  : spellsets['Rosa'][rosa_exit_replacement]
+        })
+        spellsets['Rosa'].pop(rosa_exit_replacement)
 
     if env.options.flags.has('harmspell'):
         # move '#Sight' (i.e. '#Harm') to be learned via level-up

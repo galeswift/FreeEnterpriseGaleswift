@@ -1024,6 +1024,9 @@ Set this flag to remove all Call orbs from the game. Rydia can still learn summo
 [-call:nogrowup]
 Set this flag to prevent Rydia from learning any summons at Dwarf Castle (she will still learn Fire2/Ice-2/Lit-2).
 
+[-vanilla:zot]
+By default, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell. This flag removes that behavior.
+
 [-vanilla:fashion]
 To help distinguish duplicate characters, Free Enterprise randomizes the battle palettes of each character. Enabling this flag preserves each character's original battle colors.
 
