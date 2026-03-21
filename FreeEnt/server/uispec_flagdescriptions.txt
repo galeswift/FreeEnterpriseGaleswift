@@ -414,6 +414,9 @@ Bosses (including Zeromus) have FF4ET scripts and boss location stats scale with
 [Bslots]
 The stats of the boss slots are shuffled within four different groups: ungated overworld slots, gated overworld slots, underworld slots (and Baron basement), and Darkness-locked slots. For example, you can find a boss with the Magus Sisters slot stats at Antlion Cave. On <em>Bunsafe</em>, the Odin slot is shuffled with the gated overworld slots.
 
+[Bzones]
+Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).
+
 [@Brestrict]
 Limits the locations that bosses specified in objectives (or D.Mist, if <em>Knofree</em> is enabled) can appear in, when possible. If there are too many required bosses to place them all in un-restricted slots, then restricted slots will be used. On <em>Bvanilla</em>, custom-chosen boss objectives will ignore this setting. 
 

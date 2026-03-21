@@ -616,6 +616,7 @@
 <>* Bosses
 .(Bvanilla)- No boss randomization
 .(Bstandard) Randomize bosses
+..[Bzones]^ Shuffle bosses only within zones
 ..[Bunsafe]! No safety checks
 [Bnofree]! No free bosses
 [Balt:gauntlet] Alt Gauntlet

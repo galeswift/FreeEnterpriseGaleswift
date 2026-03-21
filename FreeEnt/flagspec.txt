@@ -53,7 +53,7 @@ Sprice:20/Sprice:40/Sprice:60/Sprice:80/Sprice:120/Sprice:140/Sprice:160/Sprice:
 Spricey:items Spricey:weapons Spricey:armor
 Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus Salways:starveil Salways:cure3 Salways:illusion Salways:damage_items Salways:coffin
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
-Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots
+Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots Bzones
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
 Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:officer_slot Bremove:kingqueen_slot
 Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
@@ -327,6 +327,7 @@ Balt:gauntlet        bosses_alt_gauntlet
 Bstats:j             japanese_bosses
 Bstats:et            easy_type_bosses
 Bslots               boss_slot_shuffle
+Bzones               bosses_within_zones
 Brestrict:summon     bosses_no_required_at_summon
 Brestrict:moon       bosses_no_required_on_moon
 Brestrict:zot        bosses_no_required_in_zot

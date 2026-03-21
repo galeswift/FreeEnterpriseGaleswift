@@ -507,7 +507,7 @@ class FlagLogicCore:
                 self._simple_disable(flagset, log, 'Salways: overrides Sno:', ['Sno:' + f])
 
         if flagset.has('Bvanilla'):
-            self._simple_disable(flagset, log, 'Bosses not randomized', ['Bunsafe'])
+            self._simple_disable(flagset, log, 'Bosses not randomized', ['Bunsafe', 'Bzones'])
 
         if flagset.has('Evanilla'):
             self._simple_disable(flagset, log, 'Encounters are vanilla', ['Ekeep:behemoths', 'Ekeep:doors', 'Edanger'])

@@ -558,7 +558,7 @@ class FlagLogicCore {
             }
         }
         if (flagset.has("Bvanilla")) {
-            this._simple_disable(flagset, log, "Bosses not randomized", ["Bunsafe"]);
+            this._simple_disable(flagset, log, "Bosses not randomized", ["Bunsafe", "Bzones"]);
         }
         if (flagset.has("Evanilla")) {
             this._simple_disable(flagset, log, "Encounters are vanilla", ["Ekeep:behemoths", "Ekeep:doors", "Edanger"]);

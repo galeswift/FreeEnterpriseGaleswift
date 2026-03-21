@@ -623,6 +623,19 @@ This flag shuffles the *stats* of the boss slots within four different groups. W
     - Underworld: Dwarf 1/2, Lower Bab-il (top), Super Cannon, Sealed Cave, Asura spot, Levia spot, Baron Basement
     - Darkness: Giant 1/2, Cave Bahamut, Murasame altar, Crystal Sword altar, White Spear altar, Ribbon altar, Masamune altar
 
+### `Bzones` {: .h6 }
+
+- Idea: warlink05
+- Design: warlink05, ScytheMarshall
+- Programming: ScytheMarshall
+
+This flag restricts boss randomization to be within three zones (different from the groups for `Bslots`). Waterhag is included, so it can replace one of the bosses in the early-game zone. If a situation arises where every boss in a zone must be in the seed due to custom boss objectives and there are not enough slots to place them all in a zone (perhaps because of `Bremove`), then if Waterhag is one of those bosses, it will be moved, and otherwise a randomly chosen objective boss from that zone will move to another zone. (This case is incredibly niche.)
+
+!!! info "`Bzones` zones"
+    - Early Game Bosses (up to Karate): D.Mist, Officer, Waterhag (no slot), Octomamm, Antlion, MomBomb, Fabul Gauntlet, Milon, Milon Z, DKC, Guards, Karate
+    - Gated Storyline Bosses on the Blue Planet (Baigan up to EvilWall): Baigan, Kainazzo, Dark Elf, Magus Sisters, Valvalis, Calbrena, Golbez, Lugae, Dark Imps, KQ Eblan, Rubicant, EvilWall
+    - Summons and Darkness-Locked Bosses: Odin, Asura, Leviatan, Bahamut, Elements, CPU, Pale Dim, Wyvern, Plague, D.Lunars, Ogopogo
+
 ## Glitch Flags
 
 ### `Glife2f` {: .h6 }

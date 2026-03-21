@@ -7400,6 +7400,12 @@ var FLAG_UISPEC = [
             "description": "The positions of bosses are shuffled. Boss stats are roughly scaled to match the battle it's replacing. For example, Rubicant in the Watery Pass would have the HP and speed of Octomamm. (Yes, this flag is janky, and a MegaNuke is still a MegaNuke. Save often.)",
             "subcontrols": [
               {
+                "flag": "Bzones",
+                "title": "Shuffle bosses only within zones",
+                "description": "Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).",
+                "fork": true
+              },
+              {
                 "flag": "Bunsafe",
                 "title": "No safety checks",
                 "description": "Normally, you are guaranteed a path to the underworld that does not require defeating the most difficult bosses. This flag removes that check.",
