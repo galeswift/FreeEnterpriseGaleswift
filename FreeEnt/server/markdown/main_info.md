@@ -628,6 +628,7 @@ This flag shuffles the *stats* of the boss slots within four different groups. W
 - Idea: warlink05
 - Design: warlink05, ScytheMarshall
 - Programming: ScytheMarshall
+- Locations: core_rando.py, flagsetcore.py
 
 This flag restricts boss randomization to be within three zones (different from the groups for `Bslots`). Waterhag is included, so it can replace one of the bosses in the early-game zone. If a situation arises where every boss in a zone must be in the seed due to custom boss objectives and there are not enough slots to place them all in a zone (perhaps because of `Bremove`), then if Waterhag is one of those bosses, it will be moved, and otherwise a randomly chosen objective boss from that zone will move to another zone. (This case is incredibly niche.)
 
@@ -636,13 +637,24 @@ This flag restricts boss randomization to be within three zones (different from 
     - Gated Storyline Bosses on the Blue Planet (Baigan up to EvilWall): Baigan, Kainazzo, Dark Elf, Magus Sisters, Valvalis, Calbrena, Golbez, Lugae, Dark Imps, KQ Eblan, Rubicant, EvilWall
     - Summons and Darkness-Locked Bosses: Odin, Asura, Leviatan, Bahamut, Elements, CPU, Pale Dim, Wyvern, Plague, D.Lunars, Ogopogo
 
+### `Bpro`, `Bfriendly`, `Bcruel`, `Beasy` {: .h6 }
+
+- Idea: IAmDMar (`Bpro`), Wylem (name for `Bcruel`), ScytheMarshall
+- Design: ScytheMarshall, Wylem
+- Programming: ScytheMarshall
+- Locations: core_rando.py, generate_boss_slot_rankings.py, boss_slot_rankings_data.py
+
+These flags are difficulty modifiers for `Bstandard`, where we generate a score for each boss-slot pairing and try to find assignments that are harder or easier based on the scoring. `Bpro` and `Bfriendly` perform a standard boss shuffle and then try many swaps of two bosses, keeping the result if the resulting assignment is harder (`Bpro`) or easier (`Bfriendly`) than before. `Bcruel` places the bosses where they generally are the most threatening, subject to some randomness. `Beasy` attempts to place the hardest bosses where they can do the least damage, by identifying boss-slot pairs as in `Bcruel` and then putting the boss into a slot where it is much less threatening. There are checks to ensure that objective bosses are placed without messing with the scoring much and on `Beasy` any bosses not in the seed are generally some of the harder bosses.
+
+The data for all three versions (US/J/ET) is located in boss_slot_rankings_data.py, if you want to inspect the slot rankings (which slots are the strongest in which stats) and boss weights (which stats are most important for which bosses).
+
 ## Glitch Flags
 
 ### `Glife2f` {: .h6 }
 
 - Idea: ScytheMarshall
 - Design/Programming: ScytheMarshall
-- Locations: 
+- Locations: modify_life_monsters.f4c, generator.py
 
 This flag makes Life1 and Life potions restore HP to swooned monsters depending on their $2F stat, specifically (1 + ($2F / 32)) times (max HP / 4), with all divisions being integer division. Hence, there will be minor truncation errors. Characters are not affected by the change.
 
@@ -652,7 +664,7 @@ Note that Cry does lower the $2F of every monster in battle, even ones that are 
 
 - Idea: ScytheMarshall
 - Design/Programming: ScytheMarshall
-- Locations: 
+- Locations: remove_life_glitch.f4c
 
 This flag makes Life2 fail against monsters (and removes the usual Life glitch), so that you can only ever defeat a single monster once unless the monsters revive each other.
 

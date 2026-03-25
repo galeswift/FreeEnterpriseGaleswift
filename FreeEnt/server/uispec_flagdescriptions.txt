@@ -396,6 +396,18 @@ Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag remov
 [Bstandard]
 The positions of bosses are shuffled. Boss stats are roughly scaled to match the battle it's replacing. For example, Rubicant in the Watery Pass would have the HP and speed of Octomamm. (Yes, this flag is janky, and a MegaNuke is still a MegaNuke. Save often.)
 
+[Bpro]
+The positions of bosses are shuffled, with modifications to lean towards a more difficult layout on average than on <em>Bstandard</em>.
+
+[Bfriendly]
+The positions of bosses are shuffled, with modifications to lean towards an easier layout on average than on <em>Bstandard</em>.
+
+[Bcruel]
+Bosses are randomly placed into the positions where they pose the biggest challenge. Expect the easier bosses to be in weak slots and the harder bosses to be in strong slots.
+
+[Beasy]
+Bosses are randomly placed into the positions where they are less threatening. Usually the hardest bosses are in weak slots and the easier bosses are in strong slots.
+
 [Bunsafe]
 Normally, you are guaranteed a path to the underworld that does not require defeating the most difficult bosses. This flag removes that check.
 

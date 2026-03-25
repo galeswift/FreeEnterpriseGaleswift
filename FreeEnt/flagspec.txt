@@ -53,7 +53,7 @@ Sprice:20/Sprice:40/Sprice:60/Sprice:80/Sprice:120/Sprice:140/Sprice:160/Sprice:
 Spricey:items Spricey:weapons Spricey:armor
 Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus Salways:starveil Salways:cure3 Salways:illusion Salways:damage_items Salways:coffin
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
-Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots Bzones
+Bvanilla Bstandard/Bpro/Bfriendly/Bcruel/Beasy Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots Bzones
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
 Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:officer_slot Bremove:kingqueen_slot
 Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
@@ -170,7 +170,7 @@ Pnone    : ~Pkey & ~Pshop & ~Pchests
 Cvanilla : ~Cstandard & ~Crelaxed
 Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Tsemipro & ~Twild & ~Twildish & ~Tstandardish & ~Tvanillaish & ~Tempty
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Swildish & ~Scabins & ~Svanillaish & ~Sempty & ~Ssame
-Bvanilla : ~Bstandard
+Bvanilla : ~Bstandard & ~Bpro & ~Bfriendly & ~Bcruel & ~Beasy
 Etoggle  : ~Evanilla & ~Ereduce & ~Enorepeats & ~Enoencounters
 Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
@@ -321,6 +321,10 @@ Sethersell           shops_ethers_sell_full
 
 Bvanilla             bosses_vanilla
 Bstandard            bosses_standard
+Bpro                 bosses_pro
+Bfriendly            bosses_friendly
+Bcruel               bosses_cruel
+Beasy                bosses_easy
 Bnofree              no_free_bosses
 Bunsafe              bosses_unsafe
 Balt:gauntlet        bosses_alt_gauntlet

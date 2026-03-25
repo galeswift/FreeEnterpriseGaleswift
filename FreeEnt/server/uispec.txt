@@ -615,9 +615,17 @@
 == BOSSES
 <>* Bosses
 .(Bvanilla)- No boss randomization
-.(Bstandard) Randomize bosses
+.(Bstandard) Standard boss randomization
 ..[Bzones]^ Shuffle bosses only within zones
 ..[Bunsafe]! No safety checks
+.(Bpro)!^ Pro boss randomization
+..[ECHO:Bstandard]
+.(Bfriendly)^ Friendly boss randomization
+..[ECHO:Bstandard]
+.(Bcruel)!^ Place bosses in their most challenging locations
+..[ECHO:Bstandard]
+.(Beasy)^ Place bosses in less threatening locations
+..[ECHO:Bstandard]
 [Bnofree]! No free bosses
 [Balt:gauntlet] Alt Gauntlet
 <>^ Alternate boss stats/scripts
