@@ -777,23 +777,26 @@ The Tower Key is now a logical way underground, if you can access Lower Bab-il f
 
 Entrances to field maps from the various overworld maps are randomized within the given categories; for example, under `all` the entrance to Baron Town might lead to Dwarf Castle and the entrance to Baron Castle might lead to Cave Bahamut. Doors within field maps, for example doors to buildings inside of towns or connectors to different parts of a dungeon, remain intact.
 
-### `-calmness` {: .h6 }
+### `-panicbutton` {: .h6 }
 
-- Idea: jayp12323
-- Design/Programming: jayp12323
-- Locations: doorsrando.f4c
+- Idea/Design: jayp12323
+- Programming: jayp12323, Wylem, ScytheMarshall (the latter two for figuring out the initial graphical glitch)
+- Locations: panic_button.f4c
 
-When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button".
+When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button". On `-starting:` flags, you will be placed at your starting location instead, whatever it is, and placed in your starting vehicle (the Falcon or on foot).
 
-This flag _removes_ the Select+R functionality.
+This flag _enables_ the Select+R functionality. Before v4.6.4.Gale, this flag was named `-calmness` and _disabled_ the functionality, and was only relevant on doors/entrances rando. Now, this flag can be enabled on any seed. 
+
+!!! warn "Panic button"
+    The Panic button is no longer default on doors/entrances rando! Remember to enable it if you want to use it.
 
 ### `-forcesealed` {: .h6 }
 
 - Idea: rejakdylle
 - Design/Programming: jayp12323
-- Locations: doorsrando.f4c
+- Locations: force_sealed_cave_boss.f4c
 
-Normally, with the Panic button you can simply warp out of Sealed Cave after picking up the item at the bottom without fighting the boss. This flag triggers the boss fight on the way into the crystal room, not out of it. You can, of course, still skip the fight on Push B to Jump.
+Normally, with the Panic button you can simply warp out of Sealed Cave after picking up the item at the bottom without fighting the boss. This flag triggers the boss fight on the way into the crystal room, not out of it. You can, of course, still skip the fight on Push B to Jump or using the Warp glitch.
 
 ### `-kit:atb` {: .h6 }
 

@@ -1419,7 +1419,7 @@ const _FE_FLAGSPEC = {
         "-entrancesrando:blueplanet",
         "-entrancesrando:why",
         "-entrancesrando:all",
-        "-calmness",
+        "-panicbutton",
         "-forcesealed",
         "-wacky:random",
         "-wacky:random2",
@@ -11236,7 +11236,7 @@ const _FE_FLAGSPEC = {
             "value": 6
         },
         {
-            "flag": "-calmness",
+            "flag": "-panicbutton",
             "offset": 517,
             "size": 1,
             "value": 1

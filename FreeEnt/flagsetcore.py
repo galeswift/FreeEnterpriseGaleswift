@@ -534,21 +534,6 @@ class FlagLogicCore:
         if flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet','-entrancesrando:why','-entrancesrando:all'):
             self._simple_disable_regex(flagset, log, 'Entrances rando takes priority', r'^-doorsrando')
 
-        if not flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet',
-                               '-entrancesrando:why','-entrancesrando:all','-doorsrando:normal','-doorsrando:gated',
-                               '-doorsrando:blueplanet','-doorsrando:why','-doorsrando:all'):
-            self._simple_disable(flagset, log, 'Removing doors rando related flags when no doors/entrances option is enabled ', ['-calmness','-forcesealed'])
-
-
-
-        if flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet','-entrancesrando:why','-entrancesrando:all'):
-            self._simple_disable_regex(flagset, log, 'Entrances rando takes priority', r'^-doorsrando')
-
-        if not flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet',
-                               '-entrancesrando:why','-entrancesrando:all','-doorsrando:normal','-doorsrando:gated',
-                               '-doorsrando:blueplanet','-doorsrando:why','-doorsrando:all'):
-            self._simple_disable(flagset, log, 'Removing doors rando related flags when no doors/entrances option is enabled ', ['-calmness','-forcesealed'])
-
         # temporarily prevent usage of -starting:underground and -starting:blackchocobo, until Doors are fixed
         if flagset.has_any('-starting:underground','-starting:blackchocobo'):
             self._lib.push(log, ['error', "Different starting location flags are not currently available; remove them and try again."])

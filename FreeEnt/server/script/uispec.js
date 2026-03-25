@@ -8056,15 +8056,15 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "-calmness",
-        "title": "Disable the Panic Button (Select + R)",
-        "description": "Disables the use of the Panic button (Select + R)",
+        "flag": "-panicbutton",
+        "title": "Enable the Panic Button (Select + R)",
+        "description": "Enables the use of the Panic button (Select + R) to warp to your starting location.",
         "fork": true
       },
       {
         "flag": "-forcesealed",
         "title": "Disable skipping the Sealed Cave Boss",
-        "description": "Fighting the Sealed Cave boss is required before seeing the KI",
+        "description": "Fighting the Sealed Cave boss is required before seeing the KI.",
         "fork": true
       }
     ]

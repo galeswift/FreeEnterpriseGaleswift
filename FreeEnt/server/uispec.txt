@@ -731,7 +731,7 @@
 ...(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
 ...(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
 ...(-entrancesrando:all)!          All Entrances Shuffled
-[-calmness]^ Disable the Panic Button (Select + R)
+[-panicbutton]^ Enable the Panic Button (Select + R)
 [-forcesealed]^ Disable skipping the Sealed Cave Boss
 
 == FUSOYA

@@ -920,11 +920,11 @@ Randomizes most Entrances in the game. Doors inside towns remain intact.
     <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>
 </ul>
 
-[-calmness]
-Disables the use of the Panic button (Select + R)
+[-panicbutton]
+Enables the use of the Panic button (Select + R) to warp to your starting location.
 
 [-forcesealed]
-Fighting the Sealed Cave boss is required before seeing the KI
+Fighting the Sealed Cave boss is required before seeing the KI.
 
 [-pushbtojump]
 <ul>

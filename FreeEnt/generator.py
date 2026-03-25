@@ -922,16 +922,16 @@ def build(romfile, options, force_recompile=False):
         env.add_toggle('doorsrando')
         if rando_scope == "-entrancesrando":
             env.add_toggle('entrancesrando')
-
-        if not options.flags.has('-calmness'):
-            env.add_file('scripts/panic_button.f4c')
-        if options.flags.has('-forcesealed'):
-            env.add_toggle('forcesealed')
         
         if options.flags.has('starting_underground'):
             env.add_toggle('doorsrando_starting_underground')
 
         doors_rando.apply(env, rando_scope,rando_type)
+
+    if options.flags.has('-panicbutton'):
+        env.add_file('scripts/panic_button.f4c')
+    if options.flags.has('-forcesealed'):
+        env.add_file('scripts/force_sealed_cave_boss.f4c')
 
     # must be last
     wacky_rando.apply(env)
