@@ -1146,7 +1146,15 @@ Under this flag, if 5 plus twice the largest level in your party is less than th
 
 ### `Xsmallparty` {: .h6 }
 
-Under this flag, encounters give more EXP when your party is not full. If you can have `N` characters and you don't, then you get `6-N` bonuses of 10%, which sums over `N` from 1 to the maximum party size. For example, if you have 2 characters but you could have 5, then you get 1+2+3 = 6 bonuses of 10% (with contributions from `N` being 5,4,3), for 60% total bonus EXP. 
+Under this flag, encounters give more EXP when your party is not full. If you can have `N` characters and you don't, then you get `6-N` bonuses of 10%, which sums over `N` from 1 to the maximum party size. For example, if you have 2 characters but you could have 5, then you get 1+2+3 = 6 bonuses of 10% (with contributions from `N` being 5,4,3), for 60% total bonus EXP. The table shows the bonuses if you have the number of characters on the left with a given maximum party size.
+
+Max party size | 1 | 2 | 3 | 4 | 5
+-------------- | - | - | - | - | -
+1 character | 0% | 40% | 70% | 90% | 100%
+2 characters | x | 0%  | 30% | 50% | 60%
+3 characters | x | x   | 0%  | 20% | 30%
+4 characters | x | x   | x   | 0%  | 10%
+5 characters | x | x   | x   | x   | 0% 
 
 Since the battle spoils function runs after permadeath/etc. occurs, any characters that leave your party do not count as being part of your party for the purposes of this calculation.
 
