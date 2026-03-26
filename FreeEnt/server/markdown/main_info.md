@@ -938,16 +938,16 @@ This flag turns the Legend Sword into the same weapon type as the FF4 Advance we
     - Legend Bow, for Perseus Bow: long-range, hits air weakness.
     - Legend Arrow, for Perseus Arrow: long-range, hits Undead weakness.
 
-### `-starting:blackchocobo,underground` {: .h6 }
+### `-starting:[blackchocobo,underground]` {: .h6 }
 
 - Idea: Deathlike, Skarcerer, others in the past
 - Design: Deathlike, Skarcerer, Marshal, ScytheMarshall, others
 - Programming: ScytheMarshall
 - Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
 
-These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. Mist does not get locked from the right side after the Package cutscene if starting with the Black Chocobo.
+These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights if you start underground beyond the usual mean bosses. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. If starting with the Black Chocobo, Mist does not get locked from the right side after the Package cutscene and the Hovercraft starts available at the start of the seed outside of Kaipo, allowing you to traverse by foot to Damcyan and Antlion Cave. (There is no logic for having Fabul or D.Mist at Hobs gate progression if you have Rydia.)
 
-Or, at least, these flags _would_ do that, but because Doors Rando is a thing on the fork and modifying it to work with a different starting location is highly non-trivial, these flags will remain inactive for now. Once Doors Rando has been modified to work with these flags, these flags will become active. For now, while the flags are not accessible, all of the logic is available to look at in the various files, for when things are ready.
+Pre-v4.6.4.Gale, these flags were unavailable. As of v4.6.4.Gale, these flags are available, but incompatible with doors/entrances randomization and gated objectives (the modifications for doors required to make it work with a different starting location are highly non-trivial).
 
 ### `-vanilla:zot` {: .h6 }
 

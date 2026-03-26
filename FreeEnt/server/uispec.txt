@@ -988,6 +988,9 @@
 ..(-call:vanillagrowup) Vanilla Dwarf Castle summons
 ..(-call:nogrowup)^ Rydia learns no spells in place of summons
 .[-call:noorbs]!^ Call orbs are removed from rewards, boxes, and shops
+<> Alternate starting conditions
+.(-starting:blackchocobo) Start with Black Chocobo but no Enterprise
+.(-starting:underground) Start underground with a Drill-less Falcon
 [] Restore vanilla behaviors
 .[-vanilla:zot] Vanilla Zot spell
 .[-vanilla:fashion] Vanilla fashion

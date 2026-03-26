@@ -534,9 +534,12 @@ class FlagLogicCore:
         if flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet','-entrancesrando:why','-entrancesrando:all'):
             self._simple_disable_regex(flagset, log, 'Entrances rando takes priority', r'^-doorsrando')
 
-        # temporarily prevent usage of -starting:underground and -starting:blackchocobo, until Doors are fixed
-        if flagset.has_any('-starting:underground','-starting:blackchocobo'):
-            self._lib.push(log, ['error', "Different starting location flags are not currently available; remove them and try again."])
+        # cannot currently do -starting: flags with gated objectives or doors/entrances rando
+        gated_objectives = flagset.get_list(r'^Ogated:')
+        doors_entrances_rando = flagset.get_list(r'^-(doors|entrances)rando:')
+        if (flagset.has_any('-starting:underground','-starting:blackchocobo')
+            and (len(gated_objectives) > 0 or len(doors_entrances_rando) > 0)):
+            self._lib.push(log, ['error', "Different starting location flags are not currently available in combination with doors/entrances rando or gated objectives; remove them and try again."])
 
         unsure_flags = flagset.get_list(r'^Zunsure:')
         for fl in unsure_flags:
@@ -594,7 +597,6 @@ class FlagLogicCore:
                         flagset.set(f'Oreq:{len(hard_required_objectives)}')
                         self._lib.push(log, ['correction', f'More hard required objectives set than number of objectives required, increasing required objective count to {len(hard_required_objectives)}.'])
 
-            gated_objectives = flagset.get_list(r'^Ogated:')
             for gated in gated_objectives:
                 gated_objective_index = int(self._lib.re_sub(r'^Ogated:', '', gated))
                 bad_gated_conditions = False
@@ -604,7 +606,6 @@ class FlagLogicCore:
                         bad_gated_conditions = True
                         self._lib.push(log, ['error', f'Cannot have objective #{hard_required_index} be both gated AND hard required.'])
                         break
-                doors_entrances_rando = flagset.get_list(r'^-(doors|entrances)rando:')
                 for doors_entrances in doors_entrances_rando:
                     bad_gated_conditions = True
                     self._lib.push(log, ['error', 'Doors and entrances rando does not currently support gated objectives.'])

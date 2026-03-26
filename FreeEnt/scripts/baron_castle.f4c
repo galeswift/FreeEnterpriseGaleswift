@@ -424,8 +424,10 @@ event($1B)  //Kainazzo battle, losing twins
         [#B #PutWhale 156 201]
     }
     // %end%
-    // %flag starting_underground on%
+    // %if doorsrando_starting_underground%
     set #UnderworldOpen
+    // %end%
+    // %flag starting_underground on%
     music #Airship fade in
     load map #Overworld at 102 155 on enterprise no transition
     // %end%

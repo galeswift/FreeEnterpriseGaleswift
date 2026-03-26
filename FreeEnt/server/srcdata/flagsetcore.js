@@ -588,8 +588,10 @@ class FlagLogicCore {
         if (flagset.has_any("-entrancesrando:normal", "-entrancesrando:gated", "-entrancesrando:blueplanet", "-entrancesrando:why", "-entrancesrando:all")) {
             this._simple_disable_regex(flagset, log, "Entrances rando takes priority", "^-doorsrando");
         }
-        if (flagset.has_any("-starting:underground", "-starting:blackchocobo")) {
-            this._lib.push(log, ["error", "Different starting location flags are not currently available; remove them and try again."]);
+        gated_objectives = flagset.get_list("^Ogated:");
+        doors_entrances_rando = flagset.get_list("^-(doors|entrances)rando:");
+        if ((flagset.has_any("-starting:underground", "-starting:blackchocobo") && ((gated_objectives.length > 0) || (doors_entrances_rando.length > 0)))) {
+            this._lib.push(log, ["error", "Different starting location flags are not currently available in combination with doors/entrances rando or gated objectives; remove them and try again."]);
         }
         unsure_flags = flagset.get_list("^Zunsure:");
         for (var fl, _pj_c = 0, _pj_a = unsure_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
@@ -650,7 +652,6 @@ class FlagLogicCore {
                     }
                 }
             }
-            gated_objectives = flagset.get_list("^Ogated:");
             for (var gated, _pj_c = 0, _pj_a = gated_objectives, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 gated = _pj_a[_pj_c];
                 gated_objective_index = Number.parseInt(this._lib.re_sub("^Ogated:", "", gated));
@@ -664,7 +665,6 @@ class FlagLogicCore {
                         break;
                     }
                 }
-                doors_entrances_rando = flagset.get_list("^-(doors|entrances)rando:");
                 for (var doors_entrances, _pj_f = 0, _pj_d = doors_entrances_rando, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
                     doors_entrances = _pj_d[_pj_f];
                     bad_gated_conditions = true;

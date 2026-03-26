@@ -9540,6 +9540,23 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "@anon107",
+        "title": "Alternate starting conditions",
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "-starting:blackchocobo",
+            "title": "Start with Black Chocobo but no Enterprise",
+            "description": "The Black Chocobo in the Baron Chocobo Forest will be there from the beginning of the seed. You obtain the Enterprise by completing Baron Castle, as in the vanilla game."
+          },
+          {
+            "flag": "-starting:underground",
+            "title": "Start underground with a Drill-less Falcon",
+            "description": "You start with the Falcon and the Hook at Dwarf Castle. The Drill replaces the Hook in the key item pool and allows you to break the mountain at Agart to get above ground. You obtain the Enterprise by completing Baron Castle, as in the vanilla game."
+          }
+        ]
+      },
+      {
+        "flag": "@anon108",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9585,7 +9602,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon108",
+            "flag": "@anon109",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9822,12 +9839,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon109",
+        "flag": "@anon110",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon110",
+            "flag": "@anon111",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -9849,7 +9866,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon111",
+            "flag": "@anon112",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -9866,7 +9883,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon112",
+            "flag": "@anon113",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -9945,7 +9962,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon113",
+        "flag": "@anon114",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -9999,7 +10016,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon114",
+            "flag": "@anon115",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -10015,7 +10032,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon115",
+                "flag": "@anon116",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [
