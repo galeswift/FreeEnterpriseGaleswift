@@ -9541,6 +9541,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@anon107",
         "title": "Alternate starting conditions",
+        "fork": true,
         "type": "select",
         "subcontrols": [
           {
@@ -9551,7 +9552,8 @@ var FLAG_UISPEC = [
           {
             "flag": "-starting:underground",
             "title": "Start underground with a Drill-less Falcon",
-            "description": "You start with the Falcon and the Hook at Dwarf Castle. The Drill replaces the Hook in the key item pool and allows you to break the mountain at Agart to get above ground. You obtain the Enterprise by completing Baron Castle, as in the vanilla game."
+            "description": "You start with the Falcon and the Hook at Dwarf Castle. The Drill replaces the Hook in the key item pool and allows you to break the mountain at Agart to get above ground. You obtain the Enterprise by completing Baron Castle, as in the vanilla game.",
+            "hard": true
           }
         ]
       },
