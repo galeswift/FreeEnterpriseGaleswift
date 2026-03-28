@@ -890,7 +890,7 @@ class FlagLogicCore {
                     if ((current_boss === "waterhag")) {
                         this._lib.push(log, ["error", `Objective boss specified (${current_boss}) when that boss is not in the vanilla boss assignment`]);
                     } else {
-                        if ((((current_boss === "kingqueen") && flagset.has("Bremove:kqe_slot")) || ((current_boss === "officer") && flagset.has("Bremove:kaipo_slot")))) {
+                        if ((((current_boss === "kingqueen") && flagset.has("Bremove:kingqueen_slot")) || ((current_boss === "officer") && flagset.has("Bremove:officer_slot")))) {
                             this._lib.push(log, ["error", `Objective specified for a boss removed from the vanilla boss assignment by Bremove: (${current_boss})`]);
                         }
                     }

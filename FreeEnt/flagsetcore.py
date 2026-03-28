@@ -794,8 +794,8 @@ class FlagLogicCore:
                     current_boss = self._lib.re_sub(r'^O\d+:boss_', '', fl)
                     if current_boss == 'waterhag':
                         self._lib.push(log, ['error', f"Objective boss specified ({current_boss}) when that boss is not in the vanilla boss assignment"])
-                    elif ((current_boss == 'kingqueen' and flagset.has('Bremove:kqe_slot'))
-                            or (current_boss == 'officer' and flagset.has('Bremove:kaipo_slot'))):
+                    elif ((current_boss == 'kingqueen' and flagset.has('Bremove:kingqueen_slot'))
+                            or (current_boss == 'officer' and flagset.has('Bremove:officer_slot'))):
                         self._lib.push(log, ['error', f"Objective specified for a boss removed from the vanilla boss assignment by Bremove: ({current_boss})"])
 
             # for the purposes of making it easier for fix() to find ways to make the objectives work,
