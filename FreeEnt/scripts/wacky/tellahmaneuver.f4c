@@ -151,6 +151,7 @@ msfpatch  {
 patch ($b7b87) { 77 }  // replace short M in "MP" on BG2 with H
 patch ($b7b8e) { 49 }  // replace M in "Need MP" on BG2 with H
 
+// %if ~wacky_imaginarynumbers%
 msfpatch {
     // render HP instead of MP
     .addr $02A70E
@@ -170,6 +171,7 @@ msfpatch {
     .addr $16FFBA [[ FF FF 0A 03 FF 01 ]]
     .addr $16FFC0 [[ FF FF 0B 03 FF 01 ]]
 }
+// %end%
 
 // display HP cost of spells in battle screen
 msfpatch {

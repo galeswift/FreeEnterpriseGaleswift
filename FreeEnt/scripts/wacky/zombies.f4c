@@ -10,7 +10,7 @@ msfpatch {
         phx
         lda $47 // current slot
         tax
-        lda $_Wacky__StatusEnforcement_WorkRAM,x
+        lda $_Wacky__RAM_zombies,x
         plx
         cmp #$00
         bne $+IsZombie
@@ -37,7 +37,7 @@ msfpatch {
         tdc
         lda $_Wacky__StatusEnforcement_InputSlot
         tax
-        stz $_Wacky__StatusEnforcement_WorkRAM,x
+        stz $_Wacky__RAM_zombies,x
         plx
         stz $_Wacky__StatusEnforcement_OutputByte0
         stz $_Wacky__StatusEnforcement_OutputByte1
@@ -58,7 +58,7 @@ msfpatch {
         lda $_Wacky__StatusEnforcement_InputSlot
         tax
         stx $1670
-        lda $_Wacky__StatusEnforcement_WorkRAM,x
+        lda $_Wacky__RAM_zombies,x
         plx
         
         cmp #$00
@@ -81,7 +81,7 @@ msfpatch {
     %StateTransition:
         phx
         ldx $1670
-        sta $_Wacky__StatusEnforcement_WorkRAM,x
+        sta $_Wacky__RAM_zombies,x
         plx
         rts
 
@@ -172,7 +172,7 @@ msfpatch {
         ldx #$0000
         ldy #$0000
     %LoopStart:
-        lda $_Wacky__StatusEnforcement_WorkRAM,y
+        lda $_Wacky__RAM_zombies,y
         beq $+LoopNext
         // character is zombie, make them dead
         lda #$80
@@ -199,8 +199,8 @@ msfpatch {
     Wacky__Zombies_StatusText_Prepare:
         tay // displaced
 
-        lda $_Wacky__StatusEnforcement_WorkRAM,y
-        sta $_(Wacky__StatusEnforcement_WorkRAM + 5)
+        lda $_Wacky__RAM_zombies,y
+        sta $_(Wacky__RAM_zombies + 5)
 
         lda $29c5,y // displaced
         rtl
@@ -220,7 +220,7 @@ msfpatch {
 
     %IsCharm:
         // check previously-stored zombie state
-        lda $_(Wacky__StatusEnforcement_WorkRAM + 5)
+        lda $_(Wacky__RAM_zombies + 5)
         cmp #$01
         bne $-Return
 
@@ -240,7 +240,7 @@ msfpatch {
         lda $3540,x
         bne $+SkipSlot
 
-        lda $_Wacky__StatusEnforcement_WorkRAM,x
+        lda $_Wacky__RAM_zombies,x
         bne $+SkipSlot
 
         jml $03a030
