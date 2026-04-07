@@ -938,6 +938,14 @@ This flag turns the Legend Sword into the same weapon type as the FF4 Advance we
     - Legend Bow, for Perseus Bow: long-range, hits air weakness.
     - Legend Arrow, for Perseus Arrow: long-range, hits Undead weakness.
 
+### `-smith:sellsuper` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: compile_item_prices.py, custom_weapon_rando.py, custom_weapons.csvdb
+
+Normally, the FF4A custom weapon does not sell for anything. This flag assigns that item a price so that you can turn around and sell it to the shopkeep for items that you *actually* want. The prices are based roughly on similar quality items, though they max out at 126k GP (the max without going into the megapricing table (127k+), which means they have close enough to the maximum sell price, 63k GP instead of 63.5k).
+
 ### `-starting:[blackchocobo,underground]` {: .h6 }
 
 - Idea: Deathlike, Skarcerer, others in the past

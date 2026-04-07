@@ -204,6 +204,9 @@ def apply(env):
         custom_weapon.undead = ''
         custom_weapon.anim0 = 0x1C # Black Sword palette
 
+    if custom_weapon.id == 0x106 and env.options.flags.has('rosapaladin'):
+        custom_weapon.equip = ['kain', 'rosa', 'cid']
+
     if 'advertising' in env.meta.get('wacky_challenge',[]):
         if custom_weapon.id == 0x106:
             custom_weapon.giants = 'y'
@@ -212,6 +215,9 @@ def apply(env):
 
     # write item name
     env.add_script(f'text(item name ${CUSTOM_WEAPON_ITEM_ID:02X}) {{{custom_weapon.name}}}')
+
+    # if necessary, alter the item price to make it worth selling
+    env.meta.setdefault('altered_item_prices',{}).update({CUSTOM_WEAPON_ITEM_ID : custom_weapon.price})
 
     # write 8-byte equipment record
     gear_bytes = [0x00] * 8

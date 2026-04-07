@@ -524,8 +524,8 @@ class FlagLogicCore:
 
         if len(flagset.get_list(r'^-smith:(playable|good)')) == len(flagset.get_list(r'^-smith:')):
             self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable', '-smith:good'])
-        if flagset.has('-smith:omni') and not (flagset.has_any('-smith:super', 'Chero')):
-            self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni'])
+        if flagset.has_any('-smith:omni', '-smith:spoilsuper', '-smith:sellsuper') and not (flagset.has_any('-smith:super', 'Chero')):
+            self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni', '-smith:spoilsuper', '-smith:sellsuper'])
 
         # add restrictions in case people try to fudge the fusoya flags
         if flagset.has('Fslowstart') and flagset.has('Funcapped'):

@@ -577,8 +577,8 @@ class FlagLogicCore {
         if ((flagset.get_list("^-smith:(playable|good)").length === flagset.get_list("^-smith:").length)) {
             this._simple_disable(flagset, log, "No smith item requested", ["-smith:playable", "-smith:good"]);
         }
-        if ((flagset.has("-smith:omni") && (! flagset.has_any("-smith:super", "Chero")))) {
-            this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni"]);
+        if ((flagset.has_any("-smith:omni", "-smith:spoilsuper", "-smith:sellsuper") && (! flagset.has_any("-smith:super", "Chero")))) {
+            this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni", "-smith:spoilsuper", "-smith:sellsuper"]);
         }
         if ((flagset.has("Fslowstart") && flagset.has("Funcapped"))) {
             this._simple_disable(flagset, log, "Uncapped FuSoYa cannot also have slowstart", ["Fslowstart"]);

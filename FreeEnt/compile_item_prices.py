@@ -7,10 +7,14 @@ def apply(env):
 
     items_dbview = databases.get_items_dbview()
     altered_item_prices = env.meta.get('altered_item_prices', {})
+    print(altered_item_prices)
 
     randomized_item_codes = list(range(0x100))
     env.rnd.shuffle(randomized_item_codes)
-    normal_items_dbview = items_dbview.get_refined_view(lambda it: not (it.flag == 'D') and not (it.flag == 'K' and it.code not in [0x3E, 0xEC]))
+    if not env.options.flags.has('sellsmith'):
+        normal_items_dbview = items_dbview.get_refined_view(lambda it: not (it.flag == 'D') and not (it.flag == 'K' and it.code not in [0x3E, 0xEC]))
+    else:
+        normal_items_dbview = items_dbview.get_refined_view(lambda it: it.code == 0x46 or (not (it.flag == 'D') and not (it.flag == 'K' and it.code not in [0x3E, 0xEC])))
     randomized_normal_item_codes = [it.code for it in normal_items_dbview]
     env.rnd.shuffle(randomized_normal_item_codes)
     # since randomized_normal_item_codes isn't length 0x100, insert the excluded items in their normal spots
@@ -41,6 +45,8 @@ def apply(env):
         price_adjustment = env.options.flags.get_suffix('Sprice:')        
         has_any_adjustment_filters = env.options.flags.get_suffix('Spricey:')
         can_adjust_price = not has_any_adjustment_filters or ((env.options.flags.has('Spricey:items') and item.category == 'item' ) or (env.options.flags.has('Spricey:weapons') and item.category == 'weapon' ) or (env.options.flags.has('Spricey:armor') and item.category == 'armor' ))
+        if env.options.flags.has('sellsmith') and item.code == 0x46 and env.options.flags.has('Spricey:weapons'):
+            can_adjust_price = True
         if price_adjustment and can_adjust_price: 
             #prevPrice = price
             price = price * float(price_adjustment)//100.0

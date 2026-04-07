@@ -9455,6 +9455,11 @@ var FLAG_UISPEC = [
             "title": "The Legend Sword previews the FF4A weapon",
             "description": "If Kokkol forges a weapon from FF4 Advance, then the Legend Sword becomes the Legend \"Weapon\" of the same type as the FF4 Advance weapon, with additional properties shared by most weapons of that type.",
             "fork": true
+          },
+          {
+            "flag": "-smith:sellsuper",
+            "title": "The FF4A weapon will have a non-zero sell price",
+            "fork": true
           }
         ]
       },
