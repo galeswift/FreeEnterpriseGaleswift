@@ -230,18 +230,8 @@ def apply_bodyguard(env, rom_address):
 
 def apply_fistfight(env, rom_address):
     env.add_toggle('wacky_all_characters_ambidextrous')
-    # change claws to be universally equippable, all other weapons not
-    for item_id in range(0x01, 0x60):
-        if item_id < 0x07:
-            # is claw
-            eqp_byte = 0x00
-        elif item_id not in [0x3E, 0x46]: # ignore Spoon and custom weapon
-            eqp_byte = 0x1F
-        else:
-            eqp_byte = None
-
-        if eqp_byte is not None:
-            env.add_binary(UnheaderedAddress(0x79106 + (0x08 * item_id)), [eqp_byte], as_script=True)
+    # do equipment changes in update_equipment.py
+    # (claws universally equippable, all other weapons not)
 
 def apply_omnidextrous(env, rom_address):
     env.add_toggle('wacky_all_characters_ambidextrous')
@@ -983,10 +973,9 @@ def apply_advertising(env, rom_address):
         advertising_script.append('}\n')
 
     gear_description_bytes = {} # dictionary with keys = item_ids, values = replacement description lines 2-4 in bytes
+    # all changes to the actual equipment bytes happen in update_equipment.py
 
     # Ice weaponry changes, to hit reptiles (Claw, Brand, Spear, Arrows)
-    for equip_id in [0x02, 0x1D, 0x26, 0x57]:
-        env.add_binary(BusAddress(0x0F9100 + 0x05 + (equip_id * 0x08)), [0x04], as_script=True)
     gear_description_bytes[0x02] = encode_text(
         '[$00][$fa]Deals ice damage.          [$fb][$00][$00]' +
         '[$00][$fa]Strong against reptiles.   [$fb][$00][$00]' +
@@ -1008,8 +997,6 @@ def apply_advertising(env, rom_address):
         '[$00][$fa]                           [$fb][$00][$00]' 
         )
     # Bolt weaponry changes, to hit robots (Thunder Rod, Blitz Whip)
-    for equip_id in [0x0A, 0x35]:
-        env.add_binary(BusAddress(0x0F9100 + 0x05 + (equip_id * 0x08)), [0x02], as_script=True)
     gear_description_bytes[0x0A] = encode_text(
         '[$00][$fa]WIS[$cb]3. Casts [blackmagic]Lit[$c2]1.       [$fb][$00][$00]' +
         '[$00][$fa]Deals lightning damage.    [$fb][$00][$00]' +
@@ -1017,7 +1004,6 @@ def apply_advertising(env, rom_address):
         )
     # Blitz Whip's description handled later.
     # Earth hammer isn't Fire elemental
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x4A * 0x08)), [0x00], as_script=True)
     gear_description_bytes[0x4A] = encode_text(
         '[$00][$fa]STR[$cb]5. Two[$c2]handed. Casts   [$fb][$00][$00]' +
         '[$00][$fa][blackmagic]Quake. Strong             [$fb][$00][$00]' +
@@ -1031,7 +1017,6 @@ def apply_advertising(env, rom_address):
         '[$00][$fa]damage and robots.         [$fb][$00][$00]' 
         )   
     # Dwarf Axe should hit Air weakness
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x39 * 0x08)), [0x06], as_script=True)
     gear_description_bytes[0x39] = encode_text(
         '[$00][$fa]STR[$c7]VIT[$cb]5[$c9] AGI[$c7]WIS[$c7]WIL[$c2]5.  [$fb][$00][$00]' +
         '[$00][$fa]Strong against flying      [$fb][$00][$00]' +
@@ -1040,7 +1025,6 @@ def apply_advertising(env, rom_address):
     # Drain Spear needs a new element/status entry, for Air/Absorb
     # Note that the forge weapon takes entry 0x3B, so start after that
     env.add_binary(BusAddress(0x0FA590 + (0x3C * 0x03)), [0x60, 0x00, 0x00], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x29 * 0x08)), [0x3C], as_script=True )
     gear_description_bytes[0x29] = encode_text(
         '[$00][$fa]STR[$c7]AGI[$c7]VIT[$c7]WIS[$c7]WIL[$c2]10.    [$fb][$00][$00]' +
         '[$00][$fa]Absorbs HP. Strong against [$fb][$00][$00]' +
@@ -1048,14 +1032,12 @@ def apply_advertising(env, rom_address):
         )
     # Darkness arrows also need a new element/status entry, for Dark/Blind
     env.add_binary(BusAddress(0x0FA590 + (0x3D * 0x03)), [0x08, 0x02, 0x00], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x59 * 0x08)), [0x3D], as_script=True)
     gear_description_bytes[0x59] = encode_text(
         '[$00][$fa]Deals dark damage.         [$fb][$00][$00]' +
         '[$00][$fa]Inflicts Blind.            [$fb][$00][$00]' +
         '[$00][$fa]                           [$fb][$00][$00]' 
         )
     # the Spoon, being a dinner utensil, should be effective against dessert monsters (Slimes)
-    env.add_binary(BusAddress(0x0F9100 + 0x05 + (0x3E * 0x08)), [0x20], as_script=True)
     gear_description_bytes[0x3E] = encode_text(
         '[$00][$fa]Dart for massive damage.   [$fb][$00][$00]' +
         '[$00][$fa]Strong against slimes.     [$fb][$00][$00]' +
@@ -1064,28 +1046,24 @@ def apply_advertising(env, rom_address):
     # the Gigant Axe is handled in custom_weapon_rando.py
 
     # ElvenBow gets to actually cast Shell
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x51 * 0x08)), [0x06], as_script=True)
     gear_description_bytes[0x51] = encode_text(
         '[$00][$fa]WIS[$cb]5. Casts [whitemagic]Shell.       [$fb][$00][$00]' +
         '[$00][$fa]Strong v. mages and flying [$fb][$00][$00]' +
         '[$00][$fa]foes.                      [$fb][$00][$00]' 
         )
     # Lunar gets to actually cast Dspel
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x13 * 0x08)), [0x0C], as_script=True)
     gear_description_bytes[0x13] = encode_text(
         '[$00][$fa]                           [$fb][$00][$00]' +
         '[$00][$fa]WIL[$cb]10. Casts [whitemagic]Dspel.      [$fb][$00][$00]' +
         '[$00][$fa]                           [$fb][$00][$00]' 
         )    
     # Defense gets to cast Armor
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x1E * 0x08)), [0x05], as_script=True)
     gear_description_bytes[0x1E] = encode_text(
         '[$00][$fa]                           [$fb][$00][$00]' +
         '[$00][$fa]VIT[$cb]15. Casts [whitemagic]Armor.      [$fb][$00][$00]' +
         '[$00][$fa]                           [$fb][$00][$00]' 
         )
     # Murasame gets to cast Slow instead of Armor; thematic with Masamune
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x2F * 0x08)), [0x07], as_script=True)
     env.add_binary(BusAddress(0x0FD4E0 + 0x2F), [0x07], as_script=True)
     gear_description_bytes[0x2F] = encode_text(
         '[$00][$fa]STR[$c7]VIT[$c7]WIS[$cb]5[$c9] AGI[$c7]WIL[$c2]5.  [$fb][$00][$00]' +
@@ -1094,7 +1072,6 @@ def apply_advertising(env, rom_address):
         )
     # Power staff gets to *cast* Bersk, not just proc it. Need to add its hits data though.
     env.add_binary(BusAddress(0x0F9070 + 0x12), [0x01], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x02 + (0x12 * 0x08)), [0xE3, 0x09], as_script=True)
     gear_description_bytes[0x12] = encode_text(
         '[$00][$fa]STR[$cb]10. Casts [whitemagic]Bersk.      [$fb][$00][$00]' +
         '[$00][$fa]Inflicts Berserk.          [$fb][$00][$00]' +
@@ -1103,7 +1080,6 @@ def apply_advertising(env, rom_address):
     # Blitz whip casts Blitz (the Ninja spell, not the enemy spell, as partially busted as that would be). Also needs hits.
     env.add_binary(BusAddress(0x0F9070 + 0x35), [0x04], as_script=True)
     env.add_binary(BusAddress(0x0FD4E0 + 0x35), [0x44], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x02 + (0x35 * 0x08)), [0xBC, 0x44], as_script=True)
     gear_description_bytes[0x35] = encode_text(
         '[$00][$fa]Casts Blitz. Lightning     [$fb][$00][$00]' +
         '[$00][$fa]damage. Strong v. robots.  [$fb][$00][$00]' +
@@ -1112,7 +1088,6 @@ def apply_advertising(env, rom_address):
     # Flame whip casts Flame. Also needs... a bit more damage for hits, for balance.
     env.add_binary(BusAddress(0x0F9070 + 0x36), [0x08], as_script=True)
     env.add_binary(BusAddress(0x0FD4E0 + 0x36), [0x42], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x02 + (0x36 * 0x08)), [0xC1, 0x42], as_script=True)
     gear_description_bytes[0x36] = encode_text(
         '[$00][$fa]STR[$c7]AGI[$c7]VIT[$cb]5[$c9] WIS[$c7]WIL[$c2]5.  [$fb][$00][$00]' +
         '[$00][$fa]Casts Flame. Fire damage.  [$fb][$00][$00]' +

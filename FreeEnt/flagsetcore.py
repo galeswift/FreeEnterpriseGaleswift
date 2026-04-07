@@ -494,6 +494,16 @@ class FlagLogicCore:
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmaxtier:')
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmintier:')
 
+        mintier_flags = flagset.get_list(r'^Tmintier:')
+        maxtier_flags = flagset.get_list(r'^Tmaxtier:')
+        if len(mintier_flags) > 0 and len(maxtier_flags) > 0:
+            mintier = int(self._lib.re_sub(r'^Tmintier:', '', mintier_flags[0]))
+            maxtier = int(self._lib.re_sub(r'^Tmaxtier:', '', maxtier_flags[0]))
+            if maxtier < mintier:
+                flagset.unset(mintier_flags[0])
+                flagset.set('Tmintier:' + f'{maxtier}')
+                self._lib.push(log, ['correction', f'Tmaxtier cannot be less than Tmintier, so replacing Tmintier:{mintier} with Tmintier:{maxtier}'])
+
         if flagset.has('Tadjmiabareas') and not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish', 'Tstandardish'):
             self._simple_disable(flagset, log, 'Treasures are not weighted', ['Tadjmiabareas'])
 

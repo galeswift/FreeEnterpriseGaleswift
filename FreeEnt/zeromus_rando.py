@@ -39,7 +39,7 @@ POSSIBLE_STATUS_SPELLS = {
     '#spell.Stone' : 'random character',
     '#spell.Fatal' : 'random character',
     '#spell.Stop' : 'random character',
-    '#spell.Enemy_Gaze' : 'all_characters',
+    '#spell.Enemy_Gaze' : 'all characters',
     '#spell.Enemy_Bluster' : 'front row / back row',
     '#spell.Enemy_Slap' : 'all characters',
     '#spell.Enemy_Powder' : 'all characters',
@@ -465,7 +465,7 @@ def apply(env):
 
         # add status protection, for added danger... to us
         env.add_substitution('zeromus status protection',
-                             'resist #Poison #Blind #Mute #Piggy #Mini #Toad #Stone #Swoon #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Curse')
+                             'resist status #Poison #Blind #Mute #Piggy #Mini #Toad #Stone #Swoon #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Curse')
         env.spoilers.add_table("MISC", ailments_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))    
 
     elif script_category == 'chaos':

@@ -10,6 +10,7 @@ from .rewards import AxtorChestReward
 import random
 from random import shuffle
 from dataclasses import dataclass
+import math
 
 FIGHT_SPOILER_DESCRIPTIONS = {
     0x1C0 : "Staleman/Skulls",
@@ -394,7 +395,11 @@ def apply(env):
 
         distributions = {}
         distributions_unrestricted = {}
-        curves_dbview = databases.get_tvanillaish_dbview() if (env.options.flags.has('treasure_vanillaish')) else databases.get_curves_dbview()
+        if env.options.flags.has('treasure_vanillaish'):
+            curves_dbview = databases.get_tvanillaish_dbview() if env.options.flags.has('treasure_no_j_items') else databases.get_tvanillaish_j_dbview()
+        else:
+            curves_dbview = databases.get_curves_dbview()
+
         for row in curves_dbview:
             weights = {i : getattr(row, f"tier{i}") for i in range(1,9)}
             if env.options.flags.has('treasure_wild_weighted'):
@@ -413,10 +418,52 @@ def apply(env):
                     
             distributions_unrestricted[row.area] = util.Distribution(weights)
 
+            backup_weights = {}
+            for weight in weights:
+                backup_weights[weight] = weights[weight]
+
+            allowed_tiers = []
             # null out distributions for empty item tiers
             for i in range(1,9):
                 if not items_by_tier.get(i, None):
                     weights[i] = 0
+                else:
+                    # ID the tiers that actually still have items
+                    allowed_tiers.append(i)
+
+            # check if there are any non-zero weights; if *all* weights are 0,
+            # then we need to set a default distribution
+            empty_weights = True
+            for i in range(1,9):
+                if weights[i]:
+                    empty_weights = False
+                    break
+            
+            if empty_weights:
+                # idea: start with the expected tier for this area,
+                # clamp to [mintier,maxtier] if appropriate, and then
+                # check if that tier is allowed; if not, expand to
+                # [exptier-1, exptier+1] (still clamped) and check again, etc.
+                # Eventually you hit tier 5 or below and those shouldn't
+                # be empty, so this algorithm ends.
+                exptier = max(1,sum([w*backup_weights[w] for w in backup_weights]) // sum([backup_weights[w] for w in backup_weights]))
+                if mintier:
+                    exptier = max(mintier,exptier)
+                minbound = (1 if not mintier else mintier)
+                if maxtier:
+                    exptier = min(maxtier,exptier)
+                maxbound = (8 if not maxtier else maxtier)
+                u_bound = exptier
+                l_bound = exptier
+                while empty_weights:
+                    for i in range(max(l_bound,minbound),min(u_bound,maxbound)+1):
+                        if i in allowed_tiers:
+                            weights[i] = 1
+                            empty_weights = False
+                    if empty_weights:
+                        u_bound += 1
+                        l_bound -= 1
+
             distributions[row.area] = util.Distribution(weights)                      
         for t in plain_chests_dbview.find_all():
             tier = -1

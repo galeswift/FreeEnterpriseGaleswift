@@ -36,6 +36,18 @@ _tvanillaish_db = csvdb.CsvDb(os.path.join(DB_PATH, 'tvanillaish.csvdb'), {
     'tier8' : int,
     })
 
+_tvanillaish_j_db = csvdb.CsvDb(os.path.join(DB_PATH, 'tvanillaish_j.csvdb'), {
+    'wikiindex' : int,
+    'tier1' : int,
+    'tier2' : int,
+    'tier3' : int,
+    'tier4' : int,
+    'tier5' : int,
+    'tier6' : int,
+    'tier7' : int,
+    'tier8' : int,
+    })
+
 _treasure_db = csvdb.CsvDb(os.path.join(DB_PATH, 'treasure.csvdb'), {
     'ordr' : int,
     'flag' : csvdb.HexInt,
@@ -111,6 +123,9 @@ def get_doors_dbview():
 
 def get_tvanillaish_dbview():
     return _tvanillaish_db.create_view()
+
+def get_tvanillaish_j_dbview():
+    return _tvanillaish_j_db.create_view()
 
 def get_treasure_dbview():
     return _treasure_db.create_view()

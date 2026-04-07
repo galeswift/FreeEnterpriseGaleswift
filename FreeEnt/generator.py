@@ -769,9 +769,6 @@ def build(romfile, options, force_recompile=False):
     # this file handle whether the glitch is fully "fixed"
     env.add_file('scripts/sylph_odin_mp_fix.f4c')
 
-    if options.flags.has('edward_spoon'):
-        env.add_file('scripts/edward_spoon.f4c')
-
     if options.flags.has('give_monsters_evade'):
         env.add_file('scripts/give_monsters_evade.f4c')
     
@@ -813,7 +810,7 @@ def build(romfile, options, force_recompile=False):
     # split, noboost, nokeyboost, crystalbonus, and maxlevelbonus are all handled directly via f4c scripts
     exp_objective_bonus = env.options.flags.get_suffix('Xobjectivebonus:')
     if exp_objective_bonus:
-        if not (exp_objective_bonus == '_num'):
+        if not (exp_objective_bonus == 'num'):
             exp_objective_bonus = 100 // int(exp_objective_bonus)
             env.add_substitution('experience objective bonus divisor', f'#${exp_objective_bonus:02X}')
         else:
@@ -823,7 +820,7 @@ def build(romfile, options, force_recompile=False):
 
     exp_kicheck_bonus = env.options.flags.get_suffix('Xkicheckbonus:')
     if exp_kicheck_bonus:
-        if not (exp_kicheck_bonus == '_num'):
+        if not (exp_kicheck_bonus == 'num'):
             exp_kicheck_bonus = 100 // int(exp_kicheck_bonus)
             env.add_substitution('experience key item check bonus divisor', f'#${exp_kicheck_bonus:02X}')
         else:
@@ -976,9 +973,6 @@ def build(romfile, options, force_recompile=False):
     elif 'advertising' in env.meta.get('wacky_challenge',[]):
         for item_id in env.meta['wacky_gear_descriptions']:
             item_description_data[0x80 * item_id + 0x20 : 0x80 * item_id + 0x80] = env.meta['wacky_gear_descriptions'][item_id]
-        env.add_file('scripts/black_shirt_fix.f4c') # Black Shirt doesn't change
-    else:
-        env.add_file('scripts/black_shirt_fix.f4c') # cannot double-patch the Black Shirt!
     if 'advertising' in env.meta.get('wacky_challenge',[]):
         # manually change the Wrench icons to Hammer icons for Silver/Earth/Wooden hammers, since they're in the first row, not rows 2-4
         for item_id in [0x49, 0x4A, 0x4B]:

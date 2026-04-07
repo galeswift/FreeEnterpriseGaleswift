@@ -21,7 +21,7 @@ STARTING_BLACK = [    # formerly for Ordeals buff, now for nerfed
     ]
 
 STARTING_CALL = [    # for nerfed with all_spells
-    '#spell.Imp', '#spell.Bomb', '#spell.Choco', 
+    '#spell.Imp', '#spell.Bomb', '#spell.Chocb', 
     ]
 
 JAPANESE_EXCLUSIVE_SPELLS = [
@@ -593,7 +593,7 @@ def apply(env):
     if env.options.flags.has('antidale_spells_progression') and not env.options.flags.has('unlearn_fusoya'):
         # Funlearn overrides Cspells:anti re: Weak.
         excluded_spells.extend(['#spell.Weak'])
-        if not env.options.flags.has('fusoya_nerfed'):
+        if not env.options.flags.has('nerfed_fusoya'):
             env.add_scripts(
             'spellset(#FusoyaBlack) {{ learned {{ 53  #spell.Weak }} }}'
             )

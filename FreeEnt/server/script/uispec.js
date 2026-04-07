@@ -5234,19 +5234,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -5257,7 +5257,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -5390,19 +5391,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -5413,7 +5414,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -5552,19 +5554,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -5575,7 +5577,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -5713,19 +5716,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -5736,7 +5739,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -5875,19 +5879,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -5898,7 +5902,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -6036,19 +6041,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -6059,7 +6064,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -6197,19 +6203,19 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
@@ -6220,7 +6226,8 @@ var FLAG_UISPEC = [
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",

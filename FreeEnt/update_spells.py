@@ -347,7 +347,8 @@ def spellset_data(env):
         })
     elif env.options.flags.has('kainmagic'):
         # remove #Sight, give Kain #Lance and filled out spellsets
-        spellsets['PCecil'].pop('#Sight')
+        if not env.options.flags.has('darkpaladin'):
+            spellsets['PCecil'].pop('#Sight')
         spellsets['RydiaWhite'].pop('#Sight')
         spellsets['Rosa'].pop('#Sight')
         spellsets['Porom'].pop('#Sight')

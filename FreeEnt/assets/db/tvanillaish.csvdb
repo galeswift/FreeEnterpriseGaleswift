@@ -1,51 +1,51 @@
 area,wikiindex,wikiname,tier1,tier2,tier3,tier4,tier5,tier6,tier7,tier8
-BaronTown,1,Baron Town,8,2,1,1,1,0,0,0
+BaronTown,1,Baron Town,4,5,4,0,0,0,0,0
 Damcyan,9,Damcyan,8,4,1,0,0,0,0,0
-Mist,5,Village Mist,5,0,1,0,1,0,0,0
+Mist,5,Village Mist,4,0,2,0,1,0,0,0
 Kaipo,6,Kaipo,0,0,1,0,0,0,0,0
 Silvera,17,Silvera,0,2,1,0,0,0,0,0
-ToroiaTown,18,Toroia Town,1,0,1,2,0,0,0,0
-Agart,16,Agart,0,0,0,1,0,0,0,0
-AntlionCave,10,Antlion Cave,3,4,4,1,1,0,0,0
-BaronCastle,15,Baron Castle,1,9,7,0,3,0,0,0
-ChocoboForest,3,Chocobo Forests,1,0,0,0,0,0,0,0
-DwarfCastle,23,Dwarf Castle,3,0,4,5,6,0,0,0
+ToroiaTown,18,Toroia Town,1,0,2,1,0,0,0,0
+Agart,16,Agart,0,0,1,0,0,0,0,0
+AntlionCave,10,Antlion Cave,6,5,2,0,0,0,0,0
+BaronCastle,15,Baron Castle,4,7,8,0,1,0,0,0
+ChocoboForest,3,Chocobo Forests,8,0,0,0,0,0,0,0
+DwarfCastle,23,Dwarf Castle,6,0,3,6,3,0,0,0
 BahamutCave,35,Cave Bahamut,0,0,1,3,0,0,0,0
-LunarPath,36,Lunar Path,0,0,0,1,0,0,1,0
-CaveEblan,26,Cave Eblan,3,3,9,3,3,0,0,0
-CaveMagnes,21,Cave Magnes,0,4,5,0,1,0,0,0
-Eblan,25,Eblan,3,3,7,2,4,0,0,0
-Fabul,12,Fabul,4,2,2,1,1,0,0,0
-Giant,37,Giant of Bab-il,0,0,3,1,2,1,0,0
-Waterfall,8,Waterfall/Lake,3,1,0,0,0,0,0,0
-CaveOfSummons,32,Cave of Summons,1,2,4,2,1,0,0,0
-Feymarch,33,Town of Summons,2,1,3,1,3,0,0,0
-LunarCore,38,Lunar Subterrane/Core,0,1,0,7,9,2,3,0
-MistCave,4,Mist Cave,3,1,0,0,0,0,0,0
-MountHobs,11,Mount Hobs,3,2,0,0,0,0,0,0
+LunarPath,36,Lunar Path,0,0,2,0,0,0,0,0
+CaveEblan,26,Cave Eblan,4,5,7,3,2,0,0,0
+CaveMagnes,21,Cave Magnes,1,2,5,2,0,0,0,0
+Eblan,25,Eblan,2,3,12,2,0,0,0,0
+Fabul,12,Fabul,6,2,2,0,0,0,0,0
+Giant,37,Giant of Bab-il,0,2,3,1,1,0,0,0
+Waterfall,8,Waterfall/Lake,3,0,1,0,0,0,0,0
+CaveOfSummons,32,Cave of Summons,0,2,4,3,1,0,0,0
+Feymarch,33,Town of Summons,0,4,2,1,3,0,0,0
+LunarCore,38,Lunar Subterrane/Core,0,2,0,7,8,1,3,0
+MistCave,4,Mist Cave,2,1,1,0,0,0,0,0
+MountHobs,11,Mount Hobs,2,2,1,0,0,0,0,0
 MountOrdeals,13,Mount Ordeals,2,0,2,0,0,0,0,0
-Sewer,14,Sewer,1,1,4,1,1,0,0,0
-BaronWeaponShop,2,Baron Town Weapon/Armor Shop,0,2,0,0,0,0,0,0
-SealedCave,34,Sealed Cave,1,5,5,4,4,0,0,0
-Smithy,30,Smithy House,1,0,2,1,0,0,0,0
-SylvanCave,31,Sylvan Cave,5,6,9,2,3,0,0,0
-Tomra,29,Tomra,3,1,0,2,0,0,0,0
-ToroiaCastle,19,Toroia Castle,3,2,3,0,1,0,0,0
-ToroiaTreasury,20,Toroia Castle Treasury,2,6,6,2,1,1,0,0
-UpperBabil,27,Upper Bab-il,0,1,2,0,1,0,1,0
+Sewer,14,Sewer,3,3,3,0,0,0,0,0
+BaronWeaponShop,2,Baron Town Weapon/Armor Shop,0,1,1,0,0,0,0,0
+SealedCave,34,Sealed Cave,0,5,6,4,4,0,0,0
+Smithy,30,Smithy House,1,0,2,0,1,0,0,0
+SylvanCave,31,Sylvan Cave,1,5,13,4,2,0,0,0
+Tomra,29,Tomra,3,0,2,1,0,0,0,0
+ToroiaCastle,19,Toroia Castle,2,2,5,0,0,0,0,0
+ToroiaTreasury,20,Toroia Castle Treasury,2,6,6,2,2,0,0,0
+UpperBabil,27,Upper Bab-il,0,1,1,2,0,0,1,0
 UpperBabilAfterFall,28,Upper Bab-il (after fall),0,0,2,0,0,0,0,0
-LowerBabil,24,Lower Bab-il,1,3,3,3,1,0,1,0
+LowerBabil,24,Lower Bab-il,0,5,4,3,0,0,0,0
 Zot,22,Tower of Zot,0,1,2,2,0,0,0,0
-WateryPass,7,Watery Pass,12,2,2,2,1,0,0,0
+WateryPass,7,Watery Pass,11,1,6,0,1,0,0,0
 MIAB_Zot,1001,Tower of Zot,0,0,1,0,0,0,0,0
-MIAB_Eblan,1002,Eblan,0,0,1,0,1,1,0,0
+MIAB_Eblan,1002,Eblan,0,0,1,0,2,0,0,0
 MIAB_CaveEblan,1003,Cave Eblan,0,0,1,0,0,0,0,0
 MIAB_LowerBabil,1004,Lower Bab-il,0,1,1,2,0,0,0,0
 MIAB_UpperBabil,1005,Upper Bab-il,0,0,0,1,0,0,0,0
 MIAB_CaveOfSummons,1006,Cave of Summons,0,0,0,0,0,1,0,0
-MIAB_SylvanCave,1007,Sylvan Cave,0,0,1,4,1,0,1,0
+MIAB_SylvanCave,1007,Sylvan Cave,0,0,1,1,4,0,1,0
 MIAB_Giant,1008,Giant of Bab-il,0,0,0,0,1,0,0,0
-MIAB_LunarPath,1009,Lunar Path,0,0,0,0,0,1,0,0
+MIAB_LunarPath,1009,Lunar Path,0,0,0,0,1,0,0,0
 MIAB_LunarCore,1010,Lunar Subterrane/Core,0,0,0,0,6,3,0,0
 Ungated_Quest,2001,Ungated quests,0,0,0,40,60,0,0,0
 Gated_Quest,2002,Gated quests,0,0,0,10,40,40,10,0

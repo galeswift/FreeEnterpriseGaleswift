@@ -123,7 +123,7 @@ def apply(env):
 
     if env.options.flags.has('rydiaredmage'):
         # Rydia gets Life1, Heal... and the vanilla game already gives her Cure2. Funny that. She gets Harm if it's available.
-        fixed_white_to_add = ['Life1', 'Heal'] + (['Harm'] if env.options.flags.has('harmspell') else [])
+        fixed_white_to_add = ['Life1', 'Heal'] + (['Sight'] if env.options.flags.has('harmspell') else [])
         # identify the 5 random spells Rydia gets at Dwarf Castle
         if env.options.flags.has('japanese_spells'):
             DWARF_CASTLE_WHITE_POOL.extend(['Armor', 'Shell', 'Dspel'])
@@ -139,8 +139,12 @@ def apply(env):
     
         env.add_substitution('dwarf summon rando', '\n'.join(dwarf_white_script_lines))
 
+        spoiler_text = ', '.join([databases.get_spell_spoiler_name(f"#spell.{spell}") for spell in spoiler_names])
+        if env.options.flags.has('harmspell'):
+            spoiler_text.replace('Sight', 'Harm')
+
         env.spoilers.add_table("MISC", 
-            [["Dwarf castle white magic", ', '.join([databases.get_spell_spoiler_name(f"#spell.{spell}") for spell in spoiler_names])]], 
+            [["Dwarf castle white magic", spoiler_text]], 
             public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
         
         env.add_file('scripts/rydiaredmage.f4c')

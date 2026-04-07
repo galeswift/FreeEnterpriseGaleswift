@@ -527,7 +527,7 @@ def _set_stats_weights(scoring_parameters):
         stats_weights['evilwall']['difficulty'] += 0.2
     if scoring_parameters['danger_anchor'] or scoring_parameters['party_size_1']:
         stats_weights['plague']['difficulty'] += 0.5
-    if scoring_parameters['woahdin'] and scoring_parameters['lit_items_in_shops']:
+    if scoring_parameters['woahdin'] and not scoring_parameters['no_lit_shops']:
         stats_weights['odin']['difficulty'] -= 0.4
     elif scoring_parameters['no_lit_shops']:
         stats_weights['kainazzo']['difficulty'] += 0.2
@@ -766,8 +766,8 @@ def _get_scored_placement(env, slots, stats_slots, bosses, slot_rankings, stats_
         # on Beasy, we've pre-assigned the leftover_bosses; on Bcruel, get the unused ones
         if not leftover_bosses:
             leftover_bosses = [b for b in bosses if b not in assignment.values()]
-        print("Leftover bosses in this zone:")
-        print(leftover_bosses)
+        # print("Leftover bosses in this zone:")
+        # print(leftover_bosses)
         for i,s in enumerate(zone_removed_slots):
             assignment[s] = leftover_bosses[i]
 
@@ -1151,8 +1151,8 @@ def apply(env):
             # - gated_blue_planet is 11-12 spots for 12 bosses, so *if* it's Omode:fiends *and* all 8 objective bosses are from this zone,
             # then we're still fine.
             # - summon_darkness is 11 spots for 11 bosses, only one is a fiend; no special cases are required.
-            print(objective_bosses_and_maybe_dmist)
-            print(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist))
+            # print(objective_bosses_and_maybe_dmist)
+            # print(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist))
             if (env.options.flags.has('no_free_key_item') and env.options.flags.has('Omode:fiends') and env.options.flags.has('no_officer_slot')
                 and len(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist)) > 10):
                 # note that this can only happen if D.Mist is *not* an objective-required boss! if it doubles, then no big deal.
@@ -1161,7 +1161,7 @@ def apply(env):
                 else:
                     boss_to_move = env.rnd.choice(list(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist)))
                     extra_boss = boss_to_move
-                    print(boss_to_move)
+                    # print(boss_to_move)
                 bosses_by_zone['early_game'].remove(boss_to_move)
                 if not set(slots_by_zone['summon_darkness']).difference(restricted_boss_slots):
                     # if every boss slot in the summon_darkness zone is restricted, put the shifting boss in the gated_blue_planet zone
@@ -1169,7 +1169,7 @@ def apply(env):
                     bosses_by_zone['gated_blue_planet'].append(boss_to_move)
                 else:
                     bosses_by_zone[env.rnd.choice(['gated_blue_planet','summon_darkness'])].append(boss_to_move)
-            print(bosses_by_zone)
+            # print(bosses_by_zone)
         else:
             slots_by_zone = {'all' : list(BOSS_SLOTS)}
             bosses_by_zone = {'all' : BOSSES.copy()}     
@@ -1279,7 +1279,7 @@ def apply(env):
                     # obtain a standard shuffle, then make a number of swaps, checking to ensure difficulty goes up or down
                     temp_boss_assignment = _get_standard_boss_shuffle(env, slots_by_zone[zone], bosses_by_zone[zone], 
                                                                     removed_boss_slots, restricted_boss_slots, objective_bosses_and_maybe_dmist)
-                    print(temp_boss_assignment)
+                    # print(temp_boss_assignment)
                     slot_lookup = {}
                     for s in temp_boss_assignment:
                         slot_lookup[temp_boss_assignment[s]] = s
