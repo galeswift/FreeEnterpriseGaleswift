@@ -7,7 +7,6 @@ def apply(env):
 
     items_dbview = databases.get_items_dbview()
     altered_item_prices = env.meta.get('altered_item_prices', {})
-    print(altered_item_prices)
 
     randomized_item_codes = list(range(0x100))
     env.rnd.shuffle(randomized_item_codes)
