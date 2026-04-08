@@ -345,6 +345,10 @@ Giant (MIAB)
 :   from: 0,0,0,0,30,35,35,0 
 :   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,0,25,35,35,5
 
+In addition, all restrictions to items except for `Tmintier` and `Tmaxtier` also apply to quest and MIAB rewards; vanilla v4.6 FE is inconsistent about this situation (`-noadamants` applies, as does `-nocursed` and `Tno:j`, but `-wacky:kleptomania` does not, say). `Tmintier` as initially implemented by sgrunt (which predated the vanilla FE implementation) used to apply to such rewards, but this behaviour was reverted later. `Tmintier:2` is an additional setting that is not in vanilla FE.
+
+The quest/MIAB reward placement algorithm before v4.6.4.Gale was the same as vanilla v4.6, which means that if there were no items in a specific tier, then we ended up with a Cure1 as the default reward. It is possible, with sufficiently restrictive flags, to remove all items from tiers 6, 7, and 8, so this algorithm resulted in many Cure1s. With v4.6.4.Gale, the weights for reward placement are handled more in line with what treasure_rando does, where it clears the weights for empty item tiers. In all scenarios, if no weights remain, then the ideal average tier for that curve is considered, and then we expand in both directions until we find item tiers that still have items in them. 
+
 ### `Tsparsey:[underground,moon,overworld]` {: .h6 }
 
 - Idea: Galeswift

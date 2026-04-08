@@ -1604,7 +1604,10 @@ def apply(env):
                         rewards_assignment[slot] = default_item_reward
     else:
         # revised Rivers rando
-        curves_dbview = databases.get_tvanillaish_dbview() if (env.options.flags.has('treasure_vanillaish')) else databases.get_curves_dbview()
+        if env.options.flags.has('treasure_vanillaish'):
+            curves_dbview = databases.get_tvanillaish_dbview() if env.options.flags.has('treasure_no_j_items') else databases.get_tvanillaish_j_dbview()
+        else:
+            curves_dbview = databases.get_curves_dbview()
 
         unassigned_quest_slots = [slot for slot in (list(ITEM_SLOTS) + list(SUMMON_QUEST_SLOTS) + list(MOON_BOSS_SLOTS)) if slot not in rewards_assignment]
         if env.options.flags.has('no_free_key_item_dwarf'):
@@ -1622,9 +1625,17 @@ def apply(env):
         if not env.options.flags.has('key_item_from_pink_tail'):
             unassigned_quest_slots.remove(RewardSlot.pink_trade_item)
 
+        # for later, find items by tier (to see if there are any left)
+        items_by_tier = {}
+        for i in range(1,9):
+            items_by_tier[i] = items_dbview.find_all(lambda it: it.tier == i)
+
         if env.options.flags.has('treasure_standard') or env.options.flags.has('treasure_wild'):
-            reward_tiers = [6, 7, 8]
-            src_pool = items_dbview.find_all(lambda it: it.tier in reward_tiers)
+            low_tier = 6
+            src_pool = items_dbview.find_all(lambda it: it.tier in range(low_tier, 9))
+            while not src_pool:
+                low_tier -= 1
+                src_pool = items_dbview.find_all(lambda it: it.tier in range(low_tier, 9))
             pool = list(src_pool)
             while len(pool) < len(unassigned_quest_slots):
                 pool.append(env.rnd.choice(src_pool))
@@ -1643,6 +1654,31 @@ def apply(env):
                     weights = util.get_boosted_weights(weights, 'semipro')
                 elif env.options.flags.has('treasure_standard_weighted'):
                     weights = util.get_boosted_weights(weights, 'standardish')
+
+                # as written, quest rewards have their tiers pre-chosen, so if we want to avoid giving out many Cure1s,
+                # we need to remove the weights for empty tiers, and then potentially assign a default tier if no weights are left
+                # (this change brings the reward assignment more in line with vanilla FE 4.6/5.0... and also removes the need
+                # for some of the sanity checking a bit later, but here we are)
+                avg_curve_tier = sum([i*weights[i] for i in weights]) // sum([weights[i] for i in weights])
+                for i in range(1,9):
+                    if not items_by_tier[i]:
+                        weights[i] = 0
+                empty_weights = True
+                for i in range(1,9):
+                    if weights[i]:
+                        empty_weights = False
+                        break
+                if empty_weights:
+                    a = avg_curve_tier
+                    b = avg_curve_tier
+                    while empty_weights:
+                        for i in range(a,b+1):
+                            if items_by_tier[i]:
+                                weights[i] = 1
+                                empty_weights = False
+                        if empty_weights:
+                            a -= 1
+                            b += 1
 
                 quest_distribution = util.Distribution(weights)
                 tier_counts = quest_distribution.choose_many(env.rnd, len(unassigned_quest_slots_for_curve))
@@ -1694,7 +1730,11 @@ def apply(env):
             # exclude HrGlass1 and HrGlass3 from MIAB items if HrGlass2 is excluded
             min_miab_tier = 5
             max_miab_tier = 98 if env.options.flags.has('treasure_standard') else 99
+            # future-proofing the selection of src_pool items in case items are restricted to where tier 5 is impossible
             src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
+            while not src_pool:
+                min_miab_tier -= 1
+                src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
             pool = list(src_pool)
             while len(pool) < len(unassigned_chest_slots):
                 pool.append(env.rnd.choice(src_pool))
@@ -1717,6 +1757,28 @@ def apply(env):
                     weights = util.get_boosted_weights(weights, 'semipro')
                 elif env.options.flags.has('treasure_standard_weighted'):
                     weights = util.get_boosted_weights(weights, 'standardish')
+
+                # handle item restrictions per MIAB area, in the same way as for quests
+                avg_c_tier = sum([i*weights[i] for i in weights]) // sum([weights[i] for i in weights])
+                for i in range(1,9):
+                    if not items_by_tier[i]:
+                        weights[i] = 0
+                empty_weights = True
+                for i in range(1,9):
+                    if weights[i]:
+                        empty_weights = False
+                        break
+                if empty_weights:
+                    a = avg_c_tier
+                    b = avg_c_tier
+                    while empty_weights:
+                        for i in range(a,b+1):
+                            if items_by_tier[i]:
+                                weights[i] = 1
+                                empty_weights = False
+                        if empty_weights:
+                            a -= 1
+                            b += 1
 
                 miab_distributions[c.area[len("MIAB_"):]] = util.Distribution(weights)
 
@@ -1800,7 +1862,11 @@ def apply(env):
 
     if not env.options.flags.has('key_item_from_pink_tail'):
         if env.options.flags.has('no_adamants'):
-            items = items_dbview.find_all(lambda it: it.tier in [7, 8])
+            lbound = 7
+            items = items_dbview.find_all(lambda it: it.tier in range(lbound, 9))
+            while not items:
+                lbound -= 1
+                items = items_dbview.find_all(lambda it: it.tier in range(lbound, 9))
             pink_tail_item = env.rnd.choice(items)
             rewards_assignment[RewardSlot.pink_trade_item] = ItemReward(pink_tail_item.const)
         else:
