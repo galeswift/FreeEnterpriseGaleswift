@@ -439,6 +439,13 @@ class FlagLogicCore {
     fix(flagset) {
         var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_customized_rand_flags, all_customized_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss, boss_slots_removed, bosses_available, ch, ch_count_cap, ch_list, challenges, char_objective_flags, character_pool, current_boss, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, fl_cat, flags_objective_chars, flags_objective_chars_num, flexible_char_count, flexible_char_pool, flexible_random_objective_count, gated_objective_index, gated_objectives, group_obj_num, group_scores, grp_obj_num, grp_sc, hard_required_index, hard_required_objectives, has_unavailable_characters, just_in_case_mandatory_char_pool, kmiab_flags, log, max_bosses, max_char_objectives, max_non_tough_quests, max_tough_quests, maxtier, maxtier_flags, min_non_char_objectives, mintier, mintier_flags, mode, non_tough_quest_room, nonstarting_character_slots, num_rand_objectives, num_random_objectives, only_char_objectives, only_chars_list, only_flags, pass_quest_flags, qu, rand_category_flags, rand_only_char_flags, random_category_flags, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, sorted_groups, sparse_spoiler_flags, specific_boss_objectives, specific_tough_quest_objectives, start_exclude_flags, start_include_flags, theoretical_available_characters, total_char_count, total_flexible_bosses, total_flexible_non_tough_quests, total_flexible_tough_quests, total_mandatory_bosses, total_mandatory_non_tough_quests, total_mandatory_tough_quests, total_objective_count, tough_quest_room, unsure_flags, win_flags;
         log = [];
+        if (flagset.has("-starting:underground")) {
+            this._simple_disable_regex(flagset, log, "Starting underground is already unsafe", "^Kunsafe");
+            this._simple_disable_regex(flagset, log, "Starting underground already forces the Drill for progression", "^Kforce:");
+        }
+        if (flagset.has("Kunsafer")) {
+            this._simple_disable(flagset, log, "Cannot start with underground access on Kunsafer", ["Kstart:magma", "Kstart:hook"]);
+        }
         if ((flagset.has("Kunsafer") && (! flagset.has_any("Ksummon", "Kmoon", "Kmiab:above", "Kmiab:lst", "Kmiab:standard", "Kmiab:all")))) {
             flagset.set("Kmoon");
             this._lib.push(log, ["correction", "Kunsafer requires placing key items on the moon/Giant, and Knofree does not count; adding Kmoon (but you can instead add any Darkness-locked checks)"]);
@@ -457,6 +464,9 @@ class FlagLogicCore {
             flagset.unset("Omode:ki17");
             flagset.set("Omode:ki16");
             this._lib.push(log, ["correction", "Can only collect 16 KIs for an objective with Owin:crystal; changing Omode:ki17 to Omode:ki16"]);
+        }
+        if (flagset.has("Owin:crystal")) {
+            this._simple_disable(flagset, log, "Cannot start with the Crystal if it is the objective reward", ["Kstart:crystal"]);
         }
         if (((! flagset.has_any("Ksummon", "Kmoon", "Kforge", "Kpink", "Kmiab:standard", "Kmiab:above", "Kmiab:below", "Kmiab:lst", "Kmiab:all")) && flagset.has("Omode:ki17"))) {
             this._simple_disable(flagset, log, "Cannot replace a key item if all of them are required", ["Pkey", "Kstart:pass"]);
@@ -495,11 +505,11 @@ class FlagLogicCore {
                 this._simple_disable_regex(flagset, log, "Conly:* flag(s) are specified", "^Cno:");
             }
         }
-        if (flagset.has("Chero")) {
+        if (flagset.has_any("Chero", "Csuperhero")) {
             this._simple_disable_regex(flagset, log, "Hero challenge includes smith weapon", "^-smith:(super|alt|playable)");
             if (flagset.has("Aagnostic")) {
                 flagset.set("Ahero");
-                this._lib.push(log, ["correction", "In the absence of other agility flags, Chero implies Ahero; replaced Aagnostic with Ahero"]);
+                this._lib.push(log, ["correction", "In the absence of other agility flags, any hero challenge implies Ahero; replaced Aagnostic with Ahero"]);
             }
         }
         start_include_flags = flagset.get_list("^Cstart:(?!not_)");
@@ -577,7 +587,7 @@ class FlagLogicCore {
         if ((flagset.get_list("^-smith:(playable|good)").length === flagset.get_list("^-smith:").length)) {
             this._simple_disable(flagset, log, "No smith item requested", ["-smith:playable", "-smith:good"]);
         }
-        if ((flagset.has_any("-smith:omni", "-smith:spoilsuper", "-smith:sellsuper") && (! flagset.has_any("-smith:super", "Chero")))) {
+        if ((flagset.has_any("-smith:omni", "-smith:spoilsuper", "-smith:sellsuper") && (! flagset.has_any("-smith:super", "Chero", "Csuperhero")))) {
             this._simple_disable(flagset, log, "No FF4A weapon available", ["-smith:omni", "-smith:spoilsuper", "-smith:sellsuper"]);
         }
         if ((flagset.has("Fslowstart") && flagset.has("Funcapped"))) {
@@ -624,11 +634,11 @@ class FlagLogicCore {
         if (((all_spoiler_flags.length > 0) && (all_spoiler_flags.length === sparse_spoiler_flags.length))) {
             this._simple_disable_regex(flagset, log, "No spoilers requested", "^-spoil:sparse");
         }
-        if (((flagset.has("Chi") && flagset.has("Chero")) && flagset.has("Cparty:1"))) {
-            this._simple_disable(flagset, log, "No room for characters to be added with Chero and Max Party size of 1", ["Chi"]);
+        if (((flagset.has("Chi") && flagset.has_any("Chero", "Csuperhero")) && flagset.has("Cparty:1"))) {
+            this._simple_disable(flagset, log, "No room for characters to be added with a hero challenge and Max Party size of 1", ["Chi"]);
         }
-        if (((flagset.has("Cfifo") && flagset.has("Chero")) && flagset.has("Cparty:1"))) {
-            this._simple_disable(flagset, log, "Cant remove characters with Chero and Max Party size of 1", ["Cfifo"]);
+        if (((flagset.has("Cfifo") && flagset.has_any("Chero", "Csuperhero")) && flagset.has("Cparty:1"))) {
+            this._simple_disable(flagset, log, "Cant remove characters with a hero challenge and Max Party size of 1", ["Cfifo"]);
         }
         if ((flagset.has("Cpermajoin") && flagset.has("Cfifo"))) {
             this._simple_disable(flagset, log, "Permajoin and Remove Oldest are incompatible", ["Cfifo"]);

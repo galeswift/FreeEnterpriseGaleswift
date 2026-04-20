@@ -390,6 +390,14 @@ class FlagLogicCore:
 
         # NOTE: mutex flags ARE handled internally by FlagSet, don't worry about them here        
         # key item flags
+        if flagset.has('-starting:underground'):
+            self._simple_disable_regex(flagset, log, 'Starting underground is already unsafe', r'^Kunsafe') # also hits Kunsafer
+            self._simple_disable_regex(flagset, log, 'Starting underground already forces the Drill for progression', r'^Kforce:')
+
+        if flagset.has('Kunsafer'):
+            # note that if we're starting underground, this check will not occur, so you *can* start with Magma/Hook
+            self._simple_disable(flagset, log, 'Cannot start with underground access on Kunsafer', ['Kstart:magma', 'Kstart:hook'])
+            
         if flagset.has('Kunsafer') and not flagset.has_any('Ksummon', 'Kmoon', 'Kmiab:above', 'Kmiab:lst', 'Kmiab:standard', 'Kmiab:all'):
             flagset.set('Kmoon')
             self._lib.push(log, ['correction', 'Kunsafer requires placing key items on the moon/Giant, and Knofree does not count; adding Kmoon (but you can instead add any Darkness-locked checks)'])
@@ -410,6 +418,9 @@ class FlagLogicCore:
             flagset.unset('Omode:ki17')
             flagset.set('Omode:ki16')
             self._lib.push(log, ['correction', 'Can only collect 16 KIs for an objective with Owin:crystal; changing Omode:ki17 to Omode:ki16'])
+
+        if flagset.has('Owin:crystal'):
+            self._simple_disable(flagset, log, 'Cannot start with the Crystal if it is the objective reward', ['Kstart:crystal'])
 
         if not flagset.has_any('Ksummon', 'Kmoon', 'Kforge', 'Kpink',
                            'Kmiab:standard', 'Kmiab:above', 'Kmiab:below', 'Kmiab:lst',
@@ -449,12 +460,12 @@ class FlagLogicCore:
             if len(only_flags) > 0:
                 self._simple_disable_regex(flagset, log, 'Conly:* flag(s) are specified', r'^Cno:')
 
-        if flagset.has('Chero'):
+        if flagset.has_any('Chero', 'Csuperhero'):
             # note: it's fine to keep -smith:good, to make sure the weapon is strong, and -smith:spoilsuper, for preview fun
             self._simple_disable_regex(flagset, log, 'Hero challenge includes smith weapon', r'^-smith:(super|alt|playable)')
             if flagset.has('Aagnostic'):
                 flagset.set('Ahero')
-                self._lib.push(log, ['correction', 'In the absence of other agility flags, Chero implies Ahero; replaced Aagnostic with Ahero'])
+                self._lib.push(log, ['correction', 'In the absence of other agility flags, any hero challenge implies Ahero; replaced Aagnostic with Ahero'])
 
         start_include_flags = flagset.get_list(r'^Cstart:(?!not_)')
         start_exclude_flags = flagset.get_list(r'^Cstart:not_')
@@ -465,6 +476,7 @@ class FlagLogicCore:
 
         if flagset.has('Kstart:magma') and flagset.has('Kforce:hook'):
             self._simple_disable_regex(flagset, log, 'Force hook with start:Magma', r'^Kforce:hook')
+
         if flagset.has('Cnekkie') and len(flagset.get_list(r'^Cthrift:')) > 0:
             self._simple_disable_regex(flagset, log, 'Starting gear specified by Cnekkie', r'^Cthrift:')
 
@@ -524,7 +536,7 @@ class FlagLogicCore:
 
         if len(flagset.get_list(r'^-smith:(playable|good)')) == len(flagset.get_list(r'^-smith:')):
             self._simple_disable(flagset, log, 'No smith item requested', ['-smith:playable', '-smith:good'])
-        if flagset.has_any('-smith:omni', '-smith:spoilsuper', '-smith:sellsuper') and not (flagset.has_any('-smith:super', 'Chero')):
+        if flagset.has_any('-smith:omni', '-smith:spoilsuper', '-smith:sellsuper') and not (flagset.has_any('-smith:super', 'Chero', 'Csuperhero')):
             self._simple_disable(flagset, log, 'No FF4A weapon available', ['-smith:omni', '-smith:spoilsuper', '-smith:sellsuper'])
 
         # add restrictions in case people try to fudge the fusoya flags
@@ -569,11 +581,11 @@ class FlagLogicCore:
         if (len(all_spoiler_flags) > 0 and len(all_spoiler_flags) == len(sparse_spoiler_flags)):
             self._simple_disable_regex(flagset, log, 'No spoilers requested', r'^-spoil:sparse')
 
-        if flagset.has('Chi') and flagset.has('Chero') and flagset.has('Cparty:1'):  
-            self._simple_disable(flagset, log, 'No room for characters to be added with Chero and Max Party size of 1', ['Chi'])
+        if flagset.has('Chi') and flagset.has_any('Chero', 'Csuperhero') and flagset.has('Cparty:1'):  
+            self._simple_disable(flagset, log, 'No room for characters to be added with a hero challenge and Max Party size of 1', ['Chi'])
 
-        if flagset.has('Cfifo') and flagset.has('Chero') and flagset.has('Cparty:1'):  
-            self._simple_disable(flagset, log, 'Cant remove characters with Chero and Max Party size of 1', ['Cfifo'])
+        if flagset.has('Cfifo') and flagset.has_any('Chero', 'Csuperhero') and flagset.has('Cparty:1'):  
+            self._simple_disable(flagset, log, 'Cant remove characters with a hero challenge and Max Party size of 1', ['Cfifo'])
 
         if flagset.has('Cpermajoin') and flagset.has('Cfifo'):
             self._simple_disable(flagset, log, 'Permajoin and Remove Oldest are incompatible', ['Cfifo'])
