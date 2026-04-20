@@ -60,13 +60,13 @@ def apply(env):
         elif price > 1270:
             if price % 1000:
                 new_price = 1000 * (price // 1000)
-                print(f"WARNING: {item.const} has non-representable cost {price}; rounding to {new_price}")
+                # print(f"WARNING: {item.const} has non-representable cost {price}; rounding to {new_price}")
                 price = new_price
             prices.append(0x80 | (price // 1000))
         else:
             if price % 10:
                 new_price = 10 * (price // 10)
-                print(f"WARNING: {item.const} has non-representable cost {price}; rounding to {new_price}")
+                # print(f"WARNING: {item.const} has non-representable cost {price}; rounding to {new_price}")
                 price = new_price
             prices.append(price // 10)
 

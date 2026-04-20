@@ -22,7 +22,7 @@ from f4c import encode_text
 
 import math
 
-DEBUG = 0
+DEBUG = 2 # set to > 1 for more detailed checker output
 MAX_RANDOMIZATION_ATTEMPTS = 100
 
 COMMON_BRANCHES = [
@@ -1360,10 +1360,10 @@ def apply(env):
         if DEBUG:
             print('assignment {}:'.format(attempts))
             for k in rewards_assignment:
-                print('  {} <- {}'.format(str(k), rewards_assignment[k]))
+                print('  {} <- {}'.format(k.name, rewards_assignment[k]))
             for k in boss_assignment:
                 print('  {} <- {}'.format(k, boss_assignment[k]))
-            print('remaining slots: {' + '\n'.join([str(s) for s in remaining_slots]) + '}')
+            print('remaining slots: {' + '\n'.join([s.name for s in remaining_slots]) + '}')
 
         # build dependency checker
         checker = dep_checker.DepChecker()
@@ -1541,10 +1541,15 @@ def apply(env):
             result, path = checker.check(qualification, without=without, force=force)
             if not result:
                 # item is unreachable, assignment fails
-                if DEBUG:
-                    print('  FAILED: no path to {}'.format(qualification))
+                if DEBUG > 1:
+                    br = None
+                    for b in checker._branches:
+                        if b[-1] == str(qualification):
+                            br = b
+                            break
+                    print(f"  FAILED: no path to {qualification}"  + (f", forcing {force}" if force else "") + (f", without {without}" if without else "") + f" ({br}" + ")")
                 found_valid_assignment = False
-                break
+                break            
             else:
                 if DEBUG:
                     print('  {} : {}'.format(qualification, ', '.join(path)))
@@ -1898,10 +1903,10 @@ def apply(env):
 
     if DEBUG:
         print('FINAL ASSIGNMENT:')
-        max_slot_length = max([len(str(s)) for s in combined_assignments])
+        max_slot_length = max([len((s.name if type(s) == RewardSlot else s)) for s in combined_assignments])
         format_str = '  {{:{}}} <- {{}}'.format(max_slot_length)
         for k in combined_assignments:
-            print(format_str.format(str(k), combined_assignments[k]))
+            print(format_str.format((k.name if type(k) == RewardSlot else k), combined_assignments[k]))
         print('ATTEMPTS: {}'.format(attempts))
 
         print('BREAKDOWN of gating key items:')
