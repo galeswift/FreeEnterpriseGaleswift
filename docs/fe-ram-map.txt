@@ -39,6 +39,8 @@ WRAM:
 7E:1180 - 7E:123F   : character names
 7E:1240 - 7E:125F   : discovered axtor -> actor table
 
+7E:14C0 - 7E:14FF  F: Enorepeats formation bit field
+
 7E:1500 - 7E:1553   : API area (was character names)
     -> 7E:1500-1502   : key item "found" bits
     -> 7E:1503-1505   : key item "used" bits
@@ -109,7 +111,7 @@ WRAM:
   1680 - 1697       : scratch space
     -> 7E:1680-168F   : local variables
     -> 7E:1690-1697   : longer-term temporary variables
-  1698 - 16FF      F: doors rando work space
+  1698 - 16FF      F: doors rando work space (note: impacts 64-floor glitch)
     -> 7E:1698-169F  F: map_plane bit array
     -> 7E:16FF       F: 1-byte map history index
 
@@ -117,5 +119,3 @@ WRAM:
 7E:16B4             : flashing custom setting
 7E:16B5             : encounter custom setting
 7E:16B6             : dash custom setting
-
-7E:1DC0 - 7E:1DFF  F: Enorepeats formation bit field
