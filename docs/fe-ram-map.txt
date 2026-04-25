@@ -39,6 +39,7 @@ WRAM:
 7E:1180 - 7E:123F   : character names
 7E:1240 - 7E:125F   : discovered axtor -> actor table
 
+7E:1320 - 7E:133F  F: expanded wacky challenge allocated space
 7E:14C0 - 7E:14FF  F: Enorepeats formation bit field
 
 7E:1500 - 7E:1553   : API area (was character names)
@@ -105,7 +106,7 @@ WRAM:
     -> 7E:1637       F: Big Chocobo Summon probability
     -> 7E:1638       F: Big Chocobo Summon spell power byte
 
-    -> 7E:1660-166C   : wacky challenge allocated space
+    -> 7E:1660-166C  F: unallocated (formerly wacky challenge allocated space)
     -> 7E:166D-166F   : long address storage
     -> 7E:1670-167F   : util.f4c/dead-end registers
   1680 - 1697       : scratch space

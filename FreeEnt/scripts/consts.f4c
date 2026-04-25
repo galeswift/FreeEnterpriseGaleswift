@@ -66,26 +66,42 @@ consts(msg) {
     $118  fe_WackyChallengeIntro
     $119  fe_WackyChallengeTitle
     $11A  fe_WackyChallengeDetail
-    $11F  fe_WackyChallengeDelimiter
-    $120  fe_WackyChallengeTitle2
-	$121  fe_WackyChallengeTitle3
-    $122  fe_WackyChallengeTitle4
-	$123  fe_WackyChallengeTitle5
-    $124  fe_WackyChallengeTitle6
-	$125  fe_WackyChallengeTitle7
-    $126  fe_WackyChallengeTitle8
-	$127  fe_WackyChallengeTitle9
-    $128  fe_WackyChallengeTitle10
-	$129  fe_WackyChallengeTitle11
-    $12A  fe_WackyChallengeTitle12
-	$12B  fe_WackyChallengeTitle13
-    $12C  fe_WackyChallengeTitle14
-	$12D  fe_WackyChallengeTitle15
-    $12E  fe_WackyChallengeTitle16
-	$12F  fe_WackyChallengeTitle17
 
     $14B  fe_WackyDialoguePayableGolbez
     $14D  fe_WackyDialogueNightMode
+    
+    $176  fe_WackyChallengeDelimiter
+    $177  fe_WackyChallengeTitle2
+	$178  fe_WackyChallengeTitle3
+    $179  fe_WackyChallengeTitle4
+	$17A  fe_WackyChallengeTitle5
+    $17B  fe_WackyChallengeTitle6
+	$17C  fe_WackyChallengeTitle7
+    $17D  fe_WackyChallengeTitle8
+	$17E  fe_WackyChallengeTitle9
+    $17F  fe_WackyChallengeTitle10
+	$180  fe_WackyChallengeTitle11
+    $181  fe_WackyChallengeTitle12
+	$182  fe_WackyChallengeTitle13
+    $183  fe_WackyChallengeTitle14
+	$184  fe_WackyChallengeTitle15
+    $185  fe_WackyChallengeTitle16
+	$186  fe_WackyChallengeTitle17
+    $187  fe_WackyChallengeTitle18
+	$188  fe_WackyChallengeTitle19
+    $189  fe_WackyChallengeTitle20
+	$18A  fe_WackyChallengeTitle21
+    $18B  fe_WackyChallengeTitle22
+	$18C  fe_WackyChallengeTitle23
+    $18D  fe_WackyChallengeTitle24
+	$18E  fe_WackyChallengeTitle25
+    $18F  fe_WackyChallengeTitle26
+	$190  fe_WackyChallengeTitle27
+    $191  fe_WackyChallengeTitle28
+	$192  fe_WackyChallengeTitle29
+    $193  fe_WackyChallengeTitle30
+	$194  fe_WackyChallengeTitle31
+    $195  fe_WackyChallengeTitle32
 }
 
 consts(event) {

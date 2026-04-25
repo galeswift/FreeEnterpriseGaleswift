@@ -1343,29 +1343,34 @@ class FlagLogicCore:
 
         challenges = flagset.get_list(r'^-wacky:')
         if challenges:
-            # Simplified wacky compatibility logic
-            # If one of these is set, none of the others in this group can be
-            WACKY_SET_1 = ['afflicted', 'menarepigs', 'mirrormirror', 'skywarriors', 'zombies']
-            # If one of the above is set, none of these can be
-            WACKY_SET_2 = ['battlescars', 'payablegolbez', 'tellahmaneuver', 'worthfighting']
-            # These are sets of mutually incompatible modes
-            WACKY_SET_3 = [
-                ['3point', 'afflicted', 'battlescars', 'menarepigs', 'mirrormirror', 'skywarriors', 'unstackable', 'zombies'],
-                ['afflicted', 'friendlyfire'],
-                ['battlescars', 'afflicted', 'zombies', 'worthfighting'],
-                ['darts', 'musical', 'skillissue'],
-                ['3point', 'tellahmaneuver'],
+            # implement the more precise wacky compability logic, since Status Enforcement doesn't take up Wacky RAM anymore
+            WACKY_POSITIVE_RAM = ['payablegolbez', 'tellahmaneuver', 'worthfighting', 'skillissue', 'battlescars', 'zombies']
+            WACKY_RAM_BYTES = [3, 6, 2, 2, 1, 6]
+            MAX_WACKY_RAM = 32
+            WACKY_MUTUAL_INCOMPATIBILITIES = [
+                ['friendlyfire', 'afflicted'], # These both use Wacky__SpellFilterHook
+                ['tellahmaneuver', '3point'], # These both mess with MP
+                ['musical', 'darts', 'skillissue'], # These all replace the Fight command or prevent command usage
+                ['worthfighting', 'battlescars', 'zombies', 'afflicted'], # These all use Wacky__PostBattleHook
+                ['menarepigs', 'skywarriors', 'mirrormirror', 'zombies', 'afflicted'], # These all use Wacky__StatusEnforcement
+                ['unstackable', 'menarepigs', 'skywarriors', 'battlescars', '3point', 'mirrormirror', 'zombies', 'afflicted'], # These all use Wacky__InitializeAxtorHook
             ]
-
+            ram_bytes_used = 0
+            modes = []
             for c in challenges:
                 mode = self._lib.re_sub(r'-wacky:', '', c)
-                if mode in WACKY_SET_1:
-                    self._simple_disable(flagset, log, 'Can only have one enforced status wacky mode', [fr'-wacky:{m}' for m in WACKY_SET_1 if m != mode])
-                    self._simple_disable(flagset, log, 'Modes are incompatible with enforced status wacky modes', [fr'-wacky:{m}' for m in WACKY_SET_2])
-                for group in WACKY_SET_3:
-                    if mode in group:
-                        self._simple_disable(flagset, log, f'Wacky modes are incompatible with {mode}', [fr'-wacky:{m}' for m in group if m != mode])
-                    
+                self._lib.push(modes, mode)
+
+            for i in range(6):
+                if WACKY_POSITIVE_RAM[i] in modes:
+                    ram_bytes_used += WACKY_RAM_BYTES[i]
+            if ram_bytes_used > MAX_WACKY_RAM:
+                self._lib.push(log, ['error', f'The chosen wacky flags use too many RAM bytes ({ram_bytes_used} out of 32); remove some wacky flags and try again.'])
+
+            for group in WACKY_MUTUAL_INCOMPATIBILITIES:
+                for i in range(len(group) - 1):
+                    if group[i] in modes:
+                        self._simple_disable(flagset, log, f'Wacky mode is incompatible with {group[i]}', [f'-wacky:{other}' for other in group[i+1:]])                    
         
         return log
 

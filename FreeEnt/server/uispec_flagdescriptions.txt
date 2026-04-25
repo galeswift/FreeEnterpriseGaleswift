@@ -1108,15 +1108,14 @@ Enables the April Fools Day 2019 mode.
 </ul>
 <p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>
 <ul>
-	<li>Only one of the following can be used: "afflicted", "menarepigs", "mirrormirror", "skywarriors", "zombies"</li>
-	<li>If any of the above are set, none of these can be used: "battlescars", "payablegolbez", "tellahmaneuver", "worthfighting"</li>
-	<li>None of these modes can be used together: "3point", "afflicted", "battlescars", "menarepigs", "mirrormirror", "skywarriors", "unstackable", "zombies"</li>
-	<li>None of these modes can be used together: "afflicted", "friendlyfire"</li>
-	<li>None of these modes can be used together: "afflicted", "battlescars", "worthfighting", "zombies"</li>
-	<li>None of these modes can be used together: "darts", "musical", "skillissue"</li>
-	<li>None of these modes can be used together: "3point", "tellahmaneuver"</li>	
+	<li>None of these modes can be used together: "friendlyfire", "afflicted"</li>
+	<li>None of these modes can be used together: "tellahmaneuver", "3point"</li>
+	<li>None of these modes can be used together: "musical", "darts", "skillissue"</li>	
+	<li>None of these modes can be used together: "worthfighting", "battlescars", "zombies", "afflicted"</li>
+	<li>None of these modes can be used together: "menarepigs", "skywarriors", "mirrormirror", "zombies", "afflicted"</li>
+	<li>None of these modes can be used together: "unstackable", "menarepigs", "skywarriors", "battlescars", "3point", "mirrormirror", "zombies", "afflicted"</li>
 </ul>
-<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>
+<p>If the random option is used and there are not enough compatible modes remaining, fewer random modes will be chosen.</p>
 
 [-tweak:kainmagic] 
 Kain gets two spellsets: White (with a new spell Lance replacing Sight) and Black. Lance is removed from all other spellsets.

@@ -13234,7 +13234,7 @@ class FlagLogicCore {
         this._simple_disable(flagset, log, prefix, flagset.get_list(flags_regex));
     }
     fix(flagset) {
-        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_customized_rand_flags, all_customized_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss, boss_slots_removed, bosses_available, ch, ch_count_cap, ch_list, challenges, char_objective_flags, character_pool, current_boss, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, fl_cat, flags_objective_chars, flags_objective_chars_num, flexible_char_count, flexible_char_pool, flexible_random_objective_count, gated_objective_index, gated_objectives, group_obj_num, group_scores, grp_obj_num, grp_sc, hard_required_index, hard_required_objectives, has_unavailable_characters, just_in_case_mandatory_char_pool, kmiab_flags, log, max_bosses, max_char_objectives, max_non_tough_quests, max_tough_quests, maxtier, maxtier_flags, min_non_char_objectives, mintier, mintier_flags, mode, non_tough_quest_room, nonstarting_character_slots, num_rand_objectives, num_random_objectives, only_char_objectives, only_chars_list, only_flags, pass_quest_flags, qu, rand_category_flags, rand_only_char_flags, random_category_flags, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, sorted_groups, sparse_spoiler_flags, specific_boss_objectives, specific_tough_quest_objectives, start_exclude_flags, start_include_flags, theoretical_available_characters, total_char_count, total_flexible_bosses, total_flexible_non_tough_quests, total_flexible_tough_quests, total_mandatory_bosses, total_mandatory_non_tough_quests, total_mandatory_tough_quests, total_objective_count, tough_quest_room, unsure_flags, win_flags;
+        var MAX_WACKY_RAM, WACKY_MUTUAL_INCOMPATIBILITIES, WACKY_POSITIVE_RAM, WACKY_RAM_BYTES, actual_available_characters, all_customized_rand_flags, all_customized_random_flags, all_specific_objectives, all_spoiler_flags, available_vanilla_chars, bad_gated_conditions, boss, boss_slots_removed, bosses_available, ch, ch_count_cap, ch_list, challenges, char_objective_flags, character_pool, current_boss, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, fl_cat, flags_objective_chars, flags_objective_chars_num, flexible_char_count, flexible_char_pool, flexible_random_objective_count, gated_objective_index, gated_objectives, group_obj_num, group_scores, grp_obj_num, grp_sc, hard_required_index, hard_required_objectives, has_unavailable_characters, just_in_case_mandatory_char_pool, kmiab_flags, log, max_bosses, max_char_objectives, max_non_tough_quests, max_tough_quests, maxtier, maxtier_flags, min_non_char_objectives, mintier, mintier_flags, mode, modes, non_tough_quest_room, nonstarting_character_slots, num_rand_objectives, num_random_objectives, only_char_objectives, only_chars_list, only_flags, pass_quest_flags, qu, ram_bytes_used, rand_category_flags, rand_only_char_flags, random_category_flags, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, sorted_groups, sparse_spoiler_flags, specific_boss_objectives, specific_tough_quest_objectives, start_exclude_flags, start_include_flags, theoretical_available_characters, total_char_count, total_flexible_bosses, total_flexible_non_tough_quests, total_flexible_tough_quests, total_mandatory_bosses, total_mandatory_non_tough_quests, total_mandatory_tough_quests, total_objective_count, tough_quest_room, unsure_flags, win_flags;
         log = [];
         if (flagset.has("-starting:underground")) {
             this._simple_disable_regex(flagset, log, "Starting underground is already unsafe", "^Kunsafe");
@@ -14209,46 +14209,36 @@ class FlagLogicCore {
         }
         challenges = flagset.get_list("^-wacky:");
         if (challenges) {
-            WACKY_SET_1 = ["afflicted", "menarepigs", "mirrormirror", "skywarriors", "zombies"];
-            WACKY_SET_2 = ["battlescars", "payablegolbez", "tellahmaneuver", "worthfighting"];
-            WACKY_SET_3 = [["3point", "afflicted", "battlescars", "menarepigs", "mirrormirror", "skywarriors", "unstackable", "zombies"], ["afflicted", "friendlyfire"], ["battlescars", "afflicted", "zombies", "worthfighting"], ["darts", "musical", "skillissue"], ["3point", "tellahmaneuver"]];
+            WACKY_POSITIVE_RAM = ["payablegolbez", "tellahmaneuver", "worthfighting", "skillissue", "battlescars", "zombies"];
+            WACKY_RAM_BYTES = [3, 6, 2, 2, 1, 6];
+            MAX_WACKY_RAM = 32;
+            WACKY_MUTUAL_INCOMPATIBILITIES = [["friendlyfire", "afflicted"], ["tellahmaneuver", "3point"], ["musical", "darts", "skillissue"], ["worthfighting", "battlescars", "zombies", "afflicted"], ["menarepigs", "skywarriors", "mirrormirror", "zombies", "afflicted"], ["unstackable", "menarepigs", "skywarriors", "battlescars", "3point", "mirrormirror", "zombies", "afflicted"]];
+            ram_bytes_used = 0;
+            modes = [];
             for (var c, _pj_c = 0, _pj_a = challenges, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 c = _pj_a[_pj_c];
                 mode = this._lib.re_sub("-wacky:", "", c);
-                if (_pj.in_es6(mode, WACKY_SET_1)) {
-                    this._simple_disable(flagset, log, "Can only have one enforced status wacky mode", function () {
-    var _pj_d = [], _pj_e = WACKY_SET_1;
-    for (var _pj_f = 0, _pj_g = _pj_e.length; (_pj_f < _pj_g); _pj_f += 1) {
-        var m = _pj_e[_pj_f];
-        if ((m !== mode)) {
-            _pj_d.push(`-wacky:${m}`);
-        }
-    }
-    return _pj_d;
-}
-.call(this));
-                    this._simple_disable(flagset, log, "Modes are incompatible with enforced status wacky modes", function () {
-    var _pj_d = [], _pj_e = WACKY_SET_2;
-    for (var _pj_f = 0, _pj_g = _pj_e.length; (_pj_f < _pj_g); _pj_f += 1) {
-        var m = _pj_e[_pj_f];
-        _pj_d.push(`-wacky:${m}`);
-    }
-    return _pj_d;
-}
-.call(this));
+                this._lib.push(modes, mode);
+            }
+            for (var i = 0, _pj_a = 6; (i < _pj_a); i += 1) {
+                if (_pj.in_es6(WACKY_POSITIVE_RAM[i], modes)) {
+                    ram_bytes_used += WACKY_RAM_BYTES[i];
                 }
-                for (var group, _pj_f = 0, _pj_d = WACKY_SET_3, _pj_e = _pj_d.length; (_pj_f < _pj_e); _pj_f += 1) {
-                    group = _pj_d[_pj_f];
-                    if (_pj.in_es6(mode, group)) {
-                        this._simple_disable(flagset, log, `Wacky modes are incompatible with ${mode}`, function () {
-    var _pj_g = [], _pj_h = group;
-    for (var _pj_i = 0, _pj_j = _pj_h.length; (_pj_i < _pj_j); _pj_i += 1) {
-        var m = _pj_h[_pj_i];
-        if ((m !== mode)) {
-            _pj_g.push(`-wacky:${m}`);
-        }
+            }
+            if ((ram_bytes_used > MAX_WACKY_RAM)) {
+                this._lib.push(log, ["error", `The chosen wacky flags use too many RAM bytes (${ram_bytes_used} out of 32); remove some wacky flags and try again.`]);
+            }
+            for (var group, _pj_c = 0, _pj_a = WACKY_MUTUAL_INCOMPATIBILITIES, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                group = _pj_a[_pj_c];
+                for (var i = 0, _pj_d = (group.length - 1); (i < _pj_d); i += 1) {
+                    if (_pj.in_es6(group[i], modes)) {
+                        this._simple_disable(flagset, log, `Wacky mode is incompatible with ${group[i]}`, function () {
+    var _pj_e = [], _pj_f = group.slice((i + 1));
+    for (var _pj_g = 0, _pj_h = _pj_f.length; (_pj_g < _pj_h); _pj_g += 1) {
+        var other = _pj_f[_pj_g];
+        _pj_e.push(`-wacky:${other}`);
     }
-    return _pj_g;
+    return _pj_e;
 }
 .call(this));
                     }

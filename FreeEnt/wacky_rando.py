@@ -8,8 +8,9 @@ from .core_rando import BOSS_SLOTS
 
 from f4c import encode_text
 
+# sorted by increasing number of mutual incompatibility groups, then by the arbitrary original order
+# (used by flagsetcore to smooth out Tricker choosing wackies at random)
 WACKY_CHALLENGES = {
-    'musical'           : 'Final Fantasy IV:\nThe Musical',
     'bodyguard'         : 'The Bodyguard',
     'fistfight'         : 'Fist Fight',
     'omnidextrous'      : 'Omnidextrous',
@@ -23,41 +24,41 @@ WACKY_CHALLENGES = {
     'misspelled'        : 'Misspelled',
     'enemyunknown'      : 'Enemy Unknown',
     'kleptomania'       : 'Kleptomania',
-    'darts'             : 'World Championship\nof Darts',
-    'unstackable'       : 'Unstackable',
-    'menarepigs'        : 'Men Are Pigs',
-    'skywarriors'       : 'The Sky Warriors',
-    'zombies'           : 'Zombies!!!',
-    'afflicted'         : 'Afflicted',
     'batman'            : 'Holy Onomatopoeias,\nBatman!',
-    'battlescars'       : 'Battle Scars',
     'imaginarynumbers'  : 'Imaginary Numbers',
-    'tellahmaneuver'    : 'The Tellah\nManeuver',
-    '3point'            : 'The 3-Point System',
-    'friendlyfire'      : 'Friendly Fire',
     'payablegolbez'     : 'Payable Golbez',
     'gottagofast'       : 'Gotta Go Fast',
-    'worthfighting'     : 'Something Worth\nFighting For',
     'saveusbigchocobo'  : 'Save Us,\nBig Chocobo!',
     'isthisrandomized'  : 'Is This Even\nRandomized?',
     'forwardisback'     : 'Forward is\nthe New Back',
-    'mirrormirror'      : 'Mirror, Mirror,\non the Wall',
     'dropitlikeitshot'  : 'Drop It Like It\'s Hot',
     'whatsmygear'       : 'What\'s My\nGear Again?',
     'scrambledstats'    : 'Scrambled Stats',
     'advertising'       : 'Truth in\nAdvertising',
-    'skillissue'        : 'Skill Issue',
     'workexperience'    : 'Work Experience',
-    'moneygains'        : 'Big Money,\nLittle Gains'
+    'moneygains'        : 'Big Money,\nLittle Gains',
+    'musical'           : 'Final Fantasy IV:\nThe Musical',
+    'darts'             : 'World Championship\nof Darts',
+    'unstackable'       : 'Unstackable',
+    'tellahmaneuver'    : 'The Tellah\nManeuver',
+    'friendlyfire'      : 'Friendly Fire',
+    'worthfighting'     : 'Something Worth\nFighting For',
+    'skillissue'        : 'Skill Issue',
+    'menarepigs'        : 'Men Are Pigs',
+    'skywarriors'       : 'The Sky Warriors',
+    'battlescars'       : 'Battle Scars',
+    '3point'            : 'The 3-Point System',
+    'mirrormirror'      : 'Mirror, Mirror,\non the Wall',
+    'zombies'           : 'Zombies!!!',
+    'afflicted'         : 'Afflicted',
 }
 
 WACKY_ROM_ADDRESS = BusAddress(0x268000)
-WACKY_RAM_ADDRESS = BusAddress(0x7e1660)
+WACKY_RAM_ADDRESS = BusAddress(0x7e1320)
 WACKY_LAST_AVAILABLE_ROM_ADDR = 0x26ffff # TODO: Find the actual limit
-WACKY_LAST_AVAILABLE_RAM_BYTE = 0x7e166c
+WACKY_LAST_AVAILABLE_RAM_BYTE = 0x7e133f
 
 WACKY_RAM_USAGE = {
-    'musical'           : 0,
     'bodyguard'         : 0,
     'fistfight'         : 0,
     'omnidextrous'      : 0,
@@ -71,41 +72,44 @@ WACKY_RAM_USAGE = {
     'misspelled'        : 0,
     'enemyunknown'      : 0,
     'kleptomania'       : 0,
-    'darts'             : 0,
-    'unstackable'       : 0,
-    'menarepigs'        : 7, # StatusEnforcement
-    'skywarriors'       : 7, # StatusEnforcement
-    'zombies'           : 13, # StatusEnforcement plus zombie status tracking
-    'afflicted'         : 7, # StatusEnforcement
     'batman'            : 0,
-    'battlescars'       : 1,
     'imaginarynumbers'  : 0,
-    'tellahmaneuver'    : 6,
-    '3point'            : 0,
-    'friendlyfire'      : 0,
     'payablegolbez'     : 3,
     'gottagofast'       : 0,
-    'worthfighting'     : 2,
     'saveusbigchocobo'  : 0,
     'isthisrandomized'  : 0,
     'forwardisback'     : 0,
     'dropitlikeitshot'  : 0,
     'whatsmygear'       : 0,
-    'mirrormirror'      : 7, # StatusEnforcement
     'scrambledstats'    : 0,
     'advertising'       : 0,
-    'skillissue'        : 2,
     'workexperience'    : 0,
     'moneygains'        : 0,
+    'musical'           : 0,
+    'darts'             : 0,
+    'unstackable'       : 0,
+    'tellahmaneuver'    : 6,
+    'friendlyfire'      : 0,
+    'worthfighting'     : 2,
+    'skillissue'        : 2,
+    'menarepigs'        : 0,
+    'skywarriors'       : 0,
+    'battlescars'       : 1,
+    '3point'            : 0,
+    'mirrormirror'      : 0,
+    'zombies'           : 6,
+    'afflicted'         : 0,
 }
 
+# sorted by length, then within groups by the above ordering of number of mutual incompatibility groups
+# (used by flagsetcore to smooth out Tricker choosing wackies at random)
 WACKY_MUTUAL_INCOMPATIBILITIES = [
-    ['3point', 'battlescars', 'unstackable', 'afflicted', 'menarepigs', 'skywarriors', 'zombies', 'mirrormirror'], # These all use Wacky__InitializeAxtorHook
-    ['afflicted', 'friendlyfire'], # These both use Wacky__SpellFilterHook
-    ['battlescars', 'afflicted', 'zombies', 'worthfighting'], # These all use Wacky__PostBattleHook
-    ['darts', 'musical', 'skillissue'], # These all replace the Fight command or prevent command usage
-    ['3point','tellahmaneuver'], # These both mess with MP
-    ['afflicted', 'menarepigs', 'skywarriors', 'mirrormirror', 'zombies'], # These all use Wacky__StatusEnforcement
+    ['friendlyfire', 'afflicted'], # These both use Wacky__SpellFilterHook
+    ['tellahmaneuver', '3point'], # These both mess with MP
+    ['musical', 'darts', 'skillissue'], # These all replace the Fight command or prevent command usage
+    ['worthfighting', 'battlescars', 'zombies', 'afflicted'], # These all use Wacky__PostBattleHook
+    ['menarepigs', 'skywarriors', 'mirrormirror', 'zombies', 'afflicted'], # These all use Wacky__StatusEnforcement
+    ['unstackable', 'menarepigs', 'skywarriors', 'battlescars', '3point', 'mirrormirror', 'zombies', 'afflicted'], # These all use Wacky__InitializeAxtorHook
 ]
 
 def find_compatible_remaining_wacky_modes(current_modes):
@@ -171,13 +175,6 @@ def apply(env):
         rom_base = WACKY_ROM_ADDRESS
         ram_base = WACKY_RAM_ADDRESS
 
-        # ID if status enforcement is being used; change ram_base accordingly
-        for wacky in wacky_challenge:
-            if wacky in WACKY_MUTUAL_INCOMPATIBILITIES[5]:
-                # StatusEnforcement hard-coded RAM values in use
-                ram_base += 0x07
-                break
-
         for idx, wacky in enumerate(wacky_challenge):
             # apply script of the same name, if it exists
             script_filename = f'scripts/wacky/{wacky}.f4c'
@@ -202,15 +199,9 @@ def apply(env):
                         raise Exception(f"Incompatible wacky modes (too much ROM space required): {', '.join(wacky_challenge)}")
                     rom_base = rom_base.offset(rom_bytes_used)
 
-                if wacky not in WACKY_MUTUAL_INCOMPATIBILITIES[5]:
-                    if ram_base.get_bus() + ram_bytes_used - 1 > WACKY_LAST_AVAILABLE_RAM_BYTE:
-                        raise Exception(f"Incompatible wacky modes (RAM incompatibility): {', '.join(wacky_challenge)}")
-                    ram_base = ram_base.offset(ram_bytes_used)
-                elif wacky == 'zombies':
-                    # zombies uses the 7 normal status enforcement bytes plus 6 more
-                    if ram_base.get_bus() + ram_bytes_used - 7 - 1 > WACKY_LAST_AVAILABLE_RAM_BYTE:
-                        raise Exception(f"Incompatible wacky modes (RAM incompatibility): {', '.join(wacky_challenge)}")
-                    ram_base = ram_base.offset(6)                    
+                if ram_base.get_bus() + ram_bytes_used - 1 > WACKY_LAST_AVAILABLE_RAM_BYTE:
+                    raise Exception(f"Incompatible wacky modes (RAM incompatibility): {', '.join(wacky_challenge)}")
+                ram_base = ram_base.offset(ram_bytes_used)
 
             text = WACKY_CHALLENGES[wacky]
             centered_text = '\n'.join([line.center(26).upper().rstrip() for line in text.split('\n')])
