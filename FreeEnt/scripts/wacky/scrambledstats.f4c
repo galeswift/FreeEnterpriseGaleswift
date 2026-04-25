@@ -29,7 +29,9 @@ patch($039C39 bus) { {% 3967 AGI substitute %} }
 // for the second patch, monsters might behave strangely!
 // i.e. might come back with non-0 HP after Life-glitching
 patch($039A0F bus) { {% 3968 VIT substitute %} }
+// %flag glitch_modified_life off%
 patch($03D6DA bus) { {% 2716 VIT substitute %} }
+// %end%
 patch($039F18 bus) { {% 2016 VIT substitute %} }
 
 // Wisdom

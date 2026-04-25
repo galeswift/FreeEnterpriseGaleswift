@@ -312,6 +312,7 @@ def apply_scrambledstats(env, rom_address):
     env.add_substitution('wacky scrambled stats agi address', f'    .def  CharAgilityAddress  $20{20+statsdict["AGI"]:02X}')
     env.add_substitution('3968 VIT substitute', f'{102+statsdict["VIT"]:02X}')
     env.add_substitution('2716 VIT substitute', f'{20+statsdict["VIT"]:02X}')
+    env.add_substitution('lda $2716 VIT substitute', f'lda $27{20+statsdict["VIT"]:02X}')
     env.add_substitution('2016 VIT substitute', f'{20+statsdict["VIT"]:02X}')
     env.add_substitution('3969 WIS substitute', f'{102+statsdict["WIS"]:02X}')
     env.add_substitution('2017 WIS substitute', f'{20+statsdict["WIS"]:02X}')

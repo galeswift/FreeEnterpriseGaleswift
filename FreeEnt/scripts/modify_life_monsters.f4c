@@ -45,7 +45,7 @@ msfpatch{
 
     %IsCharacter:
         // displaced
-        lda $2716
+        {% lda $2716 VIT substitute : lda $2716 %}
         sta $df
         jml $03d6de
 }
