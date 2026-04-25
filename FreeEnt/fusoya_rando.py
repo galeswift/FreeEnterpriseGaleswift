@@ -595,7 +595,7 @@ def apply(env):
         excluded_spells.extend(['#spell.Weak'])
         if not env.options.flags.has('nerfed_fusoya'):
             env.add_scripts(
-            'spellset(#FusoyaBlack) {{ learned {{ 53  #spell.Weak }} }}'
+            'spellset(#FusoyaBlack) { learned { 53  #spell.Weak } }'
             )
 
     max_credits = 14
@@ -665,8 +665,6 @@ def apply(env):
         white = STARTING_WHITE.copy()
         if j_spells:
             white.extend(STARTING_WHITE_JAPANESE)
-        if not no_lance:
-            white.remove('#spell.Sight')
         black = STARTING_BLACK.copy()
         omni = STARTING_CALL.copy()
         
@@ -680,6 +678,9 @@ def apply(env):
             for spell in STARTING_CALL:
                 if env.rnd.random() < MAYBE_THRESHOLD:
                     omni.remove(spell)
+
+        if not no_lance and '#spell.Sight' in white:
+            white.remove('#spell.Sight')
 
         if env.options.flags.has('randomhp_fusoya'):
             # in this case, either the HP max is 3900 or it's 1100, no slowstart option
