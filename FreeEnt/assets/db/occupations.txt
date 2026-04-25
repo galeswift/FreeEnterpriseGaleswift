@@ -1,6 +1,6 @@
 DSL Installer
 Delivery man
-Assistant manager (Doose's)
+Assistant manager at Doose's
 Engagement party coordinator
 Photographer
 Mechanic
@@ -29,7 +29,7 @@ Wedding DJ
 Firewood delivery man
 Poller for Town Selectman campaign
 Movie theater attendant
-Flier Hander Outer (Hot Dog costume)
+Flier Hander Outer with Hot Dog costume
 Bath and shower adhesive salesman
 Ribbon collector
 Souvenir Salesman
@@ -564,7 +564,7 @@ Artisanal Everclear Brewer
 Artisanal Landlord
 Artisanal Pharmacist
 Artist
-Arts & Crafts Consultant
+Arts and Crafts Consultant
 Arts Administrator
 Asbestos Abatement
 Asbestos Abatement Specialist
@@ -4409,7 +4409,7 @@ Fireworks Tester
 First Aid Instructor
 First Grade Teacher
 First-Line Supervisor
-Fish & Tackle Expert
+Fish and Tackle Expert
 Fish Advocate
 Fish And Game Warden
 Fish And Wildlife Conservation Officer
@@ -6880,7 +6880,7 @@ Lid Tightener
 Lid Twister
 Lie Detector
 Lieutenant
-Lieutenant, Usm (Ret.)
+Lieutenant, Usm Ret.
 Life Coach
 Life Critic
 Lifeguard
