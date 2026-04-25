@@ -13,7 +13,7 @@ id,name,spoilername,disabled,equip,use,price,attack,accuracy,metallic,throwable,
 0x10C,[katana]Mutsuno,Mutsunokami,,edge,,110000,100,99,y,y,,,,,10,,,,10,,Blink,8,,,,,,,,,0x24,0x06,0x03,0x01,#item.Masamune
 0x10D,[shuriken]Scrap,Scrap Metal,,,edge,100,4,99,y,y,,,,,,,,,,air,,,,,,,,,,,0x24,0x0B,0x12,0x06,#item.Shuriken
 0x10E,[boomerang]Sunrise,Rising Sun,,edge,,99000,85,95,,,y,,,,,,10,,,air,,,,,,,,,,,0x1A,0x0F,0x11,0x08,#item.FullMoon
-0x10F,[claw]Tiger,Tiger Fangs,,yang,,25000,90,,,,,,,,10,10,,,paralyze,,,,,,,,,,,0x1D,0x16,0x0E,0x03,#item.CatClaw
+0x10F,[claw]Tiger,Tiger Fangs,,yang,,25000,0,90,,,,,,,,10,10,,,paralyze,,,,,,,,,,,0x1D,0x16,0x0E,0x03,#item.CatClaw
 0x110,[claw]Dragon,Dragon Claw,,yang,,40000,0,90,,,,,,,10,,,,10,holy,,,y,,,,,,,,0x1B,0x16,0x0E,0x03,#item.CatClaw
 0x111,[claw]Godhand,Godhand,,yang,,55000,0,90,,,,,,,15,15,15,,,holy,,,,,,,,,,,0x24,0x16,0x0E,0x03,#item.CatClaw
 0x112,[wrench]Thor,Thor's Hammer,,cid,,126000,190,80,y,,,y,,,15,,,,,lightning,Blitz,8,,y,,,,,,,0x24,0x09,0x0E,0x0B,#item.EarthHammer
