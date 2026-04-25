@@ -44,7 +44,7 @@ def apply(env):
         price_adjustment = env.options.flags.get_suffix('Sprice:')        
         has_any_adjustment_filters = env.options.flags.get_suffix('Spricey:')
         can_adjust_price = not has_any_adjustment_filters or ((env.options.flags.has('Spricey:items') and item.category == 'item' ) or (env.options.flags.has('Spricey:weapons') and item.category == 'weapon' ) or (env.options.flags.has('Spricey:armor') and item.category == 'armor' ))
-        if env.options.flags.has('sellsmith') and item.code == 0x46 and env.options.flags.has('Spricey:weapons'):
+        if env.options.flags.has('sellsmith') and item_code == 0x46 and env.options.flags.has('Spricey:weapons'):
             can_adjust_price = True
         if price_adjustment and can_adjust_price: 
             #prevPrice = price
