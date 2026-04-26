@@ -22,8 +22,10 @@ from f4c import encode_text
 
 import math
 
-DEBUG = 2 # set to > 1 for more detailed checker output
-MAX_RANDOMIZATION_ATTEMPTS = 100
+DEBUG = 0 # set to > 1 for more detailed checker output
+# largest known successful generation: 2837 attempts
+# flagset: Onone Kmain/miab:above,below/forge/pink/unweighted/force:hook/unsafer Pkey Cstandard Twild Swild Bstandard/nofree Etoggle Hrandom Gnone Fvanilla Aagnostic Zailments -starting:blackchocobo
+MAX_RANDOMIZATION_ATTEMPTS = 5000
 
 COMMON_BRANCHES = [
     ['#item.Magma?', 'underground'],
