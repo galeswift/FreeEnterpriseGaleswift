@@ -194,7 +194,8 @@ def command_lists(env):
         # give Kain White and Black commands
         commands['Kain1'].extend(['#White', '#Black'])
         if env.options.flags.has('all_good_abilities'):
-            commands['Kain1'].remove('#DarkWave')
+            if not env.options.flags.has('cidairship'):
+                commands['Kain1'].remove('#DarkWave')
             commands['Kain1'].remove('#Sneak')
 
     if env.options.flags.has('rydiaredmage'):
