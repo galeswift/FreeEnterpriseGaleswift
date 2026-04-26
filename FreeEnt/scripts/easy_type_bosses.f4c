@@ -97,22 +97,8 @@ ai_script(moon $25)
 }
 
 // cast Venom instead of one Nuke,
-// with funky spell power (need to change
-// in boss_rando.py)
-ai_script(moon $26)
-{
-    set spell power 14
-    target self
-    use #Nuke
-    
-    set spell power 14
-    target self
-    use #Venom
-    
-    set spell power 14
-    target self
-    use #Nuke
-}
+// with funky spell power; change is in
+// wyvern_script_et.f4c
 
 // counter with Storm instead of MegaNuke
 ai_script(moon $27)
@@ -124,20 +110,14 @@ ai_script(moon $27)
 monster($95)   // D. Lunar
 {
     attack element #Lit
-    attack sequence $FE
+    attack sequence $F6
 }
 
 // also very different attack/counter scripts:
 
-// create ai group $FE to handle the 3-condition set
+// create ai group $F6 to handle the 3-condition set
 // group instead of 2-condition set group that D. Lunars
-// normally have
-// aigroup($B2) {
-//     condition set $02 : script $59  // alone
-//     condition set $19 : script $2C  // self status #Wall
-//     condition set $00 : script $2B  // $FF $FF $FF $FF
-// }
-patch($0ee51f bus) { 02 59 19 2C 00 2B }
+// normally have; change made in randomizer_boss.f4c
 
 // change usual attack script
 ai_script(moon $2B)

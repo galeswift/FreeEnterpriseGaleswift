@@ -380,6 +380,43 @@ ai_script($B8)
 // Wyvern handled in separate files, for US/J/ET changes
 
 //------------------------------------------------------------------
+// There are unused/dummy AI condition groups at the end of the
+// table, with lots of space to expand (without going past $FF),
+// so always replace scripts for ET bosses (D.Lunars) and 
+// Truth in Advertising (Tricker) to ensure no collisions.
+
+// for ET D.Lunars:
+
+// aigroup($F6) {
+//     condition set $02 : script $59  // alone
+//     condition set $19 : script $2C  // self status #Wall
+//     condition set $00 : script $2B  // $FF $FF $FF $FF
+// }
+patch($0ee507 bus) { 02 59 19 2C 00 2B FF }
+
+// for Advertising Tricker:
+
+// aigroup($F7) {
+//     condition set $0A : script $23  // anyone (character) uses #Lit magic
+//     condition set $31 : script $3F  // condition flag 0, anyone (character) uses #Air #Fight
+//     condition set $32 : script $3F  // condition flag 0, anyone (character) uses #Air #Aim
+//     condition set $33 : script $3F  // condition flag 0, anyone (character) uses #Air jump
+// }
+patch($0ee50e bus) { 0A 23 31 3F 32 3F 33 3F FF }
+
+// shift over the remaining AI groups (including Last Arm's Fission script, 17 FC)
+// cut out the lone 7D right at the end because it's broken anyway
+
+patch($0ee517 bus) { 
+    00 00 FF 
+    00 FB FF 
+    00 FC FF 
+    17 7C FF 
+    04 FD FF
+    00 7D FF
+}
+
+//------------------------------------------------------------------
 // Do WaterHag battle fixes here anyway because why not
 
 ai_script($93)

@@ -18,8 +18,3 @@ ai_script(moon $26)
     target self
     use #Nuke
 }
-
-ai_script(moon $27)
-{
-    use #Enemy_Storm
-}
