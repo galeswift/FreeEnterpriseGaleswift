@@ -770,9 +770,15 @@ def apply(env):
                             # pre-cull objectives we've already specified, to help the randomizer
                             continue
                         random_objective_pool.setdefault(category, []).append(objective_id)
-            random_category_weights = RANDOM_CATEGORY_WEIGHTS
-            if random_objective_allowed_types:
-                random_category_weights = { k : RANDOM_CATEGORY_WEIGHTS[k] for k in RANDOM_CATEGORY_WEIGHTS if k in random_objective_allowed_types }
+            random_category_weights = {}
+            for k in RANDOM_CATEGORY_WEIGHTS:
+                # pre-cull categories if there are no available objectives left, to avoid key errors
+                if k in random_objective_pool:
+                    random_category_weights[k] = RANDOM_CATEGORY_WEIGHTS[k]
+                if random_objective_allowed_types:
+                    # remove weights from disallowed objective types, if they were there to begin with
+                    if k not in random_objective_allowed_types and k in random_category_weights:
+                        random_category_weights.pop(k)
             random_category_distribution = util.Distribution(**random_category_weights)
 
             # 10k is probably overkill. Try 100 attempts to choose the objectives (per group). or some smaller number.
