@@ -79,4 +79,4 @@ def apply(env):
         megaprice_bytes.extend([((price >> (i * 8)) & 0xFF) for i in range(3)])
     megaprice_bytes.append(0x00)
 
-    env.add_binary(BusAddress(0x218080), megaprice_bytes, as_script=True)
+    env.add_binary(BusAddress(0x21D300), megaprice_bytes, as_script=True)
