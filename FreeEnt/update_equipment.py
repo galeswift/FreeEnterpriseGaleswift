@@ -105,7 +105,7 @@ def equipment(env):
 
     if env.options.flags.has('edward_spoon'):
         # point the Spoon to the Harps equip index
-        equipment_to_change.setdefault(0x3E,{}).update({0x07 : 0x19})
+        equipment_to_change.setdefault(0x3E,{}).update({0x06 : 0x19})
 
     if env.options.flags.has('darkpaladin'):
         dark_sword_index = 0x15
@@ -132,7 +132,10 @@ def equipment(env):
             new_byte = non_paladin_shield_index | (0x20 if item_id >= 0x47 else 0x00)
             equipment_to_change.setdefault(item_id,{}).update({0x06 : new_byte})
         # reroute Holy Swords/Paladin Shields to the normally unused Rosa-only index $1A, so Rosa gets them and PCecil loses them
-        for item_id in [0x19, 0x1A, 0x1B, 0x3F, 0x64, 0x6C]:
+        if not env.options.flags.has('spoilsmith'):
+            # only handle the Legend Sword if custom_weapon_rando isn't
+            equipment_to_change.setdefault(0x19,{}).update({0x06 : holy_sword_index})
+        for item_id in [0x1A, 0x1B, 0x3F, 0x64, 0x6C]:
             equipment_to_change.setdefault(item_id,{}).update({0x06 : holy_sword_index})
 
     if 'advertising' in env.meta.get('wacky_challenge',[]):
@@ -175,6 +178,8 @@ def equipment(env):
             if item_id < 0x07:
                 # is claw
                 eqp_byte = 0x00
+            elif item_id == 0x19 and env.options.flags.has('spoilsmith'): # ignore custom Legend
+                eqp_byte = None
             elif item_id not in [0x3E, 0x46]: # ignore Spoon and custom weapon
                 eqp_byte = 0x1F
             else:

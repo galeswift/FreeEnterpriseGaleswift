@@ -84,6 +84,12 @@ def _are_users(cw, characters):
         users_set = users_set.union(set(_CHARACTER_TO_USERS.get(ch, [ch])))
     return bool(set(cw.equip + cw.use).intersection(users_set))
 
+def _expand_chars_to_jobs(characters):
+    jobs = set()
+    for ch in characters:
+        jobs.update(set(_CHARACTER_TO_USERS.get(ch, [ch])))
+    return jobs
+
 def _calculate_stats_byte(*stats):
     # stats is in the order: STR, AGI, VIT, WIS, WIL
     plus_bonus = 0
@@ -168,8 +174,8 @@ def apply(env):
             # alt smith item can't be a MoonVeil if Tno:j is on! So restricting to Yang-only without Adamants would be bad; don't restrict in that case.
             # also, all of these items *are* good, even the White Shirt. Have you looked at its defensive stats recently?
             if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
-                    and (env.meta['available_characters']).issubset(set(['yang']) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
-                items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(env.meta['available_characters']))
+                    and (env.meta['available_characters'].issubset(set(['yang'])) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
+                items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(_expand_chars_to_jobs(env.meta['available_characters'])))
         items = items_dbview.find_all(lambda it: it.tier in [7, 8])
         if env.options.flags.has('goodsmith'):
             # if we want "good" items, take the best according to the list above (we've already guaranteed there's something available)

@@ -436,8 +436,8 @@ def apply(env):
                 target_axtor_map[target_slot] = 0x00        
         else:
             target_axtor_map[target_slot] = CHARACTERS[character]        
-
-        env.meta['available_characters'].add(character)
+            env.meta['available_characters'].add(character)
+            
         if slot not in ['dkcecil_slot', 'kain1_slot']:
             env.meta['available_nonstarting_characters'].add(character)
 

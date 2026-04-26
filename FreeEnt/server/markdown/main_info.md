@@ -1460,7 +1460,7 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Programming: ScytheMarshall
 - Locations: rosa_paladin.f4c, mtordeals.f4c, character_expansion.f4c, various command f4c's, generator.py
 
-This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot). They also swap weapons (except for the FF4A weapons), but *not* armour.
+This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot, subject to `-vanilla:zot` or not). They also swap weapons (except for the FF4A weapons, and the custom Legend weapon under `-smith:spoilsuper`), but *not* armour.
 
 ### `-tweak:cidairship` {: .h6 }
 
