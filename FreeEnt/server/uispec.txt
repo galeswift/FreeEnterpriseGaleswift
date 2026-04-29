@@ -886,6 +886,8 @@
 ..(-kit:adamant)^     Adamant kit
 ..(-kit:cursed)^      Cursed kit
 ..(-kit:hero)^        Hero kit
+..(-kit:support)^     Support kit
+..(-kit:heroplusplus)^  Hero++ kit
 ..(-kit:exit)^        Exit kit
 ..(-kit:egg)^         Egg kit
 ..(-kit:zelda)^       Zelda kit
@@ -920,6 +922,8 @@
 ..(-kit2:adamant)^     Adamant kit
 ..(-kit2:cursed)^      Cursed kit
 ..(-kit2:hero)^        Hero kit
+..(-kit2:support)^     Support kit
+..(-kit2:heroplusplus)^  Hero++ kit
 ..(-kit2:exit)^        Exit kit
 ..(-kit2:egg)^         Egg kit
 ..(-kit2:zelda)^       Zelda kit
@@ -954,6 +958,8 @@
 ..(-kit3:adamant)^     Adamant kit
 ..(-kit3:cursed)^      Cursed kit
 ..(-kit3:hero)^        Hero kit
+..(-kit3:support)^     Support kit
+..(-kit3:heroplusplus)^  Hero++ kit
 ..(-kit3:exit)^        Exit kit
 ..(-kit3:egg)^         Egg kit
 ..(-kit3:zelda)^       Zelda kit

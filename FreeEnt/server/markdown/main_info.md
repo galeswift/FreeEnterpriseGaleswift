@@ -802,6 +802,58 @@ This flag _enables_ the Select+R functionality. Before v4.6.4.Gale, this flag wa
 
 Normally, with the Panic button you can simply warp out of Sealed Cave after picking up the item at the bottom without fighting the boss. This flag triggers the boss fight on the way into the crystal room, not out of it. You can, of course, still skip the fight on Push B to Jump or using the Warp glitch.
 
+### `-monsterevade`, `-monsterflee` {: .h6 }
+
+- Idea: ScytheMarshall (but also probably others)
+- Design/Programming: ScytheMarshall (with help from Aexoden and the disassembly)
+- Locations: give_monsters_evade.f4c, monster_flee.f4c
+
+These flags restore functionality to monsters that the original devs removed before the game released. `-monsterevade` allows monsters to correctly load their physical and magical evade stats at the start of battle (instead of just when those stats change, like for Valvalis). Be warned: monsters will take a lot less damage, and will dodge Life pots/casts! `-monsterflee` builds on the evade functionality and restores the ability for monsters to flee from battle (which requires them to have non-zero evade). Monsters can flee from non-boss-bit battles.
+
+### `-miscbugfixes` {: .h6 }
+
+- Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
+- Design/Programming: ScytheMarshall, cassidy/Wylem (for Hermes/Berserk)
+- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c, fix_regen_slot_indexing.f4c, fix_regen_axtor_check.f4c
+
+This flag includes fixes for a variety of vanilla FF4 bugs: 
+
+- The Hermes/Berserk glitch, where if you use a Hermes and then berserk that character before they take another action, they can hit swooned chararcters (because the game checks the subcommand for "can this actor hit swooned actors with their command?" and Hermes has the same subcommand as a monster spell that's used in the Zeromus cutscene to revive your party). The fix is to first check if the actor's command is magic; if it is, then load the subcommand, and if it isn't, put `FF FF` into the (16-bit) accumulator instead (preventing the check from ever succeeding).
+- The monster victim history bug, where multi-target spells do not update a monster's victim history except when the monster is in the lowest slot. The fix is to rewrite a loop in-place.
+- The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
+- The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
+- The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
+
+It also adds a fix for a vanilla FE bug: 
+- The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
+
+### `-starting:[blackchocobo,underground]` {: .h6 }
+
+- Idea: Deathlike, Skarcerer, others in the past
+- Design: Deathlike, Skarcerer, Marshal, ScytheMarshall, others
+- Programming: ScytheMarshall
+- Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
+
+These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights if you start underground beyond the usual mean bosses. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. If starting with the Black Chocobo, Mist does not get locked from the right side after the Package cutscene and the Hovercraft starts available at the start of the seed outside of Kaipo, allowing you to traverse by foot to Damcyan and Antlion Cave. (There is no logic for having Fabul or D.Mist at Hobs gate progression if you have Rydia.)
+
+Pre-v4.6.4.Gale, these flags were unavailable. As of v4.6.4.Gale, these flags are available, but incompatible with doors/entrances randomization and gated objectives (the modifications for doors required to make it work with a different starting location are highly non-trivial).
+
+### `-vanilla:zot` {: .h6 }
+
+- Idea: IAmDMar (relaying an idea from WeffJebster's chat)
+- Design: IAmDMar, Wylem, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: zot_rando.py, zot_top.f4c
+
+As of v4.6.4.Gale, by default Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). This flag removes that behaviour.
+
+!!! info "Possible Zot spells for Rosa"
+    Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
+
+On `-tweak:rosadin`, Rosa will learn a random spell, but because she cannot learn any of the non-Exit spells, she will not learn Exit. Cecil's white magic is unchanged.
+
+## Kit Flags
+
 ### `-kit:atb` {: .h6 }
 
 - Idea: ScytheMarshall
@@ -834,6 +886,37 @@ This kit gives you a Cursed ring, regardless of `-nocursed`.
 
 This kit gives you one tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
+### `-kit:support` {: .h6 }
+
+- Idea: Deathlike
+- Design: ScytheMarshall, Guerin, CoffeeAndChocobos
+- Programming: ScytheMarshall
+- Locations: kit_rando.py
+
+This kit provides a small selection of support-type items that your starting character can use.
+
+!!! info "Support kit contents by character"
+    - Cecil: 1x FireBomb, 1x LitBolt, Black Shield, and a tier 4-5 shield
+    - Kain: tier 4 shield, Dancing Dagger
+    - Rydia: 1x AuApple, 2x SomaDrop
+    - Tellah: 1x SomaDrop, 2x Ether2, 2x Vampire
+    - Edward: 1x AuApple, and either a Protect Ring or a Ribbon
+    - Rosa: Power staff, 5x Heal
+    - Yang: 2x Kamikaze, 2x Illusion
+    - Palom: Gaea Hat, 3x Ether1
+    - Porom: Gaea Hat, 3x Ether1
+    - Cid: tier 4 shield, 2x Kamikaze
+    - Edge: 3x Shuriken, 1x Ninja Star
+    - FuSoYa: 1x Stardust, 1x GaiaDrum
+
+### `-kit:heroplusplus` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: kit_rando.py
+
+This kit is just the Hero and Support kits packaged together, to allow for more variety in other kits while still providing the goods for the starting character.
+
 ### `-kit:exit` {: .h6 }
 
 - Idea: JudgeJoe, Fleury14
@@ -850,6 +933,8 @@ This kit gives you 5-10 Exits.
 
 This kit gives you one Siren and a selection of items that your starting character can use to successfully defeat a Yellow D egg. It's possible that resets are necessary or that the fights will be very long. Depending on the starting character, there may be many possible selections of items or only a few. The probability of a specific selection of items is smaller if the Yellow D fight will be long/etc. or if the items contribute to your party's power afterwards.
 
+The list of possible kits, along with who could get them, can be found in the kit_rando.py file. 
+
 ### `-kit:zelda` {: .h6 }
 
 - Idea: IAmDMar
@@ -859,30 +944,7 @@ This kit gives you one Siren and a selection of items that your starting charact
 
 This kit gives you a sword (one of Fire/Ice/Slumber/Silver/Light), a shield (Iron/Silver/Fire/Ice/Diamond), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle. It's themed after Zelda 1.
 
-### `-monsterevade`, `-monsterflee` {: .h6 }
-
-- Idea: ScytheMarshall (but also probably others)
-- Design/Programming: ScytheMarshall (with help from Aexoden and the disassembly)
-- Locations: give_monsters_evade.f4c, monster_flee.f4c
-
-These flags restore functionality to monsters that the original devs removed before the game released. `-monsterevade` allows monsters to correctly load their physical and magical evade stats at the start of battle (instead of just when those stats change, like for Valvalis). Be warned: monsters will take a lot less damage, and will dodge Life pots/casts! `-monsterflee` builds on the evade functionality and restores the ability for monsters to flee from battle (which requires them to have non-zero evade). Monsters can flee from non-boss-bit battles.
-
-### `-miscbugfixes` {: .h6 }
-
-- Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
-- Design/Programming: ScytheMarshall, cassidy/Wylem (for Hermes/Berserk)
-- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c, fix_regen_slot_indexing.f4c, fix_regen_axtor_check.f4c
-
-This flag includes fixes for a variety of vanilla FF4 bugs: 
-
-- The Hermes/Berserk glitch, where if you use a Hermes and then berserk that character before they take another action, they can hit swooned chararcters (because the game checks the subcommand for "can this actor hit swooned actors with their command?" and Hermes has the same subcommand as a monster spell that's used in the Zeromus cutscene to revive your party). The fix is to first check if the actor's command is magic; if it is, then load the subcommand, and if it isn't, put `FF FF` into the (16-bit) accumulator instead (preventing the check from ever succeeding).
-- The monster victim history bug, where multi-target spells do not update a monster's victim history except when the monster is in the lowest slot. The fix is to rewrite a loop in-place.
-- The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
-- The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
-- The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
-
-It also adds a fix for a vanilla FE bug: 
-- The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
+## Smith Flags
 
 ### `-smith:playable` {: .h6 }
 
@@ -949,31 +1011,6 @@ This flag turns the Legend Sword into the same weapon type as the FF4 Advance we
 - Locations: compile_item_prices.py, custom_weapon_rando.py, custom_weapons.csvdb
 
 Normally, the FF4A custom weapon does not sell for anything. This flag assigns that item a price so that you can turn around and sell it to the shopkeep for items that you *actually* want. The prices are based roughly on similar quality items, though they max out at 126k GP (the max without going into the megapricing table (127k+), which means they have close enough to the maximum sell price, 63k GP instead of 63.5k).
-
-### `-starting:[blackchocobo,underground]` {: .h6 }
-
-- Idea: Deathlike, Skarcerer, others in the past
-- Design: Deathlike, Skarcerer, Marshal, ScytheMarshall, others
-- Programming: ScytheMarshall
-- Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
-
-These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights if you start underground beyond the usual mean bosses. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. If starting with the Black Chocobo, Mist does not get locked from the right side after the Package cutscene and the Hovercraft starts available at the start of the seed outside of Kaipo, allowing you to traverse by foot to Damcyan and Antlion Cave. (There is no logic for having Fabul or D.Mist at Hobs gate progression if you have Rydia.)
-
-Pre-v4.6.4.Gale, these flags were unavailable. As of v4.6.4.Gale, these flags are available, but incompatible with doors/entrances randomization and gated objectives (the modifications for doors required to make it work with a different starting location are highly non-trivial).
-
-### `-vanilla:zot` {: .h6 }
-
-- Idea: IAmDMar (relaying an idea from WeffJebster's chat)
-- Design: IAmDMar, Wylem, Guerin, ScytheMarshall
-- Programming: ScytheMarshall
-- Locations: zot_rando.py, zot_top.f4c
-
-As of v4.6.4.Gale, by default Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). This flag removes that behaviour.
-
-!!! info "Possible Zot spells for Rosa"
-    Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
-
-On `-tweak:rosadin`, Rosa will learn a random spell, but because she cannot learn any of the non-Exit spells, she will not learn Exit. Cecil's white magic is unchanged.
 
 ## FuSoYa Flags
 
@@ -1136,7 +1173,7 @@ Earn double experience after obtaining the Crystal.
 
 Earn extra experience based on how many objectives you have completed up until the end of the battle (not including any potential objectives you complete _after_ the battle ends). The options are 25% per objective (25), 10% per objective (10), 5% per objective (5) and a percentage depending on the percentage of the available objectives you have completed (_num). For example, if there are 7 objectives in the seed and you complete 3 of them, then you will earn 42% bonus experience (no matter how many objectives you need to complete to get the objective completion reward). This flag is forced off if there are no objectives,
 
-### `Xkicheckbonus:[10/5/2/_num]` {: .h6 }
+### `Xkicheckbonus:[10/5/2/num]` {: .h6 }
 
 Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num). The starting key item check does not count towards the number of checks you have completed. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
 

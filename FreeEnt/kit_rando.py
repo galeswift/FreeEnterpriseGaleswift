@@ -218,7 +218,7 @@ KIT_SPECS = {
 
     'hero' : None, # special case handling
      
-    'egg' : None, # special case handling,
+    'egg' : None, # special case handling
 
     'zelda': [
         ( ['SilverSword', 'FireBrand', 'IceBrand', 'Sleep', 'Light'],  [1] ),
@@ -228,6 +228,10 @@ KIT_SPECS = {
         ( 'Strength',   [1] ),
         ( 'Whistle',    [1] ),
         ],
+
+    'support' : None, # special case handling
+
+    'heroplusplus' : None, # special case handling 
 }
 
 EGG_METHODS = {
@@ -442,6 +446,71 @@ EGG_METHODS = {
           ] },
 }
 
+SUPPORT_KIT = {
+    'cecil' : [
+        ('FireBomb',    [1]),
+        ('LitBolt',     [1]),
+        ('BlackShield', [1]),
+        (['SamuraiShield', 'Aegis', 'DragoonShield', 'CrystalShield'],  [1])
+    ],
+
+    'kain' : [
+        ('Dancing',     [1]),
+        (['SamuraiShield', 'Aegis', 'DragoonShield'],  [1])
+    ],
+
+    'rydia' : [
+        ('AuApple',     [1]),
+        ('SomaDrop',    [2])
+    ],
+
+    'tellah' : [
+        ('SomaDrop',    [1]),
+        ('Ether2',      [2]),
+        ('Vampire',     [2])
+    ],
+
+    'edward' : [
+        ('AuApple',     [1]),
+        (['Protect', 'Ribbon'], [1])
+    ],
+
+    'rosa' : [
+        ('Power',   [1]),
+        ('Heal',    [5])
+    ],
+
+    'yang' : [
+        ('Kamikaze',    [2]),
+        ('Illusion',    [2])
+    ],
+
+    'palom' : [
+        ('GaeaHat',     [1]),
+        ('Ether1',      [3])
+    ],
+
+    'porom' : [
+        ('GaeaHat',     [1]),
+        ('Ether1',      [3])
+    ],
+
+    'cid' : [
+        ('Kamikaze',    [2]),
+        (['SamuraiShield', 'Aegis', 'DragoonShield'],  [1])
+    ],
+
+    'edge' : [
+        ('Shuriken',    [3]),
+        ('NinjaStar'    [1])
+    ],
+
+    'fusoya' : [
+        ('Stardust',    [1]),
+        ('GaiaDrum',    [1])
+    ]
+}
+
 def apply(env):
     kits = []
     items_dbview = databases.get_items_dbview()
@@ -468,8 +537,10 @@ def apply(env):
             kit_spec = [
                 ( items_dbview.find_all(lambda it: it.tier >= 1 and it.tier <= 8), [99] )
                 ]
-        elif kit_name == 'hero':
+        elif kit_name in ['hero', 'heroplusplus']:
             char = env.meta['starting_character']
+            if kit_name == 'heroplusplus':
+                pluspluskit = SUPPORT_KIT[char]
             if (char == 'cecil'):
                 char = 'pcecil'
             if (char == 'rydia'):
@@ -491,8 +562,13 @@ def apply(env):
             kit_spec = [ ( [ weapon1 ], [1]) ]
             if weapon2:
                 quantity = [20] if (weapon1.subtype == 'bow' and ('unstackable' not in env.meta.get('wacky_challenge', []))) else [1]
-                kit_spec = kit_spec + [ ( [ weapon2 ], quantity ) ]
-            kit_spec = kit_spec + [ ([ armor ], [1]), ( [ head ], [1]), ( [ hand ], [1]) ]
+                kit_spec += [ ( [ weapon2 ], quantity ) ]
+            kit_spec += [ ([ armor ], [1]), ( [ head ], [1]), ( [ hand ], [1]) ]
+            if kit_name == 'heroplusplus':
+                kit_spec += pluspluskit
+        elif kit_name == 'support':
+            char = env.meta['starting_character']
+            kit_spec = SUPPORT_KIT[char]
         elif kit_name == 'egg':
             char = env.meta['starting_character']
             if char == 'cecil':

@@ -8989,6 +8989,18 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit:support",
+                "title": "Support kit",
+                "description": "A selection of support-type items that your starting character can use.",
+                "fork": true
+              },
+              {
+                "flag": "-kit:heroplusplus",
+                "title": "Hero++ kit",
+                "description": "The Hero and Support kits packaged together.",
+                "fork": true
+              },
+              {
                 "flag": "-kit:exit",
                 "title": "Exit kit",
                 "description": "5-10 Exits.",
@@ -9168,6 +9180,18 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit2:support",
+                "title": "Support kit",
+                "description": "A selection of support-type items that your starting character can use.",
+                "fork": true
+              },
+              {
+                "flag": "-kit2:heroplusplus",
+                "title": "Hero++ kit",
+                "description": "The Hero and Support kits packaged together.",
+                "fork": true
+              },
+              {
                 "flag": "-kit2:exit",
                 "title": "Exit kit",
                 "description": "5-10 Exits.",
@@ -9344,6 +9368,16 @@ var FLAG_UISPEC = [
                 "flag": "-kit3:hero",
                 "title": "Hero kit",
                 "description": "One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.",
+                "fork": true
+              },
+              {
+                "flag": "-kit3:support",
+                "title": "Support kit",
+                "fork": true
+              },
+              {
+                "flag": "-kit3:heroplusplus",
+                "title": "Hero++ kit",
                 "fork": true
               },
               {

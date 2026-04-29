@@ -621,6 +621,12 @@ A Cursed Ring.
 [-kit:hero]
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
+[-kit:support]
+A selection of support-type items that your starting character can use.
+
+[-kit:heroplusplus]
+The Hero and Support kits packaged together.
+
 [-kit:exit]
 5-10 Exits.
 
@@ -720,6 +726,12 @@ A Cursed Ring.
 [-kit2:hero]
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
+[-kit2:support]
+A selection of support-type items that your starting character can use.
+
+[-kit2:heroplusplus]
+The Hero and Support kits packaged together.
+
 [-kit2:exit]
 5-10 Exits.
 
@@ -818,6 +830,12 @@ A Cursed Ring.
 
 [-kit3:hero]
 One tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
+
+[-kit2:support]
+A selection of support-type items that your starting character can use.
+
+[-kit2:heroplusplus]
+The Hero and Support kits packaged together.
 
 [-kit:exit]
 5-10 Exits.

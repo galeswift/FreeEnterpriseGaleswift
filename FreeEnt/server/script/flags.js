@@ -1305,6 +1305,8 @@ const _FE_FLAGSPEC = {
         "-kit:adamant",
         "-kit:cursed",
         "-kit:hero",
+        "-kit:support",
+        "-kit:heroplusplus",
         "-kit:exit",
         "-kit:atb",
         "-kit:egg",
@@ -1338,6 +1340,8 @@ const _FE_FLAGSPEC = {
         "-kit2:adamant",
         "-kit2:cursed",
         "-kit2:hero",
+        "-kit2:support",
+        "-kit2:heroplusplus",
         "-kit2:exit",
         "-kit2:atb",
         "-kit2:egg",
@@ -1371,6 +1375,8 @@ const _FE_FLAGSPEC = {
         "-kit3:adamant",
         "-kit3:cursed",
         "-kit3:hero",
+        "-kit3:support",
+        "-kit3:heroplusplus",
         "-kit3:exit",
         "-kit3:atb",
         "-kit3:egg",
@@ -2675,6 +2681,8 @@ const _FE_FLAGSPEC = {
             "-kit:adamant",
             "-kit:cursed",
             "-kit:hero",
+            "-kit:support",
+            "-kit:heroplusplus",
             "-kit:exit",
             "-kit:atb",
             "-kit:egg",
@@ -2710,6 +2718,8 @@ const _FE_FLAGSPEC = {
             "-kit2:adamant",
             "-kit2:cursed",
             "-kit2:hero",
+            "-kit2:support",
+            "-kit2:heroplusplus",
             "-kit2:exit",
             "-kit2:atb",
             "-kit2:egg",
@@ -2745,6 +2755,8 @@ const _FE_FLAGSPEC = {
             "-kit3:adamant",
             "-kit3:cursed",
             "-kit3:hero",
+            "-kit3:support",
+            "-kit3:heroplusplus",
             "-kit3:exit",
             "-kit3:atb",
             "-kit3:egg",
@@ -10553,34 +10565,46 @@ const _FE_FLAGSPEC = {
             "value": 28
         },
         {
-            "flag": "-kit:exit",
+            "flag": "-kit:support",
             "offset": 463,
             "size": 6,
             "value": 29
         },
         {
-            "flag": "-kit:atb",
+            "flag": "-kit:heroplusplus",
             "offset": 463,
             "size": 6,
             "value": 30
         },
         {
-            "flag": "-kit:egg",
+            "flag": "-kit:exit",
             "offset": 463,
             "size": 6,
             "value": 31
         },
         {
-            "flag": "-kit:zelda",
+            "flag": "-kit:atb",
             "offset": 463,
             "size": 6,
             "value": 32
         },
         {
-            "flag": "-kit:random",
+            "flag": "-kit:egg",
             "offset": 463,
             "size": 6,
             "value": 33
+        },
+        {
+            "flag": "-kit:zelda",
+            "offset": 463,
+            "size": 6,
+            "value": 34
+        },
+        {
+            "flag": "-kit:random",
+            "offset": 463,
+            "size": 6,
+            "value": 35
         },
         {
             "flag": "-kit2:basic",
@@ -10751,34 +10775,46 @@ const _FE_FLAGSPEC = {
             "value": 28
         },
         {
-            "flag": "-kit2:exit",
+            "flag": "-kit2:support",
             "offset": 469,
             "size": 6,
             "value": 29
         },
         {
-            "flag": "-kit2:atb",
+            "flag": "-kit2:heroplusplus",
             "offset": 469,
             "size": 6,
             "value": 30
         },
         {
-            "flag": "-kit2:egg",
+            "flag": "-kit2:exit",
             "offset": 469,
             "size": 6,
             "value": 31
         },
         {
-            "flag": "-kit2:zelda",
+            "flag": "-kit2:atb",
             "offset": 469,
             "size": 6,
             "value": 32
         },
         {
-            "flag": "-kit2:random",
+            "flag": "-kit2:egg",
             "offset": 469,
             "size": 6,
             "value": 33
+        },
+        {
+            "flag": "-kit2:zelda",
+            "offset": 469,
+            "size": 6,
+            "value": 34
+        },
+        {
+            "flag": "-kit2:random",
+            "offset": 469,
+            "size": 6,
+            "value": 35
         },
         {
             "flag": "-kit3:basic",
@@ -10949,34 +10985,46 @@ const _FE_FLAGSPEC = {
             "value": 28
         },
         {
-            "flag": "-kit3:exit",
+            "flag": "-kit3:support",
             "offset": 475,
             "size": 6,
             "value": 29
         },
         {
-            "flag": "-kit3:atb",
+            "flag": "-kit3:heroplusplus",
             "offset": 475,
             "size": 6,
             "value": 30
         },
         {
-            "flag": "-kit3:egg",
+            "flag": "-kit3:exit",
             "offset": 475,
             "size": 6,
             "value": 31
         },
         {
-            "flag": "-kit3:zelda",
+            "flag": "-kit3:atb",
             "offset": 475,
             "size": 6,
             "value": 32
         },
         {
-            "flag": "-kit3:random",
+            "flag": "-kit3:egg",
             "offset": 475,
             "size": 6,
             "value": 33
+        },
+        {
+            "flag": "-kit3:zelda",
+            "offset": 475,
+            "size": 6,
+            "value": 34
+        },
+        {
+            "flag": "-kit3:random",
+            "offset": 475,
+            "size": 6,
+            "value": 35
         },
         {
             "flag": "-noadamants",
