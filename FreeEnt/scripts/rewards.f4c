@@ -396,7 +396,14 @@ msfpatch {
         bra $+ItemNotYetUsed
         
         // %flag superhero_challenge on%
-    %RemoveSuperhero:       
+    %RemoveSuperhero:
+        // %end%
+        // %if superhero_quickstart%
+        lda $_Rewards__CurrentSlot   // to prevent softlocks, skip the dialog message during quickstart
+        cmp #$20   // #reward_slot.starting_item
+        beq $+StartSuperheroLoop
+        // %end%
+        // %flag superhero_challenge on%
         lda $06C6   // Check if it's a fight chest and skip the dialog message if so
         bne $+StartSuperheroLoop
         // Show depower message

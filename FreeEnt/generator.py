@@ -1023,6 +1023,9 @@ def build(romfile, options, force_recompile=False):
 
     if not (options.quickstart or options.test_settings.get('quickstart', False)):
         env.add_substitution('quickstart', '')
+    else:
+        if env.options.flags.has('superhero_challenge'):
+            env.add_toggle('superhero_quickstart')
 
     credits_line_count = 225
     credits_tick_count = credits_line_count * 16
