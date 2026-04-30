@@ -98,6 +98,6 @@ patch($00dac2 bus) { 90 } // black chocobo tiles
 // %flag starting_underground on%
 // change the enter/leave Zot events to use the Falcon sprite
 // by telling the _draw_enterprise function to load that instead
-patch($00dabe bus) { 1C } // palette 7
+patch($00dabe bus) { 1C } // palette 6
 patch($00dac2 bus) { D8 } // falcon tiles
 // %end%
