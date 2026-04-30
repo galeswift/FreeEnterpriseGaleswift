@@ -659,6 +659,7 @@ event($7C)  //Valvalis battle
     [#B #If #Flag #flag.TwinsStone]{
         vfx #PutEnterpriseAtBaron
     }
+    [#B #PutFalcon 101 160]
     music #Overworld fade in
     load map #Overworld at 101 158
     player face down
