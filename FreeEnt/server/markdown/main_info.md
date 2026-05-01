@@ -455,7 +455,7 @@ Shops only sell a single item, where all shops in the game are the same. The ite
 - Design/Programming: Galeswift, ScytheMarshall (for `stirred` only)
 - Locations: compile_item_prices.py
 
-This flag shuffles the prices of all of the items in the game (under `shaken`) or all of the normal buy/sellable items (under `stirred`). In particular, `Smixed:shaken` mixes in the prices of key items and non-items like no-weapon, no-armor, Sort, and the TrashCan, so some normal items will just be worth 0 GP. `Smixed:stirred` only shuffles the prices of items that you can normally possibly buy in shops on `Swild`.
+This flag shuffles the prices of all of the items in the game (under `shaken`) or all of the normal buy/sellable items (under `stirred`). In particular, `Smixed:shaken` mixes in the prices of key items and non-items like no-weapon, no-armor, Sort, and the TrashCan, so some normal items will just be worth 0 GP. `Smixed:stirred` only shuffles the prices of items that you can normally possibly buy in shops on `Swild`. Prior to v4.6.2.Gale, there was only one flag for this behaviour, `Smixed`, and it behaved as `Smixed:shaken` does currently.
 
 Under `-wacky:mysteryjuice`, the 1000 GP prices will be shuffled into other items (rather than randomized prices being overwritten by 1000 GP). Under `Sprice:[n]/pricey:[]`, the price increase/decrease applies to the new shuffled price (in case only some items are more/less expensive).
 
