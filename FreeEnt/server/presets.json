@@ -45,8 +45,89 @@
     ]
   },
   {
-    "comment": "Ladder Collection",
-    "href": "https://EXTERNAL-LINK-TO-PRESETS-JSON"
+    "category": "Ladder Collection",
+    "presets": [
+      {
+        "name": "Ladder Standard",
+        "flags": "Orandom:7,tough_quest/req:6/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/j:abilities/nekkie Twildish Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -noadamants -spoon -vanilla:zot",
+        "description": "<p>A standard competitive FE flagset, updated from the previous season's standard increasing the objective count and guaranteeing that every character appears at least once.</p>"
+      },
+      {
+        "name": "Ladder Hard",
+        "flags": "O1:quest_forge/random:6,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:9/start:any/no:fusoya/j:abilities Tpro Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -spoon -smith:alt -vanilla:zot",
+        "description": "<p>A more difficult version of Ladder Standard where pro loot means you must invest more time to get more power. FuSoYa wants to be the star of the show, and will not accept any other role, which means if you don't see Fu as your starting character, he will not make an appearance. Without the wildish loot, the weight of Cmaybe can prove exceptionally challenging when an army of Tellahs and Edwards seek to join your party. Don't forget about D.Mist gating a key item! Good luck!</p>"
+      },
+      {
+        "name": "Supermarket Sweep",
+        "flags": "Orandom:4,tough_quest,boss/req:3/win:crystal Kmain Pshop Crelaxed/j:abilities Twild Swild/free/no:apples Bstandard/whyburn Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -spoon -vanilla:zot",
+        "description": "<p>The strongest equipment, items, and characters may be available right out the gate. Shops are free!</p>"
+      },
+      {
+        "name": "Fu in Wario Land",
+        "flags": "O1:quest_forge/2:quest_tradepink/3:quest_pass/win:crystal Kmain/miab/nofree Pkey Crelaxed/nofree/start:fusoya/j:abilities Twildish Sstandard/no:j Bstandard/nofree/alt:gauntlet Etoggle/noexp Hrandom Gwarp/life/sylph/backrow Fvanilla Aagnostic Zvanilla -kit:freedom -vanilla:zot,fusoya",
+        "description": "<p>Where does Fu go when he's banned from tournament play? Treasure hunting! He wants only the finest weapons, armor, and secret pathways home. However, the price you pay for this immense power is Bnofree, and no ability to grind random encounters, so be wary!</p>"
+      },
+      {
+        "name": "Omnidextrous",
+        "flags": "O2:quest_monsterking/4:quest_whitealtar/random:5,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:5/j:abilities/nekkie/nodupes Twild/sparse:80/maxtier:7 Spro Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -spoon -vanilla:zot -wacky:omnidextrous",
+        "description": "<p>Utilizing the Omnidextrous flag, any character can equip any weapon or piece of armor, and treasures are bumped up to accommodate. Characters, however, are at a premium, and shops are reduced a bit so make those treasures count!</p>"
+      },
+      {
+        "name": "Lali-Ho Redux",
+        "flags": "O1:quest_forge/2:quest_tradepink/3:quest_magnes/random:2,tough_quest/req:4/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:10/j:abilities/nekkie/bye Twildish/maxtier:6 Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Xnoboost Zvanilla -kit:basic -kit2:defense -noadamants -spoon -vanilla:zot,giant",
+        "description": "<p>Think Lali-Ho Swiss, but a little more generous for the beginner-to-intermediate race. Crelaxed and full sell prices ease things a bit. That being said, Giott is giving you his personal armor instead of letting you break the economy with jewelry. Oh, and it's quest objectives instead of boss/character hunts, just to mix things up.</p>"
+      },
+      {
+        "name": "Fabul Gauntlet Mark II",
+        "flags": "Orandom:5,tough_quest/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:7/j:abilities/nodupes/bye Tpro Spro/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -kit:basic -noadamants -vanilla:zot",
+        "description": "<p>The flagset from our 2020 spring event returns with a new twist: the objectives will always be tough quests. Complete all 5 to get the Crystal and defeat Zeromus. Don't forget about D.Mist!</p>"
+      },
+      {
+        "name": "Purple Moon",
+        "flags": "Orandom:8,boss/req:7/win:crystal Kmain/summon/miab/force:hook Pchests Crelaxed/noearned/distinct:7/start:any/no:cecil,fusoya/j:abilities/nekkie/nodupes/hero Twildish Sstandard Bstandard/alt:gauntlet/whichburn Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Ahero Zvanilla -kit:basic -noadamants -spoon -vanilla:zot,miabs",
+        "description": "<p>An offshoot of our ZZ5 flagsets, this flagset retains the boss hunt objectives from ZZ5 but incorporates monster-in-a-box (MIAB) chests and the Chero flag for a distinctly different take. Be sure to brush up on your vanilla monster chest locations!</p>"
+      },
+      {
+        "name": "Finders Keepers",
+        "flags": "Orandom:5,tough_quest/req:4/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/no:fusoya/j:abilities/bye/permajoin Tpro Scabins/free Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -vanilla:zot",
+        "description": "<p>The big nasty of Season 3. Shops give Cabins. Treasure is set to Tpro. Permajoin and Cbye are both on. Your one breather is the Warp glitch, but how long do you wait for a black mage to show up?</p>"
+      },
+      {
+        "name": "10/10 Would Race Again",
+        "flags": "O1:quest_magnes/2:quest_baroncastle/3:quest_zot/4:quest_sealedcave/5:quest_ribbonaltar/6:quest_cavebahamut/7:quest_dwarfcastle/8:quest_lowerbabil/random:2,tough_quest/req:all/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/start:any/no:cecil,fusoya/j:abilities/nodupes/party:4 Twildish Sstandard/no:j Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -kit:better -spoon -vanilla:zot",
+        "description": "<p>This flagset leverages tough quests and sets all those lovely checks that you hesitate to do into required objectives. Take a Giant grind if you must, but be wary: this ultra-high completion percentage may grant runners enough XP simply through completing the objectives.</p>"
+      },
+      {
+        "name": "Chero",
+        "flags": "O1:quest_forge/2:quest_toroiatreasury/random:2/req:all/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/no:fusoya/j:abilities/nekkie/hero Tpro Sstandard Bstandard/alt:gauntlet/whichburn Etoggle Hrandom Glife/sylph/backrow Fweighted Ahero Zvanilla -kit:freedom -kit2:random -noadamants -vanilla:zot",
+        "description": "<p>Hero challenge! Be wary of the solo Ordeals fight. Agility manipulating gear is a godsend.</p>"
+      },
+      {
+        "name": "Giant%",
+        "flags": "Omode:classicgiant/win:game Kmain/moon Pnone Cstandard Twild/no:j Scabins/free Bstandard/whichburn Etoggle/no:jdrops Hrandom Gdupe/mp/warp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -spoon -vanilla:zot",
+        "description": "<p>Fast-paced, low skill floor, high skill ceiling, and very unpredictable with only one KI required for go mode. Are you willing to dive into the Giant ASAP? Or power up a bit more first? ALL the glitch flags are on for this one (almost)! Don't forget Gwarp, and practice that Gmp and Gdupe!</p>"
+      },
+      {
+        "name": "Royal Moonster Mash",
+        "flags": "O1:quest_cavebahamut/2:quest_murasamealtar/3:quest_crystalaltar/4:quest_whitealtar/5:quest_ribbonaltar/6:quest_masamunealtar/7:quest_monsterqueen/8:quest_monsterking/req:6/win:game Kmain/moon/force:magma Pnone Crelaxed/noearned/distinct:7/j:spells,abilities/nekkie Twildish/maxtier:7/junk Spro/free/no:apples,sirens Bstandard/alt:gauntlet/whichburn Etoggle/noexp Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:mysidia -kit2:freedom -kit3:freedom -noadamants -spoon -smith:super -vanilla:zot",
+        "description": "<p>Zeromus is taking the day off on this vacation. Simply find your moon and underground access, and defeat 6 of the bosses to win the game! Do you try to go at a lower level in the name of speed, or grind a bit in the name of efficiency?</p>"
+      },
+      {
+        "name": "Falcon%",
+        "flags": "O1:quest_falcon/req:all/win:game Kmain/nofree/force:hook Pnone Cstandard/nofree/no:fusoya/j:abilities Tpro Sstandard/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -spoon -vanilla:zot",
+        "description": "<p>Test yourself in one of the most challenging early-game aspects of Free Enterprise: the dreaded Hook route! Gather as much strength as you can to be safe, or dive as soon as possible and hope for a couple easy bosses. The game ends when you launch the Falcon with the guaranteed overworld Hook.</p>"
+      },
+      {
+        "name": "Hop Til You Shop",
+        "flags": "O1:quest_murasamealtar/2:quest_crystalaltar/3:quest_whitealtar/4:quest_ribbonaltar/5:quest_masamunealtar/req:4/win:game Kmain/moon/unsafe Pkey Cstandard/nofree/distinct:5/j:abilities/nekkie Twildish/money Swild Bstandard/alt:gauntlet/whichburn Etoggle/noexp/no:jdrops Hrandom Gmp/warp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -kit2:money -kit3:money -spoon -vanilla:zot,miabs -pushbtojump",
+        "description": "<p>All the chests have money, and the shops are wild, so if you can name it, it's probably in a shop. Be smart with your purchases, your goal is to complete a Lunar run to finish the seed. Push B to Jump is enabled to open up the world as much as possible to allow you to get that Darkness Crystal as soon as you can, then sprint... (through space) to the moon!</p>"
+      },
+      {
+        "name": "Push B to Jump",
+        "flags": "O1:quest_forge/2:quest_tradepink/random:1,quest,char/req:all/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/j:abilities Twildish Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -kit2:miab -spoon -smith:super -vanilla:zot -pushbtojump",
+        "description": "<p>Push B to jump, whether in battle or out of battle. Short-circuit the maps, fear no Valvalis, and avoid most boss fights. Optimized routing pays off strongly.</p>"
+      }
+    ]
   },
   {
     "header": "Fork-Specific"
