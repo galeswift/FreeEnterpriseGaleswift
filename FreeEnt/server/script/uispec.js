@@ -7595,6 +7595,7 @@ var FLAG_UISPEC = [
             "flag": "Bitburns",
             "title": "Replace Wyvern's opening MegaNuke with random, incredibly dangerous attack",
             "description": "The replacement attack will include Meganuke, Big Bang, Zanteksuken, Full party charm, and Meteo",
+            "hard": true,
             "fork": true
           }
         ]
@@ -7609,6 +7610,13 @@ var FLAG_UISPEC = [
         "flag": "Bwoahdin",
         "title": "Replace Odin's first two Zantetsukens 1 and 2 with a random attack",
         "description": "The replacement attack will be single-target (and generally weaker than e.g. Nuke, unless <em>Bunsafe</em> is enabled). Odin will not raise the sword before the random attack.",
+        "fork": true
+      },
+      {
+        "flag": "Bthehades",
+        "title": "Replace Fire1 and Fire2 in the KQ Eblan fight with Heat Ray and Glare",
+        "description": "King Eblan will cast single-target Glare; Queen Eblan will cast target-all Heat Ray.",
+        "hard": true,
         "fork": true
       },
       {

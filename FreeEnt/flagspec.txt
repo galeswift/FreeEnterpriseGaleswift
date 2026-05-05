@@ -55,7 +55,7 @@ Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus S
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
 Bvanilla Bstandard/Bpro/Bfriendly/Bcruel/Beasy Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots Bzones
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
-Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:officer_slot Bremove:kingqueen_slot
+Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bthehades Bspellpower Bremove:officer_slot Bremove:kingqueen_slot
 Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
@@ -346,6 +346,7 @@ Bwhybez              golbez_no_shadow
 Bwhichbez            golbez_random_spells
 Bitburns             wyvern_all_bad_things
 Bwoahdin             odin_random_spell
+Bthehades            kingqueen_fire_upgrade
 Bspellpower          bosses_nonzero_spellpower
 Bremove:officer_slot    no_officer_slot
 Bremove:kingqueen_slot  no_kingqueen_slot

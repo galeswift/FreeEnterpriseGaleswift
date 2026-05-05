@@ -583,6 +583,14 @@ In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the refle
 
 In some other FF games, Odin has both the target-all instant death attack and a single-target damaging attack (usually "Gungnir"). Under this flag, Odin's script is changed so that the first two Odin attacks are replaced with a random single-target spell. Odin will also not raise the sword until the point where you can trigger the Thunderstruck script. 
 
+### `Bthehades` {: .h6 }
+
+- Idea: Pushwall
+- Design/Programming: ScytheMarshall
+- Locations: babil_rubicant.f4c, boss_rando.py, core_rando.py
+
+This flag replaces King Eblan's Fire2 spell with Glare (single-target) and Queen Eblan's Fire1 spell with Heat Ray (default target-all). Nothing else about the fight is changed.
+
 ### `Bwhybez/whichbez` {: .h6 }
 
 - Idea: sgrunt (probably others)

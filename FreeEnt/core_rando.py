@@ -483,6 +483,7 @@ def _set_scoring_parameters(env):
         'danger_anchor'   : (env.options.flags.has_any('hero_challenge', 'superhero_challenge') and env.options.flags.has('no_cursed_rings'))
                                 or env.options.flags.has_any('fastest_agility', 'random_agility', 'monster_agility'),
         'woahdin'         : env.options.flags.has('odin_random_spell'),
+        'thehades'        : env.options.flags.has('kingqueen_fire_upgrade'),
         'no_lit_shops'    : env.options.flags.has_any('shops_no_damage_items', 'shops_no_j_items'),
         'whichburn'       : env.options.flags.has('wyvern_random_meganuke'),
         'itburns'         : env.options.flags.has('wyvern_all_bad_things'),
@@ -541,6 +542,9 @@ def _set_stats_weights(scoring_parameters):
         for boss in ['waterhag', 'mombomb', 'milon', 'guard', 'darkimp', 'darkelf']:
             stats_weights[boss].update({'difficulty' : 1})
         stats_weights['kingqueen'].update({'difficulty' : (1 if scoring_parameters['boss_spellpower'] else 0.4)})
+        stats_weights['mirrorcecil'].update({'difficulty' : 1.5})
+    if scoring_parameters['thehades'] and scoring_parameters['boss_spellpower']:
+        stats_weights['kingqueen']['difficulty'] += 0.3
     if scoring_parameters['unsafe']:
         if scoring_parameters['whichburn']:
             stats_weights['wyvern']['difficulty'] += 0.2

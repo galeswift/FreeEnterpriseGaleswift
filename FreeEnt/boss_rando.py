@@ -966,6 +966,9 @@ def apply(env):
         env.add_file('scripts/wyvern_script_et.f4c')
     else:
         env.add_file('scripts/wyvern_script_us_j.f4c')
+    if env.options.flags.has('kingqueen_fire_upgrade'):
+        env.add_substitution('king eblan fire2 replacement', '    use #Enemy_Glare')
+        env.add_substitution('queen eblan fire1 replacement', '    use #Enemy_HeatRay')
 
     # special case wyvern
     if assignment['milonz_slot'] == 'wyvern' and not env.options.flags.has('wyvern_no_meganuke') and not env.options.flags.has('wyvern_random_meganuke'):

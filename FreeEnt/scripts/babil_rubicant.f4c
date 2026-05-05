@@ -201,8 +201,8 @@ All [Edge]s acquired
 text(spell name #Flood) {[$15]Flood}
 text(spell name #Blitz) {[$15]Blitz}
 
-
-// alter messages in King/Queen fight
+// alter messages in King/Queen fight,
+// also potentially replace Fire1/Fire2
 ai_script($C3)
 {
     // %free boss%
@@ -211,13 +211,19 @@ ai_script($C3)
     // %end%
     pass
     
+    // %king eblan fire2 replacement%
     use #Fire2
+    // %end%
     
     pass
     
+    // %king eblan fire2 replacement%
     use #Fire2
+    // %end%
     
+    // %king eblan fire2 replacement%
     use #Fire2
+    // %end%
     
     // %free boss%
     pass
@@ -242,9 +248,22 @@ ai_script($C4)
     use #Enemy_Vanish
     // %end%
 
+    // %queen eblan fire1 replacement%
     use #Fire1
+    // %end%
 }
 
+// %flag kingqueen_fire_upgrade on%
+// for Q.Eblan's normal Fire1 replacement,
+// change this script and then use that instead of
+// script $5F (shared by Puppet)
+ai_script($23)
+{
+    use #Enemy_HeatRay
+}
+
+patch($0ee3e2 bus) { 23 }
+// %end%
 
 //---------------------------------------
 // Rubicant fight
