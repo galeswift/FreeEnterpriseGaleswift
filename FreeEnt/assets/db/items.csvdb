@@ -138,7 +138,7 @@ code,const,name,spoilername,category,subtype,j,flag,tier,shopoverride,price,thro
 0x88,#item.IceArmor,[armor]Ice,Ice Armor,armor,armor,,,3,,18000,,yes,,,"kain,pcecil,cid"
 0x89,#item.DiamondArmor,[armor]Diamond,Diamond Armor,armor,armor,,,4,,20000,,,,,"kain,pcecil,cid"
 0x8A,#item.Genji,[armor]Samurai,Samurai Armor,armor,armor,,,4,,20000,,,,,"kain,pcecil,cid,edge"
-0x8B,#item.DragonArmor,[armor]Dragoon,Dragoon Armor,armor,armor,,,5,,30000,,,,,"kain,pcecil,cid"
+0x8B,#item.DragoonArmor,[armor]Dragoon,Dragoon Armor,armor,armor,,,5,,30000,,,,,"kain,pcecil,cid"
 0x8C,#item.CrystalArmor,[armor]Crystal,Crystal Armor,armor,armor,,,5,,65000,,,,,pcecil
 0x8D,#item.Cloth,[shirt]Cloth,Cloth Armor,armor,robe,,,1,,50,,,,,"kain,crydia,tellah,edward,rosa,yang,palom,porom,pcecil,cid,arydia,edge,fusoya"
 0x8E,#item.LeatherArmor,[shirt]Leather,Leather Armor,armor,robe,,,1,,200,,,,,"kain,crydia,tellah,edward,rosa,yang,palom,porom,pcecil,cid,arydia,edge,fusoya"

@@ -6019,7 +6019,7 @@ trigger(#LunarSubterran3F 0)
 trigger(#LunarSubterran3F 1)
 {
     position 23 24
-    treasure #DragonArmor
+    treasure #DragoonArmor
 }
 
 trigger(#LunarSubterran3F 2)
