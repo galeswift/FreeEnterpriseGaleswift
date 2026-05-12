@@ -98,7 +98,7 @@ def spellset_data(env):
         '#Weak'  : 48,
         '#Fatal' : 49,
         '#Nuke'  : 50,
-        '#Meteo' : 56
+        '#Meteo' : 60
     }
     spellsets['RydiaCall'] = { # $04
         '#Chocb' : 0
