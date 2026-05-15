@@ -115,7 +115,6 @@ Activities Financer
 Activity Aide
 Activity Director
 Actor
-Actor?
 Actress
 Actuarial Clerk
 Actuary
@@ -4486,7 +4485,7 @@ Flame Gouger
 Flame Retardant
 Flame Snuffer
 Flan Molder
-Flâneur
+Flaneur
 Flange Cutter
 Flanger
 Flanking Machine Operator
@@ -6961,7 +6960,6 @@ List Generator
 Literacy Coach
 Literacy Critic
 Literary Agent
-Literary Agent 
 Literary Stylist
 Lithium Wholesaler
 Lithographic Platemaker
@@ -7787,7 +7785,7 @@ Mri Protester
 Mri Technician
 Msg Advocate
 Mud Logger
-Müesli Inspector
+Muesli Inspector
 Muffin Slicer
 Muffin Tester
 Muffler Installer
@@ -8344,7 +8342,7 @@ Packet Stapler
 Packing Bubble Popper
 Packing Peanut Salesman
 Packing Specialist
-Pączki Advocate
+Paczki Advocate
 Pad Assembler
 Pad Maker
 Padding Advocate
@@ -8444,8 +8442,8 @@ Paper Glosser
 Paper Hanger
 Paper Hole Puncher
 Paper Laminator
-Paper Mâche Expert
-Paper Mâche Researcher
+Paper Mache Expert
+Paper Mache Researcher
 Paper Maker
 Paper Perforator
 Paper Plate Separator
@@ -11651,7 +11649,6 @@ Systems Analust
 Systems Analyist
 Systems Analysis
 Systems Analyst
-Systems Analyst
 Systems Anaylst
 Systems Manager
 Systems Operator
@@ -11981,7 +11978,6 @@ Thermometer Reader
 Thermostat Adjuster
 Thermostat Checker
 Thermostat Enforcer
-Thermostat Regulator​
 Thermostat Regulator
 Thermostat Supervisor
 Thesaurus Collector
@@ -13048,7 +13044,7 @@ Wicker Artisan
 Wicker Consultant
 Wicker Sculptor
 Wicker Worker
-Widow'S Apprentice
+Widow's Apprentice
 Wiffle Ball Tester
 Wig Adjuster
 Wig Colorist
