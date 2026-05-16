@@ -516,17 +516,35 @@ def apply(env):
     items_dbview = databases.get_items_dbview()
 
     kit_names = []
-    for flag_prefix in ['-kit:', '-kit2:', '-kit3:']:
-        kit_name = env.options.flags.get_suffix(flag_prefix)
-        if kit_name in KIT_SPECS:
-            kit_names.append(kit_name)
-        elif kit_name == 'random':
-            kit_names.append(env.rnd.choice(list(KIT_SPECS)))
+    if env.options.test_settings.get('items', False):
+        # with the prefilled inventory test setting, those items are placed first,
+        # and then the inventory is filled with the kits... which possibly prevents
+        # all of the items from actually being placed. So, reorder the kits to allow
+        # the objective EagleEye and 5 Carrots to be placed.
+        if env.meta.get('objective_starter_kit'):
+            kit_names.append('objective')
+        if env.meta.get('wacky_starter_kit'):
+            kit_names.append('wacky_challenge')
 
-    if env.meta.get('wacky_starter_kit'):
-        kit_names.append('wacky_challenge')
-    if env.meta.get('objective_starter_kit'):
-        kit_names.append('objective')
+        for flag_prefix in ['-kit:', '-kit2:', '-kit3:']:
+            kit_name = env.options.flags.get_suffix(flag_prefix)
+            if kit_name in KIT_SPECS:
+                kit_names.append(kit_name)
+            elif kit_name == 'random':
+                kit_names.append(env.rnd.choice(list(KIT_SPECS)))
+
+    else:
+        for flag_prefix in ['-kit:', '-kit2:', '-kit3:']:
+            kit_name = env.options.flags.get_suffix(flag_prefix)
+            if kit_name in KIT_SPECS:
+                kit_names.append(kit_name)
+            elif kit_name == 'random':
+                kit_names.append(env.rnd.choice(list(KIT_SPECS)))
+
+        if env.meta.get('wacky_starter_kit'):
+            kit_names.append('wacky_challenge')
+        if env.meta.get('objective_starter_kit'):
+            kit_names.append('objective')
 
     for kit_name in kit_names:
         if kit_name == 'grabbag':
