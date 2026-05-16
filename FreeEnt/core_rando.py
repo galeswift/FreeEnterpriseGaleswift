@@ -613,7 +613,7 @@ def _try_allowed_boss_swap(env, assignment, slot_lookup, bosses, stats_slots,
     # 1. a required boss in a restricted slot means there are no non-required bosses in unrestricted slots, so the only
     # swaps are this required boss with another required boss or with another boss in a restricted slot, and
     # 2. swapping with a non-required boss in an unrestricted slot is fine.
-    two_bosses = env.rnd.choices(bosses, k=2)
+    two_bosses = env.rnd.sample(bosses, k=2)
     b0 = two_bosses[0]
     b1 = two_bosses[1]
     # if a boss is required, then it isn't in a removed slot
@@ -1312,39 +1312,34 @@ def apply(env):
                         # first, no matter which zone the extra_boss (default Waterhag) is in, a boss from that zone is being removed
                         # then, for each Bremove flag, remove one boss from the appropriate zone
                         for zone in bosses_by_zone:
+                            removable_bosses = [h for h in BEASY_DIFFICULTY if h not in objective_bosses_and_maybe_dmist and h in bosses_by_zone[zone]]
+                            def remove_one_boss(env, removable_bosses, zone_bosses, unused_zone_bosses):
+                                for b in removable_bosses:
+                                    if env.rnd.random() < 0.3 or b == removable_bosses[-1]:
+                                        zone_bosses.remove(b)
+                                        unused_zone_bosses.append(b)
+                                        break
+                                removable_bosses = [h for h in removable_bosses if h not in unused_zone_bosses]
                             if extra_boss in bosses_by_zone[zone]:
-                                for b in BEASY_DIFFICULTY:
-                                    if b in objective_bosses_and_maybe_dmist or b not in bosses_by_zone[zone]:
-                                        continue
-                                    if env.rnd.random() < 0.3:
-                                        bosses_by_zone[zone].remove(b)
-                                        unused_bosses[zone].append(b)
-                                        break
+                                remove_one_boss(env, removable_bosses, bosses_by_zone[zone], unused_bosses[zone])
                             if 'officer_slot' in removed_boss_slots and zone == 'early_game':
-                                for b in BEASY_DIFFICULTY:
-                                    if b in objective_bosses_and_maybe_dmist or b not in bosses_by_zone[zone]:
-                                        continue
-                                    if env.rnd.random() < 0.3:
-                                        bosses_by_zone[zone].remove(b)
-                                        unused_bosses[zone].append(b)
-                                        break
+                                remove_one_boss(env, removable_bosses, bosses_by_zone[zone], unused_bosses[zone])
                             if 'kingqueen_slot' in removed_boss_slots and zone == 'gated_blue_planet':
-                                for b in BEASY_DIFFICULTY:
-                                    if b in objective_bosses_and_maybe_dmist or b not in bosses_by_zone[zone]:
-                                        continue
-                                    if env.rnd.random() < 0.3:
-                                        bosses_by_zone[zone].remove(b)
-                                        unused_bosses[zone].append(b)
-                                        break
+                                remove_one_boss(env, removable_bosses, bosses_by_zone[zone], unused_bosses[zone])
                     else:
                         num_bosses_to_remove = 1 + len(removed_boss_slots)
-                        for b in BEASY_DIFFICULTY:
-                            if b in objective_bosses_and_maybe_dmist:
-                                continue
+                        removable_bosses = [h for h in BEASY_DIFFICULTY if h not in objective_bosses_and_maybe_dmist]
+                        for b in removable_bosses:
                             if env.rnd.random() < 0.3:
                                 bosses_by_zone['all'].remove(b)
                                 unused_bosses['all'].append(b)
                                 num_bosses_to_remove -= 1
+                            elif b == removable_bosses[-num_bosses_to_remove]:
+                                # if unlucky, we can get to the end of the list without removing enough bosses,
+                                # so just remove the last ones
+                                unused_bosses['all'].extend(removable_bosses[-num_bosses_to_remove:])
+                                bosses_by_zone['all'] = bosses_by_zone['all'][:-num_bosses_to_remove]
+                                num_bosses_to_remove = 0
                             if not num_bosses_to_remove:
                                 break
 
