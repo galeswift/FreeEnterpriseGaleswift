@@ -396,7 +396,7 @@ def apply(env):
         replacescriptflag = True
         potential_spells = list(POSSIBLE_STATUS_SPELLS)
         ailments_spoilers = []
-        ailments_to_use = env.rnd.choices(potential_spells, k=6)
+        ailments_to_use = env.rnd.sample(potential_spells, k=6)
         targeting_data = [env.rnd.choice(POSSIBLE_STATUS_SPELLS[sp].split(' / ')) for sp in ailments_to_use]
         script_fragments = []
         for i in range(6):
@@ -625,7 +625,9 @@ def apply(env):
             env.add_substitution(f'chaos phase {i+1}', ''.join(chaos_phases[i]))
 
         if env.options.flags.has('z_random_bigbangs'):
-            single_bb_replacement = env.rnd.choice(list(POSSIBLE_BIGBANG_COMMANDS))
+            # Python does change POSSIBLE_BIGBANG_COMMANDS, so we need to ignore Dark Wave
+            # (it's better to not let Z use it here)
+            single_bb_replacement = env.rnd.choice([bb for bb in POSSIBLE_BIGBANG_COMMANDS if bb != '#DarkWave'])
             bigbang_replacements[0].extend([
                 '    target all characters\n',
                 '    use ' + single_bb_replacement + '\n',
