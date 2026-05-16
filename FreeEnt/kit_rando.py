@@ -476,7 +476,7 @@ SUPPORT_KIT = {
     ],
 
     'rosa' : [
-        ('Power',   [1]),
+        ('PowerStaff',   [1]),
         ('Heal',    [5])
     ],
 
@@ -502,7 +502,7 @@ SUPPORT_KIT = {
 
     'edge' : [
         ('Shuriken',    [3]),
-        ('NinjaStar'    [1])
+        ('NinjaStar',    [1])
     ],
 
     'fusoya' : [
