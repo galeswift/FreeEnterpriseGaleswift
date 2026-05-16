@@ -291,7 +291,8 @@ def apply(env):
             characters = []
             if not env.options.flags.has('characters_not_guaranteed'):
                 characters.extend(allowed_characters)
-                if start_character in characters and len(allowed_characters) > mandatory_objective_required_char_count:
+                if (start_character in characters and start_character not in env.meta['objective_required_characters']
+                    and len(allowed_characters) > mandatory_objective_required_char_count):
                     characters.remove(start_character)
             else:
                 # need to ensure that even on Cmaybe, we put in enough characters for random objectives
@@ -305,11 +306,29 @@ def apply(env):
                     # remove restricted characters first
                     if valid_RESTRICTED_CHARACTERS and not env.options.flags.has('characters_relaxed'):
                         ch = env.rnd.choice(valid_RESTRICTED_CHARACTERS)
-                        if ch in characters:
+                        if ch in characters and ch not in env.meta['objective_required_characters']:
                             characters.remove(ch)
                         valid_RESTRICTED_CHARACTERS.remove(ch)
                     else:
-                        characters.remove(env.rnd.choice(characters))
+                        # remove any; it doesn't matter whom, as long as they aren't objective-required.
+                        ch_options = [c for c in characters if c not in env.meta['objective_required_characters']]
+                        characters.remove(env.rnd.choice(ch_options))
+            elif len(characters) > len(assignable_slots):
+                # obscure edge case for Cnopartner/nofree + Omode:classicgiant (but not Cnoearned): 
+                # we can have one too many characters, so pre-cull one depending on if there are 
+                # too many restricted characters for gated slots
+                valid_RESTRICTED_CHARACTERS = list(RESTRICTED_CHARACTERS)
+                if len(valid_RESTRICTED_CHARACTERS) >= len(HARD_SLOTS) - 1:
+                    # cull a restricted character to help the randomizer; note that there are
+                    # len(HARD_SLOTS) - 1 available non-starting-character slots, i.e. 9-1 = 8.
+                    ch_options = [c for c in valid_RESTRICTED_CHARACTERS if c in characters and c not in env.meta['objective_required_characters']]
+                    if ch_options:
+                        ch = env.rnd.choice(ch_options)
+                        characters.remove(ch)
+                else:
+                    # remove any; it doesn't matter whom, as long as they aren't objective-required (and they can't all be!).
+                    ch_options = [c for c in characters if c not in env.meta['objective_required_characters']]
+                    characters.remove(env.rnd.choice(ch_options))
             # add characters to the pool as best as we're able            
             while len(characters) < len(assignable_slots):        
                 character_choices = set(allowed_characters)                
@@ -388,7 +407,7 @@ def apply(env):
                 if not character_is_findable:
                     assignment_impossible = True
             nonstarting_chars = set()
-            for slot in [s for s in assignable_slots if slot not in STARTING_SLOTS]:
+            for slot in [s for s in assignable_slots if s not in STARTING_SLOTS]:
                 # build set of viable objective characters, needs to have the mandatory number of objective characters to be valid
                 nonstarting_chars.add(cur_assignment[slot])
             if len(nonstarting_chars) < mandatory_objective_required_char_count:
