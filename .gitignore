@@ -40,3 +40,4 @@ FreeEnt/server/_build/**
 *.symbols
 *.script
 env_specs.bat
+.vscode/**
