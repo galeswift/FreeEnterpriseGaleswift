@@ -328,7 +328,7 @@ An unrestricted randomization, allowing equal chance for items to appear in any 
 Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.
 
 [Tplayable]
-Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.
+Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.
 
 [Tadjmiabareas]
 On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.
@@ -382,7 +382,7 @@ A basic randomization, allowing slightly stronger items than the standard random
 Shops will contain items of similar quality and quantity as their vanilla counterparts.
 
 [Splayable]
-Equipment sold in shops will be usable by at least one character that you can acquire in the seed.
+Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.
 
 [Sunsafe]
 Normally, the randomizer guarantees Cure2 potions, Life potions and StarVeils are readily available, and that Cure3 potions are available in seeds without white mages. This flag removes those checks.
@@ -491,6 +491,9 @@ Back attacks and "Surprised!" encounters will still occur, even when encounters 
 
 [Enoexp]
 Bosses and monster-in-a-box fights still award EXP.
+
+[Enogp]
+Bosses and monster-in-a-box fights will <em>not</em> award GP.
 
 [Enodmachin]
 The D.Machin in the Searcher encounter is replaced by a Horseman.

@@ -376,7 +376,7 @@ class FlagLogicCore:
         for flag in flags_to_disable:
             if flagset.has(flag):
                 flagset.unset(flag)
-                print(prefix + '; removed ' + flag)
+                # print(prefix + '; removed ' + flag)
                 self._lib.push(log, ['correction', prefix + '; removed ' + flag])
 
     def _simple_disable_regex(self, flagset, log, prefix, flags_regex):
@@ -404,6 +404,11 @@ class FlagLogicCore:
 
         if flagset.has('Kforge') and flagset.has('Omode:classicforge'):
             self._simple_disable(flagset, log, 'Classic forge is incompatible with Kforge', ['Kforge'])
+        
+        # Force Owin:crystal under Omode:classicforge; needs to be here for Kstart:crystal and other checks soon
+        if flagset.has('Omode:classicforge') and not flagset.has('Owin:crystal'):
+            flagset.set('Owin:crystal')
+            self._lib.push(log, ['correction', 'Classic Forge is enabled; forced to add Owin:crystal'])
 
         if flagset.has('Kforge'):
             self._simple_disable_regex(flagset, log, '-smith is incompatible with Kforge', r'^-smith:')
@@ -506,6 +511,9 @@ class FlagLogicCore:
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmaxtier:')
             self._simple_disable_regex(flagset, log, 'Treasures are not random', r'^Tmintier:')
 
+        if flagset.has_any('Tvanilla', 'Tshuffle'):
+            self._simple_disable(flagset, log, 'Treasures and rewards are not random', ['Tplayable'])
+
         mintier_flags = flagset.get_list(r'^Tmintier:')
         maxtier_flags = flagset.get_list(r'^Tmaxtier:')
         if len(mintier_flags) > 0 and len(maxtier_flags) > 0:
@@ -516,11 +524,11 @@ class FlagLogicCore:
                 flagset.set('Tmintier:' + f'{maxtier}')
                 self._lib.push(log, ['correction', f'Tmaxtier cannot be less than Tmintier, so replacing Tmintier:{mintier} with Tmintier:{maxtier}'])
 
-        if flagset.has('Tadjmiabareas') and not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish', 'Tstandardish'):
+        if not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish', 'Tstandardish'):
             self._simple_disable(flagset, log, 'Treasures are not weighted', ['Tadjmiabareas'])
 
         if flagset.has_any('Svanilla', 'Sshuffle', 'Scabins', 'Sempty'):
-            self._simple_disable_regex(flagset, log, 'Shops are not random', r'^(Sno:([^j]|j.)|Salways:([^j]|j.))')
+            self._simple_disable_regex(flagset, log, 'Shops are not random', r'^(Sno:([^j]|j.)|Salways:([^j]|j.)|Splayable)')
             if not flagset.has('Sshuffle'):
                 self._simple_disable(flagset, log, 'Shops are not random', ['Sunsafe'])
 
@@ -570,7 +578,7 @@ class FlagLogicCore:
                 flagset.unset(fl)
                 self._lib.push(log, ['correction', f'Cannot use {fl} when {fl_cat} is set; removed {fl}'])
 
-        if flagset.has('Zphysical') and flagset.has('Zwhichbang'):
+        if (flagset.has('Zphysical') and not flagset.has_any('Zunsure:vanilla', 'Zunsure:ailments', 'Zunsure:chaos', 'Zunsure:lavosshell')):
             self._simple_disable(flagset, log, 'No guaranteed Big Bangs in script', ['Zwhichbang'])
 
         if flagset.has_any('Zchaos', 'Zlavosshell') and not flagset.has_any('Zunsure:vanilla', 'Zunsure:physical', 'Zunsure:ailments'):
@@ -637,11 +645,8 @@ class FlagLogicCore:
 
             win_flags = flagset.get_list(r'^Owin:')
           
-            # Force Owin:crystal if classicforge, otherwise force Owin:game if no win result specified
-            if flagset.has('Omode:classicforge') and not flagset.has('Owin:crystal'):
-                flagset.set('Owin:crystal')
-                self._lib.push(log, ['correction', 'Classic Forge is enabled; forced to add Owin:crystal'])
-            elif len(win_flags) == 0:
+            # Force Owin:game if no win result specified; classicforge is handled above
+            if len(win_flags) == 0:
                 flagset.set('Owin:game')
                 self._lib.push(log, ['correction', 'Objectives set without outcome specified; added Owin:game'])
                    

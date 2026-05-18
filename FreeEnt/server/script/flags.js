@@ -13280,7 +13280,6 @@ class FlagLogicCore {
             flag = _pj_a[_pj_c];
             if (flagset.has(flag)) {
                 flagset.unset(flag);
-                console.log(((prefix + "; removed ") + flag));
                 this._lib.push(log, ["correction", ((prefix + "; removed ") + flag)]);
             }
         }
@@ -13304,6 +13303,10 @@ class FlagLogicCore {
         }
         if ((flagset.has("Kforge") && flagset.has("Omode:classicforge"))) {
             this._simple_disable(flagset, log, "Classic forge is incompatible with Kforge", ["Kforge"]);
+        }
+        if ((flagset.has("Omode:classicforge") && (! flagset.has("Owin:crystal")))) {
+            flagset.set("Owin:crystal");
+            this._lib.push(log, ["correction", "Classic Forge is enabled; forced to add Owin:crystal"]);
         }
         if (flagset.has("Kforge")) {
             this._simple_disable_regex(flagset, log, "-smith is incompatible with Kforge", "^-smith:");
@@ -13404,6 +13407,9 @@ class FlagLogicCore {
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmaxtier:");
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmintier:");
         }
+        if (flagset.has_any("Tvanilla", "Tshuffle")) {
+            this._simple_disable(flagset, log, "Treasures and rewards are not random", ["Tplayable"]);
+        }
         mintier_flags = flagset.get_list("^Tmintier:");
         maxtier_flags = flagset.get_list("^Tmaxtier:");
         if (((mintier_flags.length > 0) && (maxtier_flags.length > 0))) {
@@ -13415,11 +13421,11 @@ class FlagLogicCore {
                 this._lib.push(log, ["correction", `Tmaxtier cannot be less than Tmintier, so replacing Tmintier:${mintier} with Tmintier:${maxtier}`]);
             }
         }
-        if ((flagset.has("Tadjmiabareas") && (! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish", "Tstandardish")))) {
+        if ((! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish", "Tstandardish"))) {
             this._simple_disable(flagset, log, "Treasures are not weighted", ["Tadjmiabareas"]);
         }
         if (flagset.has_any("Svanilla", "Sshuffle", "Scabins", "Sempty")) {
-            this._simple_disable_regex(flagset, log, "Shops are not random", "^(Sno:([^j]|j.)|Salways:([^j]|j.))");
+            this._simple_disable_regex(flagset, log, "Shops are not random", "^(Sno:([^j]|j.)|Salways:([^j]|j.)|Splayable)");
             if ((! flagset.has("Sshuffle"))) {
                 this._simple_disable(flagset, log, "Shops are not random", ["Sunsafe"]);
             }
@@ -13475,7 +13481,7 @@ class FlagLogicCore {
                 this._lib.push(log, ["correction", `Cannot use ${fl} when ${fl_cat} is set; removed ${fl}`]);
             }
         }
-        if ((flagset.has("Zphysical") && flagset.has("Zwhichbang"))) {
+        if ((flagset.has("Zphysical") && (! flagset.has_any("Zunsure:vanilla", "Zunsure:ailments", "Zunsure:chaos", "Zunsure:lavosshell")))) {
             this._simple_disable(flagset, log, "No guaranteed Big Bangs in script", ["Zwhichbang"]);
         }
         if ((flagset.has_any("Zchaos", "Zlavosshell") && (! flagset.has_any("Zunsure:vanilla", "Zunsure:physical", "Zunsure:ailments")))) {
@@ -13549,14 +13555,9 @@ class FlagLogicCore {
                 }
             }
             win_flags = flagset.get_list("^Owin:");
-            if ((flagset.has("Omode:classicforge") && (! flagset.has("Owin:crystal")))) {
-                flagset.set("Owin:crystal");
-                this._lib.push(log, ["correction", "Classic Forge is enabled; forced to add Owin:crystal"]);
-            } else {
-                if ((win_flags.length === 0)) {
-                    flagset.set("Owin:game");
-                    this._lib.push(log, ["correction", "Objectives set without outcome specified; added Owin:game"]);
-                }
+            if ((win_flags.length === 0)) {
+                flagset.set("Owin:game");
+                this._lib.push(log, ["correction", "Objectives set without outcome specified; added Owin:game"]);
             }
             pass_quest_flags = flagset.get_list("^O\\d+:quest_pass$");
             if (((pass_quest_flags.length > 0) && flagset.has("Pnone"))) {

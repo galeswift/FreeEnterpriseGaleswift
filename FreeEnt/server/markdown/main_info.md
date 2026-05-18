@@ -395,7 +395,9 @@ Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the 
 - Design/Programming: ScytheMarshall
 - Locations: treasure_rando.py, character_rando.py
 
-Under this flag, all chests will contain items that at least one character available in the seed will be able to use. Under Omnidextrous, this flag does nothing. Under Fist Fight, the only weapons available are claws. This flag does not apply to KI check zonk rewards or MIABs. Summon orbs are consumables, so are treated like any other consumable item (so will appear even if Rydia doesn't; this choice is for tier restriction purposes).
+Under this flag, all items from chests and quest/MIAB rewards will be usable by at least one character available in the seed. Under Omnidextrous, this flag does nothing except remove summon orbs if Rydia is not available. Under Fist Fight, the only weapons available are claws. All dartables will appear, regardless of Fist Fight, if at least one character with Dart is available (normally just Edge, possibly DKC also, or everyone on World Championship of Darts, which also makes all weapons dartable). Flags that change equipment options are taken into consideration.
+
+Prior to v4.6.4, this flag did not impact dartables or summon orbs. When first created, this flag did not apply to KI check zonk rewards or MIABs. The summon orb choice was for tier restriction purposes, which is irrelevant on v4.6.4.
 
 With mystery flags, you can tell who the characters are in the seed by looking at the gear you get.
 
@@ -489,7 +491,7 @@ These flags change the prices of the items specified by `Spricey`, which can be 
 - Design/Programming: ScytheMarshall
 - Locations: shop_rando.py, character_rando.py
 
-Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, with the same exceptions.
+Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, handled exactly the same way.
 
 ### `Sethersell` {: .h6 }
 

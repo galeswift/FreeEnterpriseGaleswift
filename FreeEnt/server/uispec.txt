@@ -684,7 +684,7 @@
 ...(Erunspoils50) 50% EXP and GP earned
 ...(Erunspoils25) 25% EXP and GP earned
 [Enoexp]! No EXP for random encounters
-[Enogp]!^ No GP for random encounters
+[Enogp]!^ No GP for any encounters
 [Enodmachin]!^ Disable D.Machin encounters
 [Enomacgiant]!^ Disable MacGiant encounters
 <>^ Change encounter tables

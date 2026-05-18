@@ -5277,7 +5277,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               }
             ]
@@ -5434,7 +5434,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -5597,7 +5597,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -5759,7 +5759,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -5922,7 +5922,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -6084,7 +6084,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -6246,7 +6246,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               }
             ]
@@ -6321,7 +6321,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -6459,7 +6459,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -6598,7 +6598,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -6736,7 +6736,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -6875,7 +6875,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -7007,7 +7007,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
                 "fork": true
               },
               {
@@ -7824,7 +7824,8 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "Enogp",
-        "title": "No GP for random encounters",
+        "title": "No GP for any encounters",
+        "description": "Bosses and monster-in-a-box fights will <em>not</em> award GP.",
         "hard": true,
         "fork": true
       },
