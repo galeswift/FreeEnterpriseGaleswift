@@ -3794,7 +3794,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Kmain",
             "title": "Randomize key items",
-            "description": "The locations of key items are shuffled amongst each other. For example, you may find the Magma Key in the Antlion's Nest instead of the Sandruby.\n\nThe items randomized this way are the <em>Package, SandRuby, Legend Sword, Baron Key, TwinHarp, Earth Crystal, Magma Key, Tower Key, Airship Hook, Luca Key, Dark Crystal, Pink Tail, Rat Tail, Pan, Spoon, Adamant,</em> and the <em>Crystal used to transform Zeromus</em> (yes, you have to find it.)",
+            "description": "The locations of key items are shuffled amongst each other. For example, you may find the Magma Key in the Antlion's Nest instead of the Sandruby.\n\nThe items randomized this way are the <em>Package, SandRuby, Legend Sword, Baron Key, TwinHarp, Earth Crystal, Magma Key, Tower Key, Airship Hook, Luca Key, Dark Crystal, Pink Tail, Rat Tail, Pan, Spoon, Adamant,</em> and the <em>Crystal used to transform Zeromus</em> (yes, you have to find it).",
             "subcontrols": [
               {
                 "flag": "Ksummon",
@@ -3864,7 +3864,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Kpink",
                 "title": "Pink Tail trades for a key item",
-                "description": "The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless adamant armors are disabled via <em>-noadamants</em>.",
+                "description": "The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless Adamant Armors are disabled via <em>-noadamants</em>.",
                 "hard": true,
                 "fork": true
               },
@@ -4690,7 +4690,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Cspells:anti",
             "title": "Characters learn US spells, with altered progression.",
-            "description": "Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.",
+            "description": "Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast. See <a href='fork_info#cspellsjanti'>the fork_info page</a> for the full list of changes.",
             "fork": true
           }
         ]
@@ -4708,7 +4708,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Cabilities:fullgood",
             "title": "Characters have a full set of good commands",
-            "description": "Each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list."
+            "description": "Each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list. See <a href='fork_info#cabilitiesfullgood'>the fork_info page</a> for the specific abilities chosen for each character."
           }
         ]
       },
@@ -6101,8 +6101,8 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "Tplayable",
-        "title": "Chests contain usable items",
-        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+        "title": "Equipment in chests will be usable",
+        "description": "Equipment from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
         "fork": true
       },
       {
@@ -6357,8 +6357,8 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "Splayable",
-        "title": "Shops contain usable items",
-        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+        "title": "Equipment found in shops will be usable",
+        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
         "fork": true
       },
       {
@@ -7154,6 +7154,7 @@ var FLAG_UISPEC = [
             "flag": "@doorsrando",
             "title": "Randomize Doors",
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon78",
@@ -7193,6 +7194,7 @@ var FLAG_UISPEC = [
             "flag": "@entrancesrando",
             "title": "Randomize Entrances",
             "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon79",
@@ -7233,12 +7235,14 @@ var FLAG_UISPEC = [
       {
         "flag": "-calmness",
         "title": "Disable the Panic Button (Select + R)",
-        "description": "Disables the use of the Panic button (Select + R)"
+        "description": "Disables the use of the Panic button (Select + R)",
+        "fork": true
       },
       {
         "flag": "-forcesealed",
         "title": "Disable skipping the Sealed Cave Boss",
-        "description": "Fighting the Sealed Cave boss is required before seeing the KI"
+        "description": "Fighting the Sealed Cave boss is required before seeing the KI",
+        "fork": true
       }
     ]
   },
@@ -8187,7 +8191,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@exp",
         "title": "Restore vanilla or change EXP distribution",
-        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.",
+        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.",
         "subcontrols": [
           {
             "flag": "-exp:split",
