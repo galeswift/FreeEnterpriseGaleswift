@@ -5277,7 +5277,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               }
             ]
@@ -5434,7 +5434,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -5597,7 +5597,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -5759,7 +5759,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -5922,7 +5922,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -6084,7 +6084,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -6246,7 +6246,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tplayable",
                 "title": "Chests contain usable items",
-                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
                 "fork": true
               }
             ]
@@ -6321,7 +6321,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -6459,7 +6459,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -6598,7 +6598,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -6736,7 +6736,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -6875,7 +6875,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -7007,7 +7007,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Splayable",
                 "title": "Shops contain usable items",
-                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia.",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
                 "fork": true
               },
               {
@@ -7995,7 +7995,6 @@ var FLAG_UISPEC = [
             "flag": "@doorsrando",
             "title": "Randomize Doors",
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
-            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon80",
@@ -8485,7 +8484,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@exp",
         "title": "Restore vanilla or change EXP distribution",
-        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.",
+        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.",
         "subcontrols": [
           {
             "flag": "Xsplit",
