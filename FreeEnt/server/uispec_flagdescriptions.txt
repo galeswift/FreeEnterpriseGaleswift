@@ -129,7 +129,7 @@ Hard required objectives are a # of objectives that must be completed in order t
 [Kmain]
 The locations of key items are shuffled amongst each other. For example, you may find the Magma Key in the Antlion's Nest instead of the Sandruby.
 
-The items randomized this way are the <em>Package, SandRuby, Legend Sword, Baron Key, TwinHarp, Earth Crystal, Magma Key, Tower Key, Airship Hook, Luca Key, Dark Crystal, Pink Tail, Rat Tail, Pan, Spoon, Adamant,</em> and the <em>Crystal used to transform Zeromus</em> (yes, you have to find it.)
+The items randomized this way are the <em>Package, SandRuby, Legend Sword, Baron Key, TwinHarp, Earth Crystal, Magma Key, Tower Key, Airship Hook, Luca Key, Dark Crystal, Pink Tail, Rat Tail, Pan, Spoon, Adamant,</em> and the <em>Crystal used to transform Zeromus</em> (yes, you have to find it).
 
 [Ksummon]
 Key items may be awarded by the Sylphs, the king and queen of the Feymarch, Odin's throne, and Cave Bahamut.
@@ -156,7 +156,7 @@ Includes the monster-in-a-box chests in the Lunar Subterrane. This setting ignor
 The reward for turning in the Legend Sword and Adamant to Kokkol is a key item. The vanilla Excalibur is added to the key items rewards pool. If the hero challenge is enabled, this overrides the normal <em>Chero</em> supersmith reward.
 
 [Kpink]
-The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless adamant armors are disabled via <em>-noadamants</em>.
+The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless Adamant Armors are disabled via <em>-noadamants</em>.
 
 [Klstmiab]
 This ignores the Kmoon or Kunsafe safety check that Kmiab has.
@@ -258,13 +258,13 @@ Your starting character will be selected as normal according to your other flag 
 White mages will learn Armor, Shell, and Dispel. All mages learn spells at the levels they would in FF4j.
 
 [Cspells:anti]
-Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.
+Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast. See <a href='fork_info#cspellsjanti'>the fork_info page</a> for the full list of changes.
 
 [Cabilities:j]
 Characters retain the battle commands from FF4j that were removed in FF4us.
 
 [Cabilities:fullgood]
-Each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list.
+Each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list. See <a href='fork_info#cabilitiesfullgood'>the fork_info page</a> for the specific abilities chosen for each character.
 
 [Cnodupes]
 If a duplicate character tries to join your party, instead nothing happens.
@@ -328,7 +328,7 @@ An unrestricted randomization, allowing equal chance for items to appear in any 
 Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.
 
 [Tplayable]
-Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.
+Equipment from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.
 
 [Tadjmiabareas]
 On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.
@@ -382,7 +382,7 @@ A basic randomization, allowing slightly stronger items than the standard random
 Shops will contain items of similar quality and quantity as their vanilla counterparts.
 
 [Splayable]
-Equipment sold in shops will be usable by at least one character that you can acquire in the seed.
+Equipment sold in shops will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#splayable''>the fork_info page</a> for more information.
 
 [Sunsafe]
 Normally, the randomizer guarantees Cure2 potions, Life potions and StarVeils are readily available, and that Cure3 potions are available in seeds without white mages. This flag removes those checks.
@@ -932,7 +932,7 @@ The default base ATB for the agility anchor is 5 ticks. Under these flags, the b
 In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).
 
 [@exp]
-To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.
+To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.
 
 [-exp:split]
 Normally in Free Enterprise, earned EXP is not divided among the party, and each member receives the full amount. Set this flag to restore the original FF4 EXP distribution scheme (ie. earned EXP is divided among the surviving party members).

@@ -704,22 +704,22 @@
 
 == DOORS
 <> Warps Randomization Options
-.(@doorsrando) Randomize Doors
+.(@doorsrando)^ Randomize Doors
 ..<> Doors Randomization Options
 ...(-doorsrando:normal)!           Doors Shuffle without Cross World
 ...(-doorsrando:gated)!          Underworld and Moon Doors shuffled
 ...(-doorsrando:blueplanet)!          Overworld and Underworld Doors Shuffled
 ...(-doorsrando:why)!          Overworld and Moon Doors shuffled
 ...(-doorsrando:all)!          All Doors shuffled
-.(@entrancesrando) Randomize Entrances
+.(@entrancesrando)^ Randomize Entrances
 ..<> Entrances Randomization Options
 ...(-entrancesrando:normal)!           Entrances Shuffle without Cross World
 ...(-entrancesrando:gated)!          Underworld and Moon Entrances Shuffled
 ...(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
 ...(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
 ...(-entrancesrando:all)!          All Entrances Shuffled
-[-calmness] Disable the Panic Button (Select + R)
-[-forcesealed] Disable skipping the Sealed Cave Boss
+[-calmness]^ Disable the Panic Button (Select + R)
+[-forcesealed]^ Disable skipping the Sealed Cave Boss
 
 
 == OTHER

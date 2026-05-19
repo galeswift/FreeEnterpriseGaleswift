@@ -387,7 +387,9 @@ Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the 
 - Design/Programming: ScytheMarshall
 - Locations: treasure_rando.py, character_rando.py
 
-Under this flag, all chests will contain items that at least one character available in the seed will be able to use. Under Omnidextrous, this flag does nothing. Under Fist Fight, the only weapons available are claws. This flag does not apply to KI check zonk rewards or MIABs. Summon orbs are consumables, so are treated like any other consumable item (so will appear even if Rydia doesn't; this choice is for tier restriction purposes).
+Under this flag, all chests will contain items that at least one character available in the seed will be able to use. This flag also applies to KI check zonk rewards or MIABs. Under Omnidextrous, this flag does nothing. Under Fist Fight, the only weapons available are claws. Summon orbs are consumables, so are treated like any other consumable item (so will appear even if Rydia doesn't; this choice is for tier restriction purposes). Dartable weapons are not considered usable by Dart users, so will not appear unless a character who can normally equip them appears. 
+
+Note that this flag operates differently compared to the main branch v5.0-alpha: the summon orb and dartables exclusions are noted above and the assignment algorithm is different. On the alpha, items are replaced if they are not allowed, with a weighting to ensure you don't see the same gear over and over; on the fork, items are simply assigned as normal after filtering out disallowed items.
 
 With mystery flags, you can tell who the characters are in the seed by looking at the gear you get.
 
@@ -481,7 +483,7 @@ These flags change the prices of the items specified by `Spricey`, which can be 
 - Design/Programming: ScytheMarshall
 - Locations: shop_rando.py, character_rando.py
 
-Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, with the same exceptions.
+Similarly to `Tplayable`, this flag limits equipment found in shops to those usable to characters you can actually find in the seed, with the same exceptions.
 
 ### `Sethersell` {: .h6 }
 
@@ -968,7 +970,7 @@ This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now inc
 - Design/Programming: ScytheMarshall
 - Locations: experience_acceleration.f4c, generator.py
 
-These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. 
+These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. Note that the main branch v5.0-alpha uses *additive* increases by default, unlike the fork.
 
 ### `-exp:crystalbonus` {: .h6 }
 
