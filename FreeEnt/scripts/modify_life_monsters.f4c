@@ -1,0 +1,51 @@
+// change how much HP monsters are revived with
+// when Life1/Life potions are used
+
+msfpatch{
+    .addr $03d6d9
+        jml $=ModifiedLife1Monsters
+        nop
+
+    .new
+    ModifiedLife1Monsters:
+        lda $cf
+        cmp #$05
+        bcc $+IsCharacter
+        // divide max HP by 4 and multiply
+        // by 1, 2, 3, or 4 depending on $2F
+        // being less than 32, 64, 96, 128
+        // (we'll ignore the error, which is
+        // at most 3x4 = 12 HP)
+        tdc
+        tay
+        lda $272f
+        sec
+    %Loop2FStart:
+        iny
+        sbc #$20
+        bcs $-Loop2FStart
+
+        rep #$20
+        .mx 0x00
+        lda $2709
+        lsr a
+        lsr a
+        sta $e3
+        tdc
+        clc
+    %Loop2F2Start:
+        adc $e3
+        dey
+        bne $-Loop2F2Start
+        sta $2707
+        sep #$20
+        .mx 0x20
+
+        jml $03d6ea
+
+    %IsCharacter:
+        // displaced
+        {% lda $2716 VIT substitute : lda $2716 %}
+        sta $df
+        jml $03d6de
+}

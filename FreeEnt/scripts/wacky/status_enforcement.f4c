@@ -10,15 +10,13 @@
 // toggle to be enabled.
 
 msfpatch {
-    .def Wacky__StatusEnforcement_InputAxtor   $7e1660
-    .def Wacky__StatusEnforcement_InputJob     $7e1661
-    .def Wacky__StatusEnforcement_OutputByte0  $7e1662
-    .def Wacky__StatusEnforcement_OutputByte1  $7e1663
-    .def Wacky__StatusEnforcement_OutputByte2  $7e1664
-    .def Wacky__StatusEnforcement_OutputByte3  $7e1665
-    .def Wacky__StatusEnforcement_InputSlot    $7e1666
-
-    .def Wacky__StatusEnforcement_WorkRAM      $7e1667
+    .def Wacky__StatusEnforcement_InputAxtor   $7e1D48
+    .def Wacky__StatusEnforcement_InputJob     $7e1D49
+    .def Wacky__StatusEnforcement_OutputByte0  $7e1D4A
+    .def Wacky__StatusEnforcement_OutputByte1  $7e1D4B
+    .def Wacky__StatusEnforcement_OutputByte2  $7e1D4C
+    .def Wacky__StatusEnforcement_OutputByte3  $7e1D4D
+    .def Wacky__StatusEnforcement_InputSlot    $7e1D4E
 }
 
 msfpatch {

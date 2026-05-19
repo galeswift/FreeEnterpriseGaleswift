@@ -77,15 +77,7 @@ msfpatch{
 
 
 
-// %if forcesealed%
-eventcall($47)
-{
-    if not #DemonWallBattle:
-        $AA   //Demon Wall battle
-    else:
-        $00   //(no event)
-}
-// %end%
+
 
 
 

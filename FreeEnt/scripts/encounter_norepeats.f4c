@@ -16,6 +16,9 @@
 // use a scratch register to keep track of when indexing should roll over.
 
 msfpatch{
+    .def EncNoRepeats__OverworldBits  $7e14c0
+    .def EncNoRepeats__UnderMoonBits  $7e14e0
+
     .addr $008b05
         jml $=EncNoRepeats__CheckFormation
 
@@ -210,10 +213,10 @@ msfpatch{
         // where in the bit field to start looking
         lda $1701
         beq $+OverworldFormations
-        ldx #$1de0
+        ldx #$_EncNoRepeats__UnderMoonBits
         bra $+CheckFormationBitField
     %OverworldFormations:
-        ldx #$1dc0
+        ldx #$_EncNoRepeats__OverworldBits
     %CheckFormationBitField:
         pla
         jsl $=Tracker__CheckBit

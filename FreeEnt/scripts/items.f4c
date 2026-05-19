@@ -134,7 +134,7 @@ msfpatch {
 // (no change to selling, since that value
 //  is limited to 2 bytes)
 msfpatch {
-    .def Megaprice_Table $218080
+    .def Megaprice_Table $21D300
 
     ItemPurchasePrice_Hook:
         lda $0fa450,x

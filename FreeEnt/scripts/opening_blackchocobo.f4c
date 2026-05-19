@@ -212,7 +212,7 @@ event($10)  //Opening events
 
     open door
     [#B #If #not_PartySize 1] {
-        p #Kain toggle visible
+        p #Kain1 toggle visible
     }
     batch 3 {
         p #CastleBaronSoldier1 face right

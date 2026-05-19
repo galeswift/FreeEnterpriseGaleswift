@@ -374,7 +374,7 @@ ordr,flag,world,area,map,mapid,index,x,y,contents,jcontents,fight,exclude,spoile
 372,0x182,Moon,LunarCore,#LunarSubterran2F,0x168,1,26,12,#item.LifeStaff,,0x1EC,,Lunar Subterrane,B2 (route to altar),chest
 373,0x183,Moon,LunarCore,#LunarSubterran2F,0x168,2,25,23,#item.FlameWhip,,,,Lunar Subterrane,B2 (main route),secret path chest
 374,0x184,Moon,LunarCore,#LunarSubterran3F,0x169,0,25,16,#item.DragoonHelm,,,,Lunar Subterrane,B3,secret path first chamber
-375,0x185,Moon,LunarCore,#LunarSubterran3F,0x169,1,23,24,#item.DragonArmor,,,,Lunar Subterrane,B3,"secret path second chamber, top"
+375,0x185,Moon,LunarCore,#LunarSubterran3F,0x169,1,23,24,#item.DragoonArmor,,,,Lunar Subterrane,B3,"secret path second chamber, top"
 376,0x186,Moon,LunarCore,#LunarSubterran3F,0x169,2,14,28,#item.DragoonGauntlet,,,,Lunar Subterrane,B3,"secret path second chamber, left"
 377,0x187,Moon,LunarCore,#LunarSubterran4F,0x16A,0,28,7,#item.ArtemisArrow,,,,Lunar Subterrane,B4,top right
 378,0x188,Moon,LunarCore,#LunarSubterran4F,0x16A,1,6,24,#item.StardustRod,,0x1F3,,Lunar Subterrane,B4,bottom left

@@ -1,31 +1,7 @@
 // effectively, swap Rosa and Cecil jobs but not stats
 // swap weapons, but not armour
 
-patch($0fa558 bus) { 22 04 } // $04, non-Paladin shields for Rosa
-patch($0fa55E bus) { 22 00 } // $07, swords for Rosa
-patch($0fa566 bus) { 0C 23 } // $0B, white mage staves for Cecil
-patch($0fa576 bus) { B6 18 } // $13, daggers for Rosa
-patch($0fa588 bus) { 20 00 } // $1C, holy swords/Paladin-only shields for Rosa
-
-// changes axes to point at the non-Paladin Shield equip field (so Cecil
-// loses them and Rosa gains them, due to the above shields change)
-patch($0f92c6 bus) { 04 }
-patch($0f92ce bus) { 04 }
-patch($0f92d6 bus) { 04 }
-patch($0f933e bus) { 24 }
-patch($0f9346 bus) { 24 }
-
-patch($0fa584 bus) { 00 02 } // $1A, Paladin-only armour for Cecil
-
-// change Paladin-only armour to point at this equip field ($1A, which
-// is normally an unused Rosa-only field) instead of the holy sword field 
-// ($1C, which was diverted to Rosa)
-patch($0f948e bus) { 5A }
-patch($0f94b6 bus) { 5A }
-patch($0f952e bus) { 9A }
-patch($0f9566 bus) { 9A }
-patch($0f9606 bus) { DA }
-patch($0f9636 bus) { 1A }
+// all equipment changes happen in update_equipment.py
 
 // swap Rosa and Cecil's spellsets, in the menu and in battle
 

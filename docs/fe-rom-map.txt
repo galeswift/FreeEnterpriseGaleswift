@@ -24,7 +24,7 @@ Fork modifications via fork devs.
 20:8000 - 20:FFFF   : added code bank
 
 21:8000 - 21:807F   : extended shops (shop types)
-21:8080 - 21:80FF   : item megapricing table
+21:8080 - 21:80FF  F: *** UNUSED *** (formerly item megapricing table)
 21:8100 - 21:88FF   : extended shops (manifests)
 21:8900 - 21:897F   : title screen display metadata
 21:8980 - 21:89BF   : actor families
@@ -40,7 +40,8 @@ Fork modifications via fork devs.
 21:D000 - 21:D1FF   : reward slot maps & coordinates
 21:D200 - 21:D2FB   : ending vignette order
 21:D2FC - 21:D2FF   : vignette timing values
-21:D300 - 21:D4FF   : *** UNUSED ***
+21:D300 - 21:D3FF  F: item megapricing table
+21:D400 - 21:D4FF  F: *** UNUSED ***
 21:D500 - 21:D6FF   : replacement text for ending Mysidian Legend
 21:D700 - 21:D7FF   : castle baron soldier index table
 21:D800 - 21:D80F   : version number string

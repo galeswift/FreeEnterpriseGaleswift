@@ -380,12 +380,7 @@ event($82)  //Kain regaining his senses
     }
     
     player face down
-    // %flag rosapaladin on%
-    // Rosa is using PCecil's White spellset
-    give spell #PCecil #Exit
-    // %end%
-    // %flag rosapaladin off%
-    give spell #Rosa #Exit
+    // %zot spell rando%
     // %end%
     deactivate #ZotKain
     set #KainRegainedSenses
@@ -394,6 +389,11 @@ event($82)  //Kain regaining his senses
 text(bank 1 message $1C9) {
 [name $e0] and [name $e1]
 joined![music $29][pause 40]
+}
+
+text(bank 1 message $10D) {
+All [Rosa]s learned
+[name $e2]!
 }
 
 //-------------------------------------------------
@@ -659,6 +659,7 @@ event($7C)  //Valvalis battle
     [#B #If #Flag #flag.TwinsStone]{
         vfx #PutEnterpriseAtBaron
     }
+    [#B #PutFalcon 101 160]
     music #Overworld fade in
     load map #Overworld at 101 158
     player face down

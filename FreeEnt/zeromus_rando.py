@@ -20,9 +20,45 @@ POSSIBLE_BIGBANG_COMMANDS = {
     '#spell.Enemy_MegaNuke' : (True, 'spell power', 32, 'all characters'),
 }
 
+# "5" because Python lists are 0-indexed
 BIGBANG_5_COMMANDS = {
     '#spell.Enemy_Count' : (False, 'spell power', 20, 'all characters'), # battle-cheesing but it's fine if it's only the very last BB
     '#spell.Enemy_Dancing' : (False, 'spell power', 20, 'all characters'), # script-breaking but it's fine if it's only the very last BB
+}
+
+# Ailment data used for Zailments; note that we're also giving Zeromus status protection here,
+# so we can use funkier spells
+POSSIBLE_STATUS_SPELLS = {
+    '#spell.Mute' : 'all characters',
+    '#spell.Slow' : 'all characters',
+    '#spell.Bersk' : 'front row / back row',
+    '#spell.Size' : 'all characters',
+    '#spell.Toad' : 'all characters',
+    '#spell.Piggy' : 'all characters',
+    '#spell.Venom' : 'all characters',
+    '#spell.Stone' : 'random character',
+    '#spell.Fatal' : 'random character',
+    '#spell.Stop' : 'random character',
+    '#spell.Enemy_Gaze' : 'all characters',
+    '#spell.Enemy_Bluster' : 'front row / back row',
+    '#spell.Enemy_Slap' : 'all characters',
+    '#spell.Enemy_Powder' : 'all characters',
+    '#spell.Enemy_Glance' : 'random character',
+    '#spell.Enemy_Tongue' : 'front row / back row',
+    '#spell.Enemy_Curse' : 'all characters',
+    '#spell.Enemy_Ray' : 'all characters',
+    '#spell.Enemy_Beak' : 'random character',
+    '#spell.Enemy_Petrify' : 'front row / back row',
+    '#spell.Enemy_Blast' : 'front row / back row',
+    '#spell.Enemy_Hug' : 'random character',
+    '#spell.Enemy_Breath' : 'front row / back row / all characters',
+    '#spell.Enemy_Whisper' : 'random character / front row / back row',
+    '#spell.Enemy_Entangle' : 'front row / back row',
+    '#spell.Enemy_HoldGas' : 'front row / back row',
+    '#spell.Enemy_Gas' : 'front row / back row',
+    '#spell.Enemy_Poison' : 'front row / back row / all characters',
+    '#spell.Enemy_Demolish' : 'random character',
+    '#spell.Enemy_Crush' : 'random character',
 }
 
 # some scripts are just... unused. Should they be in here?
@@ -185,8 +221,15 @@ POSSIBLE_CHAOS_REACTIONS = {
 }
 
 def apply(env):
-    # if not env.options.flags.has_any('z_physical_script','z_physical_or_magical_script','-z:chaos','-z:lavosshell','z_random_bigbangs','z_random_phases','z_no_nerfs','z_must_nerf'):
-    #     return
+    # first, identify script category
+    z_unsure_flags = env.options.flags.get_list(r'^Zunsure:')
+    main_z_flag = env.options.flags.get_list(r'^Z')[0]
+    if not z_unsure_flags:
+        # the first Z flag is always the script category, so pull that value
+        script_category = main_z_flag[1:]
+    else:
+        # randomly choose from the Zunsure options or the main category, which flagsetcore ensures are disjoint
+        script_category = env.rnd.choice([main_z_flag] + z_unsure_flags)[1:]
     
     bigbang_replacements = [[], [], [], [], [], []]
     script_nuke_replacement = []
@@ -208,6 +251,7 @@ def apply(env):
         etversion = True
         bb_spell_powers = [30, 27, 28, 28, 28, 27]
         nuke_spell_power = 11
+        hug_spell_power = 14
     else:
         bb_spell_powers = [32, 31, 32, 32, 31, 32]
         nuke_spell_power = 14
@@ -218,10 +262,10 @@ def apply(env):
     replacescriptflag = False
     fixjumpflag = False
 
-    # main script changes: physical, chaos, or three random scripts. Handle each of the applicable subflags as well, except for phaseshift.
+    # main script changes: physical, ailments, chaos, or three random scripts. Handle each of the applicable subflags as well, except for phaseshift.
     # at the end, check for other flags that impact the vanilla script.
 
-    if env.options.flags.has('z_physical_script') or ((env.rnd.random() < 1/2) and env.options.flags.has('z_physical_or_magical_script')):
+    if script_category == 'physical':
         physicalflag = True
         replacescriptflag = True
         fixjumpflag = True
@@ -346,7 +390,85 @@ def apply(env):
         # will need to change in the event of writing a compiler for new ai sets/etc.
         env.add_binary(address.UnheaderedAddress(0x0764A1), [0x61, 0x56, 0x18, 0x54, 0x05, 0x4E, 0x30, 0x58, 0x5C, 0x4F, 0x06, 0x4D]) 
     
-    elif env.options.flags.has('z_chaos_script'):
+    elif script_category == 'ailments':
+        # the normal script, but the six different Nuke/Virus casts are replaced with status spells (let's make them all different, for variety)
+        # no, we're not changing the Count cast in ET Meteo phase
+        replacescriptflag = True
+        potential_spells = list(POSSIBLE_STATUS_SPELLS)
+        ailments_spoilers = []
+        ailments_to_use = env.rnd.sample(potential_spells, k=6)
+        targeting_data = [env.rnd.choice(POSSIBLE_STATUS_SPELLS[sp].split(' / ')) for sp in ailments_to_use]
+        script_fragments = []
+        for i in range(6):
+            script_to_add = []
+            if targeting_data[i] != 'random character':
+                script_to_add.append('    target ' + targeting_data[i] + '\n')
+            script_to_add.append('    use ' + ailments_to_use[i])
+            script_fragments.append(script_to_add)
+
+        if not etversion:
+            script_virus_replacement.append(f'    set spell power {(49 if jversion else 36)}\n')
+        script_virus_replacement.extend(script_fragments[0])
+        ailments_spoilers.append(('Script Virus replacement', databases.get_spell_spoiler_name(ailments_to_use[0])))
+
+        script_nuke_replacement.append(f'    set spell power {nuke_spell_power}\n')
+        script_nuke_replacement.extend(script_fragments[1])
+        ailments_spoilers.append(('Script Nuke replacement', databases.get_spell_spoiler_name(ailments_to_use[1])))
+
+        reaction_spoiler_labels = ['Counter Nuke replacement', 'Counter Nuke Call replacement', 'Counter Weak replacement', 'Counter Virus replacement']
+        # counter-Nuke
+        counter_nuke_replacement.extend([f'    set spell power {nuke_spell_power}' + '\n'] + script_fragments[2])
+        # Call counter (Nuke or Hug)
+        counter_nuke_call_replacement.extend([f'    set spell power {(hug_spell_power if etversion else nuke_spell_power)}' + '\n'] + script_fragments[3])
+        # counter-Weak
+        counter_weak_replacement.extend(script_fragments[4])
+        # counter-Virus
+        counter_virus_replacement.extend([f'    set spell power {(40 if jversion else 36)}' + '\n'] + script_fragments[5])
+
+        for i in range(4):
+            ailments_spoilers.append((reaction_spoiler_labels[i], databases.get_spell_spoiler_name(ailments_to_use[i+2])))
+
+        # handle Big Bangs if necessary
+        if env.options.flags.has('z_random_bigbangs'):
+            whichbangflag = True
+
+        elif env.options.flags.has('z_no_nerfs'): 
+            # vanilla script but with chains for the Big Bangs; yes, this will be brutal
+            bigbang_replacements[0].extend([
+                '    chain {\n',
+                f'        set spell power {bb_spell_powers[0]}\n',
+                '        chain into\n',
+                '        use #Enemy_BigBang\n',       
+                '        condition 3\n'
+                '    }\n'
+            ])
+            for i in range(1,6):
+                bigbang_replacements[i].extend([
+                    '    chain {\n',
+                    f'        set spell power {bb_spell_powers[i]}\n',
+                    '        chain into\n',
+                    '        use #Enemy_BigBang\n',
+                    '    }\n'
+                ])
+        
+        elif env.options.flags.has('z_must_nerf'):
+            # vanilla script except we make the spell power set to 253 (0xFD) for Big Bangs
+            # setting 255 at the start via the script-change f4c
+            # I *think* using 255 (0xFF) makes the game think it's an opcode... yep. so does 254 (0xFE), so 253 it is.
+            env.add_substitution('zeromus initial spell power', '    spell power 255')
+            
+            for i in range(1,6):
+                bigbang_replacements[i].extend([
+                    '    set spell power 253\n',
+                    '    use #Enemy_BigBang\n',
+                ])  
+
+        # add status protection, for added danger... to us
+        env.add_substitution('zeromus status protection',
+                             'resist status #Poison #Blind #Mute #Piggy #Mini #Toad #Stone #Swoon #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Curse')
+        env.spoilers.add_table("MISC", ailments_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))    
+
+    elif script_category == 'chaos':
         # 2-5 random attacks per phase (or 1-3 for last phase), sometimes with a pass-shake-BB-type pattern (at most floor(n/2) of them), random reactions
         # each phase should have at least one damaging move
         chaos_phases = [[], [], []]
@@ -503,7 +625,9 @@ def apply(env):
             env.add_substitution(f'chaos phase {i+1}', ''.join(chaos_phases[i]))
 
         if env.options.flags.has('z_random_bigbangs'):
-            single_bb_replacement = env.rnd.choice(list(POSSIBLE_BIGBANG_COMMANDS))
+            # Python does change POSSIBLE_BIGBANG_COMMANDS, so we need to ignore Dark Wave
+            # (it's better to not let Z use it here)
+            single_bb_replacement = env.rnd.choice([bb for bb in POSSIBLE_BIGBANG_COMMANDS if bb != '#DarkWave'])
             bigbang_replacements[0].extend([
                 '    target all characters\n',
                 '    use ' + single_bb_replacement + '\n',
@@ -575,9 +699,9 @@ def apply(env):
         env.add_file('scripts/zeromus_chaosscript.f4c')
         env.spoilers.add_table("MISC", chaos_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))        
 
-    elif env.options.flags.has('z_random_scripts'):
+    elif script_category == 'lavosshell':
         # assign three random scripts from the game, avoiding condition changes
-        # mutually exclusive with z_shuffle_scripts/-z:phaseshift
+        # mutually exclusive with z_shuffle_scripts/Zphaseshift
         # requires a patch for Z to load both normal and alternate scripts
         env.add_file('scripts/zeromus_mimicscript.f4c')
 
@@ -745,8 +869,8 @@ def apply(env):
             public = env.options.flags.has_any('-spoil:all', '-spoil:misc')
             )
 
-    if env.options.flags.has('z_random_phases'):
-        # mutually exclusive with -z:lavosshell and -z:chaos; handled by flagsetcore
+    if env.options.flags.has('z_random_phases') and script_category not in ['chaos', 'lavosshell']:
+        # mutually exclusive with Zlavosshell and Zchaos; handled by flagsetcore, except under Zunsure:
         phases = [0x4C, 0x55, 0x57]
         env.rnd.shuffle(phases)
         # manual bytes for attack phase shuffle:

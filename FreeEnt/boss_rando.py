@@ -575,16 +575,20 @@ def apply(env):
                 ]
             })
 
-    assignment = {k : env.assignments[k] for k in env.assignments if k in BOSS_SLOTS}
+    assignment = {k : env.assignments[k] for k in BOSS_SLOTS}
+    # if Bslots is not on, the shuffled_stats_slots dictionary is just the identity
+    shuffled_stats_slots = env.meta['boss_stats_slots']
 
     for slot in assignment:
         boss = assignment[slot]
         is_alt_gauntlet = (env.options.flags.has('bosses_alt_gauntlet') and boss == 'fabulgauntlet')
 
-        source_formation_id = FORMATION_MAP[slot[:-5]] # remove "_slot" suffix
+        source_formation_id = FORMATION_MAP[shuffled_stats_slots[slot][:-5]] # remove "_slot" suffix
         target_formation_id = FORMATION_MAP[boss]
 
         script_lines.append(f'// {slot} <- {boss}')
+        if env.options.flags.has('boss_slot_shuffle'):
+            script_lines.append(f'// stats are from ' + shuffled_stats_slots[slot])
 
         source_formation_id_list = (source_formation_id if type(source_formation_id) is list else [source_formation_id])
         target_formation_id_list = (target_formation_id if type(target_formation_id) is list else [target_formation_id])
@@ -674,10 +678,10 @@ def apply(env):
         leader = _get_leader(target_formation, FORMATION_DATA)
 
         env.add_substitution(f'{boss} defaults', '')
-        stat_scaling_reports.append(f'{slot} <- {boss}')
+        stat_scaling_reports.append(f'{shuffled_stats_slots[slot]} <- {boss}')
         for monster_id in target_formation:
             monster = target_formation[monster_id]
-            csv_row = [boss, slot, monster['name']]
+            csv_row = [boss, shuffled_stats_slots[slot], monster['name']]
 
             if monster_id in MONSTER_ID_REMAPS:
                 script_lines.append(f'monster(${MONSTER_ID_REMAPS[monster_id]:02X}) {{')
@@ -962,6 +966,9 @@ def apply(env):
         env.add_file('scripts/wyvern_script_et.f4c')
     else:
         env.add_file('scripts/wyvern_script_us_j.f4c')
+    if env.options.flags.has('kingqueen_fire_upgrade'):
+        env.add_substitution('king eblan fire2 replacement', '    use #Enemy_Glare')
+        env.add_substitution('queen eblan fire1 replacement', '    use #Enemy_HeatRay')
 
     # special case wyvern
     if assignment['milonz_slot'] == 'wyvern' and not env.options.flags.has('wyvern_no_meganuke') and not env.options.flags.has('wyvern_random_meganuke'):
@@ -979,9 +986,12 @@ def apply(env):
         boss = assignment[slot]
         # remove Officer slot and/or KQ Eblan slot if relevant
         if not ((slot == 'officer_slot' and env.options.flags.has('no_officer_slot'))
-                or (slot == 'kingqueen_slot' and env.options.flags.has('no_kq_eblan_slot'))):
+                or (slot == 'kingqueen_slot' and env.options.flags.has('no_kingqueen_slot'))):
             missing_bosses.remove(boss)
-            boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], obscurable=True) )
+            if env.options.flags.has('boss_slot_shuffle'):
+                boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], 'Stats: ' + BOSS_SPOILER_NAMES[shuffled_stats_slots[slot][:-5]], obscurable=True) )
+            else:
+                boss_spoilers.append( SpoilerRow(BOSS_SLOT_SPOILER_NAMES[slot], BOSS_SPOILER_NAMES[boss], obscurable=True) )
     for boss in missing_bosses:
         boss_spoilers.append( SpoilerRow("(not available)", BOSS_SPOILER_NAMES[boss], obscurable=True) )
     env.spoilers.add_table("BOSSES", boss_spoilers, public=env.options.flags.has_any('-spoil:all', '-spoil:bosses'))

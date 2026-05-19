@@ -1,11 +1,14 @@
 // for when Z needs maxed out attack/spell power,
 // we need to adjust the attack index/spell power using
 // scripting because otherwise the boss data doesn't line up
+// also adding status protection occasionally
 monster($C9)   // Zeromus 
 {
     // %zeromus attack index%
     // %end%
     // %zeromus initial spell power%
+    // %end%
+    // %zeromus status protection%
     // %end%
 }
 

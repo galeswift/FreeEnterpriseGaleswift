@@ -1,0 +1,28 @@
+// Allow Dart to use the max of level and agility,
+// but only with the Shuriken/Ninja Star
+
+msfpatch{
+    .addr $03e395
+        jsl $=EdgeDartStarCheck
+        nop
+
+    .new
+    EdgeDartStarCheck:
+        lda $3580
+        cmp #$40
+        beq $+IsStar
+        cmp #$41
+        beq $+IsStar
+        lda $2682
+        bra $+FoundStat
+    %IsStar:
+        // load level, compare to agility
+        lda $2682
+        cmp $2695
+        bcs $+FoundStat
+        // level is smaller, use agility
+        lda $2695
+    %FoundStat:
+        sta $e1
+        rtl
+}

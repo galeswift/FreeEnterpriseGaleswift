@@ -1,0 +1,12 @@
+// turn Rydia into a Red Mage upon growing up
+
+// provide adult Rydia with the White spellset
+// in both battle and menu
+patch($13fdfe bus) { 02 03 04 }
+patch($14ffc3 bus) { 02 03 04 }
+
+// change class name to Red.Wiz
+patch($0fa7b1 bus) { 53 60 5F C1 58 64 75 }
+
+// all equipment options are handled in update_equipment.py
+// all spells learned are handled in tweak_rando.py and dwarfcastle.f4c

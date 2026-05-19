@@ -319,6 +319,14 @@ def spellset_data(env):
                 '#Fatal' : 45,
                 '#Nuke'  : 57
             })
+    rosa_exit_replacement = env.meta['zot_spell']
+    if not env.options.flags.has('rosapaladin') and rosa_exit_replacement != '#Exit':
+        # swap #Exit into the replacement spell's level-up slot
+        # if Rosa is learning something else
+        spellsets['Rosa'].update({
+            '#Exit'  : spellsets['Rosa'][rosa_exit_replacement]
+        })
+        spellsets['Rosa'].pop(rosa_exit_replacement)
 
     if env.options.flags.has('harmspell'):
         # move '#Sight' (i.e. '#Harm') to be learned via level-up
@@ -339,7 +347,8 @@ def spellset_data(env):
         })
     elif env.options.flags.has('kainmagic'):
         # remove #Sight, give Kain #Lance and filled out spellsets
-        spellsets['PCecil'].pop('#Sight')
+        if not env.options.flags.has('darkpaladin'):
+            spellsets['PCecil'].pop('#Sight')
         spellsets['RydiaWhite'].pop('#Sight')
         spellsets['Rosa'].pop('#Sight')
         spellsets['Porom'].pop('#Sight')
@@ -364,6 +373,55 @@ def spellset_data(env):
             spellsets['KainWhite'].update({
                 '#White' : 56
             })      
+
+    if env.options.flags.has('call_level_up'):
+        spellsets['RydiaCall'].update({
+            '#spell.Imp'   : 3,
+            '#spell.Bomb'  : 10,
+            '#spell.Mage'  : 15,
+            '#spell.Odin'  : 23,
+            '#spell.Sylph' : 27,
+            '#spell.Shiva' : 28,
+            '#spell.Jinn'  : 29,
+            '#spell.Indra' : 30,
+            '#spell.Titan' : 32,
+            '#spell.Mist'  : 34,
+            '#spell.Asura' : 39,
+            '#spell.Levia' : 46,
+            '#spell.Baham' : 53,
+        })
+        if env.options.flags.has('japanese_spells'):
+            spellsets['RydiaCall'].update({
+                '#spell.Cocka' : 21,
+                '#spell.Levia' : 49,
+                '#spell.Baham' : 57,
+            })
+        elif env.options.flags.has('antidale_spells_progression'):
+            spellsets['RydiaCall'].update({
+            '#spell.Shiva' : 26,
+            '#spell.Jinn'  : 26,
+            '#spell.Indra' : 26,
+            })            
+    elif env.options.flags.has('call_start_all'):
+        spellsets['RydiaCall'].update({
+            '#spell.Imp'   : 0,
+            '#spell.Bomb'  : 0,
+            '#spell.Mage'  : 0,
+            '#spell.Odin'  : 0,
+            '#spell.Sylph' : 0,
+            '#spell.Shiva' : 0,
+            '#spell.Jinn'  : 0,
+            '#spell.Indra' : 0,
+            '#spell.Titan' : 0,
+            '#spell.Mist'  : 0,
+            '#spell.Asura' : 0,
+            '#spell.Levia' : 0,
+            '#spell.Baham' : 0,
+        })       
+        if env.options.flags.has('japanese_spells'):
+            spellsets['RydiaCall'].update({
+                '#spell.Cocka' : 0,
+            })
 
     spells_script = []
     # set up spell name consts for #Lance and #Harm

@@ -10,6 +10,7 @@ from .rewards import AxtorChestReward
 import random
 from random import shuffle
 from dataclasses import dataclass
+import math
 
 FIGHT_SPOILER_DESCRIPTIONS = {
     0x1C0 : "Staleman/Skulls",
@@ -183,6 +184,9 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.AdamantArmor')
     if env.options.flags.has('no_cursed_rings'):
         dbview.refine(lambda it: it.const != '#item.Cursed')
+    if (env.options.flags.has('no_call_orbs')
+        or (env.options.flags.has('treasure_playable') and 'rydia' not in env.meta['available_characters'])):
+        dbview.refine(lambda it: it.subtype != 'summon')
     if env.options.flags.has('objective_mode_external'):
         dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):
@@ -191,23 +195,70 @@ def refineItemsView(dbview, env):
     # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
     if env.options.flags.has('treasure_playable') and not 'omnidextrous' in (env.meta.get('wacky_challenge',[])):
         user_set = expand_characters_to_users(env.meta['available_characters'])
+
+        # Remove Dark Knight Cecil from users if on Cpaladin
+        if env.options.flags.has('characters_cecil_paladin'):
+            user_set.difference_update(set(['dkcecil']))
+
+        # check for Dart options; with World Championship of Darts, every weapon should appear,
+        # and without it, every normally-throwable weapon should appear when Edge is in the seed... 
+        # or DKC on Cabilities:fullgood when it's not also Kleptomania...
+        darters_set = set(['edge'])
+        dart_all = False
+        if 'darts' in env.meta.get('wacky_challenge',[]):
+            darters_set = user_set
+            dart_all = True
+        elif env.options.flags.has('all_good_abilities') and 'dkcecil' in user_set and not 'kleptomania' in env.meta.get('wacky_challenge',[]):
+            darters_set.add('dkcecil')
+
+        # adjust the equipment data if necessary 
+        adj_equip = env.meta.get('adjusted_equipment_user_data', {})
+        if not adj_equip:
+            for it in dbview:
+                adj_equip[it.code] = it.equip.copy()
+
+            if env.options.flags.has('rosapaladin'):
+                for it in dbview:
+                    if it.subtype in ['lightsword', 'sword', 'shield', 'axe', 'dagger'] and 'dkcecil' not in it.equip and it.const != '#item.Spoon':
+                        # Rosa gets swords/holy swords, axes, daggers (not the Spoon, of course), and all shields;
+                        # Cecil loses them
+                        adj_equip[it.code].remove('pcecil')
+                        adj_equip[it.code].append('rosa')
+                    elif it.subtype in ['staff'] and 'pcecil' not in it.equip:
+                        # Cecil gains the White Mage staves; Rosa loses them
+                        adj_equip[it.code].remove('rosa')
+                        adj_equip[it.code].append('pcecil')
+            elif env.options.flags.has('darkpaladin'):
+                for it in dbview:
+                    if 'dkcecil' in it.equip and 'pcecil' not in it.equip:
+                        adj_equip[it.code].append('pcecil')
+
+            if env.options.flags.has('rydiaredmage'):
+                for it in dbview:
+                    if 'dkcecil' in it.equip:
+                        # Adult Rydia gets DKC gear
+                        adj_equip[it.code].append('arydia')
+                    elif it.subtype == 'sword' or (it.subtype == 'shield' and len(it.equip) > 1):
+                        # as well as non-Paladin/DKC swords/shields
+                        adj_equip[it.code].append('arydia')
+                    elif 'crydia' in it.equip and not 'arydia' in it.equip:
+                        # keeps all of her child equipment (specifically White Mage gear)
+                        adj_equip[it.code].append('arydia')
+                    elif env.options.flags.has('rosapaladin') and it.subtype == 'axe':
+                        # and gets axes on Rosadin
+                        adj_equip[it.code].append('arydia')
+
+            env.meta['adjusted_equipment_user_data'] = adj_equip
+
         # In Fist Fight, the only weapons are claws, which are equippable by everyone, so need more complex logic
         if 'fistfight' in env.meta.get('wacky_challenge',[]):
-            dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(it.equip).isdisjoint(user_set)) or (it.subtype == 'claw'))
+            dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(adj_equip[it.code]).isdisjoint(user_set)) 
+                                                           or (it.category == 'weapon' and (dart_all or it.subtype == 'claw'))
+                                                           or (not darters_set.isdisjoint(user_set) and it.throw))
         else:
-            # Remove Dark Knight Cecil from users if on Cpaladin without Dark Paladin
-            if env.options.flags.has('characters_cecil_paladin') and not env.options.flags.has('darkpaladin'):
-                user_set.difference_update(set(['dkcecil']))
-            if env.options.flags.has('rosapaladin'):
-                # When Rosa and Paladin Cecil swap weapons/shields, need to handle that
-                weapons_user_set = user_set.copy().difference(set(['pcecil','rosa']))
-                for c in ['pcecil', 'rosa']:
-                    if c in user_set:
-                        weapons_user_set.add([d for d in ['pcecil', 'rosa'] if d != c][0])
-                dbview.refine(lambda it: it.category == 'item' or (it.category == 'armor' and it.subtype != 'shield' and not set(it.equip).isdisjoint(user_set))
-                                                               or ((it.category == 'weapon' or it.subtype == 'shield') and not set(it.equip).isdisjoint(weapons_user_set)))
-            else:
-                dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
+            dbview.refine(lambda it: it.category == 'item' or not set(adj_equip[it.code]).isdisjoint(user_set)
+                                                           or (it.category == 'weapon' and dart_all)
+                                                           or (not darters_set.isdisjoint(user_set) and it.throw))
 
 def expand_characters_to_users(char_set):
     user_set = set()
@@ -392,7 +443,11 @@ def apply(env):
 
         distributions = {}
         distributions_unrestricted = {}
-        curves_dbview = databases.get_tvanillaish_dbview() if (env.options.flags.has('treasure_vanillaish')) else databases.get_curves_dbview()
+        if env.options.flags.has('treasure_vanillaish'):
+            curves_dbview = databases.get_tvanillaish_dbview() if env.options.flags.has('treasure_no_j_items') else databases.get_tvanillaish_j_dbview()
+        else:
+            curves_dbview = databases.get_curves_dbview()
+
         for row in curves_dbview:
             weights = {i : getattr(row, f"tier{i}") for i in range(1,9)}
             if env.options.flags.has('treasure_wild_weighted'):
@@ -411,10 +466,52 @@ def apply(env):
                     
             distributions_unrestricted[row.area] = util.Distribution(weights)
 
+            backup_weights = {}
+            for weight in weights:
+                backup_weights[weight] = weights[weight]
+
+            allowed_tiers = []
             # null out distributions for empty item tiers
             for i in range(1,9):
                 if not items_by_tier.get(i, None):
                     weights[i] = 0
+                else:
+                    # ID the tiers that actually still have items
+                    allowed_tiers.append(i)
+
+            # check if there are any non-zero weights; if *all* weights are 0,
+            # then we need to set a default distribution
+            empty_weights = True
+            for i in range(1,9):
+                if weights[i]:
+                    empty_weights = False
+                    break
+            
+            if empty_weights:
+                # idea: start with the expected tier for this area,
+                # clamp to [mintier,maxtier] if appropriate, and then
+                # check if that tier is allowed; if not, expand to
+                # [exptier-1, exptier+1] (still clamped) and check again, etc.
+                # Eventually you hit tier 5 or below and those shouldn't
+                # be empty, so this algorithm ends.
+                exptier = max(1,sum([w*backup_weights[w] for w in backup_weights]) // sum([backup_weights[w] for w in backup_weights]))
+                if mintier:
+                    exptier = max(mintier,exptier)
+                minbound = (1 if not mintier else mintier)
+                if maxtier:
+                    exptier = min(maxtier,exptier)
+                maxbound = (8 if not maxtier else maxtier)
+                u_bound = exptier
+                l_bound = exptier
+                while empty_weights:
+                    for i in range(max(l_bound,minbound),min(u_bound,maxbound)+1):
+                        if i in allowed_tiers:
+                            weights[i] = 1
+                            empty_weights = False
+                    if empty_weights:
+                        u_bound += 1
+                        l_bound -= 1
+
             distributions[row.area] = util.Distribution(weights)                      
         for t in plain_chests_dbview.find_all():
             tier = -1
@@ -455,11 +552,11 @@ def apply(env):
         pass_chest = env.rnd.choice(remaining_chests.find_all())
         treasure_assignment.assign(pass_chest, '#item.Pass')
         remaining_chests.refine(lambda t: t.world != 'Overworld' and t.area != pass_chest.area)
-        pass_chest = env.rnd.choice(remaining_chests.find_all())
-        treasure_assignment.assign(pass_chest, '#item.Pass')
-        remaining_chests.refine(lambda t: t.area != pass_chest.area)
-        pass_chest = env.rnd.choice(remaining_chests.find_all())
-        treasure_assignment.assign(pass_chest, '#item.Pass')
+        pass_chest2 = env.rnd.choice(remaining_chests.find_all())
+        treasure_assignment.assign(pass_chest2, '#item.Pass')
+        remaining_chests.refine(lambda t: t.area != pass_chest2.area)
+        pass_chest3 = env.rnd.choice(remaining_chests.find_all())
+        treasure_assignment.assign(pass_chest3, '#item.Pass')
 
     # apply required objective treasures
     if env.meta['required_treasures']:

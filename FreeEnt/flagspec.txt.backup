@@ -53,58 +53,59 @@ Sprice:20/Sprice:40/Sprice:60/Sprice:80/Sprice:120/Sprice:140/Sprice:160/Sprice:
 Spricey:items Spricey:weapons Spricey:armor
 Salways:apples Salways:sirens Salways:vampires Salways:hrglass Salways:bacchus Salways:starveil Salways:cure3 Salways:illusion Salways:damage_items Salways:coffin
 Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sno:cure3 Sno:illusion Sno:life Sno:damage_items Sno:coffin
-Bvanilla Bstandard Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et
+Bvanilla Bstandard/Bpro/Bfriendly/Bcruel/Beasy Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots Bzones
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
-Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bspellpower Bremove:kaipo_slot Bremove:kqe_slot
+Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bthehades Bspellpower Bremove:officer_slot Bremove:kingqueen_slot
 Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
-Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
--kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:exit/-kit:atb/-kit:egg/-kit:random
--kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:exit/-kit2:atb/-kit2:egg/-kit2:random
--kit3:basic/-kit3:better/-kit3:loaded/-kit3:cata/-kit3:freedom/-kit3:cid/-kit3:yang/-kit3:money/-kit3:grabbag/-kit3:miab/-kit3:archer/-kit3:fabul/-kit3:castlevania/-kit3:summon/-kit3:notdeme/-kit3:meme/-kit3:defense/-kit3:mist/-kit3:mysidia/-kit3:baron/-kit3:dwarf/-kit3:eblan/-kit3:libra/-kit3:99/-kit3:green/-kit3:adamant/-kit3:cursed/-kit3:hero/-kit3:exit/-kit3:atb/-kit3:egg/-kit3:random
+Gnone Gdupe Gmp Gwarp Glife/Glife2f/Gnolifer Gsylph Gbackrow G64
+Fweighted/Fvanilla/Flocation/Fsequential:p/Fsequential:r/Fnerfed
+Fslowstart/Funlearn
+Fmaybe Funcapped Frandomhp Fomnimage
+Aagnostic/Avanilla/Ahero/Aslowest/Afastest/Aaverage/Amedian/Arandom/Amonster/Aflat/A750formula/Aanchor:7/Aanchor:27/Aanchor:28/Aanchor:41/Aanchor:42
+Ascale:1/Ascale:10
+Xsplit
+Xnoboost
+Xnokeybonus
+Xcrystalbonus
+Xobjectivebonus:25/Xobjectivebonus:10/Xobjectivebonus:5/Xobjectivebonus:num
+Xkicheckbonus:10/Xkicheckbonus:5/Xkicheckbonus:2/Xkicheckbonus:num
+Xzonkbonus:10/Xzonkbonus:5/Xzonkbonus:2
+Xmiabbonus:100/Xmiabbonus:50
+Xmoonbonus:200/Xmoonbonus:100
+Xmaxlevelbonus
+Xsmallparty
+Xgeometric:90/Xgeometric:80/Xgeometric:70/Xgeometric:60/Xgeometric:50/Xgeometric:40/Xgeometric:30/Xgeometric:20/Xgeometric:10/Xgeometric:0
+Zvanilla/Zphysical/Zailments/Zchaos/Zlavosshell
+Zunsure:vanilla Zunsure:physical Zunsure:ailments Zunsure:chaos Zunsure:lavosshell
+Zwhichbang
+Zphaseshift
+Znonerfs/Zmustnerf
+Znocosplay
+-kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:support/-kit:heroplusplus/-kit:exit/-kit:atb/-kit:egg/-kit:zelda/-kit:random
+-kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:support/-kit2:heroplusplus/-kit2:exit/-kit2:atb/-kit2:egg/-kit2:zelda/-kit2:random
+-kit3:basic/-kit3:better/-kit3:loaded/-kit3:cata/-kit3:freedom/-kit3:cid/-kit3:yang/-kit3:money/-kit3:grabbag/-kit3:miab/-kit3:archer/-kit3:fabul/-kit3:castlevania/-kit3:summon/-kit3:notdeme/-kit3:meme/-kit3:defense/-kit3:mist/-kit3:mysidia/-kit3:baron/-kit3:dwarf/-kit3:eblan/-kit3:libra/-kit3:99/-kit3:green/-kit3:adamant/-kit3:cursed/-kit3:hero/-kit3:support/-kit3:heroplusplus/-kit3:exit/-kit3:atb/-kit3:egg/-kit3:zelda/-kit3:random
 -noadamants
 -nocursed
 -spoon
 -monsterevade
 -monsterflee
--smith:super/-smith:alt -smith:playable -smith:omni
+-smith:super/-smith:alt -smith:playable/-smith:good -smith:omni -smith:spoilsuper -smith:sellsuper
 -starting:blackchocobo/-starting:underground
--fusoya:vanilla/-fusoya:location/-fusoya:sequential_p/-fusoya:sequential_r/-fusoya:nerfed
--fusoya:slowstart/-fusoya:unlearn
--fusoya:maybe -fusoya:uncapped -fusoya:randomhp -fusoya:omnimage
--agility:vanilla/-agility:slowest/-agility:fastest/-agility:average/-agility:median/-agility:random/-agility:monster/-agility:flat/-agility:750formula/-agility:anchor7/-agility:anchor27/-agility:anchor28/-agility:anchor41/-agility:anchor42
--agility:scale1/-agility:scale10
 -speedmodbalance
--exp:split
--exp:noboost
--exp:nokeybonus
--exp:crystalbonus
--exp:objectivebonus25/-exp:objectivebonus10/-exp:objectivebonus5/-exp:objectivebonus_num
--exp:kicheckbonus10/-exp:kicheckbonus5/-exp:kicheckbonus2/-exp:kicheckbonus_num
--exp:zonkbonus10/-exp:zonkbonus5/-exp:zonkbonus2
--exp:miabbonus100/-exp:miabbonus50
--exp:moonbonus200/-exp:moonbonus100
--exp:maxlevelbonus
--exp:smallparty
--exp:geometric90/-exp:geometric80/-exp:geometric70/-exp:geometric60/-exp:geometric50/-exp:geometric40/-exp:geometric30/-exp:geometric20/-exp:geometric10/-exp:geometric0
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
--vanilla:hobs
--vanilla:growup
+-call:levelup/-call:all -call:vanillahobs -call:vanillagrowup/-call:nogrowup -call:noorbs
+-vanilla:zot
 -vanilla:fashion
 -vanilla:miabs
 -vanilla:giant
--z:physical/-z:physmag/-z:chaos/-z:lavosshell
--z:whichbang
--z:phaseshift
--z:nonerfs/-z:mustnerf
--z:vanillasprite
 -vintage
 -pushbtojump
 -doorsrando/-doorsrando:normal/-doorsrando:gated/-doorsrando:blueplanet/-doorsrando:why/-doorsrando:all
 -entrancesrando/-entrancesrando:normal/-entrancesrando:gated/-entrancesrando:blueplanet/-entrancesrando:why/-entrancesrando:all
--calmness
+-panicbutton
 -forcesealed
 -wacky:random/-wacky:random2/-wacky:random3/-wacky:random4/-wacky:random5/-wacky:random6
 -wacky:musical
@@ -148,7 +149,8 @@ Gnone Gdupe Gmp Gwarp Glife Gsylph Gbackrow G64
 -wacky:workexperience
 -wacky:moneygains
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin/-tweak:rosadin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon 
--tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen
+-tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen -tweak:yanghp -tweak:tellahrecall
+-tweak:edgedart -tweak:magicwhips -tweak:rydiaredmage
 -spoil:all
 -spoil:keyitems
 -spoil:rewards
@@ -168,10 +170,14 @@ Pnone    : ~Pkey & ~Pshop & ~Pchests
 Cvanilla : ~Cstandard & ~Crelaxed
 Tvanilla : ~Tshuffle & ~Tstandard & ~Tpro & ~Tsemipro & ~Twild & ~Twildish & ~Tstandardish & ~Tvanillaish & ~Tempty
 Svanilla : ~Sshuffle & ~Sstandard & ~Spro & ~Swild & ~Swildish & ~Scabins & ~Svanillaish & ~Sempty & ~Ssame
-Bvanilla : ~Bstandard
+Bvanilla : ~Bstandard & ~Bpro & ~Bfriendly & ~Bcruel & ~Beasy
 Etoggle  : ~Evanilla & ~Ereduce & ~Enorepeats & ~Enoencounters
 Hrandom  : ~Hvanilla & ~Hnone
 Gnone    : ~/^G(?!none)/
+Fweighted : ~Fvanilla & ~Flocation & ~Fsequential:p & ~Fsequential:r & ~Fnerfed
+Aagnostic : ~Avanilla & ~Ahero & ~Aslowest & ~Afastest & ~Aaverage & ~Amedian & ~Arandom & ~Amonster & ~Aflat & ~A750formula & ~/^Aanchor:/
+Zvanilla : ~Zphysical & ~Zailments & ~Zchaos & ~Zlavosshell 
+
 ----- SLUGS
 
 Onone                objective_none
@@ -315,11 +321,17 @@ Sethersell           shops_ethers_sell_full
 
 Bvanilla             bosses_vanilla
 Bstandard            bosses_standard
+Bpro                 bosses_pro
+Bfriendly            bosses_friendly
+Bcruel               bosses_cruel
+Beasy                bosses_easy
 Bnofree              no_free_bosses
 Bunsafe              bosses_unsafe
 Balt:gauntlet        bosses_alt_gauntlet
 Bstats:j             japanese_bosses
 Bstats:et            easy_type_bosses
+Bslots               boss_slot_shuffle
+Bzones               bosses_within_zones
 Brestrict:summon     bosses_no_required_at_summon
 Brestrict:moon       bosses_no_required_on_moon
 Brestrict:zot        bosses_no_required_in_zot
@@ -334,9 +346,10 @@ Bwhybez              golbez_no_shadow
 Bwhichbez            golbez_random_spells
 Bitburns             wyvern_all_bad_things
 Bwoahdin             odin_random_spell
+Bthehades            kingqueen_fire_upgrade
 Bspellpower          bosses_nonzero_spellpower
-Bremove:kqe_slot     no_kq_eblan_slot
-Bremove:kaipo_slot   no_officer_slot
+Bremove:officer_slot    no_officer_slot
+Bremove:kingqueen_slot  no_kingqueen_slot
 
 Evanilla             encounter_vanilla
 Etoggle              encounter_toggle
@@ -362,9 +375,23 @@ Gdupe                glitch_allow_duplication
 Gmp                  glitch_allow_mp_underflow
 Gwarp                glitch_allow_dwarf_warp
 Glife                glitch_allow_life
+Glife2f              glitch_modified_life
+Gnolifer             glitch_prevent_life2
 Gsylph               glitch_allow_sylph
 Gbackrow             glitch_allow_backrow
 G64                  glitch_allow_64
+
+Fvanilla       vanilla_fusoya
+Flocation      location_fusoya
+Fsequential:p  sequential_p_fusoya
+Fsequential:r  sequential_r_fusoya
+Fnerfed        nerfed_fusoya
+Fmaybe         maybe_fusoya
+Fslowstart     slowstart_fusoya
+Funlearn       unlearn_fusoya
+Funcapped      uncapped_fusoya
+Frandomhp      randomhp_fusoya
+Fomnimage      add_spells_fusoya
 
 -noadamants          no_adamants
 -nocursed            no_cursed_rings
@@ -375,55 +402,48 @@ G64                  glitch_allow_64
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith
+-smith:good          goodsmith
 -smith:omni          omnismith
+-smith:spoilsuper    spoilsmith
+-smith:sellsuper     sellsmith
 -starting:blackchocobo  starting_blackchocobo
 -starting:underground   starting_underground
 
--fusoya:vanilla       vanilla_fusoya
--fusoya:location      location_fusoya
--fusoya:sequential_p  sequential_p_fusoya
--fusoya:sequential_r  sequential_r_fusoya
--fusoya:nerfed        nerfed_fusoya
--fusoya:maybe         maybe_fusoya
--fusoya:slowstart     slowstart_fusoya
--fusoya:unlearn       unlearn_fusoya
--fusoya:uncapped      uncapped_fusoya
--fusoya:randomhp      randomhp_fusoya
--fusoya:omnimage      add_spells_fusoya
-
--agility:vanilla     vanilla_agility
--agility:slowest     slowest_agility
--agility:fastest     fastest_agility
--agility:average     average_agility
--agility:median      median_agility
--agility:random      random_agility
--agility:monster     monster_agility
--agility:flat        flat_agility
--agility:750formula  formula_agility
+Avanilla     vanilla_agility
+Ahero        hero_agility
+Aslowest     slowest_agility
+Afastest     fastest_agility
+Aaverage     average_agility
+Amedian      median_agility
+Arandom      random_agility
+Amonster     monster_agility
+Aflat        flat_agility
+A750formula  formula_agility
 -speedmodbalance     balance_speed_mod_range
 
--exp:split           experience_split
--exp:noboost         experience_no_boost
--exp:nokeybonus      experience_no_key_item_bonus
--exp:crystalbonus    experience_crystal_bonus
--exp:maxlevelbonus   experience_max_level_bonus
--exp:smallparty      experience_small_party
+Xsplit           experience_split
+Xnoboost         experience_no_boost
+Xnokeybonus      experience_no_key_item_bonus
+Xcrystalbonus    experience_crystal_bonus
+Xmaxlevelbonus   experience_max_level_bonus
+Xsmallparty      experience_small_party
 -miscbugfixes        bug_fixes
--vanilla:hobs        vanilla_hobs
--vanilla:growup      vanilla_dwarf_summons
+-call:levelup        call_level_up
+-call:all            call_start_all 
+-call:vanillahobs    vanilla_hobs
+-call:vanillagrowup  vanilla_dwarf_summons
+-call:nogrowup       no_dwarf_summons
+-call:noorbs         no_call_orbs
+-vanilla:zot         vanilla_zot
 -vanilla:fashion     vanilla_fashion
 -vanilla:miabs       vanilla_miabs
 -vanilla:giant       vanilla_giant
 
--z:vanillasprite     vanilla_z
--z:physical          z_physical_script
--z:physmag           z_physical_or_magical_script
--z:chaos             z_chaos_script
--z:lavosshell        z_random_scripts
--z:whichbang         z_random_bigbangs
--z:phaseshift        z_random_phases
--z:nonerfs           z_no_nerfs
--z:mustnerf          z_must_nerf
+Znocosplay         vanilla_z
+Zwhichbang         z_random_bigbangs
+Zphaseshift        z_random_phases
+Znonerfs           z_no_nerfs
+Zmustnerf          z_must_nerf
 
 -pushbtojump         jump
 
@@ -440,3 +460,8 @@ G64                  glitch_allow_64
 -tweak:twinmeteo     twinmeteo
 -tweak:chocobosummon bigchocobosummon
 -tweak:fusoyaregen   fusoyaregen
+-tweak:yanghp        yanghp
+-tweak:tellahrecall  tellahrecall
+-tweak:edgedart      edgedart
+-tweak:magicwhips    magicwhips
+-tweak:rydiaredmage  rydiaredmage

@@ -21,7 +21,7 @@ STARTING_BLACK = [    # formerly for Ordeals buff, now for nerfed
     ]
 
 STARTING_CALL = [    # for nerfed with all_spells
-    '#spell.Imp', '#spell.Bomb', '#spell.Choco', 
+    '#spell.Imp', '#spell.Bomb', '#spell.Chocb', 
     ]
 
 JAPANESE_EXCLUSIVE_SPELLS = [
@@ -591,11 +591,11 @@ def apply(env):
         excluded_spells.extend(['#spell.Sight'])
 
     if env.options.flags.has('antidale_spells_progression') and not env.options.flags.has('unlearn_fusoya'):
-        # -fusoya:unlearn overrides Cspells:anti re: Weak.
+        # Funlearn overrides Cspells:anti re: Weak.
         excluded_spells.extend(['#spell.Weak'])
-        if not env.options.flags.has('fusoya_nerfed'):
+        if not env.options.flags.has('nerfed_fusoya'):
             env.add_scripts(
-            'spellset(#FusoyaBlack) {{ learned {{ 53  #spell.Weak }} }}'
+            'spellset(#FusoyaBlack) { learned { 53  #spell.Weak } }'
             )
 
     max_credits = 14
@@ -604,7 +604,7 @@ def apply(env):
         max_credits = 34
         if env.options.flags.has('no_officer_slot'):
             max_credits -= 1
-        if env.options.flags.has('no_kq_eblan_slot'):
+        if env.options.flags.has('no_kingqueen_slot'):
             max_credits -= 1
     elif all_spells and not env.options.flags.has('location_fusoya'):
         max_credits = (27 if env.options.flags.has('slowstart_fusoya') else 22)
@@ -665,8 +665,6 @@ def apply(env):
         white = STARTING_WHITE.copy()
         if j_spells:
             white.extend(STARTING_WHITE_JAPANESE)
-        if not no_lance:
-            white.remove('#spell.Sight')
         black = STARTING_BLACK.copy()
         omni = STARTING_CALL.copy()
         
@@ -680,6 +678,9 @@ def apply(env):
             for spell in STARTING_CALL:
                 if env.rnd.random() < MAYBE_THRESHOLD:
                     omni.remove(spell)
+
+        if not no_lance and '#spell.Sight' in white:
+            white.remove('#spell.Sight')
 
         if env.options.flags.has('randomhp_fusoya'):
             # in this case, either the HP max is 3900 or it's 1100, no slowstart option
@@ -709,7 +710,7 @@ def apply(env):
         if env.options.flags.has('no_officer_slot'):
             LOCATION_SLOTS.pop('officer_slot')
             MOD_BOSS_SLOT_SPOILER_NAMES.pop('officer_slot')
-        if env.options.flags.has('no_kq_eblan_slot'):
+        if env.options.flags.has('no_kingqueen_slot'):
             LOCATION_SLOTS.pop('kingqueen_slot')
             MOD_BOSS_SLOT_SPOILER_NAMES.pop('kingqueen_slot')
         
@@ -795,7 +796,7 @@ def apply(env):
             learned_spells.insert(3, 'FF') # Officer is the second slot, so its spells would normally start at index 3
             learned_spells.insert(4, 'FF')
             learned_spells.insert(5, 'FF') 
-        if env.options.flags.has('no_kq_eblan_slot'):
+        if env.options.flags.has('no_kingqueen_slot'):
             learned_spells.insert(60, 'FF') # King/Queen Eblan is the twenty-first slot, so its spells would normally start at index 60
             learned_spells.insert(61, 'FF')
             learned_spells.insert(62, 'FF') 

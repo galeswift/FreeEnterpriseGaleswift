@@ -19,7 +19,18 @@ msfpatch {
 
         lda $26d2
         cmp #$14
+        // %flag glitch_prevent_life2 on%
+        bne $+CheckOtherSpells
+        pha
+        lda $cf
+        cmp #$05
+        pla
+        bcc $+Success
+    %CheckOtherSpells:
+        // %end%
+        // %flag glitch_prevent_life2 off%
         beq $+Success
+        // %end%
         cmp #$ab
         beq $+Success
         cmp #$ac

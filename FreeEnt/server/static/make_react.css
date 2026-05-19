@@ -330,6 +330,26 @@ body {
     border-left-color: #7a3c3c;
 }
 
+.flagSection.fusoya {
+    border-left-color: #3e3c7a;
+}
+
+.flagSection.experience {
+    border-left-color: #13802e;
+}
+
+.flagSection.agility {
+    border-left-color: #993286;
+}
+
+.flagSection.zeromus {
+    border-left-color: #4b4023;
+}
+
+.flagSection.wacky {
+    border-left-color: #561380;
+}
+
 .flagSection.spoilers {
     border-left-color: #111111;
 }

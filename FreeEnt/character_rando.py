@@ -291,7 +291,8 @@ def apply(env):
             characters = []
             if not env.options.flags.has('characters_not_guaranteed'):
                 characters.extend(allowed_characters)
-                if start_character in characters and len(allowed_characters) > mandatory_objective_required_char_count:
+                if (start_character in characters and start_character not in env.meta['objective_required_characters']
+                    and len(allowed_characters) > mandatory_objective_required_char_count):
                     characters.remove(start_character)
             else:
                 # need to ensure that even on Cmaybe, we put in enough characters for random objectives
@@ -305,11 +306,29 @@ def apply(env):
                     # remove restricted characters first
                     if valid_RESTRICTED_CHARACTERS and not env.options.flags.has('characters_relaxed'):
                         ch = env.rnd.choice(valid_RESTRICTED_CHARACTERS)
-                        if ch in characters:
+                        if ch in characters and ch not in env.meta['objective_required_characters']:
                             characters.remove(ch)
                         valid_RESTRICTED_CHARACTERS.remove(ch)
                     else:
-                        characters.remove(env.rnd.choice(characters))
+                        # remove any; it doesn't matter whom, as long as they aren't objective-required.
+                        ch_options = [c for c in characters if c not in env.meta['objective_required_characters']]
+                        characters.remove(env.rnd.choice(ch_options))
+            elif len(characters) > len(assignable_slots):
+                # obscure edge case for Cnopartner/nofree + Omode:classicgiant (but not Cnoearned): 
+                # we can have one too many characters, so pre-cull one depending on if there are 
+                # too many restricted characters for gated slots
+                valid_RESTRICTED_CHARACTERS = list(RESTRICTED_CHARACTERS)
+                if len(valid_RESTRICTED_CHARACTERS) >= len(HARD_SLOTS) - 1:
+                    # cull a restricted character to help the randomizer; note that there are
+                    # len(HARD_SLOTS) - 1 available non-starting-character slots, i.e. 9-1 = 8.
+                    ch_options = [c for c in valid_RESTRICTED_CHARACTERS if c in characters and c not in env.meta['objective_required_characters']]
+                    if ch_options:
+                        ch = env.rnd.choice(ch_options)
+                        characters.remove(ch)
+                else:
+                    # remove any; it doesn't matter whom, as long as they aren't objective-required (and they can't all be!).
+                    ch_options = [c for c in characters if c not in env.meta['objective_required_characters']]
+                    characters.remove(env.rnd.choice(ch_options))
             # add characters to the pool as best as we're able            
             while len(characters) < len(assignable_slots):        
                 character_choices = set(allowed_characters)                
@@ -388,7 +407,7 @@ def apply(env):
                 if not character_is_findable:
                     assignment_impossible = True
             nonstarting_chars = set()
-            for slot in [s for s in assignable_slots if slot not in STARTING_SLOTS]:
+            for slot in [s for s in assignable_slots if s not in STARTING_SLOTS]:
                 # build set of viable objective characters, needs to have the mandatory number of objective characters to be valid
                 nonstarting_chars.add(cur_assignment[slot])
             if len(nonstarting_chars) < mandatory_objective_required_char_count:
@@ -436,8 +455,8 @@ def apply(env):
                 target_axtor_map[target_slot] = 0x00        
         else:
             target_axtor_map[target_slot] = CHARACTERS[character]        
-
-        env.meta['available_characters'].add(character)
+            env.meta['available_characters'].add(character)
+            
         if slot not in ['dkcecil_slot', 'kain1_slot']:
             env.meta['available_nonstarting_characters'].add(character)
 
@@ -457,41 +476,10 @@ def apply(env):
         env.add_file('scripts/swoon_to_wishes.f4c')
         env.add_toggle('check_legend_swoon')
 
-    # apply Dark Paladin tweak
+    # apply Dark Paladin tweak naming changes
     if env.options.flags.has('darkpaladin'):
         CHARACTER_AS_ENEMY_NAMES['cecil'] = ['D.Knight', 'DPaladin']
         REFERENCE_ACTORS_TO_SPOILER_NAMES[0x0B] = 'Cecil (dark paladin)'
-
-        dp_initial_stats_script = ('\n' + 'patch ($0FAA27 bus) { 90 01 90 01 }\n' + # 400 HP
-            'patch ($0FAA2F bus) { 0F 0F 0A 07 04 }\n' + # 15 Str/Agi, 10 Vit, 7 Wis, 4 Wil
-            'patch ($0FAA34 bus) { 0A 32 }\n' # crit rate 10 (from 3), bonus 50 (from 30)
-        )
-        env.add_script(dp_initial_stats_script)
-
-        dp_level_up_stats_script = '\n'
-        for level in range(1,70):
-            str_bit = (1 if (level % 7) in [0,1,2,4,5] else 0) + (1 if (level % 7) in [3,6] and (level > 25) else 0)
-            agi_bit = (1 if (level > 15) and (level % 2) == 0 else 0)
-            vit_bit = (1 if ((level+1) % 5) == 0 else 0)
-            wis_bit = (1 if (level % 5) in [0,2]  else 0) + (1 if (level % 5) in [1,3] and (level in range(30,45)) else 0)
-            wil_bit = (1 if ((level+1) % 6) == 0 else 0)
-            incr_bits = (2 if (level % 7) == 0 else 1) + (1 if (level % 3) == 0 and (level in range(40,60)) else 0) 
-            stats_byte = (0x80 * str_bit) + (0x40 * agi_bit) + (0x20 * vit_bit) + (0x10 * wis_bit) + (0x08 * wil_bit) + incr_bits
-            hp_byte = 12 + 6 * (level // 8) + 4 * max(0,min(level-30, 13))
-            dp_level_up_stats_script = dp_level_up_stats_script + f'patch (${(0x0FC010 + (0x05 * (level-1))):06X} bus) {{ {stats_byte:02X} {hp_byte:02X} }}\n'
-        env.add_script(dp_level_up_stats_script)
-        
-        if not 'whatsmygear' in env.meta.get('wacky_challenge',[]):
-            env.add_script('\n'+ 
-                'patch ($0f91d7 bus) { 90 }\n' + # Str/Wis +3 for Light/Chaos Sword
-                'patch ($0f92ff bus) { B3 }\n' # Str/Vit/Wis +15 for Crystal/Hades Sword
-                )
-            wis_wil_swap = '\n'
-            for gear_id in [0x64, 0x6C, 0x71, 0x76, 0x85, 0x8C, 0xA0, 0xA6]:
-                wis_wil_swap = wis_wil_swap + f'patch (${(0x0F9100 + (0x08 * gear_id) + 0x07):06X} bus)' + ' { 10 }\n' # Wis+3 for all Pally/Ancient and Crystal/Hades gear
-            env.add_script(wis_wil_swap)
-
-        env.add_file('scripts/darkpaladin.f4c')
 
     # sub in against-ally battle data
     # TODO: need more complex logic for this so it can be obfuscated

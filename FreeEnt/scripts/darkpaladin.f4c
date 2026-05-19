@@ -41,22 +41,12 @@ text(item name #Light) {[darksword]Chaos}
 text(item name #CrystalSword) {[darksword]Hades}
 
 // let Dark Paladin Cecil equip all of DKC's gear by 
-// expanding the "only equippable by DKC" class
-patch ($0fa57a bus) { 01 02 }
-
-// update the weaker dark swords to be a bit stronger
-patch ($0f91b9 bus) { 1E } // Darkness Sword becomes 30 attack
-patch ($0f9201 bus) { 32 } // Ancient Sword becomes 50 attack
-patch ($0f91c1 bus) { 46 } // Black Sword becomes 70 attack
-
+// expanding the "only equippable by DKC" class;
 // change Ancient Sword to be only equippable by Cecil
-patch ($0f9206 bus) { 15 }
+// changes happen in update_equipment.py
 
-// change Light/Chaos to be Dark
-patch ($0f91d4 bus) { 04 }
-
-// change Crystal/Hades to be Dark and have no racial strength
-patch ($0f92fc bus) { 04 00 }
+// attack powers/elements/trait properties are updated
+// in update_equipment.py
 
 // stats changes to Light/Chaos and Crystal/Hades and all of 
 // the two sets of armour depend on the whatsmygear wacky, 

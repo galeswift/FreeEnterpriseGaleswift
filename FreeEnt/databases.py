@@ -36,6 +36,18 @@ _tvanillaish_db = csvdb.CsvDb(os.path.join(DB_PATH, 'tvanillaish.csvdb'), {
     'tier8' : int,
     })
 
+_tvanillaish_j_db = csvdb.CsvDb(os.path.join(DB_PATH, 'tvanillaish_j.csvdb'), {
+    'wikiindex' : int,
+    'tier1' : int,
+    'tier2' : int,
+    'tier3' : int,
+    'tier4' : int,
+    'tier5' : int,
+    'tier6' : int,
+    'tier7' : int,
+    'tier8' : int,
+    })
+
 _treasure_db = csvdb.CsvDb(os.path.join(DB_PATH, 'treasure.csvdb'), {
     'ordr' : int,
     'flag' : csvdb.HexInt,
@@ -78,6 +90,7 @@ _custom_weapons_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_weapons.csvdb'), 
     'id' : csvdb.HexInt,
     'equip' : csvdb.List(','),
     'use' : csvdb.List(','),
+    'price' : int,
     'attack' : int,
     'accuracy' : int,
     'str' : int,
@@ -85,6 +98,16 @@ _custom_weapons_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_weapons.csvdb'), 
     'vit' : int,
     'wis' : int,
     'wil' : int,
+    'spellpower' : int,
+    'elements' : csvdb.List(','),
+    'anim0' : csvdb.HexInt,
+    'anim1' : csvdb.HexInt,
+    'anim2' : csvdb.HexInt,
+    'anim3' : csvdb.HexInt,
+    })
+
+_custom_legend_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_legend.csvdb'), {
+    'id' : csvdb.HexInt,
     'spellpower' : int,
     'elements' : csvdb.List(','),
     'anim0' : csvdb.HexInt,
@@ -101,6 +124,9 @@ def get_doors_dbview():
 
 def get_tvanillaish_dbview():
     return _tvanillaish_db.create_view()
+
+def get_tvanillaish_j_dbview():
+    return _tvanillaish_j_db.create_view()
 
 def get_treasure_dbview():
     return _treasure_db.create_view()
@@ -122,6 +148,9 @@ def get_encounter_groups_dbview():
 
 def get_custom_weapons_dbview():
     return _custom_weapons_db.create_view()
+
+def get_custom_legend_dbview():
+    return _custom_legend_db.create_view()
 
 # helper function that some things need, maybe relocate?
 _item_spoiler_names = {}

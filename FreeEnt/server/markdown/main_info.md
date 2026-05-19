@@ -8,7 +8,7 @@ This page lists out, in some detail, the new/non-vanilla flags offered by the fo
 
 ## Objective Flags
 
-The number of objectives required for the reward has been expanded to 1-31 and all, instead of just 1-10 and all.
+The number of objectives required for the reward has been expanded to 1-31 and all, instead of just 1-10 and all. The logic to check whether your flagset is viable has been overhauled and made more permissive regarding objective combinations, so that more flexibility is possible with the three random objective groups.
 
 ### `Omode:bosscollector[N]` {: .h6 }
 
@@ -16,7 +16,7 @@ The number of objectives required for the reward has been expanded to 1-31 and a
 - Design/Programming: Galeswift
 - Locations: objective_rando.py, flagsetcore.py, objectives.f4c, eventextensions_randomizer.f4c
 
-This flag requires you to defeat some number of bosses to complete the objective (independent of any boss hunt objectives).
+This flag requires you to defeat some number of bosses to complete the objective (independent of any boss hunt objectives). For N = 34, if `Bremove` removes bosses from the game, then the required number of bosses drops to 33 or 32.
 
 ### `Omode:goldhunter[N]` {: .h6 }
 
@@ -84,11 +84,15 @@ This flag forces you to complete certain objectives to complete the seed. For ex
 
 ## Key Item Flags
 
+`Kforce:magma` has been modified to prevent D.Mist at the Rubicant spot gating the Magma Key at Rydia's Mom.
+
 ### `Knofree[dwarf,package]` {: .h6 }
 
 - Idea: sgrunt (probably others)
 - Design/Programming: sgrunt
-- Locations: 
+- Locations: core_rando.py, generator.py
+
+These flags move the free key item in the Toroia Hospital (the one Edward gives you) to either the Dwarf Castle Hospital (where Cid gives it to you) or to Rydia's Mom... but where the trigger for Rydia's Mom to give you the item is burning Mist with the Package, instead of defeating D.Mist. The Dwarf Castle item is treated as a gated quest, for the purposes of weighted non-KI rewards.
 
 ### `Kmiab:[standard,all,above,below,lst]` {: .h6 }
 
@@ -120,7 +124,7 @@ This flag adds the Pink Tail trade reward to the available key item slots. The v
 - Design/Programming: sgrunt
 - Locations: core_rando.py
 
-Under this flag, you will be _required_ to obtain moon access prior to obtaining underground access, meaning you will find your underground access somewhere accessible using the Darkness crystal (either on the moon somewhere or via the Giant).
+Under this flag, you will be _required_ to obtain moon access prior to obtaining underground access, meaning you will find your underground access somewhere accessible using the Darkness crystal (either on the moon somewhere or via the Giant). On `-vanilla:giant`, you will not need to complete the Giant unless one of `Bvanilla` or `Bunsafe` is also on (similar to the Odin spot gotcha).
 
 ### `Klatedark`, `Kunreliabledark` {: .h6 }
 
@@ -166,7 +170,7 @@ Under `Cthrift[n]`, where `n` can be from 2 to 5, characters will start with a f
 - Design/Programming: Antidale (with some tweaks by ScytheMarshall)
 - Locations: reordered_spells.f4c, update_spells.py, updated_spells.csvdb, fusoya_rando.py, mtordeals.f4c
 
-These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. However, if `-fusoya:unlearn` is active, then Fu will simply start with Weak and lose it as usual for that flag. 
+These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. However, if `Funlearn` is active, then Fu will simply start with Weak and lose it as usual for that flag. 
 
 The other details of the changes are as follows:
 
@@ -341,6 +345,10 @@ Giant (MIAB)
 :   from: 0,0,0,0,30,35,35,0 
 :   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,0,25,35,35,5
 
+In addition, all restrictions to items except for `Tmintier` and `Tmaxtier` also apply to quest and MIAB rewards; vanilla v4.6 FE is inconsistent about this situation (`-noadamants` applies, as does `-nocursed` and `Tno:j`, but `-wacky:kleptomania` does not, say). `Tmintier` as initially implemented by sgrunt (which predated the vanilla FE implementation) used to apply to such rewards, but this behaviour was reverted later. `Tmintier:2` is an additional setting that is not in vanilla FE.
+
+The quest/MIAB reward placement algorithm before v4.6.4.Gale was the same as vanilla v4.6, which means that if there were no items in a specific tier, then we ended up with a Cure1 as the default reward. It is possible, with sufficiently restrictive flags, to remove all items from tiers 6, 7, and 8, so this algorithm resulted in many Cure1s. With v4.6.4.Gale, the weights for reward placement are handled more in line with what treasure_rando does, where it clears the weights for empty item tiers. In all scenarios, if no weights remain, then the ideal average tier for that curve is considered, and then we expand in both directions until we find item tiers that still have items in them. 
+
 ### `Tsparsey:[underground,moon,overworld]` {: .h6 }
 
 - Idea: Galeswift
@@ -387,9 +395,9 @@ Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the 
 - Design/Programming: ScytheMarshall
 - Locations: treasure_rando.py, character_rando.py
 
-Under this flag, all chests will contain items that at least one character available in the seed will be able to use. This flag also applies to KI check zonk rewards or MIABs. Under Omnidextrous, this flag does nothing. Under Fist Fight, the only weapons available are claws. Summon orbs are consumables, so are treated like any other consumable item (so will appear even if Rydia doesn't; this choice is for tier restriction purposes). Dartable weapons are not considered usable by Dart users, so will not appear unless a character who can normally equip them appears. 
+Under this flag, all items from chests and quest/MIAB rewards will be usable by at least one character available in the seed. Under Omnidextrous, this flag does nothing except remove summon orbs if Rydia is not available. Under Fist Fight, the only weapons available are claws. All dartables will appear, regardless of Fist Fight, if at least one character with Dart is available (normally just Edge, possibly DKC also, or everyone on World Championship of Darts, which also makes all weapons dartable). Flags that change equipment options are taken into consideration.
 
-Note that this flag operates differently compared to the main branch v5.0-alpha: the summon orb and dartables exclusions are noted above and the assignment algorithm is different. On the alpha, items are replaced if they are not allowed, with a weighting to ensure you don't see the same gear over and over; on the fork, items are simply assigned as normal after filtering out disallowed items.
+Prior to v4.6.4, this flag did not impact dartables or summon orbs. When first created, this flag did not apply to KI check zonk rewards or MIABs. The summon orb choice was for tier restriction purposes, which is irrelevant on v4.6.4.
 
 With mystery flags, you can tell who the characters are in the seed by looking at the gear you get.
 
@@ -449,7 +457,7 @@ Shops only sell a single item, where all shops in the game are the same. The ite
 - Design/Programming: Galeswift, ScytheMarshall (for `stirred` only)
 - Locations: compile_item_prices.py
 
-This flag shuffles the prices of all of the items in the game (under `shaken`) or all of the normal buy/sellable items (under `stirred`). In particular, `Smixed:shaken` mixes in the prices of key items and non-items like no-weapon, no-armor, Sort, and the TrashCan, so some normal items will just be worth 0 GP. `Smixed:stirred` only shuffles the prices of items that you can normally possibly buy in shops on `Swild`.
+This flag shuffles the prices of all of the items in the game (under `shaken`) or all of the normal buy/sellable items (under `stirred`). In particular, `Smixed:shaken` mixes in the prices of key items and non-items like no-weapon, no-armor, Sort, and the TrashCan, so some normal items will just be worth 0 GP. `Smixed:stirred` only shuffles the prices of items that you can normally possibly buy in shops on `Swild`. Prior to v4.6.2.Gale, there was only one flag for this behaviour, `Smixed`, and it behaved as `Smixed:shaken` does currently.
 
 Under `-wacky:mysteryjuice`, the 1000 GP prices will be shuffled into other items (rather than randomized prices being overwritten by 1000 GP). Under `Sprice:[n]/pricey:[]`, the price increase/decrease applies to the new shuffled price (in case only some items are more/less expensive).
 
@@ -483,7 +491,7 @@ These flags change the prices of the items specified by `Spricey`, which can be 
 - Design/Programming: ScytheMarshall
 - Locations: shop_rando.py, character_rando.py
 
-Similarly to `Tplayable`, this flag limits equipment found in shops to those usable to characters you can actually find in the seed, with the same exceptions.
+Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, handled exactly the same way.
 
 ### `Sethersell` {: .h6 }
 
@@ -526,7 +534,7 @@ The `-z` flags interact with these flags in the following ways:
 - Design/Programming: sgrunt
 - Locations: core_rando.py, objective_rando.py
 
-This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can appear.
+This flag limits where objective bosses (and D.Mist, if `Knofree` is on) can appear, if possible. Pre-v4.6.4.Gale, these required bosses would never be placed in the restricted slots, which would prevent seeds from generating if there were too many required bosses and too many restricted slots. As of v4.6.4.Gale, these slots are deprioritized, much like how `Crestrict` prefers to not placed restricted characters in ungated slots, meaning you can potentially find required bosses in restricted slots if there are too many required bosses to fit in the unrestricted slots.
 
 ### `Bitburns` {: .h6 }
 
@@ -577,6 +585,14 @@ In vanilla FE (before v5.0), Wyvern's scripted spell power changes for the refle
 
 In some other FF games, Odin has both the target-all instant death attack and a single-target damaging attack (usually "Gungnir"). Under this flag, Odin's script is changed so that the first two Odin attacks are replaced with a random single-target spell. Odin will also not raise the sword until the point where you can trigger the Thunderstruck script. 
 
+### `Bthehades` {: .h6 }
+
+- Idea: Pushwall
+- Design/Programming: ScytheMarshall
+- Locations: babil_rubicant.f4c, boss_rando.py, core_rando.py
+
+This flag replaces King Eblan's Fire2 spell with Glare (single-target) and Queen Eblan's Fire1 spell with Heat Ray (default target-all). Nothing else about the fight is changed.
+
 ### `Bwhybez/whichbez` {: .h6 }
 
 - Idea: sgrunt (probably others)
@@ -604,7 +620,67 @@ Under `Bspellpower`, all bosses are treated as having at least 1 spell power. Th
 - Design/Programming: ScytheMarshall
 - Locations: boss_rando.py, kaipo_rydia.f4c, babil_rubicant.f4c
 
-These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc.
+These flags will remove the specified boss slot from the game entirely. No objective bosses will be placed there, FuSoYa will not learn spells, etc. (These flags were previously known as `Bremove[kaipo_slot,kqe_slot]`; now they are consistent with other flags/etc.)
+
+### `Bslots` {: .h6 }
+
+- Idea: Pushwall (with inadvertent inspiration from ScytheMarshall)
+- Design: Pushwall
+- Programming: ScytheMarshall
+- Locations: boss_rando.py, core_rando.py
+
+This flag shuffles the *stats* of the boss slots within four different groups. Watch out. The Odin slot (Baron Basement) is shuffled with the Gated Overworld slots on `Bunsafe`.
+
+!!! info "`Bslots` groups"
+    - Ungated Overworld: Mist Cave, Waterfall, Antlion Nest, Mt. Hobs, Fabul Defense, Ordeals 1/2/3, Baron Inn 1/2, Zot 1 
+    - Gated Overworld: Kaipo Inn (Package), Baron Castle 1/2, Cave Magnes, Zot 2, Hook 1/2
+    - Underworld: Dwarf 1/2, Lower Bab-il (top), Super Cannon, Sealed Cave, Asura spot, Levia spot, Baron Basement
+    - Darkness: Giant 1/2, Cave Bahamut, Murasame altar, Crystal Sword altar, White Spear altar, Ribbon altar, Masamune altar
+
+### `Bzones` {: .h6 }
+
+- Idea: warlink05
+- Design: warlink05, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: core_rando.py, flagsetcore.py
+
+This flag restricts boss randomization to be within three zones (different from the groups for `Bslots`). Waterhag is included, so it can replace one of the bosses in the early-game zone. If a situation arises where every boss in a zone must be in the seed due to custom boss objectives and there are not enough slots to place them all in a zone (perhaps because of `Bremove`), then if Waterhag is one of those bosses, it will be moved, and otherwise a randomly chosen objective boss from that zone will move to another zone. (This case is incredibly niche.)
+
+!!! info "`Bzones` zones"
+    - Early Game Bosses (up to Karate): D.Mist, Officer, Waterhag (no slot), Octomamm, Antlion, MomBomb, Fabul Gauntlet, Milon, Milon Z, DKC, Guards, Karate
+    - Gated Storyline Bosses on the Blue Planet (Baigan up to EvilWall): Baigan, Kainazzo, Dark Elf, Magus Sisters, Valvalis, Calbrena, Golbez, Lugae, Dark Imps, KQ Eblan, Rubicant, EvilWall
+    - Summons and Darkness-Locked Bosses: Odin, Asura, Leviatan, Bahamut, Elements, CPU, Pale Dim, Wyvern, Plague, D.Lunars, Ogopogo
+
+### `Bpro`, `Bfriendly`, `Bcruel`, `Beasy` {: .h6 }
+
+- Idea: IAmDMar (`Bpro`), Wylem (name for `Bcruel`), ScytheMarshall
+- Design: ScytheMarshall, Wylem
+- Programming: ScytheMarshall
+- Locations: core_rando.py, generate_boss_slot_rankings.py, boss_slot_rankings_data.py
+
+These flags are difficulty modifiers for `Bstandard`, where we generate a score for each boss-slot pairing and try to find assignments that are harder or easier based on the scoring. `Bpro` and `Bfriendly` perform a standard boss shuffle and then try many swaps of two bosses, keeping the result if the resulting assignment is harder (`Bpro`) or easier (`Bfriendly`) than before. `Bcruel` places the bosses where they generally are the most threatening, subject to some randomness. `Beasy` attempts to place the hardest bosses where they can do the least damage, by identifying boss-slot pairs as in `Bcruel` and then putting the boss into a slot where it is much less threatening. There are checks to ensure that objective bosses are placed without messing with the scoring much and on `Beasy` any bosses not in the seed are generally some of the harder bosses.
+
+The data for all three versions (US/J/ET) is located in boss_slot_rankings_data.py, if you want to inspect the slot rankings (which slots are the strongest in which stats) and boss weights (which stats are most important for which bosses).
+
+## Glitch Flags
+
+### `Glife2f` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: modify_life_monsters.f4c, generator.py
+
+This flag makes Life1 and Life potions restore HP to swooned monsters depending on their $2F stat, specifically (1 + ($2F / 32)) times (max HP / 4), with all divisions being integer division. Hence, there will be minor truncation errors. Characters are not affected by the change.
+
+Note that Cry does lower the $2F of every monster in battle, even ones that are swooned. 
+
+### `Gnolifer` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: remove_life_glitch.f4c
+
+This flag makes Life2 fail against monsters (and removes the usual Life glitch), so that you can only ever defeat a single monster once unless the monsters revive each other.
 
 ## Encounter Flags
 
@@ -715,23 +791,78 @@ The Tower Key is now a logical way underground, if you can access Lower Bab-il f
 
 Entrances to field maps from the various overworld maps are randomized within the given categories; for example, under `all` the entrance to Baron Town might lead to Dwarf Castle and the entrance to Baron Castle might lead to Cave Bahamut. Doors within field maps, for example doors to buildings inside of towns or connectors to different parts of a dungeon, remain intact.
 
-### `-calmness` {: .h6 }
+### `-panicbutton` {: .h6 }
 
-- Idea: jayp12323
-- Design/Programming: jayp12323
-- Locations: doorsrando.f4c
+- Idea/Design: jayp12323
+- Programming: jayp12323, Wylem, ScytheMarshall (the latter two for figuring out the initial graphical glitch)
+- Locations: panic_button.f4c
 
-When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button".
+When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button". On `-starting:` flags, you will be placed at your starting location instead, whatever it is, and placed in your starting vehicle (the Falcon or on foot).
 
-This flag _removes_ the Select+R functionality.
+This flag _enables_ the Select+R functionality. Before v4.6.4.Gale, this flag was named `-calmness` and _disabled_ the functionality, and was only relevant on doors/entrances rando. Now, this flag can be enabled on any seed. 
+
+!!! warn "Panic button"
+    The Panic button is no longer default on doors/entrances rando! Remember to enable it if you want to use it.
 
 ### `-forcesealed` {: .h6 }
 
 - Idea: rejakdylle
 - Design/Programming: jayp12323
-- Locations: doorsrando.f4c
+- Locations: force_sealed_cave_boss.f4c
 
-Normally, with the Panic button you can simply warp out of Sealed Cave after picking up the item at the bottom without fighting the boss. This flag triggers the boss fight on the way into the crystal room, not out of it. You can, of course, still skip the fight on Push B to Jump.
+Normally, with the Panic button you can simply warp out of Sealed Cave after picking up the item at the bottom without fighting the boss. This flag triggers the boss fight on the way into the crystal room, not out of it. You can, of course, still skip the fight on Push B to Jump or using the Warp glitch.
+
+### `-monsterevade`, `-monsterflee` {: .h6 }
+
+- Idea: ScytheMarshall (but also probably others)
+- Design/Programming: ScytheMarshall (with help from Aexoden and the disassembly)
+- Locations: give_monsters_evade.f4c, monster_flee.f4c
+
+These flags restore functionality to monsters that the original devs removed before the game released. `-monsterevade` allows monsters to correctly load their physical and magical evade stats at the start of battle (instead of just when those stats change, like for Valvalis). Be warned: monsters will take a lot less damage, and will dodge Life pots/casts! `-monsterflee` builds on the evade functionality and restores the ability for monsters to flee from battle (which requires them to have non-zero evade). Monsters can flee from non-boss-bit battles.
+
+### `-miscbugfixes` {: .h6 }
+
+- Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
+- Design/Programming: ScytheMarshall, cassidy/Wylem (for Hermes/Berserk)
+- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c, fix_regen_slot_indexing.f4c, fix_regen_axtor_check.f4c
+
+This flag includes fixes for a variety of vanilla FF4 bugs: 
+
+- The Hermes/Berserk glitch, where if you use a Hermes and then berserk that character before they take another action, they can hit swooned chararcters (because the game checks the subcommand for "can this actor hit swooned actors with their command?" and Hermes has the same subcommand as a monster spell that's used in the Zeromus cutscene to revive your party). The fix is to first check if the actor's command is magic; if it is, then load the subcommand, and if it isn't, put `FF FF` into the (16-bit) accumulator instead (preventing the check from ever succeeding).
+- The monster victim history bug, where multi-target spells do not update a monster's victim history except when the monster is in the lowest slot. The fix is to rewrite a loop in-place.
+- The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
+- The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
+- The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
+
+It also adds a fix for a vanilla FE bug: 
+- The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
+
+### `-starting:[blackchocobo,underground]` {: .h6 }
+
+- Idea: Deathlike, Skarcerer, others in the past
+- Design: Deathlike, Skarcerer, Marshal, ScytheMarshall, others
+- Programming: ScytheMarshall
+- Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
+
+These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights if you start underground beyond the usual mean bosses. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. If starting with the Black Chocobo, Mist does not get locked from the right side after the Package cutscene and the Hovercraft starts available at the start of the seed outside of Kaipo, allowing you to traverse by foot to Damcyan and Antlion Cave. (There is no logic for having Fabul or D.Mist at Hobs gate progression if you have Rydia.)
+
+Pre-v4.6.4.Gale, these flags were unavailable. As of v4.6.4.Gale, these flags are available, but incompatible with doors/entrances randomization and gated objectives (the modifications for doors required to make it work with a different starting location are highly non-trivial).
+
+### `-vanilla:zot` {: .h6 }
+
+- Idea: IAmDMar (relaying an idea from WeffJebster's chat)
+- Design: IAmDMar, Wylem, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: zot_rando.py, zot_top.f4c
+
+As of v4.6.4.Gale, by default Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). This flag removes that behaviour.
+
+!!! info "Possible Zot spells for Rosa"
+    Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
+
+On `-tweak:rosadin`, Rosa will learn a random spell, but because she cannot learn any of the non-Exit spells, she will not learn Exit. Cecil's white magic is unchanged.
+
+## Kit Flags
 
 ### `-kit:atb` {: .h6 }
 
@@ -765,6 +896,37 @@ This kit gives you a Cursed ring, regardless of `-nocursed`.
 
 This kit gives you one tier 4-5 weapon, body armor, headgear, and ring/gauntlet for your starting character. If the weapon is a bow, it will come with arrows; if the starting character is Edge or the Omnidextrous flag is enabled, there will also be a second weapon.
 
+### `-kit:support` {: .h6 }
+
+- Idea: Deathlike
+- Design: ScytheMarshall, Guerin, CoffeeAndChocobos
+- Programming: ScytheMarshall
+- Locations: kit_rando.py
+
+This kit provides a small selection of support-type items that your starting character can use.
+
+!!! info "Support kit contents by character"
+    - Cecil: 1x FireBomb, 1x LitBolt, Black Shield, and a tier 4-5 shield
+    - Kain: tier 4 shield, Dancing Dagger
+    - Rydia: 1x AuApple, 2x SomaDrop
+    - Tellah: 1x SomaDrop, 2x Ether2, 2x Vampire
+    - Edward: 1x AuApple, and either a Protect Ring or a Ribbon
+    - Rosa: Power staff, 5x Heal
+    - Yang: 2x Kamikaze, 2x Illusion
+    - Palom: Gaea Hat, 3x Ether1
+    - Porom: Gaea Hat, 3x Ether1
+    - Cid: tier 4 shield, 2x Kamikaze
+    - Edge: 3x Shuriken, 1x Ninja Star
+    - FuSoYa: 1x Stardust, 1x GaiaDrum
+
+### `-kit:heroplusplus` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: kit_rando.py
+
+This kit is just the Hero and Support kits packaged together, to allow for more variety in other kits while still providing the goods for the starting character.
+
 ### `-kit:exit` {: .h6 }
 
 - Idea: JudgeJoe, Fleury14
@@ -781,30 +943,18 @@ This kit gives you 5-10 Exits.
 
 This kit gives you one Siren and a selection of items that your starting character can use to successfully defeat a Yellow D egg. It's possible that resets are necessary or that the fights will be very long. Depending on the starting character, there may be many possible selections of items or only a few. The probability of a specific selection of items is smaller if the Yellow D fight will be long/etc. or if the items contribute to your party's power afterwards.
 
-### `-monsterevade`, `-monsterflee` {: .h6 }
+The list of possible kits, along with who could get them, can be found in the kit_rando.py file. 
 
-- Idea: ScytheMarshall (but also probably others)
-- Design/Programming: ScytheMarshall (with help from Aexoden and the disassembly)
-- Locations: give_monsters_evade.f4c, monster_flee.f4c
+### `-kit:zelda` {: .h6 }
 
-These flags restore functionality to monsters that the original devs removed before the game released. `-monsterevade` allows monsters to correctly load their physical and magical evade stats at the start of battle (instead of just when those stats change, like for Valvalis). Be warned: monsters will take a lot less damage, and will dodge Life pots/casts! `-monsterflee` builds on the evade functionality and restores the ability for monsters to flee from battle (which requires them to have non-zero evade). Monsters can flee from non-boss-bit battles.
+- Idea: IAmDMar
+- Design: IAmDMar, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: kit_rando.py
 
-### `-miscbugfixes` {: .h6 }
+This kit gives you a sword (one of Fire/Ice/Slumber/Silver/Light), a shield (Iron/Silver/Fire/Ice/Diamond), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle. It's themed after Zelda 1.
 
-- Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
-- Design/Programming: ScytheMarshall, cassidy/Wylem (for Hermes/Berserk)
-- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c, fix_regen_slot_indexing.f4c, fix_regen_axtor_check.f4c
-
-This flag includes fixes for a variety of vanilla FF4 bugs: 
-
-- The Hermes/Berserk glitch, where if you use a Hermes and then berserk that character before they take another action, they can hit swooned chararcters (because the game checks the subcommand for "can this actor hit swooned actors with their command?" and Hermes has the same subcommand as a monster spell that's used in the Zeromus cutscene to revive your party). The fix is to first check if the actor's command is magic; if it is, then load the subcommand, and if it isn't, put `FF FF` into the (16-bit) accumulator instead (preventing the check from ever succeeding).
-- The monster victim history bug, where multi-target spells do not update a monster's victim history except when the monster is in the lowest slot. The fix is to rewrite a loop in-place.
-- The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
-- The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
-- The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
-
-It also adds a fix for a vanilla FE bug: 
-- The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
+## Smith Flags
 
 ### `-smith:playable` {: .h6 }
 
@@ -814,6 +964,18 @@ It also adds a fix for a vanilla FE bug:
 
 Under this flag, the forge item will be usable by one of the characters you can get in the seed, whether it's an FF4A weapon or a regular tier 7-8 item. This flag does nothing when it's just the vanilla Excalbur (and on `Omode:classicforge`) or if it would otherwise give nothing (only Yang and no j-items or Adamants). 
 
+### `-smith:good` {: .h6 }
+
+- Idea: various (perhaps mostly ScytheMarshall)
+- Design: ScytheMarshall, Wylem
+- Programming: ScytheMarshall
+- Locations: custom_weapon_rando.py
+
+Under this flag, the forge item will not only be usable by one of the characters you can get in the seed (FF4A weapon or otherwise), but it will *also* be strong. For example, most of the good melee FF4A weapons, or an Adamant armour if those are available, or a MoonVeil if available, etc. The goal is to avoid feeling bad about spending the time to forge. On `-smith:alt`, the tier 7-8 items are given a fixed order and the best item in that order that is available (depending on the characters in the seed and other flags) will be given:
+
+!!! info "`-smith:alt,good` item order"
+    - Adamant Armour, Crystal Sword, Excalibur, Avenger, MoonVeil, Dragoon Spear, Artemis Arrows, Masamune, White Shirt
+
 ### `-smith:omni` {: .h6 }
 
 - Idea: CoffeeAndChocobos
@@ -822,74 +984,105 @@ Under this flag, the forge item will be usable by one of the characters you can 
 
 This flag allows every character in the seed to equip the FF4A weapon, if there is one. It will not, however, also allow anyone who cannot equip bows or arrows to equip the other hand to use Rosa's weapons.
 
-### `-starting:blackchocobo,underground` {: .h6 }
+Note that under this flag or under the Omnidextrous wacky flag, any sort of playable/good restriction will not restrict by character, because all characters can equip whatever the FF4A weapon ends up being.
 
-- Idea: Deathlike, Skarcerer, others in the past
-- Design: Deathlike, Skarcerer, Marshal, ScytheMarshall, others
+### `-smith:spoilsuper` {: .h6 }
+
+- Idea: Pushwall
+- Design: Pushwall, ScytheMarshall
 - Programming: ScytheMarshall
-- Locations: opening_[blackchocobo/underground].f4c, guided_intro.f4c, core_rando.py, generator.py, doors_rando.py, doorsrando.f4c, panic_button.f4c, many area f4c files, randomizer_keyitems.f4c, eventextensions[_misc].f4c, tracker.f4c, treasure_rando.py
+- Locations: custom_weapon_rando.py, custom_weapon_support.f4c
 
-These flags provide alternate starting conditions for the seed: either starting without an airship but with Black Chocobos, or starting underground with the Falcon (without the Drill). Logic is included to ensure that not having the Enterprise does not softlock the seed, though no logic is included to ensure that your party can win any fights. Some cutscenes are modified to not give you the Enterprise afterwards if you do not have it, instead giving a different vehicle (or no vehicle). Baron Castle now gives the Enterprise. Mist does not get locked from the right side after the Package cutscene if starting with the Black Chocobo.
+This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power, 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item). It will also match animations. The full list of additional properties is below:
 
-Or, at least, these flags _would_ do that, but because Doors Rando is a thing on the fork and modifying it to work with a different starting location is highly non-trivial, these flags will remain inactive for now. Once Doors Rando has been modified to work with these flags, these flags will become active. For now, while the flags are not accessible, all of the logic is available to look at in the various files, for when things are ready.
+!!! info "Alternate Legend weapon properties"
+    - Legend Claw, for Tiger Fang, Dragon Claw, Godhand: hits Undead weakness.
+    - Legend Rod, for Asura Rod: casts Stop upon use as an item.
+    - Legend Staff, for Seraphim Mace, Nirvana: casts Cure2 upon use as an item.
+    - Legend (dark) Sword, for Deathbringer: also dark elemental, inflicts Poison. 
+    - Legend (holy) Sword, for Caliburn, Flandango, Lightbringer: no change.
+    - Legend (normal) Sword, for Piggy Stick: inflicts Mini.
+    - Legend Spear, for Abel's Lance: also hits air weakness.
+    - Legend Katana, for Sasuke's Katana and Mutsunokami: casts Float upon use as an item.
+    - Legend Dagger, for Triton's Dagger: cast Virus upon use as an item.
+    - Legend Whip, for Mist Whip: long-range, inflicts Paralyze.
+    - Legend Axe, for Gigant Axe: two-handed.
+    - Legend Star, for Scrap Metal: long-range, hits air weakness (but is not Dartable).
+    - Legend Boomerang, for Rising Sun: long-range, hits air weakness.
+    - Legend Harp, for Requiem Harp, Apollo's Harp, Loki's Lute: long-range, two-handed, inflicts Blind.
+    - Legend Hammer, for Thor's Hammer, Fiery Hammer: two-handed, hits Machine weakness.
+    - Legend Bow, for Perseus Bow: long-range, hits air weakness.
+    - Legend Arrow, for Perseus Arrow: long-range, hits Undead weakness.
+
+### `-smith:sellsuper` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: compile_item_prices.py, custom_weapon_rando.py, custom_weapons.csvdb
+
+Normally, the FF4A custom weapon does not sell for anything. This flag assigns that item a price so that you can turn around and sell it to the shopkeep for items that you *actually* want. The prices are based roughly on similar quality items, though they max out at 126k GP (the max without going into the megapricing table (127k+), which means they have close enough to the maximum sell price, 63k GP instead of 63.5k).
 
 ## FuSoYa Flags
 
-- Idea: ScytheMarshall (except `-fusoya:slowstart`, `-fusoya:unlearn`, `-fusoya:omnimage`)
+- Idea: ScytheMarshall (except `Fslowstart`, `Funlearn`, `Fomnimage`)
 - Design/Programming: ScytheMarshall
 - Locations: fusoya_rando.py, fusoya_challenge.f4c; some wacky f4c files where command menus change
 
-These flags are intended to change how FuSoYa's spell-learning works, with the goal of making the character more balanced and less of an instant exclusion from "competitive" flagsets. 
+These flags are intended to change how FuSoYa's spell-learning works, with the goal of making the character more balanced and less of an instant exclusion from "competitive" flagsets. (Note that on v4.6.4.Gale, these flags were renamed to `F` from `-fusoya:`.)
 
-### `-fusoya:vanilla` {: .h6 }
+### `Fweighted` {: .h6 }
+
+This flag is just the normal FE FuSoYa behaviour given a flag name (for UI purposes, and to point out to new players that Fu is not vanilla anymore).
+
+### `Fvanilla` {: .h6 }
 
 This flag is just the `-vanilla:fusoya` flag but renamed; Fu starts at full power with all spells learned.
 
-### `-fusoya:sequential_p` {: .h6 }
+### `Fsequential:p` {: .h6 }
 
 Under this flag, FuSoYa learns spells in a fixed order: the order in which Porom and Palom learn their spells by level-up. If spells are learned at the same level, there is an arbitrary choice for which spells come first (mostly for minor balancing).
 
-### `-fusoya:sequential_r` {: .h6 }
+### `Fsequential:r` {: .h6 }
 
 - Idea: Deathlike
 
 Under this flag, FuSoYa learns spells in a fixed order: the order in which Rosa and Rydia learn their spells by level-up. If spells are learned at the same level, there is an arbitrary choice for which spells come first (mostly for minor balancing). Since Rosa and Rydia don't learn all of their spells by level-up (no Exit, Fire1, Fire/Ice/Lit2), FuSoYa will not learn the missing spells.
 
-### `-fusoya:location` {: .h6 }
+### `Flocation` {: .h6 }
 
 Under this flag, FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.
 
 Spells are broken into four tiers based on power/usefulness and boss spots are divided into eight tiers based on strength/out-of-the-way-ness. Each spell tier has a weighting for which boss spots spells can go; the stronger spells are weighted to go in the more powerful boss spots. Each spell is then assigned to a boss spot until all the spells are used up, and then it repeats, going until all the boss spots are assigned three spells (skipping spells that cannot be placed into a remaining boss spot due to weighting restrictions).
 
-### `-fusoya:nerfed` {: .h6 }
+### `Fnerfed` {: .h6 }
 
 FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual. The spells chosen are the same as the spells that FuSoYa would start with on the old F1 FuSoYa challenge flag (where he would get the rest of his spells at Ordeals).
 
-### `-fusoya:maybe` {: .h6 }
+### `Fmaybe` {: .h6 }
 
 FuSoYa will not necessarily learn every spell. Each spell is independently kept with a probability of 85%. Vanilla and nerfed FuSoYa will have possibly fewer starting spells and other FuSoYas will learn fewer spells/learn some spells a bit earlier.
 
-### `-fusoya:uncapped` {: .h6 }
+### `Funcapped` {: .h6 }
 
-FuSoYa will gain, or start with, up to 3900 HP (500 plus 100 HP for every boss in the seed). This flag interacts with `Bremove` and `-fusoya:omnimage` to lower the total HP threshold.
+FuSoYa will gain, or start with, up to 3900 HP (500 plus 100 HP for every boss in the seed). This flag interacts with `Bremove` and `Fomnimage` to lower the total HP threshold.
 
-### `-fusoya:slowstart` {: h6 }
+### `Fslowstart` {: h6 }
 
 - Idea: Guerin
 
 FuSoYa will skip learning spells and gaining HP after three of the first six and two of the next six boss fights. The boss fight numbers are random each seed. Fu will eventually learn all available spells, just five bosses later than usual.
 
-### `-fusoya:randomhp` {: h6 }
+### `Frandomhp` {: h6 }
 
 FuSoYa will gain the same amount of HP in the same amount of levels, but will possibly not gain any HP after some bosses and more than 100 HP after some bosses. The HP gains will be integer multiples of 100. 
 
-### `-fusoya:unlearn` {: h6 }
+### `Funlearn` {: h6 }
 
 - Idea: Galeswift
 
-FuSoYa will start with all possible spells and then lose spells after each boss fight until he's down to six spells. Spell loss happens in reverse order of the usual spell learning, so he will lose more powerful spells earlier; the exception is under `-fusoya:location`, where he loses the spells he would gain at those bosses (meaning he loses more powerful spells after more powerful boss spots).
+FuSoYa will start with all possible spells and then lose spells after each boss fight until he's down to six spells. Spell loss happens in reverse order of the usual spell learning, so he will lose more powerful spells earlier; the exception is under `Flocation`, where he loses the spells he would gain at those bosses (meaning he loses more powerful spells after more powerful boss spots).
 
-### `-fusoya:omnimage` {: h6 }
+### `Fomnimage` {: h6 }
 
 - Idea: Guerin
 
@@ -897,7 +1090,7 @@ FuSoYa is given a third spellset potentially containing every non-Black/White sp
 
 ## Agility Flags
 
-- Idea: ScytheMarshall (except `-agility:random`, `-agility:750formula`, and `-speedmodbalance`)
+- Idea: ScytheMarshall (except `Arandom`, `A750formula`, and `-speedmodbalance`)
 - Design/Programming: ScytheMarshall (except for the above)
 - Locations: agility.f4c (mostly)
 
@@ -905,41 +1098,51 @@ These flags are for changing how the agility system works. Some flags choose dif
 
 For agility flags that tend to increase the base ATB, the Count spell duration is lengthened to make it significantly more reasonable (otherwise back attack Plague is nearly impossible). 
 
-### `-agility:vanilla` {: .h6 }
+Up until v4.6.4.Gale, these flags were called `-agility:` instead of `F`.
+
+### `Aagnostic` {: .h6 }
+
+This flag is just the default FE agility anchoring behaviour (with the highest priority slot as the anchor) given a flag name.
+
+### `Avanilla` {: .h6 }
 
 This flag is simply `-vanilla:agility` renamed (so your anchor will always be the Cecil in the earliest slot, or else the character in the earliest slot).
 
-### `-agility:slowest` {: .h6 }
+### `Ahero` {: .h6 }
+
+This flag implements the normal "hero" agility anchoring, even without `Chero`. If your starting character is in your party, then they are the anchor; otherwise, it is the usual FE anchoring behaviour. If dupes are enabled, then the hero will still be the specific copy of the character that was the starting character (axtor ID 0x01). If `Chero` is on, it will guarantee `Ahero` in the absence of `A` flags other than `Aagnostic`.
+
+### `Aslowest` {: .h6 }
 
 The character with the lowest agility stat is chosen as the anchor (including 0 Agility, which could potentially be advantageous).
 
-### `-agility:fastest` {: .h6 }
+### `Afastest` {: .h6 }
 
 The character with the largest agility stat is chosen as the anchor. This flag doubles the Count timer.
 
-### `-agility:average` {: .h6 }
+### `Aaverage` {: .h6 }
 
 The average agility of your party (rounded down, of course) is the value used for anchoring. Empty slots do not count.
 
-### `-agility:median` {: .h6 }
+### `Amedian` {: .h6 }
 
 The median agility of your party (the agility stat in the middle, or the lower of the two in the middle for an even number of characters) is the value used for anchoring. Empty slots do not count.
 
-### `-agility:random` {: .h6 }
+### `Arandom` {: .h6 }
 
 - Idea: Found in rivers's dev ideas document
 
 The anchor slot is randomly determined (like Afflicted, it is fixed for each formation); for that battle, the agility anchor is chosen by taking the first non-empty party slot starting at the randomly determined slot, cycling around to lower party slots if necessary.
 
-### `-agility:monster` {: .h6 }
+### `Amonster` {: .h6 }
 
 The average agility of the _monsters_ in the battle (including pre-swooned/hidden monsters) is the value used for anchoring. This flag is incredibly dangerous, because most later-game monsters are much faster than your party members.
 
-### `-agility:flat` {: .h6 }
+### `Aflat` {: .h6 }
 
 Every character and monster will have the same base ATB (5 ticks, unless scaled by another flag), regardless of their agility stat. 
 
-### `-agility:750formula` {: .h6 }
+### `A750formula` {: .h6 }
 
 - Idea: S3
 - Design: S3
@@ -948,11 +1151,11 @@ Every character and monster will have the same base ATB (5 ticks, unless scaled 
 
 The agility formula is completely reworked to be dependent on the absolute speed stat instead of relative to an anchor. The base ATB is now (15 * 5 * 10) / (Agi + 32) ticks, where the 5 can be scaled up to 10 or down to 1 by another flag (the 750 in the flag name comes from the numerator). This flag will tend to increase the number of empty ticks/ticks between actions. This flag triples the Count timer.
 
-### `-agility:anchor[7/27/28/41/42]` {: .h6 }
+### `Aanchor:[7/27/28/41/42]` {: .h6 }
 
 The specified value will be the agility value used for anchoring. The values are chosen to either let most characters at endgame level be RA1 (via 7), force Zeromus to be RA2 or RA3 (28, 42), or force Zeromus to be the worst possible RA1 or RA2 (27, 41). Other fights, especially at lower levels, may be very slow or difficult. The Count timer is doubled for 27/28 and tripled for 41/42.
 
-### `-agility:scale[1/10]` {: .h6 }
+### `Ascale:[1/10]` {: .h6 }
 
 This flag will scale the base ATB for the anchor up to 10 ticks or down to 1 tick (which also impacts flat agility and the 750formula agility). Battles will either feel very slow or very fast. Under 10 tick scaling, the Count timer is doubled.
 
@@ -970,43 +1173,51 @@ This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now inc
 - Design/Programming: ScytheMarshall
 - Locations: experience_acceleration.f4c, generator.py
 
-These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. Note that the main branch v5.0-alpha uses *additive* increases by default, unlike the fork.
+These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags (on v4.x), all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `Xcrystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. Up to v4.6.4.Gale, these flags were still called `-exp:`, but now they follow the same naming convention as on the alpha (`X`). Note that the main branch v5.0-alpha uses *additive* increases by default, unlike the fork.
 
-### `-exp:crystalbonus` {: .h6 }
+### `Xcrystalbonus` {: .h6 }
 
 Earn double experience after obtaining the Crystal.
 
-### `-exp:objectivebonus[25/10/_num]` {: .h6 }
+### `Xobjectivebonus:[25/10/5/num]` {: .h6 }
 
-Earn extra experience based on how many objectives you have completed up until the end of the battle (not including any potential objectives you complete _after_ the battle ends). The options are 25% per objective (25), 10% per objective (10), and a percentage depending on the percentage of the available objectives you have completed (_num). For example, if there are 7 objectives in the seed and you complete 3 of them, then you will earn 42% bonus experience (no matter how many objectives you need to complete to get the objective completion reward). This flag is forced off if there are no objectives,
+Earn extra experience based on how many objectives you have completed up until the end of the battle (not including any potential objectives you complete _after_ the battle ends). The options are 25% per objective (25), 10% per objective (10), 5% per objective (5) and a percentage depending on the percentage of the available objectives you have completed (_num). For example, if there are 7 objectives in the seed and you complete 3 of them, then you will earn 42% bonus experience (no matter how many objectives you need to complete to get the objective completion reward). This flag is forced off if there are no objectives,
 
-### `-exp:kicheckbonus[10/5/2/_num]` {: .h6 }
+### `Xkicheckbonus:[10/5/2/num]` {: .h6 }
 
 Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num). The starting key item check does not count towards the number of checks you have completed. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
 
-### `-exp:zonkbonus[10/5/2]` {: .h6 }
+### `Xzonkbonus:[10/5/2]` {: .h6 }
 
 A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had. The starting key item check, if it is a zonk, does not count towards the number of zonks (because you cannot choose to do this check or not). The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
 
-### `-exp:miabbonus[100/50]` {: .h6 }
+### `Xmiabbonus:[100/50]` {: .h6 }
 
 Under this flag, MIAB encounters award double or 1.5 times the usual EXP.
 
-### `-exp:moonbonus[200/100]` {: .h6 }
+### `Xmoonbonus:[200/100]` {: .h6 }
 
 Under this flag, encounters on the moon (the surface, Cave Bahamut, or LST) award double or triple the usual EXP.
 
-### `-exp:maxlevelbonus` {: .h6 }
+### `Xmaxlevelbonus` {: .h6 }
 
 Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5). For example, a pack of 3 Warlocks has smallest monster level 73, so if your largest level is 25 (base level Edge), then we compute 5 + 2*25 = 55, and take 73-55 = 18. 18 divided by 5 is 3.6, so there are 3 deficits of 5, so you would receive 3 * 20% = 60% bonus experience.
 
-### `-exp:smallparty` {: .h6 }
+### `Xsmallparty` {: .h6 }
 
-Under this flag, encounters give more EXP when your party is not full. If you can have `N` characters and you don't, then you get `6-N` bonuses of 10%, which sums over `N` from 1 to the maximum party size. For example, if you have 2 characters but you could have 5, then you get 1+2+3 = 6 bonuses of 10% (with contributions from `N` being 5,4,3), for 60% total bonus EXP. 
+Under this flag, encounters give more EXP when your party is not full. If you can have `N` characters and you don't, then you get `6-N` bonuses of 10%, which sums over `N` from 1 to the maximum party size. For example, if you have 2 characters but you could have 5, then you get 1+2+3 = 6 bonuses of 10% (with contributions from `N` being 5,4,3), for 60% total bonus EXP. The table shows the bonuses if you have the number of characters on the left with a given maximum party size.
+
+Max party size | 1 | 2 | 3 | 4 | 5
+-------------- | - | - | - | - | -
+1 character | 0% | 40% | 70% | 90% | 100%
+2 characters | x | 0%  | 30% | 50% | 60%
+3 characters | x | x   | 0%  | 20% | 30%
+4 characters | x | x   | x   | 0%  | 10%
+5 characters | x | x   | x   | x   | 0% 
 
 Since the battle spoils function runs after permadeath/etc. occurs, any characters that leave your party do not count as being part of your party for the purposes of this calculation.
 
-### `-exp:geometric[90/80/.../10/0]` {: .h6 }
+### `Xgeometric:[90/80/.../10/0]` {: .h6 }
 
 In vanilla FF4, each instance of a monster type killed in battle gives the same amount of EXP; there are at most three monster types, and their exp gains get added up separately. (Meaning that the graphical position of the monster doesn't matter; e.g. if there are three Warlocks on screen, they are all just Warlocks, independent of "which" Warlocks they are.) Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not per graphical position in battle (as above).
 
@@ -1038,6 +1249,64 @@ This flag replaces the table with the numbers 0-255 in ascending order.
 
 This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 47 of the entries are replaced with 47 numbers near the random integer in order to allow every battle slot to be targettable and every black/white spell slot to be checked. (Hence, "mostly single".) 
 
+## Call Flags
+
+- Idea/Design: ScytheMarshall (except otherwise noted)
+- Programming: ScytheMarshall
+
+Note that the vanilla FF4 bug where spells learned at the same level but from different lists are broken (only spells for the first list save) has been fixed, to accommodate Rydia learning Call spells by level-up. The fix is in character_expansion.f4c.
+
+### `-call:levelup` {: .h6 }
+
+- Idea: Deathlike (and probably others)
+- Design: Deathlike, Marshal, ScytheMarshall
+- Location: update_spells.py
+
+This flag lets Rydia learn summons by level-up. She learns each spell at the following levels:
+
+!!! info "`-call:levelup` Call spells and levels"
+    - Imp    : 3
+    - Bomb   : 10
+    - Mage   : 15
+    - Cocka  : 21 (only on J-spells)
+    - Odin   : 23
+    - Sylph  : 27
+    - Shiva  : 28 (26 on `Cspells:anti`)
+    - Jinn   : 29 (26 on `Cspells:anti`)
+    - Indra  : 30 (26 on `Cspells:anti`)
+    - Titan  : 32
+    - Mist   : 34
+    - Asura  : 39
+    - Levia  : 46 (49 on J-spells)
+    - Baham  : 53 (57 on J-spells)
+
+### `-call:all` {: .h6 }
+
+- Location: update_spells.py
+
+Rydia starts with all of the Call spells available (except Cocka, since that's apparently a J-spell).
+
+### `-call:vanillahobs` {: .h6 }
+
+This flag is just `-vanilla:hobs` renamed.
+
+### `-call:vanillagrowup` {: .h6 }
+
+This flag is just `-vanilla:growup` renamed.
+
+### `-call:nogrowup` {: .h6 }
+
+- Location: summons_rando.py
+
+Under this flag, Rydia does not learn any summons at Dwarf. This flag, as well as the vanilla growup flag, are ignored in favour of `-tweak:rydiaredmage`, if that flag is on.
+
+### `-call:noorbs` {: .h6 }
+
+- Idea: Marshal had a note about removing summon orbs
+- Location: shop_rando.py, treasure_rando.py
+
+This flag removes summon orbs from shops, boxes/miabs, and quest rewards. You can still get them in starting kits.
+
 ## Zeromus Flags
 
 - Idea: various folks over the years, surely
@@ -1046,51 +1315,63 @@ This flag replaces the PRNG table with one random integer chosen from 0 to 255. 
 
 These flags handle the randomization of Zeromus and the relevant battle scripts. The intent is to refresh the Zeromus fight experience, so that there's something new to experience at the end of the game.
 
-There are four main script change flags: `-z:physical`, `-z:physmag`, `-z:chaos`, and `-z:lavosshell`. Within those flags are two other flags that modify the scripts: `-z:whichbang` and `-z:phaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `-z:nonerfs` and `-z:mustnerf`.
+There are four main script change flags: `Zphysical`, `Zphysmag`, `Zchaos`, and `Zlavosshell`. Within those flags are two other flags that modify the scripts: `Zwhichbang` and `Zphaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `Znonerfs` and `Zmustnerf`.
 
-### `-z:physical` {: .h6 }
+### `Zvanilla` {: .h6 }
+
+This flag just gives a name to the usual vanilla Zeromus fight script.
+
+### `Zphysical` {: .h6 }
 
 Replaces Big Bang and Meteo with Dark Wave, direct Virus with Needle-all, and direct Nuke with Jump. Yes, thanks to the Kain cutscene fight in vanilla, monsters can Jump. The counter attacks are changed so that Fight, Aim, Jump, and Dart are countered by Fight, Counter-all, a very strong Fight, and a very strong single-target Counter; the latter two do not nerf Dark Wave but the first two do. Zeromus's attack stats are set/changed so that damage is roughly equivalent to the vanilla damage, but since Dark Wave is unblockable, it's possibly much more dangerous.
 
 It turns out that spells do not correctly retarget when the only monsters left in the battle are in the back row, so the game softlocks. Normally this isn't an issue, since monsters can't temporarily disappear from battle (and Cecil does not have spells in the cutscene fight), but since Zeromus is Jumping, we need to patch this behaviour.
 
-### `-z:physmag` {: .h6 }
+### `Zailments` {: .h6 }
 
-50% of the time, this flag does nothing. The other 50% of the time, Zeromus gets the physical scripting from `-z:physical`. The point of this flag is to introduce uncertainty as to what Zeromus is going to do.
+- Idea: IAmDMar
 
-### `-z:chaos` {: .h6 }
+This flag replaces all six Virus or Nuke casts (script or counter) with status spells, with various targetting options. 
+
+### `Zunsure:[vanilla,physical,ailments,chaos,lavosshell]` {: .h6 }
+
+To increase uncertainty about the Zeromus fight, these flags add the possibility of randomly choosing one of the specified script categories in addition to the main script category chosen. (flagsetcore will remove `Zunsure:[option]` if `Z[that option]` is already enabled). If `Zwhichbang` or `Zphaseshift` are on and a script category is chosen that makes one or both of those flags irrelevant, then they will do nothing.
+
+These flags replace the old flag `Zphysmag`, where 50% of the time, the flag did nothing, and the other 50% of the time, Zeromus got the physical scripting from `Zphysical`.
+
+### `Zchaos` {: .h6 }
 
 This flag replaces Zeromus's three main attack phases with three new phases consisting of 2-5 attacks (1-3 for the third phase), floor(n/2) of which are "shake" attacks (stronger target-all nerfable attacks preceded by a shake, just like Big Bang; no shakes in third phase), and at most two Black Holes potentially following some attacks. Each phase has at least one damaging move, so that you will eventually lose the battle if you do nothing. The counter attacks are chosen at random, though the triggers for those counters are unchanged.
 
 The flag is named after Chaos, the final boss of FF1 and notorious casino simulator in speedruns.
 
-### `-z:lavosshell` {: .h6 }
+### `Zlavosshell` {: .h6 }
 
 This flag replaces Zeromus's three main attack phases with three random scripts from other monsters (or their reactions), as long as those phases do not modify condition/reaction flags and do not automatically end the battle (among other things). These scripts will be able to defeat you if you do nothing. Some of these scripts are _significantly_ more dangerous than others.
 
 The flag is named after the Lavos Shell, the first form of the final boss of Chrono Trigger (which copies bosses in increasing order of power throughout the game before swapping to its own attack script).
 
-### `-z:whichbang` {: .h6 }
+### `Zwhichbang` {: .h6 }
 
 For Z scripts that include Big Bangs, this flag replaces each instance of Big Bang with a similar target-all spell chosen from a small list (including Big Bang itself). It could be a different spell for each Big Bang instance.
 
-### `-z:phaseshift` {: .h6 }
+### `Zphaseshift` {: .h6 }
 
 For the non-random-phase scripts, this flag shuffles the order of the three attack phases, so you could see Meteo phase first, then Virus phase, then Nuke phase. The HP thresholds and reactions do not change.
 
-### `-z:nonerfs` {: .h6 }
+### `Znonerfs` {: .h6 }
 
 This flag places chains around every Big Bang type attack that Zeromus does, so that you cannot modify the stat used for the attack (i.e. you cannot nerf Big Bangs). No extra turns have been added, so Zeromus will be significantly more dangerous.
 
-### `-z:mustnerf` {: .h6 }
+### `Zmustnerf` {: .h6 }
 
 This flag changes Zeromus's base spell power to 255 (or attack stats to (255,99,255), if physical scripting is enabled) and changes the scripted stat changes for Big Bang type attacks to be 253 for spell power and (255,99,255) for physical scripting. In this way, Zeromus will do 9999 damage almost guaranteed, unless you nerf the Big Bangs/Dark Waves.
 
 Dark Wave is normally bugged; it does not cap its damage, so it breaks the graphical display/can heal by overflowing 14-bit damage. So, we need to patch that issue.
 
-### `-z:vanillasprite` {: .h6 }
+### `Znocosplay` {: .h6 }
 
-This flag is just `-vanilla:z` renamed.
+This flag is just `-vanilla:z` renamed; prior to v4.6.4.Gale, this flag was called `-z:vanillasprite`.
 
 ## Wacky Flags
 
@@ -1104,7 +1385,7 @@ Some existing wacky flags have been modified:
 - On Afflicted, Heal is no longer learned via level-up (that was a bug).
 - On Is This Even Randomized?, Kick/Dark Wave/Dart/Raid now all obey the damage rounding.
 - On Misspelled, spells learned directly before an axtor has been initialized get misspelled correctly. The spell names used in textboxes are also misspelled correctly. In combination with Afflicted and Friendly Fire, the spells filtered out are those that *cast* the forbidden spells (not the nominal forbidden spells).
-- On Misspelled, when playing with `-fusoya:omnimage` the spells Comet and Flare *will* be Misspelled now (as of the bugfix patch on v4.6.3). Twin will still cast those spells; they will just have a different name and cost potentially different MP amounts.
+- On Misspelled, when playing with `Fomnimage` the spells Comet and Flare *will* be Misspelled now (as of the bugfix patch on v4.6.3). Twin will still cast those spells; they will just have a different name and cost potentially different MP amounts.
 
 ### `-wacky:mirrormirror` - Mirror, Mirror, On the Wall {: .h6 }
 
@@ -1137,7 +1418,7 @@ This wacky flag shuffles the roles of the five main stats (Str, Agi, Vit, Wis, W
 - Programming: ScytheMarshall
 - Locations: wacky_rando.py, wacky/advertising.f4c, custom_weapon_rando.py
 
-This wacky flag makes widespread changes to equipment, spells, and monsters in order to make them "more true to what they seem like". For example, all ice weapons now hit reptile weakness, all bolt weapons now hit robot weakness (and robots are weak to bolt as well), Dwarf Axe now hits air weakness, monsters are weak to air if and only if they are visibly floating, the Quake enemy spell is now also 200 power, the Gigant Axe hits giant weakness, etc. The full list is split up between wacky_rando.py and advertising.f4c.
+This wacky flag makes widespread changes to equipment, spells, and monsters in order to make them "more true to what they seem like". For example, all ice weapons now hit reptile weakness, all bolt weapons now hit robot weakness (and robots are weak to bolt as well), non-boss-bit undead monsters are now weak to Life1/Life2 (normally VampLady is the only undead that is also not immune to swoon; this change still does not allow for swoon procs, which have a separate additional check), Dwarf Axe now hits air weakness, monsters are weak to air if and only if they are visibly floating, the Quake enemy spell is now also 200 power, the Gigant Axe hits giant weakness, etc. The full list is split up between wacky_rando.py and advertising.f4c.
 
 ### `-wacky:whatsmygear` - What's My Gear Again? {: .h6 }
 
@@ -1226,7 +1507,7 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Programming: ScytheMarshall
 - Locations: rosa_paladin.f4c, mtordeals.f4c, character_expansion.f4c, various command f4c's, generator.py
 
-This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot). They also swap weapons (except for the FF4A weapons), but *not* armour.
+This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot, subject to `-vanilla:zot` or not). They also swap weapons (except for the FF4A weapons, and the custom Legend weapon under `-smith:spoilsuper`), but *not* armour.
 
 ### `-tweak:cidairship` {: .h6 }
 
@@ -1287,4 +1568,48 @@ The rough probability of getting a particular spell is obtained by looking at th
 
 This flag changes FuSoYa's Regen command to heal MP instead (barring the Tellah Maneuver wacky). The amount of healing and duration depends on which wacky flags are in play: normally it will be 10 MP every 5 ticks for roughly 10x(Fu's RA) ticks. The Tellah Maneuver wacky makes that 50 HP instead. The 3 Point Challenge wacky makes it 1 MP and with a much longer duration/wait between each regen tick.
 
-Obviously this flag doesn't really do anything when paired with `-fusoya:omnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.
+Obviously this flag doesn't really do anything when paired with `Fomnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.
+
+### `-tweak:yanghp` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag gives Yang 152-171 HP for levels 61-69, and 160-180 HP for levels 70+, where normally he stops gaining HP after level 60.
+
+### `-tweak:tellahrecall` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag changes Tellah's Recall command to be more uniform in how it chooses the spells, and removes the bad options. In particular, the eight spells are chosen uniformly at random, there is no failure chance, and the tier-1 elemental spells are upgraded to tier-3.
+
+### `-tweak:edgedart` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag makes Darting Shurikens and Ninja Stars have special behaviour: the damage is based on the larger of level and agility, instead of level. All other darts calculate damage as usual.
+
+### `-tweak:magicwhips` {: .h6 }
+
+- Idea: Marshal
+- Design: Marshal, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag makes whips add their attack power to the base damage of most summons, regardless of which hand the whip is in (which matters on Omnidextrous). For Bomb and Mist, the base damage is scaled by (50+total whip attack power)/50 instead. Summons which do not deal damage/heal are unaffected.
+
+### `-tweak:rydiaredmage` {: .h6 }
+
+- Idea: IAmDMar
+- Design: IAmDMar, Guerin, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: generator.py
+
+This flag turns Adult Rydia into a Red Mage, by letting her keep her White Magic spellset and granting her 8 additional White magic spells (Life1/Cure2/Heal and 5 additional spells that are not Life2/Cure4/Holy; if Harm is available, then she will get Harm and 4 other random spells). She also retains her White mage gear, and gains access to non-holy swords (including dark swords) and shields (some FF Red Mages do get shields; she also happens to get axes on `-tweak:rosadin`, for fun). Yes, that means she can Avenger-glitch the Dragon Whip. She will not learn 5 summons at Dwarf (though she can still learn a summon at Mt. Hobs).
+
+If a wacky flag insists on adding a command that does not remove Fight (e.g. Kleptomania), then Rydia will lose her White magic during battle, but will retain the expanded equipment pool and can cast White magic in the field.
