@@ -1,0 +1,32 @@
+services:
+  freeent:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./rom:/rom:ro        # place your ff4.smc in the rom/ folder
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7.0
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+  caddy:
+    image: caddy:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - freeent
+
+volumes:
+  mongo_data:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,19 @@
+services:
+  freeent:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:8080"          # access at http://localhost:8080
+    volumes:
+      - ./rom:/rom:ro
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7.0
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
