@@ -5442,6 +5442,12 @@ var FLAG_UISPEC = [
                 "title": "Areas with MIABs will have slightly worse items",
                 "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
                 "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
               }
             ]
           },
@@ -5767,6 +5773,12 @@ var FLAG_UISPEC = [
                 "title": "Areas with MIABs will have slightly worse items",
                 "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
                 "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
               }
             ]
           },
@@ -5930,6 +5942,12 @@ var FLAG_UISPEC = [
                 "title": "Areas with MIABs will have slightly worse items",
                 "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
                 "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
               }
             ]
           },
@@ -6091,6 +6109,12 @@ var FLAG_UISPEC = [
                 "flag": "Tadjmiabareas",
                 "title": "Areas with MIABs will have slightly worse items",
                 "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
                 "fork": true
               }
             ]

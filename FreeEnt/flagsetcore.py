@@ -527,6 +527,9 @@ class FlagLogicCore:
         if not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tvanillaish', 'Tstandardish'):
             self._simple_disable(flagset, log, 'Treasures are not weighted', ['Tadjmiabareas'])
 
+        if not flagset.has_any('Tpro', 'Tsemipro', 'Twildish', 'Tstandardish'):
+            self._simple_disable(flagset, log, 'Tpro weights are not being used', ['Tbuffweights'])
+
         if flagset.has_any('Svanilla', 'Sshuffle', 'Scabins', 'Sempty'):
             self._simple_disable_regex(flagset, log, 'Shops are not random', r'^(Sno:([^j]|j.)|Salways:([^j]|j.)|Splayable)')
             if not flagset.has('Sshuffle'):

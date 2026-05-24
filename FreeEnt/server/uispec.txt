@@ -503,8 +503,10 @@
 .(Tstandardish)^ Standard-ish chest randomization
 ..[ECHO:Tstandard]
 ..[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
+..[Tbuffweights]^ Some areas have better treasure weights
 .(Tvanillaish)^ Vanilla-ish chest randomization
-..[ECHO:Tstandardish]
+..[ECHO:Tstandard]
+..[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
 .(Tpro) Pro chest randomization
 ..[ECHO:Tstandardish]
 .(Tsemipro)^ Semi-pro chest randomization

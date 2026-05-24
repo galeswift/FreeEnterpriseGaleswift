@@ -1613,7 +1613,7 @@ def apply(env):
         if env.options.flags.has('treasure_vanillaish'):
             curves_dbview = databases.get_tvanillaish_dbview() if env.options.flags.has('treasure_no_j_items') else databases.get_tvanillaish_j_dbview()
         else:
-            curves_dbview = databases.get_curves_dbview()
+            curves_dbview = databases.get_buffed_curves_dbview() if env.options.flags.has('treasure_buffed_pro_weights') else databases.get_curves_dbview()
 
         unassigned_quest_slots = [slot for slot in (list(ITEM_SLOTS) + list(SUMMON_QUEST_SLOTS) + list(MOON_BOSS_SLOTS)) if slot not in rewards_assignment]
         if env.options.flags.has('no_free_key_item_dwarf'):

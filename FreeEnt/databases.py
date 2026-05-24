@@ -12,6 +12,18 @@ _doors_db = csvdb.CsvDb(os.path.join(DB_PATH, 'doors.csvdb'), {
     'type': str, "world":str,
 })
 
+_buffed_curves_db = csvdb.CsvDb(os.path.join(DB_PATH, 'buffed_curves.csvdb'), {
+    'wikiindex' : int,
+    'tier1' : int,
+    'tier2' : int,
+    'tier3' : int,
+    'tier4' : int,
+    'tier5' : int,
+    'tier6' : int,
+    'tier7' : int,
+    'tier8' : int,
+    })
+
 _curves_db = csvdb.CsvDb(os.path.join(DB_PATH, 'curves.csvdb'), {
     'wikiindex' : int,
     'tier1' : int,
@@ -115,6 +127,9 @@ _custom_legend_db = csvdb.CsvDb(os.path.join(DB_PATH, 'custom_legend.csvdb'), {
     'anim2' : csvdb.HexInt,
     'anim3' : csvdb.HexInt,
     })
+
+def get_buffed_curves_dbview():
+    return _buffed_curves_db.create_view()
 
 def get_curves_dbview():
     return _curves_db.create_view()

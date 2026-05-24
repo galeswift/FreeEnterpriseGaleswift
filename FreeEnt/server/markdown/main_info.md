@@ -307,47 +307,11 @@ Under this flag, mutually exclusive to the renamed `Cabilities:j` flag, each cha
 
 ## Treasure Flags
 
-Courtesy of Antidale, the `Tpro` weights have been modified slightly, to reduce the chance of the lowest tiers in some areas and up the chance of the highest tier(s). The list of changes is as follows.
-
-Baron Town
-:   from: 40,20,20,18,2,0,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;35,22,20,18,5,0,0,0
-
-Damcyan
-:   from: 40,20,20,18,2,0,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;35,22,20,18,5,0,0,0
-
-Village Mist
-:   from: 20,30,30,18,2,0,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;17,30,30,18,5,0,0,0
-
-Bahamut Cave
-:   from: 20,30,30,18,2,0,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,10,25,30,20,10,5,0
-
-Lunar Path
-:   from: 8,12,30,30,18,2,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,10,30,30,20,10,0,0
-
-Waterfall
-:   from: 0,0,35,40,23,2,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,50,28,17,5,0
-
-Mist Cave
-:   from: 0,0,35,40,23,2,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,35,40,20,5,0,0
-
-Tomra
-:   from: 10,20,40,28,2,0,0,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5,15,40,28,7,5,0,0
-
-Giant (MIAB)
-:   from: 0,0,0,0,30,35,35,0 
-:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,0,25,35,35,5
-
-In addition, all restrictions to items except for `Tmintier` and `Tmaxtier` also apply to quest and MIAB rewards; vanilla v4.6 FE is inconsistent about this situation (`-noadamants` applies, as does `-nocursed` and `Tno:j`, but `-wacky:kleptomania` does not, say). `Tmintier` as initially implemented by sgrunt (which predated the vanilla FE implementation) used to apply to such rewards, but this behaviour was reverted later. `Tmintier:2` is an additional setting that is not in vanilla FE.
+Treasure randomization works a bit differently from vanilla v4.6 FE. All restrictions to items except for `Tmintier` and `Tmaxtier` also apply to quest and MIAB rewards; vanilla v4.6 FE is inconsistent about this situation (`-noadamants` applies, as does `-nocursed` and `Tno:j`, but `-wacky:kleptomania` does not, say). `Tmintier` as initially implemented by sgrunt (which predated the vanilla FE implementation) used to apply to such rewards, but this behaviour was reverted later. `Tmintier:2` is an additional setting that is not in vanilla FE.
 
 The quest/MIAB reward placement algorithm before v4.6.4.Gale was the same as vanilla v4.6, which means that if there were no items in a specific tier, then we ended up with a Cure1 as the default reward. It is possible, with sufficiently restrictive flags, to remove all items from tiers 6, 7, and 8, so this algorithm resulted in many Cure1s. With v4.6.4.Gale, the weights for reward placement are handled more in line with what treasure_rando does, where it clears the weights for empty item tiers. In all scenarios, if no weights remain, then the ideal average tier for that curve is considered, and then we expand in both directions until we find item tiers that still have items in them. 
+
+Prior to v4.6.4.Gale, certain areas had increased `Tpro` weights. That behaviour is now selected through the `Tbuffweights` flag, as described below.
 
 ### `Tsparsey:[underground,moon,overworld]` {: .h6 }
 
@@ -371,7 +335,7 @@ This flag causes the specified areas to ignore the restrictions imposed on non-M
 - Design/Programming: Antidale
 - Locations: treasure_rando.py, core_rando.py, util.py
 
-Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the boosts are more targeted towards tier 5 and tier 6 treasures. The Last Arm miab can have tier 8, unlike on `Tpro`.
+Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the boosts are more targeted towards tier 5 and tier 6 treasures.
 
 ### `Tvanillaish` {: .h6 }
 
@@ -408,6 +372,51 @@ With mystery flags, you can tell who the characters are in the seed by looking a
 - Locations: util.py, treasure_rando.py
 
 This flag scales down weights for non-MIAB treasures in areas where there are MIABs, similarly to how `Twildish` scales up `Tpro` weights. The goal is to allow some fine-tuning of weighted treasure to make `-vanilla:miabs` a bit more balanced in the early game.
+
+### `Tbuffweights` {: .h6}
+
+- Idea: Antidale
+- Design: Antidale
+- Programming: Antidale, ScytheMarshall
+- Locations: databases.py, treasure_rando.py, buffed_curves.csv
+
+Courtesy of Antidale, this flag modifies the `Tpro` weights slightly, to reduce the chance of the lowest tiers in some areas and up the chance of the highest tier(s). Since the `Tpro` weights are used for `Twildish`, `Tstandardish`, and `Tsemipro`, the changes here impact those flags as well. The list of changes is as follows. These changes were permanent/default prior to v4.6.4.Gale, but moved into a flag for v4.6.4.Gale.
+
+Baron Town
+:   from: 40,20,20,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;35,22,20,18,5,0,0,0
+
+Damcyan
+:   from: 40,20,20,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;35,22,20,18,5,0,0,0
+
+Village Mist
+:   from: 20,30,30,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;17,30,30,18,5,0,0,0
+
+Bahamut Cave
+:   from: 20,30,30,18,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,10,25,30,20,10,5,0
+
+Lunar Path
+:   from: 8,12,30,30,18,2,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,10,30,30,20,10,0,0
+
+Waterfall
+:   from: 0,0,35,40,23,2,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,50,28,17,5,0
+
+Mist Cave
+:   from: 0,0,35,40,23,2,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,35,40,20,5,0,0
+
+Tomra
+:   from: 10,20,40,28,2,0,0,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5,15,40,28,7,5,0,0
+
+Giant (MIAB)
+:   from: 0,0,0,0,30,35,35,0 
+:   to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,0,0,0,25,35,35,5
 
 ## Shop Flags
 
