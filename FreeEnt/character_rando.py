@@ -579,6 +579,12 @@ def apply(env):
         arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in (1,2,3))
         for reference_actor_id in REFERENCE_ACTORS_TO_EQUIP_JOBS:
             job = REFERENCE_ACTORS_TO_EQUIP_JOBS[reference_actor_id]
+            if env.options.flags.has('rosapaladin'):
+                # Rosa gets PCecil's weapons and vice-versa
+                if job == 'rosa':
+                    job = 'pcecil'
+                elif job == 'pcecil':
+                    job = 'rosa'
             weapons = weapons_dbview.find_all(lambda it: job in it.equip)
             weapon = env.rnd.choice(weapons)
             if weapon.subtype == 'bow':
@@ -631,6 +637,12 @@ def apply(env):
             job = REFERENCE_ACTORS_TO_EQUIP_JOBS[reference_actor_id]
             gear_list = [] # list of strings to be joined together to form the spoiler row
 
+            if env.options.flags.has('rosapaladin'):
+                # Rosa gets PCecil's weapons and vice-versa
+                if job == 'rosa':
+                    job = 'pcecil'
+                elif job == 'pcecil':
+                    job = 'rosa'            
             weapons = weapons_dbview.find_all(lambda it: job in it.equip)
             weapon = env.rnd.choice(weapons)
             if weapon.subtype == 'bow':
@@ -652,6 +664,14 @@ def apply(env):
                     gear_list.append(databases.get_item_spoiler_name(weapon2))
                 else:
                     off_hand_value = '$00 0'
+
+            # swap Rosa and PCecil back if necessary, since they don't swap armour
+            if env.options.flags.has('rosapaladin'):
+                # Rosa gets PCecil's weapons and vice-versa
+                if job == 'rosa':
+                    job = 'pcecil'
+                elif job == 'pcecil':
+                    job = 'rosa'                 
 
             heads = head_dbview.find_all(lambda it: job in it.equip)
             head = env.rnd.choice(heads)

@@ -162,7 +162,9 @@ Under `Cthrift[n]`, where `n` can be from 2 to 5, characters will start with a f
 - Design/Programming: Antidale (with some tweaks by ScytheMarshall)
 - Locations: reordered_spells.f4c, update_spells.py, updated_spells.csvdb, fusoya_rando.py, mtordeals.f4c
 
-These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. The other details of the changes are as follows:
+These flags modify the flag name for enabling the J spells list, which changes from `Cj:spells` to `Cspells:j`, and add a new spells list modification. The syntax change is to make it clearer that there are now two different ways that spells can change from the vanilla US lists and properties. `Cspells:j` has not changed at all, while `Cspells:anti` has a goal of improving the mid-game of most mages, while also delaying their ultimate damaging spells. It aims to achieve this by speeding up the cast times of the elemental spells, and also generally lowering the level that mages learn spells in the mid-game, and pushing learning Nuke and White to somewhere around 1,300,000 experience for the four characters who learn it via levels. In addition, FuSoYa and Tellah will now learn Weak by level-up, not by the usual method; that happens for FuSoYa at level 53 and for Tellah at level 33. However, if `-fusoya:unlearn` is active, then Fu will simply start with Weak and lose it as usual for that flag. 
+
+The other details of the changes are as follows:
 
 Rosa
 :   White 48 -> 55
@@ -271,6 +273,30 @@ Under this flag, when you are dismissing a character, you must dismiss the chara
 
 Cecil starts as a paladin on this flag, at the same stats as he normally would after his class change. Ordeals is still available as a key item check/etc. as usual and will restore Tellah's spells. Multiple files are changed in order to handle the class change, or lack thereof, under `Csuperhero`.
 
+### `Cabilities:fullgood` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: update_abilities.py
+
+Under this flag, mutually exclusive to the renamed `Cabilities:j` flag, each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list. There are some modifications due to wacky flags and tweak flags (since some of the tweak flags either add commands or make certain very useless commands significantly better); flags like `-tweak:kainmagic` take priority because they add useful commands for Kain, and then wacky flags like `-wacky:kleptomania` override those flags to force Sneak onto command lists. The base command lists are:
+
+!!! info "`Cabilities:fullgood` command lists"
+    - Dark Knight Cecil: Fight, Dark Wave, Hide, Dart, Item
+    - Kain: Fight, Jump, Dark Wave (or Raid if available), Sneak, Item
+    - Child Rydia: no change
+    - Tellah: vanilla with Recall until Ordeals, Regen/Pray/Bluff depending on tweak flags in that order
+    - Edward: Fight, Cry (or Sing if it has been improved), Hide, Aim (or Heal if it has been improved), Item
+    - Rosa: Fight, White, Aim, Cover (or Pray if it has been improved), Item
+    - Yang: no change
+    - Palom: no change
+    - Porom: no change
+    - Paladin Cecil: Fight, White, Cover, Bear, Item
+    - Cid: Fight, Power, Aim, Bear (or Raid if available, or Peep (in its normal slot) if that has been improved), Item
+    - Adult Rydia: Fight, Black, Call, Bluff, Item
+    - Edge: no change
+    - FuSoYa: Fight, White, Black, Bluff (or Omni if that's available, or Regen if that's been improved), Item
+
 ## Treasure Flags
 
 Courtesy of Antidale, the `Tpro` weights have been modified slightly, to reduce the chance of the lowest tiers in some areas and up the chance of the highest tier(s). The list of changes is as follows.
@@ -357,7 +383,9 @@ Under `Tstandardish` you get boosted treasure tiers compared to `Tpro`, but the 
 - Design/Programming: ScytheMarshall
 - Locations: treasure_rando.py, character_rando.py
 
-Under this flag, all chests will contain items that at least one character available in the seed will be able to use. Under Omnidextrous, this flag does nothing. Under Fist Fight, the only weapons available are claws. This flag does not apply to KI check zonk rewards or MIABs. Summon orbs are consumables, so are treated like any other consumable item (so will appear even if Rydia doesn't; this choice is for tier restriction purposes).
+Under this flag, all chests will contain items that at least one character available in the seed will be able to use. This flag also applies to KI check zonk rewards or MIABs. Under Omnidextrous, this flag does nothing. Under Fist Fight, the only weapons available are claws. Summon orbs are consumables, so are treated like any other consumable item (so will appear even if Rydia doesn't; this choice is for tier restriction purposes). Dartable weapons are not considered usable by Dart users, so will not appear unless a character who can normally equip them appears. 
+
+Note that this flag operates differently compared to the main branch v5.0-alpha: the summon orb and dartables exclusions are noted above and the assignment algorithm is different. On the alpha, items are replaced if they are not allowed, with a weighting to ensure you don't see the same gear over and over; on the fork, items are simply assigned as normal after filtering out disallowed items.
 
 With mystery flags, you can tell who the characters are in the seed by looking at the gear you get.
 
@@ -451,7 +479,7 @@ These flags change the prices of the items specified by `Spricey`, which can be 
 - Design/Programming: ScytheMarshall
 - Locations: shop_rando.py, character_rando.py
 
-Similarly to `Tplayable`, this flag limits shop items to those usable to characters you can actually find in the seed, with the same exceptions.
+Similarly to `Tplayable`, this flag limits equipment found in shops to those usable to characters you can actually find in the seed, with the same exceptions.
 
 ### `Sethersell` {: .h6 }
 
@@ -463,7 +491,14 @@ This flag bypasses the override that the vanilla game does to make Ether1s/Ether
 
 ## Boss Flags
 
-For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now).
+For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now). 
+
+For v4.6.3.Gale (post-bugfix-patch) and onwards, the scripted stat changes are calculated slightly differently, to ensure that if a monster's stats are supposed to increase, they actually *do* increase (which wasn't the case on the previous attempt). Note that Valvalis in a late-game spot is now an absolute monster.
+
+!!! warn "Valvalis is a huge threat!"
+    We all know that Valvalis actually gets the scripted defense/magic defense stats that are supposed to occur in this fight. However, the original FE scripted stat scaling is janky (in a specific way), and boss slots that have minimal defense or magic defense will not really have much more in tornado form (including the vanilla spot). The scaling algorithm for scripted stat changes implemented here is janky in a much different way, in that bosses with very high levels get a *lot* of defense and magic defense in tornado form. Be *very* careful dealing with Valvalis.
+
+    (The original algorithm on the fork was janky in a third way, in that some bosses actually *lost* defense or magic defense stats in tornado form. That only really mattered on `-monsterevade`, but here we are.)
 
 ### `Bstats:[j/et]` {: .h6 }
 
@@ -608,6 +643,15 @@ These flags change the encounter tables; namely, which encounters are in which g
 
 The Alt Gauntlet is not impacted by these flags.
 
+### `Erunspoils[100/50/25]` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design: CoffeeAndChocobos, ScytheMarshall, Wylem
+- Programming: Wylem, ScytheMarshall
+- Locations: encounter_run_spoils.f4c, experience_acceleration.f4c, encounter_rando.py
+
+These flags allow your party to gain experience and GP from partial progress of a battle, i.e. if you defeat some monsters but run away before the battle is over, then you will gain the percentage of spoils listed in the flag. If you defeat no monsters, then you can still possibly lose GP as usual.
+
 ## Harp Flags
 
 harumph, the leader of the #FadeHarp community, made some flags to change the TwinHarp behaviour. In vanilla FE, you will always get a randomized song instead of the vanilla Melody of Lute (Edward's theme) during the TwinHarp cutscene and subsequent fight. These flags change that behaviour.
@@ -738,14 +782,18 @@ These flags restore functionality to monsters that the original devs removed bef
 
 - Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
 - Design/Programming: ScytheMarshall, cassidy/Wylem (for Hermes/Berserk)
-- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c
+- Locations: fix_hermes_berserk.f4c, fix_victim_history.f4c, fix_wisdom_will_timers.f4c, fix_regen_slot_indexing.f4c, fix_regen_axtor_check.f4c
 
-This flag includes fixes for four vanilla FF4 bugs: 
+This flag includes fixes for a variety of vanilla FF4 bugs: 
 
 - The Hermes/Berserk glitch, where if you use a Hermes and then berserk that character before they take another action, they can hit swooned chararcters (because the game checks the subcommand for "can this actor hit swooned actors with their command?" and Hermes has the same subcommand as a monster spell that's used in the Zeromus cutscene to revive your party). The fix is to first check if the actor's command is magic; if it is, then load the subcommand, and if it isn't, put `FF FF` into the (16-bit) accumulator instead (preventing the check from ever succeeding).
 - The monster victim history bug, where multi-target spells do not update a monster's victim history except when the monster is in the lowest slot. The fix is to rewrite a loop in-place.
 - The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
 - The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
+- The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
+
+It also adds a fix for a vanilla FE bug: 
+- The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
 
 ### `-smith:playable` {: .h6 }
 
@@ -911,7 +959,7 @@ This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now inc
 - Design/Programming: ScytheMarshall
 - Locations: experience_acceleration.f4c, generator.py
 
-These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. 
+These flags adjust the experience earned from battle, in ways different/similar to the pre-existing `-exp:` flags. As with those flags, all of the bonuses are multiplicative with each other, meaning if you slingshot a character with 10 KI while `-exp:crystalbonus` is on and you have the Crystal, then that character will receive 8 (2x2x2) times the usual experience. Note that the main branch v5.0-alpha uses *additive* increases by default, unlike the fork.
 
 ### `-exp:crystalbonus` {: .h6 }
 
@@ -923,11 +971,11 @@ Earn extra experience based on how many objectives you have completed up until t
 
 ### `-exp:kicheckbonus[10/5/2/_num]` {: .h6 }
 
-Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num), not counting the starting key item check. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
+Earn extra experience based on how many key item checks you have completed up until the end of the battle (not including the potential check(s) the battle is for). The options are 10% (10), 5% (5), 2% (2), and a percentage depending on the percentage of available key item checks you have completed (_num). The starting key item check does not count towards the number of checks you have completed. The number of key item checks depends on the `K` flags. If the seed has mystery flags, then every key item check is assumed to be available.
 
 ### `-exp:zonkbonus[10/5/2]` {: .h6 }
 
-A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had, not counting what happens with the starting key item. The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
+A "zonk" is when you get a non-key-item reward from a key item check. Under this flag, you earn extra experience based on the number of zonks you have had. The starting key item check, if it is a zonk, does not count towards the number of zonks (because you cannot choose to do this check or not). The options are 10% (10), 5% (5), and 2% (2) (no flag-dependent option, because on mystery flags you would be able to identify the `K` flag immediately). If a check cannot potentially reward a key item, then it does not count for the zonk count, unless the seed has mystery flags.
 
 ### `-exp:miabbonus[100/50]` {: .h6 }
 
@@ -961,13 +1009,15 @@ The options are multiples of 10 from 90 down to 0, resulting in 90% exp scaling,
 
 These flags change the PRNG table for the game (a table of 256 bytes from 0-255, shuffled).
 
+Note: The game's battle system has many places where it rolls random numbers until it finds a valid option, which means it needs to be able to eventually roll all possible options in case there is only one valid option. The worst offender is the game's Charm code, when it chooses a spell for your character to attempt to cast from all possible white *and* black spells, 48 total. ... But if you only have one spell, say, like Paladin Cecil does at base level, then it needs to roll exactly that value. Thus, `-prng:random` and `-prng:mostlysingle` are crafted to ensure that the game does not softlock through not having enough possible RNG options.
+
 ### `-prng:shuffle` {: .h6 }
 
 This flag provides a differently shuffled table of the bytes 0-255.
 
 ### `-prng:random` {: .h6 }
 
-This flag independently randomizes each of the 256 bytes of the table, so that there is no guarantee that every number shows up and there are probably repeats. There is a safety check made to ensure that the table allows for every battle slot to be selected. Otherwise, the game will softlock in battle because it cannot choose a valid target.
+This flag independently randomizes each of the 256 bytes of the table, so that there is no guarantee that every number shows up and there are probably repeats. There is a safety check made to ensure that the table allows for every battle slot to be selected (and every black/white spell slot, for Charm). Otherwise, the game will softlock in battle because it cannot choose a valid target/spell.
 
 ### `-prng:consecutive` {: .h6 }
 
@@ -975,7 +1025,7 @@ This flag replaces the table with the numbers 0-255 in ascending order.
 
 ### `-prng:mostlysingle` {: .h6 }
 
-This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 12 of the entries are replaced with 12 numbers near the random integer in order to allow every battle slot to be targettable. (Hence, "mostly single".) 
+This flag replaces the PRNG table with one random integer chosen from 0 to 255. However, as a safety, 47 of the entries are replaced with 47 numbers near the random integer in order to allow every battle slot to be targettable and every black/white spell slot to be checked. (Hence, "mostly single".) 
 
 ## Zeromus Flags
 
@@ -1035,6 +1085,15 @@ This flag is just `-vanilla:z` renamed.
 
 Wylem reworked the wacky challenge framework to allow for multiple wackies to be present at once, in his multi-wacky fork. Thanks, Wylem!
 
+Some existing wacky flags have been modified:
+- On Tellah Maneuver, SomaDrops now provide +30 max HP instead of the useless +10 max MP.
+- On 3-Point System, SomaDrops are now available normally (except in shops), but provide +1 max MP instead of +10.
+- On Time is Money, an overflow glitch has been fixed (your GP would overflow if it capped out).
+- On Afflicted, Heal is no longer learned via level-up (that was a bug).
+- On Is This Even Randomized?, Kick/Dark Wave/Dart/Raid now all obey the damage rounding.
+- On Misspelled, spells learned directly before an axtor has been initialized get misspelled correctly. The spell names used in textboxes are also misspelled correctly. In combination with Afflicted and Friendly Fire, the spells filtered out are those that *cast* the forbidden spells (not the nominal forbidden spells).
+- On Misspelled, when playing with `-fusoya:omnimage` the spells Comet and Flare *will* be Misspelled now (as of the bugfix patch on v4.6.3). Twin will still cast those spells; they will just have a different name and cost potentially different MP amounts.
+
 ### `-wacky:mirrormirror` - Mirror, Mirror, On the Wall {: .h6 }
 
 - Idea: ScytheMarshall
@@ -1082,7 +1141,7 @@ This wacky flag fully randomizes the stat bonuses that equipment items give (and
 - Design/Programming: ScytheMarshall, design suggestions by Guerin and Antidale 
 - Locations: wacky_rando.py, skillissue.f4c, eventextensions_randomizer.f4c, text_buffers.f4c, character_expansion.f4c, unused.f4c
 
-This wacky flag causes all commands except for Fight and Item to be locked at the beginning of the seed, and each boss defeated unlocks one of the commands (similarly to how Ultimecia's Castle works in FFVIII, except you cannot choose the command to unlock). If a magic command is locked, then you cannot use those spells outside of battle either. This wacky is compatible with Misspelled but not with FF4: The Musical or World Championship of Darts. On Push B to Jump, you can still push B to Jump even if you have not unlocked the Jump command.
+This wacky flag causes all commands except for Fight and Item to be locked at the beginning of the seed, and each boss defeated unlocks one of the commands (similarly to how Ultimecia's Castle works in FFVIII, except you cannot choose the command to unlock). If a magic command is locked, then you cannot use those spells outside of battle either. This wacky is compatible with Misspelled but not with FF4: The Musical or World Championship of Darts. On Push B to Jump, you can still push B to Jump even if you have not unlocked the Jump command. When not all abilities are accessible (say, without J abilities), then only those abilities that are accessible will be unlocked.
 
 ### `-wacky:workexperience` - Work Experience {: .h6 }
 
@@ -1090,9 +1149,17 @@ This wacky flag causes all commands except for Fight and Item to be locked at th
 - Design/Programming: ScytheMarshall 
 - Locations: wacky_rando.py, experience_acceleration.f4c
 
-This wacky flag makes two changes to experience, to simulate what it's like to get work experience in real life: 1. Each distinct character instance gets an experience modifier of 0.5-1.5x in increments of 0.25, and 2. Your average party level determines a second modifier to all character's experience, by computing (average party level / 8) + 1 and then using that divided by 6 as the modifier, so that you only start gaining full experience at average party level 40. Base level Rydia, Edward, and Paladin Cecil start with 1/6 experience; a party with most of the usual characters will start with roughly 1/3 experience.
+This wacky flag makes two changes to experience, to simulate what it's like to get work experience in real life: 1. Each distinct character instance gets an experience modifier of 0.5-1.5x in increments of 0.25, determined by the formation ID (like status effects on Afflicted), and 2. Your average party level determines a second modifier to all character's experience, by computing (average party level / 8) + 1 and then using that divided by 6 as the modifier, so that you only start gaining full experience at average party level 40. Base level Rydia, Edward, and Paladin Cecil start with 1/6 experience; a party with most of the usual characters will start with roughly 1/3 experience.
 
 The idea is that two characters can do the same work and get different experience, and that you need work experience to get work experience. Probably the most cynical wacky flag of the whole bunch.
+
+### `-wacky:moneygains` - Big Money, Little Gains {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design/Programming: ScytheMarshall
+- Locations: wacky_rando.py, moneygains.f4c, randomizer_boss.f4c
+
+This wacky flag swaps GP and EXP rewards from battle, as if the GP and EXP values for monsters were swapped. Meaning, the experience you get will be the GP rewards appropriately scaled by the experience flags (or ignored entirely by `Enoexp`), and the GP you get will be from the experience rewards, including the 3-byte rewards for some bosses (or ignored entirely by the Time is Money wacky or `Enogp`).
 
 ## Tweak Flags
 
@@ -1122,6 +1189,16 @@ This flag replaces Sight with Harm, a holy-elemental damage-dealing spell slight
 
 This flag modifies Edward's Heal J-ability to use the best of Cure1, Cure2, Cure3 in your inventory instead of only Cure1s. 
 
+### `-tweak:edwardsing[/better]` {: .h6 }
+
+- Idea: ScytheMarshall, inspiration from IAmDMar
+- Design/Programming: ScytheMarshall
+- Locations: edward_sing_upgrade.f4c, generator.py
+
+These flags modify Edward's Sing command to randomly choose one of the available status spells to use that are not actively resisted by the target. Under the "normal" flag, Sing will choose one of Mute, Charm, or Sleep that the target does not resist; if the target resists all three, then nothing will happen. Under the "better" flag, Sing will choose from Venom, Powder (Darkness), Mute, Piggy, Mini, Toad, Stone, Fatal, Bersk, Charm, Sleep, Hold, and Curse (the spell, which inflicts the Curse status). If the Sing user is a frog, then Sing will always cast Toad.
+
+The battle alert textbox will now always be a fixed song name, one of a few sourced from community members.
+
 ### `-tweak:darkpaladin` {: .h6 }
 
 - Idea: various, but initial inspiration from PinkPuff (via Unprecedented Chaos) and F&I thread from Kindron Darkfire
@@ -1130,6 +1207,15 @@ This flag modifies Edward's Heal J-ability to use the best of Cure1, Cure2, Cure
 
 This flag makes widespread changes to Paladin Cecil's stats, equipment, and abilities, based loosely on the stronger DKC in Unprecedented Chaos. He retains Dark Wave upon class-change, as well as DKC equipment, and loses command Cover (but will still Cover low-HP characters). His stats become more attack-focused/Wisdom-heavy and his gear now boosts Wis instead of Wil. His white magic set is replaced with a black magic set that mostly has status spells and single-target magic. His equipment is renamed for thematic reasons. Holy swords are now dark elemental, and the Lightbringer (now "Deathbringer") specifically hits dragon weakness. Spoiler logs are updated to match the new names, as are the select button descriptions.
 
+### `-tweak:rosadin` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design: CoffeeAndChocobos, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: rosa_paladin.f4c, mtordeals.f4c, character_expansion.f4c, various command f4c's, generator.py
+
+This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot). They also swap weapons (except for the FF4A weapons), but *not* armour.
+
 ### `-tweak:cidairship` {: .h6 }
 
 - Idea: CoffeeAndChocobos, though the original FF4 devs may have considered doing something like this
@@ -1137,6 +1223,14 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Locations: cidairship.f4c; some wacky f4c files where command menus change
 
 This flag gives Cid a new target-all command called Raid, using command ID `$15` (which was dummied out in vanilla FF4, but in the Japanese version this command still had a name in the code, "Airship"). The command does damage based on Cid's agility and the furthest airship you've acquired; the Falcon does more damage than the Enterprise, and the Big Whale does more damage than the Falcon. The command ignores defense/magic defense, so Cid can use it to fight Valvalis/etc.
+
+### `-tweak:cidpeep` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: improve_cid_peep.f4c
+
+This flag allows the Peep command (not the spell/Bestiary) to hit boss bit monsters. It can also hit Zeromus, since there's no exception for that fight, unlike the spell.
 
 ### `-tweak:twinmeteo` {: .h6 }
 
@@ -1152,6 +1246,33 @@ This flag allows Twin to cast W.Meteo or self-target Stone, in addition to Flare
 - Design/Programming: CoffeeAndChocobos (design), ScytheMarshall (design and programming), others in the Discord thread
 - Locations: big_chocobo_summon.f4c
 
-This flag turns the Chocobo summon into a spell somewhat like Asura, in that sometimes it will instead Call the Big Chocobo to attack. The chance of the Big Chocobo attacking is 4% plus 2% for each distinct item stored with the Big Chocobo, maxing out at 100% at 48 distinct items. The spell power is described in the following way. The base spell power is 40. For each distinct item stored with the Big Chocobo, the spell power increases by 8, plus its item price (prices larger than 112000 GP count as 112000) divided by 16000, times 8. The largest increase per item is 64 points of spell power (e.g. Crystal Sword, Avenger, Adamant). The maximum total spell power is 2040. Carrots give +16 spell power instead of +8, and Whistles give +32 spell power instead of +16. The Grimoire's Chocobo summon is replaced with Big Chocobo.
+This flag turns the Chocobo summon into a spell somewhat like Asura, in that sometimes it will instead Call the Big Chocobo to attack. The chance of the Big Chocobo attacking is 4% plus 2% for each distinct item stored with the Big Chocobo, maxing out at 100% at 48 distinct items. The spell power is described in the following way. The base spell power is 40. For each distinct item stored with the Big Chocobo, the spell power increases by 8, plus its item buy price (prices larger than 112000 GP count as 112000) divided by 16000, times 8. The largest increase per item is 64 points of spell power (e.g. Crystal Sword, Avenger, Adamant). The maximum total spell power is 2040. Carrots give +16 spell power instead of +8, and Whistles give +32 spell power instead of +16. The Grimoire's Chocobo summon is replaced with Big Chocobo.
 
 Since the Big Chocobo menu cannot be accessed with the Save Us Big Chocobo wacky active, the probability is a static 20% with 232 spell power (as if you stored 8 different items with an average of 24 bonus spell power each).
+
+### `-tweak:rosapray` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: improve_rosa_pray.f4c
+
+This flag, like the flag to improve Edward's Heal command, allows Pray to cast better spells than Cure1. As Rosa's level increases, the available spells change, getting better with higher levels:
+
+!!! info "Level/RNG ranges for Pray spells"
+    - "Prayer unanswered.": Level 10-20, RNG 0-31
+    - Cure1: Level 10-32, RNG 32-67
+    - Cure2: Level 13-57, RNG 68-143
+    - Cure3: Level 28-73, RNG 144-191
+    - Cure4: Level 38-99, RNG 192-255
+
+The rough probability of getting a particular spell is obtained by looking at the range 3xL-30 and 5xL+5, where L is Rosa's level (and the range is clamped to 0-255), and rolling a random number in that range; the outcome is determined by which range the random number lands in, listed above. So, even though Cure1 is possible at level 32, for example, it is highly unlikely.
+
+### `-tweak:fusoyaregen` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: improve_fusoya_regen_mp.f4c, generator.py
+
+This flag changes FuSoYa's Regen command to heal MP instead (barring the Tellah Maneuver wacky). The amount of healing and duration depends on which wacky flags are in play: normally it will be 10 MP every 5 ticks for roughly 10x(Fu's RA) ticks. The Tellah Maneuver wacky makes that 50 HP instead. The 3 Point Challenge wacky makes it 1 MP and with a much longer duration/wait between each regen tick.
+
+Obviously this flag doesn't really do anything when paired with `-fusoya:omnimage`, but potentially Bless becomes usable by other characters, so it's good to be flexible and not necessarily exclude this possibility.

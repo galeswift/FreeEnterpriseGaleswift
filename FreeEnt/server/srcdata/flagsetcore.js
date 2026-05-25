@@ -437,7 +437,7 @@ class FlagLogicCore {
         this._simple_disable(flagset, log, prefix, flagset.get_list(flags_regex));
     }
     fix(flagset) {
-        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, bad_gated_conditions, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, mode, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, required_chars, required_count, required_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
+        var WACKY_SET_1, WACKY_SET_2, WACKY_SET_3, actual_available_characters, all_character_pool, all_customized_random_flags, all_random_flags, all_specific_objectives, all_spoiler_flags, bad_gated_conditions, boss_collector_flags, boss_slots_removed, ch, challenges, char_objective_flags, character_pool, chars_to_remove, current_char, desired_char_count, distinct_count, distinct_flags, doors_entrances_rando, duplicate_char_count, duplicate_check_count, flag_suffix, gated_objective_index, gated_objectives, hard_required_index, hard_required_objectives, has_unavailable_characters, kmiab_flags, log, max_bosses, mode, num_random_objectives, only_flags, pass_quest_flags, pool, random_only_char_flags, removed_bosses_flags, required_chars, required_count, required_objective_count, skip_pools, sparse_spoiler_flags, specific_boss_objectives, start_exclude_flags, start_include_flags, total_objective_count, total_potential_bosses, win_flags;
         log = [];
         if ((flagset.has("Kunsafer") && (! flagset.has_any("Kmoon", "Kmiab:lst", "Kmiab:all")))) {
             flagset.set("Kmoon");
@@ -543,7 +543,7 @@ class FlagLogicCore {
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmaxtier:");
             this._simple_disable_regex(flagset, log, "Treasures are not random", "^Tmintier:");
         }
-        if ((flagset.has("Tadjmiabareas") && (! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish")))) {
+        if ((flagset.has("Tadjmiabareas") && (! flagset.has_any("Tpro", "Tsemipro", "Twildish", "Tvanillaish", "Tstandardish")))) {
             this._simple_disable(flagset, log, "Treasures are not weighted", ["Tadjmiabareas"]);
         }
         if (flagset.has_any("Svanilla", "Scabins", "Sempty")) {
@@ -785,6 +785,13 @@ class FlagLogicCore {
                 total_potential_bosses += 6;
                 total_objective_count += 6;
             }
+            boss_collector_flags = flagset.get_suffix("Omode:bosscollector");
+            if (boss_collector_flags) {
+                boss_collector_flags = Number.parseInt(boss_collector_flags);
+                while ((total_potential_bosses < boss_collector_flags)) {
+                    total_potential_bosses += 1;
+                }
+            }
             if (flagset.has("Omode:classicforge")) {
                 total_objective_count += 1;
             }
@@ -794,8 +801,29 @@ class FlagLogicCore {
             if ((flagset.get_list("^Omode:dkmatter").length > 0)) {
                 total_objective_count += 1;
             }
-            if ((total_potential_bosses > 34)) {
-                this._lib.push(log, ["error", "More than 34 potential bosses specified"]);
+            if ((flagset.get_list("^Omode:ki").length > 0)) {
+                total_objective_count += 1;
+            }
+            if ((flagset.get_list("^Omode:goldhunter").length > 0)) {
+                total_objective_count += 1;
+            }
+            if (flagset.has("Omode:external")) {
+                total_objective_count += 1;
+            }
+            max_bosses = 34;
+            boss_slots_removed = 0;
+            removed_bosses_flags = flagset.get_list(`^Bremove:`);
+            for (var slot, _pj_c = 0, _pj_a = removed_bosses_flags, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                slot = _pj_a[_pj_c];
+                max_bosses -= 1;
+                boss_slots_removed += 1;
+            }
+            if ((total_potential_bosses > max_bosses)) {
+                if ((boss_slots_removed > 0)) {
+                    this._lib.push(log, ["error", `More than ${max_bosses} potential bosses specified (${boss_slots_removed} removed)`]);
+                } else {
+                    this._lib.push(log, ["error", `More than 34 potential bosses specified`]);
+                }
             }
             if ((total_objective_count > 32)) {
                 this._lib.push(log, ["error", "More than 32 objectives specified"]);
@@ -866,7 +894,7 @@ class FlagLogicCore {
                 }
                 actual_available_characters = (desired_char_count - chars_to_remove);
                 if (((actual_available_characters < required_objective_count) && (skip_pools === false))) {
-                    this._lib.push(log, ["error", (`Not enough unique characters for pool ${random_prefix}.  Another pool could potentially consume some or all of these characters ${random_only_char_flags}` + ",".join(flagset.get_list(`^${random_prefix}`)))]);
+                    this._lib.push(log, ["error", `Not enough unique characters for pool ${random_prefix}.  Another pool could potentially consume some or all of these characters ${random_only_char_flags}`]);
                     break;
                 }
                 duplicate_check_count += required_objective_count;
@@ -876,7 +904,7 @@ class FlagLogicCore {
         if (challenges) {
             WACKY_SET_1 = ["afflicted", "menarepigs", "mirrormirror", "skywarriors", "zombies"];
             WACKY_SET_2 = ["battlescars", "payablegolbez", "tellahmaneuver", "worthfighting"];
-            WACKY_SET_3 = [["3point", "afflicted", "battlescars", "menarepigs", "mirrormirror", "skywarriors", "unstackable", "zombies"], ["afflicted", "friendlyfire"], ["battlescars", "afflicted", "zombies", "worthfighting"], ["darts", "musical"], ["3point", "tellahmaneuver"]];
+            WACKY_SET_3 = [["3point", "afflicted", "battlescars", "menarepigs", "mirrormirror", "skywarriors", "unstackable", "zombies"], ["afflicted", "friendlyfire"], ["battlescars", "afflicted", "zombies", "worthfighting"], ["darts", "musical", "skillissue"], ["3point", "tellahmaneuver"]];
             for (var c, _pj_c = 0, _pj_a = challenges, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
                 c = _pj_a[_pj_c];
                 mode = this._lib.re_sub("-wacky:", "", c);

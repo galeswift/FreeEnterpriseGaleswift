@@ -11,10 +11,7 @@ patch($14ffcb bus) { 0E }
 
 // rename $19 to be "Omni", since Fu will not use Regen/Bless now
 // (technically this just also associates #Omni to $19)
-consts(command)
-{
-    $19     Omni
-}
+// constants change happens in update_abilities.py
 
 // Add the menu data for "Omni" at the end of Bank 01,
 // right before the Menu Kit extra code
@@ -83,20 +80,14 @@ msfpatch {
 // for $19 (was $28, should be $00)
 patch($13fddc bus) { 00 }
 
+// update the status mask for Omni,
+// since it's different from Bless/Regen ($38)
+patch($13fd4b bus) { 2C }
+
 // remove the pointer to execute_bless in bank 03,
 // to match other spell commands
 patch($03b3ae bus) { 00 00 }
 
 // if not j-abilities, add the $19 command
 // with j-abilities, we already have it
-// %flag japanese_abilities off%
-actor(#Fusoya) {
-    commands {
-        #Fight
-        #White
-        #Black
-        #Omni
-        #Item
-    }
-}
-// %end%
+// change happens in update_abilities.py

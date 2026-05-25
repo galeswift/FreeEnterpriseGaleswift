@@ -147,9 +147,20 @@ def apply(env):
 
     if env.options.flags.has('encounter_cant_run'):
         env.add_file('scripts/cant_run.f4c')
+    else:
+        run_spoils_flag = env.options.flags.get_suffix('Erunspoils')
+        if run_spoils_flag:
+            env.add_file('scripts/encounter_run_spoils.f4c')
+            run_spoils_flag = int(run_spoils_flag)
+            if run_spoils_flag in [25, 50]:
+                loop_num = 50 // run_spoils_flag
+                env.add_substitution('run penalty loop', f'#$00{loop_num:02X}')
+                env.add_toggle('run_experience_penalty')
+                env.add_toggle('run_gp_penalty')
 
     if env.options.flags.has('no_gp_for_random_encounters'):
         env.add_file('scripts/encounter_no_gp.f4c')
+        env.add_toggle('no_gp_from_encounters')
 
     if env.options.flags.has('encounter_no_dmachin'):
         env.add_file('scripts/encounter_no_dmachin.f4c')

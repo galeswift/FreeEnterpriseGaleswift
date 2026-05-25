@@ -42,6 +42,22 @@ msfpatch {
         sta $af
         // %end%
 
+        // %if run_experience_penalty%
+        // if we are running and experience is halved or quartered,
+        // do that here
+        lda $a8 
+        and #$40
+        beq $+NextModifier__RunPenalty
+        ldy {% run penalty loop %}
+    %RunPenaltyLoop:
+        lsr $af
+        ror $ae
+        ror $ad
+        dey
+        bne $-RunPenaltyLoop
+    %NextModifier__RunPenalty:
+        // %end%
+
         // %if wacky_workexperience%
         // use average party level to build a scale factor to the experience;
         // do first to avoid potential obnoxious handling of overflow scenarios
@@ -132,7 +148,7 @@ msfpatch {
         lda $_Util__Divide_Quotient2
         adc $af
         bcc $03
-        jml $_MaxExp
+        jmp $_MaxExp
         sta $af
 
     %NextModifier__WackyWorkExp:
@@ -726,6 +742,11 @@ msfpatch {
         sta $1038,x
         lda $1039,x
         adc $af
+        // the original code didn't check for overflows when adding exp
+        // to characters, because it didn't need to. ... we do.
+        bcc $+NoCharExpOverflow
+        jml $03eecd
+    %NoCharExpOverflow:
         sta $1039,x
 
         // return

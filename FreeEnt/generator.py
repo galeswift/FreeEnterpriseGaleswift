@@ -45,6 +45,7 @@ from . import kit_rando
 from . import custom_weapon_rando
 from . import wacky_rando
 from . import update_spells
+from . import update_abilities
 
 from . import compile_item_prices
 from . import doors_rando
@@ -159,6 +160,7 @@ F4C_FILES = '''
     scripts/extra_item_descriptions.f4c
     scripts/stats.f4c
     scripts/level_up_summary.f4c
+    scripts/gp_exp_overflow_protection.f4c
     scripts/treasure_discard.f4c
     scripts/treasure_character.f4c
     scripts/custom_item_effects.f4c
@@ -561,9 +563,10 @@ def check_prng_safe(list_of_bytes):
     # for "safe" prng, need to ensure that every battle slot can be obtained
     check_0_4 = set(range(0,5)).issubset(set([i % 5 for i in list_of_bytes]))
     check_0_7 = set(range(0,8)).issubset(set([i % 8 for i in list_of_bytes]))
-    check_0_13 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
+    check_0_12 = set(range(0,13)).issubset(set([i % 13 for i in list_of_bytes]))
+    check_0_47 = set(range(0,48)).issubset(set([i % 48 for i in list_of_bytes]))
 
-    return (check_0_4 and check_0_7 and check_0_13)
+    return (check_0_4 and check_0_7 and check_0_12 and check_0_47)
 
 #--------------------------------------------------------------------------
 
@@ -655,14 +658,12 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
-    if options.flags.has('japanese_spells'):
-        env.add_file('scripts/japanese_spells.f4c')
-    elif options.flags.has('antidale_spells_progression'):
-        env.add_file('scripts/reordered_spells.f4c')
-        update_spells.apply(env)
+    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
+    update_spells.spell_data(env)
+    update_spells.spellset_data(env)
 
-    if options.flags.has('japanese_abilities'):
-        env.add_file('scripts/japanese_abilities.f4c')
+    # handle all changes to command lists
+    update_abilities.command_lists(env)
 
     RANDO_MODULES = [
         character_rando,
@@ -861,22 +862,26 @@ def build(romfile, options, force_recompile=False):
         elif prng_mod == 'consecutive':
             prng_bytes = list(range(0,256))
         elif prng_mod == 'mostlysingle':
+            # Charm spell selection needs a range of 48 values; "center" at 24 (23 below, 24 above),
+            # unless we roll too low or too high
             random_integer = env.rnd.randrange(0,256)
-            lower_bound = max(random_integer-6,0)
-            if min(random_integer+6,255) == 255:
-                lower_bound = 243
-            extra_ints = list(range(lower_bound,lower_bound+13))
+            lower_bound = max(random_integer-23,0)
+            if min(random_integer+24,255) == 255:
+                lower_bound = 255-47 # 208
+            extra_ints = list(range(lower_bound,lower_bound+48))
             extra_ints.remove(random_integer)
             env.rnd.shuffle(extra_ints)
-            prng_bytes = [(extra_ints[(i // 20) - 1] if i % 20 == 0 and i // 20 > 0 else random_integer) for i in range(0,256)]
-
+            # place the other bytes equally spaced (every 5), leaving 13 at the front and 12 at the back
+            prng_bytes = [(extra_ints[(i // 5) - 2] if i % 5 == 3 and i // 5 > 1 and i // 5 < 49 else random_integer) for i in range(0,256)]
         env.add_binary(BusAddress(0x14EE00), prng_bytes, as_script=False)
 
     if options.flags.has('bug_fixes'):
         env.add_files(
             'scripts/fix_wisdom_will_timers.f4c',
             'scripts/fix_victim_history.f4c',
-            'scripts/fix_hermes_berserk.f4c'
+            'scripts/fix_hermes_berserk.f4c',
+            'scripts/fix_regen_axtor_check.f4c',
+            'scripts/fix_regen_slot_indexing.f4c'
             )
 
     if options.flags.has('vintage'):
@@ -901,14 +906,48 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/harm_spell.f4c')
     if options.flags.has('edwardheal'):
         env.add_file('scripts/improve_edward_heal.f4c')
+    if options.flags.has_any('edwardsing','edwardsing_better'):
+        env.add_file('scripts/edward_sing_upgrade.f4c')
+        sing_text_options = [
+            'Song of Molbols',
+            'Song of Ruin',
+            'Sick Beats',
+            'Samba de Status',
+            'Debuff Dirge',
+            'Evil Chorus',
+            'Vogon Poetry'
+            ]
+        env.rnd.shuffle(sing_text_options)
+        env.add_substitution('song of silence replacement text', sing_text_options[0])
+        if options.flags.has('edwardsing_better'):
+            env.add_substitution('edward sing status options', '#$bcff')
+        else:
+            env.add_substitution('edward sing status options', '#$1804')
     if options.flags.has('cidairship'):
         env.add_file('scripts/cidairship.f4c')
+    if options.flags.has('cidpeep'):
+        env.add_file('scripts/improve_cid_peep.f4c')
     if options.flags.has('twinmeteo'):
         env.add_file('scripts/twin_meteo_stone.f4c')
     if options.flags.has('bigchocobosummon'):
         env.add_file('scripts/big_chocobo_summon.f4c')
         if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
             env.add_toggle('save us big chocobo summon')
+    if options.flags.has('rosapaladin'):
+        env.add_file('scripts/rosa_paladin.f4c')
+        env.add_substitution('auto cover job class', '#$05')
+    if options.flags.has('rosapray'):
+        env.add_file('scripts/improve_rosa_pray.f4c')
+    if options.flags.has('fusoyaregen'):
+        if 'tellahmaneuver' in env.meta.get('wacky_challenge',[]):
+            env.add_binary(BusAddress(0x03E3FE), [0x32]) # 50 HP regen instead of 10 HP
+        else:
+            env.add_file('scripts/improve_fusoya_regen_mp.f4c')
+            env.add_toggle('fusoya_regen_mp')
+            if '3point' in env.meta.get('wacky_challenge',[]):
+                env.add_binary(BusAddress(0x03E3FE), [0x01]) # 1 MP regen instead of 10 MP
+                env.add_binary(BusAddress(0x03AAA7), [0x14]) # counter needs to hit 20 ticks instead of 5 ticks 
+                env.add_binary(BusAddress(0x13FEAB), [0x99]) # regen duration should be 25*RA ticks
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')

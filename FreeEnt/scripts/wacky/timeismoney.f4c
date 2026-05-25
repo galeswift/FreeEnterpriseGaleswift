@@ -14,9 +14,9 @@ msfpatch {
         bne $+DoneOverflow
 
         lda #$ff
-        sta $1a60
-        sta $1a61
-        sta $1a62
+        sta $16a0
+        sta $16a1
+        sta $16a2
     
     %DoneOverflow:
         inc $16a3 // displaced
@@ -42,22 +42,12 @@ msfpatch {
         bne $+DoneOverflow
 
         lda #$ff
-        sta $1a60
-        sta $1a61
-        sta $1a62
+        sta $16a0
+        sta $16a1
+        sta $16a2
     
     %DoneOverflow:
         inc $16a3 // displaced
         lda $16a3 // displaced
         rtl
-}
-
-// no GP earned from enemies
-msfpatch {
-    .addr $03ecc7
-        lda #$00
-        nop nop
-    .addr $03ecd1
-        lda #$00
-        nop nop
 }

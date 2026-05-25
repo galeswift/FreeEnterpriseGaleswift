@@ -122,7 +122,20 @@ def apply(env):
         if 'fistfight' in wacky:
             items_dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(it.equip).isdisjoint(user_set)) or (it.subtype == 'claw'))
         else:
-            items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
+            # Remove Dark Knight Cecil from users if on Cpaladin without Dark Paladin
+            if env.options.flags.has('characters_cecil_paladin') and not env.options.flags.has('darkpaladin'):
+                user_set.difference_update(set(['dkcecil']))
+            if env.options.flags.has('rosapaladin'):
+                # When Rosa and Paladin Cecil swap weapons/shields, need to handle that
+                weapons_user_set = user_set.copy()
+                for c in ['pcecil', 'rosa']:
+                    if c in weapons_user_set:
+                        weapons_user_set.remove(c)
+                        weapons_user_set.add([d for d in ['pcecil', 'rosa'] if d != c][0])
+                items_dbview.refine(lambda it: it.category == 'item' or (it.category == 'armor' and it.subtype != 'shield' and not set(it.equip).isdisjoint(user_set))
+                                                               or ((it.category == 'weapon' or it.subtype == 'shield') and not set(it.equip).isdisjoint(weapons_user_set)))
+            else:
+                items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))      
 
     if 'kleptomania' in wacky:
         items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']) or (it.tier == 1))
@@ -287,7 +300,13 @@ def apply(env):
 
         kokkol_shop_assignment = next(filter(lambda sa: sa.shop.level == 'kokkol', shop_assignments))
         kokkol_candidates = items_dbview.find_all(lambda it: can_be_in_shop(it, 'kokkol'))
-        kokkol_shop_assignment.add(*[it.const for it in env.rnd.sample(kokkol_candidates, min(len(kokkol_candidates), max_kokkol_items))])
+        if env.options.flags.has_any('shops_pro', 'shops_standard') and env.options.flags.has('shops_always_apples'):
+            apple_to_add = env.rnd.choice(['#item.AuApple', '#item.AgApple'])
+            kokkol_shop_assignment.add(apple_to_add)
+            max_kokkol_items -= 1
+            kokkol_candidates = [it for it in kokkol_candidates if it.const not in ['#item.AuApple', '#item.AgApple']]
+        if max_kokkol_items:
+            kokkol_shop_assignment.add(*[it.const for it in env.rnd.sample(kokkol_candidates, min(len(kokkol_candidates), max_kokkol_items))])
 
         # guaranteed items
         guaranteed_free_items = []

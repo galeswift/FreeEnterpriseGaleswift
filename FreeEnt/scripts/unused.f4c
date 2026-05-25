@@ -169,7 +169,6 @@ text(bank 1 message $147) {X}
 text(bank 1 message $148) {X}
 text(bank 1 message $149) {X}
 
-text(bank 1 message $14D) {X}
 text(bank 1 message $14E) {X}
 text(bank 1 message $14F) {X}
 text(bank 1 message $150) {X}
@@ -650,12 +649,11 @@ event($80) // doomed Dark Elf battle
 event($83) // sailing from Fabul
 { } // Erase for space
 
-// event($88) // was praying elder, now used for wacky challenges
+// event($88) // was praying elder, now used for wacky challenges (Payable Golbez)
 
 //event($89) // was praying elder, now used for objective complete
 
-event($8A) // praying elder
-{ } // Erase for space
+// event($8A) // was praying elder, now used for wacky challenges (Night Mode)
 
 event($8B) // first entry to underworld
 { } // Erase for space

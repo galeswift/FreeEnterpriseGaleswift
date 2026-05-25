@@ -363,7 +363,7 @@ EGG_METHODS = {
           'items' : [
               ('Siren', [1]),
               ('Glass', [1]),
-              ('DragoonArmor', [1]),
+              ('DragonArmor', [1]),
               ('Cursed', [1]) 
               ] },
 
@@ -567,9 +567,6 @@ def apply(env):
             item_set = entry[0]
             if type(item_set) is str:
                 item_set = [item_set]
-
-            if '3point' in env.meta.get('wacky_challenge', []):
-                item_set = list(filter(lambda i: i != 'SomaDrop', item_set))
 
             qty_list = entry[1]
             items = env.rnd.sample(item_set, len(qty_list))

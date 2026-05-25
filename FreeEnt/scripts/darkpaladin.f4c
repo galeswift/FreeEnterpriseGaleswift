@@ -10,17 +10,10 @@ patch ($0FA7A3 bus) { 45 51 5C 67 5C 5F 69 }
 
 // We'll let Cecil keep the same sprite class and see what happens
 
-// assign commands and default equipment
+// assign default equipment;
+// commands are assigned in update_abilities.py
 actor(#PCecil)
 {
-    commands {
-        #Fight
-        // %flag japanese_abilities on%
-        #DarkWave
-        // %end%
-        #Black
-        #Item
-    }
     right hand #Ancient
     left hand #NoWeapon
     head #NoWeapon
@@ -28,25 +21,7 @@ actor(#PCecil)
     arms #NoWeapon
 }
 
-// build new spell by revamping Paladin Cecil's old White set
-spellset(#PCecil) {
-    initial {
-        #Venom
-    }
-    learned {
-        3 #Sleep
-        5 #Piggy
-        8 #Drain
-        12 #Psych
-        15 #Toad
-        19 #Warp
-        22 #Stop
-        25 #Virus
-        33 #Weak
-        37 #Fatal
-        40 #Nuke
-    }
-}
+// handle spellsets in update_spells.py
 
 // assign this spell set to "Black" instead of "White"
 patch ($13fdf8 bus) { FF 00 FF }

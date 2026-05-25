@@ -3794,7 +3794,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Kmain",
             "title": "Randomize key items",
-            "description": "The locations of key items are shuffled amongst each other. For example, you may find the Magma Key in the Antlion's Nest instead of the Sandruby.\n\nThe items randomized this way are the <em>Package, SandRuby, Legend Sword, Baron Key, TwinHarp, Earth Crystal, Magma Key, Tower Key, Airship Hook, Luca Key, Dark Crystal, Pink Tail, Rat Tail, Pan, Spoon, Adamant,</em> and the <em>Crystal used to transform Zeromus</em> (yes, you have to find it.)",
+            "description": "The locations of key items are shuffled amongst each other. For example, you may find the Magma Key in the Antlion's Nest instead of the Sandruby.\n\nThe items randomized this way are the <em>Package, SandRuby, Legend Sword, Baron Key, TwinHarp, Earth Crystal, Magma Key, Tower Key, Airship Hook, Luca Key, Dark Crystal, Pink Tail, Rat Tail, Pan, Spoon, Adamant,</em> and the <em>Crystal used to transform Zeromus</em> (yes, you have to find it).",
             "subcontrols": [
               {
                 "flag": "Ksummon",
@@ -3864,7 +3864,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Kpink",
                 "title": "Pink Tail trades for a key item",
-                "description": "The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless adamant armors are disabled via <em>-noadamants</em>.",
+                "description": "The reward for trading away the Pink Tail is a key item. The vanilla Adamant Armor is added to the key item rewards pool unless Adamant Armors are disabled via <em>-noadamants</em>.",
                 "hard": true,
                 "fork": true
               },
@@ -4690,18 +4690,30 @@ var FLAG_UISPEC = [
           {
             "flag": "Cspells:anti",
             "title": "Characters learn US spells, with altered progression.",
-            "description": "Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast.",
+            "description": "Mages learn tier 3 spells earlier and Porom learns later spells earlier, but Nuke and White are pushed to require 1.3/1.2 million experience. Tellah and FuSoYa will learn Weak from level-up after 260k experience or so (unless FuSoYa is nerfed). Tier 1-3 black magic is faster to cast. See <a href='fork_info#cspellsjanti'>the fork_info page</a> for the full list of changes.",
             "fork": true
           }
         ]
       },
       {
-        "flag": "Cj:abilities",
-        "title": "Characters have J-commands",
-        "description": "Characters retain the battle commands from FF4j that were removed in FF4us."
+        "flag": "@anon45",
+        "title": "Ability options",
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Cabilities:j",
+            "title": "Characters have J-commands",
+            "description": "Characters retain the battle commands from FF4j that were removed in FF4us."
+          },
+          {
+            "flag": "Cabilities:fullgood",
+            "title": "Characters have a full set of good commands",
+            "description": "Each character is assigned up to three handpicked battle commands (including ones from FF4j) that are useful, given other flags, to fill out their command list. See <a href='fork_info#cabilitiesfullgood'>the fork_info page</a> for the specific abilities chosen for each character."
+          }
+        ]
       },
       {
-        "flag": "@anon45",
+        "flag": "@anon46",
         "title": "Limit maximum party size",
         "type": "select",
         "subcontrols": [
@@ -4727,7 +4739,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon46",
+        "flag": "@anon47",
         "title": "Permadeath options",
         "type": "select",
         "subcontrols": [
@@ -4759,7 +4771,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon47",
+        "flag": "@anon48",
         "title": "Hero Options",
         "type": "select",
         "subcontrols": [
@@ -4779,7 +4791,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon48",
+        "flag": "@anon49",
         "title": "Difficulty modifiers",
         "subcontrols": [
           {
@@ -4804,7 +4816,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon49",
+        "flag": "@anon50",
         "title": "Characters in chests",
         "fork": true,
         "subcontrols": [
@@ -4835,7 +4847,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon50",
+        "flag": "@anon51",
         "title": "Character Join Options",
         "subcontrols": [
           {
@@ -4879,7 +4891,7 @@ var FLAG_UISPEC = [
     "title": "TREASURES",
     "controls": [
       {
-        "flag": "@anon51",
+        "flag": "@anon52",
         "title": "Treasure chests (other than MIABs)",
         "important": true,
         "type": "select",
@@ -4890,7 +4902,7 @@ var FLAG_UISPEC = [
             "null": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -4913,7 +4925,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -4963,7 +4975,7 @@ var FLAG_UISPEC = [
             "description": "Treasure contents are the same as in original FF4, but their positions are shuffled. This randomization is weighted so that overworld treasures tend to remain in the overworld, and similarly for underworld/moon treasures.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -4986,7 +4998,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5036,7 +5048,7 @@ var FLAG_UISPEC = [
             "description": "A basic randomization, allowing items of reasonable strength to appear. Items are equally likely to appear in any chest regardless of location.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5059,7 +5071,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5102,7 +5114,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5131,7 +5143,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5155,7 +5167,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5186,7 +5198,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5209,7 +5221,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5252,7 +5264,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5281,7 +5293,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5305,7 +5317,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5335,7 +5347,7 @@ var FLAG_UISPEC = [
             "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5358,7 +5370,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5401,7 +5413,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5430,7 +5442,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5454,7 +5466,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5485,7 +5497,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5508,7 +5520,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5551,7 +5563,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5580,7 +5592,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5604,7 +5616,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5634,7 +5646,7 @@ var FLAG_UISPEC = [
             "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5657,7 +5669,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5700,7 +5712,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5729,7 +5741,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5753,7 +5765,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5783,7 +5795,7 @@ var FLAG_UISPEC = [
             "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5806,7 +5818,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5849,7 +5861,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5878,7 +5890,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5902,7 +5914,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5933,7 +5945,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon52",
+                "flag": "@anon53",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5956,7 +5968,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5999,7 +6011,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6028,7 +6040,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -6052,7 +6064,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6089,8 +6101,8 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "Tplayable",
-        "title": "Chests contain usable items",
-        "description": "Equipment in chests (including MIABs) will be usable by at least one character that you can acquire in the seed.",
+        "title": "Equipment in chests will be usable",
+        "description": "Equipment from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
         "fork": true
       },
       {
@@ -6100,7 +6112,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon57",
+        "flag": "@anon58",
         "title": "Junk management",
         "type": "select",
         "subcontrols": [
@@ -6122,7 +6134,7 @@ var FLAG_UISPEC = [
     "title": "SHOPS",
     "controls": [
       {
-        "flag": "@anon58",
+        "flag": "@anon59",
         "title": "Shops",
         "important": true,
         "type": "select",
@@ -6259,7 +6271,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon59",
+        "flag": "@anon60",
         "title": "Buy prices",
         "type": "select",
         "subcontrols": [
@@ -6281,7 +6293,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon60",
+        "flag": "@anon61",
         "title": "Sell prices",
         "type": "select",
         "subcontrols": [
@@ -6296,7 +6308,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon61",
+        "flag": "@anon62",
         "title": "Guarantee Items",
         "compact": true,
         "fork": true,
@@ -6345,8 +6357,8 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "Splayable",
-        "title": "Shops contain usable items",
-        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed.",
+        "title": "Equipment found in shops will be usable",
+        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
         "fork": true
       },
       {
@@ -6356,7 +6368,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon62",
+        "flag": "@anon63",
         "title": "Remove Items",
         "compact": true,
         "subcontrols": [
@@ -6420,7 +6432,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon63",
+        "flag": "@anon64",
         "title": "Shop price adjustments",
         "fork": true,
         "type": "select",
@@ -6430,7 +6442,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 20% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6455,7 +6467,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 40% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6480,7 +6492,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 60% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6505,7 +6517,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 80% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6530,7 +6542,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 120% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6555,7 +6567,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 140% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6580,7 +6592,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 160% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6605,7 +6617,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 180% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6630,7 +6642,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 200% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6656,7 +6668,7 @@ var FLAG_UISPEC = [
             "hard": true,
             "subcontrols": [
               {
-                "flag": "@anon64",
+                "flag": "@anon65",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6684,7 +6696,7 @@ var FLAG_UISPEC = [
     "title": "BOSSES",
     "controls": [
       {
-        "flag": "@anon65",
+        "flag": "@anon66",
         "title": "Bosses",
         "important": true,
         "type": "select",
@@ -6721,7 +6733,7 @@ var FLAG_UISPEC = [
         "description": "Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area."
       },
       {
-        "flag": "@anon66",
+        "flag": "@anon67",
         "title": "Alternate boss stats/scripts",
         "fork": true,
         "type": "select",
@@ -6776,7 +6788,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon67",
+        "flag": "@anon68",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -6810,7 +6822,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon68",
+        "flag": "@anon69",
         "title": "Change Golbez's behaviour",
         "fork": true,
         "subcontrols": [
@@ -6834,22 +6846,19 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon69",
+        "flag": "@anon70",
         "title": "Remove certain boss slots",
         "fork": true,
-        "type": "select",
         "subcontrols": [
           {
-            "flag": "Bremove:officer_slot",
+            "flag": "Bremove:kaipo_slot",
             "title": "Remove the Officer slot boss fight",
-            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.",
-            "fork": true
+            "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool."
           },
           {
-            "flag": "Bremove:kingqueen_slot",
+            "flag": "Bremove:kqe_slot",
             "title": "Remove the KQ Eblan slot boss fight",
-            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool.",
-            "fork": true
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
           }
         ]
       }
@@ -6859,7 +6868,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon70",
+        "flag": "@anon71",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -6932,7 +6941,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon71",
+        "flag": "@anon72",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6947,9 +6956,44 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "Ecantrun",
-        "title": "Can't run from battles",
-        "hard": true
+        "flag": "@anon73",
+        "title": "Running from battle",
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Ecantrun",
+            "title": "Can't run from battles",
+            "hard": true
+          },
+          {
+            "flag": "@Erunspoils",
+            "title": "Earn battle spoils even when running away",
+            "description": "FF4 keeps track of how many monsters you have defeated in a battle. Under these flags, if you defeat some but not all of the monsters in a formation and then run away, you will still get EXP and GP from the monsters you did defeat. The spoils can be reduced by half or by three quarters in this situation.",
+            "fork": true,
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "@anon74",
+                "title": "Spoils penalty",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Erunspoils100",
+                    "title": "100% EXP and GP earned"
+                  },
+                  {
+                    "flag": "Erunspoils50",
+                    "title": "50% EXP and GP earned"
+                  },
+                  {
+                    "flag": "Erunspoils25",
+                    "title": "25% EXP and GP earned"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "flag": "Enoexp",
@@ -6978,7 +7022,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon72",
+        "flag": "@anon75",
         "title": "Change encounter tables",
         "fork": true,
         "type": "select",
@@ -7021,7 +7065,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Etable:uniquelygood",
             "title": "Each area has one hand-picked encounter",
-            "description": "Each group is assigned the same encounter in all eight slot; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups."
+            "description": "Each group is assigned the same encounter in all eight slots; the encounter selected will be a common grind option or a useful fight for other reasons. No encounter will be found in multiple groups."
           }
         ]
       }
@@ -7031,7 +7075,7 @@ var FLAG_UISPEC = [
     "title": "HARP OPTIONS",
     "controls": [
       {
-        "flag": "@anon73",
+        "flag": "@anon76",
         "title": "Harp randomization",
         "important": true,
         "fork": true,
@@ -7102,7 +7146,7 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon74",
+        "flag": "@anon77",
         "title": "Warps Randomization Options",
         "type": "select",
         "subcontrols": [
@@ -7110,9 +7154,10 @@ var FLAG_UISPEC = [
             "flag": "@doorsrando",
             "title": "Randomize Doors",
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon75",
+                "flag": "@anon78",
                 "title": "Doors Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -7149,9 +7194,10 @@ var FLAG_UISPEC = [
             "flag": "@entrancesrando",
             "title": "Randomize Entrances",
             "description": "Randomizes most Entrances in the game. Doors inside towns remain intact.\n<ul>\n    <li>Normal=Entrances of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Entrances of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Entrances of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Entrances of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Entrances of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon76",
+                "flag": "@anon79",
                 "title": "Entrances Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -7189,12 +7235,14 @@ var FLAG_UISPEC = [
       {
         "flag": "-calmness",
         "title": "Disable the Panic Button (Select + R)",
-        "description": "Disables the use of the Panic button (Select + R)"
+        "description": "Disables the use of the Panic button (Select + R)",
+        "fork": true
       },
       {
         "flag": "-forcesealed",
         "title": "Disable skipping the Sealed Cave Boss",
-        "description": "Fighting the Sealed Cave boss is required before seeing the KI"
+        "description": "Fighting the Sealed Cave boss is required before seeing the KI",
+        "fork": true
       }
     ]
   },
@@ -7207,7 +7255,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon77",
+            "flag": "@anon80",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7380,7 +7428,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon78",
+            "flag": "@anon81",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7553,7 +7601,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon79",
+            "flag": "@anon82",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7758,7 +7806,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon80",
+            "flag": "@anon83",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7794,7 +7842,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon81",
+            "flag": "@anon84",
             "title": "Spell learning categories",
             "type": "select",
             "subcontrols": [
@@ -7803,151 +7851,15 @@ var FLAG_UISPEC = [
                 "title": "Usual FuSoYa challenge",
                 "subcontrols": [
                   {
-                    "flag": "@anon82",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon83",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:vanilla",
-                "title": "Vanilla FuSoYa",
-                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon84",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:sequential_p",
-                "title": "Fixed spell order (Palom/Porom)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon82",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon83",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:sequential_r",
-                "title": "Fixed spell order (Rydia/Rosa)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
-                "subcontrols": [
-                  {
-                    "flag": "@anon82",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon83",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:location",
-                "title": "Location-dependent spells",
-                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
-                "subcontrols": [
-                  {
                     "flag": "@anon85",
                     "title": "Learning modifications",
                     "type": "select",
                     "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
                       {
                         "flag": "-fusoya:unlearn",
                         "title": "FuSoYa will lose spells instead of learning them",
@@ -7975,13 +7887,149 @@ var FLAG_UISPEC = [
                 ]
               },
               {
+                "flag": "-fusoya:vanilla",
+                "title": "Vanilla FuSoYa",
+                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon87",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "flag": "-fusoya:sequential_p",
+                "title": "Fixed spell order (Palom/Porom)",
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon85",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon86",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "flag": "-fusoya:sequential_r",
+                "title": "Fixed spell order (Rydia/Rosa)",
+                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
+                "subcontrols": [
+                  {
+                    "flag": "@anon85",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:slowstart",
+                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
+                      },
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon86",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "flag": "-fusoya:location",
+                "title": "Location-dependent spells",
+                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
+                "subcontrols": [
+                  {
+                    "flag": "@anon88",
+                    "title": "Learning modifications",
+                    "type": "select",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:unlearn",
+                        "title": "FuSoYa will lose spells instead of learning them",
+                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                        "hard": true
+                      }
+                    ]
+                  },
+                  {
+                    "flag": "@anon89",
+                    "title": "HP gain modifications",
+                    "subcontrols": [
+                      {
+                        "flag": "-fusoya:uncapped",
+                        "title": "FuSoYa's maximum possible HP is now 3900",
+                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
+                      },
+                      {
+                        "flag": "-fusoya:randomhp",
+                        "title": "FuSoYa will gain HP somewhat randomly",
+                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
                 "flag": "-fusoya:nerfed",
                 "title": "Fixed starting spells, no learning",
                 "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
                 "hard": true,
                 "subcontrols": [
                   {
-                    "flag": "@anon87",
+                    "flag": "@anon90",
                     "title": "HP gain modifications",
                     "subcontrols": [
                       {
@@ -8020,7 +8068,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon88",
+            "flag": "@anon91",
             "title": "Different anchoring or ATB formula",
             "type": "select",
             "subcontrols": [
@@ -8077,7 +8125,7 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "@anon89",
+                    "flag": "@anon92",
                     "title": "Anchor agility",
                     "type": "select",
                     "subcontrols": [
@@ -8117,7 +8165,7 @@ var FLAG_UISPEC = [
             "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
             "subcontrols": [
               {
-                "flag": "@anon90",
+                "flag": "@anon93",
                 "title": "Base ATB for the anchor",
                 "type": "select",
                 "subcontrols": [
@@ -8143,7 +8191,7 @@ var FLAG_UISPEC = [
       {
         "flag": "@exp",
         "title": "Restore vanilla or change EXP distribution",
-        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways.",
+        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.",
         "subcontrols": [
           {
             "flag": "-exp:split",
@@ -8173,7 +8221,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon91",
+                "flag": "@anon94",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8201,7 +8249,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon92",
+                "flag": "@anon95",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8233,7 +8281,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon96",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8260,7 +8308,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon94",
+                "flag": "@anon97",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8283,7 +8331,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon95",
+                "flag": "@anon98",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8318,7 +8366,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon96",
+                "flag": "@anon99",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -8369,7 +8417,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon97",
+        "flag": "@anon100",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -8399,10 +8447,10 @@ var FLAG_UISPEC = [
       {
         "flag": "-miscbugfixes",
         "title": "Include minor bug fixes",
-        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, and incorrect victim history entries."
+        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen."
       },
       {
-        "flag": "@anon98",
+        "flag": "@anon101",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -8433,12 +8481,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon99",
+        "flag": "@anon102",
         "title": "Zeromus fight changes",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon100",
+            "flag": "@anon103",
             "title": "Script category",
             "type": "select",
             "subcontrols": [
@@ -8525,7 +8573,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon101",
+            "flag": "@anon104",
             "title": "Nerfing of Big Bangs",
             "type": "select",
             "subcontrols": [
@@ -8566,7 +8614,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon102",
+            "flag": "@anon105",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8616,6 +8664,12 @@ var FLAG_UISPEC = [
             "flag": "-wacky:battlescars",
             "title": "\"Battle Scars\"",
             "hard": true
+          },
+          {
+            "flag": "-wacky:moneygains",
+            "title": "\"Big Money, Little Gains\"",
+            "hard": true,
+            "fork": true
           },
           {
             "flag": "-wacky:bodyguard",
@@ -8792,12 +8846,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon103",
+        "flag": "@anon106",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon104",
+            "flag": "@anon107",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8819,14 +8873,48 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "-tweak:darkpaladin",
-            "title": "Cecil becomes a Dark Paladin",
-            "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+            "flag": "@anon108",
+            "title": "Improve Edward's Sing command",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:edwardsing",
+                "title": "Sing only chooses Mute/Sleep/Charm that can work",
+                "description": "Normally, Sing uses Toad if Edward is a frog, or randomly chooses from Sleep/Mute/Charm/fail uniformly at random. Under this flag, Sing still only casts Toad if Edward is a frog, but otherwise it will pick randomly from the spells Sleep, Mute, Charm to which the target is vulnerable. If the target is immune to all three, then Sing will do nothing. Note that Sing will not bypass the boss bit."
+              },
+              {
+                "flag": "-tweak:edwardsingbetter",
+                "title": "Sing chooses from a wider range of status spells",
+                "description": "Sing will behave as in <em>-tweak:edwardsing</em>, but instead of only choosing from Sleep, Mute, and Charm, Sing can choose from: Venom, Powder (Blind), Mute, Piggy, Mini, Toad, Stone, Fatal, Bersk, Charm, Sleep, Hold, and Curse."
+              }
+            ]
+          },
+          {
+            "flag": "@anon109",
+            "title": "Changes to Cecil's Paladin class",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-tweak:darkpaladin",
+                "title": "Cecil becomes a Dark Paladin",
+                "description": "Cecil now becomes a Dark Paladin upon class change on Ordeals. He keeps the Dark Wave command and gains a set of Black magic, along with significant stat changes to become more offensive-oriented. Dark Knight and Paladin-specific equipment is reworked, based somewhat on <em>Unprecedented Crisis.</em>"
+              },
+              {
+                "flag": "-tweak:rosadin",
+                "title": "Rosa and Paladin Cecil switch classes",
+                "description": "Cecil now becomes a White Mage upon class change on Ordeals and Rosa is now a Paladin. Armor options remain the same, but weapon and shield options are swapped (except for the FF4A weapons). Rosa gains Cover and will auto-Cover, but downgrades to Cecil's White magic spellset (excluding Exit, which remains event-based); Cecil gains Pray and Rosa's full White magic spellset (including Exit on level-up)."
+              }
+            ]
           },
           {
             "flag": "-tweak:cidairship",
             "title": "Cid gains a target-all Raid command",
             "description": "Cid obtains a new target-all Raid command, based on the Japanese name of the dummied-out Command <em>$15</em>, <em>Airship</em>. The command increases in power with the furthest airship you have obtained: the Falcon is stronger than the Enterprise, and the Big Whale is stronger than the Falcon."
+          },
+          {
+            "flag": "-tweak:cidpeep",
+            "title": "Peep can hit boss bit monsters and Zeromus",
+            "description": "Normally, Peep does not hit monster with the boss bit. This flag removes that restriction. Because the Peep command does not have an exception for the Zeromus fight like the spell does, Cid can use Peep in that battle as well."
           },
           {
             "flag": "-tweak:twinmeteo",
@@ -8837,6 +8925,16 @@ var FLAG_UISPEC = [
             "flag": "-tweak:chocobosummon",
             "title": "Sometimes Call the Big Chocobo in battle",
             "description": "The Chocobo summon now sometimes calls the Big Chocobo to do a much more powerful attack. The chance of the Big Chocobo being called depends on the number of distinct items being stored with the Big Chocobo, while the spell power depends on the item prices of each of those distinct items (starting at the same power as Chocobo and increasing from there)."
+          },
+          {
+            "flag": "-tweak:rosapray",
+            "title": "Improve Rosa's Pray commmand",
+            "description": "Rosa's Pray command now casts nothing/Cure1/Cure2/Cure3/Cure4 randomly depending on Rosa's level. The higher Rosa's level is, the better the spell tends to be, with Cure2/Cure3/Cure4 becoming available when Rosa normally learns them."
+          },
+          {
+            "flag": "-tweak:fusoyaregen",
+            "title": "FuSoYa's Regen command now heals MP instead of HP",
+            "description": "Instead of healing HP, Regen now heals *MP* for party members (unless -wacky:tellahmaneuver is on, where it just heals more HP); the precise value depends on various flags."
           }
         ]
       }
@@ -8846,7 +8944,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon105",
+        "flag": "@anon110",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8900,7 +8998,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon106",
+            "flag": "@anon111",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -8916,7 +9014,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon107",
+                "flag": "@anon112",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

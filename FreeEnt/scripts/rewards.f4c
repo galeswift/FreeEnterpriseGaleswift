@@ -197,6 +197,8 @@ msfpatch {
         "Forged by Kokkol                "   // $5B     forge_item
         "Adamant Grotto[$cc][tail]Pink trade[$cd]     "   // $5C     pink_trade_item
         "Objective completion            "   // $5D     fixed_crystal
+        "Gated objective item            "   // $5E     gated_objective
+        "Dwarf hospital                  "   // $5F     dwarf_hospital_item
 }
 
 text(bank 1 message $133) {
@@ -661,12 +663,14 @@ msfpatch {
         rtl
 
     %TreasureCharacter:
-        // still need to check if this miab could have been a key item;
+        // still need to check again if this miab could have been a key item;
         // if yes, then increment the zonk counter (since char != KI)
         pla
         beq $+SkipZonk
         inc $_Rewards__ZonkChecksCount
     %SkipZonk:
+        // also need to clear $c6 now
+        stz $c6
         rtl
 }
 

@@ -24,11 +24,24 @@ msfpatch {
         ldx $c9
         beq $-KickDarkWave__HandleMiss
 
+        // %if ~wacky_isthisrandomized%
         cpx #$270f
         bcc $+KickDarkWave__StoreDamage
         // cap damage at #$270f (i.e. 9999) 
         ldx #$270f
         stx $c9
+        // %end%
+        // %if wacky_isthisrandomized%
+        cpx #$270f
+        bcs $+KickDarkWave__WackyDamage
+        jsl $=Wacky__IsThisRandomized_DoRounding
+        stx $c9
+        bra $+KickDarkWave__StoreDamage
+    %KickDarkWave__WackyDamage:
+        // max damage is 5000, not 9999
+        ldx #$1388
+        stx $c9
+        // %end%
     %KickDarkWave__StoreDamage:
         jml $03e7d3
 }

@@ -730,12 +730,12 @@ msfpatch {
         sta $1686
     %SpellSetCopyLoop:
         lda $=CharEx__InitialStateSpellSets,x
+        // %if wacky_misspelled%
+          jsl $=Wacky__Misspell
+        // %end%
         // %if wacky_spell_filter_hook%
           jsl $=Wacky__SpellFilterHook
           bcc $+SpellSetCopyLoopNext
-        // %end%
-        // %if wacky_misspelled%
-          jsl $=Wacky__Misspell
         // %end%
         sta $1590,y
     %SpellSetCopyLoopNext:
@@ -2003,7 +2003,7 @@ msfpatch {
         // %end%
 
         // %if ~wacky_all_characters_cover%
-        cmp #$09
+        cmp {% auto cover job class : #$09 %}
         beq $+IsPaladinCecil
         lda $a9
         tax

@@ -408,7 +408,9 @@
 <> Spell options
 .(Cspells:j) Characters learn J-spells
 .(Cspells:anti)^ Characters learn US spells, with altered progression.
-[Cj:abilities] Characters have J-commands
+<> Ability options
+.(Cabilities:j) Characters have J-commands
+.(Cabilities:fullgood) Characters have a full set of good commands
 <> Limit maximum party size
 .(Cparty:1)! Maximum party size 1
 .(Cparty:2)! Maximum party size 2
@@ -490,7 +492,7 @@
 ..[ECHO:Tstandard]
 .(Tempty)! Chests are empty
 [Tno:j] No J-items in chests
-[Tplayable]^ Chests contain usable items
+[Tplayable]^ Equipment in chests will be usable
 [Tadjmiabareas]^ Areas with MIABs will have slightly worse items
 <> Junk management
 .[Tjunk] Keep junk
@@ -532,7 +534,7 @@
 .[Salways:illusion] Illusions always sold in shops
 .[Salways:coffin] Coffins always sold in shops
 .[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
-[Splayable]^ Shops contain usable items
+[Splayable]^ Equipment found in shops will be usable
 [Sethersell]^ Ethers and Elixirs sell like other items
 
 ()# Remove Items
@@ -602,9 +604,9 @@
 .[Bwhybez] Disable Golbez's Shadow summon
 .[Bwhichbez] Replace Golbez's and Shadow's spells with random spells
 [Bspellpower]!^ All bosses gain scaled spell power
-<>^ Remove certain boss slots
-.[Bremove:officer_slot]^ Remove the Officer slot boss fight
-.[Bremove:kingqueen_slot]^ Remove the KQ Eblan slot boss fight
+[]^ Remove certain boss slots
+.[Bremove:kaipo_slot] Remove the Officer slot boss fight
+.[Bremove:kqe_slot] Remove the KQ Eblan slot boss fight
 
 == ENCOUNTERS
 <>* Random encounter rate
@@ -623,7 +625,13 @@
 <> Drop tables
 .(Eno:sirens) Remove Sirens from drop/sneak tables
 .(Eno:jdrops) Use US version drop/sneak tables
-[Ecantrun]! Can't run from battles
+<> Running from battle
+.(Ecantrun)! Can't run from battles
+.<@Erunspoils>^ Earn battle spoils even when running away
+..<> Spoils penalty
+...(Erunspoils100) 100% EXP and GP earned
+...(Erunspoils50) 50% EXP and GP earned
+...(Erunspoils25) 25% EXP and GP earned
 [Enoexp]! No EXP for random encounters
 [Enogp]!^ No GP for random encounters
 [Enodmachin]!^ Disable D.Machin encounters
@@ -656,22 +664,22 @@
 
 == DOORS
 <> Warps Randomization Options
-.(@doorsrando) Randomize Doors
+.(@doorsrando)^ Randomize Doors
 ..<> Doors Randomization Options
 ...(-doorsrando:normal)!           Doors Shuffle without Cross World
 ...(-doorsrando:gated)!          Underworld and Moon Doors shuffled
 ...(-doorsrando:blueplanet)!          Overworld and Underworld Doors Shuffled
 ...(-doorsrando:why)!          Overworld and Moon Doors shuffled
 ...(-doorsrando:all)!          All Doors shuffled
-.(@entrancesrando) Randomize Entrances
+.(@entrancesrando)^ Randomize Entrances
 ..<> Entrances Randomization Options
 ...(-entrancesrando:normal)!           Entrances Shuffle without Cross World
 ...(-entrancesrando:gated)!          Underworld and Moon Entrances Shuffled
 ...(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
 ...(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
 ...(-entrancesrando:all)!          All Entrances Shuffled
-[-calmness] Disable the Panic Button (Select + R)
-[-forcesealed] Disable skipping the Sealed Cave Boss
+[-calmness]^ Disable the Panic Button (Select + R)
+[-forcesealed]^ Disable skipping the Sealed Cave Boss
 
 
 == OTHER
@@ -922,6 +930,7 @@
 ..(-wacky:random6)!^         6 random wacky challenges
 .[-wacky:afflicted]!        "Afflicted"
 .[-wacky:battlescars]!      "Battle Scars"
+.[-wacky:moneygains]!^      "Big Money, Little Gains"
 .[-wacky:bodyguard]         "The Bodyguard"
 .[-wacky:dropitlikeitshot]^ "Drop It Like It's Hot"
 .[-wacky:enemyunknown]!     "Enemy Unknown"
@@ -965,10 +974,18 @@
 ..(-tweak:kainmagic) Give Kain magic (with Lance)
 ..(-tweak:harmspell) Replace Sight with Harm
 .[-tweak:edwardheal] Improve Edward's Heal command
-.[-tweak:darkpaladin] Cecil becomes a Dark Paladin
+.<> Improve Edward's Sing command
+..(-tweak:edwardsing) Sing only chooses Mute/Sleep/Charm that can work
+..(-tweak:edwardsingbetter) Sing chooses from a wider range of status spells
+.<> Changes to Cecil's Paladin class
+..[-tweak:darkpaladin] Cecil becomes a Dark Paladin
+..[-tweak:rosadin] Rosa and Paladin Cecil switch classes
 .[-tweak:cidairship] Cid gains a target-all Raid command
+.[-tweak:cidpeep] Peep can hit boss bit monsters and Zeromus
 .[-tweak:twinmeteo] Twin can also cast W.Meteo or self-Stone
 .[-tweak:chocobosummon] Sometimes Call the Big Chocobo in battle
+.[-tweak:rosapray] Improve Rosa's Pray commmand
+.[-tweak:fusoyaregen] FuSoYa's Regen command now heals MP instead of HP
 
 == SPOILERS
 <> No spoiler log

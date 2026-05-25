@@ -497,21 +497,12 @@ msfpatch {
     %LoadLearnedSpellNames:
         // load learned spell names into text buffers
         lda $=FusoyaChallenge__LearnedSpell1
-        // %if wacky_misspelled%
-          jsl $=Wacky__Misspell
-        // %end%
         ldx #$0000
         jsl $=TextBuffer__LoadSpellName
         lda $=FusoyaChallenge__LearnedSpell2
-        // %if wacky_misspelled%
-          jsl $=Wacky__Misspell
-        // %end%
         ldx #$0001
         jsl $=TextBuffer__LoadSpellName
         lda $=FusoyaChallenge__LearnedSpell3
-        // %if wacky_misspelled%
-          jsl $=Wacky__Misspell
-        // %end%
         ldx #$0002
         jsl $=TextBuffer__LoadSpellName
         rts

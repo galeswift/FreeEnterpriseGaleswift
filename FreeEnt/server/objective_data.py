@@ -59,7 +59,7 @@ OBJECTIVES = {
     0x4C: {'slug' : 'quest_zot', 'reward': '#item.EarthCrystal', 'desc': 'Complete the Tower of Zot'},
     0x4D: {'slug' : 'quest_dwarfcastle', 'reward': '#item.Magma', 'desc': 'Defeat the bosses of Dwarf Castle'},
     0x4E: {'slug' : 'quest_lowerbabil', 'reward': '#item.Magma', 'desc': 'Defeat the boss of Lower Bab-il'},
-    0x4F: {'slug' : 'quest_falcon', 'reward': '#item.Hook', 'desc': 'Launch the Falcon'},
+    0x4F: {'slug' : 'quest_falcon', 'reward': '#item.fe_Hook', 'desc': 'Launch the Falcon'},
     0x50: {'slug' : 'quest_sealedcave', 'reward': '#item.Luca', 'desc': 'Complete the Sealed Cave'},
     0x51: {'slug' : 'quest_monsterqueen', 'reward': '#item.Magma', 'desc': 'Defeat the queen at the Town of Monsters'},
     0x52: {'slug' : 'quest_monsterking', 'reward': '#item.Magma', 'desc': 'Defeat the king at the Town of Monsters'},

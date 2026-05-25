@@ -9,7 +9,7 @@
 // 0xE0 (0 ticks cast time, targetting like Virus)
 // 0x19 (100 spell power)
 // 0x64 (100 accuracy)
-// 0x01 (damage plus sap if weakness)
+// 0x01 (damage plus sap; this effect explicitly checks for White/Crystal only)
 // 0x85 (same as White)
 // 0x0F (same MP cost as tier 2s, bounces off Walls)
 
@@ -32,8 +32,9 @@ text( spell name $17 ) {
 //    mp cost 15
 //    ignore wall False
 //}
-// there's no compiler for spell blocks, so just directly write the six bytes, shrug:
-patch($0f982a bus) { E0 19 64 01 85 0F }
+// there's no compiler for spell blocks, so just directly write the five non-MP/wall bytes, shrug
+// the MP/wall byte, $0F, is handled by update_spells or wacky_rando
+patch($0f982a bus) { E0 19 64 01 85 }
 
 // set the audio effect for this spell to be the same as Ice1
 patch($0fa366 bus) { 1D }
@@ -44,79 +45,22 @@ patch($0fa0a8 bus) { 06 0B 06 00 }
 
 // Let Cecil get it at level 17 (along with Porom, Rosa at 14 for utility);
 // remove from Rydia's learned spells
+// all changes happen in update_spells.py
 
-// %flag darkpaladin off%
-spellset(#PCecil) {
-    learned {
-        8  #Peep
-        15  #Cure2
-        17  $17 // formerly #Sight, now #Harm
-        19  #Exit
-        24  #Heal
-    }
-}
-// %end%
+// ensure that Harm only inflicts Sap on undead, like White
+msfpatch{
+    .addr $03d3e0
+        jml $=DamageSap__CheckWhiteHarm
+        nop nop
 
-spellset(#RydiaWhite) {
-    learned {
-        3  #Cure1
-        7  #Hold
-    }
+    .new
+    DamageSap__CheckWhiteHarm:
+        // still check for White
+        cmp #$0b 
+        beq $+IsWhiteHarm
+        cmp #$17
+        beq $+IsWhiteHarm
+        jml $03d3f4
+    %IsWhiteHarm:
+        jml $03d3ed
 }
-
-// %flag antidale_spells_progression off%
-spellset(#Rosa) {
-    initial {
-        #Cure1
-        #Hold
-        #Peep
-        #Slow
-    }
-    learned {
-        11  #Life1
-        13  #Cure2
-        14  $17 // formerly #Sight, now #Harm
-        15  #Mute
-        18  #Heal
-        20  #Bersk
-        23  #Blink
-        24  #Charm
-        28  #Cure3
-        29  #Size
-        30  #Fast
-        32  #Float
-        34  #Wall
-        38  #Cure4
-        42  #Life2
-        48  #White
-    }
-}
-
-spellset(#Porom) {
-    initial {
-        #Cure1
-        #Hold
-        #Peep
-        #Slow
-    }
-    learned {
-        11  #Life1
-        13  #Cure2
-        14  $17 // formerly #Sight, now #Harm
-        15  #Mute
-        18  #Bersk
-        19  #Exit
-        20  #Heal
-        23  #Blink
-        25  #Charm
-        31  #Size
-        33  #Cure3
-        38  #Fast
-        40  #Float
-        44  #Wall
-        48  #Cure4
-        52  #White
-        56  #Life2
-    }
-}
-// %end%

@@ -1,0 +1,89 @@
+// Goal: make Edward's Sing command much better
+
+// Option 1: randomly choose one of the three usual
+// statuses, or Toad if Eddie's a Frog, that the target
+// is actually weak to, and cast that spell like the game
+// normally does. -tweak:edwardsing
+
+// Option 2: randomly choose *any* status that the target
+// is weak to, and cast a spell that inflicts that
+// (possibly including some damage from monster spells).
+// -tweak:edwardsingbetter
+
+// Venom, Powder, Mute, Piggy, Mini, Toad, Stone, Fatal
+// blank x2 (gradual petrify), Bersk, Charm, Sleep, Hold, blank, Curse
+
+patch($218d00 bus) {
+    1C 64 02 1A 15 19 2A 2B
+    00 00 09 03 29 01 00 68
+}
+
+// replace "Song of Silence" with something else; we'll use that alert (#$0e),
+// and make the change via substitution determined in generator.py (since we
+// have an f4c compiler option for alert text).
+
+text(alert message $0e) {{% song of silence replacement text %}}
+
+msfpatch{
+    .addr $03e910
+        jml $=EdwardSing__Upgrade
+        nop nop nop
+
+    .new
+    EdwardSing__Upgrade:
+        tdc
+        tax
+        tay
+        rep #$20
+        .mx 0x00
+        lda $272b
+        eor #$ffff
+        and {% edward sing status options %}
+        beq $+NothingHappened
+
+        pha
+    %CountSingLoopStart:
+        lsr a
+        bcc $+NoCount
+        iny
+    %NoCount:
+        cmp #$0000
+        bne $-CountSingLoopStart
+
+        tya
+        sep #$20
+        .mx 0x20
+        ldx #$0001
+        jsl $=Util__BattleRNG
+        tay
+        ldx #$0000
+        rep #$20
+        .mx 0x00
+        pla
+        jml $03e92c
+
+    %NothingHappened:
+        sep #$20
+        .mx 0x20
+        jml $03e917
+
+    .addr $03e92c
+    %FindStatusLoopStart:
+        .mx 0x00
+        lsr a
+        bcc $+NextStatus
+        dey
+        beq $+ChosenSpell
+    %NextStatus:
+        inx
+        bra $-FindStatusLoopStart
+
+    %ChosenSpell:
+        sep #$20
+        .mx 0x20
+        tdc
+        lda #$0e
+        sta $34ca
+        lda $218d00,x
+
+}

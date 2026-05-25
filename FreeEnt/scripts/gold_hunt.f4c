@@ -7,6 +7,20 @@ npc(#KaipoInn2FScholar)
     }
 }
 
+// change the "Tory" npc to generic KaipoMan
+placement($11 2)
+{
+    npc #KaipoMan
+    position 7 8
+    walking off
+    tangible
+    face left
+    palette 1
+    turning on
+    marching on
+    speed 1
+}
+
 patch($21fa05 bus) {
 // %gold hunt id%
     00

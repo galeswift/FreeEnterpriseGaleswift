@@ -187,8 +187,6 @@ def refineItemsView(dbview, env):
         dbview.refine(lambda it: it.const != '#item.fe_EagleEye')
     if 'kleptomania' in env.meta.get('wacky_challenge',[]):
         dbview.refine(lambda it: (it.category not in ['weapon', 'armor']))   
-    if '3points' in env.meta.get('wacky_challenge',[]):
-        dbview.refine(lambda it: it.const != '#item.SomaDrop')
 
     # In Omnidextrous, everyone can equip anything, hence can use everything, so this flag does nothing.
     if env.options.flags.has('treasure_playable') and not 'omnidextrous' in (env.meta.get('wacky_challenge',[])):
@@ -197,7 +195,19 @@ def refineItemsView(dbview, env):
         if 'fistfight' in env.meta.get('wacky_challenge',[]):
             dbview.refine(lambda it: it.category == 'item' or (it.category != 'weapon' and not set(it.equip).isdisjoint(user_set)) or (it.subtype == 'claw'))
         else:
-            dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
+            # Remove Dark Knight Cecil from users if on Cpaladin without Dark Paladin
+            if env.options.flags.has('characters_cecil_paladin') and not env.options.flags.has('darkpaladin'):
+                user_set.difference_update(set(['dkcecil']))
+            if env.options.flags.has('rosapaladin'):
+                # When Rosa and Paladin Cecil swap weapons/shields, need to handle that
+                weapons_user_set = user_set.copy().difference(set(['pcecil','rosa']))
+                for c in ['pcecil', 'rosa']:
+                    if c in user_set:
+                        weapons_user_set.add([d for d in ['pcecil', 'rosa'] if d != c][0])
+                dbview.refine(lambda it: it.category == 'item' or (it.category == 'armor' and it.subtype != 'shield' and not set(it.equip).isdisjoint(user_set))
+                                                               or ((it.category == 'weapon' or it.subtype == 'shield') and not set(it.equip).isdisjoint(weapons_user_set)))
+            else:
+                dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(user_set))       
 
 def expand_characters_to_users(char_set):
     user_set = set()

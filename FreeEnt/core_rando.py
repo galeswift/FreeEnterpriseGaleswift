@@ -623,12 +623,6 @@ def apply(env):
                                                                                   + drill_description_row3 
                                                                                   + '[$00][$fa]                            [$fb][$00]')
 
-    # potentially remove boss spots (other modules will need to do this again)
-    if env.options.flags.has('no_officer_slot'):
-        BOSS_SLOTS.pop('officer_slot')
-    if env.options.flags.has('no_kq_eblan_slot'):
-        BOSS_SLOTS.pop('kingqueen_slot')
-
     assignable_boss_slots = BOSS_SLOTS.copy()
     bosses = list(BOSSES)
 
@@ -638,6 +632,10 @@ def apply(env):
         prevent_hook_seed = (env.rnd.random() < 0.5)
     else:
         prevent_hook_seed = False
+
+    # need to possibly modify HOOK_UNDERGROUND_BRANCH in case the KQ Eblan slot isn't fought
+    if env.options.flags.has('no_kq_eblan_slot'):
+        HOOK_UNDERGROUND_BRANCH.remove('kingqueen_slot')
 
     # perform assignment
     attempts = 0
@@ -980,7 +978,8 @@ def apply(env):
                         rewards_assignment[slot] = pool.pop()
                     except:
                         # Pnone + win:crystal causes an issue under Tvanilla | Tshuffle. This is a workaround to that.
-                        rewards_assignment[slot] = (default_item_reward if not is_vanilla else EmptyReward())
+                        # ... and, to prevent further issues, just always give the default reward, instead of nothing.
+                        rewards_assignment[slot] = default_item_reward
     else:
         # revised Rivers rando
         curves_dbview = databases.get_tvanillaish_dbview() if (env.options.flags.has('treasure_vanillaish')) else databases.get_curves_dbview()

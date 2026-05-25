@@ -590,8 +590,13 @@ def apply(env):
         no_lance = False
         excluded_spells.extend(['#spell.Sight'])
 
-    if env.options.flags.has('antidale_spells_progression'):
+    if env.options.flags.has('antidale_spells_progression') and not env.options.flags.has('unlearn_fusoya'):
+        # -fusoya:unlearn overrides Cspells:anti re: Weak.
         excluded_spells.extend(['#spell.Weak'])
+        if not env.options.flags.has('fusoya_nerfed'):
+            env.add_scripts(
+            'spellset(#FusoyaBlack) {{ learned {{ 53  #spell.Weak }} }}'
+            )
 
     max_credits = 14
     if env.options.flags.has('uncapped_fusoya'):
@@ -679,7 +684,7 @@ def apply(env):
         if env.options.flags.has('randomhp_fusoya'):
             # in this case, either the HP max is 3900 or it's 1100, no slowstart option
             hp_gains = get_random_hp_gains(env, max_credits, max_credits, 0, (5 if max_credits > 14 else 2))
-            env.add_substitution('fusoya challenge hp gains', ' '.join([f'${gain:02X}' for gain in hp_gains]))
+            env.add_substitution('fusoya challenge hp gains', ' '.join([f'{gain:02X}' for gain in hp_gains]))
     
         env.add_substitution('fusoya initial spells', '')
         env.add_scripts(

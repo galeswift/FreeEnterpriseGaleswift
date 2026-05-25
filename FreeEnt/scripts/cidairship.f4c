@@ -5,21 +5,9 @@
 // Add battle command name data for "Raid" in Bank 0F
 patch($0fa82f bus) { 53 5C 64 5F FF }
 
-// add "Raid" as a constant
-consts(command)
-{
-    $15     Raid
-}
+// add "Raid" as a constant in update_abilities
 
-// provide Cid the Raid command
-actor(#Cid) {
-    commands {
-        #Fight
-        #Peep
-        #Raid
-        #Item
-    }
-}
+// provide Cid the Raid command in update_abilities.py
 
 // helper function to get the airship level
 // 1 for Enterprise, 2 for Falcon, 3 for Big Whale
@@ -211,6 +199,11 @@ msfpatch{
         sta $c9 // total damage is in $c9-$ca
         sep #$20
         .mx 0x20
+        // %if wacky_isthisrandomized%
+        ldx $c9
+        jsl $=Wacky__IsThisRandomized_DoRounding
+        stx $c9
+        // %end%
         tdc
         // restore the attack base from the stack
         plx
