@@ -78,12 +78,7 @@
             "name": "In a Rich Man's World",
             "description": "All the things I could do. If I had a little money.",
             "flags": "Omode:ki10,goldhunter1000/random:8,boss/req:5/hardreq:1,2/win:game Kmain/summon/moon/nofree:dwarf/unsafer/force:hook Pnone Crelaxed/thrift:5/j:abilities Twildish/mintier:3 Swildish/mixed/unsafe Bstandard/unsafe/whichburn/whichbez/woahdin Etoggle Glife/sylph/backrow -kit:money -kit2:money -kit3:money -noadamants -spoon -wacky:payablegolbez -tweak:edwardheal"
-        },
-        {
-            "name": "OmniPro",
-            "description": "A flagset featured in Possumorpheus and Y2Sky’s Toilet Paper League Tournament Preparation League - presented as Possum DM’d it to me :)",
-            "flags": "O2:quest_monsterking/4:quest_whitealtar/random:5,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:7/no:yang/j:abilities/nekkie/nodupes Tpro Sstandard/sell:0 Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:basic -kit2:money -kit3:money -spoon -wacky:omnidextrous"
-        },
+        },        
         {
             "name": "To Dart a Bard",
             "description": "",
