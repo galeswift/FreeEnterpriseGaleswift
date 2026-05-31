@@ -804,22 +804,35 @@ def apply(env):
                             stats_ideal = [monster_scaled_stats[stat][i] * stats_ratio[i] for i in range(len(stats_ratio))]
                             closest_index, closest_value = _get_closest_stat(stats_ideal, SPEED_TABLE, (1.0, 1.0))
                         else:
-                            # New scripted-stats-scaling algorithm; speed still works the same, because no monster has 0 speed.
-                            # For all other stats, the old algorithm treated the scripted changes as multiplicative scaling, but for example,
-                            # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
-                            # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
-                            # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
-                            # (Incidentally, it's better just to carve out an exception for Waterhag, and just make the resulting stats (0,0,0) to avoid
-                            # getting (0,0,1) at the Antlion spot.)
+                            if env.options.flags.has('bosses_new_scripted_stat_changes'):
+                                # New scripted-stats-scaling algorithm; speed still works the same, because no monster has 0 speed.
+                                # For all other stats, the old algorithm treated the scripted changes as multiplicative scaling, but for example,
+                                # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
+                                # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
+                                # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
+                                # (Incidentally, it's better just to carve out an exception for Waterhag, and just make the resulting stats (0,0,0) to avoid
+                                # getting (0,0,1) at the Antlion spot.)
+                                # For balance, we cap the level ratio at 1 for Valvalis, because moon Valvalis is brutal otherwise.
                                 if stats_scripted == (0,0,0) and boss == 'waterhag':
                                     closest_index, closest_value = 0x60, (0,0,0)
                                 else:
                                     diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
-                                    scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
+                                    level_ratio_capped = (min(1,(ref_leader['level'] / leader['level'])) if boss == 'valvalis'
+                                                          else ref_leader['level'] / leader['level'])
+                                    scaled_diff = [diff_stats_scripted[i] * level_ratio_capped for i in range(len(diff_stats_scripted))]
                                     stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
-                                    closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1, 0.03, 0.165))
-                        env.add_substitution(f'{monster_name} script {stat} change ${value:02X}', f'set {stat} index ${closest_index:02X}')
-                        csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+                                    weights = ((1, 0.07, 0.1) if boss == 'valvalis' else (1, 0.03, 0.165))
+                                    closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, weights)
+                            else:
+                                stats_ratio = [stats_scripted[i] / max(monster[stat][i], 1) for i in range(len(stats_scripted))]
+                                stats_ideal = [monster_scaled_stats[stat][i] * stats_ratio[i] for i in range(len(stats_ratio))]
+                                closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+                        if env.options.flags.has('bosses_new_scripted_stat_changes') or shuffled_stats_slots[slot][:-5] != boss:
+                            env.add_substitution(f'{monster_name} script {stat} change ${value:02X}', f'set {stat} index ${closest_index:02X}')
+                            csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+                        else:
+                            # not changing stats of bosses in their vanilla spots under old scaling (bugfix but only for the one spot)
+                            csv_row.append(f'script-{stat}: {"-".join([str(v) for v in stats_scripted])}')
 
             if CSV_OUTPUT:
                 print(','.join([str(v) for v in csv_row]))
@@ -1022,28 +1035,40 @@ if __name__ == '__main__':
     # change the import statement to get the information for ET or J bosses,
     # and change the csv name so you can keep track
 
-    boss_stats = open('boss_scaling_stats.csv', 'w')
-    # boss_stats = open('boss_scaling_stats_et.csv', 'w')
-    # boss_stats = open('boss_scaling_stats_j.csv', 'w')
-
-    from .boss_rando_formation_data import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
-    # from .boss_rando_formation_data_et import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
-    # from .boss_rando_formation_data_j import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
-
-    # ET
-    # MONSTER_SCRIPTED_CHANGES.update({          
-    #     0x98 : ['wyvern',
-    #         ('spell power', 14),
-    #         ]
-    #     })
-    # J/US
-    MONSTER_SCRIPTED_CHANGES.update({          
-        0x98 : ['wyvern',
-            ('spell power', 12),
-            ('spell power', 8),
-            ('spell power', 6),
-            ]
-        })
+    scripted_stats_option = 'new'
+    # scripted_stats_option = 'old'
+    boss_versions = 'US'
+    # boss_versions = 'J'
+    # boss_versions = 'ET'
+    
+    if boss_versions == 'J':
+        boss_stats = open('boss_scaling_stats_j' + ('_new' if scripted_stats_option == 'new' else '') + '.csv', 'w')
+        from .boss_rando_formation_data_j import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 12),
+                ('spell power', 8),
+                ('spell power', 6),
+                ]
+            })
+    elif boss_versions == 'ET':
+        boss_stats = open('boss_scaling_stats_et' + ('_new' if scripted_stats_option == 'new' else '') + '.csv', 'w')
+        from .boss_rando_formation_data_et import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 14),
+                ]
+            })
+    else:
+        boss_stats = open('boss_scaling_stats' + ('_new' if scripted_stats_option == 'new' else '') + '.csv', 'w')
+        from .boss_rando_formation_data import FORMATION_DATA, STATS_TABLE, SPEED_TABLE, MONSTER_HP_SCALED_THRESHOLDS
+        MONSTER_SCRIPTED_CHANGES.update({          
+            0x98 : ['wyvern',
+                ('spell power', 12),
+                ('spell power', 8),
+                ('spell power', 6),
+                ]
+            })
 
     for boss in BOSSES:
         for slot in BOSS_SLOTS:
@@ -1138,20 +1163,34 @@ if __name__ == '__main__':
                                 stats_ideal = [monster_scaled_stats[stat][i] * stats_ratio[i] for i in range(len(stats_ratio))]
                                 closest_index, closest_value = _get_closest_stat(stats_ideal, SPEED_TABLE, (1.0, 1.0))
                             else:
-                                # New scripted-stats-scaling algorithm; speed still works the same, because no monster has 0 speed.
-                                # For all other stats, the old algorithm treated the scripted changes as multiplicative scaling, but for example,
-                                # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
-                                # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
-                                # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
-                                # (Technically this algorithm will not give Waterhag (0,0,0) defense at exactly the Antlion spot, but it's close enough.)
-                                if stats_scripted == (0,0,0) and boss == 'waterhag':
-                                    closest_index, closest_value = 0x60, (0,0,0)
+                                if scripted_stats_option == 'new':
+                                    # New scripted-stats-scaling algorithm; speed still works the same, because no monster has 0 speed.
+                                    # For all other stats, the old algorithm treated the scripted changes as multiplicative scaling, but for example,
+                                    # if a boss spot has 0 base defense (like at Zot 2, the vanilla Val spot), then the scripted change would be to (0,0,0).
+                                    # Instead, we scale the *difference* between the original spot's usual and scripted stat using level (no monster has level 0),
+                                    # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
+                                    # (Incidentally, it's better just to carve out an exception for Waterhag, and just make the resulting stats (0,0,0) to avoid
+                                    # getting (0,0,1) at the Antlion spot.)
+                                    # For balance, we cap the level ratio at 1 and use different weights for Valvalis, because moon Valvalis is brutal otherwise.
+                                    if stats_scripted == (0,0,0) and boss == 'waterhag':
+                                        closest_index, closest_value = 0x60, (0,0,0)
+                                    else:
+                                        diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                        level_ratio_capped = (min(1,(ref_leader['level'] / leader['level'])) if boss == 'valvalis'
+                                                              else ref_leader['level'] / leader['level'])
+                                        scaled_diff = [diff_stats_scripted[i] * level_ratio_capped for i in range(len(diff_stats_scripted))]
+                                        stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                        weights = ((1, 0.07, 0.1) if boss == 'valvalis' else (1, 0.03, 0.165))
+                                        closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, weights)
                                 else:
-                                    diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
-                                    scaled_diff = [diff_stats_scripted[i] * (ref_leader['level'] / leader['level']) for i in range(len(diff_stats_scripted))]
-                                    stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
-                                    closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1, 0.03, 0.165))
-                            csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+                                    stats_ratio = [stats_scripted[i] / max(monster[stat][i], 1) for i in range(len(stats_scripted))]
+                                    stats_ideal = [monster_scaled_stats[stat][i] * stats_ratio[i] for i in range(len(stats_ratio))]
+                                    closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, (1.0, 0.1, 1.0))
+                            if scripted_stats_option == 'new' or slot[:-5] != boss:
+                                csv_row.append(f'script-{stat}: {"-".join([str(v) for v in closest_value])}')
+                            else:
+                                # not changing stats of bosses in their vanilla spots under old scaling (bugfix but only for the one spot)
+                                csv_row.append(f'script-{stat}: {"-".join([str(v) for v in stats_scripted])}')
                             # debugging to make sure the stat changes are monotonic increasing
                             if min([closest_value[i] - monster_scaled_stats[stat][i] for i in range(len(closest_value))]) < 0:
                                 print(boss + ' - ' + slot + ' - ' + stat + f' : {"-".join([str(v) for v in monster_scaled_stats[stat]])} to {"-".join([str(v) for v in closest_value])}')

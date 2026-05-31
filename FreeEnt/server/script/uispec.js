@@ -5446,7 +5446,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tbuffweights",
                 "title": "Some areas have better treasure weights",
-                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
                 "fork": true
               }
             ]
@@ -5777,7 +5777,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tbuffweights",
                 "title": "Some areas have better treasure weights",
-                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
                 "fork": true
               }
             ]
@@ -5946,7 +5946,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tbuffweights",
                 "title": "Some areas have better treasure weights",
-                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
                 "fork": true
               }
             ]
@@ -6114,7 +6114,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Tbuffweights",
                 "title": "Some areas have better treasure weights",
-                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
                 "fork": true
               }
             ]
@@ -7664,6 +7664,13 @@ var FLAG_UISPEC = [
         "flag": "Bspellpower",
         "title": "All bosses gain scaled spell power",
         "description": "Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "Bnewscriptstats",
+        "title": "Scripted stat changes for bosses behave differently",
+        "description": "This flag changes the behaviour of scripted stat changes for bosses. The changes impact Valvalis and Kainazzo primarily, making those bosses much bulkier in high-level spots (and less bulky in low-level spots). See <a href='fork_info#bnewscriptstats''>the fork_info page</a> for information on the new algorithm.",
         "hard": true,
         "fork": true
       },

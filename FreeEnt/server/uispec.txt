@@ -653,6 +653,7 @@
 .[Bwhybez] Disable Golbez's Shadow summon
 .[Bwhichbez] Replace Golbez's and Shadow's spells with random spells
 [Bspellpower]!^ All bosses gain scaled spell power
+[Bnewscriptstats]!^ Scripted stat changes for bosses behave differently
 []^ Remove certain boss slots
 .[Bremove:officer_slot] Remove the Officer slot boss fight
 .[Bremove:kingqueen_slot] Remove the KQ Eblan slot boss fight

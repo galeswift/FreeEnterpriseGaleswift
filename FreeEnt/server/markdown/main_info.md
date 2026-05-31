@@ -512,14 +512,7 @@ This flag bypasses the override that the vanilla game does to make Ether1s/Ether
 
 ## Boss Flags
 
-For bosses with scripted stat changes in battle, instead of simply scaling the stat changes multiplicatively (which does not handle changes where one of the stats starts at zero), we now scale the original difference between the stats, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. This change is not what v5.0 uses to handle vanilla Val; the scaling is unchanged, it's just that vanilla bosses don't have their stats changed (because the scaling to other bosses happens on the fly now). 
-
-For v4.6.3.Gale (post-bugfix-patch) and onwards, the scripted stat changes are calculated slightly differently, to ensure that if a monster's stats are supposed to increase, they actually *do* increase (which wasn't the case on the previous attempt). Note that Valvalis in a late-game spot is now an absolute monster.
-
-!!! warn "Valvalis is a huge threat!"
-    We all know that Valvalis actually gets the scripted defense/magic defense stats that are supposed to occur in this fight. However, the original FE scripted stat scaling is janky (in a specific way), and boss slots that have minimal defense or magic defense will not really have much more in tornado form (including the vanilla spot). The scaling algorithm for scripted stat changes implemented here is janky in a much different way, in that bosses with very high levels get a *lot* of defense and magic defense in tornado form. Be *very* careful dealing with Valvalis.
-
-    (The original algorithm on the fork was janky in a third way, in that some bosses actually *lost* defense or magic defense stats in tornado form. That only really mattered on `-monsterevade`, but here we are.)
+As of v4.6.4.Gale, like the v5.0 alpha does, bosses in their vanilla spots will not have their stats recalculated, meaning Valvalis at Zot 2 will actually have the correct defenses in tornado form (but not in other places that have zero base defenses).
 
 ### `Bstats:[j/et]` {: .h6 }
 
@@ -622,6 +615,24 @@ Golbez's spells are single-target damaging spells (and Weak), and can be worse i
 - Locations: boss_rando.py
 
 Under `Bspellpower`, all bosses are treated as having at least 1 spell power. That means all bosses are assigned the spell power of the spot (or just 1 if the spot normally doesn't have spell power). This change removes the level-based scaling for spell power and allows some bosses (Antlion, KQ Eblan) to do more damage while nerfing some bosses going into low spell power slots. This change also impacts scripted stat changes (for Wyvern, so that the bounced Nukes also change in damage).
+
+### `Bnewscriptstats` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall (with some design input/etc. from others)
+
+This flag changes how scripted stat changes for bosses are handled. In vanilla Free Enterprise, the scripted stat changes are treated as multiplicative scalings of the base stats. For example, in the vanilla game Kainazzo starts with 2-50-2 defense (2 evade rolls at 50% evade, with 2 defense), and then changes to 2-70-3 defense (2 evade rolls at 70% evade now, with 3 defense), so we calculate the ratios of the stats to be 1-(1.4)-(1.5) and then compute the new scripted stats for whatever spot Kainazzo is in by multiplying those ratios by the spot's base defenses and finding the stats tuple that approximates the ideal stats the best. At the Ogopogo spot (4-55-4 base defenses), we have (1x4)-(1.4x55)-(4x1.5) = 4-77-6 ideal defense, and the closest allowed tuple to that is 4-80-5. Hence, Kainazzo at the Ogopogo spot goes from 4-55-4 defenses to 4-80-5 defenses. Without the `-monsterevade` flag on, in practice that's actually 0-0-4 defenses to 4-80-5 defenses (loaded correctly!), which is a fairly sizeable increase but nothing too extreme.
+
+However, this algorithm does not account for boss spots that have 0-0-0 base defenses or magic defenses any differently. When Kainazzo and (more importantly) Valvalis are in these spots, the stats ratio is computed... and then multiplies 0-0-0 to get 0-0-0. Hence Valvalis in tornado form continues to have 0-0-0 defense at, say, the vanilla Zot 2 spot, or the Karate spot, or the Bahamut spot, and so on. Similarly, Valvalis's magic defenses in tornado form are in some spots low enough to cast Nuke/Bahamut/Meteo effectively, and in some spots are actually 0-0-0 (KQ Eblan spot, say). Another consequence of this change is that Valvalis will *lose* defenses when coming out of the tornado phase. For instance, at the Pale Dim spot, Valvalis will start the battle with 5-40-5 defenses, immediately change to 2-99-20 defenses (much higher defense, lower evade multipliers), and then when brought out of tornado phase will change to... 0-0-0 defenses instead of the original 5-40-5 defenses, because the original scripted defense value is 0-0-0, so the stats ratio is just 0-0-0. The v5.0.0 alpha changed this behaviour... but only for the vanilla spot for Valvalis, by simply not changing the boss's stats at all. So Valvalis will have the correct (vanilla) defenses and magic defenses at Zot 2, but the other spots will retain this behaviour.
+
+As mentioned at the top of the boss flags section, by default (with no flags turned on) v4.6.4.Gale handles stats scaling like the v5.0.0 alpha does. `Bnewscriptstats`, on the other hand, completely overhauls the scripted stats algorithm (and was the default stats behaviour prior to v4.6.4.Gale). The details are as follows.
+
+For bosses with scripted stat changes in battle, we now scale the original difference between the stats by level ratio, and add to get the new scripted stat change. In this way we correct Valvalis having zero defense at the vanilla Zot 2 spot (even in tornado form) and Kainazzo not gaining defense at various spots. 
+
+!!! warn "Valvalis is a huge threat!"
+    Because we use level ratio as a scaling factor, many early game spots have a much weaker Valvalis and many late game spots turn Valvalis into an absolute monster, even more than normal, and the spots where Valvalis is weak or strong are not necessarily the same as without `Bnewscriptstats`. Be *very* careful dealing with Valvalis.
+
+Prior to the v4.6.3.Gale bugfix patch, the scripted stat changes were calculated using the same weights for the function that searches for the closest stats tuple to the ideal stats. Under those weights, occasionally the stats would *decrease* instead of increasing, which was unintuitive. On the v4.6.3.Gale bugfix patch, the weights used ensured that if a monster's stats are supposed to increase, they actually *did* increase. However, Valvalis became far too defensively strong at moon spots. So, for v4.6.4.Gale, we modify the scripted stats algorithm further, to avoid stat changes that dramatically warp the difficulty. The changes are to cap the level ratio for scripted stat changes at 1 and to slightly modify the weights for the closest stats function.
 
 ### `Bremove[officer_slot,kingqueen_slot]` {: .h6 }
 

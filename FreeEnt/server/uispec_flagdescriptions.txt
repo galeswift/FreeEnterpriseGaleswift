@@ -334,7 +334,7 @@ Items from chests and quest/MIAB rewards will be usable by at least one characte
 On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.
 
 [Tbuffweights]
-On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#Tbuffweights'>the fork_info page</a> for the list of changes.
+On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.
 
 [Tsemipro]
 Uses location-based weighting, with item quality between that provided by pro and wildish.
@@ -458,6 +458,9 @@ Each of Shadow's and Golbez's spells are replaced individually. If <em>Bunsafe</
 
 [Bspellpower]
 Normally in Free Enterprise, bosses without spell power do not gain spell power when moved into a spot that usually has spell power. This flag treats all bosses without spell power as having 1 spell power for the purposes of boss scaling.
+
+[Bnewscriptstats]
+This flag changes the behaviour of scripted stat changes for bosses. The changes impact Valvalis and Kainazzo primarily, making those bosses much bulkier in high-level spots (and less bulky in low-level spots). See <a href='fork_info#bnewscriptstats''>the fork_info page</a> for information on the new algorithm.
 
 [Bremove:officer_slot]
 Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool.
