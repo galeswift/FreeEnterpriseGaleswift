@@ -812,16 +812,42 @@ def apply(env):
                                 # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
                                 # (Incidentally, it's better just to carve out an exception for Waterhag, and just make the resulting stats (0,0,0) to avoid
                                 # getting (0,0,1) at the Antlion spot.)
-                                # For balance, we cap the level ratio at 1 for Valvalis, because moon Valvalis is brutal otherwise.
+                                # We handle Valvalis's defense stat changes separately, because otherwise moon/Giant Valvalis is awful.
                                 if stats_scripted == (0,0,0) and boss == 'waterhag':
                                     closest_index, closest_value = 0x60, (0,0,0)
+                                elif boss == 'valvalis' and stat == 'defense':
+                                    if stats_scripted == (4,45,4):
+                                        # idea: cap the max multipliers at the ideal stats minus half (rounded down) the base defense multipliers, but only
+                                        # when the spot is the same level or higher than vanilla Valvalis. Moreover, the ideal stats are calculated without
+                                        # scaling the added defense up past its vanilla value. So, for high-level boss locations, tornado Val's defense multipliers
+                                        # are capped at (base mult) + 4 - (base mult // 2), meaning high-level boss locations *with non-trivial defense stats*
+                                        # will have their stat gains limited a little bit, to help make the fight less challenging. 
+                                        diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                        level_ratio_capped = min(1,(ref_leader['level'] / leader['level']))
+                                        level_ratio = ref_leader['level'] / leader['level']
+                                        scaled_diff = [diff_stats_scripted[i] * level_ratio_capped for i in range(len(diff_stats_scripted))]
+                                        stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                        weights = (1, 0.05, 0.07)
+                                        allowed_table_entries = [t for t in STATS_TABLE if t[0] <= max(0,stats_ideal[0] - (monster_scaled_stats[stat][0] // 2 if level_ratio >= 1 else 0))]
+                                        closest_index, closest_value = _get_closest_stat(stats_ideal, allowed_table_entries, weights)
+                                    else:
+                                        # check if -monsterevade is on: if it is, go back to base defense. if not, use
+                                        # a simulated 0-0-N defense value to mimic what the game actually loads at the start of battle
+                                        # (... should also check what happens with MDef here. oh, the in-battle modification *also* doesn't set
+                                        # magic evade correctly, so it only cares about the magic defense value. ... but, that's built-in,
+                                        # so we don't need to do that manually.)
+                                        if not env.options.flags.has('give_monsters_evade'):
+                                            stats_ideal = [0, 0, monster_scaled_stats[stat][2]]
+                                        else:
+                                            stats_ideal = monster_scaled_stats[stat]
+                                        weights = (1, 0.03, 0.165)
+                                        closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, weights)                                                
                                 else:
                                     diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
-                                    level_ratio_capped = (min(1,(ref_leader['level'] / leader['level'])) if boss == 'valvalis'
-                                                          else ref_leader['level'] / leader['level'])
-                                    scaled_diff = [diff_stats_scripted[i] * level_ratio_capped for i in range(len(diff_stats_scripted))]
+                                    level_ratio = ref_leader['level'] / leader['level']
+                                    scaled_diff = [diff_stats_scripted[i] * level_ratio for i in range(len(diff_stats_scripted))]
                                     stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
-                                    weights = ((1, 0.07, 0.1) if boss == 'valvalis' else (1, 0.03, 0.165))
+                                    weights = (1, 0.03, 0.165)
                                     closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, weights)
                             else:
                                 stats_ratio = [stats_scripted[i] / max(monster[stat][i], 1) for i in range(len(stats_scripted))]
@@ -1040,6 +1066,8 @@ if __name__ == '__main__':
     boss_versions = 'US'
     # boss_versions = 'J'
     # boss_versions = 'ET'
+    monster_evade = True
+    # monster_evade = False
     
     if boss_versions == 'J':
         boss_stats = open('boss_scaling_stats_j' + ('_new' if scripted_stats_option == 'new' else '') + '.csv', 'w')
@@ -1171,16 +1199,42 @@ if __name__ == '__main__':
                                     # then add that to the spot's stats; since Waterhag *loses* defense and is low-level, then we take a max to avoid negative ideal stats.
                                     # (Incidentally, it's better just to carve out an exception for Waterhag, and just make the resulting stats (0,0,0) to avoid
                                     # getting (0,0,1) at the Antlion spot.)
-                                    # For balance, we cap the level ratio at 1 and use different weights for Valvalis, because moon Valvalis is brutal otherwise.
+                                    # We handle Valvalis's defense stat changes separately, because otherwise moon/Giant Valvalis is awful.
                                     if stats_scripted == (0,0,0) and boss == 'waterhag':
                                         closest_index, closest_value = 0x60, (0,0,0)
+                                    elif boss == 'valvalis' and stat == 'defense':
+                                        if stats_scripted == (4,45,4):
+                                            # idea: cap the max multipliers at the ideal stats minus half (rounded down) the base defense multipliers, but only
+                                            # when the spot is the same level or higher than vanilla Valvalis. Moreover, the ideal stats are calculated without
+                                            # scaling the added defense up past its vanilla value. So, for high-level boss locations, tornado Val's defense multipliers
+                                            # are capped at (base mult) + 4 - (base mult // 2), meaning high-level boss locations *with non-trivial defense stats*
+                                            # will have their stat gains limited a little bit, to help make the fight less challenging. 
+                                            diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
+                                            level_ratio_capped = min(1,(ref_leader['level'] / leader['level']))
+                                            level_ratio = ref_leader['level'] / leader['level']
+                                            scaled_diff = [diff_stats_scripted[i] * level_ratio_capped for i in range(len(diff_stats_scripted))]
+                                            stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
+                                            weights = (1, 0.05, 0.07)
+                                            allowed_table_entries = [t for t in STATS_TABLE if t[0] <= max(0,stats_ideal[0] - (monster_scaled_stats[stat][0] // 2 if level_ratio >= 1 else 0))]
+                                            closest_index, closest_value = _get_closest_stat(stats_ideal, allowed_table_entries, weights)
+                                        else:
+                                            # check if -monsterevade is on: if it is, go back to base defense. if not, use
+                                            # a simulated 0-0-N defense value to mimic what the game actually loads at the start of battle
+                                            # (... should also check what happens with MDef here. oh, the in-battle modification *also* doesn't set
+                                            # magic evade correctly, so it only cares about the magic defense value. ... but, that's built-in,
+                                            # so we don't need to do that manually.)
+                                            if not monster_evade:
+                                                stats_ideal = [0, 0, monster_scaled_stats[stat][2]]
+                                            else:
+                                                stats_ideal = monster_scaled_stats[stat]
+                                            weights = (1, 0.03, 0.165)
+                                            closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, weights)   
                                     else:
                                         diff_stats_scripted = [stats_scripted[i] - monster[stat][i] for i in range(len(stats_scripted))]
-                                        level_ratio_capped = (min(1,(ref_leader['level'] / leader['level'])) if boss == 'valvalis'
-                                                              else ref_leader['level'] / leader['level'])
-                                        scaled_diff = [diff_stats_scripted[i] * level_ratio_capped for i in range(len(diff_stats_scripted))]
+                                        level_ratio = ref_leader['level'] / leader['level']
+                                        scaled_diff = [diff_stats_scripted[i] * level_ratio for i in range(len(diff_stats_scripted))]
                                         stats_ideal = [max(0,monster_scaled_stats[stat][i] + scaled_diff[i]) for i in range(len(scaled_diff))]
-                                        weights = ((1, 0.07, 0.1) if boss == 'valvalis' else (1, 0.03, 0.165))
+                                        weights = (1, 0.03, 0.165)
                                         closest_index, closest_value = _get_closest_stat(stats_ideal, STATS_TABLE, weights)
                                 else:
                                     stats_ratio = [stats_scripted[i] / max(monster[stat][i], 1) for i in range(len(stats_scripted))]
