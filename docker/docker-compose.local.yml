@@ -2,6 +2,7 @@ services:
   freeent:
     build: .
     restart: unless-stopped
+    command: ["python", "-m", "FreeEnt", "/rom/ff4.smc", "server", "--local"]
     ports:
       - "8080:8080"          # access at http://localhost:8080
     volumes:
