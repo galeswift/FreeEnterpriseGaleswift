@@ -1,0 +1,6 @@
+docker/
+venv/
+output/
+ff4.smc
+*.pyc
+__pycache__/

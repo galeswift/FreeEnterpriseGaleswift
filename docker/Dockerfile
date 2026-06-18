@@ -2,18 +2,16 @@ FROM python:3.8-slim
 
 WORKDIR /app
 
-# System deps: git to clone repo, gcc/make to compile Floating IPS
+# System deps for compiling Floating IPS
 RUN apt-get update && apt-get install -y \
-    git \
     gcc \
     g++ \
     make \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Clone FreeEnterprise4
-RUN git clone --branch main --depth 1 \
-    https://github.com/HungryTenor/FreeEnterprise4.git .
+# Copy local source (ie: whatever branch you have synched locally)
+COPY . .
 
 # Patch hardcoded MongoDB host to use the Docker service name instead of localhost
 RUN sed -i 's|mongodb://127.0.0.1:27017|mongodb://mongo:27017|g' /app/FreeEnt/server/server.py
@@ -36,6 +34,9 @@ RUN wget -q https://github.com/Alcaro/Flips/archive/refs/heads/master.tar.gz -O 
     cp flips /app/FreeEnt/server/bin/flips-linux && \
     chmod +x /app/FreeEnt/server/bin/flips-linux && \
     cd .. && rm -rf Flips-master flips.tar.gz
+
+# Fix CRLF line endings from Windows checkout before running shell scripts
+RUN find /app -name "*.sh" -exec sed -i 's/\r$//' {} +
 
 # Compile the randomizer spec files (required before server can run)
 RUN cd /app/FreeEnt && bash compile_all_specs.sh

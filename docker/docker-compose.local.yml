@@ -1,6 +1,8 @@
 services:
   freeent:
-    build: .
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     restart: unless-stopped
     command: ["python", "-m", "FreeEnt", "/rom/ff4.smc", "server", "--local"]
     ports:
