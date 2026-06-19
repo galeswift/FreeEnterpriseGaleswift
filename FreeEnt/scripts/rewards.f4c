@@ -423,21 +423,39 @@ msfpatch {
         and #$1f
         cmp #$01
         bne $+CheckNext
+        // Y is the slot number, so put that in A (8-bit transfer!)
+        // and save that for updating the effective stats at the end
+        tya
+        pha
+        ldy #$0000
     %RemoveSuperheroLoop:  
         lda $100f,x
         sec
         sbc #$32
+        bne $+CheckNegative
+        lda #$01
+        bra $+DoneStatEdit
+    %CheckNegative:
+        // it isn't possible to wrap from small positive
+        // to between 99 and 127
+        bpl $+DoneStatEdit
+        lda #$01
+    %DoneStatEdit:
         sta $100f,x
         inx
         iny
-        cpy #$000a
+        cpy #$0005
         bcc $-RemoveSuperheroLoop
-        bra $+ItemNotYetUsed
+        bra $+UpdateStats
     %CheckNext:
+        iny
         jsr $_Util__XPlus40
         // The superhero does not leave the party,
         // so save bytes by omitting a safety exit.
         bra $-CheckSuperheroLoop
+    %UpdateStats:
+        pla
+        jsl $038006
         // %end%
 
     %ItemNotYetUsed:   
