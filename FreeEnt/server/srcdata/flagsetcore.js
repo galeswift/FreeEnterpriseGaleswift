@@ -545,6 +545,9 @@ class FlagLogicCore {
             flagset.set("Cnofree");
             this._lib.push(log, ["correction", "Ctreasure:free set, auto-assigning Cnofree"]);
         }
+        if ((! flagset.has("Cnodupes"))) {
+            this._simple_disable_regex(flagset, log, "Cannot fuse gear without duplicate characters", "^Cfuse:");
+        }
         if (flagset.has("Tempty")) {
             this._simple_disable_regex(flagset, log, "Treasures are empty", "^Tsparse:");
         }

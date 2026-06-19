@@ -501,6 +501,9 @@ class FlagLogicCore:
             flagset.set('Cnofree')
             self._lib.push(log, ['correction', 'Ctreasure:free set, auto-assigning Cnofree'])        
 
+        if not flagset.has('Cnodupes'):
+            self._simple_disable_regex(flagset, log, 'Cannot fuse gear without duplicate characters', r'^Cfuse:')
+
         if flagset.has('Tempty'):
             self._simple_disable_regex(flagset, log, 'Treasures are empty', r'^Tsparse:')
 

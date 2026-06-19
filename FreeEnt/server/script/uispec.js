@@ -4937,7 +4937,28 @@ var FLAG_UISPEC = [
           {
             "flag": "Cnodupes",
             "title": "Duplicate characters not allowed",
-            "description": "If a duplicate character tries to join your party, instead nothing happens."
+            "description": "If a duplicate character tries to join your party, instead nothing happens.",
+            "subcontrols": [
+              {
+                "flag": "@anon52",
+                "title": "Get stat boosts when duplicate characters join",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Cfuse:gear",
+                    "title": "Use any equipment to add stat boosts",
+                    "description": "If a duplicate character tries to join your party, instead you are given the option to \"fuse\" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Cfuse:equip",
+                    "title": "Use equipment the character can equip to add stat boosts",
+                    "description": "If a duplicate character tries to join your party, instead you are given the option to \"fuse\" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats. Only equipment that the character can normally equip can be fused.",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
           },
           {
             "flag": "Chi",
@@ -4975,7 +4996,7 @@ var FLAG_UISPEC = [
     "title": "TREASURES",
     "controls": [
       {
-        "flag": "@anon52",
+        "flag": "@anon53",
         "title": "Treasure chests (other than MIABs)",
         "important": true,
         "type": "select",
@@ -4986,7 +5007,7 @@ var FLAG_UISPEC = [
             "null": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5009,7 +5030,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5059,7 +5080,7 @@ var FLAG_UISPEC = [
             "description": "Treasure contents are the same as in original FF4, but their positions are shuffled. This randomization is weighted so that overworld treasures tend to remain in the overworld, and similarly for underworld/moon treasures.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5082,7 +5103,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5132,7 +5153,7 @@ var FLAG_UISPEC = [
             "description": "A basic randomization, allowing items of reasonable strength to appear. Items are equally likely to appear in any chest regardless of location.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5155,7 +5176,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5198,7 +5219,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5227,7 +5248,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5251,7 +5272,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5289,7 +5310,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5312,7 +5333,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5355,7 +5376,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5384,7 +5405,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5408,7 +5429,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5458,7 +5479,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5481,7 +5502,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5524,7 +5545,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5553,7 +5574,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5577,7 +5598,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5620,7 +5641,7 @@ var FLAG_UISPEC = [
             "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5643,7 +5664,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5686,7 +5707,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5715,7 +5736,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5739,7 +5760,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5789,7 +5810,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5812,7 +5833,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5855,7 +5876,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5884,7 +5905,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -5908,7 +5929,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5957,7 +5978,7 @@ var FLAG_UISPEC = [
             "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5980,7 +6001,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -6023,7 +6044,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6052,7 +6073,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -6076,7 +6097,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6125,7 +6146,7 @@ var FLAG_UISPEC = [
             "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -6148,7 +6169,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -6191,7 +6212,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6220,7 +6241,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
@@ -6244,7 +6265,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6287,7 +6308,7 @@ var FLAG_UISPEC = [
         "title": "No J-items in chests"
       },
       {
-        "flag": "@anon58",
+        "flag": "@anon59",
         "title": "Junk management",
         "type": "select",
         "subcontrols": [
@@ -6309,7 +6330,7 @@ var FLAG_UISPEC = [
     "title": "SHOPS",
     "controls": [
       {
-        "flag": "@anon59",
+        "flag": "@anon60",
         "title": "Shops",
         "important": true,
         "type": "select",
@@ -6349,7 +6370,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon60",
+                "flag": "@anon61",
                 "title": "Guarantee Items",
                 "compact": true,
                 "fork": true,
@@ -6397,7 +6418,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon61",
+                "flag": "@anon62",
                 "title": "Remove Items",
                 "compact": true,
                 "subcontrols": [
@@ -6487,7 +6508,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon60",
+                "flag": "@anon61",
                 "title": "Guarantee Items",
                 "compact": true,
                 "fork": true,
@@ -6535,7 +6556,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon61",
+                "flag": "@anon62",
                 "title": "Remove Items",
                 "compact": true,
                 "subcontrols": [
@@ -6626,7 +6647,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon60",
+                "flag": "@anon61",
                 "title": "Guarantee Items",
                 "compact": true,
                 "fork": true,
@@ -6674,7 +6695,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon61",
+                "flag": "@anon62",
                 "title": "Remove Items",
                 "compact": true,
                 "subcontrols": [
@@ -6764,7 +6785,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon60",
+                "flag": "@anon61",
                 "title": "Guarantee Items",
                 "compact": true,
                 "fork": true,
@@ -6812,7 +6833,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon61",
+                "flag": "@anon62",
                 "title": "Remove Items",
                 "compact": true,
                 "subcontrols": [
@@ -6903,7 +6924,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon60",
+                "flag": "@anon61",
                 "title": "Guarantee Items",
                 "compact": true,
                 "fork": true,
@@ -6951,7 +6972,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon61",
+                "flag": "@anon62",
                 "title": "Remove Items",
                 "compact": true,
                 "subcontrols": [
@@ -7035,7 +7056,7 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
-                "flag": "@anon62",
+                "flag": "@anon63",
                 "title": "Remove Items",
                 "compact": true,
                 "subcontrols": [
@@ -7108,7 +7129,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon63",
+        "flag": "@anon64",
         "title": "Buy prices",
         "type": "select",
         "subcontrols": [
@@ -7130,7 +7151,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon64",
+        "flag": "@anon65",
         "title": "Sell prices",
         "type": "select",
         "subcontrols": [
@@ -7145,7 +7166,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon65",
+        "flag": "@anon66",
         "title": "Shop price adjustments",
         "fork": true,
         "type": "select",
@@ -7155,7 +7176,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 20% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7180,7 +7201,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 40% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7205,7 +7226,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 60% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7230,7 +7251,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 80% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7255,7 +7276,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 120% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7280,7 +7301,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 140% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7305,7 +7326,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 160% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7330,7 +7351,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 180% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7355,7 +7376,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 200% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7381,7 +7402,7 @@ var FLAG_UISPEC = [
             "hard": true,
             "subcontrols": [
               {
-                "flag": "@anon66",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -7415,7 +7436,7 @@ var FLAG_UISPEC = [
     "title": "BOSSES",
     "controls": [
       {
-        "flag": "@anon67",
+        "flag": "@anon68",
         "title": "Bosses",
         "important": true,
         "type": "select",
@@ -7540,7 +7561,7 @@ var FLAG_UISPEC = [
         "description": "Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area."
       },
       {
-        "flag": "@anon68",
+        "flag": "@anon69",
         "title": "Alternate boss stats/scripts",
         "fork": true,
         "type": "select",
@@ -7602,7 +7623,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon69",
+        "flag": "@anon70",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -7644,7 +7665,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon70",
+        "flag": "@anon71",
         "title": "Change Golbez's behaviour",
         "fork": true,
         "subcontrols": [
@@ -7675,7 +7696,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon71",
+        "flag": "@anon72",
         "title": "Remove certain boss slots",
         "fork": true,
         "subcontrols": [
@@ -7697,7 +7718,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon72",
+        "flag": "@anon73",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -7793,7 +7814,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon73",
+        "flag": "@anon74",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -7808,7 +7829,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon74",
+        "flag": "@anon75",
         "title": "Running from battle",
         "type": "select",
         "subcontrols": [
@@ -7825,7 +7846,7 @@ var FLAG_UISPEC = [
             "type": "select",
             "subcontrols": [
               {
-                "flag": "@anon75",
+                "flag": "@anon76",
                 "title": "Spoils penalty",
                 "type": "select",
                 "subcontrols": [
@@ -7875,7 +7896,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon76",
+        "flag": "@anon77",
         "title": "Change encounter tables",
         "fork": true,
         "type": "select",
@@ -7928,7 +7949,7 @@ var FLAG_UISPEC = [
     "title": "HARP OPTIONS",
     "controls": [
       {
-        "flag": "@anon77",
+        "flag": "@anon78",
         "title": "Harp randomization",
         "important": true,
         "type": "select",
@@ -7976,7 +7997,7 @@ var FLAG_UISPEC = [
             "title": "Allow Dwarf Castle warp"
           },
           {
-            "flag": "@anon78",
+            "flag": "@anon79",
             "title": "Life glitch options",
             "type": "select",
             "subcontrols": [
@@ -8017,7 +8038,7 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon79",
+        "flag": "@anon80",
         "title": "Warps Randomization Options",
         "fork": true,
         "type": "select",
@@ -8028,7 +8049,7 @@ var FLAG_UISPEC = [
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
             "subcontrols": [
               {
-                "flag": "@anon80",
+                "flag": "@anon81",
                 "title": "Doors Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -8068,7 +8089,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon81",
+                "flag": "@anon82",
                 "title": "Entrances Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -8132,7 +8153,7 @@ var FLAG_UISPEC = [
             "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
             "subcontrols": [
               {
-                "flag": "@anon82",
+                "flag": "@anon83",
                 "title": "Learning modifications",
                 "type": "select",
                 "subcontrols": [
@@ -8152,7 +8173,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon83",
+                "flag": "@anon84",
                 "title": "HP gain modifications",
                 "subcontrols": [
                   {
@@ -8178,7 +8199,7 @@ var FLAG_UISPEC = [
             "null": true,
             "subcontrols": [
               {
-                "flag": "@anon84",
+                "flag": "@anon85",
                 "title": "HP gain modifications",
                 "subcontrols": [
                   {
@@ -8198,7 +8219,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon82",
+                "flag": "@anon83",
                 "title": "Learning modifications",
                 "type": "select",
                 "subcontrols": [
@@ -8218,7 +8239,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon83",
+                "flag": "@anon84",
                 "title": "HP gain modifications",
                 "subcontrols": [
                   {
@@ -8244,7 +8265,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon82",
+                "flag": "@anon83",
                 "title": "Learning modifications",
                 "type": "select",
                 "subcontrols": [
@@ -8264,7 +8285,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon83",
+                "flag": "@anon84",
                 "title": "HP gain modifications",
                 "subcontrols": [
                   {
@@ -8290,7 +8311,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon85",
+                "flag": "@anon86",
                 "title": "Learning modifications",
                 "type": "select",
                 "subcontrols": [
@@ -8304,7 +8325,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon86",
+                "flag": "@anon87",
                 "title": "HP gain modifications",
                 "subcontrols": [
                   {
@@ -8331,7 +8352,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon87",
+                "flag": "@anon88",
                 "title": "HP gain modifications",
                 "subcontrols": [
                   {
@@ -8450,7 +8471,7 @@ var FLAG_UISPEC = [
             "type": "select",
             "subcontrols": [
               {
-                "flag": "@anon88",
+                "flag": "@anon89",
                 "title": "Anchor agility",
                 "type": "select",
                 "subcontrols": [
@@ -8491,7 +8512,7 @@ var FLAG_UISPEC = [
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon89",
+            "flag": "@anon90",
             "title": "Base ATB for the anchor",
             "type": "select",
             "subcontrols": [
@@ -8545,7 +8566,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon90",
+                "flag": "@anon91",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8577,7 +8598,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon91",
+                "flag": "@anon92",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8609,7 +8630,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon92",
+                "flag": "@anon93",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8636,7 +8657,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon93",
+                "flag": "@anon94",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8659,7 +8680,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon94",
+                "flag": "@anon95",
                 "title": "Amount of bonus EXP",
                 "type": "select",
                 "subcontrols": [
@@ -8694,7 +8715,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon95",
+                "flag": "@anon96",
                 "title": "Per-monster-kill percentage reduction",
                 "type": "select",
                 "subcontrols": [
@@ -8750,7 +8771,7 @@ var FLAG_UISPEC = [
     "title": "ZEROMUS",
     "controls": [
       {
-        "flag": "@anon96",
+        "flag": "@anon97",
         "title": "Zeromus fight script",
         "important": true,
         "type": "select",
@@ -8841,7 +8862,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon97",
+        "flag": "@anon98",
         "title": "Nerfing of Big Bangs",
         "fork": true,
         "type": "select",
@@ -8876,7 +8897,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon98",
+            "flag": "@anon99",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -9067,7 +9088,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon99",
+            "flag": "@anon100",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -9258,7 +9279,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon100",
+            "flag": "@anon101",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -9485,7 +9506,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon101",
+            "flag": "@anon102",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -9501,7 +9522,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon102",
+            "flag": "@anon103",
             "title": "Restrictions on forge items",
             "type": "select",
             "subcontrols": [
@@ -9539,7 +9560,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon103",
+        "flag": "@anon104",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -9573,11 +9594,11 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon104",
+        "flag": "@anon105",
         "title": "Call options",
         "subcontrols": [
           {
-            "flag": "@anon105",
+            "flag": "@anon106",
             "title": "Spellset options",
             "type": "select",
             "subcontrols": [
@@ -9599,7 +9620,7 @@ var FLAG_UISPEC = [
             "description": "By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior."
           },
           {
-            "flag": "@anon106",
+            "flag": "@anon107",
             "title": "Dwarf Castle spell learning",
             "type": "select",
             "subcontrols": [
@@ -9626,7 +9647,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon107",
+        "flag": "@anon108",
         "title": "Alternate starting conditions",
         "fork": true,
         "type": "select",
@@ -9645,7 +9666,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon108",
+        "flag": "@anon109",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9691,7 +9712,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>None of these modes can be used together: \"friendlyfire\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"tellahmaneuver\", \"3point\"</li>\n\t<li>None of these modes can be used together: \"musical\", \"darts\", \"skillissue\"</li>\t\n\t<li>None of these modes can be used together: \"worthfighting\", \"battlescars\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"menarepigs\", \"skywarriors\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"unstackable\", \"menarepigs\", \"skywarriors\", \"battlescars\", \"3point\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, fewer random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon109",
+            "flag": "@anon110",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9928,12 +9949,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon110",
+        "flag": "@anon111",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon111",
+            "flag": "@anon112",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -9955,7 +9976,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon112",
+            "flag": "@anon113",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -9972,7 +9993,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon113",
+            "flag": "@anon114",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -10051,7 +10072,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon114",
+        "flag": "@anon115",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -10105,7 +10126,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon115",
+            "flag": "@anon116",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -10121,7 +10142,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon116",
+                "flag": "@anon117",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

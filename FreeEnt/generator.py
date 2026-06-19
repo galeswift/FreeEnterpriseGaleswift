@@ -769,6 +769,11 @@ def build(romfile, options, force_recompile=False):
     # this file handle whether the glitch is fully "fixed"
     env.add_file('scripts/sylph_odin_mp_fix.f4c')
 
+    if env.options.flags.has_any('characters_fuse_gear_bonuses', 'characters_fuse_equip_bonuses'):
+        env.add_file('scripts/nodupes_gear_fusion.f4c')
+        if 'omnidextrous' in env.meta['wacky_challenge'] and env.options.flags.has('characters_fuse_equip_bonuses'):
+            env.add_substitution('fuse equip omnidex', '#$00')
+
     if options.flags.has('give_monsters_evade'):
         env.add_file('scripts/give_monsters_evade.f4c')
     

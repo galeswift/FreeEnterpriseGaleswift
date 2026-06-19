@@ -178,10 +178,8 @@ text(bank 1 message $155) {X}
 
 text(bank 1 message $158) {X}
 
-text(bank 1 message $15A) {X}
-text(bank 1 message $15B) {X}
-text(bank 1 message $15C) {X}
-text(bank 1 message $15D) {X}
+// 15A-15D are for Cnodupes:fuse[] textboxes
+
 text(bank 1 message $15E) {X}
 text(bank 1 message $15F) {X}
 text(bank 1 message $160) {X}

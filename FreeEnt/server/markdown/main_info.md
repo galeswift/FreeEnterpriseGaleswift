@@ -305,6 +305,17 @@ Under this flag, mutually exclusive to the renamed `Cabilities:j` flag, each cha
     - Edge: no change
     - FuSoYa: Fight, White, Black, Bluff (or Omni if that's available, or Regen if that's been improved), Item
 
+### `Cfuse:[gear/equip]` {: .h6 }
+
+- Idea: Marshal (fusion idea), ScytheMarshall (of gear)
+- Design: ScytheMarshall, Marshal
+- Programming: ScytheMarshall
+- Locations: nodupes_gear_fusion.f4c, rewards.f4c, eventextensions_misc.f4c, generator.py, 
+
+This flag allows you to "fuse" equipment to characters when you encounter a duplicate character to one already in your party. Fusing equipment to a character removes one copy of the item from your inventory and adds the stat bonuses from that item to your character's base stats, clamping the stats to the range 1-99. The stat changes are permanent but do not persist through re-initialization (for Cecil going from Dark Knight to Paladin, or for any character on `Cmostlydead`). There may be some order-of-operations issues when combined with `Csuperhero`, in the sense that because the stats are clamped between 1 and 99, when a character loses stats they might go down to 49 when you might have expected their stats to only drop to a higher value.
+
+On `Cfuse:gear`, any equipment can be used for any character, regardless of whether or not they can equip it. On `Cfuse:equip`, only equipment that the character can normally equip (subject to other flags, like `-wacky:omnidextrous`) can be used.
+
 ## Treasure Flags
 
 Treasure randomization works a bit differently from vanilla v4.6 FE. All restrictions to items except for `Tmintier` and `Tmaxtier` also apply to quest and MIAB rewards; vanilla v4.6 FE is inconsistent about this situation (`-noadamants` applies, as does `-nocursed` and `Tno:j`, but `-wacky:kleptomania` does not, say). `Tmintier` as initially implemented by sgrunt (which predated the vanilla FE implementation) used to apply to such rewards, but this behaviour was reverted later. `Tmintier:2` is an additional setting that is not in vanilla FE.

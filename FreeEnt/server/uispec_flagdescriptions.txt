@@ -269,6 +269,12 @@ Each character is assigned up to three handpicked battle commands (including one
 [Cnodupes]
 If a duplicate character tries to join your party, instead nothing happens.
 
+[Cfuse:gear]
+If a duplicate character tries to join your party, instead you are given the option to "fuse" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats.
+
+[Cfuse:equip]
+If a duplicate character tries to join your party, instead you are given the option to "fuse" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats. Only equipment that the character can normally equip can be fused.
+
 [Cnekkie]
 Characters start with a random low-level weapon and no armor. (Duplicate characters will have the same starting gear.)
 

@@ -456,6 +456,9 @@
 .[Ctreasure:unsafe]! Unsafe characters in chests
 [] Character Join Options
 .[Cnodupes] Duplicate characters not allowed
+..<> Get stat boosts when duplicate characters join
+...(Cfuse:gear)^ Use any equipment to add stat boosts 
+...(Cfuse:equip)^ Use equipment the character can equip to add stat boosts 
 .[Chi]^ New characters are forced to join the party
 .[Cfifo]^ Characters in the party the longest must be dismissed first
 .[Cbye] Dismissed characters are irretrievable
