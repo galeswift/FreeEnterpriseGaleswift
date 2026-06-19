@@ -359,10 +359,10 @@ msfpatch {
         jml $=CharEx__GiveAxtor
 
     %AlreadyInParty:
-        rtl
         // %anyflags: characters_fuse_gear_bonuses characters_fuse_equip_bonuses%
         jsr $_FuseGearDupes
         // %end%
+        rtl
 }
 
 msfpatch {
