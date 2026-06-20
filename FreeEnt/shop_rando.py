@@ -141,8 +141,9 @@ def apply(env):
         elif env.options.flags.has('all_good_abilities') and 'dkcecil' in user_set and not 'kleptomania' in env.meta.get('wacky_challenge',[]):
             darters_set.add('dkcecil')
 
-        # we can't rely on Tplayable to have created the adjusted equipment data, so we do it all again
-        adj_equip = env.meta.get('adjusted_equipment_user_data', {})
+        # we can't rely on Tplayable to have created the adjusted equipment data relative to the *shop* restrictions
+        # we probably won't use this again, but in case we do...
+        adj_equip = env.meta.get('adjusted_shop_equipment_user_data', {})
         if not adj_equip:
             for it in items_dbview:
                 adj_equip[it.code] = it.equip.copy()
@@ -178,7 +179,7 @@ def apply(env):
                         # and gets axes on Rosadin
                         adj_equip[it.code].append('arydia')
 
-            env.meta['adjusted_equipment_user_data'] = adj_equip
+            env.meta['adjusted_shop_equipment_user_data'] = adj_equip
 
         # In Fist Fight, the only weapons are claws, which are equippable by everyone, so need more complex logic
         if 'fistfight' in env.meta.get('wacky_challenge',[]):

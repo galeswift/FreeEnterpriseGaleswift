@@ -212,7 +212,7 @@ def refineItemsView(dbview, env):
             darters_set.add('dkcecil')
 
         # adjust the equipment data if necessary 
-        adj_equip = env.meta.get('adjusted_equipment_user_data', {})
+        adj_equip = env.meta.get('adjusted_treasure_equipment_user_data', {})
         if not adj_equip:
             for it in dbview:
                 adj_equip[it.code] = it.equip.copy()
@@ -248,7 +248,7 @@ def refineItemsView(dbview, env):
                         # and gets axes on Rosadin
                         adj_equip[it.code].append('arydia')
 
-            env.meta['adjusted_equipment_user_data'] = adj_equip
+            env.meta['adjusted_treasure_equipment_user_data'] = adj_equip
 
         # In Fist Fight, the only weapons are claws, which are equippable by everyone, so need more complex logic
         if 'fistfight' in env.meta.get('wacky_challenge',[]):
