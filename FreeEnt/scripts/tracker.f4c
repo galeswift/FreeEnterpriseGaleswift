@@ -758,7 +758,7 @@ msfpatch {
     %Text__NotFound: "[$cc]not yet found[$cd]" [[ 00 ]]
     %Text__Unused:   "[$cc]unused[$cd]" [[ 00 ]]
 
-    %Text__Location: "Received from:" [[ 00 ]]  // whitespace for laziness in copy loop
+    %Text__Location: "Received from: " [[ 00 ]]  // whitespace for laziness in copy loop
 }
 
 
