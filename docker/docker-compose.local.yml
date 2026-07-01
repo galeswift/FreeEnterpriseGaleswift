@@ -1,0 +1,22 @@
+services:
+  freeent:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    command: ["python", "-m", "FreeEnt", "/rom/ff4.smc", "server", "--local"]
+    ports:
+      - "8080:8080"          # access at http://localhost:8080
+    volumes:
+      - ./rom:/rom:ro
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7.0
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
