@@ -852,17 +852,30 @@ msfpatch {
         and #$1f
         cmp #$01
         bne $+CheckNext
-    %MakeSuperheroLoop:        
+        tya
+        pha
+        ldy #$0000
+    %MakeSuperheroLoop:
         lda $100f,x
         clc
         adc #$32
+        cmp #$64
+        bcc $+NoCapNeeded
+        lda #$63
+    %NoCapNeeded:
         sta $100f,x
         inx
         iny
-        cpy #$000a
+        cpy #$0005
         bcc $-MakeSuperheroLoop
+        // we've updated and capped the base stats;
+        // now update effective stats and finish
+        // the slot number is on top of the stack, from earlier
+        pla
+        jsl $038006
         jmp $_EvEx__End
     %CheckNext:
+        iny
         jsr $_Util__XPlus40
         // The superhero does not leave the party,
         // so save bytes by omitting a safety exit.

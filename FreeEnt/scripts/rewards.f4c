@@ -359,6 +359,9 @@ msfpatch {
         jml $=CharEx__GiveAxtor
 
     %AlreadyInParty:
+        // %anyflags: characters_fuse_gear_bonuses characters_fuse_equip_bonuses%
+        jsr $_FuseGearDupes
+        // %end%
         rtl
 }
 
@@ -396,7 +399,14 @@ msfpatch {
         bra $+ItemNotYetUsed
         
         // %flag superhero_challenge on%
-    %RemoveSuperhero:       
+    %RemoveSuperhero:
+        // %end%
+        // %if superhero_quickstart%
+        lda $_Rewards__CurrentSlot   // to prevent softlocks, skip the dialog message during quickstart
+        cmp #$20   // #reward_slot.starting_item
+        beq $+StartSuperheroLoop
+        // %end%
+        // %flag superhero_challenge on%
         lda $06C6   // Check if it's a fight chest and skip the dialog message if so
         bne $+StartSuperheroLoop
         // Show depower message
@@ -416,21 +426,39 @@ msfpatch {
         and #$1f
         cmp #$01
         bne $+CheckNext
+        // Y is the slot number, so put that in A (8-bit transfer!)
+        // and save that for updating the effective stats at the end
+        tya
+        pha
+        ldy #$0000
     %RemoveSuperheroLoop:  
         lda $100f,x
         sec
         sbc #$32
+        bne $+CheckNegative
+        lda #$01
+        bra $+DoneStatEdit
+    %CheckNegative:
+        // it isn't possible to wrap from small positive
+        // to between 99 and 127
+        bpl $+DoneStatEdit
+        lda #$01
+    %DoneStatEdit:
         sta $100f,x
         inx
         iny
-        cpy #$000a
+        cpy #$0005
         bcc $-RemoveSuperheroLoop
-        bra $+ItemNotYetUsed
+        bra $+UpdateStats
     %CheckNext:
+        iny
         jsr $_Util__XPlus40
         // The superhero does not leave the party,
         // so save bytes by omitting a safety exit.
         bra $-CheckSuperheroLoop
+    %UpdateStats:
+        pla
+        jsl $038006
         // %end%
 
     %ItemNotYetUsed:   

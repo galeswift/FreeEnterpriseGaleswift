@@ -1669,6 +1669,40 @@ msfpatch {
         rtl
 }
 
+// fix the spell learning routine issues regarding spells
+// being learned at the same level but in different lists
+msfpatch{
+    .addr $03f10E
+        jsr $_SaveLearnedSpellIndex
+
+    .addr $03f16e
+    SaveLearnedSpellIndex:
+        // use $9c-$9d as storage for the initial learned-spell-block index
+        // (it shouldn't be relevant to its original purpose here)
+        ldx $9a
+        stx $9c
+        // displaced
+        tyx
+        tdc
+        tay
+        rts
+
+    .addr $03f145
+        // load the index where the spells 
+        // for this list start into Y
+        ldy $9c
+        // $b8 is never used here, so no need to set it to 0
+        // the way the original code does
+        stz $b7
+
+    .addr $03f157
+        // jump directly to adding the spell, 
+        // no list-checking required
+        bra $1d
+        // addresses $03f159-$03f16d are now completely
+        // unused and can be reclaimed, if desired (29-8=21 bytes)
+}
+
 // push spell sets after level up
 msfpatch {
     .addr $03f0c3

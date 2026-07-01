@@ -8,8 +8,9 @@ from .core_rando import BOSS_SLOTS
 
 from f4c import encode_text
 
+# sorted by increasing number of mutual incompatibility groups, then by the arbitrary original order
+# (used by flagsetcore to smooth out Tricker choosing wackies at random)
 WACKY_CHALLENGES = {
-    'musical'           : 'Final Fantasy IV:\nThe Musical',
     'bodyguard'         : 'The Bodyguard',
     'fistfight'         : 'Fist Fight',
     'omnidextrous'      : 'Omnidextrous',
@@ -23,41 +24,41 @@ WACKY_CHALLENGES = {
     'misspelled'        : 'Misspelled',
     'enemyunknown'      : 'Enemy Unknown',
     'kleptomania'       : 'Kleptomania',
-    'darts'             : 'World Championship\nof Darts',
-    'unstackable'       : 'Unstackable',
-    'menarepigs'        : 'Men Are Pigs',
-    'skywarriors'       : 'The Sky Warriors',
-    'zombies'           : 'Zombies!!!',
-    'afflicted'         : 'Afflicted',
     'batman'            : 'Holy Onomatopoeias,\nBatman!',
-    'battlescars'       : 'Battle Scars',
     'imaginarynumbers'  : 'Imaginary Numbers',
-    'tellahmaneuver'    : 'The Tellah\nManeuver',
-    '3point'            : 'The 3-Point System',
-    'friendlyfire'      : 'Friendly Fire',
     'payablegolbez'     : 'Payable Golbez',
     'gottagofast'       : 'Gotta Go Fast',
-    'worthfighting'     : 'Something Worth\nFighting For',
     'saveusbigchocobo'  : 'Save Us,\nBig Chocobo!',
     'isthisrandomized'  : 'Is This Even\nRandomized?',
     'forwardisback'     : 'Forward is\nthe New Back',
-    'mirrormirror'      : 'Mirror, Mirror,\non the Wall',
     'dropitlikeitshot'  : 'Drop It Like It\'s Hot',
     'whatsmygear'       : 'What\'s My\nGear Again?',
     'scrambledstats'    : 'Scrambled Stats',
     'advertising'       : 'Truth in\nAdvertising',
-    'skillissue'        : 'Skill Issue',
     'workexperience'    : 'Work Experience',
-    'moneygains'        : 'Big Money,\nLittle Gains'
+    'moneygains'        : 'Big Money,\nLittle Gains',
+    'musical'           : 'Final Fantasy IV:\nThe Musical',
+    'darts'             : 'World Championship\nof Darts',
+    'unstackable'       : 'Unstackable',
+    'tellahmaneuver'    : 'The Tellah\nManeuver',
+    'friendlyfire'      : 'Friendly Fire',
+    'worthfighting'     : 'Something Worth\nFighting For',
+    'skillissue'        : 'Skill Issue',
+    'menarepigs'        : 'Men Are Pigs',
+    'skywarriors'       : 'The Sky Warriors',
+    'battlescars'       : 'Battle Scars',
+    '3point'            : 'The 3-Point System',
+    'mirrormirror'      : 'Mirror, Mirror,\non the Wall',
+    'zombies'           : 'Zombies!!!',
+    'afflicted'         : 'Afflicted',
 }
 
 WACKY_ROM_ADDRESS = BusAddress(0x268000)
-WACKY_RAM_ADDRESS = BusAddress(0x7e1660)
+WACKY_RAM_ADDRESS = BusAddress(0x7e1320)
 WACKY_LAST_AVAILABLE_ROM_ADDR = 0x26ffff # TODO: Find the actual limit
-WACKY_LAST_AVAILABLE_RAM_BYTE = 0x7e166c
+WACKY_LAST_AVAILABLE_RAM_BYTE = 0x7e133f
 
 WACKY_RAM_USAGE = {
-    'musical'           : 0,
     'bodyguard'         : 0,
     'fistfight'         : 0,
     'omnidextrous'      : 0,
@@ -71,40 +72,44 @@ WACKY_RAM_USAGE = {
     'misspelled'        : 0,
     'enemyunknown'      : 0,
     'kleptomania'       : 0,
-    'darts'             : 0,
-    'unstackable'       : 0,
-    'menarepigs'        : 13, # StatusEnforcement
-    'skywarriors'       : 13, # StatusEnforcement
-    'zombies'           : 13, # StatusEnforcement
-    'afflicted'         : 13, # StatusEnforcement
     'batman'            : 0,
-    'battlescars'       : 1,
     'imaginarynumbers'  : 0,
-    'tellahmaneuver'    : 6,
-    '3point'            : 0,
-    'friendlyfire'      : 0,
     'payablegolbez'     : 3,
     'gottagofast'       : 0,
-    'worthfighting'     : 2,
     'saveusbigchocobo'  : 0,
     'isthisrandomized'  : 0,
     'forwardisback'     : 0,
     'dropitlikeitshot'  : 0,
     'whatsmygear'       : 0,
-    'mirrormirror'      : 13, # StatusEnforcement
     'scrambledstats'    : 0,
     'advertising'       : 0,
-    'skillissue'        : 2,
     'workexperience'    : 0,
     'moneygains'        : 0,
+    'musical'           : 0,
+    'darts'             : 0,
+    'unstackable'       : 0,
+    'tellahmaneuver'    : 6,
+    'friendlyfire'      : 0,
+    'worthfighting'     : 2,
+    'skillissue'        : 2,
+    'menarepigs'        : 0,
+    'skywarriors'       : 0,
+    'battlescars'       : 1,
+    '3point'            : 0,
+    'mirrormirror'      : 0,
+    'zombies'           : 6,
+    'afflicted'         : 0,
 }
 
+# sorted by length, then within groups by the above ordering of number of mutual incompatibility groups
+# (used by flagsetcore to smooth out Tricker choosing wackies at random)
 WACKY_MUTUAL_INCOMPATIBILITIES = [
-    ['3point', 'battlescars', 'unstackable', 'afflicted', 'menarepigs', 'skywarriors', 'zombies', 'mirrormirror'], # These all use Wacky__InitializeAxtorHook
-    ['afflicted', 'friendlyfire'], # These both use Wacky_SpellFilterHook
-    ['battlescars', 'afflicted', 'zombies', 'worthfighting'], # These all use Wacky__PostBattleHook
-    ['darts', 'musical', 'skillissue'], # These all replace the Fight command or prevent command usage
-    ['3point','tellahmaneuver'], # These both mess with MP
+    ['friendlyfire', 'afflicted'], # These both use Wacky__SpellFilterHook
+    ['tellahmaneuver', '3point'], # These both mess with MP
+    ['musical', 'darts', 'skillissue'], # These all replace the Fight command or prevent command usage
+    ['worthfighting', 'battlescars', 'zombies', 'afflicted'], # These all use Wacky__PostBattleHook
+    ['menarepigs', 'skywarriors', 'mirrormirror', 'zombies', 'afflicted'], # These all use Wacky__StatusEnforcement
+    ['unstackable', 'menarepigs', 'skywarriors', 'battlescars', '3point', 'mirrormirror', 'zombies', 'afflicted'], # These all use Wacky__InitializeAxtorHook
 ]
 
 def find_compatible_remaining_wacky_modes(current_modes):
@@ -182,6 +187,7 @@ def apply(env):
                     .def Wacky__RAM_{wacky}     ${ram_base.get_bus():06x}
                     }}
             ''')
+            env.add_toggle(f'wacky_{wacky}')
 
             apply_func = globals().get(f'apply_{wacky}', None)
             if apply_func:
@@ -215,22 +221,11 @@ def apply_bodyguard(env, rom_address):
 
 def apply_fistfight(env, rom_address):
     env.add_toggle('wacky_all_characters_ambidextrous')
-    # change claws to be universally equippable, all other weapons not
-    for item_id in range(0x01, 0x60):
-        if item_id < 0x07:
-            # is claw
-            eqp_byte = 0x00
-        elif item_id not in [0x3E, 0x46]: # ignore Spoon and custom weapon
-            eqp_byte = 0x1F
-        else:
-            eqp_byte = None
-
-        if eqp_byte is not None:
-            env.add_binary(UnheaderedAddress(0x79106 + (0x08 * item_id)), [eqp_byte], as_script=True)
+    # do equipment changes in update_equipment.py
+    # (claws universally equippable, all other weapons not)
 
 def apply_omnidextrous(env, rom_address):
     env.add_toggle('wacky_all_characters_ambidextrous')
-    env.add_toggle('wacky_omnidextrous')
 
 def apply_whatsmygear(env, rom_address):
     # this function can't be called from where it lives in assets.item_info.generate.py, so repeat it here
@@ -317,6 +312,7 @@ def apply_scrambledstats(env, rom_address):
     env.add_substitution('wacky scrambled stats agi address', f'    .def  CharAgilityAddress  $20{20+statsdict["AGI"]:02X}')
     env.add_substitution('3968 VIT substitute', f'{102+statsdict["VIT"]:02X}')
     env.add_substitution('2716 VIT substitute', f'{20+statsdict["VIT"]:02X}')
+    env.add_substitution('lda $2716 VIT substitute', f'lda $27{20+statsdict["VIT"]:02X}')
     env.add_substitution('2016 VIT substitute', f'{20+statsdict["VIT"]:02X}')
     env.add_substitution('3969 WIS substitute', f'{102+statsdict["WIS"]:02X}')
     env.add_substitution('2017 WIS substitute', f'{20+statsdict["WIS"]:02X}')
@@ -325,13 +321,8 @@ def apply_scrambledstats(env, rom_address):
     env.add_substitution('2018 WIL substitute', f'{20+statsdict["WIL"]:02X}')
     env.add_substitution('ldx WIL offset', f'ldx #$00{statsdict["WIL"]:02X}')
 
-    env.add_toggle('wacky_scrambledstats')
-
 def apply_sixleggedrace(env, rom_address):
     env.add_toggle('wacky_challenge_show_detail')
-
-def apply_neatfreak(env, rom_address):
-    env.add_toggle('wacky_neatfreak')
 
 def apply_timeismoney(env, rom_address):
     env.add_file('scripts/sell_zero.f4c')
@@ -512,7 +503,6 @@ def apply_misspelled(env, rom_address):
         remap_data[0x41] = 0x41 # Flare    
 
     env.add_binary(rom_address, remap_data, as_script=True)
-    env.add_toggle('wacky_misspelled')
     return len(remap_data)
 
 def apply_kleptomania(env, rom_address):
@@ -551,7 +541,6 @@ def apply_darts(env, rom_address):
     env.add_substitution('wacky_fightcommandreplacement', '#$16')
 
 def apply_unstackable(env, rom_address):
-    env.add_toggle('wacky_unstackable')
     env.add_toggle('wacky_initialize_axtor_hook')
 
 def apply_menarepigs(env, rom_address):
@@ -714,41 +703,42 @@ def setup_payablegolbez(env):
     env.meta['payablegolbez_slots'] = bribe_slots
 
 def apply_payablegolbez(env, rom_address):
+    version = ('J' if env.options.flags.has('japanese_bosses') else ('ET' if env.options.flags.has('easy_type_bosses') else 'US'))
     BOSS_SLOT_HPS = {
-        'antlion_slot' : 1000,
-        'asura_slot' : 23000,
-        'bahamut_slot' : 37000,
-        'baigan_slot' : 4200,
-        'calbrena_slot' : 8524,
-        'cpu_slot' : 24000,
-        'darkelf_slot' : 5000,
+        'antlion_slot' : (1100 if version == 'J' else 1000),
+        'asura_slot' : (31005 if version == 'J' else 23000),
+        'bahamut_slot' : (45001 if version == 'J' else 37000),
+        'baigan_slot' : (5332 if version == 'J' else 4200),
+        'calbrena_slot' : (10539 if version == 'J' else (8212 if version == 'ET' else 8524)),
+        'cpu_slot' : (36000 if version == 'J' else 24000),
+        'darkelf_slot' : (7817 if version == 'J' else 5000),
         'darkimp_slot' : 597,
-        'dlunar_slot' : 42000,
+        'dlunar_slot' : (46000 if version == 'J' else (43000 if version == 'ET' else 42000)),
         'dmist_slot' : 465,
         'elements_slot' : 65000,
-        'evilwall_slot' : 19000,
-        'fabulgauntlet_slot' : 1880,
-        'golbez_slot' : 3002,
-        'guard_slot' : 400,
-        'kainazzo_slot' : 4000,
-        'karate_slot' : 4000,
+        'evilwall_slot' : (28000 if version == 'J' else 19000),
+        'fabulgauntlet_slot' : (1972 if version == 'J' else 1880),
+        'golbez_slot' : (4002 if version == 'J' else 3002),
+        'guard_slot' : (560 if version == 'J' else 400),
+        'kainazzo_slot' : (5312 if version == 'J' else 4000),
+        'karate_slot' : (8000 if version == 'J' else 4000),
         'kingqueen_slot' : 6000,
-        'leviatan_slot' : 35000,
-        'lugae_slot' : 18943,
-        'magus_slot' : 9000,
-        'milon_slot' : 2780,
-        'milonz_slot' : 3000,
-        'mirrorcecil_slot' : 1000,
-        'mombomb_slot' : 1250,
+        'leviatan_slot' : (50001 if version == 'J' else 35000),
+        'lugae_slot' : (23607 if version == 'J' else 18943),
+        'magus_slot' : (9780 if version == 'J' else 9000),
+        'milon_slot' : (3300 if version == 'J' else 2780),
+        'milonz_slot' : (3523 if version == 'J' else 3000),
+        'mirrorcecil_slot' : (4520 if version == 'J' else 1000),
+        'mombomb_slot' : (1498 if version == 'J' else 1250),
         'octomamm_slot' : 2350,
-        'odin_slot' : 20500,
+        'odin_slot' : (20001 if version == 'J' else (18000 if version == 'ET' else 20500)),
         'officer_slot' : 302,
-        'ogopogo_slot' : 37000,
-        'paledim_slot' : 27300,
-        'plague_slot' : 28000,
-        'rubicant_slot' : 25200,
-        'valvalis_slot' : 6000,
-        'wyvern_slot' : 25000,
+        'ogopogo_slot' : (50000 if version == 'J' else (30000 if version == 'ET' else 37000)),
+        'paledim_slot' : (32700 if version == 'J' else (30000 if version == 'ET' else 27300)),
+        'plague_slot' : (33333 if version == 'J' else 28000),
+        'rubicant_slot' : (34000 if version == 'J' else 25200),
+        'valvalis_slot' : (8636 if version == 'J' else 6000),
+        'wyvern_slot' : (60000 if version == 'J' else (36000 if version == 'ET' else 25000)),
     }
     bribe_values = []
     bribe_slots = env.meta.get('payablegolbez_slots')
@@ -843,7 +833,6 @@ def apply_batman(env, rom_address):
     return len(data)
 
 def apply_isthisrandomized(env, rom_address):
-    env.add_toggle('wacky_isthisrandomized')
     env.add_file('scripts/dark_wave_damage.f4c')
 
 def apply_advertising(env, rom_address):
@@ -853,19 +842,23 @@ def apply_advertising(env, rom_address):
         0x08 : {'resist status' : '#Mini'}, # TinyMage
         0x0A : {'weak' : None}, # SandMoth
         0x0D : {'trait' : None}, # CaveToad
-        0x0F : {'attack element' : '#Absorb'}, # Zombie
+        0x0F : {'resist status' : '#Poison #Piggy #Mini #Toad #Sleep #Stun', 'attack element' : '#Absorb'}, # Zombie
         0x12 : {'trait' : None}, # Mad Toad
         0x18 : {'weak' : '#Holy'}, # Dark Imp
         0x1C : {'weak' : '#Holy'}, # Slime
         0x20 : {'weak' : '#Lit #Air'}, # Tricker
+        0x32 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Skelton
         0x25 : {'trait' : None}, # Gargoyle
         0x27 : {'trait' : None}, # Hooligan
         0x2A : {'trait' : '#Reptile'}, # Aligator
         0x2C : {'resist element' : None}, # Fighter
-        0x30 : {'attack element' : '#Absorb'}, # Ghoul
-        0x32 : {'attack element' : '#Absorb'}, # Revenant
-        0x33 : {'resist element' : None, 'attack element' : '#Absorb', 'weak' : '#Fire #Holy #Air #Immune'}, # VampGirl
+        0x2F : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Red Bone
+        0x30 : {'resist status' : '#Poison #Piggy #Mini #Toad #Sleep #Stun', 'attack element' : '#Absorb'}, # Ghoul
+        0x31 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Skull
+        0x32 : {'resist status' : '#Poison #Piggy #Mini #Toad #Sleep #Stun', 'attack element' : '#Absorb'}, # Revenant
+        0x33 : {'resist status' : None, 'resist element' : None, 'attack element' : '#Absorb', 'weak' : '#Fire #Holy #Air #Immune'}, # VampGirl
         0x34 : {'weak' : None}, # CaveNaga
+        0x35 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Sleep #Stun #Float #Curse'}, # D.Bone
         0x37 : {'trait' : '#Reptile'}, # Crocdile
         0x38 : {'weak' : '#Ice'}, # Hydra
         0x3D : {'trait' : '#Reptile', 'weak' : '#Ice'}, # Python
@@ -880,6 +873,7 @@ def apply_advertising(env, rom_address):
         0x4A : {'trait' : '#Spirit'}, # Screamer
         0x4E : {'weak' : None, 'trait' : None}, # BladeMan
         0x50 : {'attack status' : '#Stone'}, # Medusa
+        0x51 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Berserk #Sleep #Stun #Float #Curse'}, # D.Fossil
         0x54 : {'weak' : '#Holy #Immune', 'trait' : '#Spirit'}, # Ghost
         0x55 : {'weak' : '#Ice', 'resist element' : '#Fire #Absorb'}, # Bomb
         0x56 : {'weak' : '#Fire', 'resist element' : '#Ice #Absorb'}, # GrayBomb
@@ -945,6 +939,7 @@ def apply_advertising(env, rom_address):
         0xC5 : {'trait' : '#Robot', 'weak' : '#Lit #Air'}, # CPU
         0xC6 : {'trait' : '#Robot', 'weak' : '#Lit #Air'}, # Defender
         0xCD : {'weak' : '#Holy', 'resist element' : '#Dark'}, # D.Knight
+        0xD3 : {'resist status' : '#Poison #Blind #Mute #Piggy #Mini #Toad #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Float #Curse'}, # Ghast
         0xD4 : {'trait' : '#Robot #Zombie'}, # Balnab-Z
         0xD5 : {'trait' : '#Robot', 'weak' : '#Lit #Air'}, # Attacker
         0xD6 : {'weak' : '#Ice', 'resist element' : '#Fire #Absorb'}, # Bomb boss version
@@ -970,10 +965,9 @@ def apply_advertising(env, rom_address):
         advertising_script.append('}\n')
 
     gear_description_bytes = {} # dictionary with keys = item_ids, values = replacement description lines 2-4 in bytes
+    # all changes to the actual equipment bytes happen in update_equipment.py
 
     # Ice weaponry changes, to hit reptiles (Claw, Brand, Spear, Arrows)
-    for equip_id in [0x02, 0x1D, 0x26, 0x57]:
-        env.add_binary(BusAddress(0x0F9100 + 0x05 + (equip_id * 0x08)), [0x04], as_script=True)
     gear_description_bytes[0x02] = encode_text(
         '[$00][$fa]Deals ice damage.          [$fb][$00][$00]' +
         '[$00][$fa]Strong against reptiles.   [$fb][$00][$00]' +
@@ -995,8 +989,6 @@ def apply_advertising(env, rom_address):
         '[$00][$fa]                           [$fb][$00][$00]' 
         )
     # Bolt weaponry changes, to hit robots (Thunder Rod, Blitz Whip)
-    for equip_id in [0x0A, 0x35]:
-        env.add_binary(BusAddress(0x0F9100 + 0x05 + (equip_id * 0x08)), [0x02], as_script=True)
     gear_description_bytes[0x0A] = encode_text(
         '[$00][$fa]WIS[$cb]3. Casts [blackmagic]Lit[$c2]1.       [$fb][$00][$00]' +
         '[$00][$fa]Deals lightning damage.    [$fb][$00][$00]' +
@@ -1004,7 +996,6 @@ def apply_advertising(env, rom_address):
         )
     # Blitz Whip's description handled later.
     # Earth hammer isn't Fire elemental
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x4A * 0x08)), [0x00], as_script=True)
     gear_description_bytes[0x4A] = encode_text(
         '[$00][$fa]STR[$cb]5. Two[$c2]handed. Casts   [$fb][$00][$00]' +
         '[$00][$fa][blackmagic]Quake. Strong             [$fb][$00][$00]' +
@@ -1018,7 +1009,6 @@ def apply_advertising(env, rom_address):
         '[$00][$fa]damage and robots.         [$fb][$00][$00]' 
         )   
     # Dwarf Axe should hit Air weakness
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x39 * 0x08)), [0x06], as_script=True)
     gear_description_bytes[0x39] = encode_text(
         '[$00][$fa]STR[$c7]VIT[$cb]5[$c9] AGI[$c7]WIS[$c7]WIL[$c2]5.  [$fb][$00][$00]' +
         '[$00][$fa]Strong against flying      [$fb][$00][$00]' +
@@ -1027,7 +1017,6 @@ def apply_advertising(env, rom_address):
     # Drain Spear needs a new element/status entry, for Air/Absorb
     # Note that the forge weapon takes entry 0x3B, so start after that
     env.add_binary(BusAddress(0x0FA590 + (0x3C * 0x03)), [0x60, 0x00, 0x00], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x29 * 0x08)), [0x3C], as_script=True )
     gear_description_bytes[0x29] = encode_text(
         '[$00][$fa]STR[$c7]AGI[$c7]VIT[$c7]WIS[$c7]WIL[$c2]10.    [$fb][$00][$00]' +
         '[$00][$fa]Absorbs HP. Strong against [$fb][$00][$00]' +
@@ -1035,14 +1024,12 @@ def apply_advertising(env, rom_address):
         )
     # Darkness arrows also need a new element/status entry, for Dark/Blind
     env.add_binary(BusAddress(0x0FA590 + (0x3D * 0x03)), [0x08, 0x02, 0x00], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x04 + (0x59 * 0x08)), [0x3D], as_script=True)
     gear_description_bytes[0x59] = encode_text(
         '[$00][$fa]Deals dark damage.         [$fb][$00][$00]' +
         '[$00][$fa]Inflicts Blind.            [$fb][$00][$00]' +
         '[$00][$fa]                           [$fb][$00][$00]' 
         )
     # the Spoon, being a dinner utensil, should be effective against dessert monsters (Slimes)
-    env.add_binary(BusAddress(0x0F9100 + 0x05 + (0x3E * 0x08)), [0x20], as_script=True)
     gear_description_bytes[0x3E] = encode_text(
         '[$00][$fa]Dart for massive damage.   [$fb][$00][$00]' +
         '[$00][$fa]Strong against slimes.     [$fb][$00][$00]' +
@@ -1051,28 +1038,24 @@ def apply_advertising(env, rom_address):
     # the Gigant Axe is handled in custom_weapon_rando.py
 
     # ElvenBow gets to actually cast Shell
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x51 * 0x08)), [0x06], as_script=True)
     gear_description_bytes[0x51] = encode_text(
         '[$00][$fa]WIS[$cb]5. Casts [whitemagic]Shell.       [$fb][$00][$00]' +
         '[$00][$fa]Strong v. mages and flying [$fb][$00][$00]' +
         '[$00][$fa]foes.                      [$fb][$00][$00]' 
         )
     # Lunar gets to actually cast Dspel
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x13 * 0x08)), [0x0C], as_script=True)
     gear_description_bytes[0x13] = encode_text(
         '[$00][$fa]                           [$fb][$00][$00]' +
         '[$00][$fa]WIL[$cb]10. Casts [whitemagic]Dspel.      [$fb][$00][$00]' +
         '[$00][$fa]                           [$fb][$00][$00]' 
         )    
     # Defense gets to cast Armor
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x1E * 0x08)), [0x05], as_script=True)
     gear_description_bytes[0x1E] = encode_text(
         '[$00][$fa]                           [$fb][$00][$00]' +
         '[$00][$fa]VIT[$cb]15. Casts [whitemagic]Armor.      [$fb][$00][$00]' +
         '[$00][$fa]                           [$fb][$00][$00]' 
         )
     # Murasame gets to cast Slow instead of Armor; thematic with Masamune
-    env.add_binary(BusAddress(0x0F9100 + 0x03 + (0x2F * 0x08)), [0x07], as_script=True)
     env.add_binary(BusAddress(0x0FD4E0 + 0x2F), [0x07], as_script=True)
     gear_description_bytes[0x2F] = encode_text(
         '[$00][$fa]STR[$c7]VIT[$c7]WIS[$cb]5[$c9] AGI[$c7]WIL[$c2]5.  [$fb][$00][$00]' +
@@ -1081,7 +1064,6 @@ def apply_advertising(env, rom_address):
         )
     # Power staff gets to *cast* Bersk, not just proc it. Need to add its hits data though.
     env.add_binary(BusAddress(0x0F9070 + 0x12), [0x01], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x02 + (0x12 * 0x08)), [0xE3, 0x09], as_script=True)
     gear_description_bytes[0x12] = encode_text(
         '[$00][$fa]STR[$cb]10. Casts [whitemagic]Bersk.      [$fb][$00][$00]' +
         '[$00][$fa]Inflicts Berserk.          [$fb][$00][$00]' +
@@ -1090,7 +1072,6 @@ def apply_advertising(env, rom_address):
     # Blitz whip casts Blitz (the Ninja spell, not the enemy spell, as partially busted as that would be). Also needs hits.
     env.add_binary(BusAddress(0x0F9070 + 0x35), [0x04], as_script=True)
     env.add_binary(BusAddress(0x0FD4E0 + 0x35), [0x44], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x02 + (0x35 * 0x08)), [0xBC, 0x44], as_script=True)
     gear_description_bytes[0x35] = encode_text(
         '[$00][$fa]Casts Blitz. Lightning     [$fb][$00][$00]' +
         '[$00][$fa]damage. Strong v. robots.  [$fb][$00][$00]' +
@@ -1099,7 +1080,6 @@ def apply_advertising(env, rom_address):
     # Flame whip casts Flame. Also needs... a bit more damage for hits, for balance.
     env.add_binary(BusAddress(0x0F9070 + 0x36), [0x08], as_script=True)
     env.add_binary(BusAddress(0x0FD4E0 + 0x36), [0x42], as_script=True)
-    env.add_binary(BusAddress(0x0F9100 + 0x02 + (0x36 * 0x08)), [0xC1, 0x42], as_script=True)
     gear_description_bytes[0x36] = encode_text(
         '[$00][$fa]STR[$c7]AGI[$c7]VIT[$cb]5[$c9] WIS[$c7]WIL[$c2]5.  [$fb][$00][$00]' +
         '[$00][$fa]Casts Flame. Fire damage.  [$fb][$00][$00]' +
@@ -1110,6 +1090,7 @@ def apply_advertising(env, rom_address):
     # (but not if What's My Gear Again? is on; deal with that when we merge multi-wacky)
     if not ('whatsmygear' in env.meta.get('wacky_challenge', [])):
         env.meta['wacky_gear_descriptions'] = gear_description_bytes
+    # ... but, we need to make hammers look like hammers now (put this in generator.py)
 
     env.add_script('\n'.join(advertising_script))
     
@@ -1131,13 +1112,9 @@ def apply_skillissue(env, rom_address):
         if s not in available_skills:
             skill_unlock_table.insert(s,0x00)
 
-    env.add_toggle('wacky_skillissue')
     if 'bodyguard' not in env.meta.get('wacky_challenge', []):
         env.add_toggle('wacky_skillissue_no_bodyguard')
     env.add_substitution('wacky skill issue max credits', f'#${num_skills+1:02X}')
     env.add_binary(rom_address, skill_unlock_table, as_script=True)
 
     return len(skill_unlock_table)
-
-def apply_workexperience(env, rom_address):
-    env.add_toggle('wacky_workexperience')

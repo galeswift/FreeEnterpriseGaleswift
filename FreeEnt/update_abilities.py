@@ -33,7 +33,7 @@ def command_lists(env):
     # situations to care about:
     # -- command changes wackies (Darts, Musical, Klepto)
     # -- j-abilities
-    # -- added abilities from e.g. -tweak flags, -fusoya:omnimage
+    # -- added abilities from e.g. -tweak flags, Fomnimage
     # -- other flags that give/change ability lists
 
     # start with vanilla (non-J) command lists, minus #Item
@@ -160,7 +160,8 @@ def command_lists(env):
         else:
             commands['PCecil'].append('#Fortify')
         commands['Cid'].extend(['#Focus', '#Aim', '#Fortify'])
-        commands['ARydia'].append('#Bluff')
+        if not env.options.flags.has('rydiaredmage'):
+            commands['ARydia'].append('#Bluff')
         if env.options.flags.has('fusoyaregen'):
             # Fu gets Regen (for now), as does post-Ordeals Tellah
             commands['Tellah3'].append('#Regen')
@@ -193,8 +194,12 @@ def command_lists(env):
         # give Kain White and Black commands
         commands['Kain1'].extend(['#White', '#Black'])
         if env.options.flags.has('all_good_abilities'):
-            commands['Kain1'].remove('#DarkWave')
+            if not env.options.flags.has('cidairship'):
+                commands['Kain1'].remove('#DarkWave')
             commands['Kain1'].remove('#Sneak')
+
+    if env.options.flags.has('rydiaredmage'):
+        commands['ARydia'].insert(1,'#White')
 
     if env.options.flags.has('add_spells_fusoya'):
         # replace Regen with Omni if necessary, or just add it
@@ -211,7 +216,7 @@ def command_lists(env):
         commands['Edge'].pop(0) # Edge already has Dart
         if env.options.flags.has('all_good_abilities'):
             # ... so, let's give him Bluff to fill in the gap
-            commands['#Edge'].append('#Bluff')
+            commands['Edge'].append('#Bluff')
             # DKC also has Dart, so we sub in the thematic Sneak
             commands['DKCecil'].pop(0)
             commands['DKCecil'].append('#Sneak')
@@ -240,7 +245,9 @@ def command_lists(env):
             # in this case, Kain already has Sneak due to all_good_abilities
             commands['Kain1'].pop()
         if env.options.flags.has('add_spells_fusoya'):
-            commands['Fusoya'].remove('#Fight')        
+            commands['Fusoya'].remove('#Fight')
+        if env.options.flags.has('rydiaredmage'):
+            commands['ARydia'].remove('#White')
         if env.options.flags.has('japanese_abilities'):
             commands['Tellah1'].remove('#Recall')
             commands['Edward'].remove('#Medicine')
@@ -269,8 +276,10 @@ def command_lists(env):
                 commands['Cid'].remove('#Focus')
             else:
                 commands['Cid'].pop(-2)
-            commands['ARydia'].remove('#Bluff')
-            ## remove whichever of Regen/Bluff FuSoYa has
+            # remove White above if Rydia's kept her spells, Bluff otherwise
+            if not env.options.flags.has('rydiaredmage'):
+                commands['ARydia'].remove('#Bluff')
+            # remove whichever of Regen/Bluff FuSoYa has
             if not env.options.flags.has('add_spells_fusoya'):
                 commands['Fusoya'].pop(-2)
 

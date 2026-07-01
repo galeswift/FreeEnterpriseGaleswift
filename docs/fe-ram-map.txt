@@ -39,6 +39,9 @@ WRAM:
 7E:1180 - 7E:123F   : character names
 7E:1240 - 7E:125F   : discovered axtor -> actor table
 
+7E:1320 - 7E:133F  F: expanded wacky challenge allocated space
+7E:14C0 - 7E:14FF  F: Enorepeats formation bit field
+
 7E:1500 - 7E:1553   : API area (was character names)
     -> 7E:1500-1502   : key item "found" bits
     -> 7E:1503-1505   : key item "used" bits
@@ -102,14 +105,15 @@ WRAM:
     -> 7E:1636       F: Cfifo oldest axtor buffer
     -> 7E:1637       F: Big Chocobo Summon probability
     -> 7E:1638       F: Big Chocobo Summon spell power byte
+    -> 7E:1639       F: Gear fusion menu check (for select item dialog)
 
-    -> 7E:1660-166C   : wacky challenge allocated space
+    -> 7E:1660-166C  F: unallocated (formerly wacky challenge allocated space)
     -> 7E:166D-166F   : long address storage
     -> 7E:1670-167F   : util.f4c/dead-end registers
   1680 - 1697       : scratch space
     -> 7E:1680-168F   : local variables
     -> 7E:1690-1697   : longer-term temporary variables
-  1698 - 16FF      F: doors rando work space
+  1698 - 16FF      F: doors rando work space (note: impacts 64-floor glitch)
     -> 7E:1698-169F  F: map_plane bit array
     -> 7E:16FF       F: 1-byte map history index
 

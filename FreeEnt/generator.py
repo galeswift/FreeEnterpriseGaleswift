@@ -40,12 +40,15 @@ from . import golbez_rando
 from . import zeromus_rando
 from . import sprite_rando
 from . import summons_rando
+from . import zot_rando
 from . import objective_rando
 from . import kit_rando
 from . import custom_weapon_rando
+from . import tweak_rando
 from . import wacky_rando
 from . import update_spells
 from . import update_abilities
+from . import update_equipment
 
 from . import compile_item_prices
 from . import doors_rando
@@ -179,6 +182,7 @@ F4C_FILES = '''
     scripts/hide_softlock_fixes.f4c
     scripts/rom_header.f4c
     scripts/sram_expansion.f4c
+    scripts/fix_dma_extra_copy.f4c
     scripts/character_expansion.f4c
     scripts/character_retrieval.f4c
     scripts/pregame_screen.f4c
@@ -658,13 +662,6 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
-    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
-    update_spells.spell_data(env)
-    update_spells.spellset_data(env)
-
-    # handle all changes to command lists
-    update_abilities.command_lists(env)
-
     RANDO_MODULES = [
         character_rando,
         core_rando,
@@ -677,6 +674,7 @@ def build(romfile, options, force_recompile=False):
         encounter_rando,
         sprite_rando,
         summons_rando,
+        zot_rando,
         wyvern_rando,
         odin_rando,
         golbez_rando,
@@ -694,6 +692,18 @@ def build(romfile, options, force_recompile=False):
                 continue
 
             method(env)
+
+    # handle almost all changes to spells/spellsets except for FuSoYa and MP cost
+    update_spells.spell_data(env)
+    update_spells.spellset_data(env)
+
+    # handle all changes to command lists
+    update_abilities.command_lists(env)
+
+    # handle all changes to equipment and the equipment index table
+    # except for the Spoon and the custom FF4A weapon
+    update_equipment.equip_table(env)
+    update_equipment.equipment(env)
 
     if not options.flags.has('vanilla_z') or options.flags.has('vintage'):
         ZEROMUS_PICS_DIR = os.path.join(os.path.dirname(__file__), 'compiled_zeromus_pics')
@@ -747,7 +757,10 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/remove_mp_underflow.f4c')
     if not options.flags.has('glitch_allow_dwarf_warp'):
         env.add_file('scripts/remove_dark_crystal_skip.f4c')
-    if not options.flags.has('glitch_allow_life'):
+    if env.options.flags.has('glitch_modified_life'):
+        env.add_file('scripts/modify_life_monsters.f4c')
+    elif not options.flags.has('glitch_allow_life'):
+        # this case handles both the absence of any Glife flags and Gnolifer
         env.add_file('scripts/remove_life_glitch.f4c')
     if (not options.flags.has('glitch_allow_backrow')) or 'sixleggedrace' in env.meta.get('wacky_challenge', []):
         env.add_file('scripts/remove_backrow_glitch.f4c')
@@ -756,8 +769,10 @@ def build(romfile, options, force_recompile=False):
     # this file handle whether the glitch is fully "fixed"
     env.add_file('scripts/sylph_odin_mp_fix.f4c')
 
-    if options.flags.has('edward_spoon'):
-        env.add_file('scripts/edward_spoon.f4c')
+    if env.options.flags.has_any('characters_fuse_gear_bonuses', 'characters_fuse_equip_bonuses'):
+        env.add_file('scripts/nodupes_gear_fusion.f4c')
+        if 'omnidextrous' in env.meta.get('wacky_challenge',[]) and env.options.flags.has('characters_fuse_equip_bonuses'):
+            env.add_substitution('fuse equip omnidex', '#$00')
 
     if options.flags.has('give_monsters_evade'):
         env.add_file('scripts/give_monsters_evade.f4c')
@@ -770,24 +785,24 @@ def build(romfile, options, force_recompile=False):
         random_offset = env.rnd.randrange(0x100)
         env.add_substitution('random agility PRNG offset', f'#${random_offset:02X}')
 
-    scale_agility_mod = env.options.flags.get_suffix('-agility:scale') # either 1 or 10; 5 is default
+    scale_agility_mod = env.options.flags.get_suffix('Ascale:') # either 1 or 10; 5 is default
     if scale_agility_mod:
         scale_agility_mod = int(scale_agility_mod)
         env.add_substitution('scale agility parameter', f'#$00{10*scale_agility_mod:02X}')
         env.add_toggle('scale_agility')
 
-    fixed_anchor_agi = env.options.flags.get_suffix('-agility:anchor')
+    fixed_anchor_agi = env.options.flags.get_suffix('Aanchor:')
     if fixed_anchor_agi:
         fixed_anchor_agi = int(fixed_anchor_agi)
         env.add_toggle('fixed_anchor')
         env.add_substitution('fixed anchor agility', f'#${fixed_anchor_agi:02X}')
 
     count_timer = 2
-    if env.options.flags.get_suffix('-agility:scale') == '10':
+    if env.options.flags.get_suffix('Ascale:') == '10':
         count_timer *= 2
-    if env.options.flags.has_any('fastest_agility') or env.options.flags.get_suffix('-agility:anchor2'): # matches 27 or 28
+    if env.options.flags.has_any('fastest_agility') or env.options.flags.get_suffix('Aanchor:2'): # matches 27 or 28
         count_timer *= 2
-    elif env.options.flags.has_any('monster_agility', 'formula_agility') or env.options.flags.get_suffix('-agility:anchor4'): # matches 41 or 42
+    elif env.options.flags.has_any('monster_agility', 'formula_agility') or env.options.flags.get_suffix('Aanchor:4'): # matches 41 or 42
         count_timer *= 3
     if count_timer != 2:
         env.add_toggle('rescale_inner_count_timer') # goal: make Count not completely broken
@@ -798,9 +813,9 @@ def build(romfile, options, force_recompile=False):
 
     # experience flag substitutions and toggles
     # split, noboost, nokeyboost, crystalbonus, and maxlevelbonus are all handled directly via f4c scripts
-    exp_objective_bonus = env.options.flags.get_suffix('-exp:objectivebonus')
+    exp_objective_bonus = env.options.flags.get_suffix('Xobjectivebonus:')
     if exp_objective_bonus:
-        if not (exp_objective_bonus == '_num'):
+        if not (exp_objective_bonus == 'num'):
             exp_objective_bonus = 100 // int(exp_objective_bonus)
             env.add_substitution('experience objective bonus divisor', f'#${exp_objective_bonus:02X}')
         else:
@@ -808,9 +823,9 @@ def build(romfile, options, force_recompile=False):
             env.add_substitution('experience objective bonus divisor', '#$' + num_obj)
         env.add_toggle('experience_objective_bonus')
 
-    exp_kicheck_bonus = env.options.flags.get_suffix('-exp:kicheckbonus')
+    exp_kicheck_bonus = env.options.flags.get_suffix('Xkicheckbonus:')
     if exp_kicheck_bonus:
-        if not (exp_kicheck_bonus == '_num'):
+        if not (exp_kicheck_bonus == 'num'):
             exp_kicheck_bonus = 100 // int(exp_kicheck_bonus)
             env.add_substitution('experience key item check bonus divisor', f'#${exp_kicheck_bonus:02X}')
         else:
@@ -819,7 +834,7 @@ def build(romfile, options, force_recompile=False):
             env.add_substitution('experience key item check bonus divisor', f'#${(num_kichecks-1):02X}')
         env.add_toggle('experience_kicheck_bonus')
 
-    exp_zonk_bonus = env.options.flags.get_suffix('-exp:zonkbonus')
+    exp_zonk_bonus = env.options.flags.get_suffix('Xzonkbonus:')
     if exp_zonk_bonus:
         exp_zonk_bonus = 100 // int(exp_zonk_bonus)
         # need to check for the starting key item here, using the rewards assignment;
@@ -831,19 +846,19 @@ def build(romfile, options, force_recompile=False):
         env.add_substitution('experience zonk bonus divisor', f'#${exp_zonk_bonus:02X}')
         env.add_toggle('experience_zonk_bonus')
 
-    exp_miab_bonus = env.options.flags.get_suffix('-exp:miabbonus')
+    exp_miab_bonus = env.options.flags.get_suffix('Xmiabbonus:')
     if exp_miab_bonus:
         exp_miab_bonus = int(exp_miab_bonus) // 50
         env.add_substitution('experience miab bonus multiplier', f'#${exp_miab_bonus:04X}')
         env.add_toggle('experience_miab_bonus')
 
-    exp_moon_bonus = env.options.flags.get_suffix('-exp:moonbonus')
+    exp_moon_bonus = env.options.flags.get_suffix('Xmoonbonus:')
     if exp_moon_bonus:
         exp_moon_bonus = int(exp_moon_bonus) // 100
         env.add_substitution('experience moon bonus multiplier', f'#${exp_moon_bonus:04X}')
         env.add_toggle('experience_moon_bonus')
 
-    exp_geometric_mod = env.options.flags.get_suffix('-exp:geometric')
+    exp_geometric_mod = env.options.flags.get_suffix('Xgeometric:')
     if exp_geometric_mod:
         exp_geometric_mod = int(exp_geometric_mod) // 10
         env.add_substitution('experience geometric numerator', f'        lda #${exp_geometric_mod:02X}')
@@ -881,7 +896,8 @@ def build(romfile, options, force_recompile=False):
             'scripts/fix_victim_history.f4c',
             'scripts/fix_hermes_berserk.f4c',
             'scripts/fix_regen_axtor_check.f4c',
-            'scripts/fix_regen_slot_indexing.f4c'
+            'scripts/fix_regen_slot_indexing.f4c',
+            'scripts/fix_edward_sing_check.f4c'
             )
 
     if options.flags.has('vintage'):
@@ -895,59 +911,7 @@ def build(romfile, options, force_recompile=False):
     if options.flags.has('jump'):
         env.add_file('scripts/jump.f4c')
 
-    # misc/creative tweaks
-    if options.flags.has('kainmagic'):
-        env.add_file('scripts/give_kain_magic.f4c')
-        mp_script = '\n'
-        for level in range(1,51):
-            mp_script = mp_script + f'patch (${(0x0FB65E + (0x05 * (level-1))):06X} bus) {{ {2:02X} }}\n'
-        env.add_substitution('kain mp script', mp_script)
-    elif options.flags.has('harmspell'):
-        env.add_file('scripts/harm_spell.f4c')
-    if options.flags.has('edwardheal'):
-        env.add_file('scripts/improve_edward_heal.f4c')
-    if options.flags.has_any('edwardsing','edwardsing_better'):
-        env.add_file('scripts/edward_sing_upgrade.f4c')
-        sing_text_options = [
-            'Song of Molbols',
-            'Song of Ruin',
-            'Sick Beats',
-            'Samba de Status',
-            'Debuff Dirge',
-            'Evil Chorus',
-            'Vogon Poetry'
-            ]
-        env.rnd.shuffle(sing_text_options)
-        env.add_substitution('song of silence replacement text', sing_text_options[0])
-        if options.flags.has('edwardsing_better'):
-            env.add_substitution('edward sing status options', '#$bcff')
-        else:
-            env.add_substitution('edward sing status options', '#$1804')
-    if options.flags.has('cidairship'):
-        env.add_file('scripts/cidairship.f4c')
-    if options.flags.has('cidpeep'):
-        env.add_file('scripts/improve_cid_peep.f4c')
-    if options.flags.has('twinmeteo'):
-        env.add_file('scripts/twin_meteo_stone.f4c')
-    if options.flags.has('bigchocobosummon'):
-        env.add_file('scripts/big_chocobo_summon.f4c')
-        if 'saveusbigchocobo' in env.meta.get('wacky_challenge',[]):
-            env.add_toggle('save us big chocobo summon')
-    if options.flags.has('rosapaladin'):
-        env.add_file('scripts/rosa_paladin.f4c')
-        env.add_substitution('auto cover job class', '#$05')
-    if options.flags.has('rosapray'):
-        env.add_file('scripts/improve_rosa_pray.f4c')
-    if options.flags.has('fusoyaregen'):
-        if 'tellahmaneuver' in env.meta.get('wacky_challenge',[]):
-            env.add_binary(BusAddress(0x03E3FE), [0x32]) # 50 HP regen instead of 10 HP
-        else:
-            env.add_file('scripts/improve_fusoya_regen_mp.f4c')
-            env.add_toggle('fusoya_regen_mp')
-            if '3point' in env.meta.get('wacky_challenge',[]):
-                env.add_binary(BusAddress(0x03E3FE), [0x01]) # 1 MP regen instead of 10 MP
-                env.add_binary(BusAddress(0x03AAA7), [0x14]) # counter needs to hit 20 ticks instead of 5 ticks 
-                env.add_binary(BusAddress(0x13FEAB), [0x99]) # regen duration should be 25*RA ticks
+    tweak_rando.apply(env)
 
     if not options.hide_flags:
         env.add_substitution('flags hidden', '')
@@ -960,16 +924,16 @@ def build(romfile, options, force_recompile=False):
         env.add_toggle('doorsrando')
         if rando_scope == "-entrancesrando":
             env.add_toggle('entrancesrando')
-
-        if not options.flags.has('-calmness'):
-            env.add_file('scripts/panic_button.f4c')
-        if options.flags.has('-forcesealed'):
-            env.add_toggle('forcesealed')
         
         if options.flags.has('starting_underground'):
             env.add_toggle('doorsrando_starting_underground')
 
         doors_rando.apply(env, rando_scope,rando_type)
+
+    if options.flags.has('-panicbutton'):
+        env.add_file('scripts/panic_button.f4c')
+    if options.flags.has('-forcesealed'):
+        env.add_file('scripts/force_sealed_cave_boss.f4c')
 
     # must be last
     wacky_rando.apply(env)
@@ -1014,10 +978,11 @@ def build(romfile, options, force_recompile=False):
     elif 'advertising' in env.meta.get('wacky_challenge',[]):
         for item_id in env.meta['wacky_gear_descriptions']:
             item_description_data[0x80 * item_id + 0x20 : 0x80 * item_id + 0x80] = env.meta['wacky_gear_descriptions'][item_id]
-        env.add_file('scripts/black_shirt_fix.f4c') # Black Shirt doesn't change
-    else:
-        env.add_file('scripts/black_shirt_fix.f4c') # cannot double-patch the Black Shirt!
-    
+    if 'advertising' in env.meta.get('wacky_challenge',[]):
+        # manually change the Wrench icons to Hammer icons for Silver/Earth/Wooden hammers, since they're in the first row, not rows 2-4
+        for item_id in [0x49, 0x4A, 0x4B]:
+            item_description_data[0x80 * item_id + 0x02] = 0x39
+
     env.add_binary(UnheaderedAddress(0x120000), item_description_data)
 
     # pregame text
@@ -1063,6 +1028,9 @@ def build(romfile, options, force_recompile=False):
 
     if not (options.quickstart or options.test_settings.get('quickstart', False)):
         env.add_substitution('quickstart', '')
+    else:
+        if env.options.flags.has('superhero_challenge'):
+            env.add_toggle('superhero_quickstart')
 
     credits_line_count = 225
     credits_tick_count = credits_line_count * 16

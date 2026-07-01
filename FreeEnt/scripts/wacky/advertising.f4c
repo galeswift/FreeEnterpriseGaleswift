@@ -76,7 +76,7 @@ formation($EA)
 // Tricker
 monster($20) 
 { 
-    reaction sequence $FE
+    reaction sequence $F7
 }
 
 // this script is unused, as far as I know.
@@ -108,10 +108,8 @@ patch($0ee677 bus) { 10 51 }
 patch($0ee67a bus) { 10 52 }
 patch($0ee67d bus) { 10 53 }
 
-// I don't *think* anything uses the random "7D" ai group
-// at the end of the block. It's... only half-formed? 7D FF doesn't work.
-// so, start replacing there (index $FE):
-patch($0ee51f bus) { 0A 23 31 3F 32 3F 33 3F }
+// assign Tricker the $F7 AI group for the reaction script;
+// change made in randomizer_boss.f4c
 
 // Kainazzo's script needs some tweaking
 ai_script($A5)
@@ -308,3 +306,7 @@ Frost
 // Item changes; can't do this without just patching bytes.
 // Patches written in wacky_rando.py under apply_advertising
 // to make address arithmetic easy.
+// ... except, of course, changing the item icons for the hammers:
+text(item name $49) {[hammer]Silver}
+text(item name $4A) {[hammer]Earth}
+text(item name $4B) {[hammer]Wooden}

@@ -97,7 +97,7 @@
 
 <118> // [harp]Requiem
   STR/AGI/VIT/WIL/WIS-5.
-  Two-handed.
+  Two-handed. Absorbs HP.
 
 <119> // [harp]Loki
   STR/AGI/VIT+15. 2-hand.

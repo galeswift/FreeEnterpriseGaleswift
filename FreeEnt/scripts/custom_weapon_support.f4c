@@ -24,7 +24,7 @@ msfpatch {
     .addr $01ff35  // beginning of free space at end of bank 01
     MenuEquipCompatibilityCheck__Wrapper:
         sta $_CustomWeapon__RealIDAddr
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         beq $+DoSubstitution
         // if item is not proxy, thunk to original function
         jmp $bf7d
@@ -37,6 +37,23 @@ msfpatch {
         rts
 }
 
+// add an auxiliary check to ID if it's the custom weapon, or perhaps
+// the "preview" Legend weapon under -smith:superspoiler
+// here, A = the item ID; the result is that the zero flag is *set*
+// when the item needs to be proxied, and unset otherwise
+// (returns long because the one check above is actually in bank01)
+msfpatch{
+    .new
+    ProxyIDWeaponCheck:
+        // %flag spoilsmith on%
+        cmp #$19
+        beq $+YesProxy
+        // %end%
+        cmp #$.CustomWeapon__ItemID
+    %YesProxy:
+        rtl
+}
+
 // alter equipment compatibility check in menu to substitute proxy item ID
 // for off-hand item if needed
 msfpatch {
@@ -47,7 +64,7 @@ msfpatch {
     CustomWeapon__HandleMenuOtherHandItem:
         // A already contains item ID
         beq $+NoItem
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -84,7 +101,7 @@ msfpatch {
 
     .new
     CustomWeapon__HandleMenuArrowCheck:
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -108,7 +125,7 @@ msfpatch {
     CustomWeapon__HandleRightHandWeaponType:
         lda $2894
         beq $+NoItem
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -125,7 +142,7 @@ msfpatch {
     CustomWeapon__HandleLeftHandWeaponType:
         lda $2895
         beq $+NoItem
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -159,7 +176,7 @@ msfpatch {
         // but the BCC when we get back will handle the same case
 
         // A = item ID
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -173,7 +190,7 @@ msfpatch {
         // but the BCC when we get back will handle the same case
 
         // A = item ID
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -189,7 +206,7 @@ msfpatch {
     .new
     CustomWeapon__HandleArrowEquipInBattle:
         // A = item ID
-        cmp #$.CustomWeapon__ItemID
+        jsl $=ProxyIDWeaponCheck
         bne $+NoSubstitution
         lda $=CustomWeapon__ProxyIDAddr
     %NoSubstitution:
@@ -199,3 +216,29 @@ msfpatch {
 
 
 // item_delivery_quantity.f4c handles the logic to deliver 99 arrows
+
+// %if legend_arrow%
+// if the Legend Sword *also* changes, into the Legend Arrow, then
+// prevent losing it
+msfpatch{
+    .addr $03c97a
+    jml $=LegendArrowSave
+    nop nop
+
+    .new
+    LegendArrowSave:
+        lda $32db,x
+        cmp #$19
+        beq $+SaveArrow
+        // displaced
+        lda $cd
+        tax
+        lda $38dc,x
+        jml $03c980
+    %SaveArrow:
+        // leave 1 in the count field, 
+        // so it'll do nothing
+        lda #$01
+        jml $03c988
+}
+// %end%

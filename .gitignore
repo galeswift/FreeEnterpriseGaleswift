@@ -40,3 +40,5 @@ FreeEnt/server/_build/**
 *.private
 *.symbols
 *.script
+env_specs.bat
+.vscode/**

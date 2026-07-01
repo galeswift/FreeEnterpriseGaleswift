@@ -20,7 +20,7 @@
 ....(Omode:bosscollector20) Collect 20 bosses
 ....(Omode:bosscollector25) Collect 25 bosses
 ....(Omode:bosscollector30) Collect 30 bosses
-....(Omode:bosscollector34) Collect 34 bosses
+....(Omode:bosscollector34) Collect 34/all bosses
 ..[@goldhunter]^ Gold Hunter
 ...<> Set type of gold hunt
 ....(Omode:goldhunter100) Have 100,000 gold
@@ -163,7 +163,7 @@
 .....[Orandom3:onlyfusoya] Only include Fusoya
 .<> Set number of objectives required to earn reward
 ..(Oreq:all) Complete all objectives for reward
-..(Oreq:1) Complete 1 objectives for reward
+..(Oreq:1) Complete 1 objective for reward
 ..(Oreq:2) Complete 2 objectives for reward
 ..(Oreq:3) Complete 3 objectives for reward
 ..(Oreq:4) Complete 4 objectives for reward
@@ -173,6 +173,27 @@
 ..(Oreq:8) Complete 8 objectives for reward
 ..(Oreq:9) Complete 9 objectives for reward
 ..(Oreq:10) Complete 10 objectives for reward
+..(Oreq:11) Complete 11 objectives for reward
+..(Oreq:12) Complete 12 objectives for reward
+..(Oreq:13) Complete 13 objectives for reward
+..(Oreq:14) Complete 14 objectives for reward
+..(Oreq:15) Complete 15 objectives for reward
+..(Oreq:16) Complete 16 objectives for reward
+..(Oreq:17) Complete 17 objectives for reward
+..(Oreq:18) Complete 18 objectives for reward
+..(Oreq:19) Complete 19 objectives for reward
+..(Oreq:20) Complete 20 objectives for reward
+..(Oreq:21) Complete 21 objectives for reward
+..(Oreq:22) Complete 22 objectives for reward
+..(Oreq:23) Complete 23 objectives for reward
+..(Oreq:24) Complete 24 objectives for reward
+..(Oreq:25) Complete 25 objectives for reward
+..(Oreq:26) Complete 26 objectives for reward
+..(Oreq:27) Complete 27 objectives for reward
+..(Oreq:28) Complete 28 objectives for reward
+..(Oreq:29) Complete 29 objectives for reward
+..(Oreq:30) Complete 30 objectives for reward
+..(Oreq:31) Complete 31 objectives for reward
 .[@Ogated]^ Gated Objective
 ..<> Pick an objective
 ...(Ogated:1) Objective #1 is gated behind other objectives
@@ -435,6 +456,9 @@
 .[Ctreasure:unsafe]! Unsafe characters in chests
 [] Character Join Options
 .[Cnodupes] Duplicate characters not allowed
+..<> Get stat boosts when duplicate characters join
+...(Cfuse:gear)^ Use any equipment to add stat boosts 
+...(Cfuse:equip)^ Use equipment the character can equip to add stat boosts 
 .[Chi]^ New characters are forced to join the party
 .[Cfifo]^ Characters in the party the longest must be dismissed first
 .[Cbye] Dismissed characters are irretrievable
@@ -469,31 +493,33 @@
 ...(Tmaxtier:4)! Chests contain tier 4 items at best
 ...(Tmaxtier:3)! Chests contain tier 3 items at best
 ..()#^ Unrestrict item quality
-...[Tunrestrict:treasury] Chests in the toroia treasury will be unaffected by any Tmaxtier flags
-...[Tunrestrict:moon] Chests on the moon will be unaffected by any Tmaxtier flags
-...[Tunrestrict:underworld] Chests in the underworld will be unaffected by any Tmaxtier flags
-...[Tunrestrict:overworld] Chests on the overworld will be unaffected by any Tmaxtier flags
+...[Tunrestrict:treasury] Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags
+...[Tunrestrict:moon] Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags
+...[Tunrestrict:underworld] Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags
+...[Tunrestrict:overworld] Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags
 ..<> Improve item quality
-...(Tmintier:2) Chests contain tier 2 items at worst
+...(Tmintier:2)^ Chests contain tier 2 items at worst
 ...(Tmintier:3) Chests contain tier 3 items at worst
 ...(Tmintier:4) Chests contain tier 4 items at worst
 ...(Tmintier:5) Chests contain tier 5 items at worst
+..[Tplayable]^ Chests contain usable items
+.(Tstandardish)^ Standard-ish chest randomization
+..[ECHO:Tstandard]
+..[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
+..[Tbuffweights]^ Some areas have better treasure weights
 .(Tvanillaish)^ Vanilla-ish chest randomization
 ..[ECHO:Tstandard]
+..[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
 .(Tpro) Pro chest randomization
-..[ECHO:Tstandard]
+..[ECHO:Tstandardish]
 .(Tsemipro)^ Semi-pro chest randomization
-..[ECHO:Tstandard]
-.(Twild) Wild chest randomization
-..[ECHO:Tstandard]
+..[ECHO:Tstandardish]
 .(Twildish) Wild-ish chest randomization
-..[ECHO:Tstandard]
-.(Tstandardish)^ Standard-ish chest randomization
+..[ECHO:Tstandardish]
+.(Twild) Wild chest randomization
 ..[ECHO:Tstandard]
 .(Tempty)! Chests are empty
 [Tno:j] No J-items in chests
-[Tplayable]^ Equipment in chests will be usable
-[Tadjmiabareas]^ Areas with MIABs will have slightly worse items
 <> Junk management
 .[Tjunk] Keep junk
 .[Tmoney] Everything is junk
@@ -505,6 +531,31 @@
 .(Sstandard) Standard shop randomization
 ..[Sunsafe]! No safety checks
 ..[Ssingles]!^ Shops sell only a single item
+..[Splayable]^ Shops contain usable items
+..()#^ Guarantee Items
+...[Salways:apples] Apples/Soma Drops always sold in shops
+...[Salways:sirens] Sirens always sold in shops
+...[Salways:vampires] Vampires always sold in shops
+...[Salways:hrglass] HrGlass2 always sold in shops
+...[Salways:bacchus] Bacchus always sold in shops
+...[Salways:starveil] Starveils always sold in shops
+...[Salways:cure3] Cure3 always sold in shops
+...[Salways:illusion] Illusions always sold in shops
+...[Salways:coffin] Coffins always sold in shops
+...[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
+..()# Remove Items
+...[Sno:j] No J-items in shops
+...[Sno:apples] No Apples/Soma Drops in shops
+...[Sno:sirens] No Sirens in shops
+...[Sno:life]! No Life potions in shops
+...[Sno:vampires]^ No Vampires in shops
+...[Sno:hrglass]^ No HrGlass2 in shops
+...[Sno:bacchus]^ No Bacchus in shops
+...[Sno:starveil]^ No Starveils in shops
+...[Sno:cure3]^ No Cure3 in shops
+...[Sno:illusion]^ No Illusions in shops
+...[Sno:coffin]^ No Coffins in shops
+...[Sno:damage_items]^ No Damage items (BigBomb,ThorRage,etc) in shops
 .(Spro) Pro shop randomization
 ..[ECHO:Sstandard]
 .(Swildish)^ Wild-ish shop randomization
@@ -515,7 +566,22 @@
 ..[ECHO:Sstandard]
 .(Scabins)! Shops sell only cabins
 .(Ssame)!^ Shops sell only one type of item
+..[Splayable]^ Shops contain usable items
+..()# Remove Items
+...[Sno:j] No J-items in shops
+...[Sno:apples] No Apples/Soma Drops in shops
+...[Sno:sirens] No Sirens in shops
+...[Sno:life]! No Life potions in shops
+...[Sno:vampires]^ No Vampires in shops
+...[Sno:hrglass]^ No HrGlass2 in shops
+...[Sno:bacchus]^ No Bacchus in shops
+...[Sno:starveil]^ No Starveils in shops
+...[Sno:cure3]^ No Cure3 in shops
+...[Sno:illusion]^ No Illusions in shops
+...[Sno:coffin]^ No Coffins in shops
+...[Sno:damage_items]^ No Damage items (BigBomb,ThorRage,etc) in shops
 .(Sempty)! Shops sell nothing
+
 <> Buy prices
 .(Sfree) Shop items are free
 .(Smixed:stirred)^ Shop item prices are shuffled within normal items
@@ -523,33 +589,6 @@
 <> Sell prices
 .(Ssell:quarter) Items sell for 1/4 price
 .(Ssell:0) Items sell for 0 GP
-()#^ Guarantee Items
-.[Salways:apples] Apples/Soma Drops always sold in shops
-.[Salways:sirens] Sirens always sold in shops
-.[Salways:vampires] Vampires always sold in shops
-.[Salways:hrglass] HrGlass2 always sold in shops
-.[Salways:bacchus] Bacchus always sold in shops
-.[Salways:starveil] Starveils always sold in shops
-.[Salways:cure3] Cure3 always sold in shops
-.[Salways:illusion] Illusions always sold in shops
-.[Salways:coffin] Coffins always sold in shops
-.[Salways:damage_items] Damage items (BigBomb,ThorRage,etc) always in shops
-[Splayable]^ Equipment found in shops will be usable
-[Sethersell]^ Ethers and Elixirs sell like other items
-
-()# Remove Items
-.[Sno:j] No J-items in shops
-.[Sno:apples] No Apples/Soma Drops in shops
-.[Sno:sirens] No Sirens in shops
-.[Sno:life]! No Life potions in shops
-.[Sno:vampires]^ No Vampires in shops
-.[Sno:hrglass]^ No HrGlass2 in shops
-.[Sno:bacchus]^ No Bacchus in shops
-.[Sno:starveil]^ No Starveils in shops
-.[Sno:cure3]^ No Cure3 in shops
-.[Sno:illusion]^ No Illusions in shops
-.[Sno:coffin]^ No Coffins in shops
-.[Sno:damage_items]^ No Damage items (BigBomb,ThorRage,etc) in shops
 
 <>^ Shop price adjustments
 .(Sprice:20) Shop prices are adjusted to 20% of their normal value
@@ -576,16 +615,28 @@
 .(Sprice:400)! Shop prices are adjusted to 400% of their normal value
 ..[ECHO:Sprice:20]
 
+[Sethersell]^ Ethers and Elixirs sell like other items
+
 == BOSSES
 <>* Bosses
 .(Bvanilla)- No boss randomization
-.(Bstandard) Randomize bosses
+.(Bstandard) Standard boss randomization
+..[Bzones]^ Shuffle bosses only within zones
 ..[Bunsafe]! No safety checks
+.(Bpro)!^ Pro boss randomization
+..[ECHO:Bstandard]
+.(Bfriendly)^ Friendly boss randomization
+..[ECHO:Bstandard]
+.(Bcruel)!^ Place bosses in their most challenging locations
+..[ECHO:Bstandard]
+.(Beasy)^ Place bosses in less threatening locations
+..[ECHO:Bstandard]
 [Bnofree]! No free bosses
 [Balt:gauntlet] Alt Gauntlet
 <>^ Alternate boss stats/scripts
 .(Bstats:j)! FF4j boss stats and scripts
 .(Bstats:et) FF4 Easy Type boss stats and scripts
+[Bslots]!^ Shuffle the stats of boss slots within groups
 (@Brestrict)^ Restrict required boss locations
 .[Brestrict:summon] Required bosses cannot be at summon spots
 .[Brestrict:moon] Required bosses cannot be at moon spots
@@ -597,16 +648,18 @@
 <> Change Wyvern's opening MegaNuke
 .(Bwhyburn) Disable Wyvern's opening MegaNuke
 .(Bwhichburn) Replace Wyvern's opening MegaNuke with a random attack
-.(Bitburns)^ Replace Wyvern's opening MegaNuke with random, incredibly dangerous attack
+.(Bitburns)!^ Replace Wyvern's opening MegaNuke with random, incredibly dangerous attack
 [Bflatvern]^ Wyvern will not scale spell power for Nuke
 [Bwoahdin]^ Replace Odin's first two Zantetsukens 1 and 2 with a random attack
+[Bthehades]!^ Replace Fire1 and Fire2 in the KQ Eblan fight with Heat Ray and Glare
 []^ Change Golbez's behaviour
 .[Bwhybez] Disable Golbez's Shadow summon
 .[Bwhichbez] Replace Golbez's and Shadow's spells with random spells
 [Bspellpower]!^ All bosses gain scaled spell power
+[Bnewscriptstats]!^ Scripted stat changes for bosses behave differently
 []^ Remove certain boss slots
-.[Bremove:kaipo_slot] Remove the Officer slot boss fight
-.[Bremove:kqe_slot] Remove the KQ Eblan slot boss fight
+.[Bremove:officer_slot] Remove the Officer slot boss fight
+.[Bremove:kingqueen_slot] Remove the KQ Eblan slot boss fight
 
 == ENCOUNTERS
 <>* Random encounter rate
@@ -618,6 +671,10 @@
 .(Ereduce) Random encounters reduced by 50%
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights
+.(Enorepeats)^ Each formation can only be encountered once
+..[Ekeep:doors] Preserve TrapDoor fights
+..[Ekeep:behemoths] Preserve forced Behemoth fights
+..[Edanger] Keep dangerous encounters
 .(Enoencounters)! No random encounters
 ..[Ekeep:doors] Preserve TrapDoor fights
 ..[Ekeep:behemoths] Preserve forced Behemoth fights
@@ -633,7 +690,7 @@
 ...(Erunspoils50) 50% EXP and GP earned
 ...(Erunspoils25) 25% EXP and GP earned
 [Enoexp]! No EXP for random encounters
-[Enogp]!^ No GP for random encounters
+[Enogp]!^ No GP for any encounters
 [Enodmachin]!^ Disable D.Machin encounters
 [Enomacgiant]!^ Disable MacGiant encounters
 <>^ Change encounter tables
@@ -647,24 +704,27 @@
 .(Etable:uniquelygood) Each area has one hand-picked encounter
 
 == HARP OPTIONS
-<>*^ Harp randomization
+<>* Harp randomization
 .(Hrandom) Edward plays a random song
-.(Hvanilla)- Edward plays the vanilla song
-.(Hnone) Edward plays nothing
+.(Hvanilla)^- Edward plays the vanilla song
+.(Hnone)^ Edward plays nothing
 
 == GLITCHES
 [@G] Enable major glitches
 .[Gdupe] Allow item duplication
 .[Gmp] Allow MP underflow
 .[Gwarp] Allow Dwarf Castle warp
-.[Glife] Allow Life glitch 
+.<> Life glitch options
+..(Glife) Allow Life glitch
+..(Glife2f) Change how Life works for monsters
+..(Gnolifer) Prevent Life2 working on monsters
 .[Gsylph] Allow Sylph MP glitch
 .[Gbackrow] Allow backrow glitch 
 .[G64] Allow 64-floor glitch
 
 == DOORS
-<> Warps Randomization Options
-.(@doorsrando)^ Randomize Doors
+<>^ Warps Randomization Options
+.(@doorsrando) Randomize Doors
 ..<> Doors Randomization Options
 ...(-doorsrando:normal)!           Doors Shuffle without Cross World
 ...(-doorsrando:gated)!          Underworld and Moon Doors shuffled
@@ -678,9 +738,128 @@
 ...(-entrancesrando:blueplanet)!          Overworld and Underworld Entrances Shuffled
 ...(-entrancesrando:why)!          Overworld and Moon Entrances Shuffled
 ...(-entrancesrando:all)!          All Entrances Shuffled
-[-calmness]^ Disable the Panic Button (Select + R)
+[-panicbutton]^ Enable the Panic Button (Select + R)
 [-forcesealed]^ Disable skipping the Sealed Cave Boss
 
+== FUSOYA
+<@fusoya>* FuSoYa challenges
+.(Fweighted) Usual FuSoYa challenge
+..<> Learning modifications
+...(Fslowstart)^ 5 of the first 12 bosses defeated will not reward spells or HP
+...(Funlearn)!^ FuSoYa will lose spells instead of learning them
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
+.(Fvanilla)- Vanilla FuSoYa
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+.(Fsequential:p)^ Fixed spell order (Palom/Porom)
+..[ECHO:Fweighted]
+.(Fsequential:r)^ Fixed spell order (Rydia/Rosa)
+..[ECHO:Fweighted]
+.(Flocation)^ Location-dependent spells
+..<> Learning modifications
+...(Funlearn)!^ FuSoYa will lose spells instead of learning them
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
+.(Fnerfed)!^ Fixed starting spells, no learning
+..[] HP gain modifications
+...[Funcapped]^ FuSoYa's maximum possible HP is now 3900
+...[Frandomhp]^ FuSoYa will gain HP somewhat randomly
+[Fmaybe]!^ Spells not guaranteed to be learned
+[Fomnimage]^ FuSoYa also learns summons/Twin/Ninja magic
+
+== AGILITY
+<@agility>* Specify agility anchoring
+.(Aagnostic) Use the first occupied party slot for anchoring
+.(Avanilla)- Use vanilla agility anchoring
+.(Ahero)^ Use your starting/hero character as anchor, if available
+.(Aslowest)^ Use your slowest character as anchor
+.(Afastest)!^ Use your fastest character as anchor
+.(Aaverage)^ Use your average agility for anchoring
+.(Amedian)^ Use your median agility for anchoring
+.(Arandom)!^ A random party slot is chosen for anchoring
+.(Amonster)!^ Use average monster agility for anchoring
+.(Aflat)^ Everyone is the same agility
+.(A750formula)^ Use a formula to determine agility
+.<@anchor>^ Use a fixed agility anchor
+..<> Anchor agility
+...(Aanchor:7) 7 Agility anchor
+...(Aanchor:27)! 27 Agility anchor
+...(Aanchor:28)! 28 Agility anchor
+...(Aanchor:41)! 41 Agility anchor
+...(Aanchor:42)! 42 Agility anchor
+[@agilityscale]^ Scale the base ATB
+.<> Base ATB for the anchor
+..(Ascale:1) Base ATB is 1 tick 
+..(Ascale:10) Base ATB is 10 ticks 
+
+== EXPERIENCE
+[@exp] Restore vanilla or change EXP distribution
+.[Xsplit] Split EXP distribution
+.[Xnoboost] No low-level EXP boost
+.[Xnokeybonus] No EXP bonus after 10 key items
+.[Xcrystalbonus]^ Double EXP after obtaining the Crystal
+.[@objectiveexp]^ Award extra EXP for completing objectives
+..<> Amount of bonus EXP 
+...(Xobjectivebonus:25) Each completed objective gives 25% extra EXP
+...(Xobjectivebonus:10) Each completed objective gives 10% extra EXP
+...(Xobjectivebonus:5) Each completed objective gives 5% extra EXP
+...(Xobjectivebonus:num) Each completed objective gives extra EXP
+.[@kicheckexp]^ Award extra EXP for completing key item checks
+..<> Amount of bonus EXP
+...(Xkicheckbonus:10) Each completed KI check gives 10% extra EXP
+...(Xkicheckbonus:5) Each completed KI check gives 5% extra EXP
+...(Xkicheckbonus:2) Each completed KI check gives 2% extra EXP
+...(Xkicheckbonus:num) Each completed KI check gives extra EXP
+.[@zonkbonusexp]^ Award extra EXP after non-KI rewards from KI checks
+..<> Amount of bonus EXP
+...(Xzonkbonus:10) Each non-KI reward gives 10% extra EXP
+...(Xzonkbonus:5) Each non-KI reward gives 5% extra EXP
+...(Xzonkbonus:2) Each non-KI reward gives 2% extra EXP
+.[@miabbonusexp]^ Award extra EXP during MIAB encounters
+..<> Amount of bonus EXP
+...(Xmiabbonus:100) MIAB encounters give double EXP
+...(Xmiabbonus:50) MIAB encounters give 50% extra EXP
+.[@moonbonusexp]^ Award extra EXP when on the moon
+..<> Amount of bonus EXP
+...(Xmoonbonus:200) Moon encounters give triple EXP
+...(Xmoonbonus:100) Moon encounters give double EXP
+.[Xmaxlevelbonus]^ Award extra EXP when underlevelled
+.[Xsmallparty]^ Award extra EXP when your party is not full
+.[@geometricexp]^ Decrease EXP earned from repeated same-type monster kills
+..<> Per-monster-kill percentage reduction
+...(Xgeometric:90) Repeated monster kills scale down in EXP to 90%
+...(Xgeometric:80) Repeated monster kills scale down in EXP to 80%
+...(Xgeometric:70) Repeated monster kills scale down in EXP to 70%
+...(Xgeometric:60) Repeated monster kills scale down in EXP to 60%
+...(Xgeometric:50) Repeated monster kills scale down in EXP to 50%
+...(Xgeometric:40) Repeated monster kills scale down in EXP to 40%
+...(Xgeometric:30) Repeated monster kills scale down in EXP to 30%
+...(Xgeometric:20) Repeated monster kills scale down in EXP to 20%
+...(Xgeometric:10) Repeated monster kills scale down in EXP to 10%
+...(Xgeometric:0) Repeated monster kills do not award EXP
+
+== ZEROMUS
+<>* Zeromus fight script
+.(Zvanilla)- Vanilla Z script
+.(Zphysical)!^ Physical Z script
+.(Zailments)!^ Status ailments Z script
+.(Zchaos)!^ Fully random attack and reaction scripts
+.(Zlavosshell)!^ Three random attack phases
+[@Zunsure] Random category selection
+.[Zunsure:vanilla]^ Possible vanilla script
+.[Zunsure:physical]!^ Possible physical script
+.[Zunsure:ailments]!^ Possible status script
+.[Zunsure:chaos]!^ Possible chaos script
+.[Zunsure:lavosshell]!^ Possible copycat script
+[Zwhichbang]!^ Replace every Big Bang with another spell
+[Zphaseshift]!^ Shuffle the three main Z fight phases
+<>^ Nerfing of Big Bangs
+.(Znonerfs)! Prevent nerfing of Big Bangs
+.(Zmustnerf)! 9999 damage Big Bangs
+[Znocosplay] Vanilla Z sprite
 
 == OTHER
 [@kit] Starter kits
@@ -714,8 +893,11 @@
 ..(-kit:adamant)^     Adamant kit
 ..(-kit:cursed)^      Cursed kit
 ..(-kit:hero)^        Hero kit
+..(-kit:support)^     Support kit
+..(-kit:heroplusplus)^  Hero++ kit
 ..(-kit:exit)^        Exit kit
 ..(-kit:egg)^         Egg kit
+..(-kit:zelda)^       Zelda kit
 ..(-kit:random)       Select a random kit
 .<> Kit 2
 ..(-kit2:basic)        Basic kit
@@ -747,8 +929,11 @@
 ..(-kit2:adamant)^     Adamant kit
 ..(-kit2:cursed)^      Cursed kit
 ..(-kit2:hero)^        Hero kit
+..(-kit2:support)^     Support kit
+..(-kit2:heroplusplus)^  Hero++ kit
 ..(-kit2:exit)^        Exit kit
 ..(-kit2:egg)^         Egg kit
+..(-kit2:zelda)^       Zelda kit
 ..(-kit2:random)       Select a random kit
 .<> Kit 3
 ..(-kit3:basic)        Basic kit
@@ -780,146 +965,55 @@
 ..(-kit3:adamant)^     Adamant kit
 ..(-kit3:cursed)^      Cursed kit
 ..(-kit3:hero)^        Hero kit
+..(-kit3:support)^     Support kit
+..(-kit3:heroplusplus)^  Hero++ kit
 ..(-kit3:exit)^        Exit kit
 ..(-kit3:egg)^         Egg kit
+..(-kit3:zelda)^       Zelda kit
 ..(-kit3:random)       Select a random kit
 [-noadamants] No Adamant Armors
 [-nocursed] No Cursed Rings
 [-spoon] Edward can equip the Spoon
 [-monsterevade]!^ Monsters get physical and magical evasion
 [-monsterflee]^ Monsters can flee from battle
+[-speedmodbalance]^ Alter the speed modifier behaviour
 [@smithy] Smithy reward
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
 ..(-smith:super) Kokkol crafts a weapon from FF4 Advance
-.[-smith:playable]^ Kokkol's item will be usable
+.<> Restrictions on forge items
+..(-smith:playable)^ Kokkol's item will be usable
+..(-smith:good)^ Kokkol's item will be usable and strong, if possible
 .[-smith:omni]^ All characters can equip the FF4A weapon 
-[@fusoya]^ FuSoYa challenges
-.<> Spell learning categories
-..(@normalfu) Usual FuSoYa challenge
-...<> Learning modifications
-....(-fusoya:slowstart) 5 of the first 12 bosses defeated will not reward spells or HP
-....(-fusoya:unlearn)! FuSoYa will lose spells instead of learning them
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
-..(-fusoya:vanilla) Vanilla FuSoYa
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-..(-fusoya:sequential_p) Fixed spell order (Palom/Porom)
-...[ECHO:@normalfu]
-..(-fusoya:sequential_r) Fixed spell order (Rydia/Rosa)
-...[ECHO:@normalfu]
-..(-fusoya:location) Location-dependent spells
-...<> Learning modifications
-....(-fusoya:unlearn)! FuSoYa will lose spells instead of learning them
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
-..(-fusoya:nerfed)! Fixed starting spells, no learning
-...[] HP gain modifications
-....[-fusoya:uncapped] FuSoYa's maximum possible HP is now 3900
-....[-fusoya:randomhp] FuSoYa will gain HP somewhat randomly
-.[-fusoya:maybe]! Spells not guaranteed to be learned
-.[-fusoya:omnimage] FuSoYa also learns summons/Twin/Ninja magic
-[@agility]^ Change the ATB system (or make it vanilla)
-.<> Different anchoring or ATB formula
-..(-agility:vanilla) Use vanilla agility anchoring
-..(-agility:slowest) Use your slowest character as anchor
-..(-agility:fastest)! Use your fastest character as anchor
-..(-agility:average) Use your average agility for anchoring
-..(-agility:median) Use your median agility for anchoring
-..(-agility:random)! A random party slot is chosen for anchoring
-..(-agility:monster)! Use average monster agility for anchoring
-..(-agility:flat) Everyone is the same agility
-..(-agility:750formula) Use a formula to determine agility
-..<@anchor> Use a fixed agility anchor
-...<> Anchor agility
-....(-agility:anchor7) 7 Agility anchor
-....(-agility:anchor27)! 27 Agility anchor
-....(-agility:anchor28)! 28 Agility anchor
-....(-agility:anchor41)! 41 Agility anchor
-....(-agility:anchor42)! 42 Agility anchor
-.[@agilityscale] Scale the base ATB
-..<> Base ATB for the anchor
-...(-agility:scale1) Base ATB is 1 tick 
-...(-agility:scale10) Base ATB is 10 ticks 
-.[-speedmodbalance] Alter the speed modifier behaviour
-[@exp] Restore vanilla or change EXP distribution
-.[-exp:split] Split EXP distribution
-.[-exp:noboost] No low-level EXP boost
-.[-exp:nokeybonus] No EXP bonus after 10 key items
-.[-exp:crystalbonus]^ Double EXP after obtaining the Crystal
-.[@objectiveexp]^ Award extra EXP for completing objectives
-..<> Amount of bonus EXP 
-...(-exp:objectivebonus25) Each completed objective gives 25% extra EXP
-...(-exp:objectivebonus10) Each completed objective gives 10% extra EXP
-...(-exp:objectivebonus_num) Each completed objective gives extra EXP
-.[@kicheckexp]^ Award extra EXP for completing key item checks
-..<> Amount of bonus EXP
-...(-exp:kicheckbonus10) Each completed KI check gives 10% extra EXP
-...(-exp:kicheckbonus5) Each completed KI check gives 5% extra EXP
-...(-exp:kicheckbonus2) Each completed KI check gives 2% extra EXP
-...(-exp:kicheckbonus_num) Each completed KI check gives extra EXP
-.[@zonkbonusexp]^ Award extra EXP after non-KI rewards from KI checks
-..<> Amount of bonus EXP
-...(-exp:zonkbonus10) Each non-KI reward gives 10% extra EXP
-...(-exp:zonkbonus5) Each non-KI reward gives 5% extra EXP
-...(-exp:zonkbonus2) Each non-KI reward gives 2% extra EXP
-.[@miabbonusexp]^ Award extra EXP during MIAB encounters
-..<> Amount of bonus EXP
-...(-exp:miabbonus100) MIAB encounters give double EXP
-...(-exp:miabbonus50) MIAB encounters give 50% extra EXP
-.[@moonbonusexp]^ Award extra EXP when on the moon
-..<> Amount of bonus EXP
-...(-exp:moonbonus200) Moon encounters give triple EXP
-...(-exp:moonbonus100) Moon encounters give double EXP
-.[-exp:maxlevelbonus]^ Award extra EXP when underlevelled
-.[-exp:smallparty]^ Award extra EXP when your party is not full
-.[@geometricexp]^ Decrease EXP earned from repeated same-type monster kills
-..<> Per-monster-kill percentage reduction
-...(-exp:geometric_90) Repeated monster kills scale down in EXP to 90%
-...(-exp:geometric_80) Repeated monster kills scale down in EXP to 80%
-...(-exp:geometric_70) Repeated monster kills scale down in EXP to 70%
-...(-exp:geometric_60) Repeated monster kills scale down in EXP to 60%
-...(-exp:geometric_50) Repeated monster kills scale down in EXP to 50%
-...(-exp:geometric_40) Repeated monster kills scale down in EXP to 40%
-...(-exp:geometric_30) Repeated monster kills scale down in EXP to 30%
-...(-exp:geometric_20) Repeated monster kills scale down in EXP to 20%
-...(-exp:geometric_10) Repeated monster kills scale down in EXP to 10%
-...(-exp:geometric_0) Repeated monster kills do not award EXP
+.[-smith:spoilsuper]^ The Legend Sword previews the FF4A weapon
+.[-smith:sellsuper]^ The FF4A weapon will have a non-zero sell price
 <>^ Change the PRNG table
 .(-prng:shuffle) Shuffle the PRNG table values
 .(-prng:random) Randomize the PRNG values independently
 .(-prng:consecutive)! Replace the PRNG table with the numbers 0 to 255 in order
 .(-prng:mostlysingle)! Replace the PRNG table with (mostly) a single value
-[-miscbugfixes] Include minor bug fixes
+[-miscbugfixes]^ Include minor bug fixes
+[] Call options
+.<> Spellset options
+..(-call:levelup)^ Rydia learns summons by level-up
+..(-call:all)^ Rydia starts with all summons learned
+.[-call:vanillahobs] Vanilla Hobs spell
+.<> Dwarf Castle spell learning
+..(-call:vanillagrowup) Vanilla Dwarf Castle summons
+..(-call:nogrowup)^ Rydia learns no spells in place of summons
+.[-call:noorbs]!^ Call orbs are removed from rewards, boxes, and shops
+<>^ Alternate starting conditions
+.(-starting:blackchocobo) Start with Black Chocobo but no Enterprise
+.(-starting:underground)! Start underground with a Drill-less Falcon
 [] Restore vanilla behaviors
-.[-vanilla:hobs] Vanilla Hobs spell
-.[-vanilla:growup] Vanilla Dwarf Castle summons
+.[-vanilla:zot] Vanilla Zot spell
 .[-vanilla:fashion] Vanilla fashion
 .[-vanilla:miabs] Vanilla monster-in-a-box locations
 .[-vanilla:giant] Vanilla Giant
-[]^ Zeromus fight changes
-.<> Script category
-..(@vanilla) Vanilla Z script
-...[-z:whichbang]! Replace every Big Bang with another spell
-...[-z:phaseshift]! Shuffle the three main Z fight phases
-..(-z:physical)! Physical Z script
-...[-z:phaseshift]! Shuffle the three main Z fight phases
-..(-z:physmag)! Random physical or magical Z script
-...[-z:whichbang]! Replace every Big Bang with another spell
-...[-z:phaseshift]! Shuffle the three main Z fight phases
-..(-z:chaos)! Fully random attack and reaction scripts
-...[-z:whichbang]! Replace every Big Bang with another spell
-..(-z:lavosshell)! Three random attack phases
-...[-z:whichbang]! Replace every Big Bang with another spell
-.<> Nerfing of Big Bangs
-..(-z:nonerfs)! Prevent nerfing of Big Bangs
-..(-z:mustnerf)! 9999 damage Big Bangs
-.[-z:vanillasprite] Vanilla Z sprite
 [-vintage] Vintage Battlefield
 [-pushbtojump] Push B to Jump
+
+== WACKY
 [@wacky] Wacky challenge
 .<> Random wacky challenge(s)
 ..(-wacky:random)!           1 random wacky challenge
@@ -946,8 +1040,8 @@
 .[-wacky:kleptomania]       "Kleptomania"
 .[-wacky:menarepigs]!       "Men Are Pigs"
 .[-wacky:misspelled]        "Misspelled"
-.[-wacky:biggermagnet]!     "A Much Bigger Magnet"
 .[-wacky:mirrormirror]^     "Mirror, Mirror, on the Wall"
+.[-wacky:biggermagnet]!     "A Much Bigger Magnet"
 .[-wacky:mysteryjuice]      "Mystery Juice"
 .[-wacky:neatfreak]!        "Neat Freak"
 .[-wacky:nightmode]!        "Night Mode"
@@ -963,12 +1057,13 @@
 .[-wacky:3point]            "The 3-Point System"
 .[-wacky:timeismoney]       "Time is Money"
 .[-wacky:advertising]^      "Truth in Advertising"
-.[-wacky:darts]             "World Championship of Darts"
 .[-wacky:unstackable]!      "Unstackable"
 .[-wacky:whatsmygear]^      "What's My Gear Again?"
 .[-wacky:workexperience]!^  "Work Experience"
+.[-wacky:darts]             "World Championship of Darts"
 .[-wacky:zombies]           "Zombies!!!"
 
+== TWEAKS
 []^ Miscellaneous tweaks
 .<> Sight replacements
 ..(-tweak:kainmagic) Give Kain magic (with Lance)
@@ -986,6 +1081,11 @@
 .[-tweak:chocobosummon] Sometimes Call the Big Chocobo in battle
 .[-tweak:rosapray] Improve Rosa's Pray commmand
 .[-tweak:fusoyaregen] FuSoYa's Regen command now heals MP instead of HP
+.[-tweak:yanghp] Yang continues to gain HP after level 60
+.[-tweak:tellahrecall] Improve Tellah's Recall command
+.[-tweak:edgedart] Improve Edge's Dart command for Shuriken/Ninja Star
+.[-tweak:magicwhips] Whips increase summon spell power
+.[-tweak:rydiaredmage] Adult Rydia keeps White and gains extra spells/gear
 
 == SPOILERS
 <> No spoiler log

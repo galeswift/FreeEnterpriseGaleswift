@@ -127,8 +127,12 @@ msfpatch {
     .addr $008a12
         jml $=EncounterDangerous__Outdoors
 
+    // %if ~wacky_worthfighting%
+    // Something Worth Fighting For also patches this
+    // address, so we'll call the Indoors code there
     .addr $008a7e
         jml $=EncounterDangerous__Indoors
+    // %end%
 
     .new
     EncounterDangerous__Outdoors:

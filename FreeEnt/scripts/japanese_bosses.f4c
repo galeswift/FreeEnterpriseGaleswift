@@ -157,6 +157,8 @@ monster($C9)   // Zeromus
     // %zeromus initial spell power%
     spell power 39
     // %end%
+    // %zeromus status protection%
+    // %end%
 }
 
 // speed table patches

@@ -1,0 +1,9 @@
+// Edward's Sing command checks for whether
+// Edward has a two-handed weapon in his right
+// hand (or, if nothing is in his right hand,
+// in his left hand). These two patches change
+// the check to be only for Harps, not for any 
+// two-handed weapon.
+
+patch($03a313 bus) { 46 }
+patch($03a321 bus) { 46 }

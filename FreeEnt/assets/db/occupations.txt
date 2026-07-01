@@ -1,6 +1,6 @@
 DSL Installer
 Delivery man
-Assistant manager (Doose's)
+Assistant manager at Doose's
 Engagement party coordinator
 Photographer
 Mechanic
@@ -29,7 +29,7 @@ Wedding DJ
 Firewood delivery man
 Poller for Town Selectman campaign
 Movie theater attendant
-Flier Hander Outer (Hot Dog costume)
+Flier Hander Outer with Hot Dog costume
 Bath and shower adhesive salesman
 Ribbon collector
 Souvenir Salesman
@@ -115,7 +115,6 @@ Activities Financer
 Activity Aide
 Activity Director
 Actor
-Actor?
 Actress
 Actuarial Clerk
 Actuary
@@ -564,7 +563,7 @@ Artisanal Everclear Brewer
 Artisanal Landlord
 Artisanal Pharmacist
 Artist
-Arts & Crafts Consultant
+Arts and Crafts Consultant
 Arts Administrator
 Asbestos Abatement
 Asbestos Abatement Specialist
@@ -4409,7 +4408,7 @@ Fireworks Tester
 First Aid Instructor
 First Grade Teacher
 First-Line Supervisor
-Fish & Tackle Expert
+Fish and Tackle Expert
 Fish Advocate
 Fish And Game Warden
 Fish And Wildlife Conservation Officer
@@ -4486,7 +4485,7 @@ Flame Gouger
 Flame Retardant
 Flame Snuffer
 Flan Molder
-Flâneur
+Flaneur
 Flange Cutter
 Flanger
 Flanking Machine Operator
@@ -6880,7 +6879,7 @@ Lid Tightener
 Lid Twister
 Lie Detector
 Lieutenant
-Lieutenant, Usm (Ret.)
+Lieutenant, Usm Ret.
 Life Coach
 Life Critic
 Lifeguard
@@ -6961,7 +6960,6 @@ List Generator
 Literacy Coach
 Literacy Critic
 Literary Agent
-Literary Agent 
 Literary Stylist
 Lithium Wholesaler
 Lithographic Platemaker
@@ -7787,7 +7785,7 @@ Mri Protester
 Mri Technician
 Msg Advocate
 Mud Logger
-Müesli Inspector
+Muesli Inspector
 Muffin Slicer
 Muffin Tester
 Muffler Installer
@@ -8344,7 +8342,7 @@ Packet Stapler
 Packing Bubble Popper
 Packing Peanut Salesman
 Packing Specialist
-Pączki Advocate
+Paczki Advocate
 Pad Assembler
 Pad Maker
 Padding Advocate
@@ -8444,8 +8442,8 @@ Paper Glosser
 Paper Hanger
 Paper Hole Puncher
 Paper Laminator
-Paper Mâche Expert
-Paper Mâche Researcher
+Paper Mache Expert
+Paper Mache Researcher
 Paper Maker
 Paper Perforator
 Paper Plate Separator
@@ -11649,7 +11647,6 @@ Systems Analust
 Systems Analyist
 Systems Analysis
 Systems Analyst
-Systems Analyst
 Systems Anaylst
 Systems Manager
 Systems Operator
@@ -11979,7 +11976,6 @@ Thermometer Reader
 Thermostat Adjuster
 Thermostat Checker
 Thermostat Enforcer
-Thermostat Regulator​
 Thermostat Regulator
 Thermostat Supervisor
 Thesaurus Collector
@@ -13046,7 +13042,7 @@ Wicker Artisan
 Wicker Consultant
 Wicker Sculptor
 Wicker Worker
-Widow'S Apprentice
+Widow's Apprentice
 Wiffle Ball Tester
 Wig Adjuster
 Wig Colorist

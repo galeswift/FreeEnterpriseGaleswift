@@ -97,6 +97,7 @@ FE_DESCRIPTIONS = load_custom_descriptions('custom_descriptions.txt')
 VANILLA_DESCRIPTIONS = load_custom_descriptions('vanilla_descriptions.txt')
 CUSTOM_WEAPON_DESCRIPTIONS =  load_custom_descriptions('gba_descriptions.txt')
 FE_DARKPAL_DESCRIPTIONS = load_custom_descriptions('custom_descriptions_dark_paladin.txt')
+CUSTOM_LEGEND_DESCRIPTIONS = load_custom_descriptions('custom_legend_descriptions.txt')
 
 fe_item_data = []
 vanilla_item_data = []
@@ -169,6 +170,20 @@ for custom_weapon in custom_weapons_dbview:
         long_range=custom_weapon.longrange
         )
     with open(f'custom_weapon_{custom_weapon.id:X}_description.bin', 'wb') as outfile:
+        outfile.write(bytes(data))
+
+custom_legend_dbview = databases.get_custom_legend_dbview()
+for custom_legend in custom_legend_dbview:
+    data = generate_item_description_data(
+        custom_legend.name,
+        CUSTOM_LEGEND_DESCRIPTIONS.get(custom_legend.id, None),
+        is_weapon=True,
+        strength=0x28,
+        percent=0x63,
+        metallic=True,
+        long_range=custom_legend.longrange
+    )
+    with open(f'custom_legend_{custom_legend.id:X}_description.bin', 'wb') as outfile:
         outfile.write(bytes(data))
 
 # To output the "Deathbringer" description, need to modify the above custom_weapon code to only care about 0x103 and output to the special file.

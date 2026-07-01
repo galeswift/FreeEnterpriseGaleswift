@@ -30,7 +30,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "@bosscollector",
                 "title": "Boss Collector",
-                "description": "Find and defeat the specified number of bosses to complete this objective.",
+                "description": "Find and defeat the specified number of bosses to complete this objective. If some bosses are removed by <em>Bremove</em>, then the minimum of the specified number and the total number of bosses available will be used for the goal.",
                 "fork": true,
                 "subcontrols": [
                   {
@@ -96,7 +96,7 @@ var FLAG_UISPEC = [
                       },
                       {
                         "flag": "Omode:bosscollector34",
-                        "title": "Collect 34 bosses"
+                        "title": "Collect 34/all bosses"
                       }
                     ]
                   }
@@ -3518,7 +3518,7 @@ var FLAG_UISPEC = [
               },
               {
                 "flag": "Oreq:1",
-                "title": "Complete 1 objectives for reward"
+                "title": "Complete 1 objective for reward"
               },
               {
                 "flag": "Oreq:2",
@@ -3555,6 +3555,90 @@ var FLAG_UISPEC = [
               {
                 "flag": "Oreq:10",
                 "title": "Complete 10 objectives for reward"
+              },
+              {
+                "flag": "Oreq:11",
+                "title": "Complete 11 objectives for reward"
+              },
+              {
+                "flag": "Oreq:12",
+                "title": "Complete 12 objectives for reward"
+              },
+              {
+                "flag": "Oreq:13",
+                "title": "Complete 13 objectives for reward"
+              },
+              {
+                "flag": "Oreq:14",
+                "title": "Complete 14 objectives for reward"
+              },
+              {
+                "flag": "Oreq:15",
+                "title": "Complete 15 objectives for reward"
+              },
+              {
+                "flag": "Oreq:16",
+                "title": "Complete 16 objectives for reward"
+              },
+              {
+                "flag": "Oreq:17",
+                "title": "Complete 17 objectives for reward"
+              },
+              {
+                "flag": "Oreq:18",
+                "title": "Complete 18 objectives for reward"
+              },
+              {
+                "flag": "Oreq:19",
+                "title": "Complete 19 objectives for reward"
+              },
+              {
+                "flag": "Oreq:20",
+                "title": "Complete 20 objectives for reward"
+              },
+              {
+                "flag": "Oreq:21",
+                "title": "Complete 21 objectives for reward"
+              },
+              {
+                "flag": "Oreq:22",
+                "title": "Complete 22 objectives for reward"
+              },
+              {
+                "flag": "Oreq:23",
+                "title": "Complete 23 objectives for reward"
+              },
+              {
+                "flag": "Oreq:24",
+                "title": "Complete 24 objectives for reward"
+              },
+              {
+                "flag": "Oreq:25",
+                "title": "Complete 25 objectives for reward"
+              },
+              {
+                "flag": "Oreq:26",
+                "title": "Complete 26 objectives for reward"
+              },
+              {
+                "flag": "Oreq:27",
+                "title": "Complete 27 objectives for reward"
+              },
+              {
+                "flag": "Oreq:28",
+                "title": "Complete 28 objectives for reward"
+              },
+              {
+                "flag": "Oreq:29",
+                "title": "Complete 29 objectives for reward"
+              },
+              {
+                "flag": "Oreq:30",
+                "title": "Complete 30 objectives for reward"
+              },
+              {
+                "flag": "Oreq:31",
+                "title": "Complete 31 objectives for reward"
               }
             ]
           },
@@ -3903,7 +3987,7 @@ var FLAG_UISPEC = [
                   {
                     "flag": "Kforce:magma",
                     "title": "Guarantee underworld access via Magma Key",
-                    "description": "You are guaranteed that there is a path to the underworld via the Magma Key, without needing to use the Hook route through Cave Eblan."
+                    "description": "You are guaranteed that there is a path to the underworld via the Magma Key, without needing to defeat the Rubicant spot boss."
                   },
                   {
                     "flag": "Kforce:hook",
@@ -3916,7 +4000,7 @@ var FLAG_UISPEC = [
               {
                 "flag": "Kunsafe",
                 "title": "No safety checks",
-                "description": "<ul>\n    <li>Normally, you are guaranteed a path to the underworld that does not require first going to the moon. This flag removes that check.</li>\n    <li>If Kmiab is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>\n</ul>",
+                "description": "<ul>\n    <li>Normally, you are guaranteed a path to the underworld that does not require first going to the moon/Giant. This flag removes that check.</li>\n    <li>If </em>Kmiab:standard</em> is enabled, key items may appear in the Lunar Subterrane monster-in-a-box chests.</li>\n</ul>",
                 "hard": true
               },
               {
@@ -4853,7 +4937,28 @@ var FLAG_UISPEC = [
           {
             "flag": "Cnodupes",
             "title": "Duplicate characters not allowed",
-            "description": "If a duplicate character tries to join your party, instead nothing happens."
+            "description": "If a duplicate character tries to join your party, instead nothing happens.",
+            "subcontrols": [
+              {
+                "flag": "@anon52",
+                "title": "Get stat boosts when duplicate characters join",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Cfuse:gear",
+                    "title": "Use any equipment to add stat boosts",
+                    "description": "If a duplicate character tries to join your party, instead you are given the option to \"fuse\" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Cfuse:equip",
+                    "title": "Use equipment the character can equip to add stat boosts",
+                    "description": "If a duplicate character tries to join your party, instead you are given the option to \"fuse\" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats. Only equipment that the character can normally equip can be fused.",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
           },
           {
             "flag": "Chi",
@@ -4891,7 +4996,7 @@ var FLAG_UISPEC = [
     "title": "TREASURES",
     "controls": [
       {
-        "flag": "@anon52",
+        "flag": "@anon53",
         "title": "Treasure chests (other than MIABs)",
         "important": true,
         "type": "select",
@@ -4902,7 +5007,7 @@ var FLAG_UISPEC = [
             "null": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -4925,7 +5030,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -4975,7 +5080,7 @@ var FLAG_UISPEC = [
             "description": "Treasure contents are the same as in original FF4, but their positions are shuffled. This randomization is weighted so that overworld treasures tend to remain in the overworld, and similarly for underworld/moon treasures.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -4998,7 +5103,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5048,7 +5153,7 @@ var FLAG_UISPEC = [
             "description": "A basic randomization, allowing items of reasonable strength to appear. Items are equally likely to appear in any chest regardless of location.",
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5071,7 +5176,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -5114,7 +5219,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -5143,37 +5248,38 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -5188,753 +5294,12 @@ var FLAG_UISPEC = [
                     "title": "Chests contain tier 5 items at worst"
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "flag": "Tvanillaish",
-            "title": "Vanilla-ish chest randomization",
-            "description": "Uses location-based weighting, with item quality approximately that of the vanilla game.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
               },
               {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Tpro",
-            "title": "Pro chest randomization",
-            "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Tsemipro",
-            "title": "Semi-pro chest randomization",
-            "description": "Uses location-based weighting, with item quality between that provided by pro and wildish.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Twild",
-            "title": "Wild chest randomization",
-            "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "Twildish",
-            "title": "Wild-ish chest randomization",
-            "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
-            "subcontrols": [
-              {
-                "flag": "@anon53",
-                "title": "Sparse options (defaults to everywhere)",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tsparsey:underground",
-                    "title": "Chests in the underground are sparse",
-                    "description": "The Tsparse flags will only affect chests in the underground"
-                  },
-                  {
-                    "flag": "Tsparsey:moon",
-                    "title": "Chests on the moon are sparse",
-                    "description": "The Tsparse flags will only affect chests in the moon"
-                  },
-                  {
-                    "flag": "Tsparsey:overworld",
-                    "title": "Chests in the overworld are sparse",
-                    "description": "The Tsparse flags will only affect chests in the overworld"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon54",
-                "title": "Sparse distribution",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tsparse:10",
-                    "title": "Only 10% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:20",
-                    "title": "Only 20% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:30",
-                    "title": "Only 30% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:40",
-                    "title": "Only 40% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:50",
-                    "title": "Only 50% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:60",
-                    "title": "Only 60% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:70",
-                    "title": "Only 70% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:80",
-                    "title": "Only 80% of chests are filled"
-                  },
-                  {
-                    "flag": "Tsparse:90",
-                    "title": "Only 90% of chests are filled"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon55",
-                "title": "Restrict item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmaxtier:7",
-                    "title": "Chests contain tier 7 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:6",
-                    "title": "Chests contain tier 6 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:5",
-                    "title": "Chests contain tier 5 items at best"
-                  },
-                  {
-                    "flag": "Tmaxtier:4",
-                    "title": "Chests contain tier 4 items at best",
-                    "hard": true
-                  },
-                  {
-                    "flag": "Tmaxtier:3",
-                    "title": "Chests contain tier 3 items at best",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "@anon56",
-                "title": "Unrestrict item quality",
-                "compact": true,
-                "fork": true,
-                "subcontrols": [
-                  {
-                    "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
-                  },
-                  {
-                    "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
-                  }
-                ]
-              },
-              {
-                "flag": "@anon57",
-                "title": "Improve item quality",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:3",
-                    "title": "Chests contain tier 3 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:4",
-                    "title": "Chests contain tier 4 items at worst"
-                  },
-                  {
-                    "flag": "Tmintier:5",
-                    "title": "Chests contain tier 5 items at worst"
-                  }
-                ]
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
               }
             ]
           },
@@ -5945,7 +5310,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon53",
+                "flag": "@anon54",
                 "title": "Sparse options (defaults to everywhere)",
                 "compact": true,
                 "fork": true,
@@ -5968,7 +5333,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon54",
+                "flag": "@anon55",
                 "title": "Sparse distribution",
                 "type": "select",
                 "subcontrols": [
@@ -6011,7 +5376,7 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon55",
+                "flag": "@anon56",
                 "title": "Restrict item quality",
                 "type": "select",
                 "subcontrols": [
@@ -6040,37 +5405,38 @@ var FLAG_UISPEC = [
                 ]
               },
               {
-                "flag": "@anon56",
+                "flag": "@anon57",
                 "title": "Unrestrict item quality",
                 "compact": true,
                 "fork": true,
                 "subcontrols": [
                   {
                     "flag": "Tunrestrict:treasury",
-                    "title": "Chests in the toroia treasury will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:moon",
-                    "title": "Chests on the moon will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:underworld",
-                    "title": "Chests in the underworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
                   },
                   {
                     "flag": "Tunrestrict:overworld",
-                    "title": "Chests on the overworld will be unaffected by any Tmaxtier flags"
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
                   }
                 ]
               },
               {
-                "flag": "@anon57",
+                "flag": "@anon58",
                 "title": "Improve item quality",
                 "type": "select",
                 "subcontrols": [
                   {
                     "flag": "Tmintier:2",
-                    "title": "Chests contain tier 2 items at worst"
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
                   },
                   {
                     "flag": "Tmintier:3",
@@ -6085,6 +5451,848 @@ var FLAG_UISPEC = [
                     "title": "Chests contain tier 5 items at worst"
                   }
                 ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Tvanillaish",
+            "title": "Vanilla-ish chest randomization",
+            "description": "Uses location-based weighting, with item quality approximately that of the vanilla game.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon54",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon58",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Tpro",
+            "title": "Pro chest randomization",
+            "description": "A skill-testing randomization, limiting the strength of available items, and weighted to favor stronger items in later-game and infrequently-visited areas.",
+            "subcontrols": [
+              {
+                "flag": "@anon54",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon58",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Tsemipro",
+            "title": "Semi-pro chest randomization",
+            "description": "Uses location-based weighting, with item quality between that provided by pro and wildish.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon54",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon58",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Twildish",
+            "title": "Wild-ish chest randomization",
+            "description": "Allows items of any strength to appear, including the most powerful items, but uses location-based weighting like the pro randomization.",
+            "subcontrols": [
+              {
+                "flag": "@anon54",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon58",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "Tadjmiabareas",
+                "title": "Areas with MIABs will have slightly worse items",
+                "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
+                "fork": true
+              },
+              {
+                "flag": "Tbuffweights",
+                "title": "Some areas have better treasure weights",
+                "description": "On treasure distributions based on <em>Tpro</em> weights, some areas will have better treasure weights. See <a href='fork_info#tbuffweights'>the fork_info page</a> for the list of changes.",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "Twild",
+            "title": "Wild chest randomization",
+            "description": "An unrestricted randomization, allowing equal chance for items to appear in any chest, including the most powerful items.",
+            "subcontrols": [
+              {
+                "flag": "@anon54",
+                "title": "Sparse options (defaults to everywhere)",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tsparsey:underground",
+                    "title": "Chests in the underground are sparse",
+                    "description": "The Tsparse flags will only affect chests in the underground"
+                  },
+                  {
+                    "flag": "Tsparsey:moon",
+                    "title": "Chests on the moon are sparse",
+                    "description": "The Tsparse flags will only affect chests in the moon"
+                  },
+                  {
+                    "flag": "Tsparsey:overworld",
+                    "title": "Chests in the overworld are sparse",
+                    "description": "The Tsparse flags will only affect chests in the overworld"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon55",
+                "title": "Sparse distribution",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tsparse:10",
+                    "title": "Only 10% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:20",
+                    "title": "Only 20% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:30",
+                    "title": "Only 30% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:40",
+                    "title": "Only 40% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:50",
+                    "title": "Only 50% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:60",
+                    "title": "Only 60% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:70",
+                    "title": "Only 70% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:80",
+                    "title": "Only 80% of chests are filled"
+                  },
+                  {
+                    "flag": "Tsparse:90",
+                    "title": "Only 90% of chests are filled"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon56",
+                "title": "Restrict item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmaxtier:7",
+                    "title": "Chests contain tier 7 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:6",
+                    "title": "Chests contain tier 6 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:5",
+                    "title": "Chests contain tier 5 items at best"
+                  },
+                  {
+                    "flag": "Tmaxtier:4",
+                    "title": "Chests contain tier 4 items at best",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Tmaxtier:3",
+                    "title": "Chests contain tier 3 items at best",
+                    "hard": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon57",
+                "title": "Unrestrict item quality",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Tunrestrict:treasury",
+                    "title": "Chests in the Toroia treasury will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:moon",
+                    "title": "Chests on the moon will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:underworld",
+                    "title": "Chests in the underworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  },
+                  {
+                    "flag": "Tunrestrict:overworld",
+                    "title": "Chests on the overworld will be unaffected by any Tmaxtier or Tmintier flags"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon58",
+                "title": "Improve item quality",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Tmintier:2",
+                    "title": "Chests contain tier 2 items at worst",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Tmintier:3",
+                    "title": "Chests contain tier 3 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:4",
+                    "title": "Chests contain tier 4 items at worst"
+                  },
+                  {
+                    "flag": "Tmintier:5",
+                    "title": "Chests contain tier 5 items at worst"
+                  }
+                ]
+              },
+              {
+                "flag": "Tplayable",
+                "title": "Chests contain usable items",
+                "description": "Items from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
+                "fork": true
               }
             ]
           },
@@ -6100,19 +6308,7 @@ var FLAG_UISPEC = [
         "title": "No J-items in chests"
       },
       {
-        "flag": "Tplayable",
-        "title": "Equipment in chests will be usable",
-        "description": "Equipment from chests and quest/MIAB rewards will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#tplayable''>the fork_info page</a> for more information.",
-        "fork": true
-      },
-      {
-        "flag": "Tadjmiabareas",
-        "title": "Areas with MIABs will have slightly worse items",
-        "description": "On weighted treasure distributions, areas with MIABs will have the non-miab treasure weights scaled down slightly.",
-        "fork": true
-      },
-      {
-        "flag": "@anon58",
+        "flag": "@anon59",
         "title": "Junk management",
         "type": "select",
         "subcontrols": [
@@ -6134,7 +6330,7 @@ var FLAG_UISPEC = [
     "title": "SHOPS",
     "controls": [
       {
-        "flag": "@anon59",
+        "flag": "@anon60",
         "title": "Shops",
         "important": true,
         "type": "select",
@@ -6166,6 +6362,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "@anon61",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon62",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6186,6 +6500,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "@anon61",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon62",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6207,6 +6639,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "@anon61",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon62",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6227,6 +6777,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "@anon61",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon62",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6248,6 +6916,124 @@ var FLAG_UISPEC = [
                 "description": "Shops only sell a single item, but follow the standard randomization rules and safety checks (unless disabled).",
                 "hard": true,
                 "fork": true
+              },
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "@anon61",
+                "title": "Guarantee Items",
+                "compact": true,
+                "fork": true,
+                "subcontrols": [
+                  {
+                    "flag": "Salways:apples",
+                    "title": "Apples/Soma Drops always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:sirens",
+                    "title": "Sirens always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:vampires",
+                    "title": "Vampires always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:hrglass",
+                    "title": "HrGlass2 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:bacchus",
+                    "title": "Bacchus always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:starveil",
+                    "title": "Starveils always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:cure3",
+                    "title": "Cure3 always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:illusion",
+                    "title": "Illusions always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:coffin",
+                    "title": "Coffins always sold in shops"
+                  },
+                  {
+                    "flag": "Salways:damage_items",
+                    "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
+                  }
+                ]
+              },
+              {
+                "flag": "@anon62",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
               }
             ]
           },
@@ -6261,7 +7047,79 @@ var FLAG_UISPEC = [
             "title": "Shops sell only one type of item",
             "description": "Shops only sell a single item, and all shops in the game are the same.  The item chosen uses the same rules as Swild.",
             "hard": true,
-            "fork": true
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Splayable",
+                "title": "Shops contain usable items",
+                "description": "Items sold in shops will be usable by at least one character that you can acquire in the seed. Dartables are considered usable by Dart users and summon orbs are usable by Rydia. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
+                "fork": true
+              },
+              {
+                "flag": "@anon63",
+                "title": "Remove Items",
+                "compact": true,
+                "subcontrols": [
+                  {
+                    "flag": "Sno:j",
+                    "title": "No J-items in shops"
+                  },
+                  {
+                    "flag": "Sno:apples",
+                    "title": "No Apples/Soma Drops in shops"
+                  },
+                  {
+                    "flag": "Sno:sirens",
+                    "title": "No Sirens in shops"
+                  },
+                  {
+                    "flag": "Sno:life",
+                    "title": "No Life potions in shops",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Sno:vampires",
+                    "title": "No Vampires in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:hrglass",
+                    "title": "No HrGlass2 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:bacchus",
+                    "title": "No Bacchus in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:starveil",
+                    "title": "No Starveils in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:cure3",
+                    "title": "No Cure3 in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:illusion",
+                    "title": "No Illusions in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:coffin",
+                    "title": "No Coffins in shops",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Sno:damage_items",
+                    "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
           },
           {
             "flag": "Sempty",
@@ -6271,7 +7129,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon60",
+        "flag": "@anon64",
         "title": "Buy prices",
         "type": "select",
         "subcontrols": [
@@ -6293,7 +7151,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon61",
+        "flag": "@anon65",
         "title": "Sell prices",
         "type": "select",
         "subcontrols": [
@@ -6308,131 +7166,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon62",
-        "title": "Guarantee Items",
-        "compact": true,
-        "fork": true,
-        "subcontrols": [
-          {
-            "flag": "Salways:apples",
-            "title": "Apples/Soma Drops always sold in shops"
-          },
-          {
-            "flag": "Salways:sirens",
-            "title": "Sirens always sold in shops"
-          },
-          {
-            "flag": "Salways:vampires",
-            "title": "Vampires always sold in shops"
-          },
-          {
-            "flag": "Salways:hrglass",
-            "title": "HrGlass2 always sold in shops"
-          },
-          {
-            "flag": "Salways:bacchus",
-            "title": "Bacchus always sold in shops"
-          },
-          {
-            "flag": "Salways:starveil",
-            "title": "Starveils always sold in shops"
-          },
-          {
-            "flag": "Salways:cure3",
-            "title": "Cure3 always sold in shops"
-          },
-          {
-            "flag": "Salways:illusion",
-            "title": "Illusions always sold in shops"
-          },
-          {
-            "flag": "Salways:coffin",
-            "title": "Coffins always sold in shops"
-          },
-          {
-            "flag": "Salways:damage_items",
-            "title": "Damage items (BigBomb,ThorRage,etc) always in shops"
-          }
-        ]
-      },
-      {
-        "flag": "Splayable",
-        "title": "Equipment found in shops will be usable",
-        "description": "Equipment sold in shops will be usable by at least one character that you can acquire in the seed. Summon orbs are not restricted if Rydia is not available and dartable weapons are not considered usable by characters with Dart. See <a href='fork_info#splayable''>the fork_info page</a> for more information.",
-        "fork": true
-      },
-      {
-        "flag": "Sethersell",
-        "title": "Ethers and Elixirs sell like other items",
-        "description": "Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.",
-        "fork": true
-      },
-      {
-        "flag": "@anon63",
-        "title": "Remove Items",
-        "compact": true,
-        "subcontrols": [
-          {
-            "flag": "Sno:j",
-            "title": "No J-items in shops"
-          },
-          {
-            "flag": "Sno:apples",
-            "title": "No Apples/Soma Drops in shops"
-          },
-          {
-            "flag": "Sno:sirens",
-            "title": "No Sirens in shops"
-          },
-          {
-            "flag": "Sno:life",
-            "title": "No Life potions in shops",
-            "hard": true
-          },
-          {
-            "flag": "Sno:vampires",
-            "title": "No Vampires in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:hrglass",
-            "title": "No HrGlass2 in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:bacchus",
-            "title": "No Bacchus in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:starveil",
-            "title": "No Starveils in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:cure3",
-            "title": "No Cure3 in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:illusion",
-            "title": "No Illusions in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:coffin",
-            "title": "No Coffins in shops",
-            "fork": true
-          },
-          {
-            "flag": "Sno:damage_items",
-            "title": "No Damage items (BigBomb,ThorRage,etc) in shops",
-            "fork": true
-          }
-        ]
-      },
-      {
-        "flag": "@anon64",
+        "flag": "@anon66",
         "title": "Shop price adjustments",
         "fork": true,
         "type": "select",
@@ -6442,7 +7176,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 20% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6467,7 +7201,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 40% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6492,7 +7226,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 60% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6517,7 +7251,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 80% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6542,7 +7276,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 120% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6567,7 +7301,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 140% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6592,7 +7326,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 160% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6617,7 +7351,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 180% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6642,7 +7376,7 @@ var FLAG_UISPEC = [
             "title": "Shop prices are adjusted to 200% of their normal value",
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6668,7 +7402,7 @@ var FLAG_UISPEC = [
             "hard": true,
             "subcontrols": [
               {
-                "flag": "@anon65",
+                "flag": "@anon67",
                 "title": "Only affect specific item types",
                 "compact": true,
                 "subcontrols": [
@@ -6689,6 +7423,12 @@ var FLAG_UISPEC = [
             ]
           }
         ]
+      },
+      {
+        "flag": "Sethersell",
+        "title": "Ethers and Elixirs sell like other items",
+        "description": "Normally in FF4, Ether1s/Ether2s/Elixirs all sell for 1 GP each. This flag removes that behaviour, so that they sell just like every other item.",
+        "fork": true
       }
     ]
   },
@@ -6696,7 +7436,7 @@ var FLAG_UISPEC = [
     "title": "BOSSES",
     "controls": [
       {
-        "flag": "@anon66",
+        "flag": "@anon68",
         "title": "Bosses",
         "important": true,
         "type": "select",
@@ -6708,9 +7448,97 @@ var FLAG_UISPEC = [
           },
           {
             "flag": "Bstandard",
-            "title": "Randomize bosses",
+            "title": "Standard boss randomization",
             "description": "The positions of bosses are shuffled. Boss stats are roughly scaled to match the battle it's replacing. For example, Rubicant in the Watery Pass would have the HP and speed of Octomamm. (Yes, this flag is janky, and a MegaNuke is still a MegaNuke. Save often.)",
             "subcontrols": [
+              {
+                "flag": "Bzones",
+                "title": "Shuffle bosses only within zones",
+                "description": "Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).",
+                "fork": true
+              },
+              {
+                "flag": "Bunsafe",
+                "title": "No safety checks",
+                "description": "Normally, you are guaranteed a path to the underworld that does not require defeating the most difficult bosses. This flag removes that check.",
+                "hard": true
+              }
+            ]
+          },
+          {
+            "flag": "Bpro",
+            "title": "Pro boss randomization",
+            "description": "The positions of bosses are shuffled, with modifications to lean towards a more difficult layout on average than on <em>Bstandard</em>.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Bzones",
+                "title": "Shuffle bosses only within zones",
+                "description": "Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).",
+                "fork": true
+              },
+              {
+                "flag": "Bunsafe",
+                "title": "No safety checks",
+                "description": "Normally, you are guaranteed a path to the underworld that does not require defeating the most difficult bosses. This flag removes that check.",
+                "hard": true
+              }
+            ]
+          },
+          {
+            "flag": "Bfriendly",
+            "title": "Friendly boss randomization",
+            "description": "The positions of bosses are shuffled, with modifications to lean towards an easier layout on average than on <em>Bstandard</em>.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Bzones",
+                "title": "Shuffle bosses only within zones",
+                "description": "Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).",
+                "fork": true
+              },
+              {
+                "flag": "Bunsafe",
+                "title": "No safety checks",
+                "description": "Normally, you are guaranteed a path to the underworld that does not require defeating the most difficult bosses. This flag removes that check.",
+                "hard": true
+              }
+            ]
+          },
+          {
+            "flag": "Bcruel",
+            "title": "Place bosses in their most challenging locations",
+            "description": "Bosses are randomly placed into the positions where they pose the biggest challenge. Expect the easier bosses to be in weak slots and the harder bosses to be in strong slots.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Bzones",
+                "title": "Shuffle bosses only within zones",
+                "description": "Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).",
+                "fork": true
+              },
+              {
+                "flag": "Bunsafe",
+                "title": "No safety checks",
+                "description": "Normally, you are guaranteed a path to the underworld that does not require defeating the most difficult bosses. This flag removes that check.",
+                "hard": true
+              }
+            ]
+          },
+          {
+            "flag": "Beasy",
+            "title": "Place bosses in less threatening locations",
+            "description": "Bosses are randomly placed into the positions where they are less threatening. Usually the hardest bosses are in weak slots and the easier bosses are in strong slots.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Bzones",
+                "title": "Shuffle bosses only within zones",
+                "description": "Bosses are randomized only within three different zones: early game and ungated overworld slots (vanilla bosses up to Karate), gated storyline boss slots on the blue planet (vanilla bosses from Baigan up to EvilWall), and summon slots together with both Giant fights and all LST altars. Waterhag is included with the early game bosses, so one of those bosses will be absent barring severe objective requirements (which will force Waterhag, or potentially a different boss, into a different zone).",
+                "fork": true
+              },
               {
                 "flag": "Bunsafe",
                 "title": "No safety checks",
@@ -6733,7 +7561,7 @@ var FLAG_UISPEC = [
         "description": "Replaces the Fabul Gauntlet boss with five unscaled normal enemy encounters from the nearby area."
       },
       {
-        "flag": "@anon67",
+        "flag": "@anon69",
         "title": "Alternate boss stats/scripts",
         "fork": true,
         "type": "select",
@@ -6752,9 +7580,16 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "Bslots",
+        "title": "Shuffle the stats of boss slots within groups",
+        "description": "The stats of the boss slots are shuffled within four different groups: ungated overworld slots, gated overworld slots, underworld slots (and Baron basement), and Darkness-locked slots. For example, you can find a boss with the Magus Sisters slot stats at Antlion Cave. On <em>Bunsafe</em>, the Odin slot is shuffled with the gated overworld slots.",
+        "hard": true,
+        "fork": true
+      },
+      {
         "flag": "@Brestrict",
         "title": "Restrict required boss locations",
-        "description": "Limits the locations that bosses specified in objectives can appear in. If Knofree is enabled, this will include D.Mist.",
+        "description": "Limits the locations that bosses specified in objectives (or D.Mist, if <em>Knofree</em> is enabled) can appear in, when possible. If there are too many required bosses to place them all in un-restricted slots, then restricted slots will be used. On <em>Bvanilla</em>, custom-chosen boss objectives will ignore this setting.",
         "fork": true,
         "subcontrols": [
           {
@@ -6788,7 +7623,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon68",
+        "flag": "@anon70",
         "title": "Change Wyvern's opening MegaNuke",
         "type": "select",
         "subcontrols": [
@@ -6805,6 +7640,7 @@ var FLAG_UISPEC = [
             "flag": "Bitburns",
             "title": "Replace Wyvern's opening MegaNuke with random, incredibly dangerous attack",
             "description": "The replacement attack will include Meganuke, Big Bang, Zanteksuken, Full party charm, and Meteo",
+            "hard": true,
             "fork": true
           }
         ]
@@ -6822,7 +7658,14 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon69",
+        "flag": "Bthehades",
+        "title": "Replace Fire1 and Fire2 in the KQ Eblan fight with Heat Ray and Glare",
+        "description": "King Eblan will cast single-target Glare; Queen Eblan will cast target-all Heat Ray.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "@anon71",
         "title": "Change Golbez's behaviour",
         "fork": true,
         "subcontrols": [
@@ -6846,19 +7689,26 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon70",
+        "flag": "Bnewscriptstats",
+        "title": "Scripted stat changes for bosses behave differently",
+        "description": "This flag changes the behaviour of scripted stat changes for bosses. The changes impact Valvalis and Kainazzo primarily, making those bosses much bulkier in high-level spots (and less bulky in low-level spots). See <a href='fork_info#bnewscriptstats''>the fork_info page</a> for information on the new algorithm.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "@anon72",
         "title": "Remove certain boss slots",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "Bremove:kaipo_slot",
+            "flag": "Bremove:officer_slot",
             "title": "Remove the Officer slot boss fight",
             "description": "Normally in Free Enterprise, the Officer/Soldiers boss fight is included in the randomization. This flag removes the boss slot at Kaipo Inn entirely while keeping Officer/Soldiers in the pool."
           },
           {
-            "flag": "Bremove:kqe_slot",
+            "flag": "Bremove:kingqueen_slot",
             "title": "Remove the KQ Eblan slot boss fight",
-            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based off the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
+            "description": "Normally in Free Enterprise, the KQ Eblan boss fight is included in the randomization, with invented stats at the Hook 1 slot based on the second part of the vanilla Lugae boss fight. This flag removes that boss slot entirely while keeping KQ Eblan in the pool."
           }
         ]
       }
@@ -6868,7 +7718,7 @@ var FLAG_UISPEC = [
     "title": "ENCOUNTERS",
     "controls": [
       {
-        "flag": "@anon71",
+        "flag": "@anon73",
         "title": "Random encounter rate",
         "important": true,
         "type": "select",
@@ -6917,6 +7767,29 @@ var FLAG_UISPEC = [
             ]
           },
           {
+            "flag": "Enorepeats",
+            "title": "Each formation can only be encountered once",
+            "description": "Each encounter formation can only be encountered once through regular means (encounters from Sirens and events do not count, nor do encounters arising from <em>Edanger</em>). Encounters can be toggled as in <em>Etoggle</em>.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "Ekeep:doors",
+                "title": "Preserve TrapDoor fights",
+                "description": "Prevents the above encounter rate setting from applying to the TrapDoor fights in the Sealed Cave."
+              },
+              {
+                "flag": "Ekeep:behemoths",
+                "title": "Preserve forced Behemoth fights",
+                "description": "Prevents the above encounter rate setting from applying to the forced Behemoth fights in Cave Bahamut."
+              },
+              {
+                "flag": "Edanger",
+                "title": "Keep dangerous encounters",
+                "description": "Back attacks and \"Surprised!\" encounters will still occur, even when encounters are disabled via <em>Etoggle</em> or <em>Enoencounters</em>."
+              }
+            ]
+          },
+          {
             "flag": "Enoencounters",
             "title": "No random encounters",
             "hard": true,
@@ -6941,7 +7814,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon72",
+        "flag": "@anon74",
         "title": "Drop tables",
         "type": "select",
         "subcontrols": [
@@ -6956,7 +7829,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon73",
+        "flag": "@anon75",
         "title": "Running from battle",
         "type": "select",
         "subcontrols": [
@@ -6973,7 +7846,7 @@ var FLAG_UISPEC = [
             "type": "select",
             "subcontrols": [
               {
-                "flag": "@anon74",
+                "flag": "@anon76",
                 "title": "Spoils penalty",
                 "type": "select",
                 "subcontrols": [
@@ -7003,7 +7876,8 @@ var FLAG_UISPEC = [
       },
       {
         "flag": "Enogp",
-        "title": "No GP for random encounters",
+        "title": "No GP for any encounters",
+        "description": "Bosses and monster-in-a-box fights will <em>not</em> award GP.",
         "hard": true,
         "fork": true
       },
@@ -7022,7 +7896,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon75",
+        "flag": "@anon77",
         "title": "Change encounter tables",
         "fork": true,
         "type": "select",
@@ -7075,10 +7949,9 @@ var FLAG_UISPEC = [
     "title": "HARP OPTIONS",
     "controls": [
       {
-        "flag": "@anon76",
+        "flag": "@anon78",
         "title": "Harp randomization",
         "important": true,
-        "fork": true,
         "type": "select",
         "subcontrols": [
           {
@@ -7090,12 +7963,14 @@ var FLAG_UISPEC = [
             "flag": "Hvanilla",
             "title": "Edward plays the vanilla song",
             "description": "The song that Edward plays during the TwinHarp cutscene and fight is vanilla.",
-            "null": true
+            "null": true,
+            "fork": true
           },
           {
             "flag": "Hnone",
             "title": "Edward plays nothing",
-            "description": "No music plays during the TwinHarp cutscene and fight."
+            "description": "No music plays during the TwinHarp cutscene and fight.",
+            "fork": true
           }
         ]
       }
@@ -7122,8 +7997,25 @@ var FLAG_UISPEC = [
             "title": "Allow Dwarf Castle warp"
           },
           {
-            "flag": "Glife",
-            "title": "Allow Life glitch"
+            "flag": "@anon79",
+            "title": "Life glitch options",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "Glife",
+                "title": "Allow Life glitch"
+              },
+              {
+                "flag": "Glife2f",
+                "title": "Change how Life works for monsters",
+                "description": "When used on monsters, Life1 and Life potions will restore a fraction of their max HP depending on their $2F stat (one of 1/4, 2/4, 3/4, or 4/4 of the monster's max HP, with a higher $2F stat giving more HP)."
+              },
+              {
+                "flag": "Gnolifer",
+                "title": "Prevent Life2 working on monsters",
+                "description": "Normally, Life2 will still work on monsters to revive them at full HP, even without the Life glitch active. This flag removes that functionality."
+              }
+            ]
           },
           {
             "flag": "Gsylph",
@@ -7146,18 +8038,18 @@ var FLAG_UISPEC = [
     "title": "DOORS",
     "controls": [
       {
-        "flag": "@anon77",
+        "flag": "@anon80",
         "title": "Warps Randomization Options",
+        "fork": true,
         "type": "select",
         "subcontrols": [
           {
             "flag": "@doorsrando",
             "title": "Randomize Doors",
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
-            "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon78",
+                "flag": "@anon81",
                 "title": "Doors Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -7197,7 +8089,7 @@ var FLAG_UISPEC = [
             "fork": true,
             "subcontrols": [
               {
-                "flag": "@anon79",
+                "flag": "@anon82",
                 "title": "Entrances Randomization Options",
                 "type": "select",
                 "subcontrols": [
@@ -7233,16 +8125,766 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "-calmness",
-        "title": "Disable the Panic Button (Select + R)",
-        "description": "Disables the use of the Panic button (Select + R)",
+        "flag": "-panicbutton",
+        "title": "Enable the Panic Button (Select + R)",
+        "description": "Enables the use of the Panic button (Select + R) to warp to your starting location.",
         "fork": true
       },
       {
         "flag": "-forcesealed",
         "title": "Disable skipping the Sealed Cave Boss",
-        "description": "Fighting the Sealed Cave boss is required before seeing the KI",
+        "description": "Fighting the Sealed Cave boss is required before seeing the KI.",
         "fork": true
+      }
+    ]
+  },
+  {
+    "title": "FUSOYA",
+    "controls": [
+      {
+        "flag": "@fusoya",
+        "title": "FuSoYa challenges",
+        "important": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Fweighted",
+            "title": "Usual FuSoYa challenge",
+            "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
+            "subcontrols": [
+              {
+                "flag": "@anon83",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Fslowstart",
+                    "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                    "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon84",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Fvanilla",
+            "title": "Vanilla FuSoYa",
+            "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
+            "null": true,
+            "subcontrols": [
+              {
+                "flag": "@anon85",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Fsequential:p",
+            "title": "Fixed spell order (Palom/Porom)",
+            "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon83",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Fslowstart",
+                    "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                    "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon84",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Fsequential:r",
+            "title": "Fixed spell order (Rydia/Rosa)",
+            "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon83",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Fslowstart",
+                    "title": "5 of the first 12 bosses defeated will not reward spells or HP",
+                    "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon84",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Flocation",
+            "title": "Location-dependent spells",
+            "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon86",
+                "title": "Learning modifications",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Funlearn",
+                    "title": "FuSoYa will lose spells instead of learning them",
+                    "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
+                    "hard": true,
+                    "fork": true
+                  }
+                ]
+              },
+              {
+                "flag": "@anon87",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Fnerfed",
+            "title": "Fixed starting spells, no learning",
+            "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
+            "hard": true,
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon88",
+                "title": "HP gain modifications",
+                "subcontrols": [
+                  {
+                    "flag": "Funcapped",
+                    "title": "FuSoYa's maximum possible HP is now 3900",
+                    "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>Fnerfed</em>.",
+                    "fork": true
+                  },
+                  {
+                    "flag": "Frandomhp",
+                    "title": "FuSoYa will gain HP somewhat randomly",
+                    "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP).",
+                    "fork": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "flag": "Fmaybe",
+        "title": "Spells not guaranteed to be learned",
+        "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "Fomnimage",
+        "title": "FuSoYa also learns summons/Twin/Ninja magic",
+        "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>Funcapped</em> or <em>Flocation</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells).",
+        "fork": true
+      }
+    ]
+  },
+  {
+    "title": "AGILITY",
+    "controls": [
+      {
+        "flag": "@agility",
+        "title": "Specify agility anchoring",
+        "important": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Aagnostic",
+            "title": "Use the first occupied party slot for anchoring",
+            "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, by default the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under the other flags, the anchoring system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that <em>Chero</em> will force <em>Ahero</em> on over <em>Aagnostic</em>, but not over any other <em>A</em> flags."
+          },
+          {
+            "flag": "Avanilla",
+            "title": "Use vanilla agility anchoring",
+            "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present.",
+            "null": true
+          },
+          {
+            "flag": "Ahero",
+            "title": "Use your starting/hero character as anchor, if available",
+            "description": "This flag implements <em>Chero</em> anchoring, where your agility anchor will be your starting character if they are in your party, and otherwise the character in the first non-empty slot.",
+            "fork": true
+          },
+          {
+            "flag": "Aslowest",
+            "title": "Use your slowest character as anchor",
+            "fork": true
+          },
+          {
+            "flag": "Afastest",
+            "title": "Use your fastest character as anchor",
+            "description": "This flag will double the Count timer.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Aaverage",
+            "title": "Use your average agility for anchoring",
+            "description": "Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility.",
+            "fork": true
+          },
+          {
+            "flag": "Amedian",
+            "title": "Use your median agility for anchoring",
+            "fork": true
+          },
+          {
+            "flag": "Arandom",
+            "title": "A random party slot is chosen for anchoring",
+            "description": "Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Amonster",
+            "title": "Use average monster agility for anchoring",
+            "description": "Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Aflat",
+            "title": "Everyone is the same agility",
+            "description": "Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled).",
+            "fork": true
+          },
+          {
+            "flag": "A750formula",
+            "title": "Use a formula to determine agility",
+            "description": "Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer.",
+            "fork": true
+          },
+          {
+            "flag": "@anchor",
+            "title": "Use a fixed agility anchor",
+            "description": "Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.",
+            "fork": true,
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "@anon89",
+                "title": "Anchor agility",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Aanchor:7",
+                    "title": "7 Agility anchor"
+                  },
+                  {
+                    "flag": "Aanchor:27",
+                    "title": "27 Agility anchor",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Aanchor:28",
+                    "title": "28 Agility anchor",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Aanchor:41",
+                    "title": "41 Agility anchor",
+                    "hard": true
+                  },
+                  {
+                    "flag": "Aanchor:42",
+                    "title": "42 Agility anchor",
+                    "hard": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "flag": "@agilityscale",
+        "title": "Scale the base ATB",
+        "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
+        "fork": true,
+        "subcontrols": [
+          {
+            "flag": "@anon90",
+            "title": "Base ATB for the anchor",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "Ascale:1",
+                "title": "Base ATB is 1 tick"
+              },
+              {
+                "flag": "Ascale:10",
+                "title": "Base ATB is 10 ticks"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "EXPERIENCE",
+    "controls": [
+      {
+        "flag": "@exp",
+        "title": "Restore vanilla or change EXP distribution",
+        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.",
+        "subcontrols": [
+          {
+            "flag": "Xsplit",
+            "title": "Split EXP distribution",
+            "description": "Normally in Free Enterprise, earned EXP is not divided among the party, and each member receives the full amount. Set this flag to restore the original FF4 EXP distribution scheme (ie. earned EXP is divided among the surviving party members)."
+          },
+          {
+            "flag": "Xnoboost",
+            "title": "No low-level EXP boost",
+            "description": "Normally in Free Enterprise, in a full party, low-level party members (at least 5 levels below the median level) earn double EXP. Set this flag to remove this bonus."
+          },
+          {
+            "flag": "Xnokeybonus",
+            "title": "No EXP bonus after 10 key items",
+            "description": "By default in Free Enterprise, once 10 key items have been collected, earned EXP is doubled. Set this flag to remove this bonus."
+          },
+          {
+            "flag": "Xcrystalbonus",
+            "title": "Double EXP after obtaining the Crystal",
+            "description": "Under this flag, characters earn double EXP once you obtain the Crystal.",
+            "fork": true
+          },
+          {
+            "flag": "@objectiveexp",
+            "title": "Award extra EXP for completing objectives",
+            "description": "Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each completed objective earns you more EXP from each battle.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon91",
+                "title": "Amount of bonus EXP",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Xobjectivebonus:25",
+                    "title": "Each completed objective gives 25% extra EXP"
+                  },
+                  {
+                    "flag": "Xobjectivebonus:10",
+                    "title": "Each completed objective gives 10% extra EXP"
+                  },
+                  {
+                    "flag": "Xobjectivebonus:5",
+                    "title": "Each completed objective gives 5% extra EXP"
+                  },
+                  {
+                    "flag": "Xobjectivebonus:num",
+                    "title": "Each completed objective gives extra EXP",
+                    "description": "The EXP bonus is 100% divided by the number of available objectives in the seed; e.g. with 7 objectives, each objective gives you about 14% extra EXP (subject to some truncation)."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "@kicheckexp",
+            "title": "Award extra EXP for completing key item checks",
+            "description": "Normally, completing key item checks does not increase the amount of EXP received from battles. Under this flag, each completed key item check beyond the starting item earns you more EXP from each battle.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon92",
+                "title": "Amount of bonus EXP",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Xkicheckbonus:10",
+                    "title": "Each completed KI check gives 10% extra EXP"
+                  },
+                  {
+                    "flag": "Xkicheckbonus:5",
+                    "title": "Each completed KI check gives 5% extra EXP"
+                  },
+                  {
+                    "flag": "Xkicheckbonus:2",
+                    "title": "Each completed KI check gives 2% extra EXP"
+                  },
+                  {
+                    "flag": "Xkicheckbonus:num",
+                    "title": "Each completed KI check gives extra EXP",
+                    "description": "The EXP bonus is 100% divided by the number of potential key item checks in the seed; e.g. with the 21 non-starting main and summon checks on, each objective gives you about 4.7% extra EXP (subject to some truncation)."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "@zonkbonusexp",
+            "title": "Award extra EXP after non-KI rewards from KI checks",
+            "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") beyond the starting item you earn more EXP from future battles.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon93",
+                "title": "Amount of bonus EXP",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Xzonkbonus:10",
+                    "title": "Each non-KI reward gives 10% extra EXP"
+                  },
+                  {
+                    "flag": "Xzonkbonus:5",
+                    "title": "Each non-KI reward gives 5% extra EXP"
+                  },
+                  {
+                    "flag": "Xzonkbonus:2",
+                    "title": "Each non-KI reward gives 2% extra EXP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "@miabbonusexp",
+            "title": "Award extra EXP during MIAB encounters",
+            "description": "Normally, MIAB encounters have the same EXP calculation as other encounters. Under this flag, MIAB encounters award double or 1.5 times the usual EXP.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon94",
+                "title": "Amount of bonus EXP",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Xmiabbonus:100",
+                    "title": "MIAB encounters give double EXP"
+                  },
+                  {
+                    "flag": "Xmiabbonus:50",
+                    "title": "MIAB encounters give 50% extra EXP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "@moonbonusexp",
+            "title": "Award extra EXP when on the moon",
+            "description": "Normally, location of encounter does not increase EXP. Under this flag, encounters on the moon award double or triple the usual EXP.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon95",
+                "title": "Amount of bonus EXP",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Xmoonbonus:200",
+                    "title": "Moon encounters give triple EXP"
+                  },
+                  {
+                    "flag": "Xmoonbonus:100",
+                    "title": "Moon encounters give double EXP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "flag": "Xmaxlevelbonus",
+            "title": "Award extra EXP when underlevelled",
+            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).",
+            "fork": true
+          },
+          {
+            "flag": "Xsmallparty",
+            "title": "Award extra EXP when your party is not full",
+            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
+            "fork": true
+          },
+          {
+            "flag": "@geometricexp",
+            "title": "Decrease EXP earned from repeated same-type monster kills",
+            "description": "Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not \"per slot\" in battle.",
+            "fork": true,
+            "subcontrols": [
+              {
+                "flag": "@anon96",
+                "title": "Per-monster-kill percentage reduction",
+                "type": "select",
+                "subcontrols": [
+                  {
+                    "flag": "Xgeometric:90",
+                    "title": "Repeated monster kills scale down in EXP to 90%"
+                  },
+                  {
+                    "flag": "Xgeometric:80",
+                    "title": "Repeated monster kills scale down in EXP to 80%"
+                  },
+                  {
+                    "flag": "Xgeometric:70",
+                    "title": "Repeated monster kills scale down in EXP to 70%"
+                  },
+                  {
+                    "flag": "Xgeometric:60",
+                    "title": "Repeated monster kills scale down in EXP to 60%"
+                  },
+                  {
+                    "flag": "Xgeometric:50",
+                    "title": "Repeated monster kills scale down in EXP to 50%"
+                  },
+                  {
+                    "flag": "Xgeometric:40",
+                    "title": "Repeated monster kills scale down in EXP to 40%"
+                  },
+                  {
+                    "flag": "Xgeometric:30",
+                    "title": "Repeated monster kills scale down in EXP to 30%"
+                  },
+                  {
+                    "flag": "Xgeometric:20",
+                    "title": "Repeated monster kills scale down in EXP to 20%"
+                  },
+                  {
+                    "flag": "Xgeometric:10",
+                    "title": "Repeated monster kills scale down in EXP to 10%"
+                  },
+                  {
+                    "flag": "Xgeometric:0",
+                    "title": "Repeated monster kills do not award EXP"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ZEROMUS",
+    "controls": [
+      {
+        "flag": "@anon97",
+        "title": "Zeromus fight script",
+        "important": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Zvanilla",
+            "title": "Vanilla Z script",
+            "null": true
+          },
+          {
+            "flag": "Zphysical",
+            "title": "Physical Z script",
+            "description": "Enable this flag to replace Zeromus' magic-based damaging attacks with physical attacks (Fight, Dark Wave, Needle/Counter). Zeromus now counters some physical commands instead of magic.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Zailments",
+            "title": "Status ailments Z script",
+            "description": "Replaces Nuke and Virus (direct and counter) with status ailment spells, possibly with different targetting.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Zchaos",
+            "title": "Fully random attack and reaction scripts",
+            "description": "In each attack phase, Zeromus will have a handful of random attacks (one or two possibly stronger, with a shake). Four attacks are chosen as reactions. The attacks are mostly curated.",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Zlavosshell",
+            "title": "Three random attack phases",
+            "description": "The three main attack phases are replaced by three random monster scripts that do not automatically progress to another script.",
+            "hard": true,
+            "fork": true
+          }
+        ]
+      },
+      {
+        "flag": "@Zunsure",
+        "title": "Random category selection",
+        "description": "Each script category specified here, together with the main script chosen above, will have an equal probability of being the script category that Zeromus will use in the seed. The <em>Zwhichbang</em> and <em>Zphaseshift</em> flags will not apply if the script category chosen is incompatible with those flags.",
+        "subcontrols": [
+          {
+            "flag": "Zunsure:vanilla",
+            "title": "Possible vanilla script",
+            "fork": true
+          },
+          {
+            "flag": "Zunsure:physical",
+            "title": "Possible physical script",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Zunsure:ailments",
+            "title": "Possible status script",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Zunsure:chaos",
+            "title": "Possible chaos script",
+            "hard": true,
+            "fork": true
+          },
+          {
+            "flag": "Zunsure:lavosshell",
+            "title": "Possible copycat script",
+            "hard": true,
+            "fork": true
+          }
+        ]
+      },
+      {
+        "flag": "Zwhichbang",
+        "title": "Replace every Big Bang with another spell",
+        "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "Zphaseshift",
+        "title": "Shuffle the three main Z fight phases",
+        "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
+        "hard": true,
+        "fork": true
+      },
+      {
+        "flag": "@anon98",
+        "title": "Nerfing of Big Bangs",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "Znonerfs",
+            "title": "Prevent nerfing of Big Bangs",
+            "description": "Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a counter-Nuke between the tick that Z sets spell power for Big Bang and the tick when Big Bang goes off. Enable this flag to prevent that happening by implementing chains.",
+            "hard": true
+          },
+          {
+            "flag": "Zmustnerf",
+            "title": "9999 damage Big Bangs",
+            "description": "Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "Znocosplay",
+        "title": "Vanilla Z sprite",
+        "description": "Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite."
       }
     ]
   },
@@ -7255,7 +8897,7 @@ var FLAG_UISPEC = [
         "description": "Starter kits allow you to begin the game with additional items in your inventory.",
         "subcontrols": [
           {
-            "flag": "@anon80",
+            "flag": "@anon99",
             "title": "Kit 1",
             "type": "select",
             "subcontrols": [
@@ -7409,6 +9051,18 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit:support",
+                "title": "Support kit",
+                "description": "A selection of support-type items that your starting character can use.",
+                "fork": true
+              },
+              {
+                "flag": "-kit:heroplusplus",
+                "title": "Hero++ kit",
+                "description": "The Hero and Support kits packaged together.",
+                "fork": true
+              },
+              {
                 "flag": "-kit:exit",
                 "title": "Exit kit",
                 "description": "5-10 Exits.",
@@ -7421,6 +9075,12 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit:zelda",
+                "title": "Zelda kit",
+                "description": "A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.",
+                "fork": true
+              },
+              {
                 "flag": "-kit:random",
                 "title": "Select a random kit",
                 "description": "One of the other kit options, selected at random."
@@ -7428,7 +9088,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon81",
+            "flag": "@anon100",
             "title": "Kit 2",
             "type": "select",
             "subcontrols": [
@@ -7582,6 +9242,18 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit2:support",
+                "title": "Support kit",
+                "description": "A selection of support-type items that your starting character can use.",
+                "fork": true
+              },
+              {
+                "flag": "-kit2:heroplusplus",
+                "title": "Hero++ kit",
+                "description": "The Hero and Support kits packaged together.",
+                "fork": true
+              },
+              {
                 "flag": "-kit2:exit",
                 "title": "Exit kit",
                 "description": "5-10 Exits.",
@@ -7594,6 +9266,12 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit2:zelda",
+                "title": "Zelda kit",
+                "description": "A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.",
+                "fork": true
+              },
+              {
                 "flag": "-kit2:random",
                 "title": "Select a random kit",
                 "description": "One of the other kit options, selected at random."
@@ -7601,7 +9279,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon82",
+            "flag": "@anon101",
             "title": "Kit 3",
             "type": "select",
             "subcontrols": [
@@ -7755,6 +9433,16 @@ var FLAG_UISPEC = [
                 "fork": true
               },
               {
+                "flag": "-kit3:support",
+                "title": "Support kit",
+                "fork": true
+              },
+              {
+                "flag": "-kit3:heroplusplus",
+                "title": "Hero++ kit",
+                "fork": true
+              },
+              {
                 "flag": "-kit3:exit",
                 "title": "Exit kit",
                 "fork": true
@@ -7763,6 +9451,12 @@ var FLAG_UISPEC = [
                 "flag": "-kit3:egg",
                 "title": "Egg kit",
                 "description": "One Siren and a selection of items that your starting character can use to successfully defeat one Yellow D egg.",
+                "fork": true
+              },
+              {
+                "flag": "-kit3:zelda",
+                "title": "Zelda kit",
+                "description": "A tier 2-5 sword (not including Drain or dark swords), a tier 1-3 shield (not including Paladin or dark shields), a Boomerang, 4 BigBombs, a Strength Ring, and a Whistle.",
                 "fork": true
               },
               {
@@ -7801,12 +9495,18 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "-speedmodbalance",
+        "title": "Alter the speed modifier behaviour",
+        "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).",
+        "fork": true
+      },
+      {
         "flag": "@smithy",
         "title": "Smithy reward",
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon83",
+            "flag": "@anon102",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -7822,602 +9522,45 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "-smith:playable",
-            "title": "Kokkol's item will be usable",
-            "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
-            "fork": true
+            "flag": "@anon103",
+            "title": "Restrictions on forge items",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-smith:playable",
+                "title": "Kokkol's item will be usable",
+                "description": "The item that Kokkol forges will be usable by a character you can acquire in the seed.",
+                "fork": true
+              },
+              {
+                "flag": "-smith:good",
+                "title": "Kokkol's item will be usable and strong, if possible",
+                "description": "The item that Kokkol forges will not only be usable by a character you can acquire in the seed, but also will be a strong item if possible, given other restrictions.",
+                "fork": true
+              }
+            ]
           },
           {
             "flag": "-smith:omni",
             "title": "All characters can equip the FF4A weapon",
             "description": "If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will be able to equip it (though potentially not a bow/arrows for Rosa's weapons to work).",
             "fork": true
-          }
-        ]
-      },
-      {
-        "flag": "@fusoya",
-        "title": "FuSoYa challenges",
-        "description": "By default, Free Enterprise runs with the \"FuSoYa Challenge\", where FuSoYa begins with 500 HP and a collection of low-level spells, and each boss defeated grants him 100 HP and three random additional spells. This behaviour may be changed using these flags.",
-        "fork": true,
-        "subcontrols": [
-          {
-            "flag": "@anon84",
-            "title": "Spell learning categories",
-            "type": "select",
-            "subcontrols": [
-              {
-                "flag": "@normalfu",
-                "title": "Usual FuSoYa challenge",
-                "subcontrols": [
-                  {
-                    "flag": "@anon85",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon86",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:vanilla",
-                "title": "Vanilla FuSoYa",
-                "description": "Restore the vanilla game's FuSoYa behaviour, where he joins with 1900 HP and his full spellset.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon87",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:sequential_p",
-                "title": "Fixed spell order (Palom/Porom)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Palom and Porom learn their spells.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon85",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon86",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:sequential_r",
-                "title": "Fixed spell order (Rydia/Rosa)",
-                "description": "Instead of learning spells randomly, FuSoYa will learn spells in order based on the levels at which Rydia and Rosa learn their spells. He will not learn spells learned outside of level-ups (Fire1, Fire2/Ice2/Lit2, Exit).",
-                "subcontrols": [
-                  {
-                    "flag": "@anon85",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:slowstart",
-                        "title": "5 of the first 12 bosses defeated will not reward spells or HP",
-                        "description": "3 of the first 6 bosses defeated and 2 of the next 6 bosses defeated will not reward HP or spells."
-                      },
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon86",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:location",
-                "title": "Location-dependent spells",
-                "description": "FuSoYa will learn three spells after every boss, but the spells learned depend on the boss location. Stronger/gated boss spots are weighted to provide more powerful spells.",
-                "subcontrols": [
-                  {
-                    "flag": "@anon88",
-                    "title": "Learning modifications",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:unlearn",
-                        "title": "FuSoYa will lose spells instead of learning them",
-                        "description": "FuSoYa will start with all available spells at the beginning of the game; after each boss defeated, he will <em>lose</em> spells in reverse order from how he would learn them that seed, until he has six or fewer spells remaining. He will still gain HP as usual.",
-                        "hard": true
-                      }
-                    ]
-                  },
-                  {
-                    "flag": "@anon89",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "flag": "-fusoya:nerfed",
-                "title": "Fixed starting spells, no learning",
-                "description": "FuSoYa will start with a fixed pool of 14 black magic and 14 white magic spells (17 with j-spells), mostly tier 2 and below, but will not learn any spells over the course of the game. He will still gain HP as usual, but only up to 1100.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "@anon90",
-                    "title": "HP gain modifications",
-                    "subcontrols": [
-                      {
-                        "flag": "-fusoya:uncapped",
-                        "title": "FuSoYa's maximum possible HP is now 3900",
-                        "description": "FuSoYa will gain up to, or start with, 3900 HP, which is 500 plus 100 HP for each of the 34 available boss spots in the game. This flag takes priority over the lower HP cap under <em>-fusoya:nerfed</em>."
-                      },
-                      {
-                        "flag": "-fusoya:randomhp",
-                        "title": "FuSoYa will gain HP somewhat randomly",
-                        "description": "Normally, FuSoYa gains 100 HP per boss defeated. Under this flag, FuSoYa will gain a random multiple of 100 HP after each boss defeated, still arriving at the right amount of HP after the usual number of bosses defeated for maximum HP (meaning that FuSoYa will not always gain HP after a boss, and sometimes gain more than 100 HP)."
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
           },
           {
-            "flag": "-fusoya:maybe",
-            "title": "Spells not guaranteed to be learned",
-            "description": "Normally, FuSoYa will eventually learn all possible spells. This flag removes that guarantee; each possible spell will be included independently with an 85% chance.",
-            "hard": true
-          },
-          {
-            "flag": "-fusoya:omnimage",
-            "title": "FuSoYa also learns summons/Twin/Ninja magic",
-            "description": "Under this flag, FuSoYa will be given a third spellset, Omni, that contains summons, Twin magic (Comet and Flare), and Ninja magic. Except under <em>-fusoya:uncapped</em> or <em>-fusoya:location</em>, FuSoYa's starting HP is reduced to 100 if starting with less than max HP and he will gain HP from 22 bosses (or 21 without J spells)."
-          }
-        ]
-      },
-      {
-        "flag": "@agility",
-        "title": "Change the ATB system (or make it vanilla)",
-        "description": "FF4 scales the speed of combat based on the agility stat of your party's \"agility anchor\". In Free Enterprise, the anchor is always the first occupied party slot (in the sequence of middle, top, bottom, top-middle, bottom-middle). Under these flags, the ATB system will change, either by choosing a different anchor or by using a different formula for calculating the speed of combat (in a few different ways). \n\nNote that any of these flags except for scaling the base ATB and changing the speed modifier will override the <em>Chero</em> agility effect, if playing with the hero challenge.",
-        "fork": true,
-        "subcontrols": [
-          {
-            "flag": "@anon91",
-            "title": "Different anchoring or ATB formula",
-            "type": "select",
-            "subcontrols": [
-              {
-                "flag": "-agility:vanilla",
-                "title": "Use vanilla agility anchoring",
-                "description": "In vanilla FF4, if Cecil is in the party, then he is the agility anchor, regardless of position. Enabling this flag will restore that behavior, making the first Cecil in your party the anchor, if present."
-              },
-              {
-                "flag": "-agility:slowest",
-                "title": "Use your slowest character as anchor"
-              },
-              {
-                "flag": "-agility:fastest",
-                "title": "Use your fastest character as anchor",
-                "description": "This flag will double the Count timer.",
-                "hard": true
-              },
-              {
-                "flag": "-agility:average",
-                "title": "Use your average agility for anchoring",
-                "description": "Under this flag, the (truncated) average of your party's agility values is used as the anchoring value, even if none of your characters have exactly that agility."
-              },
-              {
-                "flag": "-agility:median",
-                "title": "Use your median agility for anchoring"
-              },
-              {
-                "flag": "-agility:random",
-                "title": "A random party slot is chosen for anchoring",
-                "description": "Instead of the first occupied party slot starting at slot 0 being the anchor, the anchor will be the first occupied party slot starting at a randomly chosen slot from 0 to 4 determined by the enemy formation, wrapping around to lower party slots.",
-                "hard": true
-              },
-              {
-                "flag": "-agility:monster",
-                "title": "Use average monster agility for anchoring",
-                "description": "Under this flag, the (truncated) average of the monster formation's agility values is used as the anchoring value. Note that some monsters are incredibly fast, so your party will be very slow. This flag will triple the Count timer.",
-                "hard": true
-              },
-              {
-                "flag": "-agility:flat",
-                "title": "Everyone is the same agility",
-                "description": "Under this flag, every character and monster will have the same base ATB (5 ticks, unless scaled)."
-              },
-              {
-                "flag": "-agility:750formula",
-                "title": "Use a formula to determine agility",
-                "description": "Under this flag, every character and monster will have their base ATB calculated as (15 * 10 * scale) / (Agility + 32), where the scale parameter is 5 by default (unless scaled, below). This flag will triple the Count timer."
-              },
-              {
-                "flag": "@anchor",
-                "title": "Use a fixed agility anchor",
-                "description": "Under these flags, all agility anchoring will be based on the given fixed value, even if none of your characters have that agility. For 27 or 28 Agility anchoring, the Count timer will be doubled. For 41 or 42 Agility anchoring, the Count timer will be tripled.",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "@anon92",
-                    "title": "Anchor agility",
-                    "type": "select",
-                    "subcontrols": [
-                      {
-                        "flag": "-agility:anchor7",
-                        "title": "7 Agility anchor"
-                      },
-                      {
-                        "flag": "-agility:anchor27",
-                        "title": "27 Agility anchor",
-                        "hard": true
-                      },
-                      {
-                        "flag": "-agility:anchor28",
-                        "title": "28 Agility anchor",
-                        "hard": true
-                      },
-                      {
-                        "flag": "-agility:anchor41",
-                        "title": "41 Agility anchor",
-                        "hard": true
-                      },
-                      {
-                        "flag": "-agility:anchor42",
-                        "title": "42 Agility anchor",
-                        "hard": true
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "@agilityscale",
-            "title": "Scale the base ATB",
-            "description": "The default base ATB for the agility anchor is 5 ticks. Under these flags, the base ATB can be scaled down to 1 tick or up to 10 ticks. Under the 10 tick scaling, the Count timer will be doubled.",
-            "subcontrols": [
-              {
-                "flag": "@anon93",
-                "title": "Base ATB for the anchor",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-agility:scale1",
-                    "title": "Base ATB is 1 tick"
-                  },
-                  {
-                    "flag": "-agility:scale10",
-                    "title": "Base ATB is 10 ticks"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "-speedmodbalance",
-            "title": "Alter the speed modifier behaviour",
-            "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8)."
-          }
-        ]
-      },
-      {
-        "flag": "@exp",
-        "title": "Restore vanilla or change EXP distribution",
-        "description": "To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.",
-        "subcontrols": [
-          {
-            "flag": "-exp:split",
-            "title": "Split EXP distribution",
-            "description": "Normally in Free Enterprise, earned EXP is not divided among the party, and each member receives the full amount. Set this flag to restore the original FF4 EXP distribution scheme (ie. earned EXP is divided among the surviving party members)."
-          },
-          {
-            "flag": "-exp:noboost",
-            "title": "No low-level EXP boost",
-            "description": "Normally in Free Enterprise, in a full party, low-level party members (at least 5 levels below the median level) earn double EXP. Set this flag to remove this bonus."
-          },
-          {
-            "flag": "-exp:nokeybonus",
-            "title": "No EXP bonus after 10 key items",
-            "description": "By default in Free Enterprise, once 10 key items have been collected, earned EXP is doubled. Set this flag to remove this bonus."
-          },
-          {
-            "flag": "-exp:crystalbonus",
-            "title": "Double EXP after obtaining the Crystal",
-            "description": "Under this flag, characters earn double EXP once you obtain the Crystal.",
+            "flag": "-smith:spoilsuper",
+            "title": "The Legend Sword previews the FF4A weapon",
+            "description": "If Kokkol forges a weapon from FF4 Advance, then the Legend Sword becomes the Legend \"Weapon\" of the same type as the FF4 Advance weapon, with additional properties shared by most weapons of that type.",
             "fork": true
           },
           {
-            "flag": "@objectiveexp",
-            "title": "Award extra EXP for completing objectives",
-            "description": "Normally, objectives do not increase the amount of EXP received from battles. Under this flag, each completed objective earns you more EXP from each battle.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon94",
-                "title": "Amount of bonus EXP",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-exp:objectivebonus25",
-                    "title": "Each completed objective gives 25% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:objectivebonus10",
-                    "title": "Each completed objective gives 10% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:objectivebonus_num",
-                    "title": "Each completed objective gives extra EXP",
-                    "description": "The EXP bonus is 100% divided by the number of available objectives in the seed; e.g. with 7 objectives, each objective gives you about 14% extra EXP (subject to some truncation)."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "@kicheckexp",
-            "title": "Award extra EXP for completing key item checks",
-            "description": "Normally, completing key item checks does not increase the amount of EXP received from battles. Under this flag, each completed key item check beyond the starting item earns you more EXP from each battle.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon95",
-                "title": "Amount of bonus EXP",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-exp:kicheckbonus10",
-                    "title": "Each completed KI check gives 10% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:kicheckbonus5",
-                    "title": "Each completed KI check gives 5% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:kicheckbonus2",
-                    "title": "Each completed KI check gives 2% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:kicheckbonus_num",
-                    "title": "Each completed KI check gives extra EXP",
-                    "description": "The EXP bonus is 100% divided by the number of potential key item checks in the seed; e.g. with the 21 non-starting main and summon checks on, each objective gives you about 4.7% extra EXP (subject to some truncation)."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "@zonkbonusexp",
-            "title": "Award extra EXP after non-KI rewards from KI checks",
-            "description": "Normally, the rewards from key item checks do not impact the amount of EXP received from battles. Under this flag, every time you get a non-key-item reward from a potential key item check (a \"zonk\") you earn more EXP from future battles.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon96",
-                "title": "Amount of bonus EXP",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-exp:zonkbonus10",
-                    "title": "Each non-KI reward gives 10% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:zonkbonus5",
-                    "title": "Each non-KI reward gives 5% extra EXP"
-                  },
-                  {
-                    "flag": "-exp:zonkbonus2",
-                    "title": "Each non-KI reward gives 2% extra EXP"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "@miabbonusexp",
-            "title": "Award extra EXP during MIAB encounters",
-            "description": "Normally, MIAB encounters have the same EXP calculation as other encounters. Under this flag, MIAB encounters award double or 1.5 times the usual EXP.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon97",
-                "title": "Amount of bonus EXP",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-exp:miabbonus100",
-                    "title": "MIAB encounters give double EXP"
-                  },
-                  {
-                    "flag": "-exp:miabbonus50",
-                    "title": "MIAB encounters give 50% extra EXP"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "@moonbonusexp",
-            "title": "Award extra EXP when on the moon",
-            "description": "Normally, location of encounter does not increase EXP. Under this flag, encounters on the moon award double or triple the usual EXP.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon98",
-                "title": "Amount of bonus EXP",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-exp:moonbonus200",
-                    "title": "Moon encounters give triple EXP"
-                  },
-                  {
-                    "flag": "-exp:moonbonus100",
-                    "title": "Moon encounters give double EXP"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "-exp:maxlevelbonus",
-            "title": "Award extra EXP when underlevelled",
-            "description": "Normally, level does not play into EXP calculations. Under this flag, if 5 plus twice the largest level in your party is less than the smallest monster level in the encounter, then the encounter awards 20% bonus EXP (and another 20% for each additional deficit of 5).",
+            "flag": "-smith:sellsuper",
+            "title": "The FF4A weapon will have a non-zero sell price",
             "fork": true
-          },
-          {
-            "flag": "-exp:smallparty",
-            "title": "Award extra EXP when your party is not full",
-            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
-            "fork": true
-          },
-          {
-            "flag": "@geometricexp",
-            "title": "Decrease EXP earned from repeated same-type monster kills",
-            "description": "Normally in FF4, each instance of a monster type killed in battle gives the same amount of EXP. Under this flag, each monster of the same type defeated in the same battle will yield a scaled amount of the EXP of the previous monster of that type, giving diminishing returns for repeated monster kills. Note that the reduction is per monster type and not \"per slot\" in battle.",
-            "fork": true,
-            "subcontrols": [
-              {
-                "flag": "@anon99",
-                "title": "Per-monster-kill percentage reduction",
-                "type": "select",
-                "subcontrols": [
-                  {
-                    "flag": "-exp:geometric_90",
-                    "title": "Repeated monster kills scale down in EXP to 90%"
-                  },
-                  {
-                    "flag": "-exp:geometric_80",
-                    "title": "Repeated monster kills scale down in EXP to 80%"
-                  },
-                  {
-                    "flag": "-exp:geometric_70",
-                    "title": "Repeated monster kills scale down in EXP to 70%"
-                  },
-                  {
-                    "flag": "-exp:geometric_60",
-                    "title": "Repeated monster kills scale down in EXP to 60%"
-                  },
-                  {
-                    "flag": "-exp:geometric_50",
-                    "title": "Repeated monster kills scale down in EXP to 50%"
-                  },
-                  {
-                    "flag": "-exp:geometric_40",
-                    "title": "Repeated monster kills scale down in EXP to 40%"
-                  },
-                  {
-                    "flag": "-exp:geometric_30",
-                    "title": "Repeated monster kills scale down in EXP to 30%"
-                  },
-                  {
-                    "flag": "-exp:geometric_20",
-                    "title": "Repeated monster kills scale down in EXP to 20%"
-                  },
-                  {
-                    "flag": "-exp:geometric_10",
-                    "title": "Repeated monster kills scale down in EXP to 10%"
-                  },
-                  {
-                    "flag": "-exp:geometric_0",
-                    "title": "Repeated monster kills do not award EXP"
-                  }
-                ]
-              }
-            ]
           }
         ]
       },
       {
-        "flag": "@anon100",
+        "flag": "@anon104",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -8447,21 +9590,89 @@ var FLAG_UISPEC = [
       {
         "flag": "-miscbugfixes",
         "title": "Include minor bug fixes",
-        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen."
+        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.",
+        "fork": true
       },
       {
-        "flag": "@anon101",
-        "title": "Restore vanilla behaviors",
+        "flag": "@anon105",
+        "title": "Call options",
         "subcontrols": [
           {
-            "flag": "-vanilla:hobs",
+            "flag": "@anon106",
+            "title": "Spellset options",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-call:levelup",
+                "title": "Rydia learns summons by level-up",
+                "fork": true
+              },
+              {
+                "flag": "-call:all",
+                "title": "Rydia starts with all summons learned",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "-call:vanillahobs",
             "title": "Vanilla Hobs spell",
             "description": "By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior."
           },
           {
-            "flag": "-vanilla:growup",
-            "title": "Vanilla Dwarf Castle summons",
-            "description": "By default in Free Enterprise, the summons learned when Rydia ages are randomized. Set this flag to return to the vanilla summons learned at that time (Mist, Indra, Jinn, Shiva, and Titan)."
+            "flag": "@anon107",
+            "title": "Dwarf Castle spell learning",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-call:vanillagrowup",
+                "title": "Vanilla Dwarf Castle summons",
+                "description": "By default in Free Enterprise, the summons learned when Rydia ages are randomized. Set this flag to return to the vanilla summons learned at that time (Mist, Indra, Jinn, Shiva, and Titan)."
+              },
+              {
+                "flag": "-call:nogrowup",
+                "title": "Rydia learns no spells in place of summons",
+                "description": "Set this flag to prevent Rydia from learning any summons at Dwarf Castle (she will still learn Fire2/Ice-2/Lit-2).",
+                "fork": true
+              }
+            ]
+          },
+          {
+            "flag": "-call:noorbs",
+            "title": "Call orbs are removed from rewards, boxes, and shops",
+            "description": "Set this flag to remove all Call orbs from the game. Rydia can still learn summons in other ways.",
+            "hard": true,
+            "fork": true
+          }
+        ]
+      },
+      {
+        "flag": "@anon108",
+        "title": "Alternate starting conditions",
+        "fork": true,
+        "type": "select",
+        "subcontrols": [
+          {
+            "flag": "-starting:blackchocobo",
+            "title": "Start with Black Chocobo but no Enterprise",
+            "description": "The Black Chocobo in the Baron Chocobo Forest will be there from the beginning of the seed. You obtain the Enterprise by completing Baron Castle, as in the vanilla game."
+          },
+          {
+            "flag": "-starting:underground",
+            "title": "Start underground with a Drill-less Falcon",
+            "description": "You start with the Falcon and the Hook at Dwarf Castle. The Drill replaces the Hook in the key item pool and allows you to break the mountain at Agart to get above ground. You obtain the Enterprise by completing Baron Castle, as in the vanilla game.",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "@anon109",
+        "title": "Restore vanilla behaviors",
+        "subcontrols": [
+          {
+            "flag": "-vanilla:zot",
+            "title": "Vanilla Zot spell",
+            "description": "By default, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell. This flag removes that behavior."
           },
           {
             "flag": "-vanilla:fashion",
@@ -8481,124 +9692,6 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon102",
-        "title": "Zeromus fight changes",
-        "fork": true,
-        "subcontrols": [
-          {
-            "flag": "@anon103",
-            "title": "Script category",
-            "type": "select",
-            "subcontrols": [
-              {
-                "flag": "@vanilla",
-                "title": "Vanilla Z script",
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  },
-                  {
-                    "flag": "-z:phaseshift",
-                    "title": "Shuffle the three main Z fight phases",
-                    "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:physical",
-                "title": "Physical Z script",
-                "description": "Enable this flag to replace Zeromus' magic-based damaging attacks with physical attacks (Fight, Dark Wave, Needle/Counter). Zeromus now counters some physical commands instead of magic.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:phaseshift",
-                    "title": "Shuffle the three main Z fight phases",
-                    "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:physmag",
-                "title": "Random physical or magical Z script",
-                "description": "In half the seeds rolled with this flag, Zeromus will have the physical script from <em>-z:physical</em>, and in the other half Zeromus will have the usual magic script.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  },
-                  {
-                    "flag": "-z:phaseshift",
-                    "title": "Shuffle the three main Z fight phases",
-                    "description": "Zeromus has three main phases after the first Big Bang: Virus, Nuke, and Meteo. Enable this flag to shuffle the three attack phases among themselves (the HP thresholds and reactions will not change).",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:chaos",
-                "title": "Fully random attack and reaction scripts",
-                "description": "In each attack phase, Zeromus will have a handful of random attacks (one or two possibly stronger, with a shake). Four attacks are chosen as reactions. The attacks are mostly curated.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  }
-                ]
-              },
-              {
-                "flag": "-z:lavosshell",
-                "title": "Three random attack phases",
-                "description": "The three main attack phases are replaced by three random monster scripts that do not automatically progress to another script.",
-                "hard": true,
-                "subcontrols": [
-                  {
-                    "flag": "-z:whichbang",
-                    "title": "Replace every Big Bang with another spell",
-                    "description": "Each instance of Big Bang is replaced with a (potentially different) spell chosen from a small list, including Big Bang itself.",
-                    "hard": true
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "flag": "@anon104",
-            "title": "Nerfing of Big Bangs",
-            "type": "select",
-            "subcontrols": [
-              {
-                "flag": "-z:nonerfs",
-                "title": "Prevent nerfing of Big Bangs",
-                "description": "Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a counter-Nuke between the tick that Z sets spell power for Big Bang and the tick when Big Bang goes off. Enable this flag to prevent that happening by implementing chains.",
-                "hard": true
-              },
-              {
-                "flag": "-z:mustnerf",
-                "title": "9999 damage Big Bangs",
-                "description": "Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).",
-                "hard": true
-              }
-            ]
-          },
-          {
-            "flag": "-z:vanillasprite",
-            "title": "Vanilla Z sprite",
-            "description": "Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite."
-          }
-        ]
-      },
-      {
         "flag": "-vintage",
         "title": "Vintage Battlefield",
         "description": "Enables the April Fools Day 2019 mode."
@@ -8607,14 +9700,19 @@ var FLAG_UISPEC = [
         "flag": "-pushbtojump",
         "title": "Push B to Jump",
         "description": "<ul>\n    <li>Enables the April Fools Day 2020 mode.</li>\n    <li>This flag does not affect the randomized placement of progression items.</li>\n    <li>Stability is absolutely not guaranteed.</li>\n    <li>Instability is absolutely guaranteed.</li>\n    <li>(If a door goes somewhere you don't expect it to go, it was probably a \"return\" door, which takes you back to your previous location.)</li>\n</ul>"
-      },
+      }
+    ]
+  },
+  {
+    "title": "WACKY",
+    "controls": [
       {
         "flag": "@wacky",
         "title": "Wacky challenge",
-        "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>Only one of the following can be used: \"afflicted\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"zombies\"</li>\n\t<li>If any of the above are set, none of these can be used: \"battlescars\", \"payablegolbez\", \"tellahmaneuver\", \"worthfighting\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"afflicted\", \"battlescars\", \"menarepigs\", \"mirrormirror\", \"skywarriors\", \"unstackable\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"friendlyfire\"</li>\n\t<li>None of these modes can be used together: \"afflicted\", \"battlescars\", \"worthfighting\", \"zombies\"</li>\n\t<li>None of these modes can be used together: \"darts\", \"musical\", \"skillissue\"</li>\n\t<li>None of these modes can be used together: \"3point\", \"tellahmaneuver\"</li>\t\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, less random modes will be chosen.</p>",
+        "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>None of these modes can be used together: \"friendlyfire\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"tellahmaneuver\", \"3point\"</li>\n\t<li>None of these modes can be used together: \"musical\", \"darts\", \"skillissue\"</li>\t\n\t<li>None of these modes can be used together: \"worthfighting\", \"battlescars\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"menarepigs\", \"skywarriors\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"unstackable\", \"menarepigs\", \"skywarriors\", \"battlescars\", \"3point\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, fewer random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon105",
+            "flag": "@anon110",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -8741,14 +9839,14 @@ var FLAG_UISPEC = [
             "title": "\"Misspelled\""
           },
           {
-            "flag": "-wacky:biggermagnet",
-            "title": "\"A Much Bigger Magnet\"",
-            "hard": true
-          },
-          {
             "flag": "-wacky:mirrormirror",
             "title": "\"Mirror, Mirror, on the Wall\"",
             "fork": true
+          },
+          {
+            "flag": "-wacky:biggermagnet",
+            "title": "\"A Much Bigger Magnet\"",
+            "hard": true
           },
           {
             "flag": "-wacky:mysteryjuice",
@@ -8820,10 +9918,6 @@ var FLAG_UISPEC = [
             "fork": true
           },
           {
-            "flag": "-wacky:darts",
-            "title": "\"World Championship of Darts\""
-          },
-          {
             "flag": "-wacky:unstackable",
             "title": "\"Unstackable\"",
             "hard": true
@@ -8840,18 +9934,27 @@ var FLAG_UISPEC = [
             "fork": true
           },
           {
+            "flag": "-wacky:darts",
+            "title": "\"World Championship of Darts\""
+          },
+          {
             "flag": "-wacky:zombies",
             "title": "\"Zombies!!!\""
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "title": "TWEAKS",
+    "controls": [
       {
-        "flag": "@anon106",
+        "flag": "@anon111",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon107",
+            "flag": "@anon112",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -8873,7 +9976,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon108",
+            "flag": "@anon113",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -8890,7 +9993,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon109",
+            "flag": "@anon114",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -8935,6 +10038,31 @@ var FLAG_UISPEC = [
             "flag": "-tweak:fusoyaregen",
             "title": "FuSoYa's Regen command now heals MP instead of HP",
             "description": "Instead of healing HP, Regen now heals *MP* for party members (unless -wacky:tellahmaneuver is on, where it just heals more HP); the precise value depends on various flags."
+          },
+          {
+            "flag": "-tweak:yanghp",
+            "title": "Yang continues to gain HP after level 60",
+            "description": "Normally, Yang stops gaining HP at level 60; this flag provides HP gains for levels 61+."
+          },
+          {
+            "flag": "-tweak:tellahrecall",
+            "title": "Improve Tellah's Recall command",
+            "description": "Tellah's Recall command now has a flat distribution for the eight spells it can cast and cannot fail unless Tellah lacks MP for the spell. The tier-1 elemental spells are replaced with the corresponding tier-3 spells."
+          },
+          {
+            "flag": "-tweak:edgedart",
+            "title": "Improve Edge's Dart command for Shuriken/Ninja Star",
+            "description": "When Darting a Shuriken or a Ninja Star, the damage is calculated using the larger of level and agility, instead of just level."
+          },
+          {
+            "flag": "-tweak:magicwhips",
+            "title": "Whips increase summon spell power",
+            "description": "When a character casts a summon, the attack power of any whip equipped (in either hand) is added to the summon's base damage."
+          },
+          {
+            "flag": "-tweak:rydiaredmage",
+            "title": "Adult Rydia keeps White and gains extra spells/gear",
+            "description": "Adult Rydia keeps her White magic spellset, and learns eight additional White magic spells during the Dwarf cutscene. She also gains access to non-holy swords and shields, as well as retaining the White mage gear to which she normally loses access."
           }
         ]
       }
@@ -8944,7 +10072,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon110",
+        "flag": "@anon115",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -8998,7 +10126,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon111",
+            "flag": "@anon116",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -9014,7 +10142,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon112",
+                "flag": "@anon117",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

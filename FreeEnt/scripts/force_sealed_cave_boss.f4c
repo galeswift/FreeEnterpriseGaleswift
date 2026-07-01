@@ -1,0 +1,13 @@
+// Push B can still skip the fight, but
+// otherwise the boss fight occurs before
+// you pick up the item now (originally
+// used for doors rando, to mitigate the
+// panic button allowing you to warp out)
+
+eventcall($47)
+{
+    if not #DemonWallBattle:
+        $AA   //Demon Wall battle
+    else:
+        $00   //(no event)
+}

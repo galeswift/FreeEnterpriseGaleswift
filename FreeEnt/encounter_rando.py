@@ -131,15 +131,18 @@ def apply(env):
     else:
         env.add_substitution('behemoth use toggle', '')
 
-    if env.options.flags.has('encounter_toggle'):
+    if env.options.flags.has_any('encounter_toggle', 'encounter_norepeats'):
         env.add_file('scripts/encounter_toggle.f4c')
+        env.add_toggle('toggled_encounters')
+        if env.options.flags.has('encounter_norepeats'):
+            env.add_file('scripts/encounter_norepeats.f4c')
     
-    if env.options.flags.has('encounter_dangerous') and env.options.flags.has_any('encounter_toggle', 'encounter_off'):
+    if env.options.flags.has('encounter_dangerous') and env.options.flags.has_any('encounter_toggle', 'encounter_norepeats', 'encounter_off'):
         env.add_file('scripts/encounter_dangerous.f4c')
     else:
         env.add_substitution('encounter dangerous on', '')
 
-    if not env.options.flags.has_any('encounter_toggle', 'encounter_off'):
+    if not env.options.flags.has_any('encounter_toggle', 'encounter_norepeats', 'encounter_off'):
         env.add_substitution('encounter default off', '')
 
     if not env.options.flags.has('encounter_reduction'):

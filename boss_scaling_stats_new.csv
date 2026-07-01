@@ -1,0 +1,2006 @@
+dmist,dmist_slot,D.Mist,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+dmist,officer_slot,D.Mist,11,302,880,245,3,75,26,0,0,2,2,60,12,2,4,11
+dmist,octomamm_slot,D.Mist,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,10
+dmist,antlion_slot,D.Mist,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,2
+dmist,mombomb_slot,D.Mist,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+dmist,fabulgauntlet_slot,D.Mist,15,1880,5590,1425,3,90,36,0,0,2,3,60,11,6,9,15
+dmist,milon_slot,D.Mist,15,2780,3800,3300,1,75,19,0,0,2,0,0,0,8,8,14
+dmist,milonz_slot,D.Mist,15,3000,4000,3000,3,99,44,0,0,1,6,40,22,9,9,31
+dmist,mirrorcecil_slot,D.Mist,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,17
+dmist,karate_slot,D.Mist,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,31
+dmist,guard_slot,D.Mist,18,400,1440,1000,3,99,46,0,0,1,3,40,14,11,14,26
+dmist,baigan_slot,D.Mist,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+dmist,kainazzo_slot,D.Mist,16,4000,5500,4000,3,99,44,0,0,2,10,50,48,15,15,29
+dmist,darkelf_slot,D.Mist,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+dmist,magus_slot,D.Mist,16,9000,9000,9000,5,80,60,0,0,2,3,60,11,7,7,11
+dmist,valvalis_slot,D.Mist,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+dmist,calbrena_slot,D.Mist,47,8524,21000,8000,7,99,96,0,0,2,6,60,25,11,11,41
+dmist,golbez_slot,D.Mist,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+dmist,lugae_slot,D.Mist,25,18943,26020,11000,6,99,86,0,0,1,0,0,0,27,27,7
+dmist,darkimp_slot,D.Mist,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,16
+dmist,kingqueen_slot,D.Mist,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,15
+dmist,rubicant_slot,D.Mist,50,25200,25000,7000,7,80,88,0,0,1,8,80,37,38,38,16
+dmist,evilwall_slot,D.Mist,37,19000,23000,8000,6,90,84,0,0,2,7,80,29,66,66,79
+dmist,asura_slot,D.Mist,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+dmist,leviatan_slot,D.Mist,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+dmist,odin_slot,D.Mist,53,20500,18000,0,9,85,116,0,0,3,7,50,32,43,46,95
+dmist,bahamut_slot,D.Mist,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+dmist,elements_slot,D.Mist,79,65000,102500,20000,10,80,128,0,0,3,3,60,4,89,89,15
+dmist,cpu_slot,D.Mist,48,24000,150000,10333,13,99,174,0,0,4,8,50,38,38,38,127
+dmist,paledim_slot,D.Mist,98,27300,59000,0,11,85,144,0,0,5,10,50,48,40,43,31
+dmist,wyvern_slot,D.Mist,99,25000,64300,0,12,90,160,0,0,5,10,50,52,43,46,8
+dmist,plague_slot,D.Mist,96,28000,31200,550,11,90,146,0,0,5,7,50,32,29,32,96
+dmist,dlunar_slot,D.Mist,99,42000,100000,0,11,85,144,0,0,4,10,80,54,30,30,36
+dmist,ogopogo_slot,D.Mist,62,37000,61100,0,11,99,150,0,0,4,9,50,40,38,38,127
+officer,dmist_slot,Officer,10,341,319,66,2,90,16,0,0,5,7,80,31,5,5,
+officer,dmist_slot,Soldier,9,42,128,45,2,85,13,0,0,0,0,0,5,1,2,
+officer,officer_slot,Officer,11,221,400,80,3,75,26,1,65,2,2,60,12,2,4,
+officer,officer_slot,Soldier,9,27,160,55,2,99,20,0,0,0,0,0,4,1,2,
+officer,octomamm_slot,Officer,10,1720,546,164,2,99,22,0,0,0,6,60,25,31,31,
+officer,octomamm_slot,Soldier,9,211,219,113,2,95,18,0,0,0,0,0,5,15,15,
+officer,antlion_slot,Officer,2,732,682,262,2,85,11,0,0,2,2,60,8,5,5,
+officer,antlion_slot,Soldier,2,90,273,180,2,85,11,0,0,0,0,0,3,1,2,
+officer,mombomb_slot,Officer,15,915,1982,574,3,80,30,0,0,0,1,40,9,7,7,
+officer,mombomb_slot,Soldier,13,112,793,394,2,99,22,0,0,0,0,0,3,4,4,
+officer,fabulgauntlet_slot,Officer,15,1376,2541,466,3,90,36,2,20,2,3,60,11,6,9,
+officer,fabulgauntlet_slot,Soldier,13,169,1017,320,3,80,28,0,0,0,0,0,4,2,4,
+officer,milon_slot,Officer,15,2035,1728,1078,1,75,19,1,35,2,0,0,0,8,8,
+officer,milon_slot,Soldier,13,249,691,741,2,90,15,0,0,0,0,0,0,4,4,
+officer,milonz_slot,Officer,15,2196,1819,980,3,99,44,1,60,1,6,40,22,9,9,
+officer,milonz_slot,Soldier,13,269,728,674,3,85,34,0,0,0,0,0,5,5,5,
+officer,mirrorcecil_slot,Officer,17,732,0,0,3,99,46,0,0,0,3,60,11,5,5,
+officer,mirrorcecil_slot,Soldier,14,90,0,0,3,90,36,0,0,0,0,0,4,1,2,
+officer,karate_slot,Officer,31,2928,0,0,6,99,86,0,0,0,0,0,0,4,7,
+officer,karate_slot,Soldier,26,358,0,0,5,90,66,0,0,0,0,0,0,2,4,
+officer,guard_slot,Officer,18,293,655,327,3,99,46,1,90,1,3,40,14,11,14,
+officer,guard_slot,Soldier,15,36,262,225,3,90,36,0,0,0,0,0,5,4,7,
+officer,baigan_slot,Officer,9,3074,2191,980,4,99,52,0,0,0,3,60,11,8,8,
+officer,baigan_slot,Soldier,8,376,877,674,3,95,40,0,0,0,0,0,4,4,4,
+officer,kainazzo_slot,Officer,16,2928,2500,1307,3,99,44,2,50,2,10,50,48,15,15,
+officer,kainazzo_slot,Soldier,14,358,1000,898,3,85,34,0,0,0,4,40,16,8,8,
+officer,darkelf_slot,Officer,19,3659,3182,2939,4,99,54,0,0,3,99,99,254,11,11,
+officer,darkelf_slot,Soldier,16,448,1273,2021,3,95,42,0,0,0,6,90,84,5,5,
+officer,magus_slot,Officer,16,6587,4091,2939,5,80,60,1,45,2,3,60,11,7,7,
+officer,magus_slot,Soldier,14,805,1637,2021,3,99,46,0,0,0,0,0,4,4,4,
+officer,valvalis_slot,Officer,36,4391,4319,1796,5,99,70,0,0,0,3,40,12,18,18,
+officer,valvalis_slot,Soldier,30,537,1728,1235,4,99,54,0,0,0,0,0,4,9,9,
+officer,calbrena_slot,Officer,47,6238,9546,2613,7,99,96,1,80,2,6,60,25,11,11,
+officer,calbrena_slot,Soldier,39,763,3819,1796,5,99,70,0,0,0,0,0,5,5,5,
+officer,golbez_slot,Officer,31,2197,9091,3592,5,99,68,0,0,0,0,0,0,27,27,
+officer,golbez_slot,Soldier,26,269,3637,2470,4,99,52,0,0,0,0,0,0,11,14,
+officer,lugae_slot,Officer,25,13863,11828,3592,6,99,86,1,50,1,0,0,0,27,27,
+officer,lugae_slot,Soldier,21,1694,4731,2470,5,90,66,0,0,0,0,0,0,11,14,
+officer,darkimp_slot,Officer,16,437,2646,45,5,70,56,0,0,0,0,0,0,18,21,
+officer,darkimp_slot,Soldier,14,54,1059,31,3,95,42,0,0,0,0,0,0,8,11,
+officer,kingqueen_slot,Officer,15,4391,0,0,9,85,116,0,0,0,0,0,0,53,53,
+officer,kingqueen_slot,Soldier,13,537,0,0,6,99,86,0,0,0,0,0,0,27,27,
+officer,rubicant_slot,Officer,50,18442,11364,2286,7,80,88,1,90,1,8,80,37,38,38,
+officer,rubicant_slot,Soldier,41,2253,4546,1572,5,99,68,0,0,0,0,0,5,18,18,
+officer,evilwall_slot,Officer,37,13904,10455,2613,6,90,84,1,35,2,7,80,29,66,66,
+officer,evilwall_slot,Soldier,31,1699,4182,1796,5,90,64,0,0,0,0,0,5,30,33,
+officer,asura_slot,Officer,63,16832,9091,0,10,99,134,0,0,0,8,80,37,66,66,
+officer,asura_slot,Soldier,52,2057,3637,0,8,90,104,0,0,0,0,0,5,30,33,
+officer,leviatan_slot,Officer,79,25613,12728,0,13,99,174,0,0,5,10,80,47,53,53,
+officer,leviatan_slot,Soldier,65,3130,5091,0,10,99,134,0,0,0,4,40,16,27,27,
+officer,odin_slot,Officer,53,15002,8182,0,9,85,116,2,90,3,7,50,32,43,46,
+officer,odin_slot,Soldier,44,1833,3273,0,6,99,86,0,0,0,0,0,5,20,23,
+officer,bahamut_slot,Officer,47,27077,15910,0,13,99,174,0,0,1,1,60,8,27,27,
+officer,bahamut_slot,Soldier,39,3308,6364,0,10,99,134,0,0,0,0,0,3,11,14,
+officer,elements_slot,Officer,79,65000,46591,6531,10,80,128,2,35,3,3,60,4,89,89,
+officer,elements_slot,Soldier,65,9299,18637,4490,7,99,98,0,0,0,0,0,1,42,45,
+officer,cpu_slot,Officer,48,17563,68182,3375,13,99,174,4,45,4,8,50,38,38,38,
+officer,cpu_slot,Soldier,40,2146,27273,2320,10,99,134,0,0,0,0,0,5,18,18,
+officer,paledim_slot,Officer,98,19978,26819,0,11,85,144,5,40,5,10,50,48,40,43,
+officer,paledim_slot,Soldier,81,2441,10728,0,8,99,110,0,0,0,4,40,16,19,22,
+officer,wyvern_slot,Officer,99,18295,29228,0,12,90,160,4,80,5,10,50,52,43,46,
+officer,wyvern_slot,Soldier,81,2236,11691,0,9,99,124,0,0,0,4,40,18,20,23,
+officer,plague_slot,Officer,96,20491,14182,180,11,90,146,4,50,5,7,50,32,29,32,
+officer,plague_slot,Soldier,79,2504,5673,124,8,99,110,0,0,0,0,0,5,13,16,
+officer,dlunar_slot,Officer,99,30736,45455,0,11,85,144,3,30,4,10,80,54,30,30,
+officer,dlunar_slot,Soldier,81,3755,18182,0,8,99,110,0,0,0,4,40,18,15,15,
+officer,ogopogo_slot,Officer,62,27077,27773,0,11,99,150,4,55,4,9,50,40,38,38,
+officer,ogopogo_slot,Soldier,51,3308,11110,0,9,85,116,0,0,0,3,40,14,18,18,
+octomamm,dmist_slot,Octomamm,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,
+octomamm,officer_slot,Octomamm,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,
+octomamm,octomamm_slot,Octomamm,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,
+octomamm,antlion_slot,Octomamm,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,
+octomamm,mombomb_slot,Octomamm,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,
+octomamm,fabulgauntlet_slot,Octomamm,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,
+octomamm,milon_slot,Octomamm,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,
+octomamm,milonz_slot,Octomamm,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,
+octomamm,mirrorcecil_slot,Octomamm,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,
+octomamm,karate_slot,Octomamm,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,
+octomamm,guard_slot,Octomamm,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,
+octomamm,baigan_slot,Octomamm,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,
+octomamm,kainazzo_slot,Octomamm,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,
+octomamm,darkelf_slot,Octomamm,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,
+octomamm,magus_slot,Octomamm,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,
+octomamm,valvalis_slot,Octomamm,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,
+octomamm,calbrena_slot,Octomamm,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,
+octomamm,golbez_slot,Octomamm,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,
+octomamm,lugae_slot,Octomamm,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,
+octomamm,darkimp_slot,Octomamm,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,
+octomamm,kingqueen_slot,Octomamm,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+octomamm,rubicant_slot,Octomamm,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,
+octomamm,evilwall_slot,Octomamm,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,
+octomamm,asura_slot,Octomamm,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,
+octomamm,leviatan_slot,Octomamm,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,
+octomamm,odin_slot,Octomamm,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,
+octomamm,bahamut_slot,Octomamm,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,
+octomamm,elements_slot,Octomamm,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,
+octomamm,cpu_slot,Octomamm,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,
+octomamm,paledim_slot,Octomamm,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,
+octomamm,wyvern_slot,Octomamm,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,
+octomamm,plague_slot,Octomamm,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,
+octomamm,dlunar_slot,Octomamm,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,
+octomamm,ogopogo_slot,Octomamm,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,
+antlion,dmist_slot,Antlion,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,
+antlion,officer_slot,Antlion,11,302,880,245,3,75,26,0,0,2,2,60,12,2,4,
+antlion,octomamm_slot,Antlion,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,
+antlion,antlion_slot,Antlion,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,
+antlion,mombomb_slot,Antlion,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,
+antlion,fabulgauntlet_slot,Antlion,15,1880,5590,1425,3,90,36,0,0,2,3,60,11,6,9,
+antlion,milon_slot,Antlion,15,2780,3800,3300,1,75,19,0,0,2,0,0,0,8,8,
+antlion,milonz_slot,Antlion,15,3000,4000,3000,3,99,44,0,0,1,6,40,22,9,9,
+antlion,mirrorcecil_slot,Antlion,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,
+antlion,karate_slot,Antlion,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,
+antlion,guard_slot,Antlion,18,400,1440,1000,3,99,46,0,0,1,3,40,14,11,14,
+antlion,baigan_slot,Antlion,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,
+antlion,kainazzo_slot,Antlion,16,4000,5500,4000,3,99,44,0,0,2,10,50,48,15,15,
+antlion,darkelf_slot,Antlion,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,
+antlion,magus_slot,Antlion,16,9000,9000,9000,5,80,60,0,0,2,3,60,11,7,7,
+antlion,valvalis_slot,Antlion,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,
+antlion,calbrena_slot,Antlion,47,8524,21000,8000,7,99,96,0,0,2,6,60,25,11,11,
+antlion,golbez_slot,Antlion,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,
+antlion,lugae_slot,Antlion,25,18943,26020,11000,6,99,86,0,0,1,0,0,0,27,27,
+antlion,darkimp_slot,Antlion,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,
+antlion,kingqueen_slot,Antlion,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+antlion,rubicant_slot,Antlion,50,25200,25000,7000,7,80,88,0,0,1,8,80,37,38,38,
+antlion,evilwall_slot,Antlion,37,19000,23000,8000,6,90,84,0,0,2,7,80,29,66,66,
+antlion,asura_slot,Antlion,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,
+antlion,leviatan_slot,Antlion,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,
+antlion,odin_slot,Antlion,53,20500,18000,0,9,85,116,0,0,3,7,50,32,43,46,
+antlion,bahamut_slot,Antlion,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,
+antlion,elements_slot,Antlion,79,65000,102500,20000,10,80,128,0,0,3,3,60,4,89,89,
+antlion,cpu_slot,Antlion,48,24000,150000,10333,13,99,174,0,0,4,8,50,38,38,38,
+antlion,paledim_slot,Antlion,98,27300,59000,0,11,85,144,0,0,5,10,50,48,40,43,
+antlion,wyvern_slot,Antlion,99,25000,64300,0,12,90,160,0,0,5,10,50,52,43,46,
+antlion,plague_slot,Antlion,96,28000,31200,550,11,90,146,0,0,5,7,50,32,29,32,
+antlion,dlunar_slot,Antlion,99,42000,100000,0,11,85,144,0,0,4,10,80,54,30,30,
+antlion,ogopogo_slot,Antlion,62,37000,61100,0,11,99,150,0,0,4,9,50,40,38,38,
+waterhag,dmist_slot,WaterHag,10,46065,700,200,2,90,16,0,0,5,7,80,31,5,5,,script-defense: 0-0-0
+waterhag,officer_slot,WaterHag,11,45902,880,245,3,75,26,0,0,2,2,60,12,2,4,,script-defense: 0-0-0
+waterhag,octomamm_slot,WaterHag,10,47950,1200,500,2,99,22,0,0,0,6,60,25,31,31,,script-defense: 0-0-0
+waterhag,antlion_slot,WaterHag,2,46600,1500,800,2,85,11,0,0,2,2,60,8,5,5,,script-defense: 0-0-0
+waterhag,mombomb_slot,WaterHag,15,46850,4360,1755,3,80,30,0,0,0,1,40,9,7,7,,script-defense: 0-0-0
+waterhag,fabulgauntlet_slot,WaterHag,15,47480,5590,1425,3,90,36,0,0,2,3,60,11,6,9,,script-defense: 0-0-0
+waterhag,milon_slot,WaterHag,15,48380,3800,3300,1,75,19,0,0,2,0,0,0,8,8,,script-defense: 0-0-0
+waterhag,milonz_slot,WaterHag,15,48600,4000,3000,3,99,44,0,0,1,6,40,22,9,9,,script-defense: 0-0-0
+waterhag,mirrorcecil_slot,WaterHag,17,46600,0,0,3,99,46,0,0,0,3,60,11,5,5,,script-defense: 0-0-0
+waterhag,karate_slot,WaterHag,31,49600,0,0,6,99,86,0,0,0,0,0,0,4,7,,script-defense: 0-0-0
+waterhag,guard_slot,WaterHag,18,46000,1440,1000,3,99,46,0,0,1,3,40,14,11,14,,script-defense: 0-0-0
+waterhag,baigan_slot,WaterHag,9,49800,4820,3000,4,99,52,0,0,0,3,60,11,8,8,,script-defense: 0-0-0
+waterhag,kainazzo_slot,WaterHag,16,49600,5500,4000,3,99,44,0,0,2,10,50,48,15,15,,script-defense: 0-0-0
+waterhag,darkelf_slot,WaterHag,19,50600,7000,9000,4,99,54,0,0,3,99,99,254,11,11,,script-defense: 0-0-0
+waterhag,magus_slot,WaterHag,16,54600,9000,9000,5,80,60,0,0,2,3,60,11,7,7,,script-defense: 0-0-0
+waterhag,valvalis_slot,WaterHag,36,51600,9500,5500,5,99,70,0,0,0,3,40,12,18,18,,script-defense: 0-0-0
+waterhag,calbrena_slot,WaterHag,47,54124,21000,8000,7,99,96,0,0,2,6,60,25,11,11,,script-defense: 0-0-0
+waterhag,golbez_slot,WaterHag,31,48602,20000,11000,5,99,68,0,0,0,0,0,0,27,27,,script-defense: 0-0-0
+waterhag,lugae_slot,WaterHag,25,64543,26020,11000,6,99,86,0,0,1,0,0,0,27,27,,script-defense: 0-0-0
+waterhag,darkimp_slot,WaterHag,16,46197,5820,135,5,70,56,0,0,0,0,0,0,18,21,,script-defense: 0-0-0
+waterhag,kingqueen_slot,WaterHag,15,51600,0,0,9,85,116,0,0,0,0,0,0,53,53,,script-defense: 0-0-0
+waterhag,rubicant_slot,WaterHag,50,65000,25000,7000,7,80,88,0,0,1,8,80,37,38,38,,script-defense: 0-0-0
+waterhag,evilwall_slot,WaterHag,37,64600,23000,8000,6,90,84,0,0,2,7,80,29,66,66,,script-defense: 0-0-0
+waterhag,asura_slot,WaterHag,63,65000,20000,0,10,99,134,0,0,0,8,80,37,66,66,,script-defense: 0-0-0
+waterhag,leviatan_slot,WaterHag,79,65000,28000,0,13,99,174,0,0,5,10,80,47,53,53,,script-defense: 0-0-0
+waterhag,odin_slot,WaterHag,53,65000,18000,0,9,85,116,0,0,3,7,50,32,43,46,,script-defense: 0-0-0
+waterhag,bahamut_slot,WaterHag,47,65000,35000,0,13,99,174,0,0,1,1,60,8,27,27,,script-defense: 0-0-0
+waterhag,elements_slot,WaterHag,79,65000,102500,20000,10,80,128,0,0,3,3,60,4,89,89,,script-defense: 0-0-0
+waterhag,cpu_slot,WaterHag,48,65000,150000,10333,13,99,174,0,0,4,8,50,38,38,38,,script-defense: 0-0-0
+waterhag,paledim_slot,WaterHag,98,65000,59000,0,11,85,144,0,0,5,10,50,48,40,43,,script-defense: 0-0-0
+waterhag,wyvern_slot,WaterHag,99,65000,64300,0,12,90,160,0,0,5,10,50,52,43,46,,script-defense: 0-0-0
+waterhag,plague_slot,WaterHag,96,65000,31200,550,11,90,146,0,0,5,7,50,32,29,32,,script-defense: 0-0-0
+waterhag,dlunar_slot,WaterHag,99,65000,100000,0,11,85,144,0,0,4,10,80,54,30,30,,script-defense: 0-0-0
+waterhag,ogopogo_slot,WaterHag,62,65000,61100,0,11,99,150,0,0,4,9,50,40,38,38,,script-defense: 0-0-0
+mombomb,dmist_slot,MomBomb,10,10298,306,137,2,90,16,0,0,5,7,80,31,5,5,10
+mombomb,dmist_slot,Bomb,10,19,60,10,2,85,11,0,0,5,10,80,50,2,4,
+mombomb,dmist_slot,GrayBomb,10,38,73,12,2,95,18,0,0,5,0,0,0,5,8,
+mombomb,officer_slot,MomBomb,11,10194,384,168,3,75,26,1,65,2,2,60,12,2,4,4
+mombomb,officer_slot,Bomb,11,13,75,12,2,90,16,1,65,2,2,99,20,1,3,
+mombomb,officer_slot,GrayBomb,11,25,91,15,3,80,30,1,65,2,0,0,0,2,5,
+mombomb,octomamm_slot,MomBomb,10,11504,523,342,2,99,22,0,0,0,6,60,25,31,31,4
+mombomb,octomamm_slot,Bomb,10,94,102,23,2,90,15,0,0,0,9,80,41,14,17,
+mombomb,octomamm_slot,GrayBomb,10,188,124,30,2,99,22,0,0,0,0,0,0,31,34,
+mombomb,antlion_slot,MomBomb,2,10640,654,548,2,85,11,0,0,2,2,60,8,5,5,1
+mombomb,antlion_slot,Bomb,2,40,128,37,1,60,6,0,0,2,2,85,13,2,4,
+mombomb,antlion_slot,GrayBomb,2,80,155,48,2,85,13,0,0,2,0,0,0,5,8,
+mombomb,mombomb_slot,MomBomb,15,10800,1900,1200,3,80,30,0,0,0,1,40,9,7,7,5
+mombomb,mombomb_slot,Bomb,14,50,370,80,2,95,19,0,0,0,4,60,15,3,6,
+mombomb,mombomb_slot,GrayBomb,14,100,450,105,3,85,34,0,0,0,0,0,0,7,10,
+mombomb,fabulgauntlet_slot,MomBomb,15,11204,2437,975,3,90,36,2,20,2,3,60,11,6,9,5
+mombomb,fabulgauntlet_slot,Bomb,14,76,475,65,2,99,22,2,20,2,5,60,19,3,6,
+mombomb,fabulgauntlet_slot,GrayBomb,14,151,577,86,3,95,40,2,20,2,0,0,0,6,9,
+mombomb,milon_slot,MomBomb,15,11780,1656,2257,1,75,19,1,35,2,0,0,0,8,8,14
+mombomb,milon_slot,Bomb,14,112,323,151,2,85,13,1,35,2,0,0,0,4,7,
+mombomb,milon_slot,GrayBomb,14,223,393,198,1,80,21,1,35,2,0,0,0,8,11,
+mombomb,milonz_slot,MomBomb,15,11920,1744,2052,3,99,44,1,60,1,6,40,22,9,9,31
+mombomb,milonz_slot,Bomb,14,120,340,137,3,80,28,1,60,1,8,50,36,4,7,
+mombomb,milonz_slot,GrayBomb,14,240,413,180,4,90,50,1,60,1,0,0,0,9,12,
+mombomb,mirrorcecil_slot,MomBomb,17,10640,0,0,3,99,46,0,0,0,3,60,11,5,5,6
+mombomb,mirrorcecil_slot,Bomb,16,40,0,0,3,80,30,0,0,0,5,60,19,2,4,
+mombomb,mirrorcecil_slot,GrayBomb,16,80,0,0,4,99,52,0,0,0,0,0,0,5,8,
+mombomb,karate_slot,MomBomb,31,12560,0,0,6,99,86,0,0,0,0,0,0,4,7,11
+mombomb,karate_slot,Bomb,29,160,0,0,4,99,54,0,0,0,0,0,0,2,5,
+mombomb,karate_slot,GrayBomb,29,320,0,0,7,99,98,0,0,0,0,0,0,4,7,
+mombomb,guard_slot,MomBomb,18,10256,628,684,3,99,46,1,90,1,3,40,14,11,14,26
+mombomb,guard_slot,Bomb,17,16,123,46,3,80,30,1,90,1,6,60,23,5,8,
+mombomb,guard_slot,GrayBomb,17,32,149,60,4,99,52,1,90,1,0,0,0,11,14,
+mombomb,baigan_slot,MomBomb,9,12688,2101,2052,4,99,52,0,0,0,3,60,11,8,8,9
+mombomb,baigan_slot,Bomb,9,168,410,137,3,85,32,0,0,0,5,60,19,4,7,
+mombomb,baigan_slot,GrayBomb,9,336,498,180,5,80,60,0,0,0,0,0,0,8,11,
+mombomb,kainazzo_slot,MomBomb,16,12560,2397,2736,3,99,44,2,50,2,10,50,48,15,15,29
+mombomb,kainazzo_slot,Bomb,15,160,467,183,3,80,28,2,50,2,8,70,80,7,10,
+mombomb,kainazzo_slot,GrayBomb,15,320,568,240,4,90,50,2,50,2,0,0,0,15,18,
+mombomb,darkelf_slot,MomBomb,19,13200,3051,6154,4,99,54,0,0,3,99,99,254,11,11,15
+mombomb,darkelf_slot,Bomb,18,200,595,411,3,85,34,0,0,3,255,99,255,5,8,
+mombomb,darkelf_slot,GrayBomb,18,400,723,539,5,80,62,0,0,3,0,0,0,11,14,
+mombomb,magus_slot,MomBomb,16,15760,3923,6154,5,80,60,1,45,2,3,60,11,7,7,11
+mombomb,magus_slot,Bomb,15,360,764,411,3,90,38,1,45,2,5,60,19,3,6,
+mombomb,magus_slot,GrayBomb,15,720,929,539,5,99,68,1,45,2,0,0,0,7,10,
+mombomb,valvalis_slot,MomBomb,36,13840,4140,3761,5,99,70,0,0,0,3,40,12,18,18,63
+mombomb,valvalis_slot,Bomb,34,240,807,251,3,99,44,0,0,0,5,60,19,8,11,
+mombomb,valvalis_slot,GrayBomb,34,480,981,330,6,90,80,0,0,0,0,0,0,18,21,
+mombomb,calbrena_slot,MomBomb,47,15456,9152,5471,7,99,96,1,80,2,6,60,25,11,11,41
+mombomb,calbrena_slot,Bomb,44,341,1783,365,5,80,60,1,80,2,9,80,41,5,8,
+mombomb,calbrena_slot,GrayBomb,44,682,2168,479,8,99,108,1,80,2,0,0,0,11,14,
+mombomb,golbez_slot,MomBomb,31,11922,8716,7522,5,99,68,0,0,0,0,0,0,27,27,1
+mombomb,golbez_slot,Bomb,29,121,1698,502,3,99,44,0,0,0,0,0,0,12,15,
+mombomb,golbez_slot,GrayBomb,29,241,2065,659,6,80,78,0,0,0,0,0,0,27,30,
+mombomb,lugae_slot,MomBomb,25,22124,11339,7522,6,99,86,1,50,1,0,0,0,27,27,7
+mombomb,lugae_slot,Bomb,24,758,2209,502,4,99,54,1,50,1,0,0,0,12,15,
+mombomb,lugae_slot,GrayBomb,24,1516,2686,659,7,99,98,1,50,1,0,0,0,27,30,
+mombomb,darkimp_slot,MomBomb,16,10383,2537,93,5,70,56,0,0,0,0,0,0,18,21,6
+mombomb,darkimp_slot,Bomb,15,24,494,7,3,90,36,0,0,0,0,0,0,8,11,
+mombomb,darkimp_slot,GrayBomb,15,48,601,9,5,80,62,0,0,0,0,0,0,18,21,
+mombomb,kingqueen_slot,MomBomb,15,13840,0,0,9,85,116,0,0,0,0,0,0,53,53,5
+mombomb,kingqueen_slot,Bomb,14,240,0,0,6,70,74,0,0,0,0,0,0,23,26,
+mombomb,kingqueen_slot,GrayBomb,14,480,0,0,10,90,132,0,0,0,0,0,0,65,65,
+mombomb,rubicant_slot,MomBomb,50,26128,10895,4787,7,80,88,1,90,1,8,80,37,38,38,16
+mombomb,rubicant_slot,Bomb,47,1008,2122,320,4,99,54,1,90,1,5,80,62,17,20,
+mombomb,rubicant_slot,GrayBomb,47,2016,2581,419,8,80,100,1,90,1,0,0,0,38,41,
+mombomb,evilwall_slot,MomBomb,37,22160,10023,5471,6,90,84,1,35,2,7,80,29,66,66,79
+mombomb,evilwall_slot,Bomb,35,760,1952,365,4,99,54,1,35,2,10,80,47,29,32,
+mombomb,evilwall_slot,GrayBomb,35,1520,2374,479,7,99,96,1,35,2,0,0,0,66,66,
+mombomb,asura_slot,MomBomb,63,24720,8716,0,10,99,134,0,0,0,8,80,37,66,66,69
+mombomb,asura_slot,Bomb,59,920,1698,0,6,99,86,0,0,0,5,80,62,29,32,
+mombomb,asura_slot,GrayBomb,59,1840,2065,0,11,99,152,0,0,0,0,0,0,66,66,
+mombomb,leviatan_slot,MomBomb,79,32400,12202,0,13,99,174,0,0,5,10,80,47,53,53,34
+mombomb,leviatan_slot,Bomb,74,1400,2377,0,8,99,110,0,0,5,6,80,78,23,26,
+mombomb,leviatan_slot,GrayBomb,74,2800,2890,0,13,99,174,0,0,5,0,0,0,65,65,
+mombomb,odin_slot,MomBomb,53,23120,7845,0,9,85,116,2,90,3,7,50,32,43,46,95
+mombomb,odin_slot,Bomb,50,820,1528,0,6,70,74,2,90,3,10,80,54,19,22,
+mombomb,odin_slot,GrayBomb,50,1640,1858,0,10,90,132,2,90,3,0,0,0,43,46,
+mombomb,bahamut_slot,MomBomb,47,33680,15253,0,13,99,174,0,0,1,1,60,8,27,27,17
+mombomb,bahamut_slot,Bomb,44,1480,2971,0,8,99,110,0,0,1,2,85,13,12,15,
+mombomb,bahamut_slot,GrayBomb,44,2960,3613,0,13,99,174,0,0,1,0,0,0,27,30,
+mombomb,elements_slot,MomBomb,79,65000,44668,13676,10,80,128,2,35,3,3,60,4,89,89,15
+mombomb,elements_slot,Bomb,74,4160,8699,912,6,90,82,2,35,3,5,70,6,39,42,
+mombomb,elements_slot,GrayBomb,74,8320,10580,1197,11,85,144,2,35,3,0,0,0,89,89,
+mombomb,cpu_slot,MomBomb,48,25360,65367,7066,13,99,174,4,45,4,8,50,38,38,38,127
+mombomb,cpu_slot,Bomb,45,960,12730,472,8,99,110,4,45,4,5,80,62,17,20,
+mombomb,cpu_slot,GrayBomb,45,1920,15482,619,13,99,174,4,45,4,0,0,0,38,41,
+mombomb,paledim_slot,MomBomb,98,27472,25712,0,11,85,144,5,40,5,10,50,48,40,43,31
+mombomb,paledim_slot,Bomb,92,1092,5007,0,7,90,92,5,40,5,8,70,80,18,21,
+mombomb,paledim_slot,GrayBomb,92,2184,6090,0,12,95,162,5,40,5,0,0,0,40,43,
+mombomb,wyvern_slot,MomBomb,99,26000,28021,0,12,90,160,4,80,5,10,50,52,43,46,8
+mombomb,wyvern_slot,Bomb,93,1000,5457,0,8,80,102,4,80,5,7,80,88,19,22,
+mombomb,wyvern_slot,GrayBomb,93,2000,6637,0,13,99,174,4,80,5,0,0,0,43,46,
+mombomb,plague_slot,MomBomb,96,27920,13597,377,11,90,146,4,50,5,7,50,32,29,32,32
+mombomb,plague_slot,Bomb,90,1120,2648,26,7,90,92,4,50,5,10,80,54,13,16,
+mombomb,plague_slot,GrayBomb,90,2240,3221,33,12,99,166,4,50,5,0,0,0,29,32,
+mombomb,dlunar_slot,MomBomb,99,36880,43578,0,11,85,144,3,30,4,10,80,54,30,30,36
+mombomb,dlunar_slot,Bomb,93,1680,8487,0,7,90,92,3,30,4,7,80,90,13,16,
+mombomb,dlunar_slot,GrayBomb,93,3360,10322,0,12,95,162,3,30,4,0,0,0,30,33,
+mombomb,ogopogo_slot,MomBomb,62,33680,26627,0,11,99,150,4,55,4,9,50,40,38,38,127
+mombomb,ogopogo_slot,Bomb,58,1480,5186,0,7,99,96,4,55,4,5,90,66,17,20,
+mombomb,ogopogo_slot,GrayBomb,58,2960,6307,0,13,90,170,4,55,4,0,0,0,38,41,
+fabulgauntlet,dmist_slot,General,10,80,77,22,2,90,16,0,0,5,7,80,31,5,5,
+fabulgauntlet,dmist_slot,Fighter,8,17,52,15,2,85,13,0,0,5,0,0,5,1,2,
+fabulgauntlet,dmist_slot,Weeper,6,25,21,6,1,60,8,0,0,5,3,80,28,5,5,96
+fabulgauntlet,dmist_slot,Imp Cap.,6,10,24,8,1,60,6,0,0,0,5,60,19,4,4,
+fabulgauntlet,dmist_slot,WaterHag,6,12,18,6,1,60,8,0,0,5,5,60,19,8,8,
+fabulgauntlet,dmist_slot,Gargoyle,8,40,41,15,2,85,13,0,0,5,3,85,34,5,5,
+fabulgauntlet,officer_slot,General,11,52,97,27,3,75,26,1,65,2,2,60,12,2,4,
+fabulgauntlet,officer_slot,Fighter,9,11,65,18,4,60,19,0,0,2,0,0,4,1,2,
+fabulgauntlet,officer_slot,Weeper,7,17,26,7,2,85,13,1,80,2,1,60,10,2,4,106
+fabulgauntlet,officer_slot,Imp Cap.,7,6,30,9,2,85,11,0,0,0,1,40,7,1,3,
+fabulgauntlet,officer_slot,WaterHag,6,8,23,7,2,85,13,1,80,2,1,40,7,3,6,
+fabulgauntlet,officer_slot,Gargoyle,9,26,51,18,4,60,19,1,80,2,2,60,12,2,4,
+fabulgauntlet,octomamm_slot,General,10,400,131,55,2,99,22,0,0,0,6,60,25,31,31,
+fabulgauntlet,octomamm_slot,Fighter,8,82,89,36,2,90,16,0,0,0,0,0,5,4,7,
+fabulgauntlet,octomamm_slot,Weeper,6,125,35,15,2,85,11,0,0,0,6,60,23,31,31,96
+fabulgauntlet,octomamm_slot,Imp Cap.,6,47,41,18,2,85,11,0,0,0,4,40,16,21,24,
+fabulgauntlet,octomamm_slot,WaterHag,6,60,31,15,2,85,11,0,0,0,4,40,16,53,53,
+fabulgauntlet,octomamm_slot,Gargoyle,8,200,69,36,2,90,16,0,0,0,3,80,28,31,31,
+fabulgauntlet,antlion_slot,General,2,171,164,88,2,85,11,0,0,2,2,60,8,5,5,
+fabulgauntlet,antlion_slot,Fighter,2,35,111,57,2,60,8,0,0,2,0,0,3,1,2,
+fabulgauntlet,antlion_slot,Weeper,2,54,43,23,2,90,3,0,0,2,1,60,8,5,5,20
+fabulgauntlet,antlion_slot,Imp Cap.,2,20,51,29,2,90,3,0,0,0,1,30,5,4,4,
+fabulgauntlet,antlion_slot,WaterHag,2,26,38,23,2,90,3,0,0,2,1,30,5,8,8,
+fabulgauntlet,antlion_slot,Gargoyle,2,86,86,57,2,60,8,0,0,2,1,60,8,5,5,
+fabulgauntlet,mombomb_slot,General,15,213,476,191,3,80,30,0,0,0,1,40,9,7,7,
+fabulgauntlet,mombomb_slot,Fighter,12,44,320,124,3,75,24,0,0,0,0,0,3,1,2,
+fabulgauntlet,mombomb_slot,Weeper,9,67,125,50,2,90,15,0,0,0,1,40,9,7,7,144
+fabulgauntlet,mombomb_slot,Imp Cap.,9,25,149,62,2,85,13,0,0,0,1,30,5,5,5,
+fabulgauntlet,mombomb_slot,WaterHag,8,32,110,50,2,90,15,0,0,0,1,30,5,11,11,
+fabulgauntlet,mombomb_slot,Gargoyle,12,107,250,124,3,75,24,0,0,0,1,40,9,7,7,
+fabulgauntlet,fabulgauntlet_slot,General,15,320,610,155,3,90,36,2,20,2,3,60,11,6,9,
+fabulgauntlet,fabulgauntlet_slot,Fighter,12,65,410,100,3,80,28,0,0,2,0,0,4,1,2,
+fabulgauntlet,fabulgauntlet_slot,Weeper,9,100,160,40,2,95,18,1,55,2,2,60,10,6,9,144
+fabulgauntlet,fabulgauntlet_slot,Imp Cap.,9,37,190,50,2,90,15,0,0,0,2,40,7,4,7,
+fabulgauntlet,fabulgauntlet_slot,WaterHag,8,48,140,40,2,95,18,1,45,2,2,40,7,10,13,
+fabulgauntlet,fabulgauntlet_slot,Gargoyle,12,160,320,100,3,80,28,1,80,2,2,60,12,6,9,
+fabulgauntlet,milon_slot,General,15,474,415,359,1,75,19,1,35,2,0,0,0,8,8,
+fabulgauntlet,milon_slot,Fighter,12,97,279,232,3,60,15,0,0,2,0,0,0,1,2,
+fabulgauntlet,milon_slot,Weeper,9,148,109,93,1,60,10,1,80,2,0,0,0,8,8,144
+fabulgauntlet,milon_slot,Imp Cap.,9,55,130,116,1,60,8,0,0,0,0,0,0,5,5,
+fabulgauntlet,milon_slot,WaterHag,8,71,96,93,1,60,10,1,80,2,0,0,0,11,11,
+fabulgauntlet,milon_slot,Gargoyle,12,237,218,232,3,60,15,1,80,2,0,0,0,8,8,
+fabulgauntlet,milonz_slot,General,15,511,437,327,3,99,44,1,60,1,6,40,22,9,9,
+fabulgauntlet,milonz_slot,Fighter,12,104,294,211,3,85,34,0,0,1,0,0,5,1,2,
+fabulgauntlet,milonz_slot,Weeper,9,160,115,85,2,99,22,1,90,1,5,40,20,9,9,144
+fabulgauntlet,milonz_slot,Imp Cap.,9,60,136,106,2,95,18,0,0,0,4,40,14,7,7,
+fabulgauntlet,milonz_slot,WaterHag,8,77,101,85,2,99,22,1,90,1,4,40,14,15,15,
+fabulgauntlet,milonz_slot,Gargoyle,12,256,229,211,3,85,34,1,90,1,6,40,24,9,9,
+fabulgauntlet,mirrorcecil_slot,General,17,171,0,0,3,99,46,0,0,0,3,60,11,5,5,
+fabulgauntlet,mirrorcecil_slot,Fighter,14,35,0,0,3,90,36,0,0,0,0,0,4,1,2,
+fabulgauntlet,mirrorcecil_slot,Weeper,11,54,0,0,2,99,22,0,0,0,2,60,10,5,5,164
+fabulgauntlet,mirrorcecil_slot,Imp Cap.,11,20,0,0,2,95,19,0,0,0,2,40,7,4,4,
+fabulgauntlet,mirrorcecil_slot,WaterHag,10,26,0,0,2,99,22,0,0,0,2,40,7,8,8,
+fabulgauntlet,mirrorcecil_slot,Gargoyle,14,86,0,0,3,90,36,0,0,0,2,60,12,5,5,
+fabulgauntlet,karate_slot,General,31,681,0,0,6,99,86,0,0,0,0,0,0,4,7,
+fabulgauntlet,karate_slot,Fighter,25,139,0,0,5,90,66,0,0,0,0,0,0,1,2,
+fabulgauntlet,karate_slot,Weeper,19,213,0,0,3,99,44,0,0,0,0,0,0,4,7,255
+fabulgauntlet,karate_slot,Imp Cap.,19,79,0,0,3,90,36,0,0,0,0,0,0,3,6,
+fabulgauntlet,karate_slot,WaterHag,17,103,0,0,3,99,44,0,0,0,0,0,0,7,10,
+fabulgauntlet,karate_slot,Gargoyle,25,341,0,0,5,90,66,0,0,0,0,0,0,4,7,
+fabulgauntlet,guard_slot,General,18,69,158,109,3,99,46,1,90,1,3,40,14,11,14,
+fabulgauntlet,guard_slot,Fighter,15,14,106,71,3,90,36,0,0,1,0,0,5,1,3,
+fabulgauntlet,guard_slot,Weeper,11,22,42,29,2,99,22,1,90,1,2,40,11,11,14,173
+fabulgauntlet,guard_slot,Imp Cap.,11,8,49,36,2,95,19,0,0,0,2,40,9,8,11,
+fabulgauntlet,guard_slot,WaterHag,10,11,37,29,2,99,22,1,90,1,2,40,9,18,21,
+fabulgauntlet,guard_slot,Gargoyle,15,35,83,71,3,90,36,1,90,1,3,40,14,11,14,
+fabulgauntlet,baigan_slot,General,9,715,526,327,4,99,52,0,0,0,3,60,11,8,8,
+fabulgauntlet,baigan_slot,Fighter,8,146,354,211,3,95,40,0,0,0,0,0,4,1,2,
+fabulgauntlet,baigan_slot,Weeper,6,224,138,85,3,75,26,0,0,0,2,60,10,8,8,87
+fabulgauntlet,baigan_slot,Imp Cap.,6,83,164,106,2,99,22,0,0,0,2,40,7,5,5,
+fabulgauntlet,baigan_slot,WaterHag,5,108,121,85,3,75,26,0,0,0,2,40,7,11,11,
+fabulgauntlet,baigan_slot,Gargoyle,8,358,276,211,3,95,40,0,0,0,2,60,12,8,8,
+fabulgauntlet,kainazzo_slot,General,16,681,601,436,3,99,44,2,50,2,10,50,48,15,15,
+fabulgauntlet,kainazzo_slot,Fighter,13,139,404,281,3,85,34,0,0,2,4,40,18,2,4,
+fabulgauntlet,kainazzo_slot,Weeper,10,213,158,113,2,99,22,1,80,2,9,50,44,15,15,154
+fabulgauntlet,kainazzo_slot,Imp Cap.,10,79,187,141,2,95,18,0,0,0,7,50,30,9,12,
+fabulgauntlet,kainazzo_slot,WaterHag,9,103,138,113,2,99,22,1,80,2,7,50,30,19,22,
+fabulgauntlet,kainazzo_slot,Gargoyle,13,341,315,281,3,85,34,1,80,2,10,50,52,15,15,
+fabulgauntlet,darkelf_slot,General,19,852,764,979,4,99,54,0,0,3,99,99,254,11,11,
+fabulgauntlet,darkelf_slot,Fighter,16,173,514,632,3,95,42,0,0,3,7,90,92,1,2,
+fabulgauntlet,darkelf_slot,Weeper,12,266,201,253,3,80,28,0,0,3,99,99,254,11,11,183
+fabulgauntlet,darkelf_slot,Imp Cap.,12,99,238,316,2,99,22,0,0,0,12,95,162,8,8,
+fabulgauntlet,darkelf_slot,WaterHag,11,128,176,253,3,80,28,0,0,3,12,95,162,18,18,
+fabulgauntlet,darkelf_slot,Gargoyle,16,426,401,632,3,95,42,0,0,3,99,100,255,11,11,
+fabulgauntlet,magus_slot,General,16,1532,983,979,5,80,60,1,45,2,3,60,11,7,7,
+fabulgauntlet,magus_slot,Fighter,13,312,661,632,4,80,46,0,0,2,0,0,4,1,2,
+fabulgauntlet,magus_slot,Weeper,10,479,258,253,3,80,30,1,80,2,2,60,10,7,7,154
+fabulgauntlet,magus_slot,Imp Cap.,10,178,306,316,3,75,24,0,0,0,2,40,7,5,5,
+fabulgauntlet,magus_slot,WaterHag,9,230,226,253,3,80,30,1,80,2,2,40,7,11,11,
+fabulgauntlet,magus_slot,Gargoyle,13,766,516,632,4,80,46,1,80,2,2,60,12,7,7,
+fabulgauntlet,valvalis_slot,General,36,1022,1037,599,5,99,70,0,0,0,3,40,12,18,18,
+fabulgauntlet,valvalis_slot,Fighter,29,208,697,386,4,99,54,0,0,0,0,0,4,2,4,
+fabulgauntlet,valvalis_slot,Weeper,22,320,272,155,3,90,36,0,0,0,2,40,11,18,18,255
+fabulgauntlet,valvalis_slot,Imp Cap.,22,119,323,193,3,80,30,0,0,0,2,40,7,11,14,
+fabulgauntlet,valvalis_slot,WaterHag,20,154,238,155,3,90,36,0,0,0,2,40,7,30,30,
+fabulgauntlet,valvalis_slot,Gargoyle,29,511,544,386,4,99,54,0,0,0,3,40,14,18,18,
+fabulgauntlet,calbrena_slot,General,47,1451,2292,871,7,99,96,1,80,2,6,60,25,11,11,
+fabulgauntlet,calbrena_slot,Fighter,38,295,1541,562,6,80,76,0,0,2,0,0,5,1,2,
+fabulgauntlet,calbrena_slot,Weeper,29,454,602,225,4,90,48,1,80,2,6,60,23,11,11,255
+fabulgauntlet,calbrena_slot,Imp Cap.,29,168,714,281,3,95,40,0,0,0,4,40,16,8,8,
+fabulgauntlet,calbrena_slot,WaterHag,26,218,526,225,4,90,48,1,80,2,4,40,16,18,18,
+fabulgauntlet,calbrena_slot,Gargoyle,38,726,1203,562,6,80,76,1,80,2,3,80,28,11,11,
+fabulgauntlet,golbez_slot,General,31,511,2183,1197,5,99,68,0,0,0,0,0,0,27,27,
+fabulgauntlet,golbez_slot,Fighter,25,104,1467,772,4,99,52,0,0,0,0,0,0,3,6,
+fabulgauntlet,golbez_slot,Weeper,19,160,573,309,3,85,34,0,0,0,0,0,0,27,27,255
+fabulgauntlet,golbez_slot,Imp Cap.,19,60,680,386,3,80,28,0,0,0,0,0,0,18,21,
+fabulgauntlet,golbez_slot,WaterHag,17,77,501,309,3,85,34,0,0,0,0,0,0,38,38,
+fabulgauntlet,golbez_slot,Gargoyle,25,256,1145,772,4,99,52,0,0,0,0,0,0,27,27,
+fabulgauntlet,lugae_slot,General,25,3225,2840,1197,6,99,86,1,50,1,0,0,0,27,27,
+fabulgauntlet,lugae_slot,Fighter,20,655,1909,772,5,90,66,0,0,1,0,0,0,3,6,
+fabulgauntlet,lugae_slot,Weeper,15,1008,745,309,3,99,44,1,90,1,0,0,0,27,27,240
+fabulgauntlet,lugae_slot,Imp Cap.,15,373,885,386,3,90,36,0,0,0,0,0,0,18,21,
+fabulgauntlet,lugae_slot,WaterHag,14,484,652,309,3,99,44,1,90,1,0,0,0,38,38,
+fabulgauntlet,lugae_slot,Gargoyle,20,1613,1490,772,5,90,66,1,90,1,0,0,0,27,27,
+fabulgauntlet,darkimp_slot,General,16,102,636,15,5,70,56,0,0,0,0,0,0,18,21,
+fabulgauntlet,darkimp_slot,Fighter,13,21,427,10,4,80,44,0,0,0,0,0,0,2,5,
+fabulgauntlet,darkimp_slot,Weeper,10,32,167,4,3,80,28,0,0,0,0,0,0,18,21,154
+fabulgauntlet,darkimp_slot,Imp Cap.,10,12,198,5,3,75,24,0,0,0,0,0,0,12,15,
+fabulgauntlet,darkimp_slot,WaterHag,9,16,146,4,3,80,28,0,0,0,0,0,0,30,30,
+fabulgauntlet,darkimp_slot,Gargoyle,13,51,334,10,4,80,44,0,0,0,0,0,0,18,21,
+fabulgauntlet,kingqueen_slot,General,15,1022,0,0,9,85,116,0,0,0,0,0,0,53,53,
+fabulgauntlet,kingqueen_slot,Fighter,12,208,0,0,7,80,90,0,0,0,0,0,0,9,12,
+fabulgauntlet,kingqueen_slot,Weeper,9,320,0,0,5,70,58,0,0,0,0,0,0,53,53,144
+fabulgauntlet,kingqueen_slot,Imp Cap.,9,119,0,0,4,90,48,0,0,0,0,0,0,36,39,
+fabulgauntlet,kingqueen_slot,WaterHag,8,154,0,0,5,70,58,0,0,0,0,0,0,89,89,
+fabulgauntlet,kingqueen_slot,Gargoyle,12,511,0,0,7,80,90,0,0,0,0,0,0,53,53,
+fabulgauntlet,rubicant_slot,General,50,4290,2729,762,7,80,88,1,90,1,8,80,37,38,38,
+fabulgauntlet,rubicant_slot,Fighter,40,872,1834,492,6,70,72,0,0,1,3,40,14,6,9,
+fabulgauntlet,rubicant_slot,Weeper,30,1341,716,197,4,80,44,1,90,1,7,80,33,38,38,255
+fabulgauntlet,rubicant_slot,Imp Cap.,30,496,850,246,3,90,36,0,0,0,6,60,23,26,29,
+fabulgauntlet,rubicant_slot,WaterHag,27,644,627,197,4,80,44,1,90,1,6,60,23,65,65,
+fabulgauntlet,rubicant_slot,Gargoyle,40,2145,1432,492,6,70,72,1,90,1,4,70,40,38,38,
+fabulgauntlet,evilwall_slot,General,37,3235,2510,871,6,90,84,1,35,2,7,80,29,66,66,
+fabulgauntlet,evilwall_slot,Fighter,30,657,1687,562,5,90,66,0,0,2,0,0,5,11,14,
+fabulgauntlet,evilwall_slot,Weeper,23,1011,659,225,3,95,42,1,80,2,6,80,27,66,66,255
+fabulgauntlet,evilwall_slot,Imp Cap.,23,374,782,281,3,90,36,0,0,0,5,60,19,43,46,
+fabulgauntlet,evilwall_slot,WaterHag,20,486,577,225,3,95,42,1,80,2,5,60,19,111,111,
+fabulgauntlet,evilwall_slot,Gargoyle,30,1618,1317,562,5,90,66,1,80,2,3,85,32,66,66,
+fabulgauntlet,asura_slot,General,63,3915,2183,0,10,99,134,0,0,0,8,80,37,66,66,
+fabulgauntlet,asura_slot,Fighter,51,796,1467,0,8,90,104,0,0,0,3,40,14,11,14,
+fabulgauntlet,asura_slot,Weeper,38,1224,573,0,5,99,68,0,0,0,7,80,33,66,66,255
+fabulgauntlet,asura_slot,Imp Cap.,38,453,680,0,4,99,54,0,0,0,6,60,23,43,46,
+fabulgauntlet,asura_slot,WaterHag,34,588,501,0,5,99,68,0,0,0,6,60,23,111,111,
+fabulgauntlet,asura_slot,Gargoyle,51,1958,1145,0,8,90,104,0,0,0,4,70,40,66,66,
+fabulgauntlet,leviatan_slot,General,79,5958,3056,0,13,99,174,0,0,5,10,80,47,53,53,
+fabulgauntlet,leviatan_slot,Fighter,64,1211,2054,0,10,99,136,0,0,5,4,40,18,9,12,
+fabulgauntlet,leviatan_slot,Weeper,48,1862,802,0,6,99,86,0,0,5,9,80,43,53,53,255
+fabulgauntlet,leviatan_slot,Imp Cap.,48,689,952,0,6,70,72,0,0,0,7,50,30,36,39,
+fabulgauntlet,leviatan_slot,WaterHag,43,894,702,0,6,99,86,0,0,5,7,50,30,89,89,
+fabulgauntlet,leviatan_slot,Gargoyle,64,2979,1603,0,10,99,136,0,0,5,10,80,50,53,53,
+fabulgauntlet,odin_slot,General,53,3490,1965,0,9,85,116,2,90,3,7,50,32,43,46,
+fabulgauntlet,odin_slot,Fighter,43,709,1321,0,7,80,90,0,0,3,0,0,5,7,10,
+fabulgauntlet,odin_slot,Weeper,32,1091,516,0,5,70,58,2,90,3,7,50,30,43,46,255
+fabulgauntlet,odin_slot,Imp Cap.,32,404,612,0,4,90,48,0,0,0,5,40,20,29,32,
+fabulgauntlet,odin_slot,WaterHag,29,524,451,0,5,70,58,2,90,3,5,40,20,69,69,
+fabulgauntlet,odin_slot,Gargoyle,43,1745,1031,0,7,80,90,2,90,3,8,50,34,43,46,
+fabulgauntlet,bahamut_slot,General,47,6298,3820,0,13,99,174,0,0,1,1,60,8,27,27,
+fabulgauntlet,bahamut_slot,Fighter,38,1280,2568,0,10,99,136,0,0,1,0,0,3,3,6,
+fabulgauntlet,bahamut_slot,Weeper,29,1969,1002,0,6,99,86,0,0,1,1,60,8,27,27,255
+fabulgauntlet,bahamut_slot,Imp Cap.,29,729,1190,0,6,70,72,0,0,0,1,30,5,18,21,
+fabulgauntlet,bahamut_slot,WaterHag,26,945,877,0,6,99,86,0,0,1,1,30,5,38,38,
+fabulgauntlet,bahamut_slot,Gargoyle,38,3149,2004,0,10,99,136,0,0,1,1,60,8,27,27,
+fabulgauntlet,elements_slot,General,79,17703,11186,2176,10,80,128,2,35,3,3,60,4,89,89,
+fabulgauntlet,elements_slot,Fighter,64,3596,7518,1404,8,80,100,0,0,3,0,0,1,15,18,
+fabulgauntlet,elements_slot,Weeper,48,5532,2934,562,5,90,64,2,90,3,2,55,3,89,89,255
+fabulgauntlet,elements_slot,Imp Cap.,48,2047,3484,702,10,80,54,0,0,0,2,40,2,65,65,
+fabulgauntlet,elements_slot,WaterHag,43,2656,2568,562,5,90,64,1,80,2,2,40,2,111,111,
+fabulgauntlet,elements_slot,Gargoyle,64,8852,5868,1404,8,80,100,2,90,3,3,60,4,89,89,
+fabulgauntlet,cpu_slot,General,48,4086,16369,1124,13,99,174,4,45,4,8,50,38,38,38,
+fabulgauntlet,cpu_slot,Fighter,39,830,11002,726,10,99,136,0,0,4,3,40,14,6,9,
+fabulgauntlet,cpu_slot,Weeper,29,1277,4294,291,6,99,86,2,90,3,8,50,34,38,38,255
+fabulgauntlet,cpu_slot,Imp Cap.,29,473,5099,363,6,70,72,0,0,0,6,40,24,26,29,
+fabulgauntlet,cpu_slot,WaterHag,26,613,3757,291,6,99,86,2,90,3,6,40,24,65,65,
+fabulgauntlet,cpu_slot,Gargoyle,39,2043,8587,726,10,99,136,2,90,3,4,70,42,38,38,
+fabulgauntlet,paledim_slot,General,98,4647,6439,0,11,85,144,5,40,5,10,50,48,40,43,
+fabulgauntlet,paledim_slot,Fighter,79,944,4328,0,9,75,112,0,0,5,4,40,18,7,10,
+fabulgauntlet,paledim_slot,Weeper,59,1453,1689,0,6,70,72,2,90,3,9,50,44,40,43,255
+fabulgauntlet,paledim_slot,Imp Cap.,59,538,2006,0,5,80,60,0,0,0,7,50,30,27,30,
+fabulgauntlet,paledim_slot,WaterHag,53,698,1478,0,6,70,72,2,90,3,7,50,30,65,65,
+fabulgauntlet,paledim_slot,Gargoyle,79,2324,3378,0,9,75,112,2,90,3,10,50,52,40,43,
+fabulgauntlet,wyvern_slot,General,99,4256,7017,0,12,90,160,4,80,5,10,50,52,43,46,
+fabulgauntlet,wyvern_slot,Fighter,80,865,4717,0,10,75,126,0,0,5,1,75,19,7,10,
+fabulgauntlet,wyvern_slot,Weeper,60,1330,1841,0,6,90,80,2,90,3,10,50,48,43,46,255
+fabulgauntlet,wyvern_slot,Imp Cap.,60,493,2186,0,5,90,66,0,0,0,7,50,32,29,32,
+fabulgauntlet,wyvern_slot,WaterHag,53,639,1611,0,6,90,80,2,90,3,7,50,32,69,69,
+fabulgauntlet,wyvern_slot,Gargoyle,80,2128,3681,0,10,75,126,2,90,3,5,70,56,43,46,
+fabulgauntlet,plague_slot,General,96,4766,3405,60,11,90,146,4,50,5,7,50,32,29,32,
+fabulgauntlet,plague_slot,Fighter,77,969,2289,39,9,80,114,0,0,5,0,0,5,4,7,
+fabulgauntlet,plague_slot,Weeper,58,1490,894,16,6,70,72,2,90,3,7,50,30,29,32,255
+fabulgauntlet,plague_slot,Imp Cap.,58,552,1061,20,5,80,60,0,0,0,5,40,20,20,23,
+fabulgauntlet,plague_slot,WaterHag,52,715,782,16,6,70,72,2,90,3,5,40,20,43,46,
+fabulgauntlet,plague_slot,Gargoyle,77,2383,1787,39,9,80,114,2,90,3,8,50,34,29,32,
+fabulgauntlet,dlunar_slot,General,99,7149,10913,0,11,85,144,3,30,4,10,80,54,30,30,
+fabulgauntlet,dlunar_slot,Fighter,80,1453,7335,0,9,75,112,0,0,4,1,75,19,4,7,
+fabulgauntlet,dlunar_slot,Weeper,60,2235,2863,0,6,70,72,3,80,4,10,80,50,30,30,255
+fabulgauntlet,dlunar_slot,Imp Cap.,60,827,3399,0,5,80,60,0,0,0,8,50,34,20,23,
+fabulgauntlet,dlunar_slot,WaterHag,53,1073,2505,0,6,70,72,2,70,3,8,50,34,41,44,
+fabulgauntlet,dlunar_slot,Gargoyle,80,3575,5725,0,9,75,112,2,90,3,5,80,60,30,30,
+fabulgauntlet,ogopogo_slot,General,62,6298,6668,0,11,99,150,4,55,4,9,50,40,38,38,
+fabulgauntlet,ogopogo_slot,Fighter,50,1280,4482,0,9,85,116,0,0,4,3,40,14,6,9,
+fabulgauntlet,ogopogo_slot,Weeper,38,1969,1749,0,6,80,76,2,90,3,8,50,36,38,38,255
+fabulgauntlet,ogopogo_slot,Imp Cap.,38,729,2077,0,5,90,64,0,0,0,6,40,24,26,29,
+fabulgauntlet,ogopogo_slot,WaterHag,34,945,1531,0,6,80,76,2,90,3,6,40,24,65,65,
+fabulgauntlet,ogopogo_slot,Gargoyle,50,3149,3498,0,9,85,116,2,90,3,9,50,44,38,38,
+milon,dmist_slot,Milon,10,1352,590,152,2,90,16,0,0,5,7,80,31,5,5,10
+milon,dmist_slot,Ghast,10,29,28,13,8,80,35,0,0,2,7,80,31,1,3,
+milon,officer_slot,Milon,11,1229,742,186,3,75,26,1,65,2,2,60,12,2,4,11
+milon,officer_slot,Ghast,11,19,35,15,10,80,54,1,70,1,2,60,12,1,2,
+milon,octomamm_slot,Milon,10,2776,1011,379,2,99,22,0,0,0,6,60,25,31,31,10
+milon,octomamm_slot,Ghast,10,144,48,31,4,90,48,0,0,0,6,60,25,8,11,
+milon,antlion_slot,Milon,2,1756,1264,607,2,85,11,0,0,2,2,60,8,5,5,2
+milon,antlion_slot,Ghast,2,62,60,49,6,60,25,0,0,1,2,60,8,1,3,
+milon,mombomb_slot,Milon,15,1945,3672,1330,3,80,30,0,0,0,1,40,9,7,7,5
+milon,mombomb_slot,Ghast,15,77,173,107,5,90,66,0,0,0,1,40,9,2,4,
+milon,fabulgauntlet_slot,Milon,15,2421,4708,1080,3,90,36,2,20,2,3,60,11,6,9,14
+milon,fabulgauntlet_slot,Ghast,15,115,221,87,6,90,80,2,20,2,3,60,11,2,5,
+milon,milon_slot,Milon,15,3100,3200,2500,1,75,19,1,35,2,0,0,0,8,8,14
+milon,milon_slot,Ghast,15,170,150,200,3,95,42,1,40,1,0,0,0,2,5,
+milon,milonz_slot,Milon,15,3267,3369,2273,3,99,44,1,60,1,6,40,22,9,9,31
+milon,milonz_slot,Ghast,15,184,158,182,7,99,98,1,70,1,6,40,22,2,5,
+milon,mirrorcecil_slot,Milon,17,1756,0,0,3,99,46,0,0,0,3,60,11,5,5,16
+milon,mirrorcecil_slot,Ghast,17,62,0,0,8,80,102,0,0,0,3,60,11,1,3,
+milon,karate_slot,Milon,31,4022,0,0,6,99,86,0,0,0,0,0,0,4,7,29
+milon,karate_slot,Ghast,31,245,0,0,13,99,174,0,0,0,0,0,0,1,3,
+milon,guard_slot,Milon,18,1303,1213,758,3,99,46,1,90,1,3,40,14,11,14,26
+milon,guard_slot,Ghast,18,25,57,61,8,80,102,1,90,1,3,40,14,3,6,
+milon,baigan_slot,Milon,9,4173,4059,2273,4,99,52,0,0,0,3,60,11,8,8,9
+milon,baigan_slot,Ghast,9,257,191,182,9,85,116,0,0,0,3,60,11,2,5,
+milon,kainazzo_slot,Milon,16,4022,4632,3031,3,99,44,2,50,2,10,50,48,15,15,30
+milon,kainazzo_slot,Ghast,16,245,218,243,7,99,98,1,60,1,10,50,48,4,7,
+milon,darkelf_slot,Milon,19,4777,5895,6819,4,99,54,0,0,3,99,99,254,11,11,15
+milon,darkelf_slot,Ghast,19,306,277,546,9,95,120,0,0,1,99,99,254,3,6,
+milon,magus_slot,Milon,16,7799,7579,6819,5,80,60,1,45,2,3,60,11,7,7,11
+milon,magus_slot,Ghast,16,551,356,546,10,99,134,1,50,1,3,60,11,2,4,
+milon,valvalis_slot,Milon,36,5533,8000,4167,5,99,70,0,0,0,3,40,12,18,18,63
+milon,valvalis_slot,Ghast,36,367,375,334,12,75,154,0,0,0,3,40,12,5,8,
+milon,calbrena_slot,Milon,47,7439,17685,6061,7,99,96,1,80,2,6,60,25,11,11,41
+milon,calbrena_slot,Ghast,47,522,829,485,13,99,174,1,90,1,6,60,25,3,6,
+milon,golbez_slot,Milon,31,3268,16843,8334,5,99,68,0,0,0,0,0,0,27,27,1
+milon,golbez_slot,Ghast,31,184,790,667,11,99,150,0,0,0,0,0,0,7,10,
+milon,lugae_slot,Milon,25,15310,21912,8334,6,99,86,1,50,1,0,0,0,27,27,7
+milon,lugae_slot,Ghast,25,1159,1028,667,13,99,174,1,60,1,0,0,0,7,10,
+milon,darkimp_slot,Milon,16,1451,4902,103,5,70,56,0,0,0,0,0,0,18,21,15
+milon,darkimp_slot,Ghast,16,37,230,9,9,99,124,0,0,0,0,0,0,5,8,
+milon,kingqueen_slot,Milon,15,5533,0,0,9,85,116,0,0,0,0,0,0,53,53,14
+milon,kingqueen_slot,Ghast,15,367,0,0,99,100,255,0,0,0,0,0,0,14,17,
+milon,rubicant_slot,Milon,50,20036,21053,5304,7,80,88,1,90,1,8,80,37,38,38,16
+milon,rubicant_slot,Ghast,50,1542,987,425,13,99,174,1,90,1,8,80,37,10,13,
+milon,evilwall_slot,Milon,37,15353,19369,6061,6,90,84,1,35,2,7,80,29,66,66,79
+milon,evilwall_slot,Ghast,37,1162,908,485,13,99,174,1,40,1,7,80,29,17,20,
+milon,asura_slot,Milon,63,18375,16843,0,10,99,134,0,0,0,8,80,37,66,66,69
+milon,asura_slot,Ghast,63,1407,790,0,99,100,255,0,0,0,8,80,37,17,20,
+milon,leviatan_slot,Milon,79,27439,23579,0,13,99,174,0,0,5,10,80,47,53,53,34
+milon,leviatan_slot,Ghast,79,2141,1106,0,99,100,255,0,0,2,10,80,47,14,17,
+milon,odin_slot,Milon,53,16486,15158,0,9,85,116,2,90,3,7,50,32,43,46,95
+milon,odin_slot,Ghast,53,1254,711,0,99,100,255,1,90,1,7,50,32,11,14,
+milon,bahamut_slot,Milon,47,28950,29474,0,13,99,174,0,0,1,1,60,8,27,27,17
+milon,bahamut_slot,Ghast,47,2263,1382,0,99,100,255,0,0,0,1,60,8,7,10,
+milon,elements_slot,Milon,79,65000,86316,15152,10,80,128,2,35,3,3,60,4,89,89,15
+milon,elements_slot,Ghast,79,6360,4047,1213,99,100,255,2,40,2,3,60,4,23,26,
+milon,cpu_slot,Milon,48,19130,126316,7829,13,99,174,4,45,4,8,50,38,38,38,127
+milon,cpu_slot,Ghast,48,1468,5922,627,99,100,255,2,50,2,8,50,38,10,13,
+milon,paledim_slot,Milon,98,21623,49685,0,11,85,144,5,40,5,10,50,48,40,43,31
+milon,paledim_slot,Ghast,98,1670,2329,0,99,100,255,3,45,3,10,50,48,10,13,
+milon,wyvern_slot,Milon,99,19885,54148,0,12,90,160,4,80,5,10,50,52,43,46,8
+milon,wyvern_slot,Ghast,99,1529,2539,0,99,100,255,3,90,3,10,50,52,11,14,
+milon,plague_slot,Milon,96,22152,26274,417,11,90,146,4,50,5,7,50,32,29,32,90
+milon,plague_slot,Ghast,96,1713,1232,34,99,100,255,3,55,3,7,50,32,8,11,
+milon,dlunar_slot,Milon,99,32727,84211,0,11,85,144,3,30,4,10,80,54,30,30,36
+milon,dlunar_slot,Ghast,99,2569,3948,0,99,100,255,3,35,3,10,80,54,8,11,
+milon,ogopogo_slot,Milon,62,28950,51453,0,11,99,150,4,55,4,9,50,40,38,38,127
+milon,ogopogo_slot,Ghast,62,2263,2412,0,99,100,255,2,60,2,9,50,40,10,13,
+milonz,dmist_slot,Milon Z.,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+milonz,officer_slot,Milon Z.,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,23
+milonz,octomamm_slot,Milon Z.,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,21
+milonz,antlion_slot,Milon Z.,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,5
+milonz,mombomb_slot,Milon Z.,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+milonz,fabulgauntlet_slot,Milon Z.,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,31
+milonz,milon_slot,Milon Z.,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14
+milonz,milonz_slot,Milon Z.,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31
+milonz,mirrorcecil_slot,Milon Z.,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,36
+milonz,karate_slot,Milon Z.,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,65
+milonz,guard_slot,Milon Z.,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26
+milonz,baigan_slot,Milon Z.,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+milonz,kainazzo_slot,Milon Z.,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29
+milonz,darkelf_slot,Milon Z.,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+milonz,magus_slot,Milon Z.,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+milonz,valvalis_slot,Milon Z.,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+milonz,calbrena_slot,Milon Z.,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+milonz,golbez_slot,Milon Z.,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+milonz,lugae_slot,Milon Z.,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7
+milonz,darkimp_slot,Milon Z.,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,34
+milonz,kingqueen_slot,Milon Z.,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,31
+milonz,rubicant_slot,Milon Z.,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16
+milonz,evilwall_slot,Milon Z.,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79
+milonz,asura_slot,Milon Z.,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+milonz,leviatan_slot,Milon Z.,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+milonz,odin_slot,Milon Z.,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95
+milonz,bahamut_slot,Milon Z.,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+milonz,elements_slot,Milon Z.,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15
+milonz,cpu_slot,Milon Z.,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+milonz,paledim_slot,Milon Z.,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31
+milonz,wyvern_slot,Milon Z.,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8
+milonz,plague_slot,Milon Z.,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,199
+milonz,dlunar_slot,Milon Z.,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36
+milonz,ogopogo_slot,Milon Z.,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127
+mirrorcecil,dmist_slot,D.Knight,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,
+mirrorcecil,officer_slot,D.Knight,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,
+mirrorcecil,octomamm_slot,D.Knight,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,
+mirrorcecil,antlion_slot,D.Knight,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,
+mirrorcecil,mombomb_slot,D.Knight,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,
+mirrorcecil,fabulgauntlet_slot,D.Knight,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,
+mirrorcecil,milon_slot,D.Knight,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,
+mirrorcecil,milonz_slot,D.Knight,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,
+mirrorcecil,mirrorcecil_slot,D.Knight,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,
+mirrorcecil,karate_slot,D.Knight,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,
+mirrorcecil,guard_slot,D.Knight,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,
+mirrorcecil,baigan_slot,D.Knight,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,
+mirrorcecil,kainazzo_slot,D.Knight,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,
+mirrorcecil,darkelf_slot,D.Knight,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,
+mirrorcecil,magus_slot,D.Knight,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,
+mirrorcecil,valvalis_slot,D.Knight,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,
+mirrorcecil,calbrena_slot,D.Knight,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,
+mirrorcecil,golbez_slot,D.Knight,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,
+mirrorcecil,lugae_slot,D.Knight,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,
+mirrorcecil,darkimp_slot,D.Knight,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,
+mirrorcecil,kingqueen_slot,D.Knight,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+mirrorcecil,rubicant_slot,D.Knight,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,
+mirrorcecil,evilwall_slot,D.Knight,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,
+mirrorcecil,asura_slot,D.Knight,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,
+mirrorcecil,leviatan_slot,D.Knight,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,
+mirrorcecil,odin_slot,D.Knight,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,
+mirrorcecil,bahamut_slot,D.Knight,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,
+mirrorcecil,elements_slot,D.Knight,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,
+mirrorcecil,cpu_slot,D.Knight,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,
+mirrorcecil,paledim_slot,D.Knight,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,
+mirrorcecil,wyvern_slot,D.Knight,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,
+mirrorcecil,plague_slot,D.Knight,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,
+mirrorcecil,dlunar_slot,D.Knight,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,
+mirrorcecil,ogopogo_slot,D.Knight,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,
+guard,dmist_slot,Guard,10,233,350,100,2,90,16,0,0,5,7,80,31,5,5,10
+guard,officer_slot,Guard,11,151,440,123,3,75,26,1,65,2,2,60,12,2,4,16
+guard,octomamm_slot,Guard,10,1175,600,250,2,99,22,0,0,0,6,60,25,31,31,15
+guard,antlion_slot,Guard,2,500,750,400,2,85,11,0,0,2,2,60,8,5,5,3
+guard,mombomb_slot,Guard,15,625,2180,878,3,80,30,0,0,0,1,40,9,7,7,5
+guard,fabulgauntlet_slot,Guard,15,940,2795,713,3,90,36,2,20,2,3,60,11,6,9,22
+guard,milon_slot,Guard,15,1390,1900,1650,1,75,19,1,35,2,0,0,0,8,8,14
+guard,milonz_slot,Guard,15,1500,2000,1500,3,99,44,1,60,1,6,40,22,9,9,31
+guard,mirrorcecil_slot,Guard,17,500,0,0,3,99,46,0,0,0,3,60,11,5,5,25
+guard,karate_slot,Guard,31,2000,0,0,6,99,86,0,0,0,0,0,0,4,7,45
+guard,guard_slot,Guard,18,200,720,500,3,99,46,1,90,1,3,40,14,11,14,26
+guard,baigan_slot,Guard,9,2100,2410,1500,4,99,52,0,0,0,3,60,11,8,8,9
+guard,kainazzo_slot,Guard,16,2000,2750,2000,3,99,44,2,50,2,10,50,48,15,15,29
+guard,darkelf_slot,Guard,19,2500,3500,4500,4,99,54,0,0,3,99,99,254,11,11,15
+guard,magus_slot,Guard,16,4500,4500,4500,5,80,60,1,45,2,3,60,11,7,7,11
+guard,valvalis_slot,Guard,36,3000,4750,2750,5,99,70,0,0,0,3,40,12,18,18,63
+guard,calbrena_slot,Guard,47,4262,10500,4000,7,99,96,1,80,2,6,60,25,11,11,41
+guard,golbez_slot,Guard,31,1501,10000,5500,5,99,68,0,0,0,0,0,0,27,27,1
+guard,lugae_slot,Guard,25,9472,13010,5500,6,99,86,1,50,1,0,0,0,27,27,7
+guard,darkimp_slot,Guard,16,299,2910,68,5,70,56,0,0,0,0,0,0,18,21,24
+guard,kingqueen_slot,Guard,15,3000,0,0,9,85,116,0,0,0,0,0,0,53,53,22
+guard,rubicant_slot,Guard,50,12600,12500,3500,7,80,88,1,90,1,8,80,37,38,38,16
+guard,evilwall_slot,Guard,37,9500,11500,4000,6,90,84,1,35,2,7,80,29,66,66,79
+guard,asura_slot,Guard,63,11500,10000,0,10,99,134,0,0,0,8,80,37,66,66,69
+guard,leviatan_slot,Guard,79,17500,14000,0,13,99,174,0,0,5,10,80,47,53,53,34
+guard,odin_slot,Guard,53,10250,9000,0,9,85,116,2,90,3,7,50,32,43,46,95
+guard,bahamut_slot,Guard,47,18500,17500,0,13,99,174,0,0,1,1,60,8,27,27,17
+guard,elements_slot,Guard,79,52000,51250,10000,10,80,128,2,35,3,3,60,4,89,89,15
+guard,cpu_slot,Guard,48,12000,75000,5167,13,99,174,4,45,4,8,50,38,38,38,128
+guard,paledim_slot,Guard,98,13650,29500,0,11,85,144,5,40,5,10,50,48,40,43,31
+guard,wyvern_slot,Guard,99,12500,32150,0,12,90,160,4,80,5,10,50,52,43,46,8
+guard,plague_slot,Guard,96,14000,15600,275,11,90,146,4,50,5,7,50,32,29,32,139
+guard,dlunar_slot,Guard,99,21000,50000,0,11,85,144,3,30,4,10,80,54,30,30,36
+guard,ogopogo_slot,Guard,62,18500,30550,0,11,99,150,4,55,4,9,50,40,38,38,128
+karate,dmist_slot,Karate,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,
+karate,officer_slot,Karate,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,
+karate,octomamm_slot,Karate,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,
+karate,antlion_slot,Karate,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,
+karate,mombomb_slot,Karate,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,
+karate,fabulgauntlet_slot,Karate,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,
+karate,milon_slot,Karate,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,
+karate,milonz_slot,Karate,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,
+karate,mirrorcecil_slot,Karate,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,
+karate,karate_slot,Karate,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,
+karate,guard_slot,Karate,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,
+karate,baigan_slot,Karate,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,
+karate,kainazzo_slot,Karate,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,
+karate,darkelf_slot,Karate,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,
+karate,magus_slot,Karate,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,
+karate,valvalis_slot,Karate,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,
+karate,calbrena_slot,Karate,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,
+karate,golbez_slot,Karate,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,
+karate,lugae_slot,Karate,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,
+karate,darkimp_slot,Karate,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,
+karate,kingqueen_slot,Karate,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+karate,rubicant_slot,Karate,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,
+karate,evilwall_slot,Karate,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,
+karate,asura_slot,Karate,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,
+karate,leviatan_slot,Karate,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,
+karate,odin_slot,Karate,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,
+karate,bahamut_slot,Karate,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,
+karate,elements_slot,Karate,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,
+karate,cpu_slot,Karate,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,
+karate,paledim_slot,Karate,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,
+karate,wyvern_slot,Karate,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,
+karate,plague_slot,Karate,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,
+karate,dlunar_slot,Karate,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,
+karate,ogopogo_slot,Karate,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,
+baigan,dmist_slot,Baigan,10,388,698,200,2,90,16,0,0,5,7,80,31,5,5,10
+baigan,dmist_slot,RightArm,10,39,2,0,4,60,17,0,0,5,0,0,0,1,2,10
+baigan,dmist_slot,Left Arm,10,39,2,0,4,60,17,0,0,5,0,0,0,4,4,10
+baigan,officer_slot,Baigan,11,252,877,245,3,75,26,1,65,2,2,60,12,2,4,11
+baigan,officer_slot,RightArm,11,26,2,0,3,80,28,1,65,2,0,0,0,1,2,11
+baigan,officer_slot,Left Arm,11,26,2,0,3,80,28,1,65,2,0,0,0,1,2,11
+baigan,octomamm_slot,Baigan,10,1959,1196,500,2,99,22,0,0,0,6,60,25,31,31,10
+baigan,octomamm_slot,RightArm,10,196,3,0,3,75,24,0,0,0,0,0,0,15,15,10
+baigan,octomamm_slot,Left Arm,10,196,3,0,3,75,24,0,0,0,0,0,0,18,18,10
+baigan,antlion_slot,Baigan,2,834,1494,800,2,85,11,0,0,2,2,60,8,5,5,2
+baigan,antlion_slot,RightArm,2,84,4,0,2,60,12,0,0,2,0,0,0,1,2,2
+baigan,antlion_slot,Left Arm,2,84,4,0,2,60,12,0,0,2,0,0,0,4,4,2
+baigan,mombomb_slot,Baigan,15,1042,4342,1755,3,80,30,0,0,0,1,40,9,7,7,5
+baigan,mombomb_slot,RightArm,15,105,10,0,3,85,32,0,0,0,0,0,0,4,4,5
+baigan,mombomb_slot,Left Arm,15,105,10,0,3,85,32,0,0,0,0,0,0,4,4,5
+baigan,fabulgauntlet_slot,Baigan,15,1567,5567,1425,3,90,36,2,20,2,3,60,11,6,9,15
+baigan,fabulgauntlet_slot,RightArm,15,157,12,0,4,70,40,2,20,2,0,0,0,2,4,15
+baigan,fabulgauntlet_slot,Left Arm,15,157,12,0,4,70,40,2,20,2,0,0,0,3,6,15
+baigan,milon_slot,Baigan,15,2317,3785,3300,1,75,19,1,35,2,0,0,0,8,8,14
+baigan,milon_slot,RightArm,15,232,8,0,1,80,20,1,35,2,0,0,0,4,4,14
+baigan,milon_slot,Left Arm,15,232,8,0,1,80,20,1,35,2,0,0,0,5,5,14
+baigan,milonz_slot,Baigan,15,2500,3984,3000,3,99,44,1,60,1,6,40,22,9,9,31
+baigan,milonz_slot,RightArm,15,250,9,0,4,80,46,1,60,1,0,0,0,5,5,31
+baigan,milonz_slot,Left Arm,15,250,9,0,4,80,46,1,60,1,0,0,0,5,5,31
+baigan,mirrorcecil_slot,Baigan,17,834,0,0,3,99,46,0,0,0,3,60,11,5,5,17
+baigan,mirrorcecil_slot,RightArm,17,84,0,0,4,90,50,0,0,0,0,0,0,1,2,17
+baigan,mirrorcecil_slot,Left Arm,17,84,0,0,4,90,50,0,0,0,0,0,0,4,4,17
+baigan,karate_slot,Baigan,31,3334,0,0,6,99,86,0,0,0,0,0,0,4,7,31
+baigan,karate_slot,RightArm,31,334,0,0,7,90,92,0,0,0,0,0,0,2,4,31
+baigan,karate_slot,Left Arm,31,334,0,0,7,90,92,0,0,0,0,0,0,2,4,31
+baigan,guard_slot,Baigan,18,334,1435,1000,3,99,46,1,90,1,3,40,14,11,14,26
+baigan,guard_slot,RightArm,18,34,3,0,4,90,50,1,90,1,0,0,0,4,7,26
+baigan,guard_slot,Left Arm,18,34,3,0,4,90,50,1,90,1,0,0,0,6,9,26
+baigan,baigan_slot,Baigan,9,3500,4800,3000,4,99,52,0,0,0,3,60,11,8,8,9
+baigan,baigan_slot,RightArm,9,350,10,0,5,70,56,0,0,0,0,0,0,4,4,9
+baigan,baigan_slot,Left Arm,9,350,10,0,5,70,56,0,0,0,0,0,0,5,5,9
+baigan,kainazzo_slot,Baigan,16,3334,5478,4000,3,99,44,2,50,2,10,50,48,15,15,29
+baigan,kainazzo_slot,RightArm,16,334,12,0,4,80,46,2,50,2,0,0,0,8,8,29
+baigan,kainazzo_slot,Left Arm,16,334,12,0,4,80,46,2,50,2,0,0,0,9,9,29
+baigan,darkelf_slot,Baigan,19,4167,6971,9000,4,99,54,0,0,3,99,99,254,11,11,15
+baigan,darkelf_slot,RightArm,19,417,15,0,5,70,58,0,0,3,0,0,0,5,5,15
+baigan,darkelf_slot,Left Arm,19,417,15,0,5,70,58,0,0,3,0,0,0,7,7,15
+baigan,magus_slot,Baigan,16,7500,8963,9000,5,80,60,1,45,2,3,60,11,7,7,11
+baigan,magus_slot,RightArm,16,750,19,0,5,90,64,1,45,2,0,0,0,4,4,11
+baigan,magus_slot,Left Arm,16,750,19,0,5,90,64,1,45,2,0,0,0,4,4,11
+baigan,valvalis_slot,Baigan,36,5000,9461,5500,5,99,70,0,0,0,3,40,12,18,18,63
+baigan,valvalis_slot,RightArm,36,500,20,0,6,70,74,0,0,0,0,0,0,9,9,63
+baigan,valvalis_slot,Left Arm,36,500,20,0,6,70,74,0,0,0,0,0,0,11,11,63
+baigan,calbrena_slot,Baigan,47,7104,20913,8000,7,99,96,1,80,2,6,60,25,11,11,41
+baigan,calbrena_slot,RightArm,47,711,44,0,8,80,102,1,80,2,0,0,0,5,5,41
+baigan,calbrena_slot,Left Arm,47,711,44,0,8,80,102,1,80,2,0,0,0,7,7,41
+baigan,golbez_slot,Baigan,31,2502,19918,11000,5,99,68,0,0,0,0,0,0,27,27,1
+baigan,golbez_slot,RightArm,31,251,42,0,6,70,74,0,0,0,0,0,0,11,14,1
+baigan,golbez_slot,Left Arm,31,251,42,0,6,70,74,0,0,0,0,0,0,18,18,1
+baigan,lugae_slot,Baigan,25,15786,25913,11000,6,99,86,1,50,1,0,0,0,27,27,7
+baigan,lugae_slot,RightArm,25,1579,54,0,7,90,92,1,50,1,0,0,0,11,14,7
+baigan,lugae_slot,Left Arm,25,1579,54,0,7,90,92,1,50,1,0,0,0,18,18,7
+baigan,darkimp_slot,Baigan,16,498,5796,135,5,70,56,0,0,0,0,0,0,18,21,16
+baigan,darkimp_slot,RightArm,16,50,13,0,5,80,60,0,0,0,0,0,0,8,11,16
+baigan,darkimp_slot,Left Arm,16,50,13,0,5,80,60,0,0,0,0,0,0,11,14,16
+baigan,kingqueen_slot,Baigan,15,5000,0,0,9,85,116,0,0,0,0,0,0,53,53,15
+baigan,kingqueen_slot,RightArm,15,500,0,0,10,75,126,0,0,0,0,0,0,27,27,15
+baigan,kingqueen_slot,Left Arm,15,500,0,0,10,75,126,0,0,0,0,0,0,31,34,15
+baigan,rubicant_slot,Baigan,50,21000,24897,7000,7,80,88,1,90,1,8,80,37,38,38,16
+baigan,rubicant_slot,RightArm,50,2100,52,0,7,90,94,1,90,1,0,0,0,18,18,16
+baigan,rubicant_slot,Left Arm,50,2100,52,0,7,90,94,1,90,1,0,0,0,21,24,16
+baigan,evilwall_slot,Baigan,37,15834,22905,8000,6,90,84,1,35,2,7,80,29,66,66,79
+baigan,evilwall_slot,RightArm,37,1584,48,0,7,80,90,1,35,2,0,0,0,30,33,79
+baigan,evilwall_slot,Left Arm,37,1584,48,0,7,80,90,1,35,2,0,0,0,39,42,79
+baigan,asura_slot,Baigan,63,19167,19918,0,10,99,134,0,0,0,8,80,37,66,66,69
+baigan,asura_slot,RightArm,63,1917,42,0,11,85,144,0,0,0,0,0,0,30,33,69
+baigan,asura_slot,Left Arm,63,1917,42,0,11,85,144,0,0,0,0,0,0,39,42,69
+baigan,leviatan_slot,Baigan,79,29167,27884,0,13,99,174,0,0,5,10,80,47,53,53,34
+baigan,leviatan_slot,RightArm,79,2917,59,0,13,99,174,0,0,5,0,0,0,27,27,34
+baigan,leviatan_slot,Left Arm,79,2917,59,0,13,99,174,0,0,5,0,0,0,31,34,34
+baigan,odin_slot,Baigan,53,17084,17926,0,9,85,116,2,90,3,7,50,32,43,46,95
+baigan,odin_slot,RightArm,53,1709,38,0,10,75,126,2,90,3,0,0,0,20,23,95
+baigan,odin_slot,Left Arm,53,1709,38,0,10,75,126,2,90,3,0,0,0,26,29,95
+baigan,bahamut_slot,Baigan,47,30834,34855,0,13,99,174,0,0,1,1,60,8,27,27,17
+baigan,bahamut_slot,RightArm,47,3084,73,0,13,99,174,0,0,1,0,0,0,11,14,17
+baigan,bahamut_slot,Left Arm,47,3084,73,0,13,99,174,0,0,1,0,0,0,18,18,17
+baigan,elements_slot,Baigan,79,65000,102075,20000,10,80,128,2,35,3,3,60,4,89,89,15
+baigan,elements_slot,RightArm,79,8667,213,0,11,75,140,2,35,3,0,0,0,42,45,15
+baigan,elements_slot,Left Arm,79,8667,213,0,11,75,140,2,35,3,0,0,0,53,53,15
+baigan,cpu_slot,Baigan,48,20000,149378,10333,13,99,174,4,45,4,8,50,38,38,38,127
+baigan,cpu_slot,RightArm,48,2000,312,0,13,99,174,4,45,4,0,0,0,18,18,127
+baigan,cpu_slot,Left Arm,48,2000,312,0,13,99,174,4,45,4,0,0,0,21,24,127
+baigan,paledim_slot,Baigan,98,22750,58756,0,11,85,144,5,40,5,10,50,48,40,43,31
+baigan,paledim_slot,RightArm,98,2275,123,0,12,75,154,5,40,5,0,0,0,19,22,31
+baigan,paledim_slot,Left Arm,98,2275,123,0,12,75,154,5,40,5,0,0,0,24,27,31
+baigan,wyvern_slot,Baigan,99,20834,64034,0,12,90,160,4,80,5,10,50,52,43,46,8
+baigan,wyvern_slot,RightArm,99,2084,134,0,13,99,172,4,80,5,0,0,0,20,23,8
+baigan,wyvern_slot,Left Arm,99,2084,134,0,13,99,172,4,80,5,0,0,0,26,29,8
+baigan,plague_slot,Baigan,96,23334,31071,550,11,90,146,4,50,5,7,50,32,29,32,96
+baigan,plague_slot,RightArm,96,2334,65,0,12,80,156,4,50,5,0,0,0,13,16,96
+baigan,plague_slot,Left Arm,96,2334,65,0,12,80,156,4,50,5,0,0,0,17,20,96
+baigan,dlunar_slot,Baigan,99,35000,99586,0,11,85,144,3,30,4,10,80,54,30,30,36
+baigan,dlunar_slot,RightArm,99,3500,208,0,12,75,154,3,30,4,0,0,0,15,15,36
+baigan,dlunar_slot,Left Arm,99,3500,208,0,12,75,154,3,30,4,0,0,0,18,18,36
+baigan,ogopogo_slot,Baigan,62,30834,60847,0,11,99,150,4,55,4,9,50,40,38,38,127
+baigan,ogopogo_slot,RightArm,62,3084,127,0,12,95,162,4,55,4,0,0,0,18,18,127
+baigan,ogopogo_slot,Left Arm,62,3084,127,0,12,95,162,4,55,4,0,0,0,21,24,127
+kainazzo,dmist_slot,Kainazzo,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10,scriptHP: 82,script-defense: 0-0-5
+kainazzo,officer_slot,Kainazzo,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,20,scriptHP: 53,script-defense: 1-80-2
+kainazzo,octomamm_slot,Kainazzo,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,19,scriptHP: 412,script-defense: 0-0-1
+kainazzo,antlion_slot,Kainazzo,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,4,scriptHP: 175,script-defense: 0-0-2
+kainazzo,mombomb_slot,Kainazzo,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5,scriptHP: 219,script-defense: 0-0-1
+kainazzo,fabulgauntlet_slot,Kainazzo,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,28,scriptHP: 329,script-defense: 2-35-3
+kainazzo,milon_slot,Kainazzo,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14,scriptHP: 487,script-defense: 1-55-2
+kainazzo,milonz_slot,Kainazzo,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31,scriptHP: 525,script-defense: 1-80-2
+kainazzo,mirrorcecil_slot,Kainazzo,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,31,scriptHP: 175,script-defense: 0-0-1
+kainazzo,karate_slot,Kainazzo,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,57,scriptHP: 700,script-defense: 1-35-2
+kainazzo,guard_slot,Kainazzo,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26,scriptHP: 70,script-defense: 1-90-1
+kainazzo,baigan_slot,Kainazzo,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9,scriptHP: 735,script-defense: 0-0-1
+kainazzo,kainazzo_slot,Kainazzo,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29,scriptHP: 700,script-defense: 2-70-3
+kainazzo,darkelf_slot,Kainazzo,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,16,scriptHP: 875,script-defense: 0-0-4
+kainazzo,magus_slot,Kainazzo,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11,scriptHP: 1575,script-defense: 1-65-2
+kainazzo,valvalis_slot,Kainazzo,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63,scriptHP: 1050,script-defense: 1-45-2
+kainazzo,calbrena_slot,Kainazzo,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41,scriptHP: 1492,script-defense: 1-90-1
+kainazzo,golbez_slot,Kainazzo,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1,scriptHP: 526,script-defense: 1-35-2
+kainazzo,lugae_slot,Kainazzo,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7,scriptHP: 3316,script-defense: 1-80-2
+kainazzo,darkimp_slot,Kainazzo,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,29,scriptHP: 105,script-defense: 0-0-1
+kainazzo,kingqueen_slot,Kainazzo,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,28,scriptHP: 1050,script-defense: 0-0-1
+kainazzo,rubicant_slot,Kainazzo,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16,scriptHP: 4410,script-defense: 1-90-1
+kainazzo,evilwall_slot,Kainazzo,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79,scriptHP: 3325,script-defense: 1-80-2
+kainazzo,asura_slot,Kainazzo,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69,scriptHP: 4025,script-defense: 1-80-2
+kainazzo,leviatan_slot,Kainazzo,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34,scriptHP: 6125,script-defense: 1-60-10
+kainazzo,odin_slot,Kainazzo,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95,scriptHP: 3588,script-defense: 2-90-3
+kainazzo,bahamut_slot,Kainazzo,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17,scriptHP: 6475,script-defense: 1-60-6
+kainazzo,elements_slot,Kainazzo,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,16,scriptHP: 11375,script-defense: 2-85-11
+kainazzo,cpu_slot,Kainazzo,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127,scriptHP: 4200,script-defense: 4-90-4
+kainazzo,paledim_slot,Kainazzo,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31,scriptHP: 4778,script-defense: 5-70-6
+kainazzo,wyvern_slot,Kainazzo,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8,scriptHP: 4375,script-defense: 4-90-4
+kainazzo,plague_slot,Kainazzo,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,174,scriptHP: 4900,script-defense: 4-90-4
+kainazzo,dlunar_slot,Kainazzo,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36,scriptHP: 7350,script-defense: 3-60-11
+kainazzo,ogopogo_slot,Kainazzo,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127,scriptHP: 6475,script-defense: 4-90-4
+darkelf,dmist_slot,Dark Elf,8,20186,100,89,1,60,6,0,0,0,7,80,31,4,4,1
+darkelf,dmist_slot,Dark Elf,10,279,600,112,2,90,16,0,0,5,7,80,31,5,5,10
+darkelf,officer_slot,Dark Elf,9,20121,126,109,1,60,8,0,0,0,2,60,12,1,3,1
+darkelf,officer_slot,Dark Elf,11,182,755,137,3,75,26,0,0,2,2,60,12,2,4,9
+darkelf,octomamm_slot,Dark Elf,8,20940,172,223,1,60,8,0,0,0,6,60,25,23,26,1
+darkelf,octomamm_slot,Dark Elf,10,1410,1029,278,2,99,22,0,0,0,6,60,25,31,31,8
+darkelf,antlion_slot,Dark Elf,2,20400,215,356,1,65,2,0,0,0,2,60,8,4,4,1
+darkelf,antlion_slot,Dark Elf,2,600,1286,445,2,85,11,0,0,2,2,60,8,5,5,2
+darkelf,mombomb_slot,Dark Elf,12,20500,623,780,1,60,10,0,0,0,1,40,9,5,5,1
+darkelf,mombomb_slot,Dark Elf,15,750,3738,975,3,80,30,0,0,0,1,40,9,7,7,5
+darkelf,fabulgauntlet_slot,Dark Elf,12,20752,799,634,2,60,12,0,0,0,3,60,11,5,8,1
+darkelf,fabulgauntlet_slot,Dark Elf,15,1128,4792,792,3,90,36,0,0,2,3,60,11,6,9,12
+darkelf,milon_slot,Dark Elf,12,21112,543,1467,1,60,6,0,0,0,0,0,0,7,7,1
+darkelf,milon_slot,Dark Elf,15,1668,3258,1834,1,75,19,0,0,2,0,0,0,8,8,14
+darkelf,milonz_slot,Dark Elf,12,21200,572,1334,2,90,15,0,0,0,6,40,22,7,7,3
+darkelf,milonz_slot,Dark Elf,15,1800,3429,1667,3,99,44,0,0,1,6,40,22,9,9,32
+darkelf,mirrorcecil_slot,Dark Elf,14,20400,0,0,1,75,18,0,0,0,3,60,11,4,4,1
+darkelf,mirrorcecil_slot,Dark Elf,17,600,0,0,3,99,46,0,0,0,3,60,11,5,5,14
+darkelf,karate_slot,Dark Elf,25,21600,0,0,3,80,28,0,0,0,0,0,0,3,6,2
+darkelf,karate_slot,Dark Elf,31,2400,0,0,6,99,86,0,0,0,0,0,0,4,7,25
+darkelf,guard_slot,Dark Elf,15,20160,206,445,1,75,18,0,0,0,3,40,14,9,12,2
+darkelf,guard_slot,Dark Elf,18,240,1235,556,3,99,46,0,0,1,3,40,14,11,14,26
+darkelf,baigan_slot,Dark Elf,8,21680,689,1334,1,75,18,0,0,0,3,60,11,7,7,1
+darkelf,baigan_slot,Dark Elf,9,2520,4132,1667,4,99,52,0,0,0,3,60,11,8,8,9
+darkelf,kainazzo_slot,Dark Elf,13,21600,786,1778,2,90,15,0,0,0,10,50,48,11,11,2
+darkelf,kainazzo_slot,Dark Elf,16,2400,4715,2223,3,99,44,0,0,2,10,50,48,15,15,29
+darkelf,darkelf_slot,Dark Elf,15,22000,1000,4000,1,75,18,0,0,0,99,99,254,9,9,1
+darkelf,darkelf_slot,Dark Elf,19,3000,6000,5000,4,99,54,0,0,3,99,99,254,11,11,15
+darkelf,magus_slot,Dark Elf,13,23600,1286,4000,1,80,20,0,0,0,3,60,11,5,5,1
+darkelf,magus_slot,Dark Elf,16,5400,7715,5000,5,80,60,0,0,2,3,60,11,7,7,11
+darkelf,valvalis_slot,Dark Elf,29,22400,1358,2445,3,75,24,0,0,0,3,40,12,15,15,5
+darkelf,valvalis_slot,Dark Elf,36,3600,8143,3056,5,99,70,0,0,0,3,40,12,18,18,63
+darkelf,calbrena_slot,Dark Elf,38,23410,3000,3556,3,85,32,0,0,0,6,60,25,9,9,3
+darkelf,calbrena_slot,Dark Elf,47,5115,18000,4445,7,99,96,0,0,2,6,60,25,11,11,41
+darkelf,golbez_slot,Dark Elf,25,21201,2858,4889,1,80,21,0,0,0,0,0,0,20,23,1
+darkelf,golbez_slot,Dark Elf,31,1802,17143,6112,5,99,68,0,0,0,0,0,0,27,27,1
+darkelf,lugae_slot,Dark Elf,20,27578,3718,4889,3,80,28,0,0,0,0,0,0,20,23,1
+darkelf,lugae_slot,Dark Elf,25,11366,22303,6112,6,99,86,0,0,1,0,0,0,27,27,7
+darkelf,darkimp_slot,Dark Elf,13,20239,832,60,1,75,19,0,0,0,0,0,0,14,17,1
+darkelf,darkimp_slot,Dark Elf,16,359,4989,75,5,70,56,0,0,0,0,0,0,18,21,13
+darkelf,kingqueen_slot,Dark Elf,12,22400,0,0,4,70,40,0,0,0,0,0,0,41,44,1
+darkelf,kingqueen_slot,Dark Elf,15,3600,0,0,9,85,116,0,0,0,0,0,0,53,53,12
+darkelf,rubicant_slot,Dark Elf,40,30080,3572,3112,3,80,30,0,0,0,8,80,37,31,31,2
+darkelf,rubicant_slot,Dark Elf,50,15120,21429,3889,7,80,88,0,0,1,8,80,37,38,38,16
+darkelf,evilwall_slot,Dark Elf,30,27600,3286,3556,3,80,28,0,0,0,7,80,29,53,53,6
+darkelf,evilwall_slot,Dark Elf,37,11400,19715,4445,6,90,84,0,0,2,7,80,29,66,66,79
+darkelf,asura_slot,Dark Elf,50,29200,2858,0,4,80,44,0,0,0,8,80,37,53,53,5
+darkelf,asura_slot,Dark Elf,63,13800,17143,0,10,99,134,0,0,0,8,80,37,66,66,69
+darkelf,leviatan_slot,Dark Elf,63,34000,4000,0,5,70,58,0,0,0,10,80,47,41,44,3
+darkelf,leviatan_slot,Dark Elf,79,21000,24000,0,13,99,174,0,0,5,10,80,47,53,53,34
+darkelf,odin_slot,Dark Elf,42,28200,2572,0,4,70,40,0,0,0,7,50,32,35,38,7
+darkelf,odin_slot,Dark Elf,53,12300,15429,0,9,85,116,0,0,3,7,50,32,43,46,95
+darkelf,bahamut_slot,Dark Elf,38,34800,5000,0,5,70,58,0,0,0,1,60,8,20,23,2
+darkelf,bahamut_slot,Dark Elf,47,22200,30000,0,13,99,174,0,0,1,1,60,8,27,27,17
+darkelf,elements_slot,Dark Elf,63,61600,14643,8889,4,70,42,0,0,0,3,60,4,69,69,1
+darkelf,elements_slot,Dark Elf,79,62400,87858,11112,10,80,128,0,0,3,3,60,4,89,89,15
+darkelf,cpu_slot,Dark Elf,38,29600,21429,4593,5,70,58,0,0,0,8,50,38,31,31,9
+darkelf,cpu_slot,Dark Elf,48,14400,128572,5741,13,99,174,0,0,4,8,50,38,38,38,127
+darkelf,paledim_slot,Dark Elf,78,30920,8429,0,4,90,48,0,0,0,10,50,48,32,35,3
+darkelf,paledim_slot,Dark Elf,98,16380,50572,0,11,85,144,0,0,5,10,50,48,40,43,32
+darkelf,wyvern_slot,Dark Elf,79,30000,9186,0,4,99,54,0,0,0,10,50,52,35,38,1
+darkelf,wyvern_slot,Dark Elf,99,15000,55115,0,12,90,160,0,0,5,10,50,52,43,46,8
+darkelf,plague_slot,Dark Elf,76,31200,4458,245,4,90,48,0,0,0,7,50,32,23,26,6
+darkelf,plague_slot,Dark Elf,96,16800,26743,306,11,90,146,0,0,5,7,50,32,29,32,76
+darkelf,dlunar_slot,Dark Elf,79,36800,14286,0,4,90,48,0,0,0,10,80,54,22,25,3
+darkelf,dlunar_slot,Dark Elf,99,25200,85715,0,11,85,144,0,0,4,10,80,54,30,30,36
+darkelf,ogopogo_slot,Dark Elf,49,34800,8729,0,4,90,50,0,0,0,9,50,40,31,31,9
+darkelf,ogopogo_slot,Dark Elf,62,22200,52372,0,11,99,150,0,0,4,9,50,40,38,38,127
+magus,dmist_slot,Sandy,10,130,234,67,1,60,8,0,0,2,7,80,31,5,5,10
+magus,dmist_slot,Cindy,10,223,234,67,2,90,16,0,0,5,7,80,31,5,5,10
+magus,dmist_slot,Mindy,10,114,234,67,1,60,8,0,0,2,0,0,0,5,5,10
+magus,officer_slot,Sandy,11,84,294,82,2,85,13,1,70,1,2,60,12,2,4,8
+magus,officer_slot,Cindy,11,145,294,82,3,75,26,1,65,2,2,60,12,2,4,8
+magus,officer_slot,Mindy,11,74,294,82,2,85,13,1,70,1,0,0,0,2,4,8
+magus,octomamm_slot,Sandy,10,653,400,167,2,85,11,0,0,0,6,60,25,31,31,7
+magus,octomamm_slot,Cindy,10,1123,400,167,2,99,22,0,0,0,6,60,25,31,31,7
+magus,octomamm_slot,Mindy,10,575,400,167,2,85,11,0,0,0,0,0,0,31,31,7
+magus,antlion_slot,Sandy,2,278,500,267,1,60,6,0,0,1,2,60,8,5,5,2
+magus,antlion_slot,Cindy,2,478,500,267,2,85,11,0,0,2,2,60,8,5,5,2
+magus,antlion_slot,Mindy,2,245,500,267,1,60,6,0,0,1,0,0,0,5,5,2
+magus,mombomb_slot,Sandy,15,348,1454,585,2,90,15,0,0,0,1,40,9,7,7,5
+magus,mombomb_slot,Cindy,15,598,1454,585,3,80,30,0,0,0,1,40,9,7,7,5
+magus,mombomb_slot,Mindy,15,306,1454,585,2,90,15,0,0,0,0,0,0,7,7,5
+magus,fabulgauntlet_slot,Sandy,15,523,1864,475,2,95,18,2,20,2,3,60,11,6,9,11
+magus,fabulgauntlet_slot,Cindy,15,899,1864,475,3,90,36,2,20,2,3,60,11,6,9,11
+magus,fabulgauntlet_slot,Mindy,15,460,1864,475,2,95,18,2,20,2,0,0,0,6,9,11
+magus,milon_slot,Sandy,15,773,1267,1100,1,60,10,1,40,1,0,0,0,8,8,14
+magus,milon_slot,Cindy,15,1329,1267,1100,1,75,19,1,35,2,0,0,0,8,8,14
+magus,milon_slot,Mindy,15,680,1267,1100,1,60,10,1,40,1,0,0,0,8,8,14
+magus,milonz_slot,Sandy,15,834,1334,1000,2,99,22,1,70,1,6,40,22,9,9,31
+magus,milonz_slot,Cindy,15,1434,1334,1000,3,99,44,1,60,1,6,40,22,9,9,31
+magus,milonz_slot,Mindy,15,734,1334,1000,2,99,22,1,70,1,0,0,0,9,9,31
+magus,mirrorcecil_slot,Sandy,17,278,0,0,2,99,22,0,0,0,3,60,11,5,5,12
+magus,mirrorcecil_slot,Cindy,17,478,0,0,3,99,46,0,0,0,3,60,11,5,5,12
+magus,mirrorcecil_slot,Mindy,17,245,0,0,2,99,22,0,0,0,0,0,0,5,5,12
+magus,karate_slot,Sandy,31,1112,0,0,3,99,44,0,0,0,0,0,0,4,7,22
+magus,karate_slot,Cindy,31,1912,0,0,6,99,86,0,0,0,0,0,0,4,7,22
+magus,karate_slot,Mindy,31,978,0,0,3,99,44,0,0,0,0,0,0,4,7,22
+magus,guard_slot,Sandy,18,112,480,334,2,99,22,1,90,1,3,40,14,11,14,26
+magus,guard_slot,Cindy,18,192,480,334,3,99,46,1,90,1,3,40,14,11,14,26
+magus,guard_slot,Mindy,18,98,480,334,2,99,22,1,90,1,0,0,0,11,14,26
+magus,baigan_slot,Sandy,9,1167,1607,1000,3,75,26,0,0,0,3,60,11,8,8,9
+magus,baigan_slot,Cindy,9,2007,1607,1000,4,99,52,0,0,0,3,60,11,8,8,9
+magus,baigan_slot,Mindy,9,1027,1607,1000,3,75,26,0,0,0,0,0,0,8,8,9
+magus,kainazzo_slot,Sandy,16,1112,1834,1334,2,99,22,1,60,1,10,50,48,15,15,29
+magus,kainazzo_slot,Cindy,16,1912,1834,1334,3,99,44,2,50,2,10,50,48,15,15,29
+magus,kainazzo_slot,Mindy,16,978,1834,1334,2,99,22,1,60,1,0,0,0,15,15,29
+magus,darkelf_slot,Sandy,19,1389,2334,3000,3,80,28,0,0,1,99,99,254,11,11,15
+magus,darkelf_slot,Cindy,19,2389,2334,3000,4,99,54,0,0,3,99,99,254,11,11,15
+magus,darkelf_slot,Mindy,19,1223,2334,3000,3,80,28,0,0,1,0,0,0,11,11,15
+magus,magus_slot,Sandy,16,2500,3000,3000,3,80,30,1,50,1,3,60,11,7,7,11
+magus,magus_slot,Cindy,16,4300,3000,3000,5,80,60,1,45,2,3,60,11,7,7,11
+magus,magus_slot,Mindy,16,2200,3000,3000,3,80,30,1,50,1,0,0,0,7,7,11
+magus,valvalis_slot,Sandy,36,1667,3167,1834,3,90,36,0,0,0,3,40,12,18,18,63
+magus,valvalis_slot,Cindy,36,2867,3167,1834,5,99,70,0,0,0,3,40,12,18,18,63
+magus,valvalis_slot,Mindy,36,1467,3167,1834,3,90,36,0,0,0,0,0,0,18,18,63
+magus,calbrena_slot,Sandy,47,2368,7000,2667,4,90,48,1,90,1,6,60,25,11,11,41
+magus,calbrena_slot,Cindy,47,4073,7000,2667,7,99,96,1,80,2,6,60,25,11,11,41
+magus,calbrena_slot,Mindy,47,2084,7000,2667,4,90,48,1,90,1,0,0,0,11,11,41
+magus,golbez_slot,Sandy,31,834,6667,3667,3,85,34,0,0,0,0,0,0,27,27,1
+magus,golbez_slot,Cindy,31,1435,6667,3667,5,99,68,0,0,0,0,0,0,27,27,1
+magus,golbez_slot,Mindy,31,734,6667,3667,3,85,34,0,0,0,0,0,0,27,27,1
+magus,lugae_slot,Sandy,25,5262,8674,3667,3,99,44,1,60,1,0,0,0,27,27,7
+magus,lugae_slot,Cindy,25,9051,8674,3667,6,99,86,1,50,1,0,0,0,27,27,7
+magus,lugae_slot,Mindy,25,4631,8674,3667,3,99,44,1,60,1,0,0,0,27,27,7
+magus,darkimp_slot,Sandy,16,166,1940,45,3,80,28,0,0,0,0,0,0,18,21,11
+magus,darkimp_slot,Cindy,16,286,1940,45,5,70,56,0,0,0,0,0,0,18,21,11
+magus,darkimp_slot,Mindy,16,146,1940,45,3,80,28,0,0,0,0,0,0,18,21,11
+magus,kingqueen_slot,Sandy,15,1667,0,0,5,70,58,0,0,0,0,0,0,53,53,11
+magus,kingqueen_slot,Cindy,15,2867,0,0,9,85,116,0,0,0,0,0,0,53,53,11
+magus,kingqueen_slot,Mindy,15,1467,0,0,5,70,58,0,0,0,0,0,0,53,53,11
+magus,rubicant_slot,Sandy,50,7000,8334,2334,4,80,44,1,90,1,8,80,37,38,38,16
+magus,rubicant_slot,Cindy,50,12040,8334,2334,7,80,88,1,90,1,8,80,37,38,38,16
+magus,rubicant_slot,Mindy,50,6160,8334,2334,4,80,44,1,90,1,0,0,0,38,38,16
+magus,evilwall_slot,Sandy,37,5278,7667,2667,3,95,42,1,40,1,7,80,29,66,66,79
+magus,evilwall_slot,Cindy,37,9078,7667,2667,6,90,84,1,35,2,7,80,29,66,66,79
+magus,evilwall_slot,Mindy,37,4645,7667,2667,3,95,42,1,40,1,0,0,0,66,66,79
+magus,asura_slot,Sandy,63,6389,6667,0,5,99,68,0,0,0,8,80,37,66,66,69
+magus,asura_slot,Cindy,63,10989,6667,0,10,99,134,0,0,0,8,80,37,66,66,69
+magus,asura_slot,Mindy,63,5623,6667,0,5,99,68,0,0,0,0,0,0,66,66,69
+magus,leviatan_slot,Sandy,79,9723,9334,0,6,99,86,0,0,2,10,80,47,53,53,34
+magus,leviatan_slot,Cindy,79,16723,9334,0,13,99,174,0,0,5,10,80,47,53,53,34
+magus,leviatan_slot,Mindy,79,8556,9334,0,6,99,86,0,0,2,0,0,0,53,53,34
+magus,odin_slot,Sandy,53,5695,6000,0,5,70,58,1,90,1,7,50,32,43,46,95
+magus,odin_slot,Cindy,53,9795,6000,0,9,85,116,2,90,3,7,50,32,43,46,95
+magus,odin_slot,Mindy,53,5012,6000,0,5,70,58,1,90,1,0,0,0,43,46,95
+magus,bahamut_slot,Sandy,47,10278,11667,0,6,99,86,0,0,0,1,60,8,27,27,17
+magus,bahamut_slot,Cindy,47,17678,11667,0,13,99,174,0,0,1,1,60,8,27,27,17
+magus,bahamut_slot,Mindy,47,9045,11667,0,6,99,86,0,0,0,0,0,0,27,27,17
+magus,elements_slot,Sandy,79,28889,34167,6667,5,90,64,2,40,2,3,60,4,89,89,15
+magus,elements_slot,Cindy,79,49689,34167,6667,10,80,128,2,35,3,3,60,4,89,89,15
+magus,elements_slot,Mindy,79,25423,34167,6667,5,90,64,2,40,2,0,0,0,89,89,15
+magus,cpu_slot,Sandy,48,6667,50000,3445,6,99,86,2,50,2,8,50,38,38,38,127
+magus,cpu_slot,Cindy,48,11467,50000,3445,13,99,174,4,45,4,8,50,38,38,38,127
+magus,cpu_slot,Mindy,48,5867,50000,3445,6,99,86,2,50,2,0,0,0,38,38,127
+magus,paledim_slot,Sandy,98,7584,19667,0,6,70,72,3,45,3,10,50,48,40,43,31
+magus,paledim_slot,Cindy,98,13044,19667,0,11,85,144,5,40,5,10,50,48,40,43,31
+magus,paledim_slot,Mindy,98,6674,19667,0,6,70,72,3,45,3,0,0,0,40,43,31
+magus,wyvern_slot,Sandy,99,6945,21434,0,6,90,80,3,90,3,10,50,52,43,46,8
+magus,wyvern_slot,Cindy,99,11945,21434,0,12,90,160,4,80,5,10,50,52,43,46,8
+magus,wyvern_slot,Mindy,99,6112,21434,0,6,90,80,3,90,3,0,0,0,43,46,8
+magus,plague_slot,Sandy,96,7778,10400,184,6,70,72,3,55,3,7,50,32,29,32,66
+magus,plague_slot,Cindy,96,13378,10400,184,11,90,146,4,50,5,7,50,32,29,32,66
+magus,plague_slot,Mindy,96,6845,10400,184,6,70,72,3,55,3,0,0,0,29,32,66
+magus,dlunar_slot,Sandy,99,11667,33334,0,6,70,72,3,35,3,10,80,54,30,30,36
+magus,dlunar_slot,Cindy,99,20067,33334,0,11,85,144,3,30,4,10,80,54,30,30,36
+magus,dlunar_slot,Mindy,99,10267,33334,0,6,70,72,3,35,3,0,0,0,30,30,36
+magus,ogopogo_slot,Sandy,62,10278,20367,0,6,80,76,2,60,2,9,50,40,38,38,127
+magus,ogopogo_slot,Cindy,62,17678,20367,0,11,99,150,4,55,4,9,50,40,38,38,127
+magus,ogopogo_slot,Mindy,62,9045,20367,0,6,80,76,2,60,2,0,0,0,38,38,127
+valvalis,dmist_slot,Valvalis,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10,script-defense: 1-25-2,script-magic defense: 8-80-100,script-defense: 0-0-5,script-magic defense: 7-80-31
+valvalis,officer_slot,Valvalis,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,20,script-defense: 2-80-2,script-magic defense: 8-70-80,script-defense: 1-65-2,script-magic defense: 2-60-12
+valvalis,octomamm_slot,Valvalis,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,18,script-defense: 1-25-2,script-magic defense: 8-80-100,script-defense: 0-0-0,script-magic defense: 6-60-25
+valvalis,antlion_slot,Valvalis,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,4,script-defense: 0-0-2,script-magic defense: 6-60-23,script-defense: 0-0-2,script-magic defense: 2-60-8
+valvalis,mombomb_slot,Valvalis,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5,script-defense: 1-25-2,script-magic defense: 9-75-112,script-defense: 0-0-0,script-magic defense: 1-40-9
+valvalis,fabulgauntlet_slot,Valvalis,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,27,script-defense: 3-40-4,script-magic defense: 9-75-112,script-defense: 2-20-2,script-magic defense: 3-60-11
+valvalis,milon_slot,Valvalis,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14,script-defense: 2-55-3,script-magic defense: 8-80-102,script-defense: 1-35-2,script-magic defense: 0-0-0
+valvalis,milonz_slot,Valvalis,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31,script-defense: 2-80-2,script-magic defense: 10-75-126,script-defense: 1-60-1,script-magic defense: 6-40-22
+valvalis,mirrorcecil_slot,Valvalis,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,30,script-defense: 1-25-2,script-magic defense: 10-75-126,script-defense: 0-0-0,script-magic defense: 3-60-11
+valvalis,karate_slot,Valvalis,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,55,script-defense: 3-40-4,script-magic defense: 99-99-254,script-defense: 0-0-0,script-magic defense: 0-0-0
+valvalis,guard_slot,Valvalis,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26,script-defense: 3-90-3,script-magic defense: 11-75-140,script-defense: 1-90-1,script-magic defense: 3-40-14
+valvalis,baigan_slot,Valvalis,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9,script-defense: 1-25-2,script-magic defense: 10-80-54,script-defense: 0-0-0,script-magic defense: 3-60-11
+valvalis,kainazzo_slot,Valvalis,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29,script-defense: 3-70-3,script-magic defense: 12-80-156,script-defense: 2-50-2,script-magic defense: 10-50-48
+valvalis,darkelf_slot,Valvalis,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15,script-defense: 2-25-3,script-magic defense: 99-100-255,script-defense: 0-0-3,script-magic defense: 99-99-254
+valvalis,magus_slot,Valvalis,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11,script-defense: 2-70-3,script-magic defense: 9-90-118,script-defense: 1-45-2,script-magic defense: 3-60-11
+valvalis,valvalis_slot,Valvalis,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63,script-defense: 4-45-4,script-magic defense: 99-100-255,script-defense: 0-0-0,script-magic defense: 3-40-12
+valvalis,calbrena_slot,Valvalis,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41,script-defense: 5-70-6,script-magic defense: 99-100-255,script-defense: 1-80-2,script-magic defense: 6-60-25
+valvalis,golbez_slot,Valvalis,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1,script-defense: 3-40-4,script-magic defense: 99-99-254,script-defense: 0-0-0,script-magic defense: 0-0-0
+valvalis,lugae_slot,Valvalis,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7,script-defense: 3-80-4,script-magic defense: 99-99-254,script-defense: 1-50-1,script-magic defense: 0-0-0
+valvalis,darkimp_slot,Valvalis,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,28,script-defense: 1-25-2,script-magic defense: 9-75-112,script-defense: 0-0-0,script-magic defense: 0-0-0
+valvalis,kingqueen_slot,Valvalis,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,27,script-defense: 1-25-2,script-magic defense: 8-80-102,script-defense: 0-0-0,script-magic defense: 0-0-0
+valvalis,rubicant_slot,Valvalis,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16,script-defense: 4-90-4,script-magic defense: 99-100-255,script-defense: 1-90-1,script-magic defense: 8-80-37
+valvalis,evilwall_slot,Valvalis,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79,script-defense: 5-70-6,script-magic defense: 99-100-255,script-defense: 1-35-2,script-magic defense: 7-80-29
+valvalis,asura_slot,Valvalis,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69,script-defense: 4-45-4,script-magic defense: 99-100-255,script-defense: 0-0-0,script-magic defense: 8-80-37
+valvalis,leviatan_slot,Valvalis,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34,script-defense: 4-45-4,script-magic defense: 255-99-255,script-defense: 0-0-5,script-magic defense: 10-80-47
+valvalis,odin_slot,Valvalis,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95,script-defense: 5-70-6,script-magic defense: 99-100-255,script-defense: 2-90-3,script-magic defense: 7-50-32
+valvalis,bahamut_slot,Valvalis,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17,script-defense: 4-45-4,script-magic defense: 99-100-255,script-defense: 0-0-1,script-magic defense: 1-60-8
+valvalis,elements_slot,Valvalis,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15,script-defense: 5-70-6,script-magic defense: 255-99-255,script-defense: 2-35-3,script-magic defense: 3-60-4
+valvalis,cpu_slot,Valvalis,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127,script-defense: 6-80-27,script-magic defense: 99-100-255,script-defense: 4-45-4,script-magic defense: 8-50-38
+valvalis,paledim_slot,Valvalis,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31,script-defense: 7-80-29,script-magic defense: 255-99-255,script-defense: 5-40-5,script-magic defense: 10-50-48
+valvalis,wyvern_slot,Valvalis,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8,script-defense: 6-80-27,script-magic defense: 255-99-255,script-defense: 4-80-5,script-magic defense: 10-50-52
+valvalis,plague_slot,Valvalis,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,168,script-defense: 6-80-27,script-magic defense: 255-99-255,script-defense: 4-50-5,script-magic defense: 7-50-32
+valvalis,dlunar_slot,Valvalis,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36,script-defense: 5-70-6,script-magic defense: 255-99-255,script-defense: 3-30-4,script-magic defense: 10-80-54
+valvalis,ogopogo_slot,Valvalis,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127,script-defense: 6-80-27,script-magic defense: 99-100-255,script-defense: 4-55-4,script-magic defense: 9-50-40
+calbrena,dmist_slot,Cal,7,55,34,13,2,85,11,0,0,0,2,85,13,8,8,8
+calbrena,dmist_slot,Brena,4,17,34,13,2,85,11,0,0,2,2,85,13,8,8,8
+calbrena,dmist_slot,Calbrena,10,253,500,125,2,90,16,0,0,5,7,80,31,5,5,10,scriptHP: 6
+calbrena,officer_slot,Cal,8,36,42,16,2,90,15,0,0,0,1,60,6,3,6,8
+calbrena,officer_slot,Brena,4,11,42,16,2,90,15,1,30,1,1,60,6,3,6,8
+calbrena,officer_slot,Calbrena,11,164,629,154,3,75,26,1,65,2,2,60,12,2,4,10,scriptHP: 4
+calbrena,octomamm_slot,Cal,7,276,58,32,2,85,13,0,0,0,3,60,11,53,53,7
+calbrena,octomamm_slot,Brena,4,83,58,32,2,85,13,0,0,0,3,60,11,53,53,7
+calbrena,octomamm_slot,Calbrena,10,1275,858,313,2,99,22,0,0,0,6,60,25,31,31,9,scriptHP: 28
+calbrena,antlion_slot,Cal,2,118,72,50,1,60,6,0,0,0,1,55,2,8,8,2
+calbrena,antlion_slot,Brena,1,36,72,50,1,60,6,0,0,1,1,55,2,8,8,2
+calbrena,antlion_slot,Calbrena,2,543,1072,500,2,85,11,0,0,2,2,60,8,5,5,2,scriptHP: 12
+calbrena,mombomb_slot,Cal,10,147,208,110,2,90,16,0,0,0,3,40,4,10,13,4
+calbrena,mombomb_slot,Brena,5,44,208,110,2,90,16,0,0,0,3,40,4,10,13,4
+calbrena,mombomb_slot,Calbrena,15,679,3115,1097,3,80,30,0,0,0,1,40,9,7,7,5,scriptHP: 15
+calbrena,fabulgauntlet_slot,Cal,10,221,267,90,2,99,20,0,0,0,1,60,6,9,12,10
+calbrena,fabulgauntlet_slot,Brena,5,67,267,90,2,99,20,2,20,2,1,60,6,9,12,10
+calbrena,fabulgauntlet_slot,Calbrena,15,1020,3993,891,3,90,36,2,20,2,3,60,11,6,9,14,scriptHP: 23
+calbrena,milon_slot,Cal,10,327,181,207,1,60,10,0,0,0,0,0,0,11,14,11
+calbrena,milon_slot,Brena,5,98,181,207,1,60,10,1,30,1,0,0,0,11,14,11
+calbrena,milon_slot,Calbrena,15,1509,2715,2063,1,75,19,1,35,2,0,0,0,8,8,15,scriptHP: 33
+calbrena,milonz_slot,Cal,10,352,191,188,2,99,22,0,0,0,3,40,10,13,16,24
+calbrena,milonz_slot,Brena,5,106,191,188,2,99,22,1,30,1,3,40,10,13,16,24
+calbrena,milonz_slot,Calbrena,15,1628,2858,1875,3,99,44,1,60,1,6,40,22,9,9,31,scriptHP: 36
+calbrena,mirrorcecil_slot,Cal,12,118,0,0,3,75,26,0,0,0,1,60,6,8,8,12
+calbrena,mirrorcecil_slot,Brena,6,36,0,0,3,75,26,0,0,0,1,60,6,8,8,12
+calbrena,mirrorcecil_slot,Calbrena,17,543,0,0,3,99,46,0,0,0,3,60,11,5,5,15,scriptHP: 12
+calbrena,karate_slot,Cal,21,470,0,0,4,90,48,0,0,0,0,0,0,6,9,21
+calbrena,karate_slot,Brena,10,141,0,0,4,90,48,0,0,0,0,0,0,6,9,21
+calbrena,karate_slot,Calbrena,31,2170,0,0,6,99,86,0,0,0,0,0,0,4,7,28,scriptHP: 47
+calbrena,guard_slot,Cal,12,47,69,63,3,75,26,0,0,0,1,40,7,16,19,20
+calbrena,guard_slot,Brena,6,15,69,63,3,75,26,1,40,1,1,40,7,16,19,20
+calbrena,guard_slot,Calbrena,18,217,1029,625,3,99,46,1,90,1,3,40,14,11,14,26,scriptHP: 5
+calbrena,baigan_slot,Cal,6,493,230,188,3,80,30,0,0,0,1,60,6,11,14,7
+calbrena,baigan_slot,Brena,3,148,230,188,3,80,30,0,0,0,1,60,6,11,14,7
+calbrena,baigan_slot,Calbrena,9,2279,3443,1875,4,99,52,0,0,0,3,60,11,8,8,9,scriptHP: 50
+calbrena,kainazzo_slot,Cal,11,470,262,250,2,99,22,0,0,0,5,60,21,22,25,22
+calbrena,kainazzo_slot,Brena,6,141,262,250,2,99,22,1,30,1,5,60,21,22,25,22
+calbrena,kainazzo_slot,Calbrena,16,2170,3929,2500,3,99,44,2,50,2,10,50,48,15,15,29,scriptHP: 47
+calbrena,darkelf_slot,Cal,13,587,334,563,3,80,30,0,0,0,9,75,112,16,19,12
+calbrena,darkelf_slot,Brena,7,176,334,563,3,80,30,0,0,1,9,75,112,16,19,12
+calbrena,darkelf_slot,Calbrena,19,2713,5000,5625,4,99,54,0,0,3,99,99,254,11,11,15,scriptHP: 59
+calbrena,magus_slot,Cal,11,1056,429,563,3,85,34,0,0,0,1,60,6,10,13,9
+calbrena,magus_slot,Brena,6,317,429,563,3,85,34,1,30,1,1,60,6,10,13,9
+calbrena,magus_slot,Calbrena,16,4883,6429,5625,5,80,60,1,45,2,3,60,11,7,7,11,scriptHP: 106
+calbrena,valvalis_slot,Cal,24,704,453,344,3,95,40,0,0,0,1,30,5,27,30,48
+calbrena,valvalis_slot,Brena,12,212,453,344,3,95,40,0,0,0,1,30,5,27,30,48
+calbrena,valvalis_slot,Calbrena,36,3255,6786,3438,5,99,70,0,0,0,3,40,12,18,18,63,scriptHP: 71
+calbrena,calbrena_slot,Cal,31,1000,1000,500,4,99,54,0,0,0,3,60,11,16,19,31
+calbrena,calbrena_slot,Brena,15,300,1000,500,4,99,54,1,40,1,3,60,11,16,19,31
+calbrena,calbrena_slot,Calbrena,47,4624,15000,5000,7,99,96,1,80,2,6,60,25,11,11,41,scriptHP: 100
+calbrena,golbez_slot,Cal,21,353,953,688,3,90,38,0,0,0,0,0,0,40,43,1
+calbrena,golbez_slot,Brena,10,106,953,688,3,90,38,0,0,0,0,0,0,40,43,1
+calbrena,golbez_slot,Calbrena,31,1629,14286,6875,5,99,68,0,0,0,0,0,0,27,27,1,scriptHP: 36
+calbrena,lugae_slot,Cal,17,2223,1240,688,4,90,48,0,0,0,0,0,0,40,43,6
+calbrena,lugae_slot,Brena,8,667,1240,688,4,90,48,1,30,1,0,0,0,40,43,6
+calbrena,lugae_slot,Calbrena,25,10276,18586,6875,6,99,86,1,50,1,0,0,0,27,27,8,scriptHP: 223
+calbrena,darkimp_slot,Cal,11,71,278,9,3,85,32,0,0,0,0,0,0,27,30,11
+calbrena,darkimp_slot,Brena,6,22,278,9,3,85,32,0,0,0,0,0,0,27,30,11
+calbrena,darkimp_slot,Calbrena,16,324,4158,85,5,70,56,0,0,0,0,0,0,18,21,14,scriptHP: 8
+calbrena,kingqueen_slot,Cal,10,704,0,0,5,90,66,0,0,0,0,0,0,89,89,10
+calbrena,kingqueen_slot,Brena,5,212,0,0,5,90,66,0,0,0,0,0,0,89,89,10
+calbrena,kingqueen_slot,Calbrena,15,3255,0,0,9,85,116,0,0,0,0,0,0,53,53,14,scriptHP: 71
+calbrena,rubicant_slot,Cal,33,2957,1191,438,4,90,50,0,0,0,4,60,17,65,65,13
+calbrena,rubicant_slot,Brena,16,887,1191,438,4,90,50,1,40,1,4,60,17,65,65,13
+calbrena,rubicant_slot,Calbrena,50,13671,17858,4375,7,80,88,1,90,1,8,80,37,38,38,16,scriptHP: 296
+calbrena,evilwall_slot,Cal,25,2230,1096,500,4,90,48,0,0,0,2,85,13,111,111,60
+calbrena,evilwall_slot,Brena,12,669,1096,500,4,90,48,1,30,1,2,85,13,111,111,60
+calbrena,evilwall_slot,Calbrena,37,10307,16429,5000,6,90,84,1,35,2,7,80,29,66,66,79,scriptHP: 223
+calbrena,asura_slot,Cal,42,2699,953,0,6,80,76,0,0,0,4,60,17,111,111,53
+calbrena,asura_slot,Brena,21,810,953,0,6,80,76,0,0,0,4,60,17,111,111,53
+calbrena,asura_slot,Calbrena,63,12477,14286,0,10,99,134,0,0,0,8,80,37,66,66,69,scriptHP: 270
+calbrena,leviatan_slot,Cal,53,4107,1334,0,7,99,98,0,0,0,5,60,21,89,89,26
+calbrena,leviatan_slot,Brena,26,1232,1334,0,7,99,98,0,0,2,5,60,21,89,89,26
+calbrena,leviatan_slot,Calbrena,79,18987,20000,0,13,99,174,0,0,5,10,80,47,53,53,34,scriptHP: 411
+calbrena,odin_slot,Cal,35,2405,858,0,5,90,66,0,0,0,3,40,14,65,65,72
+calbrena,odin_slot,Brena,17,722,858,0,5,90,66,2,40,2,3,40,14,65,65,72
+calbrena,odin_slot,Calbrena,53,11121,12858,0,9,85,116,2,90,3,7,50,32,43,46,95,scriptHP: 241
+calbrena,bahamut_slot,Cal,31,4341,1667,0,7,99,98,0,0,0,1,55,2,40,43,13
+calbrena,bahamut_slot,Brena,15,1303,1667,0,7,99,98,0,0,0,1,55,2,40,43,13
+calbrena,bahamut_slot,Calbrena,47,20072,25000,0,13,99,174,0,0,1,1,60,8,27,27,17,scriptHP: 435
+calbrena,elements_slot,Cal,53,12201,4881,1250,6,70,72,0,0,0,2,60,2,111,111,12
+calbrena,elements_slot,Brena,26,3661,4881,1250,6,70,72,2,20,2,2,60,2,111,111,12
+calbrena,elements_slot,Calbrena,79,56417,73215,12500,10,80,128,2,35,3,3,60,4,89,89,15,scriptHP: 1221
+calbrena,cpu_slot,Cal,32,2816,7143,646,7,99,98,0,0,0,4,60,17,65,65,97
+calbrena,cpu_slot,Brena,16,845,7143,646,7,99,98,2,20,2,4,60,17,65,65,97
+calbrena,cpu_slot,Calbrena,48,13020,107143,6459,13,99,174,4,45,4,8,50,38,38,38,127,scriptHP: 282
+calbrena,paledim_slot,Cal,65,3203,2810,0,6,90,80,0,0,0,5,60,21,65,65,24
+calbrena,paledim_slot,Brena,32,961,2810,0,6,90,80,5,20,5,5,60,21,65,65,24
+calbrena,paledim_slot,Calbrena,98,14810,42143,0,11,85,144,5,40,5,10,50,48,40,43,31,scriptHP: 321
+calbrena,wyvern_slot,Cal,66,2933,3062,0,7,80,90,0,0,0,6,60,23,65,65,7
+calbrena,wyvern_slot,Brena,32,880,3062,0,7,80,90,3,35,3,6,60,23,65,65,7
+calbrena,wyvern_slot,Calbrena,99,13562,45929,0,12,90,160,4,80,5,10,50,52,43,46,8,scriptHP: 294
+calbrena,plague_slot,Cal,64,3285,1486,35,6,90,82,0,0,0,3,40,14,43,46,64
+calbrena,plague_slot,Brena,31,986,1486,35,6,90,82,3,25,3,3,40,14,43,46,64
+calbrena,plague_slot,Calbrena,96,15190,22286,344,11,90,146,4,50,5,7,50,32,29,32,84,scriptHP: 329
+calbrena,dlunar_slot,Cal,66,4928,4762,0,6,90,80,0,0,0,3,75,24,43,46,28
+calbrena,dlunar_slot,Brena,32,1479,4762,0,6,90,80,3,15,3,3,75,24,43,46,28
+calbrena,dlunar_slot,Calbrena,99,22784,71429,0,11,85,144,3,30,4,10,80,54,30,30,36,scriptHP: 493
+calbrena,ogopogo_slot,Cal,41,4341,2910,0,6,90,84,0,0,0,4,40,18,65,65,97
+calbrena,ogopogo_slot,Brena,20,1303,2910,0,6,90,84,2,30,2,4,40,18,65,65,97
+calbrena,ogopogo_slot,Calbrena,62,20072,43643,0,11,99,150,4,55,4,9,50,40,38,38,127,scriptHP: 435
+golbez,dmist_slot,Golbez,10,19465,525,182,2,90,16,0,0,5,7,80,31,5,5,10
+golbez,dmist_slot,Shadow,3,1,175,19,2,99,20,0,0,1,2,40,7,11,11,255
+golbez,officer_slot,Golbez,11,19302,660,223,3,75,26,1,65,2,2,60,12,2,4,1
+golbez,officer_slot,Shadow,3,1,220,23,3,85,32,0,0,0,2,15,3,5,8,11
+golbez,octomamm_slot,Golbez,10,21350,900,455,2,99,22,0,0,0,6,60,25,31,31,1
+golbez,octomamm_slot,Shadow,3,1,300,46,3,80,28,0,0,0,1,30,5,69,69,10
+golbez,antlion_slot,Golbez,2,20000,1125,728,2,85,11,0,0,2,2,60,8,5,5,1
+golbez,antlion_slot,Shadow,1,1,375,73,2,85,13,0,0,0,1,25,2,11,11,2
+golbez,mombomb_slot,Golbez,15,20250,3270,1596,3,80,30,0,0,0,1,40,9,7,7,5
+golbez,mombomb_slot,Shadow,4,1,1090,160,3,90,38,0,0,0,0,0,2,18,18,155
+golbez,fabulgauntlet_slot,Golbez,15,20880,4193,1296,3,90,36,2,20,2,3,60,11,6,9,1
+golbez,fabulgauntlet_slot,Shadow,4,1,1398,130,4,80,46,0,0,0,1,25,2,15,18,15
+golbez,milon_slot,Golbez,15,21780,2850,3000,1,75,19,1,35,2,0,0,0,8,8,14
+golbez,milon_slot,Shadow,4,1,950,300,3,75,24,0,0,0,0,0,0,17,20,255
+golbez,milonz_slot,Golbez,15,22000,3000,2728,3,99,44,1,60,1,6,40,22,9,9,31
+golbez,milonz_slot,Shadow,4,1,1000,273,4,99,54,0,0,0,0,0,5,19,22,255
+golbez,mirrorcecil_slot,Golbez,17,20000,0,0,3,99,46,0,0,0,3,60,11,5,5,1
+golbez,mirrorcecil_slot,Shadow,4,1,0,0,5,70,58,0,0,0,1,25,2,11,11,17
+golbez,karate_slot,Golbez,31,22999,0,0,6,99,86,0,0,0,0,0,0,4,7,1
+golbez,karate_slot,Shadow,7,2,0,0,8,99,108,0,0,0,0,0,0,10,13,31
+golbez,guard_slot,Golbez,18,19400,1080,910,3,99,46,1,90,1,3,40,14,11,14,26
+golbez,guard_slot,Shadow,5,1,360,91,5,70,58,0,0,0,0,0,3,27,30,255
+golbez,baigan_slot,Golbez,9,23199,3615,2728,4,99,52,0,0,0,3,60,11,8,8,9
+golbez,baigan_slot,Shadow,3,2,1205,273,5,90,66,0,0,0,1,25,2,17,20,255
+golbez,kainazzo_slot,Golbez,16,22999,4125,3637,3,99,44,2,50,2,10,50,48,15,15,29
+golbez,kainazzo_slot,Shadow,4,2,1375,364,4,99,54,0,0,0,2,40,11,38,38,255
+golbez,darkelf_slot,Golbez,19,23999,5250,8182,4,99,54,0,0,3,99,99,254,11,11,15
+golbez,darkelf_slot,Shadow,5,2,1750,819,5,99,68,0,0,1,10,50,52,27,27,255
+golbez,magus_slot,Golbez,16,27998,6750,8182,5,80,60,1,45,2,3,60,11,7,7,11
+golbez,magus_slot,Shadow,4,3,2250,819,6,80,76,0,0,0,1,25,2,18,18,255
+golbez,valvalis_slot,Golbez,36,24999,7125,5000,5,99,70,0,0,0,3,40,12,18,18,63
+golbez,valvalis_slot,Shadow,9,2,2375,500,6,99,86,0,0,0,0,0,3,41,44,255
+golbez,calbrena_slot,Golbez,47,27522,15750,7273,7,99,96,1,80,2,6,60,25,11,11,41
+golbez,calbrena_slot,Shadow,11,3,5250,728,9,99,122,0,0,0,1,30,5,27,27,255
+golbez,golbez_slot,Golbez,31,22001,15000,10000,5,99,68,0,0,0,0,0,0,27,27,1
+golbez,golbez_slot,Shadow,7,1,5000,1000,6,99,86,0,0,0,0,0,0,66,66,31
+golbez,lugae_slot,Golbez,25,37937,19515,10000,6,99,86,1,50,1,0,0,0,27,27,7
+golbez,lugae_slot,Shadow,6,7,6505,1000,8,99,108,0,0,0,0,0,0,66,66,217
+golbez,darkimp_slot,Golbez,16,19597,4365,123,5,70,56,0,0,0,0,0,0,18,21,1
+golbez,darkimp_slot,Shadow,4,1,1455,13,6,70,72,0,0,0,0,0,0,43,46,16
+golbez,kingqueen_slot,Golbez,15,24999,0,0,9,85,116,0,0,0,0,0,0,53,53,1
+golbez,kingqueen_slot,Shadow,4,2,0,0,11,90,146,0,0,0,0,0,0,111,111,15
+golbez,rubicant_slot,Golbez,50,44192,18750,6364,7,80,88,1,90,1,8,80,37,38,38,16
+golbez,rubicant_slot,Shadow,12,9,6250,637,9,75,112,0,0,0,2,40,9,89,89,255
+golbez,evilwall_slot,Golbez,37,37994,17250,7273,6,90,84,1,35,2,7,80,29,66,66,79
+golbez,evilwall_slot,Shadow,9,7,5750,728,8,90,106,0,0,0,2,40,7,111,111,255
+golbez,asura_slot,Golbez,63,41993,15000,0,10,99,134,0,0,0,8,80,37,66,66,69
+golbez,asura_slot,Shadow,15,8,5000,0,13,90,170,0,0,0,2,40,9,111,111,255
+golbez,leviatan_slot,Golbez,79,53989,21000,0,13,99,174,0,0,5,10,80,47,53,53,34
+golbez,leviatan_slot,Shadow,18,12,7000,0,13,99,174,0,0,1,2,40,11,111,111,255
+golbez,odin_slot,Golbez,53,39494,13500,0,9,85,116,2,90,3,7,50,32,43,46,95
+golbez,odin_slot,Shadow,12,7,4500,0,11,90,146,1,30,1,2,40,7,111,111,255
+golbez,bahamut_slot,Golbez,47,55988,26250,0,13,99,174,0,0,1,1,60,8,27,27,17
+golbez,bahamut_slot,Shadow,11,13,8750,0,13,99,174,0,0,0,0,0,2,66,66,255
+golbez,elements_slot,Golbez,79,65000,76875,18182,10,80,128,2,35,3,3,60,4,89,89,15
+golbez,elements_slot,Shadow,18,35,25625,1819,12,95,162,0,0,1,1,30,1,111,111,255
+golbez,cpu_slot,Golbez,48,42993,112500,9394,13,99,174,4,45,4,8,50,38,38,38,127
+golbez,cpu_slot,Shadow,11,8,37500,940,13,99,174,0,0,1,2,40,9,89,89,255
+golbez,paledim_slot,Golbez,98,46291,44250,0,11,85,144,5,40,5,10,50,48,40,43,31
+golbez,paledim_slot,Shadow,23,10,14750,0,13,99,174,0,0,1,2,40,11,111,111,255
+golbez,wyvern_slot,Golbez,99,43992,48225,0,12,90,160,4,80,5,10,50,52,43,46,8
+golbez,wyvern_slot,Shadow,23,9,16075,0,13,99,174,1,30,1,2,40,11,111,111,248
+golbez,plague_slot,Golbez,96,46991,23400,500,11,90,146,4,50,5,7,50,32,29,32,4
+golbez,plague_slot,Shadow,22,10,7800,50,13,99,174,1,30,1,2,40,7,69,69,96
+golbez,dlunar_slot,Golbez,99,60987,75000,0,11,85,144,3,30,4,10,80,54,30,30,36
+golbez,dlunar_slot,Shadow,23,14,25000,0,13,99,174,0,0,1,3,40,12,69,69,255
+golbez,ogopogo_slot,Golbez,62,55988,45825,0,11,99,150,4,55,4,9,50,40,38,38,127
+golbez,ogopogo_slot,Shadow,14,13,15275,0,13,99,174,1,30,1,2,40,9,89,89,255
+lugae,dmist_slot,Dr.Lugae,13,109,148,37,2,70,3,0,0,0,9,80,41,1,2,
+lugae,dmist_slot,Balnab,13,97,148,46,2,90,16,0,0,0,9,80,41,5,5,45
+lugae,dmist_slot,Balnab-Z,19,99,1,46,1,80,21,0,0,5,10,80,54,5,5,
+lugae,dmist_slot,Dr.Lugae,10,163,404,73,2,90,16,0,0,5,7,80,31,5,5,10
+lugae,officer_slot,Dr.Lugae,15,71,187,45,1,60,6,0,0,0,2,90,15,1,2,
+lugae,officer_slot,Balnab,15,63,187,56,3,75,26,0,0,0,2,90,15,2,5,14
+lugae,officer_slot,Balnab-Z,21,64,1,56,3,85,34,1,55,2,2,99,22,2,5,
+lugae,officer_slot,Dr.Lugae,11,106,508,90,3,75,26,1,65,2,2,60,12,2,4,4
+lugae,octomamm_slot,Dr.Lugae,13,548,254,91,1,60,6,0,0,0,7,80,31,10,13,
+lugae,octomamm_slot,Balnab,13,488,254,114,2,99,22,0,0,0,7,80,31,33,36,13
+lugae,octomamm_slot,Balnab-Z,19,497,1,114,3,80,30,0,0,0,10,80,47,33,36,
+lugae,octomamm_slot,Dr.Lugae,10,819,692,182,2,99,22,0,0,0,6,60,25,31,31,3
+lugae,antlion_slot,Dr.Lugae,3,234,318,146,1,65,2,0,0,0,2,85,11,1,2,
+lugae,antlion_slot,Balnab,3,208,318,182,2,85,11,0,0,0,2,85,11,5,5,3
+lugae,antlion_slot,Balnab-Z,4,212,2,182,3,60,15,0,0,2,2,90,15,5,5,
+lugae,antlion_slot,Dr.Lugae,2,349,865,291,2,85,11,0,0,2,2,60,8,5,5,1
+lugae,mombomb_slot,Dr.Lugae,20,292,922,320,1,60,6,0,0,0,2,60,12,1,3,
+lugae,mombomb_slot,Balnab,20,260,922,399,3,80,30,0,0,0,2,60,12,8,8,23
+lugae,mombomb_slot,Balnab-Z,29,264,4,399,4,70,40,0,0,0,1,75,18,8,8,
+lugae,mombomb_slot,Dr.Lugae,15,436,2514,639,3,80,30,0,0,0,1,40,9,7,7,5
+lugae,fabulgauntlet_slot,Dr.Lugae,20,439,1182,260,1,60,8,0,0,0,4,60,15,2,4,
+lugae,fabulgauntlet_slot,Balnab,20,390,1182,324,3,90,36,0,0,0,4,60,15,7,10,19
+lugae,fabulgauntlet_slot,Balnab-Z,29,397,5,324,4,90,48,2,20,2,2,99,20,7,10,
+lugae,fabulgauntlet_slot,Dr.Lugae,15,656,3223,519,3,90,36,2,20,2,3,60,11,6,9,5
+lugae,milon_slot,Dr.Lugae,20,649,804,600,1,55,2,0,0,0,0,0,0,4,4,
+lugae,milon_slot,Balnab,20,577,804,750,1,75,19,0,0,0,0,0,0,9,9,62
+lugae,milon_slot,Balnab-Z,29,588,3,750,3,75,26,1,25,2,0,0,0,9,9,
+lugae,milon_slot,Dr.Lugae,15,969,2191,1200,1,75,19,1,35,2,0,0,0,8,8,14
+lugae,milonz_slot,Dr.Lugae,20,700,846,546,1,60,10,0,0,0,7,50,28,4,4,
+lugae,milonz_slot,Balnab,20,622,846,682,3,99,44,0,0,0,7,50,28,11,11,138
+lugae,milonz_slot,Balnab-Z,29,634,4,682,5,70,58,1,50,1,9,80,41,11,11,
+lugae,milonz_slot,Dr.Lugae,15,1046,2306,1091,3,99,44,1,60,1,6,40,22,9,9,31
+lugae,mirrorcecil_slot,Dr.Lugae,22,234,0,0,1,60,10,0,0,0,4,60,15,1,2,
+lugae,mirrorcecil_slot,Balnab,22,208,0,0,3,99,46,0,0,0,4,60,15,5,5,22
+lugae,mirrorcecil_slot,Balnab-Z,32,212,0,0,5,80,60,0,0,0,2,99,20,5,5,
+lugae,mirrorcecil_slot,Dr.Lugae,17,349,0,0,3,99,46,0,0,0,3,60,11,5,5,5
+lugae,karate_slot,Dr.Lugae,40,933,0,0,1,75,18,0,0,0,0,0,0,1,3,
+lugae,karate_slot,Balnab,40,830,0,0,6,99,86,0,0,0,0,0,0,5,8,39
+lugae,karate_slot,Balnab-Z,59,845,0,0,9,80,114,0,0,0,0,0,0,5,8,
+lugae,karate_slot,Dr.Lugae,31,1394,0,0,6,99,86,0,0,0,0,0,0,4,7,9
+lugae,guard_slot,Dr.Lugae,24,94,305,182,1,60,10,0,0,0,4,40,18,5,5,
+lugae,guard_slot,Balnab,24,83,305,228,3,99,46,0,0,0,4,40,18,13,16,116
+lugae,guard_slot,Balnab-Z,34,85,2,228,5,80,60,1,70,1,6,80,27,13,16,
+lugae,guard_slot,Dr.Lugae,18,140,831,364,3,99,46,1,90,1,3,40,14,11,14,26
+lugae,baigan_slot,Dr.Lugae,12,980,1019,546,2,85,11,0,0,0,4,60,15,4,4,
+lugae,baigan_slot,Balnab,12,871,1019,682,4,99,52,0,0,0,4,60,15,9,9,40
+lugae,baigan_slot,Balnab-Z,17,887,4,682,5,99,68,0,0,0,2,99,20,9,9,
+lugae,baigan_slot,Dr.Lugae,9,1464,2779,1091,4,99,52,0,0,0,3,60,11,8,8,9
+lugae,kainazzo_slot,Dr.Lugae,21,933,1163,728,1,60,10,0,0,0,5,80,62,7,7,
+lugae,kainazzo_slot,Balnab,21,830,1163,910,3,99,44,0,0,0,5,80,62,18,18,129
+lugae,kainazzo_slot,Balnab-Z,31,845,5,910,5,70,58,2,40,2,7,80,90,18,18,
+lugae,kainazzo_slot,Dr.Lugae,16,1394,3171,1455,3,99,44,2,50,2,10,50,48,15,15,30
+lugae,darkelf_slot,Dr.Lugae,25,1166,1480,1637,2,85,11,0,0,0,99,100,255,4,4,
+lugae,darkelf_slot,Balnab,25,1037,1480,2046,4,99,54,0,0,0,99,100,255,10,13,67
+lugae,darkelf_slot,Balnab-Z,36,1056,6,2046,6,70,72,0,0,3,255,99,255,10,13,
+lugae,darkelf_slot,Dr.Lugae,19,1743,4036,3273,4,99,54,0,0,3,99,99,254,11,11,15
+lugae,magus_slot,Dr.Lugae,21,2099,1903,1637,2,60,12,0,0,0,4,60,15,1,3,
+lugae,magus_slot,Balnab,21,1866,1903,2046,5,80,60,0,0,0,4,60,15,8,8,49
+lugae,magus_slot,Balnab-Z,31,1901,7,2046,8,70,80,1,35,2,2,99,20,8,8,
+lugae,magus_slot,Dr.Lugae,16,3136,5189,3273,5,80,60,1,45,2,3,60,11,7,7,11
+lugae,valvalis_slot,Dr.Lugae,47,1399,2009,1000,2,90,15,0,0,0,4,60,15,7,7,
+lugae,valvalis_slot,Balnab,47,1244,2009,1250,5,99,70,0,0,0,4,60,15,18,21,255
+lugae,valvalis_slot,Balnab-Z,68,1267,8,1250,7,90,92,0,0,0,6,60,23,18,21,
+lugae,valvalis_slot,Dr.Lugae,36,2091,5477,2000,5,99,70,0,0,0,3,40,12,18,18,63
+lugae,calbrena_slot,Dr.Lugae,61,1988,4439,1455,1,80,20,0,0,0,7,80,31,4,4,
+lugae,calbrena_slot,Balnab,61,1768,4439,1819,7,99,96,0,0,0,7,80,31,10,13,182
+lugae,calbrena_slot,Balnab-Z,89,1800,17,1819,10,80,128,1,65,2,10,80,47,10,13,
+lugae,calbrena_slot,Dr.Lugae,47,2970,12107,2910,7,99,96,1,80,2,6,60,25,11,11,41
+lugae,golbez_slot,Dr.Lugae,40,700,4228,2000,2,85,13,0,0,0,0,0,0,11,11,
+lugae,golbez_slot,Balnab,40,623,4228,2500,5,99,68,0,0,0,0,0,0,31,31,5
+lugae,golbez_slot,Balnab-Z,59,634,16,2500,7,80,90,0,0,0,0,0,0,31,31,
+lugae,golbez_slot,Dr.Lugae,31,1046,11530,4000,5,99,68,0,0,0,0,0,0,27,27,1
+lugae,lugae_slot,Dr.Lugae,32,4416,5500,2000,1,75,18,0,0,0,0,0,0,11,11,
+lugae,lugae_slot,Balnab,32,3927,5500,2500,6,99,86,0,0,0,0,0,0,31,31,31
+lugae,lugae_slot,Balnab-Z,47,4001,20,2500,9,80,114,1,40,1,0,0,0,31,31,
+lugae,lugae_slot,Dr.Lugae,25,6600,15000,4000,6,99,86,1,50,1,0,0,0,27,27,7
+lugae,darkimp_slot,Dr.Lugae,21,140,1231,25,2,60,12,0,0,0,0,0,0,8,8,
+lugae,darkimp_slot,Balnab,21,124,1231,31,5,70,56,0,0,0,0,0,0,21,24,20
+lugae,darkimp_slot,Balnab-Z,31,127,5,31,6,70,74,0,0,0,0,0,0,21,24,
+lugae,darkimp_slot,Dr.Lugae,16,209,3356,50,5,70,56,0,0,0,0,0,0,18,21,5
+lugae,kingqueen_slot,Dr.Lugae,20,1399,0,0,3,75,24,0,0,0,0,0,0,19,22,
+lugae,kingqueen_slot,Balnab,20,1244,0,0,9,85,116,0,0,0,0,0,0,65,65,19
+lugae,kingqueen_slot,Balnab-Z,29,1267,0,0,12,75,154,0,0,0,0,0,0,65,65,
+lugae,kingqueen_slot,Dr.Lugae,15,2091,0,0,9,85,116,0,0,0,0,0,0,53,53,5
+lugae,rubicant_slot,Dr.Lugae,64,5875,5285,1273,1,75,18,0,0,0,10,80,47,15,15,
+lugae,rubicant_slot,Balnab,64,5225,5285,1591,7,80,88,0,0,0,10,80,47,41,44,71
+lugae,rubicant_slot,Balnab-Z,94,5322,20,1591,9,85,116,1,70,1,5,99,70,41,44,
+lugae,rubicant_slot,Dr.Lugae,50,8781,14412,2546,7,80,88,1,90,1,8,80,37,38,38,16
+lugae,evilwall_slot,Dr.Lugae,48,4430,4862,1455,1,75,18,0,0,0,8,80,37,27,27,
+lugae,evilwall_slot,Balnab,48,3939,4862,1819,6,90,84,0,0,0,8,80,37,69,69,255
+lugae,evilwall_slot,Balnab-Z,70,4013,18,1819,9,75,112,1,25,2,10,80,54,69,69,
+lugae,evilwall_slot,Dr.Lugae,37,6620,13260,2910,6,90,84,1,35,2,7,80,29,66,66,79
+lugae,asura_slot,Dr.Lugae,81,5362,4228,0,3,80,28,0,0,0,10,80,47,27,27,
+lugae,asura_slot,Balnab,81,4769,4228,0,10,99,134,0,0,0,10,80,47,69,69,255
+lugae,asura_slot,Balnab-Z,99,4857,16,0,13,99,174,0,0,0,5,99,70,69,69,
+lugae,asura_slot,Dr.Lugae,63,8014,11530,0,10,99,134,0,0,0,8,80,37,66,66,69
+lugae,leviatan_slot,Dr.Lugae,99,8160,5919,0,3,90,36,0,0,0,5,80,60,19,22,
+lugae,leviatan_slot,Balnab,99,7256,5919,0,13,99,174,0,0,0,5,80,60,65,65,151
+lugae,leviatan_slot,Balnab-Z,99,7391,22,0,13,99,174,0,0,5,7,80,88,65,65,
+lugae,leviatan_slot,Dr.Lugae,79,12195,16142,0,13,99,174,0,0,5,10,80,47,53,53,34
+lugae,odin_slot,Dr.Lugae,68,4779,3805,0,3,75,24,0,0,0,9,80,41,18,18,
+lugae,odin_slot,Balnab,68,4250,3805,0,9,85,116,0,0,0,9,80,41,53,53,255
+lugae,odin_slot,Balnab-Z,99,4329,14,0,12,75,154,2,70,3,5,80,60,53,53,
+lugae,odin_slot,Dr.Lugae,53,7143,10377,0,9,85,116,2,90,3,7,50,32,43,46,95
+lugae,bahamut_slot,Dr.Lugae,61,8626,7399,0,3,90,36,0,0,0,1,60,10,11,11,
+lugae,bahamut_slot,Balnab,61,7671,7399,0,13,99,174,0,0,0,1,60,10,31,31,76
+lugae,bahamut_slot,Balnab-Z,89,7813,27,0,13,99,174,0,0,1,2,90,15,31,31,
+lugae,bahamut_slot,Dr.Lugae,47,12892,20177,0,13,99,174,0,0,1,1,60,8,27,27,17
+lugae,elements_slot,Dr.Lugae,99,24245,21667,3637,3,75,26,0,0,0,4,80,5,34,37,
+lugae,elements_slot,Balnab,99,21560,21667,4546,10,80,128,0,0,0,4,80,5,111,111,67
+lugae,elements_slot,Balnab-Z,99,21961,79,4546,13,90,170,2,25,3,5,70,6,111,111,
+lugae,elements_slot,Dr.Lugae,79,36236,59090,7273,10,80,128,2,35,3,3,60,4,89,89,15
+lugae,cpu_slot,Dr.Lugae,62,5595,31707,1879,3,90,36,0,0,0,10,50,48,15,15,
+lugae,cpu_slot,Balnab,62,4976,31707,2349,13,99,174,0,0,0,10,50,48,41,44,255
+lugae,cpu_slot,Balnab-Z,91,5068,116,2349,13,99,174,4,35,4,5,99,70,41,44,
+lugae,cpu_slot,Dr.Lugae,48,8362,86472,3758,13,99,174,4,45,4,8,50,38,38,38,127
+lugae,paledim_slot,Dr.Lugae,99,6365,12472,0,3,80,30,0,0,0,5,80,62,15,18,
+lugae,paledim_slot,Balnab,99,5660,12472,0,11,85,144,0,0,0,5,80,62,43,46,138
+lugae,paledim_slot,Balnab-Z,99,5765,46,0,13,99,174,5,40,5,7,80,90,43,46,
+lugae,paledim_slot,Dr.Lugae,98,9512,34013,0,11,85,144,5,40,5,10,50,48,40,43,31
+lugae,wyvern_slot,Dr.Lugae,99,5829,13592,0,3,85,34,0,0,0,5,90,66,18,18,
+lugae,wyvern_slot,Balnab,99,5183,13592,0,12,90,160,0,0,0,5,90,66,53,53,36
+lugae,wyvern_slot,Balnab-Z,99,5279,50,0,13,99,174,4,60,5,7,99,98,53,53,
+lugae,wyvern_slot,Dr.Lugae,99,8711,37068,0,12,90,160,4,80,5,10,50,52,43,46,8
+lugae,plague_slot,Dr.Lugae,99,6528,6595,100,3,80,30,0,0,0,9,80,41,11,14,
+lugae,plague_slot,Balnab,99,5805,6595,125,11,90,146,0,0,0,9,80,41,34,37,120
+lugae,plague_slot,Balnab-Z,99,5913,24,125,13,99,174,4,40,5,5,80,60,34,37,
+lugae,plague_slot,Dr.Lugae,96,9756,17987,200,11,90,146,4,50,5,7,50,32,29,32,27
+lugae,dlunar_slot,Dr.Lugae,99,9792,21138,0,3,80,30,0,0,0,5,99,70,11,11,
+lugae,dlunar_slot,Balnab,99,8707,21138,0,11,85,144,0,0,0,5,99,70,32,35,160
+lugae,dlunar_slot,Balnab-Z,99,8869,77,0,13,99,174,3,20,4,8,80,102,32,35,
+lugae,dlunar_slot,Dr.Lugae,99,14634,57648,0,11,85,144,3,30,4,10,80,54,30,30,36
+lugae,ogopogo_slot,Dr.Lugae,80,8626,12916,0,3,85,32,0,0,0,10,50,52,15,15,
+lugae,ogopogo_slot,Balnab,80,7671,12916,0,11,99,150,0,0,0,10,50,52,41,44,255
+lugae,ogopogo_slot,Balnab-Z,99,7813,47,0,13,99,174,4,45,4,6,80,76,41,44,
+lugae,ogopogo_slot,Dr.Lugae,62,12892,35223,0,11,99,150,4,55,4,9,50,40,38,38,127
+darkimp,dmist_slot,Dark Imp,10,155,234,67,2,90,16,0,0,5,7,80,31,5,5,
+darkimp,officer_slot,Dark Imp,11,101,294,82,3,75,26,1,65,2,2,60,12,2,4,
+darkimp,octomamm_slot,Dark Imp,10,784,400,167,2,99,22,0,0,0,6,60,25,31,31,
+darkimp,antlion_slot,Dark Imp,2,334,500,267,2,85,11,0,0,2,2,60,8,5,5,
+darkimp,mombomb_slot,Dark Imp,15,417,1454,585,3,80,30,0,0,0,1,40,9,7,7,
+darkimp,fabulgauntlet_slot,Dark Imp,15,627,1864,475,3,90,36,2,20,2,3,60,11,6,9,
+darkimp,milon_slot,Dark Imp,15,927,1267,1100,1,75,19,1,35,2,0,0,0,8,8,
+darkimp,milonz_slot,Dark Imp,15,1000,1334,1000,3,99,44,1,60,1,6,40,22,9,9,
+darkimp,mirrorcecil_slot,Dark Imp,17,334,0,0,3,99,46,0,0,0,3,60,11,5,5,
+darkimp,karate_slot,Dark Imp,31,1334,0,0,6,99,86,0,0,0,0,0,0,4,7,
+darkimp,guard_slot,Dark Imp,18,134,480,334,3,99,46,1,90,1,3,40,14,11,14,
+darkimp,baigan_slot,Dark Imp,9,1400,1607,1000,4,99,52,0,0,0,3,60,11,8,8,
+darkimp,kainazzo_slot,Dark Imp,16,1334,1834,1334,3,99,44,2,50,2,10,50,48,15,15,
+darkimp,darkelf_slot,Dark Imp,19,1667,2334,3000,4,99,54,0,0,3,99,99,254,11,11,
+darkimp,magus_slot,Dark Imp,16,3000,3000,3000,5,80,60,1,45,2,3,60,11,7,7,
+darkimp,valvalis_slot,Dark Imp,36,2000,3167,1834,5,99,70,0,0,0,3,40,12,18,18,
+darkimp,calbrena_slot,Dark Imp,47,2842,7000,2667,7,99,96,1,80,2,6,60,25,11,11,
+darkimp,golbez_slot,Dark Imp,31,1001,6667,3667,5,99,68,0,0,0,0,0,0,27,27,
+darkimp,lugae_slot,Dark Imp,25,6315,8674,3667,6,99,86,1,50,1,0,0,0,27,27,
+darkimp,darkimp_slot,Dark Imp,16,199,1940,45,5,70,56,0,0,0,0,0,0,18,21,
+darkimp,kingqueen_slot,Dark Imp,15,2000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+darkimp,rubicant_slot,Dark Imp,50,8400,8334,2334,7,80,88,1,90,1,8,80,37,38,38,
+darkimp,evilwall_slot,Dark Imp,37,6334,7667,2667,6,90,84,1,35,2,7,80,29,66,66,
+darkimp,asura_slot,Dark Imp,63,7667,6667,0,10,99,134,0,0,0,8,80,37,66,66,
+darkimp,leviatan_slot,Dark Imp,79,11667,9334,0,13,99,174,0,0,5,10,80,47,53,53,
+darkimp,odin_slot,Dark Imp,53,6834,6000,0,9,85,116,2,90,3,7,50,32,43,46,
+darkimp,bahamut_slot,Dark Imp,47,12334,11667,0,13,99,174,0,0,1,1,60,8,27,27,
+darkimp,elements_slot,Dark Imp,79,34667,34167,6667,10,80,128,2,35,3,3,60,4,89,89,
+darkimp,cpu_slot,Dark Imp,48,8000,50000,3445,13,99,174,4,45,4,8,50,38,38,38,
+darkimp,paledim_slot,Dark Imp,98,9100,19667,0,11,85,144,5,40,5,10,50,48,40,43,
+darkimp,wyvern_slot,Dark Imp,99,8334,21434,0,12,90,160,4,80,5,10,50,52,43,46,
+darkimp,plague_slot,Dark Imp,96,9334,10400,184,11,90,146,4,50,5,7,50,32,29,32,
+darkimp,dlunar_slot,Dark Imp,99,14000,33334,0,11,85,144,3,30,4,10,80,54,30,30,
+darkimp,ogopogo_slot,Dark Imp,62,12334,20367,0,11,99,150,4,55,4,9,50,40,38,38,
+kingqueen,dmist_slot,K.Eblan,10,233,350,100,2,90,16,0,0,5,7,80,31,5,5,
+kingqueen,dmist_slot,Q.Eblan,10,233,350,100,1,80,2,0,0,5,7,80,31,1,2,
+kingqueen,officer_slot,K.Eblan,11,151,440,122,3,75,26,1,65,2,2,60,12,2,4,
+kingqueen,officer_slot,Q.Eblan,11,151,440,122,1,60,6,1,65,2,2,60,12,1,2,
+kingqueen,octomamm_slot,K.Eblan,10,1175,600,250,2,99,22,0,0,0,6,60,25,31,31,
+kingqueen,octomamm_slot,Q.Eblan,10,1175,600,250,1,60,6,0,0,0,6,60,25,9,9,
+kingqueen,antlion_slot,K.Eblan,2,500,750,400,2,85,11,0,0,2,2,60,8,5,5,
+kingqueen,antlion_slot,Q.Eblan,2,500,750,400,1,80,2,0,0,2,2,60,8,1,2,
+kingqueen,mombomb_slot,K.Eblan,15,625,2180,877,3,80,30,0,0,0,1,40,9,7,7,
+kingqueen,mombomb_slot,Q.Eblan,15,625,2180,877,1,60,8,0,0,0,1,40,9,1,2,
+kingqueen,fabulgauntlet_slot,K.Eblan,15,940,2795,712,3,90,36,2,20,2,3,60,11,6,9,
+kingqueen,fabulgauntlet_slot,Q.Eblan,15,940,2795,712,2,85,11,2,20,2,3,60,11,1,3,
+kingqueen,milon_slot,K.Eblan,15,1390,1900,1650,1,75,19,1,35,2,0,0,0,8,8,
+kingqueen,milon_slot,Q.Eblan,15,1390,1900,1650,1,60,6,1,35,2,0,0,0,1,2,
+kingqueen,milonz_slot,K.Eblan,15,1500,2000,1500,3,99,44,1,60,1,6,40,22,9,9,
+kingqueen,milonz_slot,Q.Eblan,15,1500,2000,1500,2,85,11,1,60,1,6,40,22,1,3,
+kingqueen,mirrorcecil_slot,K.Eblan,17,500,0,0,3,99,46,0,0,0,3,60,11,5,5,
+kingqueen,mirrorcecil_slot,Q.Eblan,17,500,0,0,2,85,11,0,0,0,3,60,11,1,2,
+kingqueen,karate_slot,K.Eblan,31,2000,0,0,6,99,86,0,0,0,0,0,0,4,7,
+kingqueen,karate_slot,Q.Eblan,31,2000,0,0,2,99,22,0,0,0,0,0,0,1,2,
+kingqueen,guard_slot,K.Eblan,18,200,720,500,3,99,46,1,90,1,3,40,14,11,14,
+kingqueen,guard_slot,Q.Eblan,18,200,720,500,2,85,11,1,90,1,3,40,14,4,4,
+kingqueen,baigan_slot,K.Eblan,9,2100,2410,1500,4,99,52,0,0,0,3,60,11,8,8,
+kingqueen,baigan_slot,Q.Eblan,9,2100,2410,1500,2,85,13,0,0,0,3,60,11,1,2,
+kingqueen,kainazzo_slot,K.Eblan,16,2000,2750,2000,3,99,44,2,50,2,10,50,48,15,15,
+kingqueen,kainazzo_slot,Q.Eblan,16,2000,2750,2000,2,85,11,2,50,2,10,50,48,4,4,
+kingqueen,darkelf_slot,K.Eblan,19,2500,3500,4500,4,99,54,0,0,3,99,99,254,11,11,
+kingqueen,darkelf_slot,Q.Eblan,19,2500,3500,4500,2,90,15,0,0,3,99,99,254,4,4,
+kingqueen,magus_slot,K.Eblan,16,4500,4500,4500,5,80,60,1,45,2,3,60,11,7,7,
+kingqueen,magus_slot,Q.Eblan,16,4500,4500,4500,2,90,16,1,45,2,3,60,11,1,2,
+kingqueen,valvalis_slot,K.Eblan,36,3000,4750,2750,5,99,70,0,0,0,3,40,12,18,18,
+kingqueen,valvalis_slot,Q.Eblan,36,3000,4750,2750,2,95,18,0,0,0,3,40,12,5,5,
+kingqueen,calbrena_slot,K.Eblan,47,4262,10500,4000,7,99,96,1,80,2,6,60,25,11,11,
+kingqueen,calbrena_slot,Q.Eblan,47,4262,10500,4000,3,75,24,1,80,2,6,60,25,4,4,
+kingqueen,golbez_slot,K.Eblan,31,1501,10000,5500,5,99,68,0,0,0,0,0,0,27,27,
+kingqueen,golbez_slot,Q.Eblan,31,1501,10000,5500,2,95,18,0,0,0,0,0,0,8,8,
+kingqueen,lugae_slot,K.Eblan,25,9472,13010,5500,6,99,86,1,50,1,0,0,0,27,27,
+kingqueen,lugae_slot,Q.Eblan,25,9472,13010,5500,2,99,22,1,50,1,0,0,0,8,8,
+kingqueen,darkimp_slot,K.Eblan,16,299,2910,67,5,70,56,0,0,0,0,0,0,18,21,
+kingqueen,darkimp_slot,Q.Eblan,16,299,2910,67,3,60,15,0,0,0,0,0,0,5,5,
+kingqueen,kingqueen_slot,K.Eblan,15,3000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+kingqueen,kingqueen_slot,Q.Eblan,15,3000,0,0,3,80,30,0,0,0,0,0,0,15,15,
+kingqueen,rubicant_slot,K.Eblan,50,12600,12500,3500,7,80,88,1,90,1,8,80,37,38,38,
+kingqueen,rubicant_slot,Q.Eblan,50,12600,12500,3500,3,75,24,1,90,1,8,80,37,11,11,
+kingqueen,evilwall_slot,K.Eblan,37,9500,11500,4000,6,90,84,1,35,2,7,80,29,66,66,
+kingqueen,evilwall_slot,Q.Eblan,37,9500,11500,4000,2,99,22,1,35,2,7,80,29,18,18,
+kingqueen,asura_slot,K.Eblan,63,11500,10000,0,10,99,134,0,0,0,8,80,37,66,66,
+kingqueen,asura_slot,Q.Eblan,63,11500,10000,0,3,85,34,0,0,0,8,80,37,18,18,
+kingqueen,leviatan_slot,K.Eblan,79,17500,14000,0,13,99,174,0,0,5,10,80,47,53,53,
+kingqueen,leviatan_slot,Q.Eblan,79,17500,14000,0,4,80,44,0,0,5,10,80,47,15,15,
+kingqueen,odin_slot,K.Eblan,53,10250,9000,0,9,85,116,2,90,3,7,50,32,43,46,
+kingqueen,odin_slot,Q.Eblan,53,10250,9000,0,3,80,30,2,90,3,7,50,32,11,14,
+kingqueen,bahamut_slot,K.Eblan,47,18500,17500,0,13,99,174,0,0,1,1,60,8,27,27,
+kingqueen,bahamut_slot,Q.Eblan,47,18500,17500,0,4,80,44,0,0,1,1,60,8,8,8,
+kingqueen,elements_slot,K.Eblan,79,52000,51250,10000,10,80,128,2,35,3,3,60,4,89,89,
+kingqueen,elements_slot,Q.Eblan,79,52000,51250,10000,3,85,34,2,35,3,3,60,4,23,26,
+kingqueen,cpu_slot,K.Eblan,48,12000,75000,5166,13,99,174,4,45,4,8,50,38,38,38,
+kingqueen,cpu_slot,Q.Eblan,48,12000,75000,5166,4,80,44,4,45,4,8,50,38,11,11,
+kingqueen,paledim_slot,K.Eblan,98,13650,29500,0,11,85,144,5,40,5,10,50,48,40,43,
+kingqueen,paledim_slot,Q.Eblan,98,13650,29500,0,3,90,38,5,40,5,10,50,48,11,11,
+kingqueen,wyvern_slot,K.Eblan,99,12500,32150,0,12,90,160,4,80,5,10,50,52,43,46,
+kingqueen,wyvern_slot,Q.Eblan,99,12500,32150,0,4,70,42,4,80,5,10,50,52,11,14,
+kingqueen,plague_slot,K.Eblan,96,14000,15600,275,11,90,146,4,50,5,7,50,32,29,32,
+kingqueen,plague_slot,Q.Eblan,96,14000,15600,275,3,90,38,4,50,5,7,50,32,9,9,
+kingqueen,dlunar_slot,K.Eblan,99,21000,50000,0,11,85,144,3,30,4,10,80,54,30,30,
+kingqueen,dlunar_slot,Q.Eblan,99,21000,50000,0,3,90,38,3,30,4,10,80,54,8,8,
+kingqueen,ogopogo_slot,K.Eblan,62,18500,30550,0,11,99,150,4,55,4,9,50,40,38,38,
+kingqueen,ogopogo_slot,Q.Eblan,62,18500,30550,0,3,90,38,4,55,4,9,50,40,11,11,
+rubicant,dmist_slot,Rubicant,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10,scriptHP: 19
+rubicant,officer_slot,Rubicant,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,4,scriptHP: 12
+rubicant,octomamm_slot,Rubicant,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,4,scriptHP: 94
+rubicant,antlion_slot,Rubicant,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,1,scriptHP: 40
+rubicant,mombomb_slot,Rubicant,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5,scriptHP: 50
+rubicant,fabulgauntlet_slot,Rubicant,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,5,scriptHP: 75
+rubicant,milon_slot,Rubicant,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14,scriptHP: 111
+rubicant,milonz_slot,Rubicant,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31,scriptHP: 120
+rubicant,mirrorcecil_slot,Rubicant,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,6,scriptHP: 40
+rubicant,karate_slot,Rubicant,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,10,scriptHP: 159
+rubicant,guard_slot,Rubicant,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26,scriptHP: 16
+rubicant,baigan_slot,Rubicant,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9,scriptHP: 167
+rubicant,kainazzo_slot,Rubicant,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29,scriptHP: 159
+rubicant,darkelf_slot,Rubicant,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15,scriptHP: 199
+rubicant,magus_slot,Rubicant,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11,scriptHP: 358
+rubicant,valvalis_slot,Rubicant,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63,scriptHP: 239
+rubicant,calbrena_slot,Rubicant,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41,scriptHP: 339
+rubicant,golbez_slot,Rubicant,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1,scriptHP: 120
+rubicant,lugae_slot,Rubicant,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7,scriptHP: 752
+rubicant,darkimp_slot,Rubicant,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,6,scriptHP: 24
+rubicant,kingqueen_slot,Rubicant,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,5,scriptHP: 239
+rubicant,rubicant_slot,Rubicant,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16,scriptHP: 1000
+rubicant,evilwall_slot,Rubicant,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79,scriptHP: 754
+rubicant,asura_slot,Rubicant,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69,scriptHP: 913
+rubicant,leviatan_slot,Rubicant,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34,scriptHP: 1389
+rubicant,odin_slot,Rubicant,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95,scriptHP: 814
+rubicant,bahamut_slot,Rubicant,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17,scriptHP: 1469
+rubicant,elements_slot,Rubicant,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15,scriptHP: 2580
+rubicant,cpu_slot,Rubicant,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127,scriptHP: 953
+rubicant,paledim_slot,Rubicant,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31,scriptHP: 1084
+rubicant,wyvern_slot,Rubicant,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8,scriptHP: 993
+rubicant,plague_slot,Rubicant,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,31,scriptHP: 1112
+rubicant,dlunar_slot,Rubicant,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36,scriptHP: 1667
+rubicant,ogopogo_slot,Rubicant,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127,scriptHP: 1469
+evilwall,dmist_slot,EvilWall,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+evilwall,officer_slot,EvilWall,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,24
+evilwall,octomamm_slot,EvilWall,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,22
+evilwall,antlion_slot,EvilWall,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,5
+evilwall,mombomb_slot,EvilWall,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+evilwall,fabulgauntlet_slot,EvilWall,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,33
+evilwall,milon_slot,EvilWall,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14
+evilwall,milonz_slot,EvilWall,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31
+evilwall,mirrorcecil_slot,EvilWall,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,37
+evilwall,karate_slot,EvilWall,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,67
+evilwall,guard_slot,EvilWall,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26
+evilwall,baigan_slot,EvilWall,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+evilwall,kainazzo_slot,EvilWall,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29
+evilwall,darkelf_slot,EvilWall,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,16
+evilwall,magus_slot,EvilWall,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+evilwall,valvalis_slot,EvilWall,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+evilwall,calbrena_slot,EvilWall,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+evilwall,golbez_slot,EvilWall,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+evilwall,lugae_slot,EvilWall,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7
+evilwall,darkimp_slot,EvilWall,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,35
+evilwall,kingqueen_slot,EvilWall,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,33
+evilwall,rubicant_slot,EvilWall,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16
+evilwall,evilwall_slot,EvilWall,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79
+evilwall,asura_slot,EvilWall,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+evilwall,leviatan_slot,EvilWall,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+evilwall,odin_slot,EvilWall,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95
+evilwall,bahamut_slot,EvilWall,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+evilwall,elements_slot,EvilWall,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,16
+evilwall,cpu_slot,EvilWall,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+evilwall,paledim_slot,EvilWall,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31
+evilwall,wyvern_slot,EvilWall,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8
+evilwall,plague_slot,EvilWall,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,205
+evilwall,dlunar_slot,EvilWall,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36
+evilwall,ogopogo_slot,EvilWall,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127
+asura,dmist_slot,Asura,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+asura,officer_slot,Asura,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,13
+asura,octomamm_slot,Asura,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,11
+asura,antlion_slot,Asura,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,3
+asura,mombomb_slot,Asura,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+asura,fabulgauntlet_slot,Asura,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,17
+asura,milon_slot,Asura,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14
+asura,milonz_slot,Asura,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31
+asura,mirrorcecil_slot,Asura,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,19
+asura,karate_slot,Asura,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,34
+asura,guard_slot,Asura,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26
+asura,baigan_slot,Asura,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+asura,kainazzo_slot,Asura,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29
+asura,darkelf_slot,Asura,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+asura,magus_slot,Asura,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+asura,valvalis_slot,Asura,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+asura,calbrena_slot,Asura,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+asura,golbez_slot,Asura,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+asura,lugae_slot,Asura,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7
+asura,darkimp_slot,Asura,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,18
+asura,kingqueen_slot,Asura,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,17
+asura,rubicant_slot,Asura,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16
+asura,evilwall_slot,Asura,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79
+asura,asura_slot,Asura,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+asura,leviatan_slot,Asura,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+asura,odin_slot,Asura,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95
+asura,bahamut_slot,Asura,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+asura,elements_slot,Asura,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15
+asura,cpu_slot,Asura,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+asura,paledim_slot,Asura,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31
+asura,wyvern_slot,Asura,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8
+asura,plague_slot,Asura,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,106
+asura,dlunar_slot,Asura,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36
+asura,ogopogo_slot,Asura,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127
+leviatan,dmist_slot,Leviatan,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+leviatan,officer_slot,Leviatan,11,302,880,245,3,75,26,0,0,2,2,60,12,2,4,5
+leviatan,octomamm_slot,Leviatan,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,5
+leviatan,antlion_slot,Leviatan,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,1
+leviatan,mombomb_slot,Leviatan,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+leviatan,fabulgauntlet_slot,Leviatan,15,1880,5590,1425,3,90,36,0,0,2,3,60,11,6,9,7
+leviatan,milon_slot,Leviatan,15,2780,3800,3300,1,75,19,0,0,2,0,0,0,8,8,14
+leviatan,milonz_slot,Leviatan,15,3000,4000,3000,3,99,44,0,0,1,6,40,22,9,9,31
+leviatan,mirrorcecil_slot,Leviatan,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,8
+leviatan,karate_slot,Leviatan,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,14
+leviatan,guard_slot,Leviatan,18,400,1440,1000,3,99,46,0,0,1,3,40,14,11,14,26
+leviatan,baigan_slot,Leviatan,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+leviatan,kainazzo_slot,Leviatan,16,4000,5500,4000,3,99,44,0,0,2,10,50,48,15,15,29
+leviatan,darkelf_slot,Leviatan,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+leviatan,magus_slot,Leviatan,16,9000,9000,9000,5,80,60,0,0,2,3,60,11,7,7,11
+leviatan,valvalis_slot,Leviatan,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+leviatan,calbrena_slot,Leviatan,47,8524,21000,8000,7,99,96,0,0,2,6,60,25,11,11,41
+leviatan,golbez_slot,Leviatan,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+leviatan,lugae_slot,Leviatan,25,18943,26020,11000,6,99,86,0,0,1,0,0,0,27,27,7
+leviatan,darkimp_slot,Leviatan,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,7
+leviatan,kingqueen_slot,Leviatan,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,7
+leviatan,rubicant_slot,Leviatan,50,25200,25000,7000,7,80,88,0,0,1,8,80,37,38,38,16
+leviatan,evilwall_slot,Leviatan,37,19000,23000,8000,6,90,84,0,0,2,7,80,29,66,66,79
+leviatan,asura_slot,Leviatan,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+leviatan,leviatan_slot,Leviatan,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+leviatan,odin_slot,Leviatan,53,20500,18000,0,9,85,116,0,0,3,7,50,32,43,46,95
+leviatan,bahamut_slot,Leviatan,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+leviatan,elements_slot,Leviatan,79,65000,102500,20000,10,80,128,0,0,3,3,60,4,89,89,15
+leviatan,cpu_slot,Leviatan,48,24000,150000,10333,13,99,174,0,0,4,8,50,38,38,38,127
+leviatan,paledim_slot,Leviatan,98,27300,59000,0,11,85,144,0,0,5,10,50,48,40,43,31
+leviatan,wyvern_slot,Leviatan,99,25000,64300,0,12,90,160,0,0,5,10,50,52,43,46,8
+leviatan,plague_slot,Leviatan,96,28000,31200,550,11,90,146,0,0,5,7,50,32,29,32,42
+leviatan,dlunar_slot,Leviatan,99,42000,100000,0,11,85,144,0,0,4,10,80,54,30,30,36
+leviatan,ogopogo_slot,Leviatan,62,37000,61100,0,11,99,150,0,0,4,9,50,40,38,38,127
+odin,dmist_slot,Odin,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+odin,officer_slot,Odin,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,20
+odin,octomamm_slot,Odin,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,18
+odin,antlion_slot,Odin,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,4
+odin,mombomb_slot,Odin,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+odin,fabulgauntlet_slot,Odin,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,27
+odin,milon_slot,Odin,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14
+odin,milonz_slot,Odin,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31
+odin,mirrorcecil_slot,Odin,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,31
+odin,karate_slot,Odin,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,56
+odin,guard_slot,Odin,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26
+odin,baigan_slot,Odin,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+odin,kainazzo_slot,Odin,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29
+odin,darkelf_slot,Odin,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+odin,magus_slot,Odin,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+odin,valvalis_slot,Odin,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+odin,calbrena_slot,Odin,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+odin,golbez_slot,Odin,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+odin,lugae_slot,Odin,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7
+odin,darkimp_slot,Odin,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,29
+odin,kingqueen_slot,Odin,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,27
+odin,rubicant_slot,Odin,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16
+odin,evilwall_slot,Odin,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79
+odin,asura_slot,Odin,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+odin,leviatan_slot,Odin,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+odin,odin_slot,Odin,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95
+odin,bahamut_slot,Odin,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+odin,elements_slot,Odin,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15
+odin,cpu_slot,Odin,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+odin,paledim_slot,Odin,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31
+odin,wyvern_slot,Odin,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8
+odin,plague_slot,Odin,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,173
+odin,dlunar_slot,Odin,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36
+odin,ogopogo_slot,Odin,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127
+bahamut,dmist_slot,Bahamut,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+bahamut,officer_slot,Bahamut,11,302,880,245,3,75,26,0,0,2,2,60,12,2,4,4
+bahamut,octomamm_slot,Bahamut,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,4
+bahamut,antlion_slot,Bahamut,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,1
+bahamut,mombomb_slot,Bahamut,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+bahamut,fabulgauntlet_slot,Bahamut,15,1880,5590,1425,3,90,36,0,0,2,3,60,11,6,9,6
+bahamut,milon_slot,Bahamut,15,2780,3800,3300,1,75,19,0,0,2,0,0,0,8,8,14
+bahamut,milonz_slot,Bahamut,15,3000,4000,3000,3,99,44,0,0,1,6,40,22,9,9,31
+bahamut,mirrorcecil_slot,Bahamut,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,7
+bahamut,karate_slot,Bahamut,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,12
+bahamut,guard_slot,Bahamut,18,400,1440,1000,3,99,46,0,0,1,3,40,14,11,14,26
+bahamut,baigan_slot,Bahamut,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+bahamut,kainazzo_slot,Bahamut,16,4000,5500,4000,3,99,44,0,0,2,10,50,48,15,15,29
+bahamut,darkelf_slot,Bahamut,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+bahamut,magus_slot,Bahamut,16,9000,9000,9000,5,80,60,0,0,2,3,60,11,7,7,11
+bahamut,valvalis_slot,Bahamut,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+bahamut,calbrena_slot,Bahamut,47,8524,21000,8000,7,99,96,0,0,2,6,60,25,11,11,41
+bahamut,golbez_slot,Bahamut,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+bahamut,lugae_slot,Bahamut,25,18943,26020,11000,6,99,86,0,0,1,0,0,0,27,27,7
+bahamut,darkimp_slot,Bahamut,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,6
+bahamut,kingqueen_slot,Bahamut,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,6
+bahamut,rubicant_slot,Bahamut,50,25200,25000,7000,7,80,88,0,0,1,8,80,37,38,38,16
+bahamut,evilwall_slot,Bahamut,37,19000,23000,8000,6,90,84,0,0,2,7,80,29,66,66,79
+bahamut,asura_slot,Bahamut,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+bahamut,leviatan_slot,Bahamut,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+bahamut,odin_slot,Bahamut,53,20500,18000,0,9,85,116,0,0,3,7,50,32,43,46,95
+bahamut,bahamut_slot,Bahamut,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+bahamut,elements_slot,Bahamut,79,65000,102500,20000,10,80,128,0,0,3,3,60,4,89,89,15
+bahamut,cpu_slot,Bahamut,48,24000,150000,10333,13,99,174,0,0,4,8,50,38,38,38,127
+bahamut,paledim_slot,Bahamut,98,27300,59000,0,11,85,144,0,0,5,10,50,48,40,43,31
+bahamut,wyvern_slot,Bahamut,99,25000,64300,0,12,90,160,0,0,5,10,50,52,43,46,8
+bahamut,plague_slot,Bahamut,96,28000,31200,550,11,90,146,0,0,5,7,50,32,29,32,35
+bahamut,dlunar_slot,Bahamut,99,42000,100000,0,11,85,144,0,0,4,10,80,54,30,30,36
+bahamut,ogopogo_slot,Bahamut,62,37000,61100,0,11,99,150,0,0,4,9,50,40,38,38,127
+elements,dmist_slot,Elements,10,255,274,100,2,90,16,0,0,5,7,80,31,5,5,10,scriptHP: 50,scriptHP: 179
+elements,dmist_slot,Elements,10,211,427,100,2,90,16,0,0,3,6,40,24,5,5,21,scriptHP: 122
+elements,officer_slot,Elements,11,166,344,123,3,75,26,1,65,2,2,60,12,2,4,3,scriptHP: 33,scriptHP: 117
+elements,officer_slot,Elements,11,137,537,123,3,80,28,1,90,1,0,0,5,2,4,5,scriptHP: 79
+elements,octomamm_slot,Elements,10,1288,469,250,2,99,22,0,0,0,6,60,25,31,31,2,scriptHP: 249,scriptHP: 904
+elements,octomamm_slot,Elements,10,1063,732,250,2,99,22,0,0,0,1,75,19,31,31,4,scriptHP: 611
+elements,antlion_slot,Elements,2,549,586,400,2,85,11,0,0,2,2,60,8,5,5,1,scriptHP: 106,scriptHP: 386
+elements,antlion_slot,Elements,2,452,915,400,2,85,11,0,0,1,0,0,5,5,5,1,scriptHP: 260
+elements,mombomb_slot,Elements,15,686,1702,878,3,80,30,0,0,0,1,40,9,7,7,5,scriptHP: 133,scriptHP: 482
+elements,mombomb_slot,Elements,15,565,2659,878,3,85,32,0,0,0,0,0,5,7,7,11,scriptHP: 325
+elements,fabulgauntlet_slot,Elements,15,1031,2182,713,3,90,36,2,20,2,3,60,11,6,9,3,scriptHP: 199,scriptHP: 724
+elements,fabulgauntlet_slot,Elements,15,850,3409,713,3,90,38,1,25,2,0,0,5,6,9,6,scriptHP: 489
+elements,milon_slot,Elements,15,1524,1483,1650,1,75,19,1,35,2,0,0,0,8,8,14,scriptHP: 295,scriptHP: 1070
+elements,milon_slot,Elements,15,1257,2318,1650,1,80,20,1,45,2,0,0,0,8,8,29,scriptHP: 723
+elements,milonz_slot,Elements,15,1645,1561,1500,3,99,44,1,60,1,6,40,22,9,9,32,scriptHP: 318,scriptHP: 1155
+elements,milonz_slot,Elements,15,1356,2440,1500,3,99,46,1,70,1,4,40,16,9,9,65,scriptHP: 779
+elements,mirrorcecil_slot,Elements,17,549,0,0,3,99,46,0,0,0,3,60,11,5,5,4,scriptHP: 106,scriptHP: 386
+elements,mirrorcecil_slot,Elements,17,452,0,0,3,99,46,0,0,0,0,0,5,5,5,7,scriptHP: 260
+elements,karate_slot,Elements,31,2193,0,0,6,99,86,0,0,0,0,0,0,4,7,6,scriptHP: 424,scriptHP: 1539
+elements,karate_slot,Elements,31,1808,0,0,6,99,86,0,0,0,0,0,0,4,7,13,scriptHP: 1039
+elements,guard_slot,Elements,18,220,562,500,3,99,46,1,90,1,3,40,14,11,14,26,scriptHP: 43,scriptHP: 155
+elements,guard_slot,Elements,18,181,879,500,3,99,46,1,90,1,0,0,5,11,14,54,scriptHP: 104
+elements,baigan_slot,Elements,9,2302,1881,1500,4,99,52,0,0,0,3,60,11,8,8,9,scriptHP: 445,scriptHP: 1616
+elements,baigan_slot,Elements,9,1899,2940,1500,4,99,54,0,0,0,0,0,5,8,8,19,scriptHP: 1091
+elements,kainazzo_slot,Elements,16,2193,2147,2000,3,99,44,2,50,2,10,50,48,15,15,29,scriptHP: 424,scriptHP: 1539
+elements,kainazzo_slot,Elements,16,1808,3354,2000,3,99,46,1,65,2,3,90,36,15,15,60,scriptHP: 1039
+elements,darkelf_slot,Elements,19,2741,2732,4500,4,99,54,0,0,3,99,99,254,11,11,15,scriptHP: 529,scriptHP: 1924
+elements,darkelf_slot,Elements,19,2260,4269,4500,4,99,54,0,0,2,13,99,174,11,11,31,scriptHP: 1299
+elements,magus_slot,Elements,16,4933,3513,4500,5,80,60,1,45,2,3,60,11,7,7,11,scriptHP: 952,scriptHP: 3462
+elements,magus_slot,Elements,16,4068,5488,4500,5,80,62,1,60,1,0,0,5,7,7,23,scriptHP: 2337
+elements,valvalis_slot,Elements,36,3289,3708,2750,5,99,70,0,0,0,3,40,12,18,18,63,scriptHP: 635,scriptHP: 2309
+elements,valvalis_slot,Elements,36,2712,5793,2750,5,99,70,0,0,0,0,0,5,18,18,131,scriptHP: 1558
+elements,calbrena_slot,Elements,47,4672,8196,4000,7,99,96,1,80,2,6,60,25,11,11,41,scriptHP: 902,scriptHP: 3279
+elements,calbrena_slot,Elements,47,3853,12805,4000,7,99,98,1,90,1,1,75,19,11,11,85,scriptHP: 2214
+elements,golbez_slot,Elements,31,1646,7805,5500,5,99,68,0,0,0,0,0,0,27,27,1,scriptHP: 318,scriptHP: 1156
+elements,golbez_slot,Elements,31,1357,12196,5500,5,99,70,0,0,0,0,0,0,27,27,3,scriptHP: 780
+elements,lugae_slot,Elements,25,10383,10155,5500,6,99,86,1,50,1,0,0,0,27,27,7,scriptHP: 2004,scriptHP: 7287
+elements,lugae_slot,Elements,25,8561,15866,5500,6,99,86,1,60,1,0,0,0,27,27,15,scriptHP: 4919
+elements,darkimp_slot,Elements,16,328,2272,68,5,70,56,0,0,0,0,0,0,18,21,4,scriptHP: 64,scriptHP: 231
+elements,darkimp_slot,Elements,16,270,3549,68,5,70,58,0,0,0,0,0,0,18,21,7,scriptHP: 156
+elements,kingqueen_slot,Elements,15,3289,0,0,9,85,116,0,0,0,0,0,0,53,53,3,scriptHP: 635,scriptHP: 2309
+elements,kingqueen_slot,Elements,15,2712,0,0,9,95,120,0,0,0,0,0,0,53,53,6,scriptHP: 1558
+elements,rubicant_slot,Elements,50,13812,9757,3500,7,80,88,1,90,1,8,80,37,38,38,16,scriptHP: 2666,scriptHP: 9693
+elements,rubicant_slot,Elements,50,11389,15244,3500,7,90,92,1,90,1,3,80,28,38,38,34,scriptHP: 6543
+elements,evilwall_slot,Elements,37,10414,8976,4000,6,90,84,1,35,2,7,80,29,66,66,79,scriptHP: 2010,scriptHP: 7309
+elements,evilwall_slot,Elements,37,8587,14025,4000,6,99,86,1,45,2,1,80,21,66,66,164,scriptHP: 4933
+elements,asura_slot,Elements,63,12606,7805,0,10,99,134,0,0,0,8,80,37,66,66,69,scriptHP: 2433,scriptHP: 8847
+elements,asura_slot,Elements,63,10395,12196,0,10,99,138,0,0,0,3,80,28,66,66,143,scriptHP: 5972
+elements,leviatan_slot,Elements,79,19183,10927,0,13,99,174,0,0,5,10,80,47,53,53,34,scriptHP: 3702,scriptHP: 13462
+elements,leviatan_slot,Elements,79,15818,17074,0,13,99,174,0,0,3,3,85,34,53,53,71,scriptHP: 9087
+elements,odin_slot,Elements,53,11236,7025,0,9,85,116,2,90,3,7,50,32,43,46,95,scriptHP: 2169,scriptHP: 7885
+elements,odin_slot,Elements,53,9265,10976,0,9,95,120,1,80,2,6,40,24,43,46,197,scriptHP: 5323
+elements,bahamut_slot,Elements,47,20279,13659,0,13,99,174,0,0,1,1,60,8,27,27,17,scriptHP: 3914,scriptHP: 14231
+elements,bahamut_slot,Elements,47,16722,21342,0,13,99,174,0,0,1,0,0,5,27,27,36,scriptHP: 9607
+elements,elements_slot,Elements,79,57001,40000,10000,10,80,128,2,35,3,3,60,4,89,89,15,scriptHP: 11001,scriptHP: 40001
+elements,elements_slot,Elements,79,47000,62500,10000,10,90,132,1,45,2,0,0,3,89,89,31,scriptHP: 27001
+elements,cpu_slot,Elements,48,13154,58537,5167,13,99,174,4,45,4,8,50,38,38,38,127,scriptHP: 2539,scriptHP: 9231
+elements,cpu_slot,Elements,48,10847,91464,5167,13,99,174,2,55,3,3,80,28,38,38,255,scriptHP: 6232
+elements,paledim_slot,Elements,98,14963,23025,0,11,85,144,5,40,5,10,50,48,40,43,32,scriptHP: 2888,scriptHP: 10501
+elements,paledim_slot,Elements,98,12338,35976,0,11,95,148,2,55,3,3,90,36,40,43,65,scriptHP: 7088
+elements,wyvern_slot,Elements,99,13702,25093,0,12,90,160,4,80,5,10,50,52,43,46,8,scriptHP: 2645,scriptHP: 9616
+elements,wyvern_slot,Elements,99,11299,39208,0,12,99,164,2,90,3,4,70,40,43,46,17,scriptHP: 6491
+elements,plague_slot,Elements,96,15347,12176,275,11,90,146,4,50,5,7,50,32,29,32,19,scriptHP: 2962,scriptHP: 10770
+elements,plague_slot,Elements,96,12654,19025,275,11,99,150,2,70,3,6,40,24,29,32,38,scriptHP: 7270
+elements,dlunar_slot,Elements,99,23020,39025,0,11,85,144,3,30,4,10,80,54,30,30,36,scriptHP: 4443,scriptHP: 16155
+elements,dlunar_slot,Elements,99,18981,60976,0,11,95,148,2,35,3,4,70,40,30,30,75,scriptHP: 10904
+elements,ogopogo_slot,Elements,62,20279,23844,0,11,99,150,4,55,4,9,50,40,38,38,127,scriptHP: 3914,scriptHP: 14231
+elements,ogopogo_slot,Elements,62,16722,37257,0,11,99,152,2,70,3,3,80,30,38,38,255,scriptHP: 9607
+cpu,dmist_slot,CPU,10,388,234,200,2,90,16,0,0,5,7,80,31,5,5,10
+cpu,dmist_slot,Attacker,17,39,234,0,2,85,11,0,0,5,2,85,11,4,4,4
+cpu,dmist_slot,Defender,10,39,234,0,2,85,11,0,0,5,2,85,11,15,15,4
+cpu,officer_slot,CPU,11,252,294,245,3,75,26,1,65,2,2,60,12,2,4,30
+cpu,officer_slot,Attacker,19,26,294,0,4,60,17,1,25,2,2,70,3,1,3,11
+cpu,officer_slot,Defender,11,26,294,0,4,60,17,1,25,2,2,70,3,6,9,11
+cpu,octomamm_slot,CPU,10,1959,400,500,2,99,22,0,0,0,6,60,25,31,31,27
+cpu,octomamm_slot,Attacker,17,196,400,0,2,90,15,0,0,0,2,60,8,23,26,10
+cpu,octomamm_slot,Defender,10,196,400,0,2,90,15,0,0,0,2,60,8,89,89,10
+cpu,antlion_slot,CPU,2,834,500,800,2,85,11,0,0,2,2,60,8,5,5,6
+cpu,antlion_slot,Attacker,4,84,500,0,1,60,8,0,0,2,1,65,2,4,4,2
+cpu,antlion_slot,Defender,2,84,500,0,1,60,8,0,0,2,1,65,2,15,15,2
+cpu,mombomb_slot,CPU,15,1042,1454,1755,3,80,30,0,0,0,1,40,9,7,7,5
+cpu,mombomb_slot,Attacker,25,105,1454,0,1,80,20,0,0,0,1,45,2,5,5,2
+cpu,mombomb_slot,Defender,15,105,1454,0,1,80,20,0,0,0,1,45,2,18,21,2
+cpu,fabulgauntlet_slot,CPU,15,1567,1864,1425,3,90,36,2,20,2,3,60,11,6,9,40
+cpu,fabulgauntlet_slot,Attacker,25,157,1864,0,3,75,24,2,15,3,2,70,3,5,8,15
+cpu,fabulgauntlet_slot,Defender,15,157,1864,0,3,75,24,2,15,3,2,70,3,18,21,15
+cpu,milon_slot,CPU,15,2317,1267,3300,1,75,19,1,35,2,0,0,0,8,8,14
+cpu,milon_slot,Attacker,25,232,1267,0,2,60,12,2,15,3,0,0,0,7,7,6
+cpu,milon_slot,Defender,15,232,1267,0,2,60,12,2,15,3,0,0,0,21,24,6
+cpu,milonz_slot,CPU,15,2500,1334,3000,3,99,44,1,60,1,6,40,22,9,9,31
+cpu,milonz_slot,Attacker,25,250,1334,0,3,80,30,1,30,1,2,40,7,7,7,12
+cpu,milonz_slot,Defender,15,250,1334,0,3,80,30,1,30,1,2,40,7,27,27,12
+cpu,mirrorcecil_slot,CPU,17,834,0,0,3,99,46,0,0,0,3,60,11,5,5,45
+cpu,mirrorcecil_slot,Attacker,28,84,0,0,3,80,30,0,0,0,2,70,3,4,4,17
+cpu,mirrorcecil_slot,Defender,17,84,0,0,3,80,30,0,0,0,2,70,3,15,15,17
+cpu,karate_slot,CPU,31,3334,0,0,6,99,86,0,0,0,0,0,0,4,7,83
+cpu,karate_slot,Attacker,52,334,0,0,5,70,58,0,0,0,0,0,0,3,6,31
+cpu,karate_slot,Defender,31,334,0,0,5,70,58,0,0,0,0,0,0,12,15,31
+cpu,guard_slot,CPU,18,334,480,1000,3,99,46,1,90,1,3,40,14,11,14,26
+cpu,guard_slot,Attacker,30,34,480,0,3,80,30,1,40,1,3,50,4,9,12,10
+cpu,guard_slot,Defender,18,34,480,0,3,80,30,1,40,1,3,50,4,33,36,10
+cpu,baigan_slot,CPU,9,3500,1607,3000,4,99,52,0,0,0,3,60,11,8,8,9
+cpu,baigan_slot,Attacker,15,350,1607,0,3,85,34,0,0,0,2,70,3,7,7,4
+cpu,baigan_slot,Defender,9,350,1607,0,3,85,34,0,0,0,2,70,3,21,24,4
+cpu,kainazzo_slot,CPU,16,3334,1834,4000,3,99,44,2,50,2,10,50,48,15,15,29
+cpu,kainazzo_slot,Attacker,27,334,1834,0,3,80,30,2,20,2,4,60,15,11,11,11
+cpu,kainazzo_slot,Defender,16,334,1834,0,3,80,30,2,20,2,4,60,15,41,44,11
+cpu,darkelf_slot,CPU,19,4167,2334,9000,4,99,54,0,0,3,99,99,254,11,11,15
+cpu,darkelf_slot,Attacker,32,417,2334,0,3,90,36,0,0,4,6,70,74,9,9,6
+cpu,darkelf_slot,Defender,19,417,2334,0,3,90,36,0,0,4,6,70,74,31,31,6
+cpu,magus_slot,CPU,16,7500,3000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+cpu,magus_slot,Attacker,27,750,3000,0,4,70,40,1,25,2,2,70,3,5,5,5
+cpu,magus_slot,Defender,16,750,3000,0,4,70,40,1,25,2,2,70,3,18,21,5
+cpu,valvalis_slot,CPU,36,5000,3167,5500,5,99,70,0,0,0,3,40,12,18,18,63
+cpu,valvalis_slot,Attacker,60,500,3167,0,4,80,46,0,0,0,2,45,3,15,15,24
+cpu,valvalis_slot,Defender,36,500,3167,0,4,80,46,0,0,0,2,45,3,53,53,24
+cpu,calbrena_slot,CPU,47,7104,7000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+cpu,calbrena_slot,Attacker,78,711,7000,0,5,90,64,1,35,2,2,60,8,9,9,16
+cpu,calbrena_slot,Defender,47,711,7000,0,5,90,64,1,35,2,2,60,8,31,31,16
+cpu,golbez_slot,CPU,31,2502,6667,11000,5,99,68,0,0,0,0,0,0,27,27,1
+cpu,golbez_slot,Attacker,52,251,6667,0,4,80,46,0,0,0,0,0,0,20,23,1
+cpu,golbez_slot,Defender,31,251,6667,0,4,80,46,0,0,0,0,0,0,69,69,1
+cpu,lugae_slot,CPU,25,15786,8674,11000,6,99,86,1,50,1,0,0,0,27,27,7
+cpu,lugae_slot,Attacker,42,1579,8674,0,5,70,58,1,25,2,0,0,0,20,23,3
+cpu,lugae_slot,Defender,25,1579,8674,0,5,70,58,1,25,2,0,0,0,69,69,3
+cpu,darkimp_slot,CPU,16,498,1940,135,5,70,56,0,0,0,0,0,0,18,21,43
+cpu,darkimp_slot,Attacker,27,50,1940,0,3,90,38,0,0,0,0,0,0,14,17,16
+cpu,darkimp_slot,Defender,16,50,1940,0,3,90,38,0,0,0,0,0,0,53,53,16
+cpu,kingqueen_slot,CPU,15,5000,0,0,9,85,116,0,0,0,0,0,0,53,53,40
+cpu,kingqueen_slot,Attacker,25,500,0,0,6,80,78,0,0,0,0,0,0,41,44,15
+cpu,kingqueen_slot,Defender,15,500,0,0,6,80,78,0,0,0,0,0,0,111,111,15
+cpu,rubicant_slot,CPU,50,21000,8334,7000,7,80,88,1,90,1,8,80,37,38,38,16
+cpu,rubicant_slot,Attacker,83,2100,8334,0,5,70,58,1,40,1,2,85,11,31,31,6
+cpu,rubicant_slot,Defender,50,2100,8334,0,5,70,58,1,40,1,2,85,11,111,111,6
+cpu,evilwall_slot,CPU,37,15834,7667,8000,6,90,84,1,35,2,7,80,29,66,66,79
+cpu,evilwall_slot,Attacker,61,1584,7667,0,5,70,56,2,15,3,2,85,11,53,53,30
+cpu,evilwall_slot,Defender,37,1584,7667,0,5,70,56,2,15,3,2,85,11,111,111,30
+cpu,asura_slot,CPU,63,19167,6667,0,10,99,134,0,0,0,8,80,37,66,66,69
+cpu,asura_slot,Attacker,99,1917,6667,0,7,80,90,0,0,0,2,85,11,53,53,26
+cpu,asura_slot,Defender,63,1917,6667,0,7,80,90,0,0,0,2,85,11,111,111,26
+cpu,leviatan_slot,CPU,79,29167,9334,0,13,99,174,0,0,5,10,80,47,53,53,34
+cpu,leviatan_slot,Attacker,99,2917,9334,0,9,85,116,0,0,5,2,85,13,41,44,13
+cpu,leviatan_slot,Defender,79,2917,9334,0,9,85,116,0,0,5,2,85,13,111,111,13
+cpu,odin_slot,CPU,53,17084,6000,0,9,85,116,2,90,3,7,50,32,43,46,95
+cpu,odin_slot,Attacker,88,1709,6000,0,6,80,78,3,40,4,2,60,10,35,38,36
+cpu,odin_slot,Defender,53,1709,6000,0,6,80,78,3,40,4,2,60,10,111,111,36
+cpu,bahamut_slot,CPU,47,30834,11667,0,13,99,174,0,0,1,1,60,8,27,27,17
+cpu,bahamut_slot,Attacker,78,3084,11667,0,9,85,116,0,0,1,1,65,2,20,23,7
+cpu,bahamut_slot,Defender,47,3084,11667,0,9,85,116,0,0,1,1,65,2,69,69,7
+cpu,elements_slot,CPU,79,65000,34167,20000,10,80,128,2,35,3,3,60,4,89,89,15
+cpu,elements_slot,Attacker,99,8667,34167,0,7,80,88,3,20,4,1,70,1,69,69,6
+cpu,elements_slot,Defender,79,8667,34167,0,7,80,88,3,20,4,1,70,1,111,111,6
+cpu,cpu_slot,CPU,48,20000,50000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+cpu,cpu_slot,Attacker,79,2000,50000,0,9,85,116,5,20,5,3,60,11,31,31,47
+cpu,cpu_slot,Defender,48,2000,50000,0,9,85,116,5,20,5,3,60,11,111,111,47
+cpu,paledim_slot,CPU,98,22750,19667,0,11,85,144,5,40,5,10,50,48,40,43,31
+cpu,paledim_slot,Attacker,99,2275,19667,0,7,99,96,6,20,6,4,60,15,32,35,12
+cpu,paledim_slot,Defender,98,2275,19667,0,7,99,96,6,20,6,4,60,15,111,111,12
+cpu,wyvern_slot,CPU,99,20834,21434,0,12,90,160,4,80,5,10,50,52,43,46,8
+cpu,wyvern_slot,Attacker,99,2084,21434,0,8,90,106,5,30,6,4,60,15,35,38,3
+cpu,wyvern_slot,Defender,99,2084,21434,0,8,90,106,5,30,6,4,60,15,111,111,3
+cpu,plague_slot,CPU,96,23334,10400,550,11,90,146,4,50,5,7,50,32,29,32,254
+cpu,plague_slot,Attacker,99,2334,10400,0,8,80,100,5,30,6,2,60,10,23,26,94
+cpu,plague_slot,Defender,96,2334,10400,0,8,80,100,5,30,6,2,60,10,89,89,94
+cpu,dlunar_slot,CPU,99,35000,33334,0,11,85,144,3,30,4,10,80,54,30,30,36
+cpu,dlunar_slot,Attacker,99,3500,33334,0,7,99,96,4,20,5,2,90,16,22,25,14
+cpu,dlunar_slot,Defender,99,3500,33334,0,7,99,96,4,20,5,2,90,16,89,89,14
+cpu,ogopogo_slot,CPU,62,30834,20367,0,11,99,150,4,55,4,9,50,40,38,38,127
+cpu,ogopogo_slot,Attacker,99,3084,20367,0,8,80,100,5,20,5,3,60,11,31,31,47
+cpu,ogopogo_slot,Defender,62,3084,20367,0,8,80,100,5,20,5,3,60,11,111,111,47
+paledim,dmist_slot,Pale Dim,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+paledim,officer_slot,Pale Dim,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,4
+paledim,octomamm_slot,Pale Dim,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,4
+paledim,antlion_slot,Pale Dim,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,1
+paledim,mombomb_slot,Pale Dim,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+paledim,fabulgauntlet_slot,Pale Dim,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,5
+paledim,milon_slot,Pale Dim,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14
+paledim,milonz_slot,Pale Dim,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31
+paledim,mirrorcecil_slot,Pale Dim,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,6
+paledim,karate_slot,Pale Dim,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,10
+paledim,guard_slot,Pale Dim,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26
+paledim,baigan_slot,Pale Dim,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+paledim,kainazzo_slot,Pale Dim,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29
+paledim,darkelf_slot,Pale Dim,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+paledim,magus_slot,Pale Dim,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+paledim,valvalis_slot,Pale Dim,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+paledim,calbrena_slot,Pale Dim,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+paledim,golbez_slot,Pale Dim,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+paledim,lugae_slot,Pale Dim,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7
+paledim,darkimp_slot,Pale Dim,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,6
+paledim,kingqueen_slot,Pale Dim,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,5
+paledim,rubicant_slot,Pale Dim,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16
+paledim,evilwall_slot,Pale Dim,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79
+paledim,asura_slot,Pale Dim,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+paledim,leviatan_slot,Pale Dim,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+paledim,odin_slot,Pale Dim,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95
+paledim,bahamut_slot,Pale Dim,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+paledim,elements_slot,Pale Dim,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15
+paledim,cpu_slot,Pale Dim,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+paledim,paledim_slot,Pale Dim,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31
+paledim,wyvern_slot,Pale Dim,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8
+paledim,plague_slot,Pale Dim,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,31
+paledim,dlunar_slot,Pale Dim,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36
+paledim,ogopogo_slot,Pale Dim,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127
+wyvern,dmist_slot,Wyvern,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10,scriptSpellPower: 15,scriptSpellPower: 10,scriptSpellPower: 8
+wyvern,officer_slot,Wyvern,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,1,scriptSpellPower: 2,scriptSpellPower: 1,scriptSpellPower: 1
+wyvern,octomamm_slot,Wyvern,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,1,scriptSpellPower: 2,scriptSpellPower: 1,scriptSpellPower: 1
+wyvern,antlion_slot,Wyvern,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,1,scriptSpellPower: 1,scriptSpellPower: 1,scriptSpellPower: 1
+wyvern,mombomb_slot,Wyvern,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5,scriptSpellPower: 8,scriptSpellPower: 5,scriptSpellPower: 4
+wyvern,fabulgauntlet_slot,Wyvern,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,2,scriptSpellPower: 2,scriptSpellPower: 2,scriptSpellPower: 1
+wyvern,milon_slot,Wyvern,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14,scriptSpellPower: 21,scriptSpellPower: 14,scriptSpellPower: 11
+wyvern,milonz_slot,Wyvern,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31,scriptSpellPower: 47,scriptSpellPower: 31,scriptSpellPower: 24
+wyvern,mirrorcecil_slot,Wyvern,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,2,scriptSpellPower: 3,scriptSpellPower: 2,scriptSpellPower: 2
+wyvern,karate_slot,Wyvern,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,3,scriptSpellPower: 4,scriptSpellPower: 3,scriptSpellPower: 2
+wyvern,guard_slot,Wyvern,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26,scriptSpellPower: 39,scriptSpellPower: 26,scriptSpellPower: 20
+wyvern,baigan_slot,Wyvern,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9,scriptSpellPower: 14,scriptSpellPower: 9,scriptSpellPower: 7
+wyvern,kainazzo_slot,Wyvern,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29,scriptSpellPower: 44,scriptSpellPower: 29,scriptSpellPower: 22
+wyvern,darkelf_slot,Wyvern,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15,scriptSpellPower: 23,scriptSpellPower: 15,scriptSpellPower: 12
+wyvern,magus_slot,Wyvern,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11,scriptSpellPower: 17,scriptSpellPower: 11,scriptSpellPower: 9
+wyvern,valvalis_slot,Wyvern,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63,scriptSpellPower: 95,scriptSpellPower: 63,scriptSpellPower: 48
+wyvern,calbrena_slot,Wyvern,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41,scriptSpellPower: 62,scriptSpellPower: 41,scriptSpellPower: 31
+wyvern,golbez_slot,Wyvern,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1,scriptSpellPower: 2,scriptSpellPower: 1,scriptSpellPower: 1
+wyvern,lugae_slot,Wyvern,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7,scriptSpellPower: 11,scriptSpellPower: 7,scriptSpellPower: 6
+wyvern,darkimp_slot,Wyvern,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,2,scriptSpellPower: 2,scriptSpellPower: 2,scriptSpellPower: 1
+wyvern,kingqueen_slot,Wyvern,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,2,scriptSpellPower: 2,scriptSpellPower: 2,scriptSpellPower: 1
+wyvern,rubicant_slot,Wyvern,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16,scriptSpellPower: 24,scriptSpellPower: 16,scriptSpellPower: 12
+wyvern,evilwall_slot,Wyvern,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79,scriptSpellPower: 119,scriptSpellPower: 79,scriptSpellPower: 60
+wyvern,asura_slot,Wyvern,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69,scriptSpellPower: 104,scriptSpellPower: 69,scriptSpellPower: 52
+wyvern,leviatan_slot,Wyvern,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34,scriptSpellPower: 51,scriptSpellPower: 34,scriptSpellPower: 26
+wyvern,odin_slot,Wyvern,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95,scriptSpellPower: 143,scriptSpellPower: 95,scriptSpellPower: 72
+wyvern,bahamut_slot,Wyvern,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17,scriptSpellPower: 26,scriptSpellPower: 17,scriptSpellPower: 13
+wyvern,elements_slot,Wyvern,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15,scriptSpellPower: 23,scriptSpellPower: 15,scriptSpellPower: 12
+wyvern,cpu_slot,Wyvern,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127,scriptSpellPower: 191,scriptSpellPower: 127,scriptSpellPower: 96
+wyvern,paledim_slot,Wyvern,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31,scriptSpellPower: 47,scriptSpellPower: 31,scriptSpellPower: 24
+wyvern,wyvern_slot,Wyvern,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8,scriptSpellPower: 12,scriptSpellPower: 8,scriptSpellPower: 6
+wyvern,plague_slot,Wyvern,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,8,scriptSpellPower: 12,scriptSpellPower: 8,scriptSpellPower: 6
+wyvern,dlunar_slot,Wyvern,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36,scriptSpellPower: 54,scriptSpellPower: 36,scriptSpellPower: 27
+wyvern,ogopogo_slot,Wyvern,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127,scriptSpellPower: 191,scriptSpellPower: 127,scriptSpellPower: 96
+plague,dmist_slot,Plague,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,
+plague,officer_slot,Plague,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,
+plague,octomamm_slot,Plague,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,
+plague,antlion_slot,Plague,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,
+plague,mombomb_slot,Plague,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,
+plague,fabulgauntlet_slot,Plague,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,
+plague,milon_slot,Plague,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,
+plague,milonz_slot,Plague,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,
+plague,mirrorcecil_slot,Plague,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,
+plague,karate_slot,Plague,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,
+plague,guard_slot,Plague,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,
+plague,baigan_slot,Plague,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,
+plague,kainazzo_slot,Plague,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,
+plague,darkelf_slot,Plague,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,
+plague,magus_slot,Plague,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,
+plague,valvalis_slot,Plague,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,
+plague,calbrena_slot,Plague,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,
+plague,golbez_slot,Plague,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,
+plague,lugae_slot,Plague,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,
+plague,darkimp_slot,Plague,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,
+plague,kingqueen_slot,Plague,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,
+plague,rubicant_slot,Plague,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,
+plague,evilwall_slot,Plague,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,
+plague,asura_slot,Plague,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,
+plague,leviatan_slot,Plague,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,
+plague,odin_slot,Plague,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,
+plague,bahamut_slot,Plague,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,
+plague,elements_slot,Plague,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,
+plague,cpu_slot,Plague,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,
+plague,paledim_slot,Plague,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,
+plague,wyvern_slot,Plague,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,
+plague,plague_slot,Plague,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,
+plague,dlunar_slot,Plague,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,
+plague,ogopogo_slot,Plague,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,
+dlunar,dmist_slot,D. Lunar,10,233,350,100,2,90,16,0,0,5,7,80,31,5,5,10
+dlunar,officer_slot,D. Lunar,11,151,440,122,3,75,26,1,65,2,2,60,12,2,4,4
+dlunar,octomamm_slot,D. Lunar,10,1175,600,250,2,99,22,0,0,0,6,60,25,31,31,4
+dlunar,antlion_slot,D. Lunar,2,500,750,400,2,85,11,0,0,2,2,60,8,5,5,1
+dlunar,mombomb_slot,D. Lunar,15,625,2180,877,3,80,30,0,0,0,1,40,9,7,7,5
+dlunar,fabulgauntlet_slot,D. Lunar,15,940,2795,712,3,90,36,2,20,2,3,60,11,6,9,6
+dlunar,milon_slot,D. Lunar,15,1390,1900,1650,1,75,19,1,35,2,0,0,0,8,8,14
+dlunar,milonz_slot,D. Lunar,15,1500,2000,1500,3,99,44,1,60,1,6,40,22,9,9,31
+dlunar,mirrorcecil_slot,D. Lunar,17,500,0,0,3,99,46,0,0,0,3,60,11,5,5,7
+dlunar,karate_slot,D. Lunar,31,2000,0,0,6,99,86,0,0,0,0,0,0,4,7,12
+dlunar,guard_slot,D. Lunar,18,200,720,500,3,99,46,1,90,1,3,40,14,11,14,26
+dlunar,baigan_slot,D. Lunar,9,2100,2410,1500,4,99,52,0,0,0,3,60,11,8,8,9
+dlunar,kainazzo_slot,D. Lunar,16,2000,2750,2000,3,99,44,2,50,2,10,50,48,15,15,29
+dlunar,darkelf_slot,D. Lunar,19,2500,3500,4500,4,99,54,0,0,3,99,99,254,11,11,15
+dlunar,magus_slot,D. Lunar,16,4500,4500,4500,5,80,60,1,45,2,3,60,11,7,7,11
+dlunar,valvalis_slot,D. Lunar,36,3000,4750,2750,5,99,70,0,0,0,3,40,12,18,18,63
+dlunar,calbrena_slot,D. Lunar,47,4262,10500,4000,7,99,96,1,80,2,6,60,25,11,11,41
+dlunar,golbez_slot,D. Lunar,31,1501,10000,5500,5,99,68,0,0,0,0,0,0,27,27,1
+dlunar,lugae_slot,D. Lunar,25,9472,13010,5500,6,99,86,1,50,1,0,0,0,27,27,7
+dlunar,darkimp_slot,D. Lunar,16,299,2910,67,5,70,56,0,0,0,0,0,0,18,21,6
+dlunar,kingqueen_slot,D. Lunar,15,3000,0,0,9,85,116,0,0,0,0,0,0,53,53,6
+dlunar,rubicant_slot,D. Lunar,50,12600,12500,3500,7,80,88,1,90,1,8,80,37,38,38,16
+dlunar,evilwall_slot,D. Lunar,37,9500,11500,4000,6,90,84,1,35,2,7,80,29,66,66,79
+dlunar,asura_slot,D. Lunar,63,11500,10000,0,10,99,134,0,0,0,8,80,37,66,66,69
+dlunar,leviatan_slot,D. Lunar,79,17500,14000,0,13,99,174,0,0,5,10,80,47,53,53,34
+dlunar,odin_slot,D. Lunar,53,10250,9000,0,9,85,116,2,90,3,7,50,32,43,46,95
+dlunar,bahamut_slot,D. Lunar,47,18500,17500,0,13,99,174,0,0,1,1,60,8,27,27,17
+dlunar,elements_slot,D. Lunar,79,52000,51250,10000,10,80,128,2,35,3,3,60,4,89,89,15
+dlunar,cpu_slot,D. Lunar,48,12000,75000,5166,13,99,174,4,45,4,8,50,38,38,38,127
+dlunar,paledim_slot,D. Lunar,98,13650,29500,0,11,85,144,5,40,5,10,50,48,40,43,31
+dlunar,wyvern_slot,D. Lunar,99,12500,32150,0,12,90,160,4,80,5,10,50,52,43,46,8
+dlunar,plague_slot,D. Lunar,96,14000,15600,275,11,90,146,4,50,5,7,50,32,29,32,35
+dlunar,dlunar_slot,D. Lunar,99,21000,50000,0,11,85,144,3,30,4,10,80,54,30,30,36
+dlunar,ogopogo_slot,D. Lunar,62,18500,30550,0,11,99,150,4,55,4,9,50,40,38,38,127
+ogopogo,dmist_slot,Ogopogo,10,465,700,200,2,90,16,0,0,5,7,80,31,5,5,10
+ogopogo,officer_slot,Ogopogo,11,302,880,245,3,75,26,1,65,2,2,60,12,2,4,23
+ogopogo,octomamm_slot,Ogopogo,10,2350,1200,500,2,99,22,0,0,0,6,60,25,31,31,21
+ogopogo,antlion_slot,Ogopogo,2,1000,1500,800,2,85,11,0,0,2,2,60,8,5,5,5
+ogopogo,mombomb_slot,Ogopogo,15,1250,4360,1755,3,80,30,0,0,0,1,40,9,7,7,5
+ogopogo,fabulgauntlet_slot,Ogopogo,15,1880,5590,1425,3,90,36,2,20,2,3,60,11,6,9,31
+ogopogo,milon_slot,Ogopogo,15,2780,3800,3300,1,75,19,1,35,2,0,0,0,8,8,14
+ogopogo,milonz_slot,Ogopogo,15,3000,4000,3000,3,99,44,1,60,1,6,40,22,9,9,31
+ogopogo,mirrorcecil_slot,Ogopogo,17,1000,0,0,3,99,46,0,0,0,3,60,11,5,5,35
+ogopogo,karate_slot,Ogopogo,31,4000,0,0,6,99,86,0,0,0,0,0,0,4,7,64
+ogopogo,guard_slot,Ogopogo,18,400,1440,1000,3,99,46,1,90,1,3,40,14,11,14,26
+ogopogo,baigan_slot,Ogopogo,9,4200,4820,3000,4,99,52,0,0,0,3,60,11,8,8,9
+ogopogo,kainazzo_slot,Ogopogo,16,4000,5500,4000,3,99,44,2,50,2,10,50,48,15,15,29
+ogopogo,darkelf_slot,Ogopogo,19,5000,7000,9000,4,99,54,0,0,3,99,99,254,11,11,15
+ogopogo,magus_slot,Ogopogo,16,9000,9000,9000,5,80,60,1,45,2,3,60,11,7,7,11
+ogopogo,valvalis_slot,Ogopogo,36,6000,9500,5500,5,99,70,0,0,0,3,40,12,18,18,63
+ogopogo,calbrena_slot,Ogopogo,47,8524,21000,8000,7,99,96,1,80,2,6,60,25,11,11,41
+ogopogo,golbez_slot,Ogopogo,31,3002,20000,11000,5,99,68,0,0,0,0,0,0,27,27,1
+ogopogo,lugae_slot,Ogopogo,25,18943,26020,11000,6,99,86,1,50,1,0,0,0,27,27,7
+ogopogo,darkimp_slot,Ogopogo,16,597,5820,135,5,70,56,0,0,0,0,0,0,18,21,33
+ogopogo,kingqueen_slot,Ogopogo,15,6000,0,0,9,85,116,0,0,0,0,0,0,53,53,31
+ogopogo,rubicant_slot,Ogopogo,50,25200,25000,7000,7,80,88,1,90,1,8,80,37,38,38,16
+ogopogo,evilwall_slot,Ogopogo,37,19000,23000,8000,6,90,84,1,35,2,7,80,29,66,66,79
+ogopogo,asura_slot,Ogopogo,63,23000,20000,0,10,99,134,0,0,0,8,80,37,66,66,69
+ogopogo,leviatan_slot,Ogopogo,79,35000,28000,0,13,99,174,0,0,5,10,80,47,53,53,34
+ogopogo,odin_slot,Ogopogo,53,20500,18000,0,9,85,116,2,90,3,7,50,32,43,46,95
+ogopogo,bahamut_slot,Ogopogo,47,37000,35000,0,13,99,174,0,0,1,1,60,8,27,27,17
+ogopogo,elements_slot,Ogopogo,79,65000,102500,20000,10,80,128,2,35,3,3,60,4,89,89,15
+ogopogo,cpu_slot,Ogopogo,48,24000,150000,10333,13,99,174,4,45,4,8,50,38,38,38,127
+ogopogo,paledim_slot,Ogopogo,98,27300,59000,0,11,85,144,5,40,5,10,50,48,40,43,31
+ogopogo,wyvern_slot,Ogopogo,99,25000,64300,0,12,90,160,4,80,5,10,50,52,43,46,8
+ogopogo,plague_slot,Ogopogo,96,28000,31200,550,11,90,146,4,50,5,7,50,32,29,32,197
+ogopogo,dlunar_slot,Ogopogo,99,42000,100000,0,11,85,144,3,30,4,10,80,54,30,30,36
+ogopogo,ogopogo_slot,Ogopogo,62,37000,61100,0,11,99,150,4,55,4,9,50,40,38,38,127

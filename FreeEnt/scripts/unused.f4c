@@ -122,7 +122,6 @@ text(bank 1 message $FF) {X}
 
 // 103-105 are FuSoYa spell-learning messages
 
-text(bank 1 message $10D) {X}
 text(bank 1 message $10E) {X}
 
 // message $11C is the harp song text
@@ -179,10 +178,8 @@ text(bank 1 message $155) {X}
 
 text(bank 1 message $158) {X}
 
-text(bank 1 message $15A) {X}
-text(bank 1 message $15B) {X}
-text(bank 1 message $15C) {X}
-text(bank 1 message $15D) {X}
+// 15A-15D are for Cnodupes:fuse[] textboxes
+
 text(bank 1 message $15E) {X}
 text(bank 1 message $15F) {X}
 text(bank 1 message $160) {X}
@@ -209,38 +206,8 @@ text(bank 1 message $172) {X}
 text(bank 1 message $173) {X}
 text(bank 1 message $174) {X}
 
-text(bank 1 message $176) {X}
-text(bank 1 message $177) {X}
-text(bank 1 message $178) {X}
-text(bank 1 message $179) {X}
-text(bank 1 message $17A) {X}
-text(bank 1 message $17B) {X}
-text(bank 1 message $17C) {X}
-text(bank 1 message $17D) {X}
-text(bank 1 message $17E) {X}
-text(bank 1 message $17F) {X}
-text(bank 1 message $180) {X}
-text(bank 1 message $181) {X}
-text(bank 1 message $182) {X}
-text(bank 1 message $183) {X}
-text(bank 1 message $184) {X}
-text(bank 1 message $185) {X}
-text(bank 1 message $186) {X}
-text(bank 1 message $187) {X}
-text(bank 1 message $188) {X}
-text(bank 1 message $189) {X}
-text(bank 1 message $18A) {X}
-text(bank 1 message $18B) {X}
-text(bank 1 message $18C) {X}
-text(bank 1 message $18D) {X}
-text(bank 1 message $18E) {X}
-text(bank 1 message $18F) {X}
-text(bank 1 message $190) {X}
-text(bank 1 message $191) {X}
-text(bank 1 message $192) {X}
-text(bank 1 message $193) {X}
-text(bank 1 message $194) {X}
-text(bank 1 message $195) {X}
+// 176-195 are used for multi-wacky
+
 text(bank 1 message $196) {X}
 
 // 197, 198, 199 are Fabul dancer

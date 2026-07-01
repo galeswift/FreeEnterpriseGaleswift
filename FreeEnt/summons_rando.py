@@ -32,24 +32,27 @@ def apply(env):
     if not env.options.flags.has('vanilla_hobs'):
         apply_hobs_rando(env)
 
-    if not env.options.flags.has('vanilla_dwarf_summons'):
+    if not env.options.flags.has('vanilla_dwarf_summons') and not env.options.flags.has('rydiaredmage'):
         apply_dwarf_castle_summons_rando(env)
 
 
 def apply_dwarf_castle_summons_rando(env):
-    dwarf_summons = env.rnd.sample(DWARF_CASTLE_SUMMONS_POOL, 5)
+    if env.options.flags.has('no_dwarf_summons'):
+        env.add_substitution('dwarf summon rando', '')
+    else:
+        dwarf_summons = env.rnd.sample(DWARF_CASTLE_SUMMONS_POOL, 5)
 
-    dwarf_summons_script_lines = (
-        [f'give spell #RydiaCall #{spell}' for spell in dwarf_summons]
-        + [f'[#B #Text_LoadSpellName {index} #spell.{spell}]' for index,spell in enumerate(dwarf_summons)]
-        + ['message $11d']
-        )
-    
-    env.add_substitution('dwarf summon rando', '\n'.join(dwarf_summons_script_lines))
+        dwarf_summons_script_lines = (
+            [f'give spell #RydiaCall #{spell}' for spell in dwarf_summons]
+            + [f'[#B #Text_LoadSpellName {index} #spell.{spell}]' for index,spell in enumerate(dwarf_summons)]
+            + ['message $11d']
+            )
+        
+        env.add_substitution('dwarf summon rando', '\n'.join(dwarf_summons_script_lines))
 
-    env.spoilers.add_table("MISC", 
-        [["Dwarf castle summons", ', '.join([databases.get_spell_spoiler_name(f"#spell.{spell}") for spell in dwarf_summons])]], 
-        public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
+        env.spoilers.add_table("MISC", 
+            [["Dwarf castle summons", ', '.join([databases.get_spell_spoiler_name(f"#spell.{spell}") for spell in dwarf_summons])]], 
+            public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
 
 
 def apply_hobs_rando(env):

@@ -16,13 +16,16 @@ from . import character_rando
 from .spoilers import SpoilerRow
 
 from .address import *
+from .boss_slot_ranking_weights_data import *
 
 from f4c import encode_text
 
 import math
 
-DEBUG = 0
-MAX_RANDOMIZATION_ATTEMPTS = 100
+DEBUG = 0 # set to > 1 for more detailed checker output
+# largest known successful generation: 2837 attempts
+# flagset: Onone Kmain/miab:above,below/forge/pink/unweighted/force:hook/unsafer Pkey Cstandard Twild Swild Bstandard/nofree Etoggle Hrandom Gnone Fvanilla Aagnostic Zailments -starting:blackchocobo
+MAX_RANDOMIZATION_ATTEMPTS = 5000
 
 COMMON_BRANCHES = [
     ['#item.Magma?', 'underground'],
@@ -330,6 +333,452 @@ BOSSES = [
     'ogopogo',
     ]
 
+BOSS_SLOT_SHUFFLE_GROUPS = {
+    'ungated_overworld' : ['dmist_slot', 'octomamm_slot', 'antlion_slot', 'mombomb_slot', 'fabulgauntlet_slot',
+                           'milon_slot', 'milonz_slot', 'mirrorcecil_slot', 'karate_slot', 'guard_slot', 'magus_slot'],
+    'gated_overworld'   : ['officer_slot', 'baigan_slot', 'kainazzo_slot', 'darkelf_slot', 'valvalis_slot', 'kingqueen_slot', 'rubicant_slot'],
+    'underworld'        : ['calbrena_slot', 'golbez_slot', 'lugae_slot', 'darkimp_slot', 'evilwall_slot', 'asura_slot', 'leviatan_slot', 'odin_slot'],
+    'darkness'          : ['elements_slot', 'cpu_slot', 'bahamut_slot', 'paledim_slot', 'wyvern_slot', 'plague_slot', 'dlunar_slot', 'ogopogo_slot']
+}
+
+BOSS_LOCATION_ZONES = {
+    'early_game' : ['dmist_slot', 'officer_slot', 'octomamm_slot', 'antlion_slot', 'mombomb_slot', 'fabulgauntlet_slot',
+                    'milon_slot', 'milonz_slot', 'mirrorcecil_slot', 'karate_slot', 'guard_slot'],
+    'gated_blue_planet' : ['baigan_slot', 'kainazzo_slot', 'darkelf_slot', 'magus_slot', 'valvalis_slot', 'kingqueen_slot', 'rubicant_slot',
+                           'calbrena_slot', 'golbez_slot', 'lugae_slot', 'darkimp_slot', 'evilwall_slot'],
+    'summon_darkness' : ['asura_slot', 'leviatan_slot', 'odin_slot', 'elements_slot', 'cpu_slot', 
+                         'bahamut_slot', 'paledim_slot', 'wyvern_slot', 'plague_slot', 'dlunar_slot', 'ogopogo_slot']
+}
+
+def _get_standard_boss_shuffle(env, slots, bosses, removed_boss_slots,
+                                    restricted_boss_slots, objective_bosses_and_maybe_dmist):
+    tmp_assignment = {}
+    available_unrestricted_boss_slots = [s for s in slots if s not in removed_boss_slots and s not in restricted_boss_slots]
+    required_bosses = [b for b in bosses if b in objective_bosses_and_maybe_dmist]
+    zone_removed_slots = [s for s in removed_boss_slots if s in slots]
+    # first, assign required bosses to unrestricted slots
+    env.rnd.shuffle(required_bosses)
+    env.rnd.shuffle(available_unrestricted_boss_slots)
+    remaining_boss_slots = [s for s in slots if s not in removed_boss_slots]
+    for i in range(min(len(required_bosses), len(available_unrestricted_boss_slots))):
+        tmp_assignment[available_unrestricted_boss_slots[i]] = required_bosses[i]
+        remaining_boss_slots.remove(available_unrestricted_boss_slots[i])
+
+    env.rnd.shuffle(remaining_boss_slots)
+    if len(available_unrestricted_boss_slots) < len(required_bosses):
+        # if we fill the slots first, then all remaining bosses go somewhere
+        # (ensuring required bosses get placed first)
+        for i,b in enumerate(required_bosses[len(available_unrestricted_boss_slots):]):
+            tmp_assignment[remaining_boss_slots[i]] = b
+        slot_idx = len(required_bosses[len(available_unrestricted_boss_slots):])
+        remaining_bosses = [b for b in bosses if b not in required_bosses]
+        env.rnd.shuffle(remaining_bosses)
+        for i,s in enumerate(remaining_boss_slots[slot_idx:] + zone_removed_slots):
+            tmp_assignment[s] = remaining_bosses[i]
+    else:
+        # otherwise we just place all remaining bosses into remaining slots
+        remaining_bosses = [b for b in bosses if b not in required_bosses]
+        env.rnd.shuffle(remaining_bosses)
+        for i,s in enumerate(remaining_boss_slots + zone_removed_slots):
+            tmp_assignment[s] = remaining_bosses[i]
+
+    if 'boss' in env.options.test_settings:
+        for force_slot in env.options.test_settings['boss']:
+            force_boss = env.options.test_settings['boss'][force_slot]
+            replaced_boss = tmp_assignment[force_slot]
+            if force_boss != replaced_boss:
+                for k in tmp_assignment:
+                    if tmp_assignment[k] == force_boss:
+                        tmp_assignment[k] = replaced_boss
+                        break
+                tmp_assignment[force_slot] = force_boss
+    
+    return tmp_assignment
+
+NUM_SWAPS = 200
+
+# list of slots that don't have spell power (so do level-based scaling when not on Bspellpower)
+ZERO_SPELL_POWER_SLOTS = [
+    'officer_slot',
+    'antlion_slot',
+    'octomamm_slot',
+    'fabulgauntlet_slot',
+    'mirrorcecil_slot',
+    'karate_slot',
+    'darkimp_slot',
+    'kingqueen_slot',
+    'plague_slot'
+]
+
+# list of slots that don't normally have unsafe bosses guarding your logical underground progression
+# for now, use the ungated checks and the Hook route
+OVERWORLD_PROGRESSION_FIGHT_SLOTS = [
+    'antlion_slot', 
+    'fabulgauntlet_slot',
+    'milon_slot',
+    'milonz_slot',
+    'mirrorcecil_slot',
+    'guard_slot',
+    'karate_slot',
+    'kingqueen_slot',
+    'rubicant_slot',
+]
+
+# for -starting:underground, use the ungated boss fights (i.e. not Super Cannon or Sealed Cave)
+UNDERWORLD_PROGRESSION_FIGHT_SLOTS = [
+    'calbrena_slot',
+    'golbez_slot',
+    'lugae_slot',
+    'asura_slot',
+    'wyvern_slot',
+]
+
+BEASY_DIFFICULTY = [
+    'wyvern',
+    'valvalis',
+    'golbez',
+    'fabulgauntlet',
+    'kainazzo',
+    'ogopogo',
+    'mirrorcecil',
+    'dlunar',
+    'odin',
+    'evilwall',
+    'rubicant',
+    'baigan',
+    'plague',
+    'antlion',
+    'cpu',
+    'asura',
+    'leviatan',
+    'paledim',
+    'dmist',
+    'karate',
+    'elements',
+    'magus',
+    'darkelf',
+    'lugae',
+    'octomamm',
+    'mombomb',
+    'bahamut',
+    'calbrena',
+    'milonz',
+    'milon',
+    'guard',
+    'darkimp',
+    'waterhag',
+    'officer',
+    'kingqueen',
+    ]
+
+def _set_scoring_parameters(env):
+    scoring_parameters = {
+        'alt_gauntlet'    : env.options.flags.has('bosses_alt_gauntlet'),
+        'boss_spellpower' : env.options.flags.has('bosses_nonzero_spellpower'),
+        'cecil_in_seed'   : 'cecil' in env.meta['available_characters'],
+        'jump_available'  : 'kain' in env.meta['available_characters'] or env.options.flags.has('jump'),
+        'atb_scale_1'     : False,
+        'party_size_1'    : False,
+        'start_dwarf'     : env.options.flags.has('starting_underground'),
+        'danger_anchor'   : (env.options.flags.has_any('hero_challenge', 'superhero_challenge') and env.options.flags.has('no_cursed_rings'))
+                                or env.options.flags.has_any('fastest_agility', 'random_agility', 'monster_agility'),
+        'woahdin'         : env.options.flags.has('odin_random_spell'),
+        'thehades'        : env.options.flags.has('kingqueen_fire_upgrade'),
+        'no_lit_shops'    : env.options.flags.has_any('shops_no_damage_items', 'shops_no_j_items'),
+        'whichburn'       : env.options.flags.has('wyvern_random_meganuke'),
+        'itburns'         : env.options.flags.has('wyvern_all_bad_things'),
+        'whyburn'         : env.options.flags.has('wyvern_no_meganuke'),
+        'no_free'         : env.options.flags.has('no_free_bosses'),
+        'unsafe'          : env.options.flags.has('bosses_unsafe'),
+        'no_veils_shops'  : env.options.flags.has('shops_no_starveil'),
+        'no_life_shops'   : env.options.flags.has('shops_no_life'),
+        'whybez'          : env.options.flags.has('golbez_no_shadow'),
+        'whichbez'        : env.options.flags.has('golbez_random_spells'),
+    }
+    agility_scale_suffix = env.options.flags.get_suffix('Ascale:')
+    if agility_scale_suffix:
+        if int(agility_scale_suffix) == 1:
+            scoring_parameters.update({'atb_scale_1' : True})
+    party_size_suffix = env.options.flags.get_suffix('Cparty:')
+    if party_size_suffix:
+        if int(party_size_suffix) == 1:
+            scoring_parameters.update({'party_size_1' : True})
+
+    return scoring_parameters
+
+def _set_stats_weights(scoring_parameters):
+    stats_weights = BOSS_STATS_WEIGHTS_DIFFICULTY
+    if scoring_parameters['boss_spellpower']:
+        stats_weights['antlion'].update({
+            'speed' : 20,
+            'spell power' : 30,
+            'hp' : 10,
+        })
+        stats_weights['kingqueen'].update({
+            'spell power' : 40,
+            'hp' : 10,
+        })
+    if not scoring_parameters['cecil_in_seed']:
+        stats_weights['karate'].update({
+            'attack' : 30,
+            'hp' : 30,
+            'difficulty' : 1,
+        })
+    if not scoring_parameters['jump_available']:
+        stats_weights['valvalis']['difficulty'] += 0.3
+    if scoring_parameters['atb_scale_1']:
+        stats_weights['evilwall']['difficulty'] += 0.2
+    if scoring_parameters['danger_anchor'] or scoring_parameters['party_size_1']:
+        stats_weights['plague']['difficulty'] += 0.5
+    if scoring_parameters['woahdin'] and not scoring_parameters['no_lit_shops']:
+        stats_weights['odin']['difficulty'] -= 0.4
+    elif scoring_parameters['no_lit_shops']:
+        stats_weights['kainazzo']['difficulty'] += 0.2
+    if scoring_parameters['whichburn']:
+        stats_weights['wyvern']['difficulty'] -= 0.2
+    elif scoring_parameters['itburns']:
+        stats_weights['wyvern']['difficulty'] += 1
+    if scoring_parameters['no_free']:
+        for boss in ['waterhag', 'mombomb', 'milon', 'guard', 'darkimp', 'darkelf']:
+            stats_weights[boss].update({'difficulty' : 1})
+        stats_weights['kingqueen'].update({'difficulty' : (1 if scoring_parameters['boss_spellpower'] else 0.4)})
+        stats_weights['mirrorcecil'].update({'difficulty' : 1.5})
+    if scoring_parameters['thehades'] and scoring_parameters['boss_spellpower']:
+        stats_weights['kingqueen']['difficulty'] += 0.3
+    if scoring_parameters['unsafe']:
+        if scoring_parameters['whichburn']:
+            stats_weights['wyvern']['difficulty'] += 0.2
+        if scoring_parameters['whichbez']:
+            stats_weights['golbez']['difficulty'] += 0.2
+    if scoring_parameters['no_veils_shops']: # plague, wyvern, bahamut, golbez, asura, leviatan, dlunar
+        for boss in ['asura', 'leviatan', 'plague', 'dlunar']:
+            stats_weights[boss]['difficulty'] += 0.2
+        stats_weights['bahamut'].update({
+            'hp' : 20,
+            'speed' : 50,
+            'difficulty' : 1
+        })
+        stats_weights['golbez']['difficulty'] += 0.3
+        if not (scoring_parameters['whichburn'] or scoring_parameters['itburns'] or scoring_parameters['whyburn']):
+            stats_weights['wyvern']['difficulty'] += 0.3
+    if scoring_parameters['no_life_shops']:
+        stats_weights['wyvern']['difficulty'] += 0.2
+        if not scoring_parameters['whybez'] and not scoring_parameters['whichbez']:
+            stats_weights['golbez']['difficulty'] += 0.2
+    if scoring_parameters['whybez'] and not scoring_parameters['whichbez']:
+        stats_weights['golbez']['difficulty'] -= 0.2
+
+    return stats_weights
+
+def _get_pairing_score(slot, boss, rankings_data, stats_weights, scoring_parameters):
+    if boss == 'fabulgauntlet' and scoring_parameters['alt_gauntlet']:
+        score = ALT_GAUNTLET_WEIGHTS[slot] + 7
+        if slot == 'ogopogo_slot':
+            score += 5
+    else:
+        weights_vector = {}
+        for stat in ['speed', 'spell power', 'attack', 'hp', 'level', 'magic defense', 'defense']:
+            weights_vector[stat] = stats_weights[boss][stat]
+        if not scoring_parameters['boss_spellpower'] and slot in ZERO_SPELL_POWER_SLOTS:
+            # swap spell power and level weights, because level impacts the spell power, not the slot's spell power ranking
+            weights_vector.update({
+                'level' : stats_weights[boss]['spell power'],
+                'spell power' : stats_weights[boss]['level'],
+            })
+        score = stats_weights[boss]['difficulty'] * sum(
+            [(weights_vector[stat]/100) * rankings_data[slot][stat] for stat in ['speed', 'spell power', 'attack', 'hp', 'level', 'magic defense', 'defense']]
+            )
+        if scoring_parameters['unsafe']:
+            # add some weight to the normally-prevented bosses in overworld spots that could gate underground access, to encourage Bunsafe behaviour
+            # ... needs to be modified a bit for starting underground, of course
+            if slot in (UNDERWORLD_PROGRESSION_FIGHT_SLOTS if scoring_parameters['start_dwarf'] else OVERWORLD_PROGRESSION_FIGHT_SLOTS):
+                if boss in ['valvalis', 'golbez', 'wyvern']: # Kainazzo on 5.0
+                    score += 12
+                if boss == 'mirrorcecil' and scoring_parameters['no_free']:
+                    score += 12
+    if slot == 'milonz_slot':
+        if boss in ['golbez', 'plague', 'fabulgauntlet', 'magus']:
+            score += 5
+        if not scoring_parameters['jump_available'] and boss == 'valvalis':
+            score += 5      
+
+    return score  
+
+def _try_allowed_boss_swap(env, assignment, slot_lookup, bosses, stats_slots, 
+                           rankings_data, stats_weights, scoring_parameters,
+                           removed_boss_slots, restricted_boss_slots, 
+                           objective_bosses_and_maybe_dmist, filter):
+    # idea: we cannot swap a required boss in an unrestricted slot with a non-required boss in a restricted slot or a removed slot,
+    # but we can make any other swap, because:
+    # 1. a required boss in a restricted slot means there are no non-required bosses in unrestricted slots, so the only
+    # swaps are this required boss with another required boss or with another boss in a restricted slot, and
+    # 2. swapping with a non-required boss in an unrestricted slot is fine.
+    two_bosses = env.rnd.sample(bosses, k=2)
+    b0 = two_bosses[0]
+    b1 = two_bosses[1]
+    # if a boss is required, then it isn't in a removed slot
+    if ((b0 in objective_bosses_and_maybe_dmist and slot_lookup[b0] not in restricted_boss_slots) and
+        (b1 not in objective_bosses_and_maybe_dmist and (slot_lookup[b1] in restricted_boss_slots or slot_lookup[b1] in removed_boss_slots))):
+            return
+    elif ((b1 in objective_bosses_and_maybe_dmist and slot_lookup[b1] not in restricted_boss_slots) and
+          (b0 not in objective_bosses_and_maybe_dmist and (slot_lookup[b0] in restricted_boss_slots or slot_lookup[b0] in removed_boss_slots))):
+            return
+    
+    # now that we've confirmed that in principle we can make this swap, check for scoring in/decrease
+    num_in_assignment = 2
+    unavailable_slots = removed_boss_slots.union(set(['none']))
+    for b in two_bosses:
+        if slot_lookup[b] in unavailable_slots:
+            num_in_assignment -= 1
+    make_swap = False
+    if num_in_assignment == 0:
+        return
+    elif num_in_assignment == 1:
+        if slot_lookup[b0] in unavailable_slots:
+            b_in_slot = b1
+            b_not_in_slot = b0
+        else:
+            b_in_slot = b0
+            b_not_in_slot = b1
+        old_score = _get_pairing_score(stats_slots[slot_lookup[b_in_slot]], b_in_slot, rankings_data, stats_weights, scoring_parameters)
+        new_score = _get_pairing_score(stats_slots[slot_lookup[b_in_slot]], b_not_in_slot, rankings_data, stats_weights, scoring_parameters)
+        if filter == 'friendly':
+            if new_score < old_score:
+                make_swap = True
+        else:
+            if new_score > old_score:
+                make_swap = True
+        if make_swap:
+            # print(f"Swapping {b_in_slot} in {slot_lookup[b_in_slot]} with {b_not_in_slot} in {slot_lookup[b_not_in_slot]}"
+            #       + (" **********" if slot_lookup[b_not_in_slot] == 'none' else ""))
+            assignment.update({
+                slot_lookup[b_in_slot] : b_not_in_slot
+            })
+            if slot_lookup[b_not_in_slot] != 'none':
+                assignment.update({
+                    slot_lookup[b_not_in_slot] : b_in_slot
+                })
+            slot_lookup.update({
+                b_in_slot : slot_lookup[b_not_in_slot],
+                b_not_in_slot : slot_lookup[b_in_slot]
+            })
+    else:
+        old_score = (_get_pairing_score(stats_slots[slot_lookup[b0]], b0, rankings_data, stats_weights, scoring_parameters)
+                     + _get_pairing_score(stats_slots[slot_lookup[b1]], b1, rankings_data, stats_weights, scoring_parameters))
+        new_score = (_get_pairing_score(stats_slots[slot_lookup[b0]], b1, rankings_data, stats_weights, scoring_parameters)
+                     + _get_pairing_score(stats_slots[slot_lookup[b1]], b0, rankings_data, stats_weights, scoring_parameters))
+        if filter == 'friendly':
+            if new_score < old_score:
+                make_swap = True
+        else:
+            if new_score > old_score:
+                make_swap = True
+        if make_swap:
+            # print(f"Swapping {b0} in {slot_lookup[b0]} with {b1} in {slot_lookup[b1]}")
+            assignment.update({
+                slot_lookup[b0] : b1,
+                slot_lookup[b1] : b0
+            })
+            slot_lookup.update({
+                b0 : slot_lookup[b1],
+                b1 : slot_lookup[b0]
+            })
+
+def _get_scored_placement(env, slots, stats_slots, bosses, slot_rankings, stats_weights, scoring_parameters, leftover_bosses,
+                          removed_boss_slots, restricted_boss_slots, objective_bosses_and_maybe_dmist, boss_mode):
+    # set up slot-boss scores, and sort in ascending order
+    # ignore removed slots; handle at the end
+    zone_removed_slots = [s for s in removed_boss_slots if s in slots]
+    slot_boss_pairing_values = []
+    for slot in [s for s in slots if s not in zone_removed_slots]:
+        for boss in bosses:
+            score = _get_pairing_score(stats_slots[slot], boss, slot_rankings, stats_weights, scoring_parameters)
+            # randomly add some noise (-10 to 10, obviously can change) to the score, clamp to [5,45] (min, max can also change)
+            score += (env.rnd.random() - 0.5) * 2 * 10
+            score = max(5,min(45,score))
+
+            slot_boss_pairing_values.append((slot, boss, score))
+            # print(slot + ' - ' + boss + ' : ' + f'{weight}')            
+
+    slot_boss_pairing_values.sort(key=(lambda s: s[2]))
+    # for t in slot_boss_pairing_values:
+    #     print(t[0] + ' - ' + t[1] + ' : ' + f'{t[2]}')
+
+    # idea: place required bosses first, randomly shifting down some slots to avoid placing them too highly.
+    assignment = {}
+    required_bosses = [b for b in bosses if b in objective_bosses_and_maybe_dmist]
+    available_unrestricted_boss_slots = [s for s in slots if s not in removed_boss_slots and s not in restricted_boss_slots]
+    remaining_boss_slots = [s for s in slots if s not in zone_removed_slots]
+    remaining_required_bosses = [b for b in required_bosses]
+
+    # first, put as many required bosses into available unrestricted slots as possible
+    required_available_slot_boss_pairs = [t for t in slot_boss_pairing_values if t[1] in required_bosses and t[0] in available_unrestricted_boss_slots]
+    while required_available_slot_boss_pairs:
+        desired_pair = required_available_slot_boss_pairs[-1]
+        pair_options = [t for t in required_available_slot_boss_pairs if t[1] == desired_pair[1]]
+        orig_idx = slot_boss_pairing_values.index(desired_pair)
+        bosses_until_desired_pair = []
+        slots_until_desired_pair = []
+        # scan through the big list to see roughly how many bosses/slots we'd take first before this pair
+        for i in range(len(slot_boss_pairing_values)-1,orig_idx,-1):
+            t = slot_boss_pairing_values[i]
+            if t[1] == boss:
+                break
+            if t[0] not in slots_until_desired_pair:
+                slots_until_desired_pair.append(t)
+            if t[1] not in bosses_until_desired_pair:
+                bosses_until_desired_pair.append(t)
+        m = min(len(slots_until_desired_pair), len(bosses_until_desired_pair), len(pair_options)-1)
+        if boss_mode == 'easy':
+            # look from the bottom and subtract from m the number of slot pairs that would not have been removed
+            m = max(0,m-len([p for p in pair_options[:(m+1)] if p[0] not in slots_until_desired_pair]))
+        # pick a random number of slots (in [m // 2, m]) to pass by, to simulate having picked other bosses first
+        skip_n_slots = env.rnd.randrange(m // 2, m+1)
+        chosen_idx = (skip_n_slots if boss_mode == 'easy' else -(1+skip_n_slots))
+        chosen_pair = pair_options[chosen_idx]
+        assignment[chosen_pair[0]] = chosen_pair[1]
+        # prune the slot-boss pairs, to start over
+        slot_boss_pairing_values = [t for t in slot_boss_pairing_values if t[0] != chosen_pair[0] and t[1] != chosen_pair[1]]
+        required_available_slot_boss_pairs = [t for t in required_available_slot_boss_pairs if t[0] != chosen_pair[0] and t[1] != chosen_pair[1]]
+        remaining_boss_slots.remove(chosen_pair[0])
+        remaining_required_bosses.remove(chosen_pair[1])
+
+    # now, two cases: either we have placed all required bosses, or we have at least one left and we ran out of unrestricted slots
+    # once we handle all remaining required bosses, then we have no restrictions on placement, so do that first
+    if remaining_required_bosses:
+        required_boss_remaining_pairs = [t for t in slot_boss_pairing_values if t[0] in remaining_boss_slots and t[1] in remaining_required_bosses]
+        while required_boss_remaining_pairs:
+            pair_to_assign = required_boss_remaining_pairs[-1]
+            if boss_mode == 'easy':
+                pairs_with_boss = [t for t in required_boss_remaining_pairs if t[1] == pair_to_assign[1]]
+                pair_to_assign = pairs_with_boss[0]
+            assignment[pair_to_assign[0]] = pair_to_assign[1]
+            required_boss_remaining_pairs = [t for t in required_boss_remaining_pairs if t[0] != pair_to_assign[0] and t[1] != pair_to_assign[1]]
+            remaining_boss_slots.remove(pair_to_assign[0])
+
+    # all remaining bosses are not required; if we've run out of slots, then all that's left are removed slots/bosses not in the seed
+    remaining_pairs = [t for t in slot_boss_pairing_values if t[0] in remaining_boss_slots and t[1] not in required_bosses]
+    # special case: on Beasy, we tend to end up with KQ Eblan/a weak boss *excluded* if we don't intentionally remove a harder boss first. 
+    while remaining_pairs:
+        pair_to_assign = remaining_pairs[-1]
+        if boss_mode == 'easy':
+            pairs_with_boss = [t for t in remaining_pairs if t[1] == pair_to_assign[1]]
+            pair_to_assign = pairs_with_boss[0]
+        assignment[pair_to_assign[0]] = pair_to_assign[1]
+        remaining_pairs = [t for t in remaining_pairs if t[0] != pair_to_assign[0] and t[1] != pair_to_assign[1]]        
+
+    if zone_removed_slots:
+        # it doesn't matter how these slots are assigned; just do it randomly
+        # on Beasy, we've pre-assigned the leftover_bosses; on Bcruel, get the unused ones
+        if not leftover_bosses:
+            leftover_bosses = [b for b in bosses if b not in assignment.values()]
+        # print("Leftover bosses in this zone:")
+        # print(leftover_bosses)
+        for i,s in enumerate(zone_removed_slots):
+            assignment[s] = leftover_bosses[i]
+
+    return assignment
+
 QUEST_REWARD_CURVES = {
     'Ungated_Quest' : [
         RewardSlot.starting_item,
@@ -428,11 +877,11 @@ def apply(env):
     #  3 - remaining slots
 
     # item tiers:
-    #  0 - items that cannot be in MIABs under any circumstances
+    #  0 - items that cannot be in MIABs under any circumstances ... which nothing uses now, probably.
     #  1 - progression items
     #  2 - non-progression key items
     #  3 - good non-progression items
-    #  4 - less good non-progression items
+    #  4 - less good non-progression items ... which nothing uses.
 
     keyitem_assigner.item_tier(0).set_max_slot_bucket(0)
     keyitem_assigner.item_tier(1).set_max_slot_bucket(1)
@@ -500,7 +949,7 @@ def apply(env):
 
     for item in env.meta.get('objective_required_key_items', []):
         reward = KeyItemReward(item)
-        for item_tier in range(2, 5):
+        for item_tier in range(2, 4):
             if reward in keyitem_assigner.item_tier(item_tier):
                 keyitem_assigner.item_tier(item_tier).remove(reward)
                 keyitem_assigner.item_tier(1).append(reward)
@@ -508,14 +957,17 @@ def apply(env):
 
     keyitem_capable_fight_slots = []
     keyitem_incapable_fight_slots = []
+    moon_fight_slots_available = False
 
     if env.options.flags.has('key_items_in_summon_quests'):
         keyitem_capable_fight_slots.extend(SUMMON_QUEST_SLOTS)
+        moon_fight_slots_available = True
     else:
         keyitem_incapable_fight_slots.extend(SUMMON_QUEST_SLOTS)
 
     if env.options.flags.has('key_items_in_moon_bosses'):
         keyitem_capable_fight_slots.extend(MOON_BOSS_SLOTS)
+        moon_fight_slots_available = True
     else:
         keyitem_incapable_fight_slots.extend(MOON_BOSS_SLOTS)
 
@@ -587,8 +1039,25 @@ def apply(env):
 
             if 'all' in miab_flags or 'standard' in miab_flags or len(miab_flags) != 1:
                 env.rnd.shuffle(good_miabs)
-                bad_miabs.extend(good_miabs[:3])
-                good_miabs = good_miabs[3:]
+                if env.options.flags.has('key_items_unsafer') and not moon_fight_slots_available:
+                    def ensure_moon(miab_list):
+                        ensured = False
+                        for slot in miab_list:
+                            if 'moon?' in CHEST_ITEM_SLOTS[slot]:
+                                if (slot == RewardSlot.giant_chest and env.options.flags.has('vanilla_giant')
+                                    and not env.options.flags.has_any('bosses_unsafe', 'vanilla_bosses')):
+                                    continue
+                                else:
+                                    ensured = True
+                                    break
+                        return ensured
+                    while not ensure_moon(good_miabs[3:]):
+                        env.rnd.shuffle(good_miabs)
+                    bad_miabs.extend(good_miabs[:3])
+                    good_miabs = good_miabs[3:]
+                else:
+                    bad_miabs.extend(good_miabs[:3])
+                    good_miabs = good_miabs[3:]
 
         else:
             for group in good_miab_groups:
@@ -623,9 +1092,6 @@ def apply(env):
                                                                                   + drill_description_row3 
                                                                                   + '[$00][$fa]                            [$fb][$00]')
 
-    assignable_boss_slots = BOSS_SLOTS.copy()
-    bosses = list(BOSSES)
-
     if env.options.flags.has('key_items_force_magma'):
         prevent_hook_seed = True
     elif not (env.options.flags.has_any('key_items_in_summon_quests', 'key_items_in_moon_bosses') or miab_flags) and not forced_hook_route:
@@ -634,8 +1100,33 @@ def apply(env):
         prevent_hook_seed = False
 
     # need to possibly modify HOOK_UNDERGROUND_BRANCH in case the KQ Eblan slot isn't fought
-    if env.options.flags.has('no_kq_eblan_slot'):
+    if env.options.flags.has('no_kingqueen_slot'):
         HOOK_UNDERGROUND_BRANCH.remove('kingqueen_slot')
+
+    # set up boss assignment parameters
+    removed_boss_slots = set()
+    if env.options.flags.has('no_officer_slot'):
+        removed_boss_slots.add('officer_slot')
+    if env.options.flags.has('no_kingqueen_slot'):
+        removed_boss_slots.add('kingqueen_slot')
+    restricted_boss_slots = set()
+    if env.options.flags.has('bosses_no_required_at_summon'):
+        restricted_boss_slots.update({'asura_slot', 'leviatan_slot', 'odin_slot', 'bahamut_slot'})
+    if env.options.flags.has('bosses_no_required_on_moon'):
+        restricted_boss_slots.update({'bahamut_slot', 'paledim_slot', 'wyvern_slot', 'plague_slot', 'dlunar_slot', 'ogopogo_slot'})
+    if env.options.flags.has('bosses_no_required_in_zot'):
+        restricted_boss_slots.update({'magus_slot', 'valvalis_slot'})
+    if env.options.flags.has('bosses_no_required_on_hook'):
+        restricted_boss_slots.update({'kingqueen_slot', 'rubicant_slot'})
+    if env.options.flags.has('bosses_no_required_in_giant'):
+        restricted_boss_slots.update({'elements_slot', 'cpu_slot'})
+    if env.options.flags.has('bosses_no_required_in_sealedcave'):
+        restricted_boss_slots.update({'evilwall_slot'})
+    if env.options.flags.has('bosses_no_required_at_package'):
+        restricted_boss_slots.update({'officer_slot'})
+    objective_bosses_and_maybe_dmist = env.meta['objective_required_bosses']
+    if env.options.flags.has('no_free_key_item'):
+        objective_bosses_and_maybe_dmist.add('dmist')    
 
     # perform assignment
     attempts = 0
@@ -643,6 +1134,51 @@ def apply(env):
     while not found_valid_assignment and attempts < MAX_RANDOMIZATION_ATTEMPTS:
         boss_assignment = {}
         rewards_assignment = RewardsAssignment()
+        boss_stats_slots = {}
+
+        # for restricted boss shuffle, define lists of zones; if no restriction, then it's just one list!
+        # need to redo every time because bosses_by_zone's lists get modified
+        if env.options.flags.has('bosses_within_zones'):
+            slots_by_zone = {}
+            bosses_by_zone = {}
+            for zone in BOSS_LOCATION_ZONES:
+                slots_by_zone[zone] = BOSS_LOCATION_ZONES[zone]
+                bosses_by_zone[zone] = [s[:-5] for s in slots_by_zone[zone]]
+            bosses_by_zone['early_game'].append('waterhag')
+            # for potential Beasy calculations later, ID the boss that doesn't correspond to a slot
+            extra_boss = 'waterhag'
+            # special case handling for bosses without slots (e.g. Waterhag, or Officer/KQ Eblan under Bremove);
+            # to help the randomizer succeed in randomizing bosses, carve out subsets of bosses to use
+            # (normally it's not that hard, because all the bosses are shuffled together)
+            # notes: - early_game is 10-11 spots for 12 bosses, so *if* it's Knofree (normal) *and* Omode:fiends *and* Bremove:officer_slot *and*
+            # all 8 specified objective bosses are from this zone, then we need to shuffle one of the required bosses to a different zone.
+            # if summon_darkness is all restricted, then shift to gated_blue_planet, otherwise it doesn't matter. If Waterhag is required, move
+            # Waterhag, otherwise pick one at random (and Waterhag will not be placed).
+            # - gated_blue_planet is 11-12 spots for 12 bosses, so *if* it's Omode:fiends *and* all 8 objective bosses are from this zone,
+            # then we're still fine.
+            # - summon_darkness is 11 spots for 11 bosses, only one is a fiend; no special cases are required.
+            # print(objective_bosses_and_maybe_dmist)
+            # print(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist))
+            if (env.options.flags.has('no_free_key_item') and env.options.flags.has('Omode:fiends') and env.options.flags.has('no_officer_slot')
+                and len(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist)) > 10):
+                # note that this can only happen if D.Mist is *not* an objective-required boss! if it doubles, then no big deal.
+                if 'waterhag' in objective_bosses_and_maybe_dmist:
+                    boss_to_move = 'waterhag'
+                else:
+                    boss_to_move = env.rnd.choice(list(set(bosses_by_zone['early_game']).intersection(objective_bosses_and_maybe_dmist)))
+                    extra_boss = boss_to_move
+                    # print(boss_to_move)
+                bosses_by_zone['early_game'].remove(boss_to_move)
+                if not set(slots_by_zone['summon_darkness']).difference(restricted_boss_slots):
+                    # if every boss slot in the summon_darkness zone is restricted, put the shifting boss in the gated_blue_planet zone
+                    # (which cannot only have restricted slots)
+                    bosses_by_zone['gated_blue_planet'].append(boss_to_move)
+                else:
+                    bosses_by_zone[env.rnd.choice(['gated_blue_planet','summon_darkness'])].append(boss_to_move)
+            # print(bosses_by_zone)
+        else:
+            slots_by_zone = {'all' : list(BOSS_SLOTS)}
+            bosses_by_zone = {'all' : BOSSES.copy()}     
 
         # Assume no gated objective by default
         rewards_assignment[RewardSlot.gated_objective] = EmptyReward()
@@ -686,41 +1222,149 @@ def apply(env):
             keyitem_assignment, remaining_slots, remaining_items = keyitem_assigner.assign(env.rnd)
             rewards_assignment.update(keyitem_assignment)
 
-        # assign bosses
-        if not env.options.flags.has('bosses_vanilla'):
-            env.rnd.shuffle(bosses)
-            for i,k in enumerate(assignable_boss_slots):
-                boss_assignment[k] = bosses[i]
-
-            if 'boss' in env.options.test_settings:
-                for force_slot in env.options.test_settings['boss']:
-                    force_boss = env.options.test_settings['boss'][force_slot]
-                    replaced_boss = boss_assignment[force_slot]
-                    if force_boss != replaced_boss:
-                        for k in boss_assignment:
-                            if boss_assignment[k] == force_boss:
-                                boss_assignment[k] = replaced_boss
-                                break
-                        boss_assignment[force_slot] = force_boss
-
+        # shuffle boss slot stats; under Bremove, some slots might be unused, and that's fine
+        # need to shuffle slots before assigning bosses for score-dependent assignments
+        if env.options.flags.has('boss_slot_shuffle'):
+            if env.options.flags.has('bosses_unsafe'):
+                BOSS_SLOT_SHUFFLE_GROUPS['underworld'].remove('odin_slot')
+                BOSS_SLOT_SHUFFLE_GROUPS['gated_overworld'].append('odin_slot')
+            for group in BOSS_SLOT_SHUFFLE_GROUPS:
+                shuffled_slots_in_group = BOSS_SLOT_SHUFFLE_GROUPS[group].copy()
+                env.rnd.shuffle(shuffled_slots_in_group)
+                for i, slot in enumerate(BOSS_SLOT_SHUFFLE_GROUPS[group]):
+                    # key: visible slot, value: the new stats
+                    boss_stats_slots[slot] = shuffled_slots_in_group[i]
         else:
-            # vanilla assignment
+            for slot in BOSS_SLOTS:
+                boss_stats_slots[slot] = slot
+        env.meta['boss_stats_slots'] = boss_stats_slots
+
+        # assign bosses
+        bosses_in_restricted_slots = set()
+        bosses_in_removed_slots = set()
+        if env.options.flags.has('bosses_vanilla'):
+            # vanilla assignment; note that Bzones cannot be on, so use 'all'
             used_bosses = set()
-            for k in assignable_boss_slots:
+            for k in slots_by_zone['all']:
                 boss = k.replace('_slot', '')
                 boss_assignment[k] = boss
-                used_bosses.add(boss)
+                if not k in removed_boss_slots:
+                    used_bosses.add(boss)
+                    if k in restricted_boss_slots:
+                        bosses_in_restricted_slots.add(boss)
+                else:
+                    bosses_in_removed_slots.add(boss)
 
             if not set(env.meta['objective_required_bosses']).issubset(used_bosses):
                 raise Exception("Objective required boss is not present in vanilla boss assignment.")
 
+        elif env.options.flags.has('bosses_standard'):
+            for zone in slots_by_zone:
+                temp_boss_assignment = _get_standard_boss_shuffle(env, slots_by_zone[zone], bosses_by_zone[zone], 
+                                                                  removed_boss_slots, restricted_boss_slots, objective_bosses_and_maybe_dmist)
+                for s in temp_boss_assignment:
+                    boss_assignment[s] = temp_boss_assignment[s]
+            for s in removed_boss_slots:
+                bosses_in_removed_slots.add(boss_assignment[s])
+            for s in restricted_boss_slots:
+                bosses_in_restricted_slots.add(boss_assignment[s])
+
+        else:
+            # score-dependent assignment; set up all scoring parameters
+            scoring_parameters = _set_scoring_parameters(env)
+            # modify slot-independent weights according to flag info
+            stats_weights = _set_stats_weights(scoring_parameters)
+            # pull the correct slot stats ranks
+            if env.options.flags.has_any('japanese_bosses', 'easy_type_bosses'):
+                slot_rankings = (BOSS_SLOT_STATS_RANKINGS_J if env.options.flags.has('japanese_bosses') else BOSS_SLOT_STATS_RANKINGS_ET)
+            else:
+                slot_rankings = BOSS_SLOT_STATS_RANKINGS
+
+            if env.options.flags.has_any('bosses_pro', 'bosses_friendly'):
+                for zone in slots_by_zone:
+                    # obtain a standard shuffle, then make a number of swaps, checking to ensure difficulty goes up or down
+                    temp_boss_assignment = _get_standard_boss_shuffle(env, slots_by_zone[zone], bosses_by_zone[zone], 
+                                                                    removed_boss_slots, restricted_boss_slots, objective_bosses_and_maybe_dmist)
+                    # print(temp_boss_assignment)
+                    slot_lookup = {}
+                    for s in temp_boss_assignment:
+                        slot_lookup[temp_boss_assignment[s]] = s
+                    for b in [b for b in bosses_by_zone[zone] if b not in temp_boss_assignment.values() ]:
+                        slot_lookup[b] = 'none'
+                    for _ in range(NUM_SWAPS // len(slots_by_zone)):
+                        _try_allowed_boss_swap(env, temp_boss_assignment, slot_lookup, bosses_by_zone[zone], boss_stats_slots, 
+                                               slot_rankings, stats_weights, scoring_parameters, 
+                                               removed_boss_slots, restricted_boss_slots, objective_bosses_and_maybe_dmist, 
+                                               filter=('pro' if env.options.flags.has_any('bosses_pro') else 'friendly'))
+                    for s in temp_boss_assignment:
+                        boss_assignment[s] = temp_boss_assignment[s]
+
+            elif env.options.flags.has_any('bosses_cruel', 'bosses_easy'):
+                # need to handle placing objective bosses in a way that isn't too predictable;
+                # possibly just placing them first but skipping a random number of slots to simulate not placing them first
+                # also, on Beasy we need to pre-cull a "hard" boss to avoid having a boss like KQ always removed
+                unused_bosses = {}
+                for zone in bosses_by_zone:
+                    unused_bosses[zone] = []
+                if env.options.flags.has('bosses_easy'):
+                    if len(bosses_by_zone) > 1:
+                        # on Bzones, we remove bosses within the zones.
+                        # first, no matter which zone the extra_boss (default Waterhag) is in, a boss from that zone is being removed
+                        # then, for each Bremove flag, remove one boss from the appropriate zone
+                        for zone in bosses_by_zone:
+                            removable_bosses = [h for h in BEASY_DIFFICULTY if h not in objective_bosses_and_maybe_dmist and h in bosses_by_zone[zone]]
+                            def remove_one_boss(env, removable_bosses, zone_bosses, unused_zone_bosses):
+                                for b in removable_bosses:
+                                    if env.rnd.random() < 0.3 or b == removable_bosses[-1]:
+                                        zone_bosses.remove(b)
+                                        unused_zone_bosses.append(b)
+                                        break
+                                removable_bosses = [h for h in removable_bosses if h not in unused_zone_bosses]
+                            if extra_boss in bosses_by_zone[zone]:
+                                remove_one_boss(env, removable_bosses, bosses_by_zone[zone], unused_bosses[zone])
+                            if 'officer_slot' in removed_boss_slots and zone == 'early_game':
+                                remove_one_boss(env, removable_bosses, bosses_by_zone[zone], unused_bosses[zone])
+                            if 'kingqueen_slot' in removed_boss_slots and zone == 'gated_blue_planet':
+                                remove_one_boss(env, removable_bosses, bosses_by_zone[zone], unused_bosses[zone])
+                    else:
+                        num_bosses_to_remove = 1 + len(removed_boss_slots)
+                        removable_bosses = [h for h in BEASY_DIFFICULTY if h not in objective_bosses_and_maybe_dmist]
+                        for b in removable_bosses:
+                            if env.rnd.random() < 0.3:
+                                bosses_by_zone['all'].remove(b)
+                                unused_bosses['all'].append(b)
+                                num_bosses_to_remove -= 1
+                            elif b == removable_bosses[-num_bosses_to_remove]:
+                                # if unlucky, we can get to the end of the list without removing enough bosses,
+                                # so just remove the last ones
+                                unused_bosses['all'].extend(removable_bosses[-num_bosses_to_remove:])
+                                bosses_by_zone['all'] = bosses_by_zone['all'][:-num_bosses_to_remove]
+                                num_bosses_to_remove = 0
+                            if not num_bosses_to_remove:
+                                break
+
+                for zone in slots_by_zone:
+                    temp_boss_assignment = _get_scored_placement(env, slots_by_zone[zone], boss_stats_slots, bosses_by_zone[zone], 
+                                                                    slot_rankings, stats_weights, scoring_parameters, unused_bosses[zone],
+                                                                    removed_boss_slots, restricted_boss_slots, objective_bosses_and_maybe_dmist,
+                                                                    boss_mode=('cruel' if env.options.flags.has('bosses_cruel') else 'easy'))
+                    for s in temp_boss_assignment:
+                        boss_assignment[s] = temp_boss_assignment[s]
+
+        # vanilla assignment has already updated these sets, but the other assignments haven't
+        if not env.options.flags.has('bosses_vanilla'):   
+            for s in removed_boss_slots:
+                bosses_in_removed_slots.add(boss_assignment[s])
+            for s in restricted_boss_slots:
+                bosses_in_restricted_slots.add(boss_assignment[s])
+
         if DEBUG:
             print('assignment {}:'.format(attempts))
             for k in rewards_assignment:
-                print('  {} <- {}'.format(str(k), rewards_assignment[k]))
+                print('  {} <- {}'.format(k.name, rewards_assignment[k]))
             for k in boss_assignment:
                 print('  {} <- {}'.format(k, boss_assignment[k]))
-            print('remaining slots: {' + '\n'.join([str(s) for s in remaining_slots]) + '}')
+            print('remaining slots: {' + '\n'.join([s.name for s in remaining_slots]) + '}')
 
         # build dependency checker
         checker = dep_checker.DepChecker()
@@ -779,7 +1423,7 @@ def apply(env):
             add_branch_with_substitutions(*src_branch, rewards_assignment[slot].item)
 
         for slot in boss_assignment:        
-            add_branch_with_substitutions(*assignable_boss_slots[slot], boss_assignment[slot])
+            add_branch_with_substitutions(*BOSS_SLOTS[slot], boss_assignment[slot])
 
         checker.resolve()
 
@@ -791,9 +1435,6 @@ def apply(env):
         if env.options.flags.has('key_items_vanilla'):
             if '#item.Crystal' in tests:
                 tests.remove('#item.Crystal')
-
-        if env.options.flags.has('no_free_key_item'):
-            tests.append('dmist')
 
         if env.options.flags.has('key_item_from_pink_tail'):
             tests.append('#item.Pink')
@@ -819,6 +1460,7 @@ def apply(env):
             if not env.options.flags.has('bosses_vanilla') and not env.options.flags.has('bosses_unsafe'):
                 # must be able to access underground without encountering, golbez, wyvern, valvalis or odin replacement
                 # (or Dark Cecil in NFL2)
+                # ... or having to go through the Giant bosses, on -vanilla:giant
                 mean_bosses = ['golbez', 'wyvern', 'valvalis', boss_assignment['odin_slot']]
 
                 if env.options.flags.has('no_free_bosses') and 'mirrorcecil' not in mean_bosses:
@@ -830,12 +1472,35 @@ def apply(env):
                 if env.options.flags.has('no_free_key_item') and boss_assignment['guard_slot'] == 'dmist' and boss_assignment['karate_slot'] in mean_bosses:
                     mean_bosses.append('dmist')
 
+                # you should not have to go through the Giant to get your underground access from Last Arm (or D.Mist, obviously)
+                # ... but, vanilla Elements and CPU are exploitable, like vanilla Odin is.
+                if env.options.flags.has('vanilla_giant'):
+                    mean_bosses.extend([boss_assignment['elements_slot'], boss_assignment['cpu_slot']])
+
                 underground_path_disallowed.extend(mean_bosses)
 
             if not env.options.flags.has('key_items_vanilla') and not unsafe:
                 # must be able to access underground without accessing moon
                 underground_path_disallowed.append('moon')
-            
+
+            if env.options.flags.has('key_items_force_magma'):
+                # bypass the prevent_hook_route code to directly rule out D.Mist at Rubicant,
+                # so that not-Kforce:magma seeds can have uncertainty (and memes)
+                underground_path_disallowed.append(boss_assignment['rubicant_slot'])
+
+            if prevent_hook_seed:
+                # you probably also shouldn't need to beat the boss with Rubi's stats;
+                # we'll ensure this is the case whenever the Magma Key is ensured available
+                if env.options.flags.has('boss_slot_shuffle'):
+                    rubi_stats_slot = None
+                    for slot in boss_stats_slots:
+                        if boss_stats_slots[slot] == 'rubicant_slot':
+                            rubi_stats_slot = slot
+                            break
+                    if (not (env.options.flags.has('no_kq_eblan_slot') and slot == 'kingqueen_slot')
+                        and not (env.options.flags.has('no_officer_slot') and slot == 'officer_slot')):
+                        underground_path_disallowed.append(boss_assignment[rubi_stats_slot])
+
             if underground_path_disallowed:
                 tests.append(['underground', underground_path_disallowed])
 
@@ -858,52 +1523,10 @@ def apply(env):
             if not unsafe and env.options.flags.has('key_items_unreliable_darkness') and (env.rnd.random() < 0.25):
                 tests.append(['#item.DarkCrystal', [], 'underground'])
 
-        # must be able to encounter all bosses required of forced objective flags
-        required_bosses = env.meta.get('objective_required_bosses', [])
-        tests.extend(required_bosses)
-        if env.options.flags.has('no_free_key_item'):
-            required_bosses.add('dmist')
-
-        banned_required_boss_slots = set() 
-        if env.options.flags.has('bosses_no_required_at_summon'):
-            banned_required_boss_slots.update([boss_assignment['asura_slot'],
-                                               boss_assignment['leviatan_slot'],
-                                               boss_assignment['odin_slot'],
-                                               boss_assignment['bahamut_slot']])
-        if env.options.flags.has('bosses_no_required_on_moon'):
-            banned_required_boss_slots.update([boss_assignment['bahamut_slot'],
-                                               boss_assignment['paledim_slot'],
-                                               boss_assignment['wyvern_slot'],
-                                               boss_assignment['plague_slot'],
-                                               boss_assignment['dlunar_slot'],
-                                               boss_assignment['ogopogo_slot']])
-        if env.options.flags.has('bosses_no_required_in_zot'):
-            banned_required_boss_slots.update([boss_assignment['magus_slot'],
-                                               boss_assignment['valvalis_slot']])
-        if env.options.flags.has('bosses_no_required_on_hook'):
-            banned_required_boss_slots.update([boss_assignment['kingqueen_slot'],
-                                               boss_assignment['rubicant_slot']])
-        if env.options.flags.has('bosses_no_required_in_giant'):
-            banned_required_boss_slots.update([boss_assignment['elements_slot'],
-                                               boss_assignment['cpu_slot']])
-        if env.options.flags.has('bosses_no_required_in_sealedcave'):
-            banned_required_boss_slots.update([boss_assignment['evilwall_slot']])
-        if env.options.flags.has('bosses_no_required_at_package'):
-            banned_required_boss_slots.update([boss_assignment['officer_slot']])
+        # must be able to encounter all bosses required of forced objective flags (and possibly d.mist)
+        tests.extend(list(objective_bosses_and_maybe_dmist))
 
         found_valid_assignment = True
-
-        if banned_required_boss_slots:
-            for required_boss in required_bosses:
-                if required_boss in banned_required_boss_slots:
-                    if DEBUG:
-                        print(f'Boss {required_boss} is in a restricted spot')
-                    found_valid_assignment = False
-                    break
-
-        if not found_valid_assignment:
-            attempts += 1
-            continue
 
         for test in tests:
             if type(test) is list:
@@ -919,10 +1542,15 @@ def apply(env):
             result, path = checker.check(qualification, without=without, force=force)
             if not result:
                 # item is unreachable, assignment fails
-                if DEBUG:
-                    print('  FAILED: no path to {}'.format(qualification))
+                if DEBUG > 1:
+                    br = None
+                    for b in checker._branches:
+                        if b[-1] == str(qualification):
+                            br = b
+                            break
+                    print(f"  FAILED: no path to {qualification}"  + (f", forcing {force}" if force else "") + (f", without {without}" if without else "") + f" ({br}" + ")")
                 found_valid_assignment = False
-                break
+                break            
             else:
                 if DEBUG:
                     print('  {} : {}'.format(qualification, ', '.join(path)))
@@ -982,7 +1610,10 @@ def apply(env):
                         rewards_assignment[slot] = default_item_reward
     else:
         # revised Rivers rando
-        curves_dbview = databases.get_tvanillaish_dbview() if (env.options.flags.has('treasure_vanillaish')) else databases.get_curves_dbview()
+        if env.options.flags.has('treasure_vanillaish'):
+            curves_dbview = databases.get_tvanillaish_dbview() if env.options.flags.has('treasure_no_j_items') else databases.get_tvanillaish_j_dbview()
+        else:
+            curves_dbview = databases.get_buffed_curves_dbview() if env.options.flags.has('treasure_buffed_pro_weights') else databases.get_curves_dbview()
 
         unassigned_quest_slots = [slot for slot in (list(ITEM_SLOTS) + list(SUMMON_QUEST_SLOTS) + list(MOON_BOSS_SLOTS)) if slot not in rewards_assignment]
         if env.options.flags.has('no_free_key_item_dwarf'):
@@ -1000,9 +1631,17 @@ def apply(env):
         if not env.options.flags.has('key_item_from_pink_tail'):
             unassigned_quest_slots.remove(RewardSlot.pink_trade_item)
 
+        # for later, find items by tier (to see if there are any left)
+        items_by_tier = {}
+        for i in range(1,9):
+            items_by_tier[i] = items_dbview.find_all(lambda it: it.tier == i)
+
         if env.options.flags.has('treasure_standard') or env.options.flags.has('treasure_wild'):
-            reward_tiers = [6, 7, 8]
-            src_pool = items_dbview.find_all(lambda it: it.tier in reward_tiers)
+            low_tier = 6
+            src_pool = items_dbview.find_all(lambda it: it.tier in range(low_tier, 9))
+            while not src_pool:
+                low_tier -= 1
+                src_pool = items_dbview.find_all(lambda it: it.tier in range(low_tier, 9))
             pool = list(src_pool)
             while len(pool) < len(unassigned_quest_slots):
                 pool.append(env.rnd.choice(src_pool))
@@ -1021,6 +1660,31 @@ def apply(env):
                     weights = util.get_boosted_weights(weights, 'semipro')
                 elif env.options.flags.has('treasure_standard_weighted'):
                     weights = util.get_boosted_weights(weights, 'standardish')
+
+                # as written, quest rewards have their tiers pre-chosen, so if we want to avoid giving out many Cure1s,
+                # we need to remove the weights for empty tiers, and then potentially assign a default tier if no weights are left
+                # (this change brings the reward assignment more in line with vanilla FE 4.6/5.0... and also removes the need
+                # for some of the sanity checking a bit later, but here we are)
+                avg_curve_tier = sum([i*weights[i] for i in weights]) // sum([weights[i] for i in weights])
+                for i in range(1,9):
+                    if not items_by_tier[i]:
+                        weights[i] = 0
+                empty_weights = True
+                for i in range(1,9):
+                    if weights[i]:
+                        empty_weights = False
+                        break
+                if empty_weights:
+                    a = avg_curve_tier
+                    b = avg_curve_tier
+                    while empty_weights:
+                        for i in range(a,b+1):
+                            if items_by_tier[i]:
+                                weights[i] = 1
+                                empty_weights = False
+                        if empty_weights:
+                            a -= 1
+                            b += 1
 
                 quest_distribution = util.Distribution(weights)
                 tier_counts = quest_distribution.choose_many(env.rnd, len(unassigned_quest_slots_for_curve))
@@ -1072,7 +1736,11 @@ def apply(env):
             # exclude HrGlass1 and HrGlass3 from MIAB items if HrGlass2 is excluded
             min_miab_tier = 5
             max_miab_tier = 98 if env.options.flags.has('treasure_standard') else 99
+            # future-proofing the selection of src_pool items in case items are restricted to where tier 5 is impossible
             src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
+            while not src_pool:
+                min_miab_tier -= 1
+                src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
             pool = list(src_pool)
             while len(pool) < len(unassigned_chest_slots):
                 pool.append(env.rnd.choice(src_pool))
@@ -1095,6 +1763,28 @@ def apply(env):
                     weights = util.get_boosted_weights(weights, 'semipro')
                 elif env.options.flags.has('treasure_standard_weighted'):
                     weights = util.get_boosted_weights(weights, 'standardish')
+
+                # handle item restrictions per MIAB area, in the same way as for quests
+                avg_c_tier = sum([i*weights[i] for i in weights]) // sum([weights[i] for i in weights])
+                for i in range(1,9):
+                    if not items_by_tier[i]:
+                        weights[i] = 0
+                empty_weights = True
+                for i in range(1,9):
+                    if weights[i]:
+                        empty_weights = False
+                        break
+                if empty_weights:
+                    a = avg_c_tier
+                    b = avg_c_tier
+                    while empty_weights:
+                        for i in range(a,b+1):
+                            if items_by_tier[i]:
+                                weights[i] = 1
+                                empty_weights = False
+                        if empty_weights:
+                            a -= 1
+                            b += 1
 
                 miab_distributions[c.area[len("MIAB_"):]] = util.Distribution(weights)
 
@@ -1178,7 +1868,11 @@ def apply(env):
 
     if not env.options.flags.has('key_item_from_pink_tail'):
         if env.options.flags.has('no_adamants'):
-            items = items_dbview.find_all(lambda it: it.tier in [7, 8])
+            lbound = 7
+            items = items_dbview.find_all(lambda it: it.tier in range(lbound, 9))
+            while not items:
+                lbound -= 1
+                items = items_dbview.find_all(lambda it: it.tier in range(lbound, 9))
             pink_tail_item = env.rnd.choice(items)
             rewards_assignment[RewardSlot.pink_trade_item] = ItemReward(pink_tail_item.const)
         else:
@@ -1210,10 +1904,10 @@ def apply(env):
 
     if DEBUG:
         print('FINAL ASSIGNMENT:')
-        max_slot_length = max([len(str(s)) for s in combined_assignments])
+        max_slot_length = max([len((s.name if type(s) == RewardSlot else s)) for s in combined_assignments])
         format_str = '  {{:{}}} <- {{}}'.format(max_slot_length)
         for k in combined_assignments:
-            print(format_str.format(str(k), combined_assignments[k]))
+            print(format_str.format((k.name if type(k) == RewardSlot else k), combined_assignments[k]))
         print('ATTEMPTS: {}'.format(attempts))
 
         print('BREAKDOWN of gating key items:')
@@ -1264,7 +1958,7 @@ def apply(env):
             potential_key_item_slots.remove(RewardSlot.pink_trade_item)
         if miab_flags:
             potential_key_item_slots.extend(potential_miabs)
-    # put this information in env to facilitate -exp:kicheckbonus_num
+    # put this information in env to facilitate Xkicheckbonus:num
     env.meta['number_key_item_slots'] = len(potential_key_item_slots)
     env.add_binary(BusAddress(0x21dc00), [1 if s in potential_key_item_slots else 0 for s in range(RewardSlot.MAX_COUNT)], as_script=True)
     env.add_substitution('randomizer key item count', '{:02X}'.format(rewards_assignment.count_key_items()))
@@ -1274,10 +1968,15 @@ def apply(env):
     env.meta['available_bosses'] = set()
     for slot in BOSS_SLOTS:
         boss_objective_consts.append(f'#objective.boss_{boss_assignment[slot]}')
-        env.meta['available_bosses'].add(boss_assignment[slot])
+        if slot not in removed_boss_slots:
+            env.meta['available_bosses'].add(boss_assignment[slot])
     env.add_script('patch($21f860 bus) {\n' + '\n'.join(boss_objective_consts) + '\n}')
-    env.meta['banned_objective_bosses'] = banned_required_boss_slots
-    env.add_substitution('randomizer boss count', '{:02X}'.format(len(BOSS_SLOTS)))
+    env.meta['bosses_in_restricted_slots'] = bosses_in_restricted_slots
+    env.meta['unrestricted_non_objective_bosses'] = (
+        env.meta['available_bosses'].difference(env.meta['objective_required_bosses'].union(bosses_in_restricted_slots))
+    )
+    # if we are removing boss slots, then we don't necessarily have all 34 slots anymore
+    env.add_substitution('randomizer boss count', '{:02X}'.format(len(BOSS_SLOTS)-len(removed_boss_slots)))
 
     # remove golbez item delivery if not needed
     if (RewardSlot.fallen_golbez_item not in rewards_assignment):

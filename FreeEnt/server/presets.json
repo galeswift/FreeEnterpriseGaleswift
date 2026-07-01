@@ -1,48 +1,154 @@
 [
   {
-    "category": "Introductory",
+    "category": "Modern Introductory",
+    "presets" : [
+      {
+        "name": "My First Seed",
+        "flags": "Onone Kmain/force:magma Pshop Crelaxed Twild Swild Bstandard/whichburn Etoggle Hrandom Glife/backrow Fvanilla Aagnostic Zvanilla -kit:basic -spoon -vanilla:zot",
+        "description": "<p>New to Final Fantasy IV, or just new to Free Enterprise? Here's a good place to start.</p><p>Find great loot, hunt down the Crystal, and take on Zeromus! Check out the <a href='https://docs.google.com/document/d/1Volfq8L152kYLhKH4XFeO2HMZkEYTMKPY01Uc7Y_dEo/edit?tab=t.0' target='_blank'>Newbie Guide</a> for help.</p>"
+      },
+      {
+        "name": "Learning the Randomizer",
+        "flags": "O1:quest_forge/req:all/win:crystal Kmain Pkey Cstandard/abilities:j Twildish Sstandard Bstandard/whichburn Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -spoon -vanilla:zot",
+        "description": "<p>For players who are a little more familiar with Final Fantasy IV. Find the Legend Sword and Adamant Rock, and have Kokkol forge the Excalibur to earn your Crystal.</p>"
+      },
+      {
+        "name": "Intermediate",
+        "flags": "Orandom:5,quest/req:4/win:crystal Kmain/summon/moon Pkey Cstandard/abilities:j Twildish Sstandard Bstandard/whichburn Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -spoon -vanilla:zot",
+        "description": "<p>Once you're familiar with the basics, it's time to start questing! Now the Lunar Subterrane and Summon bosses can hold your key items too. Complete four out of five random quests to earn the Crystal.</p>"
+      },
+      {
+        "name": "Next Steps",
+        "flags": "O1:quest_forge/random:5,tough_quest/req:5/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/abilities:j/nodupes Tpro Sstandard Bstandard/whichburn Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -noadamants -spoon -vanilla:zot",
+        "description": "<p>Now's a good time to check out the other preset categories to start exploring the wide variety of flagsets available in FF4FE.</p><p>If you want a more advanced version of the above flagsets, here's a typical tournament-style flagset.</p>"
+      }    
+    ]
+  },
+  {
+    "category": "Classic Introductory",
     "presets" : [
       {
         "name": "Casual",
-        "flags": "Onone Kmain/force:magma Pshop Crelaxed Twild Swild Bstandard/whyburn Etoggle Gdupe/mp/warp/life/sylph/backrow/64 -spoon -vanilla:fusoya",
+        "flags": "Onone Kmain/force:magma Pshop Crelaxed Twild Swild Bstandard/whyburn Etoggle Hrandom Gdupe/mp/warp/life/sylph/backrow/64 Fvanilla Aagnostic Zvanilla -spoon -vanilla:zot",
         "description": "<p>Relaxed flags for a breezy/introductory playthrough of Free Enterprise.</p>"
       },
       {
         "name": "Intermediate",
-        "flags": "Onone Kmain Pshop Cstandard/j:abilities Twild Sstandard Bstandard/whyburn Etoggle Gdupe/mp/warp/life/sylph -spoon",
+        "flags": "Onone Kmain Pshop Cstandard/abilities:j Twild Sstandard Bstandard/whyburn Etoggle Hrandom Gdupe/mp/warp/life/sylph Fweighted Aagnostic Zvanilla -spoon -vanilla:zot",
         "description": "<p>For players with a few seeds under their belt, these flags move past the Casual preset by emphasizing treasure hunting and introducing some core FE concepts seen in common Free Enterprise play.</p>"
       },
       {
         "name": "Advanced",
-        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/maybe/j:abilities Tstandard Sstandard Bstandard Etoggle Glife/sylph -vanilla:agility",
+        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/maybe/abilities:j Tstandard Sstandard Bstandard Etoggle Hrandom Glife/sylph Fweighted Avanilla Zvanilla -vanilla:zot",
         "description": "<p>Flags for players interested in exploring competitive FE play.</p>"
       }    
     ]
   },
   {
-    "comment": "Ladder (current)",
-    "href": "https://EXTERNAL-LINK-TO-PRESETS-JSON"
+    "category": "Ladder Collection",
+    "presets": [
+      {
+        "name": "Ladder Standard",
+        "flags": "Orandom:7,tough_quest/req:6/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/j:abilities/nekkie Twildish Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -noadamants -spoon -vanilla:zot",
+        "description": "<p>A standard competitive FE flagset, updated from the previous season's standard increasing the objective count and guaranteeing that every character appears at least once.</p>"
+      },
+      {
+        "name": "Ladder Hard",
+        "flags": "O1:quest_forge/random:6,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:9/start:any/no:fusoya/j:abilities Tpro Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -spoon -smith:alt -vanilla:zot",
+        "description": "<p>A more difficult version of Ladder Standard where pro loot means you must invest more time to get more power. FuSoYa wants to be the star of the show, and will not accept any other role, which means if you don't see Fu as your starting character, he will not make an appearance. Without the wildish loot, the weight of Cmaybe can prove exceptionally challenging when an army of Tellahs and Edwards seek to join your party. Don't forget about D.Mist gating a key item! Good luck!</p>"
+      },
+      {
+        "name": "Supermarket Sweep",
+        "flags": "Orandom:4,tough_quest,boss/req:3/win:crystal Kmain Pshop Crelaxed/j:abilities Twild Swild/free/no:apples Bstandard/whyburn Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -spoon -vanilla:zot",
+        "description": "<p>The strongest equipment, items, and characters may be available right out the gate. Shops are free!</p>"
+      },
+      {
+        "name": "Fu in Wario Land",
+        "flags": "O1:quest_forge/2:quest_tradepink/3:quest_pass/win:crystal Kmain/miab/nofree Pkey Crelaxed/nofree/start:fusoya/j:abilities Twildish Sstandard/no:j Bstandard/nofree/alt:gauntlet Etoggle/noexp Hrandom Gwarp/life/sylph/backrow Fvanilla Aagnostic Zvanilla -kit:freedom -vanilla:zot,fusoya",
+        "description": "<p>Where does Fu go when he's banned from tournament play? Treasure hunting! He wants only the finest weapons, armor, and secret pathways home. However, the price you pay for this immense power is Bnofree, and no ability to grind random encounters, so be wary!</p>"
+      },
+      {
+        "name": "Omnidextrous",
+        "flags": "O2:quest_monsterking/4:quest_whitealtar/random:5,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:5/j:abilities/nekkie/nodupes Twild/sparse:80/maxtier:7 Spro Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -spoon -vanilla:zot -wacky:omnidextrous",
+        "description": "<p>Utilizing the Omnidextrous flag, any character can equip any weapon or piece of armor, and treasures are bumped up to accommodate. Characters, however, are at a premium, and shops are reduced a bit so make those treasures count!</p>"
+      },
+      {
+        "name": "Lali-Ho Redux",
+        "flags": "O1:quest_forge/2:quest_tradepink/3:quest_magnes/random:2,tough_quest/req:4/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:10/j:abilities/nekkie/bye Twildish/maxtier:6 Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Xnoboost Zvanilla -kit:basic -kit2:defense -noadamants -spoon -vanilla:zot,giant",
+        "description": "<p>Think Lali-Ho Swiss, but a little more generous for the beginner-to-intermediate race. Crelaxed and full sell prices ease things a bit. That being said, Giott is giving you his personal armor instead of letting you break the economy with jewelry. Oh, and it's quest objectives instead of boss/character hunts, just to mix things up.</p>"
+      },
+      {
+        "name": "Fabul Gauntlet Mark II",
+        "flags": "Orandom:5,tough_quest/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:7/j:abilities/nodupes/bye Tpro Spro/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -kit:basic -noadamants -vanilla:zot",
+        "description": "<p>The flagset from our 2020 spring event returns with a new twist: the objectives will always be tough quests. Complete all 5 to get the Crystal and defeat Zeromus. Don't forget about D.Mist!</p>"
+      },
+      {
+        "name": "Purple Moon",
+        "flags": "Orandom:8,boss/req:7/win:crystal Kmain/summon/miab/force:hook Pchests Crelaxed/noearned/distinct:7/start:any/no:cecil,fusoya/j:abilities/nekkie/nodupes/hero Twildish Sstandard Bstandard/alt:gauntlet/whichburn Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Ahero Zvanilla -kit:basic -noadamants -spoon -vanilla:zot,miabs",
+        "description": "<p>An offshoot of our ZZ5 flagsets, this flagset retains the boss hunt objectives from ZZ5 but incorporates monster-in-a-box (MIAB) chests and the Chero flag for a distinctly different take. Be sure to brush up on your vanilla monster chest locations!</p>"
+      },
+      {
+        "name": "Finders Keepers",
+        "flags": "Orandom:5,tough_quest/req:4/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/no:fusoya/j:abilities/bye/permajoin Tpro Scabins/free Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -vanilla:zot",
+        "description": "<p>The big nasty of Season 3. Shops give Cabins. Treasure is set to Tpro. Permajoin and Cbye are both on. Your one breather is the Warp glitch, but how long do you wait for a black mage to show up?</p>"
+      },
+      {
+        "name": "10/10 Would Race Again",
+        "flags": "O1:quest_magnes/2:quest_baroncastle/3:quest_zot/4:quest_sealedcave/5:quest_ribbonaltar/6:quest_cavebahamut/7:quest_dwarfcastle/8:quest_lowerbabil/random:2,tough_quest/req:all/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/start:any/no:cecil,fusoya/j:abilities/nodupes/party:4 Twildish Sstandard/no:j Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -kit:better -spoon -vanilla:zot",
+        "description": "<p>This flagset leverages tough quests and sets all those lovely checks that you hesitate to do into required objectives. Take a Giant grind if you must, but be wary: this ultra-high completion percentage may grant runners enough XP simply through completing the objectives.</p>"
+      },
+      {
+        "name": "Chero",
+        "flags": "O1:quest_forge/2:quest_toroiatreasury/random:2/req:all/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/no:fusoya/j:abilities/nekkie/hero Tpro Sstandard Bstandard/alt:gauntlet/whichburn Etoggle Hrandom Glife/sylph/backrow Fweighted Ahero Zvanilla -kit:freedom -kit2:random -noadamants -vanilla:zot",
+        "description": "<p>Hero challenge! Be wary of the solo Ordeals fight. Agility manipulating gear is a godsend.</p>"
+      },
+      {
+        "name": "Giant%",
+        "flags": "Omode:classicgiant/win:game Kmain/moon Pnone Cstandard Twild/no:j Scabins/free Bstandard/whichburn Etoggle/no:jdrops Hrandom Gdupe/mp/warp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -spoon -vanilla:zot",
+        "description": "<p>Fast-paced, low skill floor, high skill ceiling, and very unpredictable with only one KI required for go mode. Are you willing to dive into the Giant ASAP? Or power up a bit more first? ALL the glitch flags are on for this one (almost)! Don't forget Gwarp, and practice that Gmp and Gdupe!</p>"
+      },
+      {
+        "name": "Royal Moonster Mash",
+        "flags": "O1:quest_cavebahamut/2:quest_murasamealtar/3:quest_crystalaltar/4:quest_whitealtar/5:quest_ribbonaltar/6:quest_masamunealtar/7:quest_monsterqueen/8:quest_monsterking/req:6/win:game Kmain/moon/force:magma Pnone Crelaxed/noearned/distinct:7/j:spells,abilities/nekkie Twildish/maxtier:7/junk Spro/free/no:apples,sirens Bstandard/alt:gauntlet/whichburn Etoggle/noexp Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:mysidia -kit2:freedom -kit3:freedom -noadamants -spoon -smith:super -vanilla:zot",
+        "description": "<p>Zeromus is taking the day off on this vacation. Simply find your moon and underground access, and defeat 6 of the bosses to win the game! Do you try to go at a lower level in the name of speed, or grind a bit in the name of efficiency?</p>"
+      },
+      {
+        "name": "Falcon%",
+        "flags": "O1:quest_falcon/req:all/win:game Kmain/nofree/force:hook Pnone Cstandard/nofree/no:fusoya/j:abilities Tpro Sstandard/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -spoon -vanilla:zot",
+        "description": "<p>Test yourself in one of the most challenging early-game aspects of Free Enterprise: the dreaded Hook route! Gather as much strength as you can to be safe, or dive as soon as possible and hope for a couple easy bosses. The game ends when you launch the Falcon with the guaranteed overworld Hook.</p>"
+      },
+      {
+        "name": "Hop Til You Shop",
+        "flags": "O1:quest_murasamealtar/2:quest_crystalaltar/3:quest_whitealtar/4:quest_ribbonaltar/5:quest_masamunealtar/req:4/win:game Kmain/moon/unsafe Pkey Cstandard/nofree/distinct:5/j:abilities/nekkie Twildish/money Swild Bstandard/alt:gauntlet/whichburn Etoggle/noexp/no:jdrops Hrandom Gmp/warp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -kit2:money -kit3:money -spoon -vanilla:zot,miabs -pushbtojump",
+        "description": "<p>All the chests have money, and the shops are wild, so if you can name it, it's probably in a shop. Be smart with your purchases, your goal is to complete a Lunar run to finish the seed. Push B to Jump is enabled to open up the world as much as possible to allow you to get that Darkness Crystal as soon as you can, then sprint... (through space) to the moon!</p>"
+      },
+      {
+        "name": "Push B to Jump",
+        "flags": "O1:quest_forge/2:quest_tradepink/random:1,quest,char/req:all/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/j:abilities Twildish Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -kit2:miab -spoon -smith:super -vanilla:zot -pushbtojump",
+        "description": "<p>Push B to jump, whether in battle or out of battle. Short-circuit the maps, fear no Valvalis, and avoid most boss fights. Optimized routing pays off strongly.</p>"
+      }
+    ]
   },
   {
-    "header": "Fork Specific"
+    "header": "Fork-Specific"
   },
   {
-    "category": "All-Forked Cup",
+    "category": "All-Forked Cup (2025)",
     "presets": [
         {
             "name": "The Adamant Cup Experience (ACE)",
-            "description": "The first flagset of the All-Forked Cup",
-            "flags": "Omode:ki12/random:2,quest/random2:1,tough_quest/req:all/win:crystal Kmain/summon/moon/nofree:dwarf/unweighted Pkey Cstandard/nofree/restrict:cecil,fusoya/j:abilities/paladin/nekkie/party:4/treasure:free,unsafe Twildish Sprice:200/pricey:items/standard Bstandard/alt:gauntlet/whichbez Etoggle Glife/sylph/backrow -kit:better -smith:alt -fusoya:sequential_r -exp:objectivebonus25 -tweak:edwardheal"
+            "description": "The first flagset of the All-Forked Cup: inspired by the Adamant Cup group stage flags.",
+            "flags": "Omode:ki12/random:2,quest/random2:1,tough_quest/req:all/win:crystal Kmain/summon/moon/nofree:dwarf/unweighted Pkey Cstandard/nofree/restrict:cecil,fusoya/abilities:j/paladin/nekkie/party:4/treasure:free,unsafe Twildish Sstandard/price:200/pricey:items Bstandard/alt:gauntlet/whichbez Etoggle Hrandom Glife/sylph/backrow Fsequential:r Aagnostic Xobjectivebonus:25 Zvanilla -kit:better -smith:alt -vanilla:zot -tweak:edwardheal"
         },
           {
             "name": "Firebomb Fiesta (FBF)",
-            "description": "The second flagset of the All-Forked Cup",
-            "flags": "O1:quest_forge/2:quest_cavebahamut/3:quest_monsterking/4:quest_monsterqueen/5:quest_masamunealtar/random:3,tough_quest/req:6/win:game Kmain/miab:above/pink/nofree:package/force:magma Pnone Cstandard/nofree/distinct:7/start:not_tellah,not_fusoya/no:fusoya/restrict:cecil/j:abilities/nekkie/nodupes/hero Twildish/mintier:2/money Swild/always:damage_items/no:j Bstandard/nofree/unsafe/alt:gauntlet/whichburn/whichbez/woahdin Etoggle/noexp/nogp Gwarp/life/sylph/backrow -kit:dwarf -kit2:miab -kit3:basic -noadamants -nocursed -spoon -exp:kicheckbonus2 -tweak:edwardheal"
+            "description": "The second flagset of the All-Forked Cup: inspired by the Potion Party flagset from Eblan Elixir League.",
+            "flags": "O1:quest_forge/2:quest_cavebahamut/3:quest_monsterking/4:quest_monsterqueen/5:quest_masamunealtar/random:3,tough_quest/req:6/win:game Kmain/miab:above/pink/nofree:package/force:magma Pnone Cstandard/nofree/distinct:7/start:not_tellah,not_fusoya/no:fusoya/restrict:cecil/abilities:j/nekkie/nodupes/hero Twildish/mintier:2/money Swild/always:damage_items/no:j Bstandard/nofree/unsafe/alt:gauntlet/whichburn/whichbez/woahdin Etoggle/noexp/nogp Hrandom Gwarp/life/sylph/backrow Fweighted Ahero Xkicheckbonus:2 Zvanilla -kit:dwarf -kit2:miab -kit3:basic -noadamants -nocursed -spoon -vanilla:zot -tweak:edwardheal"
         },
         {
           "name": "Zemus Zone: Anthology (ZZA)",
-          "description": "The third flagset of the All-Forked Cup",
-          "flags": "O1:quest_forge/req:all/win:crystal Kmain/moon/pink/nofree/unweighted/start:spoon Pkey Crelaxed/nofree/distinct:8/thrift:3/j:abilities/nodupes/hero Tsemipro/playable/junk Swildish/no:vampires,damage_items Bstandard/restrict:giant,package/whichburn/whichbez Etoggle Glife/sylph/backrow/64 -kit:freedom -noadamants -fusoya:maybe -exp:maxlevelbonus -tweak:edwardheal"
+          "description": "The third flagset of the All-Forked Cup: inspired by the flags from the ZZ1 finals and ZZ2.",
+          "flags": "O1:quest_forge/req:all/win:crystal Kmain/moon/pink/nofree/unweighted/start:spoon Pkey Crelaxed/nofree/distinct:8/thrift:3/abilities:j/nodupes/hero Tsemipro/playable/junk Swildish/no:vampires,damage_items Bstandard/restrict:giant,package/whichburn/whichbez Etoggle Hrandom Glife/sylph/backrow/64 Fweighted/maybe Ahero Xmaxlevelbonus Zvanilla -kit:freedom -noadamants -vanilla:zot -tweak:edwardheal"
         }
     ]
   },
@@ -51,8 +157,8 @@
     "presets": [
         {
             "name": "Doorway To Tomorrow",
-            "description": "The flagset used for the Doorway to Tomorrow side tournament",
-            "flags": "Omode:ki11/req:all/win:crystal Kmain/summon/moon/miab:above,below Pshop Cstandard/nofree/start:not_tellah/j:abilities/thrift:4/hero Tstandard Swildish/no:sirens Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Glife/sylph/backrow -kit:basic -kit2:freedom -kit3:exit -noadamants -spoon -exp:nokeybonus,kicheckbonus5,maxlevelbonus -doorsrando:all"
+            "description": "The flagset used for the Doorway to Tomorrow side tournament in 2025.",
+            "flags": "Omode:ki11/req:all/win:crystal Kmain/summon/moon/miab:above,below Pshop Cstandard/nofree/start:not_tellah/thrift:4/abilities:j/hero Tstandard Swildish/no:sirens Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Hrandom Glife/sylph/backrow Fweighted Ahero Xnokeybonus/kicheckbonus:5/maxlevelbonus Zvanilla -kit:basic -kit2:freedom -kit3:exit -noadamants -spoon -vanilla:zot -doorsrando:all"
         }
     ]
   },
@@ -61,41 +167,56 @@
     "presets": [
         {
             "name": "Zeromus Rush",
-            "description": "Start in go mode, staring down Zeromus, without Edward or FuSoYa. This is more meant to test team building and execution when given a bunch of tools to do so, not execute the niche or semi-niche strats that pop up in Tpro and/or Spro settings (There may be seeds where those niche strats are optimal, but that’s more the structure of the randomizer than the intent of the flagset).",
-            "flags": "O1:quest_pass/win:crystal Kmain/summon/miab:above/start:pass Pkey Crelaxed/no:edward,fusoya/nekkie/permajoin Twildish/playable Swildish/no:apples Bstandard/unsafe/whybez/whichbez Etoggle Gmp/warp/life/sylph/backrow -kit:freedom -smith:super,playable -exp:kicheckbonus5,zonkbonus5,maxlevelbonus"
+            "description": "Start in go mode, staring down Zeromus, without Edward or FuSoYa. This is more meant to test team building and execution when given a bunch of tools to do so, not execute the niche or semi-niche strats that pop up in Tpro and/or Spro settings (There may be seeds where those niche strats are optimal, but that's more the structure of the randomizer than the intent of the flagset).",
+            "flags": "O1:quest_pass/req:all/win:crystal Kmain/summon/miab:above/start:pass Pkey Crelaxed/no:edward,fusoya/nekkie/permajoin Twildish/playable Swildish/no:apples Bstandard/unsafe/whybez/whichbez Etoggle Hrandom Gmp/warp/life/sylph/backrow Fweighted Aagnostic Xkicheckbonus:5/zonkbonus:5/maxlevelbonus Zvanilla -kit:freedom -smith:super,playable -vanilla:zot"
         },
         {
             "name": "MacGiant %",
-            "description": "The Highway to the Zemus Zone VI flagset encouraged players to learn and master the MacGiant grind, mostly by making all the better options untenable. Leaning into that a little bit more, MacGiant% makes the Giant of Bab-il (where a MacGiant grind is performed) a “hard required” objective - meaning you have to complete it to get the crystal regardless of which other objectives you complete. To make things coast a little more consistently, I’ve bumped up the quality of the starting gear (Cthrift:4 instead of Cnekkie), given you a single cursed ring and some exp scaling, and make the flagset require 5 of the 8 non-Giant objectives.",
-            "flags": "O1:quest_giant/2:quest_forge/random:7,tough_quest/req:6/hardreq:1/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/start:cecil,kain,rydia,edward,rosa,yang,palom,porom,cid,edge/no:tellah,fusoya/thrift:4/j:abilities/nodupes/hero Tpro/no:j/maxtier:7/mintier:3 Spro Bstandard/alt:gauntlet/whichburn/whichbez Etoggle/no:jdrops Glife/backrow -kit:freedom -kit2:cursed -noadamants -nocursed -spoon -exp:zonkbonus5 -vanilla:miabs,giant -tweak:edwardheal"
+            "description": "The Highway to the Zemus Zone VI flagset encouraged players to learn and master the MacGiant grind, mostly by making all the better options untenable. Leaning into that a little bit more, MacGiant% makes the Giant of Bab-il (where a MacGiant grind is performed) a hard required objective - meaning you have to complete it to get the crystal regardless of which other objectives you complete. To make things coast a little more consistently, I've bumped up the quality of the starting gear (Cthrift:4 instead of Cnekkie), given you a single Cursed Ring and some exp scaling, and make the flagset require 5 of the 8 non-Giant objectives.",
+            "flags": "O1:quest_giant/2:quest_forge/random:7,tough_quest/req:6/hardreq:1/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/start:cecil,kain,rydia,edward,rosa,yang,palom,porom,cid,edge/no:tellah,fusoya/thrift:4/abilities:j/nodupes/hero Tpro/no:j/maxtier:7/mintier:3 Spro Bstandard/alt:gauntlet/whichburn/whichbez Etoggle/no:jdrops Hrandom Glife/backrow Fweighted Ahero Xzonkbonus:5 Zvanilla -kit:freedom -kit2:cursed -noadamants -nocursed -spoon -vanilla:zot,miabs,giant -tweak:edwardheal"
         },
         {
             "name": "Shufflemarket Sweep",
-            "description": "The old Ladder classic, Supermarket Sweep, with jayp’s Doors Rando, and a couple other touches.",
-            "flags": "Orandom:4,quest,boss,char/req:3/win:crystal Kmain Pshop/chests Crelaxed/j:abilities/paladin/nekkie Tempty Swild/free/no:apples Bstandard/alt:gauntlet/whyburn/whybez/whichbez Etoggle Glife/sylph/backrow -spoon -smith:super -exp:crystalbonus -doorsrando:all"
+            "description": "The old Ladder classic, Supermarket Sweep, with jayp's Doors Rando, and a couple other touches.",
+            "flags": "Orandom:4,quest,boss,char/req:3/win:crystal Kmain Pshop/chests Crelaxed/abilities:j/paladin/nekkie Tempty Swild/free/no:apples Bstandard/alt:gauntlet/whyburn/whybez/whichbez Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Xcrystalbonus Zvanilla -spoon -smith:super -vanilla:zot -doorsrando:all"
         },
         {
             "name": "In a Rich Man's World",
             "description": "All the things I could do. If I had a little money.",
-            "flags": "Omode:ki10,goldhunter1000/random:8,boss/req:5/hardreq:1,2/win:game Kmain/summon/moon/nofree:dwarf/unsafer/force:hook Pnone Crelaxed/thrift:5/j:abilities Twildish/mintier:3 Swildish/mixed/unsafe Bstandard/unsafe/whichburn/whichbez/woahdin Etoggle Glife/sylph/backrow -kit:money -kit2:money -kit3:money -noadamants -spoon -wacky:payablegolbez -tweak:edwardheal"
-        },        
+            "flags": "Omode:ki10,goldhunter1000/random:8,boss/req:5/hardreq:1,2/win:game Kmain/summon/moon/nofree:dwarf/unsafer/force:hook Pnone Crelaxed/thrift:5/abilities:j Twildish/mintier:3 Swildish/mixed:shaken/unsafe Bstandard/unsafe/whichburn/whichbez/woahdin Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:money -kit2:money -kit3:money -noadamants -spoon -vanilla:zot -wacky:payablegolbez -tweak:edwardheal"
+        },
+        {
+            "name": "OmniPro",
+            "description": "A flagset featured in Possumorpheus and Y2Sky's Toilet Paper League Tournament Preparation League - presented as Possum DM'd it to me :)",
+            "flags": "O2:quest_monsterking/4:quest_whitealtar/random:5,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/nofree/distinct:7/no:yang/abilities:j/nekkie/nodupes Tpro Sstandard/sell:0 Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -kit2:money -kit3:money -spoon -vanilla:zot -wacky:omnidextrous"
+        },
         {
             "name": "To Dart a Bard",
-            "description": "",
-            "flags": "Orandom:3,quest/random2:3,tough_quest/random3:3,boss/req:6/win:crystal Kmain/moon/miab:above/nofree:dwarf/start:adamant Pkey Cstandard/nofree/start:edge/only:edward/thrift:5/j:abilities Twildish/mintier:2/money Sprice:200/standard/sell:quarter/no:vampires,bacchus,damage_items,coffin Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Gdupe/life -spoon -smith:super,playable -wacky:darts -tweak:edwardheal"
+            "description": "Unfortunately, you cannot Dart Edward, but you can Dart pretty much everything else. Maybe Edward can Heal you?",
+            "flags": "Orandom:3,quest/random2:3,tough_quest/random3:3,boss/req:6/win:crystal Kmain/moon/miab:above/nofree:dwarf/start:adamant Pkey Cstandard/nofree/start:edge/only:edward/thrift:5/abilities:j Twildish/mintier:2/money Sstandard/price:200/sell:quarter/no:vampires,bacchus,damage_items,coffin Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Hrandom Gdupe/life Fweighted Aagnostic Zvanilla -spoon -smith:super,playable -vanilla:zot -wacky:darts -tweak:edwardheal"
         }
     ]
   },
   {
-    "header": "Past Events"
+    "header": "Past Events (up to v4.6)"
+  },
+  {
+    "category": "ZZ6 (2024)",
+    "presets": [
+        {
+            "name": "Highway to the Zemus Zone VI Base Flags",
+            "description": "The flagset used for the ZZ6 tournament in 2024. A lower quality of treasure and the Chero flag will keep you on your toes. Tellah has joined Fu in his normal vacation spot. In bracket matches (and some Swiss matches if the players opted in), racers added modifications to these flags using a snake draft. For the list of modifications, see <a href='https://docs.google.com/document/d/1Bo7btycSUeuo9Lg0Mj08Rb40km4xT54vcQ8Hx9U-BuY/edit?tab=t.0' target='_blank'>the rules document</a>.",
+            "flags": "O1:quest_forge/random:7,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/start:cecil,kain,rydia,edward,rosa,yang,palom,porom,cid,edge/no:tellah,fusoya/j:abilities/nekkie/nodupes/hero Tpro/no:j/mintier:3/maxtier:7 Spro Bstandard/alt:gauntlet/whichburn Etoggle/no:jdrops Hrandom Glife/backrow Fweighted Ahero Zvanilla -kit:freedom -noadamants -nocursed -spoon -vanilla:zot"
+        }
+    ]
   },
   {
     "category": "OMG (2023)",
     "presets": [
         {
             "name": "Omnidexterous Memers Guild",
-            "description": "Utilize the `omnidexterous` flag to gain overwhelming strength and try to be as efficient as possible clearing the Kmiab content while carefully judging where to gamble",
-            "flags": "O2:quest_forge/3:quest_music/4:quest_lowerbabil/5:quest_cavebahamut/6:quest_toroiatreasury/7:boss_fabulgauntlet/8:quest_magma/req:6/win:crystal Kmain/moon/miab/force:hook Pkey Cstandard/nofree/distinct:7/start:rosa,porom/no:tellah/restrict:cecil,yang,fusoya/j:abilities/nekkie/nodupes Tpro/no:j/maxtier:5 Spro Bstandard/alt:gauntlet/whichburn Etoggle Glife/backrow -kit:basic -kit3:random -noadamants -nocursed -smith:super -vanilla:miabs -wacky:omnidextrous"
+            "description": "Utilize the Omnidexterous flag to gain overwhelming strength and try to be as efficient as possible clearing the Kmiab content while carefully judging where to gamble.",
+            "flags": "O2:quest_forge/3:quest_music/4:quest_lowerbabil/5:quest_cavebahamut/6:quest_toroiatreasury/7:boss_fabulgauntlet/8:quest_magma/req:6/win:crystal Kmain/moon/miab:standard/force:hook Pkey Cstandard/nofree/distinct:7/start:rosa,porom/no:tellah/restrict:cecil,yang,fusoya/abilities:j/nekkie/nodupes Tpro/no:j/maxtier:5 Spro Bstandard/alt:gauntlet/whichburn Etoggle Hrandom Glife/backrow Fweighted Aagnostic Zvanilla -kit:basic -kit3:random -noadamants -nocursed -smith:super -vanilla:zot,miabs -wacky:omnidextrous"
         }
     ]
   },
@@ -105,12 +226,12 @@
         {
             "name": "Potion Party",
             "description": "This flagset joins a few distinct wrinkles to create a unique FE experience. Monster boxes can now include key items, so be sure to check those out. All non-monster boxes contain only money, but shops can include anything that is not a J-item! This flagset also ends upon completing the objectives so no worrying about the Z fight! Be sure to go over the flag details a couple times before running this set.",
-            "flags": "O1:quest_monsterqueen/2:quest_monsterking/3:quest_cavebahamut/4:quest_masamunealtar/5:quest_forge/random:3,tough_quest/req:6/win:game Kmain/miab/nofree/force:magma Pnone Cstandard/nofree/distinct:7/start:not_tellah,not_fusoya/no:fusoya/restrict:cecil/j:abilities/nekkie/nodupes/hero Twildish/money Swild/no:j Bstandard/nofree/alt:gauntlet/whichburn Etoggle/noexp Gwarp/life/sylph/backrow -kit:freedom -kit2:miab -kit3:basic -noadamants -nocursed -spoon"
+            "flags": "O1:quest_monsterqueen/2:quest_monsterking/3:quest_cavebahamut/4:quest_masamunealtar/5:quest_forge/random:3,tough_quest/req:6/win:game Kmain/miab:standard/nofree/force:magma Pnone Cstandard/nofree/distinct:7/start:not_tellah,not_fusoya/no:fusoya/restrict:cecil/abilities:j/nekkie/nodupes/hero Twildish/money Swild/no:j Bstandard/nofree/alt:gauntlet/whichburn Etoggle/noexp Hrandom Gwarp/life/sylph/backrow Fweighted Ahero Zvanilla -kit:freedom -kit2:miab -kit3:basic -noadamants -nocursed -spoon -vanilla:zot"
         },
         {
             "name": "Moonveil Mixer",
             "description": "Several different features from previous events have been combined into one Mixer. Adamant armors can be found if you're lucky, the dwarven kit is back, running from battles is disabled and just like the Potion Party, the Hero flag is on! Four of the seven objectives are static as they are objectives from events you may remember! This flagset plays out more like a 'standard' seed of FE, but much like Potion Party, be sure to review so you don't miss out on details like the warp glitch!",
-            "flags": "O1:quest_magnes/2:quest_forge/3:boss_fabulgauntlet/4:boss_golbez/random:3,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/restrict:cecil,fusoya/j:abilities/nekkie/hero Twildish/maxtier:5 Sstandard Bstandard/alt:gauntlet/whichburn Etoggle/cantrun Gwarp/life/sylph/backrow -kit:better -kit2:dwarf -spoon"
+            "flags": "O1:quest_magnes/2:quest_forge/3:boss_fabulgauntlet/4:boss_golbez/random:3,tough_quest/req:6/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/restrict:cecil,fusoya/abilities:j/nekkie/hero Twildish/maxtier:5 Sstandard Bstandard/alt:gauntlet/whichburn Etoggle/cantrun Hrandom Gwarp/life/sylph/backrow Fweighted Ahero Zvanilla -kit:better -kit2:dwarf -spoon -vanilla:zot"
         }
     ]
   },
@@ -119,13 +240,13 @@
     "presets": [
         {
             "name": "Blue Moon",
-            "description": "The flagset used for the Blue moon portion of the ZZ5 event. Gather all the free characters, assemble your party immediately and track down the bosses as quickly and efficiently as possible. Don't forget a hook route will be forced, so plan accordingly!",
-            "flags": "O1:boss_golbez/2:boss_fabulgauntlet/random:6,boss/req:7/win:crystal Kmain/summon/moon/force:hook Pkey Crelaxed/noearned/distinct:7/start:any/no:fusoya/j:abilities/nekkie/nodupes Twildish Sstandard Bstandard/alt:gauntlet Etoggle Gwarp/life/sylph/backrow -kit:basic -kit2:freedom -noadamants -spoon -smith:super"
+            "description": "The flagset used for the Blue Moon portion of the ZZ5 event. Gather all the free characters, assemble your party immediately and track down the bosses as quickly and efficiently as possible. Don't forget a hook route will be forced, so plan accordingly!",
+            "flags": "O1:boss_golbez/2:boss_fabulgauntlet/random:6,boss/req:7/win:crystal Kmain/summon/moon/force:hook Pkey Crelaxed/noearned/distinct:7/start:any/no:fusoya/abilities:j/nekkie/nodupes Twildish Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Gwarp/life/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -kit2:freedom -noadamants -spoon -smith:super -vanilla:zot"
         },
         {
             "name": "Red Moon (example)",
-            "description": "For an authentic Red Moon experience, please visit the official discord, as this flagset utilized the Tricker bot for some additional curation of the characters and monsters. The flagset here is an example. To view the yaml for the flag details, go here: https://pastebin.com/L08T1mEY",
-            "flags": "O1:boss_golbez/2:boss_fabulgauntlet/3:boss_odin/4:boss_elements/5:boss_cpu/6:boss_asura/7:boss_magus/8:boss_mombomb/req:7/win:crystal Kmain/summon/moon/force:hook/nofree Pkey Crelaxed/noearned/distinct:7/start:cecil/no:cecil,fusoya,edge/j:abilities Tpro Sstandard/no:apples Bstandard/alt:gauntlet Etoggle Glife -kit:notdeme -kit2:freedom -noadamants -spoon -smith:super"
+            "description": "For an authentic Red Moon experience, please visit the official discord, as this flagset utilized the Tricker bot for some additional curation of the characters and bosses. The flagset here is an example. To view the yaml for the flag details, go here: https://pastebin.com/L08T1mEY",
+            "flags": "O1:boss_golbez/2:boss_fabulgauntlet/3:boss_odin/4:boss_elements/5:boss_cpu/6:boss_asura/7:boss_magus/8:boss_mombomb/req:7/win:crystal Kmain/summon/moon/nofree/force:hook Pkey Crelaxed/noearned/distinct:7/start:cecil/no:cecil,edge,fusoya/abilities:j Tpro Sstandard/no:apples Bstandard/alt:gauntlet Etoggle Hrandom Glife Fweighted Aagnostic Zvanilla -kit:notdeme -kit2:freedom -noadamants -spoon -smith:super -vanilla:zot"
         }
     ]
   },
@@ -134,13 +255,13 @@
     "presets": [
         {
             "name": "Group Stage",
-            "description": "The flagset used for the group stage of the Adamant Cup, this is a high power, high completion percentage flagset that will test your efficiency over large swaths of the game. Be wary of the 4 character party limit!",
-            "flags": "Orandom:7,tough_quest/req:7/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/restrict:cecil,fusoya/j:abilities/nekkie/party:4 Twildish/maxtier:7 Sstandard Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:better -spoon"
+            "description": "The flagset used for the group stage of the Adamant Cup. This is a high power, high completion percentage flagset that will test your efficiency over large swaths of the game. Be wary of the 4 character party limit!",
+            "flags": "Orandom:7,tough_quest/req:7/win:crystal Kmain/summon/moon Pkey Cstandard/nofree/restrict:cecil,fusoya/abilities:j/nekkie/party:4 Twildish/maxtier:7 Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:better -spoon -vanilla:zot"
         },
         {
             "name": "Bracket Stage",
-            "description": "The second flagset for the Adamant cup used from the top 32 onward. The high completion percentage from group stage carries over, but the tresure chest quality gets bumped down. Also, Cecil and FuSoYa are on vacation, likely planning a trip to a Lunarian theme park.",
-            "flags": "Orandom:7,tough_quest/req:7/win:crystal Kmain/summon/moon Pkey Crelaxed/nofree/no:cecil,fusoya/j:abilities/nekkie/party:4 Tpro/maxtier:6 Sstandard/sell:quarter Bstandard/alt:gauntlet Etoggle Glife/sylph -kit:basic -spoon -smith:alt"
+            "description": "The second flagset for the Adamant cup used from the top 32 onward. The high completion percentage from group stage carries over, but the treasure chest quality gets bumped down. Also, Cecil and FuSoYa are on vacation, likely planning a trip to a Lunarian theme park.",
+            "flags": "Orandom:7,tough_quest/req:7/win:crystal Kmain/summon/moon Pkey Crelaxed/nofree/no:cecil,fusoya/abilities:j/nekkie/party:4 Tpro/maxtier:6 Sstandard/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph Fweighted Aagnostic Zvanilla -kit:basic -spoon -smith:alt -vanilla:zot"
         }
     ]
   },
@@ -149,22 +270,22 @@
     "presets": [
         {
             "name": "Highw4y to the Zemus Zone",
-            "description": "Today's closest approximation of the flags used in the Highw4y to the Zemus Zone tournament",
-            "flags": "O1:quest_forge/2:quest_cavebahamut/3:boss_wyvern/random:2,tough_quest,boss/req:4/win:crystal Kmain/moon/nofree Pkey Cstandard/maybe/start:any/no:fusoya/j:abilities/nodupes/hero/nofree Tpro Sstandard/no:j Bstandard/alt:gauntlet/whichburn Etoggle Gbackrow -noadamants -kit:freedom"
+            "description": "Today's closest approximation of the flags used in the Highw4y to the Zemus Zone tournament.",
+            "flags": "O1:quest_forge/2:quest_cavebahamut/3:boss_wyvern/random:2,tough_quest,boss/req:4/win:crystal Kmain/moon/nofree Pkey Cstandard/nofree/maybe/start:any/no:fusoya/abilities:j/nodupes/hero Tpro Sstandard/no:j Bstandard/alt:gauntlet/whichburn Etoggle Hrandom Gbackrow Fweighted Ahero Zvanilla -kit:freedom -noadamants -vanilla:zot"
         }
     ]
   },
   {
-    "category": "Lali-ho (2021)",
+    "category": "LHL (2021)",
     "presets": [
       {
-        "name": "2021 Lali-Ho Swiss Stage",
-        "flags": "O1:quest_forge/2:quest_tradepink/3:quest_magnes/random:2,boss,char/req:4/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:10/j:abilities/nekkie/bye Twildish/maxtier:6 Sstandard/sell:quarter Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:basic -kit2:dwarf -noadamants -spoon -exp:noboost -vanilla:giant,growup",
+        "name": "Lali-Ho League Swiss Stage",
+        "flags": "O1:quest_forge/2:quest_tradepink/3:quest_magnes/random:2,boss,char/req:4/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:10/abilities:j/nekkie/bye Twildish/maxtier:6 Sstandard/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Xnoboost Zvanilla -kit:basic -kit2:dwarf -noadamants -spoon -call:vanillagrowup -vanilla:zot,giant",
         "description": "<p>Flags for the Swiss stage of the 2021 Lali-Ho League.</p>"
       },
       {
-        "name": "2021 Lali-Ho Bracket Stage",
-        "flags": "Omode:classicforge/1:quest_tradepink/2:quest_magnes/random:2,boss,char/req:4/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:10/j:abilities/nekkie/nodupes/bye Tpro/maxtier:6 Sstandard/sell:0 Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:freedom -kit2:grabbag -kit3:money -noadamants -exp:noboost -vanilla:giant,growup",
+        "name": "Lali-Ho League Bracket Stage",
+        "flags": "Omode:classicforge/1:quest_tradepink/2:quest_magnes/random:2,boss,char/req:4/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:10/abilities:j/nekkie/nodupes/bye Tpro/maxtier:6 Sstandard/sell:0 Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Xnoboost Zvanilla -kit:freedom -kit2:grabbag -kit3:money -noadamants -call:vanillagrowup -vanilla:zot,giant",
         "description": "<p>Flags for the bracket stage of the 2021 Lali-Ho League.</p>"
       }
     ]
@@ -173,13 +294,13 @@
     "category": "Htt3Z (2020)",
     "presets": [
       {
-        "name": "2020 Htt3Z League - Group Stage",
-        "flags": "O1:quest_forge/random:3,quest/req:3/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/maybe/no:fusoya/j:abilities/bye Twildish/sparse:60 Sstandard Bstandard/alt:gauntlet Etoggle/cantrun Gwarp/life/sylph/backrow -kit:basic -noadamants -spoon -vanilla:agility,growup",
+        "name": "Htt3Z Group Stage",
+        "flags": "O1:quest_forge/random:3,quest/req:3/win:crystal Kmain/summon/moon/nofree Pkey Crelaxed/maybe/no:fusoya/abilities:j/bye Twildish/sparse:60 Sstandard Bstandard/alt:gauntlet Etoggle/cantrun Hrandom Gwarp/life/sylph/backrow Fweighted Avanilla Zvanilla -kit:basic -noadamants -spoon -call:vanillagrowup -vanilla:zot",
         "description": "<p>Flags for the group stage of the 2020 Highway to the 3mus Zone FF4FE League.</p>"
       },
       {
-        "name": "2020 Htt3Z League - Table/Brackets Stage",
-        "flags": "O1:quest_forge/random:3,quest/req:3/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/maybe/no:fusoya/j:abilities/permajoin Tpro/sparse:60 Spro Bstandard/alt:gauntlet Etoggle/cantrun/no:sirens Glife/sylph/backrow -kit:basic -noadamants -vanilla:agility,growup",
+        "name": "Htt3Z Table/Brackets Stage",
+        "flags": "O1:quest_forge/random:3,quest/req:3/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/maybe/no:fusoya/abilities:j/permajoin Tpro/sparse:60 Spro Bstandard/alt:gauntlet Etoggle/cantrun/no:sirens Hrandom Glife/sylph/backrow Fweighted Avanilla Zvanilla -kit:basic -noadamants -call:vanillagrowup -vanilla:zot",
         "description": "<p>Flags for the table and brackets stage of the 2020 Highway to the 3mus Zone FF4FE League.</p>"
       }  
     ]
@@ -188,13 +309,13 @@
     "category": "Fabul Gauntlet (2020)",
     "presets": [
       {
-        "name": "2020 Fabul Gauntlet Swiss Rounds",
-        "flags": "Orandom:5/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/j:abilities Tstandard Sstandard Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:basic -noadamants -vanilla:growup",
+        "name": "Fabul Gauntlet Swiss Rounds",
+        "flags": "Orandom:5/req:all/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/abilities:j Tstandard Sstandard Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -call:vanillagrowup -vanilla:zot",
         "description": "<p>Flags for the Swiss/play-in rounds of the 2020 Fabul Gauntlet.</p>"
       },
       {
-        "name": "2020 Fabul Gauntlet Bracket Rounds",
-        "flags": "Orandom:5/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:7/j:abilities/nodupes/bye Tpro Spro/sell:quarter Bstandard/alt:gauntlet Etoggle Glife/sylph/backrow -kit:basic -noadamants -vanilla:growup",
+        "name": "Fabul Gauntlet Bracket Rounds",
+        "flags": "Orandom:5/req:all/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:7/abilities:j/nodupes/bye Tpro Spro/sell:quarter Bstandard/alt:gauntlet Etoggle Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -kit:basic -noadamants -call:vanillagrowup -vanilla:zot",
         "description": "<p>Flags for the bracket rounds of the 2020 Fabul Gauntlet.</p>"
       }
     ]
@@ -203,8 +324,8 @@
     "category": "H2tZZ (2019)",
     "presets": [
       {
-        "name": "2019 H2tZZ League Flags",
-        "flags": "Omode:classicforge/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/maybe/j:abilities/bye Tstandard Sstandard Bstandard Etoggle/no:jdrops Glife/sylph/backrow -noadamants -vanilla:growup",
+        "name": "H2tZZ League Flags",
+        "flags": "Omode:classicforge/req:all/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/maybe/abilities:j/bye Tstandard Sstandard Bstandard Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -noadamants -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the 2019 Highway 2 the Zemus Zone FF4FE League.</p><p>[Originally: V1 Jia Kqm Pk Cnx -hobs T3gr S2 B F Nck Gl Etf Xsbk -noadamants -aa -fab -huh -z]</p>"
       }
     ]
@@ -213,38 +334,38 @@
     "category": "WSOFE (2019)",
     "presets": [
       {
-        "name": "2019 WSOFE Appleseed Event",
-        "flags": "Onone Kmain Pshop Crelaxed/start:fusoya/j:abilities Twild Swild/free Bstandard/whyburn Etoggle/no:jdrops Gmp/warp/life/sylph/backrow -spoon -vanilla:fusoya,growup",
+        "name": "WSOFE Appleseed Event",
+        "flags": "Onone Kmain Pshop Crelaxed/start:fusoya/abilities:j Twild Swild/free Bstandard/whyburn Etoggle/no:jdrops Hrandom Gmp/warp/life/sylph/backrow Fvanilla Aagnostic Zvanilla -spoon -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the Appleseed Event of the 2019 World Series of Free Enterprise.</p><p>[Originally: Jia K Ps C -rescue -startfusoya -hobs T4gr S4f B -whyburn Gmwl Etf Xsbk -aa -spoon -fab -huh -z]</p>"
       },
       {
-        "name": "2019 WSOFE Giant% Event",
-        "flags": "Omode:classicgiant/win:game Kmain Pshop Crelaxed Twild/no:j Scabins/no:j Bstandard/whichburn Etoggle/no:jdrops Gdupe/mp/warp/life/sylph/backrow -spoon -vanilla:hobs,growup",
+        "name": "WSOFE Giant% Event",
+        "flags": "Omode:classicgiant/req:all/win:game Kmain Pshop Crelaxed Twild/no:j Scabins/no:j Bstandard/whichburn Etoggle/no:jdrops Hrandom Gdupe/mp/warp/life/sylph/backrow Fweighted Aagnostic Zvanilla -spoon -call:vanillahobs,vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the Giant% Event of the 2019 World Series of Free Enterprise.</p><p>[Originally: V2 K Ps C -rescue T4gr Sc B -whichburn F Gdmwl Etf Xsbk -aa -fab -spoon -huh -z]</p>"
       },
       {
-        "name": "2019 WSOFE League Forge% Event",
-        "flags": "Omode:classicforge/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/j:abilities Tstandard Sstandard Bstandard Etoggle/no:jdrops Glife/sylph/backrow -spoon -vanilla:agility,growup",
+        "name": "WSOFE League Forge% Event",
+        "flags": "Omode:classicforge/req:all/win:crystal Kmain/summon/moon/nofree Pkey Cstandard/nofree/abilities:j Tstandard Sstandard Bstandard Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Avanilla Zvanilla -spoon -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the League Forge% Event of the 2019 World Series of Free Enterprise.</p><p>[Originally: V1 Jia Kqm Pk Cx -rescue -hobs T3gr S2 B F Nck Gl Etf Xsbk -spoon -fab -huh -z]</p>"
       },
       {
-        "name": "2019 WSOFE Quals K1.5 Reject% Event",
-        "flags": "Onone Kmain/moon/nofree Pshop Crelaxed/nofree/only:rydia,tellah,edward,porom,cid/j:spells,abilities Twild Sstandard Bstandard/whyburn Etoggle/no:jdrops Glife/sylph/backrow -spoon -vanilla:growup",
+        "name": "WSOFE Quals K1.5 Reject% Event",
+        "flags": "Onone Kmain/moon/nofree Pshop Crelaxed/nofree/only:rydia,tellah,edward,porom,cid/spells:j/abilities:j Twild Sstandard Bstandard/whyburn Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -spoon -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the Quals K1.5 Reject% Event of the 2019 World Series of Free Enterprise.</p><p>[Originally: Jisa Km Ps C -rescue -nocecil -nokain -norosa -noyang -nopalom -noedge -nofusoya -hobs T4gr S2 B -whyburn F Nck Gl Etf Xsbk -aa -spoon -fab -huh -z]</p>"
       },
       {
-        "name": "2019 WSOFE Catalite Event",
-        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:5/j:spells,abilities/nodupes/bye Tstandard/junk Scabins Bstandard Enoencounters/no:jdrops Gsylph/backrow -vanilla:agility,growup",
+        "name": "WSOFE Catalite Event",
+        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:5/spells:j/abilities:j/nodupes/bye Tstandard/junk Scabins Bstandard Enoencounters/no:jdrops Hrandom Gsylph/backrow Fweighted Avanilla Zvanilla -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the Catalite Event of the 2019 World Series of Free Enterprise.</p><p>[Originally: Jisa Kqm Pk Cx5 -nodupes -hobs T3r Sc B F Nck Exf Xsbk -fab -huh -z]</p>"
       },
       {
-        "name": "2019 WSOFE Edward% Event",
-        "flags": "Onone Kmain Pkey Cstandard/only:edward Twild Sstandard/no:sirens Bstandard/whichburn Etoggle/no:jdrops Glife/sylph/backrow -spoon -vanilla:growup",
+        "name": "WSOFE Edward% Event",
+        "flags": "Onone Kmain Pkey Cstandard/only:edward Twild Sstandard/no:sirens Bstandard/whichburn Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -spoon -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the Edward% Event of the 2019 World Series of Free Enterprise.</p><p>[originally: Ji K Pk C -rescue -nocecil -nokain -norydia -notellah -norosa -noyang -nopalom -noporom -nocid -noedge -nofusoya T4gr S3 -nosirens B -whichburn Gl Etf Xsbk -spoon -fab -huh -z]</p>"
       },
       {
-        "name": "2019 WSOFE 2v2 Event",
-        "flags": "Omode:classicforge/win:crystal Kmain/summon/moon/miab/nofree/unsafe Pkey Crelaxed/nofree Twild Sstandard Bstandard Etoggle/no:jdrops Glife/sylph/backrow -spoon -vanilla:growup",
+        "name": "WSOFE 2v2 Event",
+        "flags": "Omode:classicforge/req:all/win:crystal Kmain/summon/moon/miab:standard/nofree/unsafe Pkey Crelaxed/nofree Twild Sstandard Bstandard Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Aagnostic Zvanilla -spoon -call:vanillagrowup -vanilla:zot",
         "description": "<p>A modernized approximation of the flags for the 2v2 Event of the 2019 World Series of Free Enterprise.</p><p>[Originally: V1 Ji Kqmt! Pk C -rescue -hobs T4gr S2 B F Nck Gl Etf Xsbk -aa -spoon -fab -huh -z]</p>"
       }
     ]
@@ -253,18 +374,18 @@
     "category": "HttZZ (2018)",
     "presets": [
       {
-        "name": "2018 League Qualifiers",
-        "flags": "Onone Kmain/nofree Pshop Crelaxed/nofree/j:spells,abilities/nodupes/bye Twild Sstandard Bstandard/whyburn Etoggle/no:jdrops Glife/sylph/backrow -vanilla:agility,hobs,fashion,growup",
+        "name": "ZZ1 League Qualifiers",
+        "flags": "Onone Kmain/nofree Pshop Crelaxed/nofree/spells:j/abilities:j/nodupes/bye Twild Sstandard Bstandard/whyburn Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Avanilla Zvanilla -call:vanillahobs,vanillagrowup -vanilla:zot,fashion",
         "description": "<p>A modernized approximation of the flags used for the qualifier rounds of the 2018 Highway To The Zemus Zone FF4FE League.</p><p>[Originally: J2KC2T4S3BF2NE3$X2Y2GWZ]</p>"
       },
       {
-        "name": "2018 League Matches",
-        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/nodupes/bye Tstandard/junk Sstandard Bstandard Etoggle/no:jdrops Glife/sylph/backrow -vanilla:agility,hobs,fashion,growup",
+        "name": "ZZ1 League Matches",
+        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/nodupes/bye Tstandard/junk Sstandard Bstandard Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Avanilla Zvanilla -call:vanillahobs,vanillagrowup -vanilla:zot,fashion",
         "description": "<p>A modernized approximation of the flags used for the round-of-32 matches stage of the 2018 Highway To The Zemus Zone FF4FE League.</p><p>[Originally: JK2PCT3S2BF2NE3X2Y2GZ]</p>"
       },
       {
-        "name": "2018 League Playoffs",
-        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:5/nodupes/bye Tstandard/junk Sstandard Bstandard Etoggle/no:jdrops Glife/sylph/backrow -vanilla:agility,hobs,fashion,growup",
+        "name": "ZZ1 League Playoffs",
+        "flags": "Onone Kmain/summon/moon/nofree Pkey Cstandard/nofree/distinct:5/nodupes/bye Tstandard/junk Sstandard Bstandard Etoggle/no:jdrops Hrandom Glife/sylph/backrow Fweighted Avanilla Zvanilla -call:vanillahobs,vanillagrowup -vanilla:zot,fashion",
         "description": "<p>A modernized approximation of the flags used for the final playoff rounds of the 2018 Highway To The Zemus Zone FF4FE League.</p><p>[Originally: JK2PC3T3S2BF2NE3X2Y2GZ]</p>"
       }
     ]
