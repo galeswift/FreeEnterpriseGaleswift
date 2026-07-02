@@ -1128,6 +1128,11 @@ def apply(env):
     if env.options.flags.has('no_free_key_item'):
         objective_bosses_and_maybe_dmist.add('dmist')    
 
+    # shift the Odin slot over if necessary on Bunsafe (and only do it once!)
+    if env.options.flags.has('boss_slot_shuffle') and env.options.flags.has('bosses_unsafe'):
+        BOSS_SLOT_SHUFFLE_GROUPS['underworld'].remove('odin_slot')
+        BOSS_SLOT_SHUFFLE_GROUPS['gated_overworld'].append('odin_slot')
+
     # perform assignment
     attempts = 0
     found_valid_assignment = False
@@ -1225,9 +1230,6 @@ def apply(env):
         # shuffle boss slot stats; under Bremove, some slots might be unused, and that's fine
         # need to shuffle slots before assigning bosses for score-dependent assignments
         if env.options.flags.has('boss_slot_shuffle'):
-            if env.options.flags.has('bosses_unsafe'):
-                BOSS_SLOT_SHUFFLE_GROUPS['underworld'].remove('odin_slot')
-                BOSS_SLOT_SHUFFLE_GROUPS['gated_overworld'].append('odin_slot')
             for group in BOSS_SLOT_SHUFFLE_GROUPS:
                 shuffled_slots_in_group = BOSS_SLOT_SHUFFLE_GROUPS[group].copy()
                 env.rnd.shuffle(shuffled_slots_in_group)
