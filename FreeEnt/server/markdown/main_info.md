@@ -1129,7 +1129,7 @@ These flags are for changing how the agility system works. Some flags choose dif
 
 For agility flags that tend to increase the base ATB, the Count spell duration is lengthened to make it significantly more reasonable (otherwise back attack Plague is nearly impossible). 
 
-Up until v4.6.4.Gale, these flags were called `-agility:` instead of `F`.
+Up until v4.6.4.Gale, these flags were called `-agility:` instead of `A`.
 
 ### `Aagnostic` {: .h6 }
 
