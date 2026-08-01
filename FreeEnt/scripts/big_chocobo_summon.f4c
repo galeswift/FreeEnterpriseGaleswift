@@ -383,8 +383,8 @@ msfpatch{
 // probability and spell power
 // Add a random check for Chocobo to turn into Big Chocobo
 msfpatch{
-    .def BigChocoboProbability  $1637
-    .def BigChocoboSpellPower   $1638
+    .def BigChocoboProbability  $163B
+    .def BigChocoboSpellPower   $163C
 
     .addr $03e050
         jml $=BigChocoboSummonRandom

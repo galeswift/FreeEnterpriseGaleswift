@@ -102,10 +102,10 @@ WRAM:
     -> 7E:1631       F: zonk checks count
     -> 7E:1632       F: Omode:ki deliver reward event trigger
     -> 7E:1634-1635  F: Cfifo oldest axtor index
-    -> 7E:1636       F: Cfifo oldest axtor buffer
-    -> 7E:1637       F: Big Chocobo Summon probability
-    -> 7E:1638       F: Big Chocobo Summon spell power byte
-    -> 7E:1639       F: Gear fusion menu check (for select item dialog)
+    -> 7E:1636-163A  F: Cfifo oldest axtor buffer
+    -> 7E:163B       F: Big Chocobo Summon probability
+    -> 7E:163C       F: Big Chocobo Summon spell power byte
+    -> 7E:163D       F: Gear fusion menu check (for select item dialog)
 
     -> 7E:1660-166C  F: unallocated (formerly wacky challenge allocated space)
     -> 7E:166D-166F   : long address storage
