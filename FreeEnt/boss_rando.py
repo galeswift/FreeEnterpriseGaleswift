@@ -5,7 +5,7 @@ from .spoilers import SpoilerRow
 import math
 from copy import copy
 
-CSV_OUTPUT = True
+CSV_OUTPUT = False
 
 BOSS_SLOTS = list(core_rando.BOSS_SLOTS)
 BOSSES = list(core_rando.BOSSES)
