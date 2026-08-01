@@ -221,7 +221,7 @@ Tier 1 spells are now instant cast (previously ATB Delay of 2), tier 2 have an A
 
 These new "permadeath" options allow for characters to leave your party when they end a battle swooned without being inaccessible for the rest of the game. Under `Cbrieflydead`, a swooned character will simply be available in the Tower of Wishes after they leave the party, with their equipment and stats as-is (including still being swooned when you pick them up). Under `Cmostlydead`, a swooned character will be sent to the Tower of Wishes and be _reinitialized_, to base level and equipment. 
 
-Under `Cbye`, both options operate as the usual permadeath. When a character's equipment would be otherwise inaccessible, the Legend Sword (if equipped) will be forcibly placed into your inventory.
+Under `Cbye`, the characters are unavailable in the Tower of Wishes. The only way to retrieve them is on `Cnodupes`, where the (single copy of the) character would join your party again: on `Cbrieflydead`, they will still be swooned but have their levels/stats/equipment/spells, and on `Cmostlydead` they will be reinitialized (meaning it's effectively the same as `Cpermadea[th/der]`). When a character's equipment would be otherwise inaccessible, the Legend Sword (if equipped) will be forcibly placed into your inventory.
 
 ### `Csuperhero` {: .h6 }
 
@@ -1495,7 +1495,7 @@ The "Tweak" flags are miscellaneous flags that modify the game in fairly large w
 - Design/Programming: ScytheMarshall
 - Locations: give_kain_magic.f4c
 
-This flag gives Kain a relatively small amount of MP and MP growth up to around level 50, a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Because Lance is scaled more to Kain's Will instead of an actual white mage's stats, every character that gets Sight will have Lance removed from their spell list because the spell is too strong. 
+This flag gives Kain a relatively small amount of MP and MP growth (2 at every level), a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Because Lance is scaled more to Kain's Will instead of an actual white mage's stats, every character that gets Sight will have Lance removed from their spell list because the spell is too strong. Enjoy what happens on Misspelled, though!
 
 ### `-tweak:harmspell` {: .h6 }
 

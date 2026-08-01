@@ -7,10 +7,18 @@ def apply(env):
     # misc/creative tweaks
     if env.options.flags.has('kainmagic'):
         env.add_file('scripts/give_kain_magic.f4c')
-        mp_script = '\n'
-        for level in range(1,51):
-            mp_script = mp_script + f'patch (${(0x0FB65E + (0x05 * (level-1))):06X} bus) {{ {2:02X} }}\n'
-        env.add_substitution('kain mp script', mp_script)
+        # give Kain 2 MP growth every level; since the MP byte is shared with the hi byte of the experience needed,
+        # we patch in different values as required (MP-hi-exp is %EEEMMMMM, so it's 0->1->2 for the high byte of exp)
+        # use "level" as Kain's actual level, so level-10 is the table entry
+        # the last entry (69 in the 0-indexed table) is used for all levels 70 and onward
+        mp_script = ['\n']
+        for level in range(10,51):
+            mp_script.append(f'patch (${(0x0FB65E + (0x05 * (level-10))):06X} bus) {{ {0x02:02X} }}')
+        for level in range(51,64):
+            mp_script.append(f'patch (${(0x0FB65E + (0x05 * (level-10))):06X} bus) {{ {0x22:02X} }}')
+        for level in range(64,70):
+            mp_script.append(f'patch (${(0x0FB65E + (0x05 * (level-10))):06X} bus) {{ {0x42:02X} }}')
+        env.add_substitution('kain mp script', '\n'.join(mp_script))
     elif env.options.flags.has('harmspell'):
         env.add_file('scripts/harm_spell.f4c')
 
