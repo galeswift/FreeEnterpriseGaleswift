@@ -1499,8 +1499,8 @@ def apply(env):
                         if boss_stats_slots[slot] == 'rubicant_slot':
                             rubi_stats_slot = slot
                             break
-                    if (not (env.options.flags.has('no_kq_eblan_slot') and slot == 'kingqueen_slot')
-                        and not (env.options.flags.has('no_officer_slot') and slot == 'officer_slot')):
+                    if (not (env.options.flags.has('no_kingqueen_slot') and rubi_stats_slot == 'kingqueen_slot')
+                        and not (env.options.flags.has('no_officer_slot') and rubi_stats_slot == 'officer_slot')):
                         underground_path_disallowed.append(boss_assignment[rubi_stats_slot])
 
             if underground_path_disallowed:
