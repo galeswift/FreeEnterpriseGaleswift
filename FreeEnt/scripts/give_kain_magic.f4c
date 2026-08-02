@@ -52,7 +52,7 @@ patch($0fa0a8 bus) { 06 04 00 06 }
 
 // fifth, GIVE KAIN MP! too lazy to do level-up so just provide 255 base MP
 // ... okay, level-up is *possible*, just bleh due to high bits of experience.
-// stop MP gain at level 50 (since 51->52 is where the high bits are non-zero)
+// be careful about where the exp gets above 2^16 and 2^17
 // automate the script in generator.py, where this script is called
 patch($0fa92b bus) { 14 }
 patch($0fa92d bus) { 14 }
