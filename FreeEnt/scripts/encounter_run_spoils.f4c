@@ -41,7 +41,7 @@ msfpatch{
     %NoRunPenalty:
         // displace
         clc
-        lda $3594
+        lda $16a0
         rtl        
 }
 // %end%
