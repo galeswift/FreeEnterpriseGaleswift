@@ -14,9 +14,11 @@ def apply(env):
     else:
         spellset_name = 'Rosa'
 
-    zot_spell_script = [f'give spell #{spellset_name} #{spell_name}',
-                        f'[#B #Text_LoadSpellName 2 #spell.{spell_name}]',
-                        'message $10D']
+    zot_spell_script = [f'give spell #{spellset_name} #{spell_name}']
+    if not env.options.flags.has('vanilla_zot'):
+        zot_spell_script.extend([f'[#B #Text_LoadSpellName 2 #spell.{spell_name}]',
+                                 'sound #WhiteMagic',
+                                 'message $10D'])
     env.add_substitution('zot spell rando', '\n'.join(zot_spell_script))
 
     env.meta['zot_spell'] = f'#{spell_name}'
