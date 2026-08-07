@@ -74,6 +74,8 @@ def apply(env):
     
     megaprice_bytes = []
     for item_code in megaprices:
+        if item_code == 0x00:
+            continue
         price = megaprices[item_code]
         megaprice_bytes.append(item_code)
         megaprice_bytes.extend([((price >> (i * 8)) & 0xFF) for i in range(3)])
