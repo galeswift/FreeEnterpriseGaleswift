@@ -619,6 +619,7 @@ def build(romfile, options, force_recompile=False):
 
     if env.options.flags.has('starting_blackchocobo'):
         env.add_file('scripts/opening_blackchocobo.f4c')
+        env.add_file('scripts/black_chocobo_no_autofly.f4c')
     elif env.options.flags.has('starting_underground'):
         env.add_file('scripts/opening_underground.f4c')
     else:
@@ -921,6 +922,7 @@ def build(romfile, options, force_recompile=False):
         rando_scope,rando_type = is_doorsrando[0].split(":")
         env.add_file('scripts/map_history_extension.f4c')
         env.add_file('scripts/doorsrando.f4c')
+        env.add_file('scripts/black_chocobo_no_autofly.f4c')
         env.add_toggle('doorsrando')
         if rando_scope == "-entrancesrando":
             env.add_toggle('entrancesrando')
