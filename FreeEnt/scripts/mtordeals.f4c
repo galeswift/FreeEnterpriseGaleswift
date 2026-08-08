@@ -503,7 +503,9 @@ event($62)  //Cecil's transformation, Tellah remembering
     give spell #TellahBlack #Lit2
     give spell #TellahBlack #Lit3
     give spell #TellahBlack #Virus
+    // %flag antidale_spells_progression off%
     give spell #TellahBlack #Weak
+    // %end%
     give spell #TellahBlack #Sleep
     give spell #TellahBlack #Stone
     give spell #TellahBlack #Drain
