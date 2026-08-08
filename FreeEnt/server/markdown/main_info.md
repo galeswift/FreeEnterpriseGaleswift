@@ -828,7 +828,7 @@ Entrances to field maps from the various overworld maps are randomized within th
 - Programming: jayp12323, Wylem, ScytheMarshall (the latter two for figuring out the initial graphical glitch)
 - Locations: panic_button.f4c
 
-When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button". On `-starting:` flags, you will be placed at your starting location instead, whatever it is, and placed in your starting vehicle (the Falcon or on foot).
+When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button". On `-starting:` flags, you will be placed at your starting location instead, whatever it is, and placed in your starting vehicle (the Falcon or on foot). Depending on the `-starting:` flag, other vehicles will be moved as well (on `-starting:blackchocobo`, the Hovercraft will be moved to its default location at Kaipo).
 
 This flag _enables_ the Select+R functionality. Before v4.6.4.Gale, this flag was named `-calmness` and _disabled_ the functionality, and was only relevant on doors/entrances rando. Now, this flag can be enabled on any seed. 
 
