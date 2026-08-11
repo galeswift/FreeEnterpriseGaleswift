@@ -1722,10 +1722,13 @@ def apply(env):
         unassigned_chest_slots = [slot for slot in CHEST_ITEM_SLOTS if slot not in rewards_assignment]
 
         if not env.options.flags.has('characters_in_treasure_relaxed') and (env.options.flags.has('characters_in_treasure_earned') or env.options.flags.has('characters_in_treasure_free')):
-            for target_slot in character_rando.RESTRICTED_SLOTS:                
+            for target_slot in env.meta['restricted_character_slots']:                
                 # Find the slot this character was assigned to                
-                if (target_slot in character_rando.FREE_SLOTS and env.options.flags.has('characters_in_treasure_free') or
-                    target_slot in character_rando.EARNED_SLOTS and env.options.flags.has('characters_in_treasure_earned')):
+                if ((target_slot in character_rando.FREE_SLOTS and env.options.flags.has('characters_in_treasure_free')) or
+                    (target_slot in character_rando.EARNED_SLOTS and env.options.flags.has('characters_in_treasure_earned'))):
+                    if target_slot == 'kain3_slot' and env.options.flags.has('objective_mode_classicforge'):
+                        # do not put the non-existent Giant character anywhere
+                        continue
                     print(f'Putting restricted slot {target_slot} in a MIAB chest')
                     character_slot = character_rando.SLOTS[target_slot]
                     rnd_chest_slot = env.rnd.choice(unassigned_chest_slots)

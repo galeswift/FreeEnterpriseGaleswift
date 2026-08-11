@@ -247,7 +247,7 @@ The starting partner character (who meets your starting/pre-game screen characte
 
 These flags take characters from the usual axtor reward slots and place them into treasure chests. `Ctreasure:free/earned` are linked to `Cnofree/noearned`, so free characters are placed in boxes separately from earned characters. Restricted characters will be found in MIABs, which doesn't normally do anything on `Ctreasure:free` unless you force the generator to roll `Crelaxed/restrict:[chars]/nofree/treasure:free` (which is not normally possible with just the UI on the generator page).
 
-Free characters will normally all be placed in treasures in the overworld only. Under `Ctreasure:unsafe`, they can go anywhere. Under `Ctreasure:relaxed`, restricted charaacters will be placed in non-MIAB boxes as well.
+Free characters will normally all be placed in treasures in the overworld only. Under `Ctreasure:unsafe`, they can go anywhere. Under `Ctreasure:relaxed`, restricted characters will be placed in non-MIAB boxes as well.
 
 !!! info "Linked Flags"
     In order to enable any of the `Ctreasure` flags, you must select treasure settings that randomize chest contents. The flag validation will remove your `Ctreasure` flags when any of `Tvanilla`, `Tshuffle`, and `Tempty` are set.
