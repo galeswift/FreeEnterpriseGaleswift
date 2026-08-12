@@ -416,6 +416,7 @@ def apply(env):
             pregame_name_characters.add(assignment[slot])
 
     axtor_map = [0x00] * 0x20           # 112
+    overworld_sprites_map = [0x00] * 0x20
 
     # build substitutions table accordingly, and set metadata objective purposes
     env.meta['available_characters'] = set()
@@ -423,21 +424,34 @@ def apply(env):
     for slot in assignment:
         character = assignment[slot]        
         target_slot = SLOTS[slot]
-        target_axtor_map = axtor_map
+        # the Package char, SandRuby char, Baron Inn char, Zot chars, and the partner char all need piggies
         slot_in_overworld = slot in ['crydia_slot', 'rosa1_slot', 'yang2_slot', 'rosa2_slot', 'kain1_slot', 'kain2_slot']
         if character is None:
+            axtor_map[target_slot] = 0x00
             if slot_in_overworld:
-                target_axtor_map[target_slot] = 0xFE  # placeholder piggy for required overworld NPCs
+                overworld_sprites_map[target_slot] = 0xFE  # placeholder piggy for required overworld NPCs
             else:
-                target_axtor_map[target_slot] = 0x00        
+                overworld_sprites_map[target_slot] = 0x00
         else:
-            target_axtor_map[target_slot] = CHARACTERS[character]        
+            axtor_map[target_slot] = CHARACTERS[character]
+            # re: Ctreasure, we still need piggies even if the characters are somewhere else.
+            slot_in_box = ((slot in ['tellah1_slot', 'edward_slot', 'palom_slot', 'porom_slot', 'tellah2_slot'] and env.options.flags.has('characters_in_treasure_free'))
+                           or (slot in ['crydia_slot', 'rosa1_slot', 'yang1_slot', 'yang2_slot', 'cid_slot', 'rosa2_slot', 
+                                        'kain2_slot', 'arydia_slot', 'edge_slot', 'fusoya_slot', 'kain3_slot'] and env.options.flags.has('characters_in_treasure_earned')))
+            if slot_in_box:
+                if slot_in_overworld:
+                    overworld_sprites_map[target_slot] = 0xFE
+                else:
+                    overworld_sprites_map[target_slot] = 0x00
+            else:
+                overworld_sprites_map[target_slot] = CHARACTERS[character]        
             env.meta['available_characters'].add(character)
             
-        if slot not in ['dkcecil_slot', 'kain1_slot']:
-            env.meta['available_nonstarting_characters'].add(character)
+            if slot not in ['dkcecil_slot', 'kain1_slot']:
+                env.meta['available_nonstarting_characters'].add(character)
 
     env.add_substitution('axtor map', ' '.join([f'{b:02X}' for b in axtor_map]))
+    env.add_substitution('overworld sprites map', ' '.join([f'{b:02X}' for b in overworld_sprites_map]))
 
     # permadeath :S
     if env.options.flags.has('characters_permadeath'):
@@ -460,9 +474,9 @@ def apply(env):
 
     # sub in against-ally battle data
     # TODO: need more complex logic for this so it can be obfuscated
-    for slot in ['crydia_slot', 'yang2_slot']:
+    for slot in ['crydia_slot']: # no yang2_slot fight anymore
         ch = assignment[slot]
-        if ch is None:
+        if ch is None or env.options.flags.has('characters_in_treasure_earned'):
             ch = 'piggy'
 
         monster_gfx_sprite = CHARACTER_MONSTER_GFX[ch][0]

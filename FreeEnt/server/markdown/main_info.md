@@ -245,7 +245,7 @@ The starting partner character (who meets your starting/pre-game screen characte
 - Design/Programming: Galeswift
 - Locations: core_rando.py, character_rando.py, rewards.f4c, treasure_rando.py
 
-These flags take characters from the usual axtor reward slots and place them into treasure chests. `Ctreasure:free/earned` are linked to `Cnofree/noearned`, so free characters are placed in boxes separately from earned characters. Restricted characters will be found in MIABs, which doesn't normally do anything on `Ctreasure:free` unless you force the generator to roll `Crelaxed/restrict:[chars]/nofree/treasure:free` (which is not normally possible with just the UI on the generator page).
+These flags take characters from the usual axtor reward slots and place them into treasure chests. `Ctreasure:free/earned` are linked to `Cnofree/noearned`, so free characters are placed in boxes separately from earned characters. Restricted characters will be found in MIABs, which doesn't normally do anything on `Ctreasure:free` unless you force the generator to roll `Crelaxed/restrict:[chars]/nofree/treasure:free` (which is not normally possible with just the UI on the generator page). Under `Ctreasure:earned`, if a pig would normally replace the character on the overworld, then there will be a pig there.
 
 Free characters will normally all be placed in treasures in the overworld only. Under `Ctreasure:unsafe`, they can go anywhere. Under `Ctreasure:relaxed`, restricted characters will be placed in non-MIAB boxes as well.
 
