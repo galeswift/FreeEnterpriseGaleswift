@@ -39,6 +39,24 @@ CUSTOM_WEAPON_TO_LEGEND = {
     0x118 : 0x210,
     0x119 : 0x210,
 }
+CUSTOM_LEGEND_GENERIC_NAME_ICON = {
+    0x201 : ['sword', 0x2E],
+    0x202 : ['sword', 0x2D],
+    0x203 : ['spear', 0x2F], 
+    0x204 : ['axe', 0x34],
+    0x205 : ['bow', 0x37],
+    0x206 : ['arrow', 0x38],
+    0x207 : ['whip', 0x3A],
+    0x208 : ['dagger', 0x30],
+    0x209 : ['katana', 0x31],
+    0x20A : ['shuriken', 0x32],
+    0x20B : ['chakram', 0x33], # 'boomerang' is too long to sub in-place in the textbox
+    0x20C : ['claw', 0x29],
+    0x20D : ['hammer', 0x35], # replace 0x35 with 0x39 on Truth in Advertising
+    0x20E : ['rod', 0x2A],
+    0x20F : ['staff', 0x2B],
+    0x210 : ['harp', 0x36]
+}
 
 # Lightbringer, Piggy Stick, Abel's Lance, Gigant Axe, Perseus Bow, Perseus Arrow, Mist Whip, Sasuke Katana, Mutsunokami, Rising Sun, Tiger Claw, Dragon Claw, Godhand, Thor's Hammer, Fiery Hammer, Nirvana, Apollo Harp, Loki's Lute
 GOOD_CUSTOM_WEAPONS = [0x103, 0x104, 0x105, 0x106, 0x107, 0x108, 0x109, 0x10B, 0x10C, 0x10E, 0x10F, 0x110, 0x111, 0x112, 0x113, 0x116, 0x117, 0x118, 0x119]
@@ -327,12 +345,19 @@ def apply(env):
         elif custom_legend.id == 0x201:
             # making no changes if it's a holy sword
             return 
-        
+
+        # replace [wrench] with [hammer] on Truth in Advertising and update Tracker menu icon
         if custom_legend.id == 0x20D and 'advertising' in env.meta.get('wacky_challenge', []):
             custom_legend.name = '[hammer]Legend'
+            env.add_substitution('legend icon', '0x39')
+        else:
+            env.add_substitution('legend icon', f'#${CUSTOM_LEGEND_GENERIC_NAME_ICON[custom_legend.id][1]:02X}')
 
         # write item name
         env.add_script(f'text(item name ${CUSTOM_LEGEND_ITEM_ID:02X}) {{{custom_legend.name}}}')
+        # change smithy textboxes
+        env.add_substitution('legend generic name', CUSTOM_LEGEND_GENERIC_NAME_ICON[custom_legend.id][0])
+        env.add_substitution('legend weapon name', custom_legend.name)
 
         # change required equipment bytes: $00 (metallic bit 7/long-range bit 5), sometimes $03 (spell), $04 (elem/status, always 0x3C), $05 (trait weakness), $06 (bow bit 7, arrow bit 6, two-handed bit 5, equip index bits 0-4)
         legend_bytes = [0x80, 0x28, 0x63, 

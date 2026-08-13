@@ -495,6 +495,20 @@ msfpatch {
         beq $+DoneListDraw
         cmp #$01
         beq $+NextLine
+        // %flag spoilsmith on%
+        // check if the Legend item has been obtained
+        // if so, use the correct icon instead 
+        cmp #$2e
+        bne $+NotLegendIcon
+        lda $1500
+        and #$04
+        beq $+UseLightSwordIcon
+        lda {% legend icon %}
+        bra $+NotLegendIcon
+    %UseLightSwordIcon:
+        lda #$2e
+    %NotLegendIcon:
+        // %end%
         sta ($29),y
         iny
         iny
@@ -682,6 +696,18 @@ msfpatch {
         rep #$20
         .mx 0x00
         lda $1681
+        // %flag spoilsmith on%
+        cmp #$1900
+        bne $+NotLegendSpoiler
+        lda $1500
+        and #$0004
+        beq $+DoNotSpoilLegend
+        lda #$1900
+        bra $+NotLegendSpoiler
+    %DoNotSpoilLegend:
+        lda #$fd00
+    %NotLegendSpoiler:
+        // %end%
         lsr a
         tax
         lda #$0000
@@ -761,6 +787,21 @@ msfpatch {
     %Text__Location: "Received from: " [[ 00 ]]  // whitespace for laziness in copy loop
 }
 
+// %flag spoilsmith on%
+// place vanilla Legend item description in table ID $fd
+// (unused in actual inventory stuff; item ID only used for characters
+// in boxes and the description is never read)
+patch($24fe80 bus) {
+00 FA 2E 4D 60 62 60 69 5F CC 8A CD FF FF FF FF
+FF FF FF FF FF FF 31 84 80 C7 89 89 C6 FB 00 00
+00 FA 58 4A 4D CB 83 C1 FF 45 60 5C 67 6E FF 63
+6A 67 74 FF 5F 5C 68 5C 62 60 C1 FF FF FB 00 00
+00 FA 4C 6A 66 66 6A 67 FF 5E 5C 69 FF 6D 60 61
+6A 6D 62 60 FF 6F 63 64 6E FF FF FF FF FB 00 00
+00 FA 6E 72 6A 6D 5F FF 70 6E 64 69 62 FF 42 5F
+5C 68 5C 69 6F C1 FF FF FF FF FF FF FF FB 00 00
+}
+// %end%
 
 msfpatch {
     TrackerMenu__KeyItemText:
