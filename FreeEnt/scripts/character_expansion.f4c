@@ -1672,7 +1672,7 @@ msfpatch {
 // fix the spell learning routine issues regarding spells
 // being learned at the same level but in different lists
 msfpatch{
-    .addr $03f10E
+    .addr $03f10e
         jsr $_SaveLearnedSpellIndex
 
     .addr $03f16e
@@ -1696,11 +1696,50 @@ msfpatch{
         stz $b7
 
     .addr $03f157
-        // jump directly to adding the spell, 
+        // jump directly to adding the spell at $03f176, 
         // no list-checking required
         bra $1d
         // addresses $03f159-$03f16d are now completely
         // unused and can be reclaimed, if desired (29-8=21 bytes)
+}
+
+// prevent learning duplicate spells via level-up
+// (needed for -call:levelup (Rydia))
+msfpatch{
+    // %if ~wacky_misspelled%
+    .addr $03f176
+        jsl $=CharEx__LevelUpSpells_CheckExisting
+        nop
+    // %end%
+
+    // abort if we find the spell we're trying to learn,
+    // otherwise perform displaced commands
+    // preserves X and Y; A is the spell to learn
+    // Misspelled's level-up code jsl's here to add the spell
+    .new
+    CharEx__LevelUpSpells_CheckExisting:
+        // %if ~wacky_misspelled%
+        // grab the spell ID if Misspelled hasn't already
+        lda $b9
+        // %end%
+        phy
+        tay
+        // compare to a table that was created in LevelUpSummary_Init
+        cmp $25b8,y
+        beq $+ExistingSpellAbort
+        sta $1560,x
+        ply
+        bra $+ReturnCheckingExistingSpells
+    %ExistingSpellAbort:
+        // overwrite the learned spell from the list of learned spells
+        // with $FE; we'll check for that value in the level-up summary
+        // so that we don't display a "Learned []" notification for
+        // that spell
+        ply
+        lda #$fe
+        sta $291c,y
+    %ReturnCheckingExistingSpells:
+        rtl
 }
 
 // push spell sets after level up
