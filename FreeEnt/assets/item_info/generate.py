@@ -95,15 +95,17 @@ with open('dp_item_names.txt', 'r') as infile:
 
 FE_DESCRIPTIONS = load_custom_descriptions('custom_descriptions.txt')
 VANILLA_DESCRIPTIONS = load_custom_descriptions('vanilla_descriptions.txt')
-CUSTOM_WEAPON_DESCRIPTIONS =  load_custom_descriptions('gba_descriptions.txt')
+CUSTOM_WEAPON_DESCRIPTIONS = load_custom_descriptions('gba_descriptions.txt')
 FE_DARKPAL_DESCRIPTIONS = load_custom_descriptions('custom_descriptions_dark_paladin.txt')
+CUSTOM_DARKPAL_WEAPON_DESCRIPTIONS = load_custom_descriptions('dp_gba_descriptions.txt')
 CUSTOM_LEGEND_DESCRIPTIONS = load_custom_descriptions('custom_legend_descriptions.txt')
+ADVERTISING_DESCRIPTIONS = load_custom_descriptions('advertising_descriptions.txt')
 
 fe_item_data = []
 vanilla_item_data = []
 fe_dp_item_data = []
 
-with open('PATH-TO-ROM', 'rb') as romfile:
+with open('ff2.sfc', 'rb') as romfile:
     for item_id in range(0xFD):
         is_weapon = (item_id < 0x60)
         is_armor = (item_id >= 0x60 and item_id < 0xB0)
@@ -174,6 +176,8 @@ for custom_weapon in custom_weapons_dbview:
 
 custom_legend_dbview = databases.get_custom_legend_dbview()
 for custom_legend in custom_legend_dbview:
+    if custom_legend.id == 0x19:
+        continue
     data = generate_item_description_data(
         custom_legend.name,
         CUSTOM_LEGEND_DESCRIPTIONS.get(custom_legend.id, None),
@@ -186,4 +190,47 @@ for custom_legend in custom_legend_dbview:
     with open(f'custom_legend_{custom_legend.id:X}_description.bin', 'wb') as outfile:
         outfile.write(bytes(data))
 
-# To output the "Deathbringer" description, need to modify the above custom_weapon code to only care about 0x103 and output to the special file.
+# # output modified "Deathbringer" version of the Lightbringer
+# deathbringer = custom_weapons_dbview.find_one(lambda cw : cw.id == 0x103)
+# deathbringer_data = generate_item_description_data(
+#     "[darksword]Bringer",
+#     CUSTOM_DARKPAL_WEAPON_DESCRIPTIONS.get(0x103, None),
+#     is_weapon=True,
+#         strength=deathbringer.attack,
+#         percent=deathbringer.accuracy,
+#         metallic=deathbringer.metallic,
+#         throwable=deathbringer.throwable,
+#         long_range=deathbringer.longrange
+# )
+# with open(f'dp_custom_weapon_103_description.bin', 'wb') as outfile:
+#     outfile.write(bytes(deathbringer_data))
+
+# create Truth in Advertising descriptions for the Legend Hammer, Thor's/Fiery Hammer, and Gigant Axe
+for advertising_item in ADVERTISING_DESCRIPTIONS:
+    if advertising_item == 0x20D:
+        with open(f'advertising_custom_legend_{advertising_item:X}_description.bin', 'wb') as outfile:
+            custom_legend = custom_legend_dbview.find_one(lambda cl : cl.id == advertising_item)
+            data = generate_item_description_data(
+                custom_legend.name.replace('[wrench]', '[hammer]'),
+                ADVERTISING_DESCRIPTIONS.get(custom_legend.id, None),
+                is_weapon=True,
+                strength=0x28,
+                percent=0x63,
+                metallic=True,
+                long_range=custom_legend.longrange
+            )
+            outfile.write(bytes(data))
+    else:
+        with open(f'advertising_custom_weapon_{advertising_item:X}_description.bin', 'wb') as outfile:
+            custom_weapon = custom_weapons_dbview.find_one(lambda cw : cw.id == advertising_item)
+            data = generate_item_description_data(
+                custom_weapon.name.replace("[wrench]", "[hammer]"),
+                ADVERTISING_DESCRIPTIONS.get(custom_weapon.id, None),
+                is_weapon=True,
+                strength=custom_weapon.attack,
+                percent=custom_weapon.accuracy,
+                metallic=custom_weapon.metallic,
+                throwable=custom_weapon.throwable,
+                long_range=custom_weapon.longrange
+                )
+            outfile.write(bytes(data))
