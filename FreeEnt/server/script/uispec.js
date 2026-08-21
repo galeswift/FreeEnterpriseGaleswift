@@ -4064,7 +4064,8 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "Kstart:hook",
-                    "title": "You start with the Hook"
+                    "title": "You start with the Hook",
+                    "description": "On <em>-starting:underground</em>, setting this flag means you start with the Drill instead of the Hook."
                   },
                   {
                     "flag": "Kstart:luca",
@@ -8705,7 +8706,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Xsmallparty",
             "title": "Award extra EXP when your party is not full",
-            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
+            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size. See <a href='fork_info#xsmallparty''>the fork_info page</a> for the full table of bonuses.",
             "fork": true
           },
           {
@@ -9435,11 +9436,13 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit3:support",
                 "title": "Support kit",
+                "description": "A selection of support-type items that your starting character can use.",
                 "fork": true
               },
               {
                 "flag": "-kit3:heroplusplus",
                 "title": "Hero++ kit",
+                "description": "The Hero and Support kits packaged together.",
                 "fork": true
               },
               {
