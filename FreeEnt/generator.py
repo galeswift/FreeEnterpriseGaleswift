@@ -929,6 +929,7 @@ def build(romfile, options, force_recompile=False):
         
         if options.flags.has('starting_underground'):
             env.add_toggle('doorsrando_starting_underground')
+            env.add_toggle('short_agart_explosion')
 
         doors_rando.apply(env, rando_scope,rando_type)
 
@@ -936,6 +937,9 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/panic_button.f4c')
     if options.flags.has('-forcesealed'):
         env.add_file('scripts/force_sealed_cave_boss.f4c')
+    if not options.flags.has('starting_underground') and (options.flags.has('-panicbutton') or is_doorsrando):
+        env.add_toggle('underworld_open_agart_explosion_pair')
+        env.add_toggle('short_agart_explosion')
 
     # must be last
     wacky_rando.apply(env)

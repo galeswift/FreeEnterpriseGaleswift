@@ -425,7 +425,12 @@ event($1B)  //Kainazzo battle, losing twins
     }
     // %end%
     // %if doorsrando_starting_underground%
-    set #UnderworldOpen
+    [#B #If #not_Flag #flag.UnderworldOpen] {
+        pause 2
+        vfx #AgartMountainExplosion
+        set #UnderworldOpen
+        sound #None
+    }
     // %end%
     // %flag starting_underground on%
     music #Airship fade in

@@ -814,6 +814,8 @@ Many return triggers have been reworked into teleport triggers, to prevent unusu
 
 The Tower Key is now a logical way underground, if you can access Lower Bab-il from the overworld. Sylph Cave MIABs can still be in Yang's room in Sylph Cave, even though the room is disconnected from the rest of Sylph.
 
+In some cases, it is possible to reach underground and then go back to the overworld without flying upwards through the crater at Agart. Because of this, the cutscene of the Agart mountain exploding will play upon accessing the underground, to prevent the visual oddity of being able to fly downwards or upwards through the closed mountain (which happened prior to the v4.6.4.Gale bugfix patch).
+
 ### `-entrancesrando:[category]` {: .h6 }
 
 - Idea: various
@@ -834,6 +836,8 @@ This flag _enables_ the Select+R functionality. Before v4.6.4.Gale, this flag wa
 
 !!! warn "Panic button"
     The Panic button is no longer default on doors/entrances rando! Remember to enable it if you want to use it.
+
+Since the Panic button allows you to warp past the drilling-upwards cutscene back to Mysidia if you complete the Hook route, the cutscene of the Agart mountain exploding will play upon accessing the underground, to prevent the visual oddity of being able to fly downwards through the closed mountain (which happened prior to the v4.6.4.Gale bugfix patch).
 
 ### `-forcesealed` {: .h6 }
 

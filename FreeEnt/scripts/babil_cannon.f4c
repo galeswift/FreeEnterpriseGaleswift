@@ -375,12 +375,18 @@ event($96)  //Jump from Tower of Bab-il, airship escape
         p #Engineer face down
     }
 
+    // %if underworld_open_agart_explosion_pair%
+    [#B #If #not_Flag #flag.UnderworldOpen] {
+        pause 4
+        vfx #AgartMountainExplosion
+        set #UnderworldOpen
+        sound #None
+    }
+    // %end%
     music #LunarSubterrane
     set #ReinforcedEnterprise
     deactivate #AirshipEngineer
     // %if doorsrando%
-    set #UnderworldOpen
-
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 156 201]
     }
