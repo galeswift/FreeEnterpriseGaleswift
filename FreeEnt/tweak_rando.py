@@ -78,16 +78,6 @@ def apply(env):
             hp_byte = 12 + 6 * (level // 8) + 4 * max(0,min(level-30, 13))
             dp_level_up_stats_script = dp_level_up_stats_script + f'patch (${(0x0FC010 + (0x05 * (level-1))):06X} bus) {{ {stats_byte:02X} {hp_byte:02X} }}\n'
         env.add_script(dp_level_up_stats_script)
-        
-        if not 'whatsmygear' in env.meta.get('wacky_challenge',[]):
-            env.add_script('\n'+ 
-                'patch ($0f91d7 bus) { 90 }\n' + # Str/Wis +3 for Light/Chaos Sword
-                'patch ($0f92ff bus) { B3 }\n' # Str/Vit/Wis +15 for Crystal/Hades Sword
-                )
-            wis_wil_swap = '\n'
-            for gear_id in [0x64, 0x6C, 0x71, 0x76, 0x85, 0x8C, 0xA0, 0xA6]:
-                wis_wil_swap += f'patch (${(0x0F9100 + (0x08 * gear_id) + 0x07):06X} bus)' + ' { 10 }\n' # Wis+3 for all Pally/Ancient and Crystal/Hades gear
-            env.add_script(wis_wil_swap)
 
         env.add_file('scripts/darkpaladin.f4c')
 

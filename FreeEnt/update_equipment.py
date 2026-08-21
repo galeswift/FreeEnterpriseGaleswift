@@ -122,6 +122,12 @@ def equipment(env):
         # Crystal sword loses undead-hitting
         equipment_to_change.setdefault(0x3F,{}).update({0x05 : 0x00})
 
+        if not 'whatsmygear' in env.meta.get('wacky_challenge',[]):
+            equipment_to_change.setdefault(0x1A,{}).update({0x07 : 0x90}) # Str/Wis+3 for Light/Chaos Sword
+            equipment_to_change.setdefault(0x3F,{}).update({0x07 : 0xB3}) # Str/Vit/Wis+15 for Crystal/Hades Sword
+            for gear_id in [0x64, 0x6C, 0x71, 0x76, 0x85, 0x8C, 0xA0, 0xA6]:
+                equipment_to_change.setdefault(gear_id,{}).update({0x07 : 0x10}) # Wis+3 for all Pally/Ancient and Crystal/Hades gear
+
     elif env.options.flags.has('rosapaladin'):
         holy_sword_index = 0x1A
         non_paladin_shield_index = 0x04
