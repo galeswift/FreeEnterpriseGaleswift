@@ -686,9 +686,9 @@
 .(Ecantrun)! Can't run from battles
 .<@Erunspoils>^ Earn battle spoils even when running away
 ..<> Spoils penalty
-...(Erunspoils100) 100% EXP and GP earned
-...(Erunspoils50) 50% EXP and GP earned
-...(Erunspoils25) 25% EXP and GP earned
+...(Erunspoils:100) 100% EXP and GP earned
+...(Erunspoils:50) 50% EXP and GP earned
+...(Erunspoils:25) 25% EXP and GP earned
 [Enoexp]! No EXP for random encounters
 [Enogp]!^ No GP for any encounters
 [Enodmachin]!^ Disable D.Machin encounters
@@ -724,7 +724,7 @@
 
 == DOORS
 <>^ Warps Randomization Options
-.(@doorsrando) Randomize Doors
+.(@doorsrando)^ Randomize Doors
 ..<> Doors Randomization Options
 ...(-doorsrando:normal)!           Doors Shuffle without Cross World
 ...(-doorsrando:gated)!          Underworld and Moon Doors shuffled
@@ -1002,11 +1002,11 @@
 ..(-call:vanillagrowup) Vanilla Dwarf Castle summons
 ..(-call:nogrowup)^ Rydia learns no spells in place of summons
 .[-call:noorbs]!^ Call orbs are removed from rewards, boxes, and shops
+[-zotspell]^ Rosa learns a random spell in place of Exit at Zot
 <>^ Alternate starting conditions
 .(-starting:blackchocobo) Start with Black Chocobo but no Enterprise
 .(-starting:underground)! Start underground with a Drill-less Falcon
 [] Restore vanilla behaviors
-.[-vanilla:zot] Vanilla Zot spell
 .[-vanilla:fashion] Vanilla fashion
 .[-vanilla:miabs] Vanilla monster-in-a-box locations
 .[-vanilla:giant] Vanilla Giant

@@ -2,7 +2,7 @@ const _FE_FLAGSPEC = {
     "version": [
         4,
         6,
-        4
+        5
     ],
     "order": [
         "Onone",
@@ -1176,9 +1176,9 @@ const _FE_FLAGSPEC = {
         "Ekeep:behemoths",
         "Edanger",
         "Ecantrun",
-        "Erunspoils100",
-        "Erunspoils50",
-        "Erunspoils25",
+        "Erunspoils:100",
+        "Erunspoils:50",
+        "Erunspoils:25",
         "Enoexp",
         "Enogp",
         "Eno:jdrops",
@@ -1413,19 +1413,17 @@ const _FE_FLAGSPEC = {
         "-call:vanillagrowup",
         "-call:nogrowup",
         "-call:noorbs",
-        "-vanilla:zot",
+        "-zotspell",
         "-vanilla:fashion",
         "-vanilla:miabs",
         "-vanilla:giant",
         "-vintage",
         "-pushbtojump",
-        "-doorsrando",
         "-doorsrando:normal",
         "-doorsrando:gated",
         "-doorsrando:blueplanet",
         "-doorsrando:why",
         "-doorsrando:all",
-        "-entrancesrando",
         "-entrancesrando:normal",
         "-entrancesrando:gated",
         "-entrancesrando:blueplanet",
@@ -2556,9 +2554,9 @@ const _FE_FLAGSPEC = {
         ],
         [
             "Ecantrun",
-            "Erunspoils100",
-            "Erunspoils50",
-            "Erunspoils25"
+            "Erunspoils:100",
+            "Erunspoils:50",
+            "Erunspoils:25"
         ],
         [
             "Eno:jdrops",
@@ -2799,7 +2797,6 @@ const _FE_FLAGSPEC = {
             "-call:nogrowup"
         ],
         [
-            "-doorsrando",
             "-doorsrando:normal",
             "-doorsrando:gated",
             "-doorsrando:blueplanet",
@@ -2807,7 +2804,6 @@ const _FE_FLAGSPEC = {
             "-doorsrando:all"
         ],
         [
-            "-entrancesrando",
             "-entrancesrando:normal",
             "-entrancesrando:gated",
             "-entrancesrando:blueplanet",
@@ -9830,19 +9826,19 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "Erunspoils100",
+            "flag": "Erunspoils:100",
             "offset": 395,
             "size": 3,
             "value": 2
         },
         {
-            "flag": "Erunspoils50",
+            "flag": "Erunspoils:50",
             "offset": 395,
             "size": 3,
             "value": 3
         },
         {
-            "flag": "Erunspoils25",
+            "flag": "Erunspoils:25",
             "offset": 395,
             "size": 3,
             "value": 4
@@ -11222,7 +11218,7 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "-vanilla:zot",
+            "flag": "-zotspell",
             "offset": 511,
             "size": 1,
             "value": 1
@@ -11258,76 +11254,64 @@ const _FE_FLAGSPEC = {
             "value": 1
         },
         {
-            "flag": "-doorsrando",
-            "offset": 517,
-            "size": 3,
-            "value": 1
-        },
-        {
             "flag": "-doorsrando:normal",
             "offset": 517,
             "size": 3,
-            "value": 2
+            "value": 1
         },
         {
             "flag": "-doorsrando:gated",
             "offset": 517,
             "size": 3,
-            "value": 3
+            "value": 2
         },
         {
             "flag": "-doorsrando:blueplanet",
             "offset": 517,
             "size": 3,
-            "value": 4
+            "value": 3
         },
         {
             "flag": "-doorsrando:why",
             "offset": 517,
             "size": 3,
-            "value": 5
+            "value": 4
         },
         {
             "flag": "-doorsrando:all",
             "offset": 517,
             "size": 3,
-            "value": 6
-        },
-        {
-            "flag": "-entrancesrando",
-            "offset": 520,
-            "size": 3,
-            "value": 1
+            "value": 5
         },
         {
             "flag": "-entrancesrando:normal",
             "offset": 520,
             "size": 3,
-            "value": 2
+            "value": 1
         },
         {
             "flag": "-entrancesrando:gated",
             "offset": 520,
             "size": 3,
-            "value": 3
+            "value": 2
         },
         {
             "flag": "-entrancesrando:blueplanet",
             "offset": 520,
             "size": 3,
-            "value": 4
+            "value": 3
         },
         {
             "flag": "-entrancesrando:why",
             "offset": 520,
             "size": 3,
-            "value": 5
+            "value": 4
         },
         {
             "flag": "-entrancesrando:all",
             "offset": 520,
             "size": 3,
-            "value": 6
+            "value": 5
         },
         {
             "flag": "-panicbutton",

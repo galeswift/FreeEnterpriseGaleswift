@@ -1084,8 +1084,8 @@ The Black Chocobo in the Baron Chocobo Forest will be there from the beginning o
 [-starting:underground]
 You start with the Falcon and the Hook at Dwarf Castle. The Drill replaces the Hook in the key item pool and allows you to break the mountain at Agart to get above ground. You obtain the Enterprise by completing Baron Castle, as in the vanilla game.
 
-[-vanilla:zot]
-By default, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell. This flag removes that behavior.
+[-zotspell]
+Under this flag, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell.
 
 [-vanilla:fashion]
 To help distinguish duplicate characters, Free Enterprise randomizes the battle palettes of each character. Enabling this flag preserves each character's original battle colors.

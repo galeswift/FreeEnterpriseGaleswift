@@ -7852,15 +7852,15 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "Erunspoils100",
+                    "flag": "Erunspoils:100",
                     "title": "100% EXP and GP earned"
                   },
                   {
-                    "flag": "Erunspoils50",
+                    "flag": "Erunspoils:50",
                     "title": "50% EXP and GP earned"
                   },
                   {
-                    "flag": "Erunspoils25",
+                    "flag": "Erunspoils:25",
                     "title": "25% EXP and GP earned"
                   }
                 ]
@@ -8048,6 +8048,7 @@ var FLAG_UISPEC = [
             "flag": "@doorsrando",
             "title": "Randomize Doors",
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon81",
@@ -9650,6 +9651,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "-zotspell",
+        "title": "Rosa learns a random spell in place of Exit at Zot",
+        "description": "Under this flag, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell.",
+        "fork": true
+      },
+      {
         "flag": "@anon108",
         "title": "Alternate starting conditions",
         "fork": true,
@@ -9672,11 +9679,6 @@ var FLAG_UISPEC = [
         "flag": "@anon109",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
-          {
-            "flag": "-vanilla:zot",
-            "title": "Vanilla Zot spell",
-            "description": "By default, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell. This flag removes that behavior."
-          },
           {
             "flag": "-vanilla:fashion",
             "title": "Vanilla fashion",

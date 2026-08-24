@@ -761,7 +761,7 @@ These flags change the encounter tables; namely, which encounters are in which g
 
 The Alt Gauntlet is not impacted by these flags.
 
-### `Erunspoils[100/50/25]` {: .h6 }
+### `Erunspoils:[100/50/25]` {: .h6 }
 
 - Idea: CoffeeAndChocobos
 - Design: CoffeeAndChocobos, ScytheMarshall, Wylem
@@ -883,14 +883,14 @@ These flags provide alternate starting conditions for the seed: either starting 
 
 Pre-v4.6.4.Gale, these flags were unavailable. As of v4.6.4.Gale, these flags are available, but incompatible with doors/entrances randomization and gated objectives (the modifications for doors required to make it work with a different starting location are highly non-trivial).
 
-### `-vanilla:zot` {: .h6 }
+### `-zotspell` {: .h6 }
 
 - Idea: IAmDMar (relaying an idea from WeffJebster's chat)
 - Design: IAmDMar, Wylem, Guerin, ScytheMarshall
 - Programming: ScytheMarshall
 - Locations: zot_rando.py, zot_top.f4c
 
-As of v4.6.4.Gale, by default Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). This flag removes that behaviour.
+Under this flag, Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). On v4.6.4.Gale, instead there was `-vanilla:zot`, which removed this behaviour (which was default).
 
 !!! info "Possible Zot spells for Rosa"
     Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
@@ -1542,7 +1542,7 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Programming: ScytheMarshall
 - Locations: rosa_paladin.f4c, mtordeals.f4c, character_expansion.f4c, various command f4c's, generator.py
 
-This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot, subject to `-vanilla:zot` or not). They also swap weapons (except for the FF4A weapons, and the custom Legend weapon under `-smith:spoilsuper`), but *not* armour.
+This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot, subject to `-zotspell` or not). They also swap weapons (except for the FF4A weapons, and the custom Legend weapon under `-smith:spoilsuper`), but *not* armour.
 
 ### `-tweak:cidairship` {: .h6 }
 
