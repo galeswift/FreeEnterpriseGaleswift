@@ -42,7 +42,7 @@ msfpatch {
         // displaced code
         tya
         dec a
-        jml $82ca72
+        jml $02ca72
     %NotRestore:
         lda $34c7
         and #$04
@@ -55,7 +55,7 @@ msfpatch {
         sta $f0ed,x
         jsl $=PaletteCycle__Init
     %Done:
-        jml $82ca79
+        jml $02ca79
 
     .addr $02ca6e
         jml $=Battle_CriticalHitTextColor
