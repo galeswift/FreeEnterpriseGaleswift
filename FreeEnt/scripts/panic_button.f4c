@@ -3,9 +3,10 @@
 
 // %flag starting_blackchocobo on%
 event($17){
-    [#B #If #Flag #flag.TellahFightsEdward]{
-        [#B #PutHovercraft 102 160]
-    }
+    // the Hovercraft starts available
+    // at Kaipo, to allow traversal to
+    // Damcyan/Antlion Cave/etc 
+    [#B #PutHovercraft 124 104]
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 100 160]
     }

@@ -46,11 +46,7 @@ msfpatch {
         nop nop nop nop
 
 }
-// Removing Black Chocobo autofly back to origin
-msfpatch {
-    .addr $009E2B
-        nop nop nop
-}
+
 // Allow Black Chocobo to fly over mountains
 msfpatch {
     .addr $00AA33

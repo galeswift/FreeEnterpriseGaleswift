@@ -2,7 +2,7 @@
 // for Cfuse:[gear/equip] under Cnodupes
 
 // RAM values:
-// $1639: $01 for "filter equipment", $00 for "normal field items"
+// $163D: $01 for "filter equipment", $00 for "normal field items"
 // $1690: item stat byte, to be bit-shifted and unused afterwards
 // $1691: positive stat change
 // $1692: negative stat change
@@ -14,6 +14,17 @@
 // $169f: slot number for char
 
 msfpatch{
+    .def ItemSelectionMenu_Equipment  $163D
+    .def FuseGear_StatByte       $1690
+    .def FuseGear_PosStat        $1691
+    .def FuseGear_NegStat        $1692
+    .def FuseGear_StatPair       $1693
+    .def FuseGear_StrChange      $1694
+    .def FuseGear_CharOffset     $1699
+    .def FuseGear_CharJob        $169B
+    .def FuseGear_JobBits        $169D
+    .def FuseGear_CharSlot       $169F
+
     FuseGearDupes:
         // Rewards__CurrentValueLo is the axtor code
 
@@ -27,14 +38,14 @@ msfpatch{
         // %end%
 
         // open menu for equipment fusion:
-        // open the inventory ($1639 is the flag for "check equipment, not field items"),
+        // open the inventory ($_ItemSelectionMenu_Equipment is the flag for "check equipment, not field items"),
         // ID stat changes, display confirm choice option,
         // return to menu if no,
         // apply the stat changes if yes, display a result message, return short
         // can only exit out entirely without fusing if pressing b in choice menu to do nothing
 
         lda #$01
-        sta $1639
+        sta $_ItemSelectionMenu_Equipment
 
         lda #$5a // refers to $15a since we're going to call the upper half via $b1e1 
         sta $b2
@@ -44,24 +55,24 @@ msfpatch{
         jsl $=TextBuffer__LoadAxtorName
 
         // for later, find the character in the party and save
-        // their X offset to $1699-169a, job class in $169b-c,
-        // slot number in $169f
+        // their X offset to $_FuseGear_CharOffset (2 bytes), job class in $_FuseGear_CharJob (2 bytes),
+        // slot number in $_FuseGear_CharSlot
         ldx #$0000
-        stz $169f
-        stx $169b
+        stz $_FuseGear_CharSlot
+        stx $_FuseGear_CharJob
     %FindFuseCharLoopStart:
         lda $1000,x
         and #$1f
         cmp $_Rewards__CurrentValueLo
         beq $+FoundFuseChar
         jsr $_Util__XPlus40
-        inc $169f
+        inc $_FuseGear_CharSlot
         bra $-FindFuseCharLoopStart
     %FoundFuseChar:
-        stx $1699
+        stx $_FuseGear_CharOffset
         lda $1001,x
         and #$0f
-        sta $169b
+        sta $_FuseGear_CharJob
 
         // load, display, close the initial prompt textbox
         ldx #$b1e1
@@ -133,35 +144,35 @@ msfpatch{
         lda $0f9107,x
 
         // we have (maybe all-0s) stat changes! so read the byte and
-        // set $1690 as the full stats byte,
-        // $1691/$1692 as the stat increases/decreases,
-        // $1693 as the offset for which pair of changes it is,
-        // and $1694-1698 as the actual numbers for the five stats,
+        // set $_FuseGear_StatByte as the full stats byte,
+        // $_FuseGear_PosStat/$_FuseGear_NegStat as the stat increases/decreases,
+        // $_FuseGear_StatPair as the offset for which pair of changes it is,
+        // and $_FuseGear_StrChange,y ($1694-$1698) as the actual numbers for the five stats,
         // for ease of recall  
-        sta $1690
+        sta $_FuseGear_StatByte
         and #$07
-        sta $1693
+        sta $_FuseGear_StatPair
         asl a
         tax
         lda $13feac,x
-        sta $1691
+        sta $_FuseGear_PosStat
         lda $13fead,x
-        sta $1692
+        sta $_FuseGear_NegStat
 
         // write the stats text to buffers 2-6
-        // and assign the correct stat change to $1694-8
+        // and assign the correct stat change to $_FuseGear_StrChange,y
         ldx #$0002
         ldy #$0000
     %StatLoopStart:
-        asl $1690
+        asl $_FuseGear_StatByte
         bcc $+NegStatText
         // if the carry is set, then we have positive stats/stat text
-        lda $1691
-        sta $1694,y
+        lda $_FuseGear_PosStat
+        sta $_FuseGear_StrChange,y
         bra $+EndStat
     %NegStatText:
-        lda $1692
-        sta $1694,y
+        lda $_FuseGear_NegStat
+        sta $_FuseGear_StrChange,y
     %EndStat:
         phx
         phy
@@ -201,14 +212,14 @@ msfpatch{
         jmp $_SelectFusionItem
 
     %ApplyStatChanges:
-        // pull X from $1699
-        ldx $1699
+        // pull X from $_FuseGear_CharOffset
+        ldx $_FuseGear_CharOffset
         ldy #$0000
 
         // add the appropriate stat change to each stat in order
         // X is the appropriate stat offset
     %AddStatLoop:
-        lda $1694,y
+        lda $_FuseGear_StrChange,y
         clc
         adc $100f,x
 
@@ -280,17 +291,17 @@ msfpatch{
 
         // update character stats; needs to be done last,
         // because the text buffers will get wiped
-        lda $169f
+        lda $_FuseGear_CharSlot
         jsl $038006
 
     DoneFusion:
-        stz $1639
+        stz $_ItemSelectionMenu_Equipment
         rts
 }
 
 // modify the lower_dialog_inventory function
 // to conditionally switch to "check for equipment" mode
-// choose $1639 for the flag for that 
+// choose $_ItemSelectionMenu_Equipment for the flag for that 
 // (1 for equipment, 0 for field items)
 // note that this is just the "init dialog inventory"
 // function; we still need to run through the bank00 functions
@@ -306,7 +317,7 @@ msfpatch{
         ldx #$0000
         ldy #$0000
 
-        lda $1639
+        lda $_ItemSelectionMenu_Equipment
         bne $+NextPrep
         // return to usual lower dialog inventory routine
         jml $00b0ab
@@ -314,25 +325,25 @@ msfpatch{
     %NextPrep:
         // %flag characters_fuse_equip_bonuses on%
         // ID the character we're checking, put the resulting
-        // bit field in $169d-169e, return $169b-c to the class number
-        lda $169b
+        // bit field in $_FuseGear_JobBits (2 bytes), return $_FuseGear_CharJob (2 bytes) to the class number
+        lda $_FuseGear_CharJob
         pha
         rep #$20
         .mx 0x00
         lda #$0001
     %FuseEquipLoopStart:
-        dec $169b
+        dec $_FuseGear_CharJob
         bmi $+FoundClassBit
         asl a
         bra $-FuseEquipLoopStart
     %FoundClassBit:
-        sta $169d
+        sta $_FuseGear_JobBits
         lda #$0000
         sep #$20
         .mx 0x20
         pla
-        sta $169b
-        stz $169c
+        sta $_FuseGear_CharJob
+        stz $_(FuseGear_CharJob + 1)
         // %end%        
 
     %CheckEquipment:
@@ -365,7 +376,7 @@ msfpatch{
         asl a
         tax
         lda $0fa550,x
-        and $169d
+        and $_FuseGear_JobBits
         sep #$20
         .mx 0x20
         bne $+Equippable
@@ -393,7 +404,7 @@ msfpatch{
     // load appropriate sign and number
     // for a specific stat and byte
     // param: X = target buffer,
-    // use $1693 for the offset,
+    // use $_FuseGear_StatPair for the offset,
     // carry = set for pos, clear for neg
     FuseGearDupes__LoadStatText:
         stx $_TextBuffer__TargetBuffer
@@ -401,7 +412,7 @@ msfpatch{
 
         // get the offset for the correct text,
         // (stat byte & #$07) * 6, possibly plus 3, then +16
-        lda $1693
+        lda $_FuseGear_StatPair
         asl a
         sta $_TextBuffer__SourceAddrLo
         asl a

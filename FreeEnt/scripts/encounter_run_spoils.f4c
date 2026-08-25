@@ -1,4 +1,4 @@
-// under Erunspoils[100/50/25], allow earning
+// under Erunspoils:[100/50/25], allow earning
 // GP and/or Exp even if running away from battle
 msfpatch {
     .addr $03871e
@@ -41,7 +41,7 @@ msfpatch{
     %NoRunPenalty:
         // displace
         clc
-        lda $3594
+        lda $16a0
         rtl        
 }
 // %end%

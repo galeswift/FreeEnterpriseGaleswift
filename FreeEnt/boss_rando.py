@@ -830,6 +830,8 @@ def apply(env):
                                         weights = (1, 0.05, 0.07)
                                         allowed_table_entries = [t for t in STATS_TABLE if t[0] <= max(0,stats_ideal[0] - (monster_scaled_stats[stat][0] // 2 if level_ratio >= 1 else 0))]
                                         closest_index, closest_value = _get_closest_stat(stats_ideal, allowed_table_entries, weights)
+                                        # get the correct index from the full table
+                                        closest_index = STATS_TABLE.index(closest_value)
                                     else:
                                         # check if -monsterevade is on: if it is, go back to base defense. if not, use
                                         # a simulated 0-0-N defense value to mimic what the game actually loads at the start of battle
@@ -1217,6 +1219,8 @@ if __name__ == '__main__':
                                             weights = (1, 0.05, 0.07)
                                             allowed_table_entries = [t for t in STATS_TABLE if t[0] <= max(0,stats_ideal[0] - (monster_scaled_stats[stat][0] // 2 if level_ratio >= 1 else 0))]
                                             closest_index, closest_value = _get_closest_stat(stats_ideal, allowed_table_entries, weights)
+                                            # get the correct index from the full table
+                                            closest_index = STATS_TABLE.index(closest_value)
                                         else:
                                             # check if -monsterevade is on: if it is, go back to base defense. if not, use
                                             # a simulated 0-0-N defense value to mimic what the game actually loads at the start of battle

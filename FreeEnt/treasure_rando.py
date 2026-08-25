@@ -350,9 +350,15 @@ def apply(env):
     if env.options.flags.has('characters_in_treasure_earned'):
         character_in_chest_slots += character_rando.EARNED_SLOTS         
         put_characters_in_chests = True
+        if env.options.flags.has('objective_mode_classicgiant'):
+            # this character slot does not exist, so do not assign it
+            # (core_rando already ignores this slot)
+            character_in_chest_slots.remove('kain3_slot')
 
     if not env.options.flags.has('characters_in_treasure_relaxed'):
-        for slot in character_rando.RESTRICTED_SLOTS:
+        # when not on Ctreasure:relaxed, every restricted character ends up in a miab,
+        # so we do not assign them here (handled in core_rando)
+        for slot in env.meta['restricted_character_slots']:
             if slot in character_in_chest_slots:
                 character_in_chest_slots.remove(slot)
 
@@ -373,7 +379,8 @@ def apply(env):
                 max_overworld_chests -= 1            
            
             character_dummy = env.assignments[character_rando.SLOTS[slot_name]]           
-
+            # if not character_dummy:
+                
             treasure_slug = treasure_assignment.get_remap(t)
             treasure_map = treasure_slug.split(" ")[0]
             treasure_idx = treasure_slug.split(" ")[1]

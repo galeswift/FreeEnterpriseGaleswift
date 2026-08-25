@@ -73,3 +73,21 @@ msfpatch {
         jsl $=ExtraItemDescriptions__BuyMenuUpdate  // but first also do this!
         jml $01c45c
 }
+
+// ensure that the first item is zeroed out before starting,
+// so that going into an empty shop after visiting a non-empty shop
+// does not trick the above routine into letting you buy an item
+// from an empty shop 
+msfpatch{
+    .addr $01c49f
+        jsl $=EmptyShopZeroOutFirstItem
+
+    .new
+    EmptyShopZeroOutFirstItem:
+        stz $1b55
+
+        // displaced
+        sta $5c
+        ldy $41
+        rtl
+}

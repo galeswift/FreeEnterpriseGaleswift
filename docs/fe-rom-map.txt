@@ -77,7 +77,8 @@ Fork modifications via fork devs.
 21:F500 - 21:F5FF   : randomizer - boss XP limit break table
 21:F600 - 21:F67F   : randomizer - Fusoya challenge spells
 21:F680 - 21:F6FF  F: randomizer - Fusoya challenge HP growth
-21:F700 - 21:F73F   : randomizer - lookup table of axtor -> actor for stats/gear/commands
+21:F700 - 21:F71F   : randomizer - lookup table of axtor -> actor for stats/gear/commands
+21:F720 - 21:F73F  F: randomizer - lookup table of axtor -> overworld sprites (e.g. piggies)
 21:F740 - 21:F76F   : randomizer - wacky sprite data
 21:F770 - 21:F78F   : randomizer - lookup table of axtor -> alt palette index
 21:F790 - 21:F7AF   : randomizer - lookup table of name distinguisher symbols

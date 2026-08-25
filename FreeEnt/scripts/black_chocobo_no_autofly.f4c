@@ -1,0 +1,5 @@
+// Removing Black Chocobo autofly back to origin
+msfpatch {
+    .addr $009E2B
+        nop nop nop
+}

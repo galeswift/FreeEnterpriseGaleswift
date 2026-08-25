@@ -44,6 +44,7 @@ msfpatch{
 msfpatch{
     .addr $03ed84
         jsl $=OverflowProtection__GP
+        nop nop
 
     .new
     OverflowProtection__GP:

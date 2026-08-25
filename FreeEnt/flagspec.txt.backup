@@ -56,7 +56,7 @@ Sno:j Sno:apples Sno:sirens Sno:vampires Sno:hrglass Sno:bacchus Sno:starveil Sn
 Bvanilla Bstandard/Bpro/Bfriendly/Bcruel/Beasy Bnofree Bunsafe Balt:gauntlet Bstats:j/Bstats:et Bslots Bzones
 Brestrict:summon Brestrict:moon Brestrict:zot Brestrict:hook Brestrict:giant Brestrict:sealedcave Brestrict:package 
 Bwhyburn/Bwhichburn/Bitburns Bflatvern Bwhybez Bwhichbez Bwoahdin Bthehades Bspellpower Bnewscriptstats Bremove:officer_slot Bremove:kingqueen_slot
-Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils100/Erunspoils50/Erunspoils25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
+Etoggle Evanilla/Ereduce/Enorepeats/Enoencounters Ekeep:doors Ekeep:behemoths Edanger Ecantrun/Erunspoils:100/Erunspoils:50/Erunspoils:25 Enoexp Enogp Eno:jdrops/Eno:sirens Enodmachin Enomacgiant
 Etable:shuffle7/Etable:shuffle8/Etable:relocatedish/Etable:relocated/Etable:wildish/Etable:wild/Etable:chaos/Etable:uniquelygood
 Hrandom Hvanilla Hnone
 Gnone Gdupe Gmp Gwarp Glife/Glife2f/Gnolifer Gsylph Gbackrow G64
@@ -97,14 +97,14 @@ Znocosplay
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
 -call:levelup/-call:all -call:vanillahobs -call:vanillagrowup/-call:nogrowup -call:noorbs
--vanilla:zot
+-zotspell
 -vanilla:fashion
 -vanilla:miabs
 -vanilla:giant
 -vintage
 -pushbtojump
--doorsrando/-doorsrando:normal/-doorsrando:gated/-doorsrando:blueplanet/-doorsrando:why/-doorsrando:all
--entrancesrando/-entrancesrando:normal/-entrancesrando:gated/-entrancesrando:blueplanet/-entrancesrando:why/-entrancesrando:all
+-doorsrando:normal/-doorsrando:gated/-doorsrando:blueplanet/-doorsrando:why/-doorsrando:all
+-entrancesrando:normal/-entrancesrando:gated/-entrancesrando:blueplanet/-entrancesrando:why/-entrancesrando:all
 -panicbutton
 -forcesealed
 -wacky:random/-wacky:random2/-wacky:random3/-wacky:random4/-wacky:random5/-wacky:random6
@@ -438,7 +438,7 @@ Xsmallparty      experience_small_party
 -call:vanillagrowup  vanilla_dwarf_summons
 -call:nogrowup       no_dwarf_summons
 -call:noorbs         no_call_orbs
--vanilla:zot         vanilla_zot
+-zotspell            random_zot_spell
 -vanilla:fashion     vanilla_fashion
 -vanilla:miabs       vanilla_miabs
 -vanilla:giant       vanilla_giant

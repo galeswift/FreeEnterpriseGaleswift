@@ -221,7 +221,7 @@ Tier 1 spells are now instant cast (previously ATB Delay of 2), tier 2 have an A
 
 These new "permadeath" options allow for characters to leave your party when they end a battle swooned without being inaccessible for the rest of the game. Under `Cbrieflydead`, a swooned character will simply be available in the Tower of Wishes after they leave the party, with their equipment and stats as-is (including still being swooned when you pick them up). Under `Cmostlydead`, a swooned character will be sent to the Tower of Wishes and be _reinitialized_, to base level and equipment. 
 
-Under `Cbye`, both options operate as the usual permadeath. When a character's equipment would be otherwise inaccessible, the Legend Sword (if equipped) will be forcibly placed into your inventory.
+Under `Cbye`, the characters are unavailable in the Tower of Wishes. The only way to retrieve them is on `Cnodupes`, where the (single copy of the) character would join your party again: on `Cbrieflydead`, they will still be swooned but have their levels/stats/equipment/spells, and on `Cmostlydead` they will be reinitialized (meaning it's effectively the same as `Cpermadea[th/der]`). When a character's equipment would be otherwise inaccessible, the Legend Sword (if equipped) will be forcibly placed into your inventory.
 
 ### `Csuperhero` {: .h6 }
 
@@ -245,9 +245,9 @@ The starting partner character (who meets your starting/pre-game screen characte
 - Design/Programming: Galeswift
 - Locations: core_rando.py, character_rando.py, rewards.f4c, treasure_rando.py
 
-These flags take characters from the usual axtor reward slots and place them into treasure chests. `Ctreasure:free/earned` are linked to `Cnofree/noearned`, so free characters are placed in boxes separately from earned characters. Restricted characters will be found in MIABs, which doesn't normally do anything on `Ctreasure:free` unless you force the generator to roll `Crelaxed/restrict:[chars]/nofree/treasure:free` (which is not normally possible with just the UI on the generator page).
+These flags take characters from the usual axtor reward slots and place them into treasure chests. `Ctreasure:free/earned` are linked to `Cnofree/noearned`, so free characters are placed in boxes separately from earned characters. Restricted characters will be found in MIABs, which doesn't normally do anything on `Ctreasure:free` unless you force the generator to roll `Crelaxed/restrict:[chars]/nofree/treasure:free` (which is not normally possible with just the UI on the generator page). Under `Ctreasure:earned`, if a pig would normally replace the character on the overworld, then there will be a pig there.
 
-Free characters will normally all be placed in treasures in the overworld only. Under `Ctreasure:unsafe`, they can go anywhere. Under `Ctreasure:relaxed`, restricted charaacters will be placed in non-MIAB boxes as well.
+Free characters will normally all be placed in treasures in the overworld only. Under `Ctreasure:unsafe`, they can go anywhere. Under `Ctreasure:relaxed`, restricted characters will be placed in non-MIAB boxes as well.
 
 !!! info "Linked Flags"
     In order to enable any of the `Ctreasure` flags, you must select treasure settings that randomize chest contents. The flag validation will remove your `Ctreasure` flags when any of `Tvanilla`, `Tshuffle`, and `Tempty` are set.
@@ -761,7 +761,7 @@ These flags change the encounter tables; namely, which encounters are in which g
 
 The Alt Gauntlet is not impacted by these flags.
 
-### `Erunspoils[100/50/25]` {: .h6 }
+### `Erunspoils:[100/50/25]` {: .h6 }
 
 - Idea: CoffeeAndChocobos
 - Design: CoffeeAndChocobos, ScytheMarshall, Wylem
@@ -814,6 +814,8 @@ Many return triggers have been reworked into teleport triggers, to prevent unusu
 
 The Tower Key is now a logical way underground, if you can access Lower Bab-il from the overworld. Sylph Cave MIABs can still be in Yang's room in Sylph Cave, even though the room is disconnected from the rest of Sylph.
 
+In some cases, it is possible to reach underground and then go back to the overworld without flying upwards through the crater at Agart. Because of this, the cutscene of the Agart mountain exploding will play upon accessing the underground, to prevent the visual oddity of being able to fly downwards or upwards through the closed mountain (which happened prior to the v4.6.4.Gale bugfix patch).
+
 ### `-entrancesrando:[category]` {: .h6 }
 
 - Idea: various
@@ -828,12 +830,14 @@ Entrances to field maps from the various overworld maps are randomized within th
 - Programming: jayp12323, Wylem, ScytheMarshall (the latter two for figuring out the initial graphical glitch)
 - Locations: panic_button.f4c
 
-When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button". On `-starting:` flags, you will be placed at your starting location instead, whatever it is, and placed in your starting vehicle (the Falcon or on foot).
+When doors or entrances are randomized, pressing Select and R at the same time while you have movement control in a field map triggers an event that puts you on the Enterprise in the air above Mysidia, and if you have the Hovercraft and/or the Big Whale, they will also be warped to that peninsula. This maneuver is colloquially called the "Panic button". On `-starting:` flags, you will be placed at your starting location instead, whatever it is, and placed in your starting vehicle (the Falcon or on foot). Depending on the `-starting:` flag, other vehicles will be moved as well (on `-starting:blackchocobo`, the Hovercraft will be moved to its default location at Kaipo).
 
 This flag _enables_ the Select+R functionality. Before v4.6.4.Gale, this flag was named `-calmness` and _disabled_ the functionality, and was only relevant on doors/entrances rando. Now, this flag can be enabled on any seed. 
 
 !!! warn "Panic button"
     The Panic button is no longer default on doors/entrances rando! Remember to enable it if you want to use it.
+
+Since the Panic button allows you to warp past the drilling-upwards cutscene back to Mysidia if you complete the Hook route, the cutscene of the Agart mountain exploding will play upon accessing the underground, to prevent the visual oddity of being able to fly downwards through the closed mountain (which happened prior to the v4.6.4.Gale bugfix patch).
 
 ### `-forcesealed` {: .h6 }
 
@@ -879,14 +883,14 @@ These flags provide alternate starting conditions for the seed: either starting 
 
 Pre-v4.6.4.Gale, these flags were unavailable. As of v4.6.4.Gale, these flags are available, but incompatible with doors/entrances randomization and gated objectives (the modifications for doors required to make it work with a different starting location are highly non-trivial).
 
-### `-vanilla:zot` {: .h6 }
+### `-zotspell` {: .h6 }
 
 - Idea: IAmDMar (relaying an idea from WeffJebster's chat)
 - Design: IAmDMar, Wylem, Guerin, ScytheMarshall
 - Programming: ScytheMarshall
 - Locations: zot_rando.py, zot_top.f4c
 
-As of v4.6.4.Gale, by default Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). This flag removes that behaviour.
+Under this flag, Rosa learns a white magic spell at the top of Zot, chosen from a list of good spells, and learns Exit at the level she would normally learn the chosen spell (unless the spell is Exit itself). On v4.6.4.Gale, instead there was `-vanilla:zot`, which removed this behaviour (which was default).
 
 !!! info "Possible Zot spells for Rosa"
     Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
@@ -1024,7 +1028,7 @@ Note that under this flag or under the Omnidextrous wacky flag, any sort of play
 - Programming: ScytheMarshall
 - Locations: custom_weapon_rando.py, custom_weapon_support.f4c
 
-This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power, 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item). It will also match animations. The full list of additional properties is below:
+This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power, 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item), and becomes usable only by characters that can equip the FF4A weapon that it will become (only Kain can equip the Legend Spear, and so on). It will also match animations. The full list of additional properties is below:
 
 !!! info "Alternate Legend weapon properties"
     - Legend Claw, for Tiger Fang, Dragon Claw, Godhand: hits Undead weakness.
@@ -1038,7 +1042,7 @@ This flag turns the Legend Sword into the same weapon type as the FF4 Advance we
     - Legend Dagger, for Triton's Dagger: cast Virus upon use as an item.
     - Legend Whip, for Mist Whip: long-range, inflicts Paralyze.
     - Legend Axe, for Gigant Axe: two-handed.
-    - Legend Star, for Scrap Metal: long-range, hits air weakness (but is not Dartable).
+    - Legend Star, for Scrap Metal: long-range, hits air weakness (but is not Dartable; Edge just equips it).
     - Legend Boomerang, for Rising Sun: long-range, hits air weakness.
     - Legend Harp, for Requiem Harp, Apollo's Harp, Loki's Lute: long-range, two-handed, inflicts Blind.
     - Legend Hammer, for Thor's Hammer, Fiery Hammer: two-handed, hits Machine weakness.
@@ -1495,7 +1499,7 @@ The "Tweak" flags are miscellaneous flags that modify the game in fairly large w
 - Design/Programming: ScytheMarshall
 - Locations: give_kain_magic.f4c
 
-This flag gives Kain a relatively small amount of MP and MP growth up to around level 50, a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Because Lance is scaled more to Kain's Will instead of an actual white mage's stats, every character that gets Sight will have Lance removed from their spell list because the spell is too strong. 
+This flag gives Kain a relatively small amount of MP and MP growth (2 at every level), a set of black magic based roughly on what his spears can do (Fire2, Ice2, Lit2, and can learn Weak), and a set of white magic (Cure2, Heal, a new spell "Lance", and can learn Blink, Bersk, White). Lance is a fairly strong holy elemental drain spell that replaces Sight. Because Lance is scaled more to Kain's Will instead of an actual white mage's stats, every character that gets Sight will have Lance removed from their spell list because the spell is too strong. Enjoy what happens on Misspelled, though!
 
 ### `-tweak:harmspell` {: .h6 }
 
@@ -1538,7 +1542,7 @@ This flag makes widespread changes to Paladin Cecil's stats, equipment, and abil
 - Programming: ScytheMarshall
 - Locations: rosa_paladin.f4c, mtordeals.f4c, character_expansion.f4c, various command f4c's, generator.py
 
-This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot, subject to `-vanilla:zot` or not). They also swap weapons (except for the FF4A weapons, and the custom Legend weapon under `-smith:spoilsuper`), but *not* armour.
+This flag effectively swaps Paladin Cecil and Rosa's job classes, without changing their stats. Pally Cecil gets Rosa's commands and spell list (with Exit by level-up), and Rosa gets Pally Cecil's commands (with auto-Cover) and a reduced spell list (with Exit still from Zot, subject to `-zotspell` or not). They also swap weapons (except for the FF4A weapons, and the custom Legend weapon under `-smith:spoilsuper`), but *not* armour.
 
 ### `-tweak:cidairship` {: .h6 }
 

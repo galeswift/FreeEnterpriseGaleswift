@@ -179,12 +179,18 @@ msfpatch {
         jsr $_EvEx__Placement_SetInvisibleImpl
         jmp $_EvEx__End
 
-
+// these events both activate and set the coordinates and
+// map plane for the specified vehicle. because they also
+// activate, they should only be used without checking
+// if the vehicle is active when the vehicle needs to be
+// *made* active without loading the map while on the vehicle.
     EvEx__PutEnterprise:
         jsr $_EvEx__ReadParameters_2
         ldx $_EvEx__Param1
         stx $171d
         stz $171f  // hardcode: put on overworld
+        lda #$01
+        sta $171c
         jmp $_EvEx__End
 
     EvEx__PutWhale:
@@ -201,6 +207,8 @@ msfpatch {
         ldx $_EvEx__Param1
         stx $1719
         stz $171b  // hardcode: put on overworld
+        lda #$01
+        sta $1718
         jmp $_EvEx__End
 
     EvEx__PutFalcon:
@@ -208,6 +216,8 @@ msfpatch {
         ldx $_EvEx__Param1
         stx $1721
         stz $1723  // hardcode: put on overworld
+        lda #$01
+        sta $1720
         jmp $_EvEx__End    
 
     EvEx__PartyLeaderCecil:

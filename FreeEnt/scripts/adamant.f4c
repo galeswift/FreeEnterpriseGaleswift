@@ -201,8 +201,12 @@ This! The Adamant!
 
 As a token of my
 gratitude, I'll make your
-old sword into something
+old {% legend generic name : sword %} into something
 special!
+}
+
+text(map #SmithyRoom message 2) {
+Handed the {% legend weapon name : [lightsword]Legend %}.
 }
 
 // make Excalibur immediately available without waiting

@@ -83,9 +83,6 @@ EASY_SLOTS = ['yang1_slot', 'yang2_slot']
 HARD_SLOTS = [s for s in SLOTS if s not in (FREE_SLOTS + EASY_SLOTS + STARTING_SLOTS)]
 EARNED_SLOTS = EASY_SLOTS + HARD_SLOTS
 
-RESTRICTED_CHARACTERS = []
-RESTRICTED_SLOTS = []
-FINAL_ASSIGNMENTS = {}
 PREGAME_NAMING_SPRITE_TABLE = [
     0x0E, 0x36, 0xB0, 0x38, 0x16, 0x36, 0xB1, 0x38, 0x0E, 0x3E, 0xB2, 0x38, 0x16, 0x3E, 0xB3, 0x38, 
     0x0E, 0x46, 0xB4, 0x38, 0x16, 0x46, 0xB5, 0x38, 0x0E, 0x56, 0xB6, 0x38, 0x16, 0x56, 0xB7, 0x38, 
@@ -113,6 +110,7 @@ def apply(env):
     requested_start_characters = []
     disrequested_start_characters = []    
     start_character = None
+    restricted_characters = []
 
     for ch in CHARACTERS:
         if env.options.flags.has(f'Cstart:{ch}'):
@@ -120,10 +118,10 @@ def apply(env):
         if env.options.flags.has(f'Cstart:not_{ch}'):
             disrequested_start_characters.append(ch)
         if env.options.flags.has(f'Crestrict:{ch}'):
-            RESTRICTED_CHARACTERS.append(ch)
+            restricted_characters.append(ch)
     
-    if not RESTRICTED_CHARACTERS:
-        RESTRICTED_CHARACTERS.extend(['fusoya', 'edge'])       
+    if not restricted_characters:
+        restricted_characters.extend(['fusoya', 'edge'])       
 
     if requested_start_characters and disrequested_start_characters:
         raise Exception("Cannot specify both inclusions and exclusions for starting character pool")
@@ -189,7 +187,7 @@ def apply(env):
                 allowed_starting_characters = list(CHARACTERS)
             else:
                 if env.options.flags.has('characters_standard'):
-                    allowed_starting_characters = sorted(list(set(allowed_characters) - set(RESTRICTED_CHARACTERS)))
+                    allowed_starting_characters = sorted(list(set(allowed_characters) - set(restricted_characters)))
                     if not allowed_starting_characters:
                         allowed_starting_characters = list(allowed_characters)
                 else:
@@ -218,7 +216,7 @@ def apply(env):
                 allowed_characters.append(char)
 
         # remove hero from further allowance, if able
-        if (env.options.flags.has('hero_challenge') or env.options.flags.has('superhero_challenge')) and start_character in allowed_characters and len(allowed_characters) > 1 and start_character not in env.meta['objective_required_characters']:
+        if (env.options.flags.has('hero_challenge') or env.options.flags.has('superhero_challenge')) and start_character in allowed_characters and len(allowed_characters) > 1 and start_character not in env.meta['objective_required_characters'] and len(allowed_characters) > mandatory_objective_required_char_count:
             allowed_characters.remove(start_character)
 
         pregame_name_characters = set(allowed_characters)
@@ -249,27 +247,6 @@ def apply(env):
 
             allowed_characters = sorted(list(distinct_characters))        
 
-        elif mandatory_objective_required_char_count > 0:
-            # also pad the character list in this case; if Cdistinct is on, we're guaranteed to have at least this number of distinct characters
-            forced_characters = sorted(list(env.meta['objective_required_characters']))
-            distinct_characters = set()
-            for c in forced_characters:
-                distinct_characters.add(c)    
-
-            distinct_characters.add(start_character)
-
-            if len(distinct_characters) < mandatory_objective_required_char_count:
-                remaining_characters = [ch for ch in allowed_characters if ch not in distinct_characters]
-                for c in env.rnd.sample(remaining_characters, min(len(remaining_characters), mandatory_objective_required_char_count - len(distinct_characters))):
-                    distinct_characters.add(c)
-
-            # after pool is filled, prevent reassignment of starting character if not allowed by flags
-            # and not required by objectives... which includes potentially having a duplicate of the hero available if that's the only way
-            # to successfully fill all of the objectives, so only remove if that doesn't cause us to run into issues.
-            if start_character not in forced_characters and start_character not in allowed_characters and len(distinct_characters) > 1 and len(distinct_characters) > mandatory_objective_required_char_count:
-                distinct_characters.remove(start_character)
-
-            allowed_characters = sorted(list(distinct_characters))
 
         # remove starting slot now that the start character is specified, but after we've already
         # done the total available character count
@@ -301,14 +278,14 @@ def apply(env):
 
             # pre-cull characters if Cnoearned is on            
             if env.options.flags.has('no_earned_characters') and not env.options.flags.has('characters_in_treasure_earned'):
-                valid_RESTRICTED_CHARACTERS = list(RESTRICTED_CHARACTERS)
+                valid_restricted_characters = list(restricted_characters)
                 while len(characters) > len(assignable_slots):
                     # remove restricted characters first
-                    if valid_RESTRICTED_CHARACTERS and not env.options.flags.has('characters_relaxed'):
-                        ch = env.rnd.choice(valid_RESTRICTED_CHARACTERS)
+                    if valid_restricted_characters and not env.options.flags.has('characters_relaxed'):
+                        ch = env.rnd.choice(valid_restricted_characters)
                         if ch in characters and ch not in env.meta['objective_required_characters']:
                             characters.remove(ch)
-                        valid_RESTRICTED_CHARACTERS.remove(ch)
+                        valid_restricted_characters.remove(ch)
                     else:
                         # remove any; it doesn't matter whom, as long as they aren't objective-required.
                         ch_options = [c for c in characters if c not in env.meta['objective_required_characters']]
@@ -317,11 +294,11 @@ def apply(env):
                 # obscure edge case for Cnopartner/nofree + Omode:classicgiant (but not Cnoearned): 
                 # we can have one too many characters, so pre-cull one depending on if there are 
                 # too many restricted characters for gated slots
-                valid_RESTRICTED_CHARACTERS = list(RESTRICTED_CHARACTERS)
-                if len(valid_RESTRICTED_CHARACTERS) >= len(HARD_SLOTS) - 1:
+                valid_restricted_characters = list(restricted_characters)
+                if len(valid_restricted_characters) >= len(HARD_SLOTS) - 1:
                     # cull a restricted character to help the randomizer; note that there are
                     # len(HARD_SLOTS) - 1 available non-starting-character slots, i.e. 9-1 = 8.
-                    ch_options = [c for c in valid_RESTRICTED_CHARACTERS if c in characters and c not in env.meta['objective_required_characters']]
+                    ch_options = [c for c in valid_restricted_characters if c in characters and c not in env.meta['objective_required_characters']]
                     if ch_options:
                         ch = env.rnd.choice(ch_options)
                         characters.remove(ch)
@@ -336,9 +313,9 @@ def apply(env):
                 # we don't have enough characters yet to fill the
                 # easy slots
                 if not env.options.flags.has('characters_relaxed'):
-                    num_unRESTRICTED_CHARACTERS_chosen = len([ch for ch in characters if ch not in RESTRICTED_CHARACTERS])
-                    if num_unRESTRICTED_CHARACTERS_chosen < num_easy_slots:
-                        subtract_if_able(character_choices, set(RESTRICTED_CHARACTERS))
+                    num_unrestricted_characters_chosen = len([ch for ch in characters if ch not in restricted_characters])
+                    if num_unrestricted_characters_chosen < num_easy_slots:
+                        subtract_if_able(character_choices, set(restricted_characters))
 
                 # if no duplicates, try to ensure that there is 
                 # a different starting partner character
@@ -354,7 +331,7 @@ def apply(env):
 
             def calculate_slot_score(slot, ch, cur_assign, req_num, char_num_2):
                 slot_score = 0.0
-                if not env.options.flags.has('characters_relaxed') and ch in RESTRICTED_CHARACTERS and slot not in HARD_SLOTS:
+                if not env.options.flags.has('characters_relaxed') and ch in restricted_characters and slot not in HARD_SLOTS:
                     slot_score += 1.0
 
                 if env.options.flags.has('characters_no_duplicates'):
@@ -378,7 +355,7 @@ def apply(env):
 
             env.rnd.shuffle(characters)
             if not env.options.flags.has('characters_relaxed'):
-                characters.sort(key=lambda ch: (ch not in RESTRICTED_CHARACTERS))
+                characters.sort(key=lambda ch: (ch not in restricted_characters))
 
             # print(characters)
 
@@ -439,6 +416,7 @@ def apply(env):
             pregame_name_characters.add(assignment[slot])
 
     axtor_map = [0x00] * 0x20           # 112
+    overworld_sprites_map = [0x00] * 0x20
 
     # build substitutions table accordingly, and set metadata objective purposes
     env.meta['available_characters'] = set()
@@ -446,21 +424,34 @@ def apply(env):
     for slot in assignment:
         character = assignment[slot]        
         target_slot = SLOTS[slot]
-        target_axtor_map = axtor_map
+        # the Package char, SandRuby char, Baron Inn char, Zot chars, and the partner char all need piggies
         slot_in_overworld = slot in ['crydia_slot', 'rosa1_slot', 'yang2_slot', 'rosa2_slot', 'kain1_slot', 'kain2_slot']
         if character is None:
+            axtor_map[target_slot] = 0x00
             if slot_in_overworld:
-                target_axtor_map[target_slot] = 0xFE  # placeholder piggy for required overworld NPCs
+                overworld_sprites_map[target_slot] = 0xFE  # placeholder piggy for required overworld NPCs
             else:
-                target_axtor_map[target_slot] = 0x00        
+                overworld_sprites_map[target_slot] = 0x00
         else:
-            target_axtor_map[target_slot] = CHARACTERS[character]        
+            axtor_map[target_slot] = CHARACTERS[character]
+            # re: Ctreasure, we still need piggies even if the characters are somewhere else.
+            slot_in_box = ((slot in ['tellah1_slot', 'edward_slot', 'palom_slot', 'porom_slot', 'tellah2_slot'] and env.options.flags.has('characters_in_treasure_free'))
+                           or (slot in ['crydia_slot', 'rosa1_slot', 'yang1_slot', 'yang2_slot', 'cid_slot', 'rosa2_slot', 
+                                        'kain2_slot', 'arydia_slot', 'edge_slot', 'fusoya_slot', 'kain3_slot'] and env.options.flags.has('characters_in_treasure_earned')))
+            if slot_in_box:
+                if slot_in_overworld:
+                    overworld_sprites_map[target_slot] = 0xFE
+                else:
+                    overworld_sprites_map[target_slot] = 0x00
+            else:
+                overworld_sprites_map[target_slot] = CHARACTERS[character]        
             env.meta['available_characters'].add(character)
             
-        if slot not in ['dkcecil_slot', 'kain1_slot']:
-            env.meta['available_nonstarting_characters'].add(character)
+            if slot not in ['dkcecil_slot', 'kain1_slot']:
+                env.meta['available_nonstarting_characters'].add(character)
 
     env.add_substitution('axtor map', ' '.join([f'{b:02X}' for b in axtor_map]))
+    env.add_substitution('overworld sprites map', ' '.join([f'{b:02X}' for b in overworld_sprites_map]))
 
     # permadeath :S
     if env.options.flags.has('characters_permadeath'):
@@ -483,9 +474,9 @@ def apply(env):
 
     # sub in against-ally battle data
     # TODO: need more complex logic for this so it can be obfuscated
-    for slot in ['crydia_slot', 'yang2_slot']:
+    for slot in ['crydia_slot']: # no yang2_slot fight anymore
         ch = assignment[slot]
-        if ch is None:
+        if ch is None or env.options.flags.has('characters_in_treasure_earned'):
             ch = 'piggy'
 
         monster_gfx_sprite = CHARACTER_MONSTER_GFX[ch][0]
@@ -580,10 +571,12 @@ def apply(env):
 
     env.add_binary(BusAddress(0x21d880), bytes(pregame_sprites))
 
+    restricted_slots = []
     for slot in assignment:
-        if assignment[slot] in RESTRICTED_CHARACTERS:
-            RESTRICTED_SLOTS.append(slot)
+        if assignment[slot] in restricted_characters:
+            restricted_slots.append(slot)
     env.update_assignments(assignment)
+    env.meta['restricted_character_slots'] = restricted_slots
 
     # generate character assignment spoilers
     # for x in SLOTS:

@@ -1,0 +1,19 @@
+<106> // [axe]Gigant
+  STR+15. Two-handed.
+  Inflicts Poison. Strong
+  against giants.
+
+<112> // [hammer]Thor
+  STR+15. Two-handed. Deals
+  lightning damage. Casts
+  Blitz. Strong v.machines.
+
+<113> // [hammer]Flare
+  STR/VIT/WIS/WIL+15. 2-hand.
+  Deals fire damage. Casts
+  [blackmagic]Nuke. Strong v.machines.
+
+<20D> // [hammer]Legend
+  WIL+3. Deals holy damage.
+  2-handed. Strong v. robots.
+  Forge with Adamant.

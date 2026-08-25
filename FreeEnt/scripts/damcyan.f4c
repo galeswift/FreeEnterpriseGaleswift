@@ -85,14 +85,18 @@ event($43)  //Tellah fighting Edward, Edward joining
         
     player invisible
     pause 2
+    // %if doorsrando_starting_underground%
+    [#B #If #not_Flag #flag.UnderworldOpen] {
+        vfx #AgartMountainExplosion
+        set #UnderworldOpen
+        sound #None
+    }
+    // %end%
     music #Overworld
     // %if doorsrando%
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 156 201]
     }
-    // %end%
-    // %if doorsrando_starting_underground%
-    set #UnderworldOpen
     // %end%
     // %flag starting_underground on%
     [#B #PutFalcon 117 62]

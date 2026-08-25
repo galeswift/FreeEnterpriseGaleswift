@@ -342,15 +342,25 @@ event($A5)  //Finding the Falcon
     set #Drill
     // %end%
     // %if doorsrando%
-    set #UnderworldOpen
-
     [#B #If #Flag #flag.BigWhaleSurfaced]{
         [#B #PutWhale 156 201]
     }
     // %end%
 
     music #None
+    // %if underworld_open_agart_explosion_pair%
+    [#B #If #Flag #flag.UnderworldOpen] {
+        load map $1FC at 48 16 on falcon
+    }
+    [#B #If #not_Flag #flag.UnderworldOpen] {
+        vfx #AgartMountainExplosion
+        set #UnderworldOpen
+        toggle screen shake
+        load map $1FC at 48 16 no transition on falcon
+    }
+    // %else%
     load map $1FC at 48 16 on falcon
+    // %end%
     sound #None
     toggle screen shake
     music #Airship

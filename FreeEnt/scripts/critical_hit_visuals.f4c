@@ -1,0 +1,101 @@
+// When flash effect are disabled, there is no indication of a critical hit,
+// beyond the higher damage dealt. To compensate for this, we alter the color
+// of the damage text.
+// The damage numbers are sprites that use the third palette color as the text
+// color, which is white in sprite palettes 0-5 and green in palette 6.
+// So we have to use the 16th palette, which is available for spell effects, etc.
+// Because we can change this palette on-demand, it's easy to add palette cycling
+// to get a flashy effect. We keep the effect subtle to so the text remains legible.
+
+msfpatch {
+    // This stores the encoded text colors to cycle through, at 2 frames per entry.
+    // Damage text appears for 42 frames. Its animation settles after 30 frames.
+    PaletteCycle__PaletteData:
+        [[ 
+            ff 17
+            ff 17
+            ff 17
+            df 17
+            df 17
+            df 17
+            bf 17
+            bf 17
+            bf 17
+            9f 17
+            9f 17
+            9f 17
+            bf 17
+            bf 17
+            bf 17
+            df 17
+            df 17
+            ff 17
+            ff 17
+            ff 17
+            ff 17
+        ]]
+
+    .def PaletteCycle__PaletteDataCount $15
+
+    Battle_CriticalHitTextColor:
+        bpl $+NotRestore
+        // displaced code
+        tya
+        dec a
+        jml $02ca72
+    %NotRestore:
+        lda $34c7
+        and #$04
+        beq $+Done
+        tya
+        dec a
+        lsr a
+        tax
+        lda #$3f
+        sta $f0ed,x
+        jsl $=PaletteCycle__Init
+    %Done:
+        jml $02ca79
+
+    .addr $02ca6e
+        jml $=Battle_CriticalHitTextColor
+}
+
+msfpatch {
+    // reuse the vanilla palette cycling vars, which won't be in use while
+    // damage is being displayed
+    .def PaletteCycle_Enabled       $7ef451
+    .def PaletteCycle_FrameCounter  $7ef453
+
+    PaletteCycle__Init:
+        stz $_PaletteCycle_FrameCounter
+        lda #$01
+        sta $_PaletteCycle_Enabled
+        rtl
+
+    PaletteCycle__NextFrame:
+        lda $_PaletteCycle_Enabled
+        beq $+Done
+        lda $_PaletteCycle_FrameCounter
+        lsr a  // 2 frames per color
+        cmp #$.PaletteCycle__PaletteDataCount
+        bcc $+NoOverflow
+        lda #$00
+        sta $_PaletteCycle_FrameCounter
+    %NoOverflow:
+        asl a
+        tax
+        lda $=PaletteCycle__PaletteData,x
+        sta $_($ed50 + $20 * 15 + 4) // cgram data for 3rd color of 16th palette
+        lda $=(PaletteCycle__PaletteData + 1),x
+        sta $_($ed50 + $20 * 15 + 5)
+        inc $_PaletteCycle_FrameCounter
+    %Done:
+        tdc
+        rtl
+    
+    .addr $02e51a
+        jsl $=PaletteCycle__NextFrame
+        tax
+        tay
+}

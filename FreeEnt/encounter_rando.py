@@ -151,7 +151,7 @@ def apply(env):
     if env.options.flags.has('encounter_cant_run'):
         env.add_file('scripts/cant_run.f4c')
     else:
-        run_spoils_flag = env.options.flags.get_suffix('Erunspoils')
+        run_spoils_flag = env.options.flags.get_suffix('Erunspoils:')
         if run_spoils_flag:
             env.add_file('scripts/encounter_run_spoils.f4c')
             run_spoils_flag = int(run_spoils_flag)

@@ -66,3 +66,12 @@ text(map #AgartWell message 0) {
 text(bank 1 message $A4) {
 [name $f0]:Well, that's gone.
 }
+
+// %if short_agart_explosion%
+// modify the AgartMountainExplosion vfx
+// to be 32 frames of waiting,
+// 24 cycles of explosions, 12 cycles of fade-out
+patch($00d27d bus) { 20 } // normally $40
+patch($00d29c bus) { 18 } // normally $40
+patch($00d2bb bus) { 0C } // normally $10
+// %end%

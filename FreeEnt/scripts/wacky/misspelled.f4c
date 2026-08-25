@@ -22,7 +22,8 @@ msfpatch {
     Wacky__Misspelled_LevelUp:
         lda $b9
         jsl $=Wacky__Misspell
-        sta $1560,x
+        // sta $1560,x
+        jsl $=CharEx__LevelUpSpells_CheckExisting
         rtl
 }
 

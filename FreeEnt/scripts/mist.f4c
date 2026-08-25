@@ -108,6 +108,14 @@ event($30)  //Mist events
         vfx #RydiaBattle
     }
 
+    // %if doorsrando_starting_underground%
+    [#B #If #not_Flag #flag.UnderworldOpen] {
+        vfx #AgartMountainExplosion
+        set #UnderworldOpen
+        sound #None
+    }
+    // %end%
+    
     [#B #Rando_LoadAxtorFashionCode $00]
 
     consts(placement) {
@@ -165,9 +173,6 @@ event($30)  //Mist events
     // %end%
     // %flag starting_blackchocobo off%
     [#B #SaveVehiclesFromMist]
-    // %end%
-    // %if doorsrando_starting_underground%
-    set #UnderworldOpen
     // %end%
     load map #Overworld at 103 119
     player face down

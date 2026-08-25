@@ -13,9 +13,9 @@ CUSTOM_WEAPON_ELEMENT_TABLE_INDEX = 0x3B
 CUSTOM_LEGEND_ITEM_ID = 0x19  # still the Legend Sword, #item.Legend, use the Custom Weapon's equip table index 0x10
 CUSTOM_LEGEND_ELEMENT_TABLE_INDEX = 0x3E # 0x3C and 0x3D are used for -wacky:advertising
 CUSTOM_WEAPON_TO_LEGEND = {
-    0x101 : 0x201, # holy swords
-    0x102 : 0x201,
-    0x103 : 0x201,
+    0x101 : 0x19, # holy swords
+    0x102 : 0x19,
+    0x103 : 0x19,
     0x104 : 0x202, # sword
     0x105 : 0x203, # spear
     0x106 : 0x204, # axe
@@ -38,10 +38,30 @@ CUSTOM_WEAPON_TO_LEGEND = {
     0x117 : 0x210, # harps
     0x118 : 0x210,
     0x119 : 0x210,
+    0x11A : 0x201, # dark sword
+}
+CUSTOM_LEGEND_GENERIC_NAME_ICON = {
+    0x19 : ['sword', 0x2E], # for completeness purposes; should be unused
+    0x201 : ['sword', 0x2C],
+    0x202 : ['sword', 0x2D],
+    0x203 : ['spear', 0x2F], 
+    0x204 : ['axe', 0x34],
+    0x205 : ['bow', 0x37],
+    0x206 : ['arrow', 0x38],
+    0x207 : ['whip', 0x3A],
+    0x208 : ['dagger', 0x30],
+    0x209 : ['katana', 0x31],
+    0x20A : ['shuriken', 0x32],
+    0x20B : ['chakram', 0x33], # 'boomerang' is too long to sub in-place in the textbox
+    0x20C : ['claw', 0x29],
+    0x20D : ['hammer', 0x35], # replace 0x35 with 0x39 on Truth in Advertising
+    0x20E : ['rod', 0x2A],
+    0x20F : ['staff', 0x2B],
+    0x210 : ['harp', 0x36]
 }
 
-# Lightbringer, Piggy Stick, Abel's Lance, Gigant Axe, Perseus Bow, Perseus Arrow, Mist Whip, Sasuke Katana, Mutsunokami, Rising Sun, Tiger Claw, Dragon Claw, Godhand, Thor's Hammer, Fiery Hammer, Nirvana, Apollo Harp, Loki's Lute
-GOOD_CUSTOM_WEAPONS = [0x103, 0x104, 0x105, 0x106, 0x107, 0x108, 0x109, 0x10B, 0x10C, 0x10E, 0x10F, 0x110, 0x111, 0x112, 0x113, 0x116, 0x117, 0x118, 0x119]
+# Lightbringer, Piggy Stick, Abel's Lance, Gigant Axe, Perseus Bow, Perseus Arrow, Mist Whip, Sasuke Katana, Mutsunokami, Rising Sun, Tiger Claw, Dragon Claw, Godhand, Thor's Hammer, Fiery Hammer, Nirvana, Apollo Harp, Loki's Lute, Deathbringer [on -tweak:darkpaladin, replaces Lightbringer]
+GOOD_CUSTOM_WEAPONS = [0x103, 0x104, 0x105, 0x106, 0x107, 0x108, 0x109, 0x10B, 0x10C, 0x10E, 0x10F, 0x110, 0x111, 0x112, 0x113, 0x116, 0x117, 0x118, 0x119, 0x11A]
 # Adamant, CS, Excal, Avenger, MoonVeil, Dragoon Spear, Arty Arrows, Masamune, White Shirt
 ORDERED_GOOD_ALT_ITEMS = [0x9A, 0x3F, 0x1B, 0x4C, 0xC5, 0x27, 0x5F, 0x30, 0x93]
 
@@ -59,6 +79,7 @@ _CAST_TABLE = {
     'Cure2' : 0x0F,
     'Virus' : 0x26,
     'Float' : 0x18,
+    'Fatal' : 0x2B
 }
 
 _EQUIP = ['dkcecil', 'kain', 'crydia', 'tellah', 'edward', 'rosa', 'yang', 'palom', 'porom', 'pcecil', 'cid', 'arydia', 'edge', 'fusoya']
@@ -200,15 +221,8 @@ def apply(env):
         return
 
     if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
-        custom_weapon.name = '[darksword]Bringer'
-        custom_weapon.spoilername = 'Deathbringer'
-        custom_weapon.elements = ['dark']
-        custom_weapon.cast = 'Fatal'
-        custom_weapon.spellpower = 8
-        custom_weapon.dragons = 'y'
-        custom_weapon.spirits = ''
-        custom_weapon.undead = ''
-        custom_weapon.anim0 = 0x1C # Black Sword palette
+        # swap Lightbringer with Deathbringer
+        custom_weapon = weapons_dbview.find_one(lambda cw: cw.id == 0x11A)
 
     if custom_weapon.id == 0x106 and env.options.flags.has('rosapaladin'):
         custom_weapon.equip = ['kain', 'rosa', 'cid']
@@ -223,7 +237,8 @@ def apply(env):
     env.add_script(f'text(item name ${CUSTOM_WEAPON_ITEM_ID:02X}) {{{custom_weapon.name}}}')
 
     # if necessary, alter the item price to make it worth selling
-    env.meta.setdefault('altered_item_prices',{}).update({CUSTOM_WEAPON_ITEM_ID : custom_weapon.price})
+    if env.options.flags.has('sellsmith'):
+        env.meta.setdefault('altered_item_prices',{}).update({CUSTOM_WEAPON_ITEM_ID : custom_weapon.price})
 
     # write 8-byte equipment record
     gear_bytes = [0x00] * 8
@@ -287,10 +302,7 @@ def apply(env):
     env.add_binary(UnheaderedAddress(0x7A590 + CUSTOM_WEAPON_ELEMENT_TABLE_INDEX * 0x03), [element_value & 0xFF, (element_value >> 8) & 0xFF, (element_value >> 16) & 0xFF], as_script=True)
 
     # set override item description
-    if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
-        with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
-            description_data = infile.read()
-    elif custom_weapon.id in [0x106, 0x112, 0x113] and 'advertising' in env.meta.get('wacky_challenge',[]):
+    if custom_weapon.id in [0x106, 0x112, 0x113] and 'advertising' in env.meta.get('wacky_challenge',[]):
         with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'advertising_custom_weapon_{custom_weapon.id:X}_description.bin'), 'rb') as infile:
             description_data = infile.read()
     else: 
@@ -318,21 +330,22 @@ def apply(env):
     if env.options.flags.has('spoilsmith'):
         custom_legend = databases.get_custom_legend_dbview().find_one(lambda cl : cl.id == CUSTOM_WEAPON_TO_LEGEND[custom_weapon.id])
 
-        if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
-            custom_legend.name = '[darksword]Legend'
-            custom_legend.elements = ['holy', 'dark', 'poison']
-            custom_legend.anim1 = 0x06
-            custom_legend.anim2 = 0x03
-            custom_legend.proxy = '#item.BlackSword'
-        elif custom_legend.id == 0x201:
+        if custom_legend.id == 0x19:
             # making no changes if it's a holy sword
             return 
-        
+
+        # replace [wrench] with [hammer] on Truth in Advertising and update Tracker menu icon
         if custom_legend.id == 0x20D and 'advertising' in env.meta.get('wacky_challenge', []):
             custom_legend.name = '[hammer]Legend'
+            env.add_substitution('legend icon', '0x39')
+        else:
+            env.add_substitution('legend icon', f'#${CUSTOM_LEGEND_GENERIC_NAME_ICON[custom_legend.id][1]:02X}')
 
         # write item name
         env.add_script(f'text(item name ${CUSTOM_LEGEND_ITEM_ID:02X}) {{{custom_legend.name}}}')
+        # change smithy textboxes
+        env.add_substitution('legend generic name', CUSTOM_LEGEND_GENERIC_NAME_ICON[custom_legend.id][0])
+        env.add_substitution('legend weapon name', custom_legend.name)
 
         # change required equipment bytes: $00 (metallic bit 7/long-range bit 5), sometimes $03 (spell), $04 (elem/status, always 0x3C), $05 (trait weakness), $06 (bow bit 7, arrow bit 6, two-handed bit 5, equip index bits 0-4)
         legend_bytes = [0x80, 0x28, 0x63, 
@@ -370,10 +383,7 @@ def apply(env):
         env.add_binary(UnheaderedAddress(0x7A590 + CUSTOM_LEGEND_ELEMENT_TABLE_INDEX * 0x03), [legend_element_value & 0xFF, (legend_element_value >> 8) & 0xFF, (legend_element_value >> 16) & 0xFF], as_script=True)
 
         # set override item description; unfortunately, we need to modify the description no matter what, due to weapon properties.
-        if custom_weapon.id == 0x103 and env.options.flags.has('darkpaladin'):
-            with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'dp_custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
-                description_data = infile.read()
-        elif custom_legend.id == 0x20D and 'advertising' in env.meta.get('wacky_challenge',[]):
+        if custom_legend.id == 0x20D and 'advertising' in env.meta.get('wacky_challenge',[]):
             with open(os.path.join(os.path.dirname(__file__), 'assets', 'item_info', f'advertising_custom_legend_{custom_legend.id:X}_description.bin'), 'rb') as infile:
                 description_data = infile.read()
         else: 

@@ -224,7 +224,9 @@ msfpatch {
     DynamicSprites__Axtor:
         sec
         sbc #$c0
-        jsr $_Lookup_AxtorToActor
+        // use a custom sprite lookup for
+        // overworld sprite purposes (e.g. Ctreasure)
+        jsr $_DynamicSprites__OverworldLookup
         beq $-DynamicSprites__ReturnInvalid
         cmp #$01
         beq $-DynamicSprites__Cecil
@@ -242,9 +244,45 @@ msfpatch {
         tax
         lda $218980,x   // [hardcoded]
         rtl
+
+    DynamicSprites__OverworldLookup:
+        // param A = axtor to lookup
+        xba
+        lda #$00
+        xba
+        tax
+        lda $21f720,x
+        rts
 }
 
-
+// modified axtor map for overworld sprites
+patch($21f720 bus) {
+    // %overworld sprites map%
+    00  // axtor 0 should be unused
+    01  // DKCecil
+    02  // Kain1
+    03  // CRydia
+    04  // Tellah1
+    05  // Edward
+    06  // Rosa1
+    07  // Yang1
+    08  // Palom
+    09  // Porom
+    04  // Tellah2
+    01  // PCecil
+    04  // Tellah3
+    07  // Yang2
+    0E  // Cid
+    02  // Kain2
+    06  // Rosa2
+    03  // ARydia
+    12  // Edge
+    13  // Fusoya
+    02  // Kain3
+    15  // Golbez
+    16  // Anna
+    // %end%
+}
 
 //-----------------------------------------------------------------------------
 // Extended name codes:

@@ -103,3 +103,8 @@
   STR/AGI/VIT+15. 2-hand.
   Strong against all monster
   categories but slimes.
+
+<11A> // [darksword]Bringer
+  STR/AGI/VIT+15. Deals dark
+  damage. Casts [blackmagic]Fatal.
+  Strong v. dragons.

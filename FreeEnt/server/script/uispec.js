@@ -4064,7 +4064,8 @@ var FLAG_UISPEC = [
                   },
                   {
                     "flag": "Kstart:hook",
-                    "title": "You start with the Hook"
+                    "title": "You start with the Hook",
+                    "description": "On <em>-starting:underground</em>, setting this flag means you start with the Drill instead of the Hook."
                   },
                   {
                     "flag": "Kstart:luca",
@@ -7851,15 +7852,15 @@ var FLAG_UISPEC = [
                 "type": "select",
                 "subcontrols": [
                   {
-                    "flag": "Erunspoils100",
+                    "flag": "Erunspoils:100",
                     "title": "100% EXP and GP earned"
                   },
                   {
-                    "flag": "Erunspoils50",
+                    "flag": "Erunspoils:50",
                     "title": "50% EXP and GP earned"
                   },
                   {
-                    "flag": "Erunspoils25",
+                    "flag": "Erunspoils:25",
                     "title": "25% EXP and GP earned"
                   }
                 ]
@@ -8047,6 +8048,7 @@ var FLAG_UISPEC = [
             "flag": "@doorsrando",
             "title": "Randomize Doors",
             "description": "Randomizes most doors in the game (including houses, etc).\n<ul>\n    <li>Normal=Doors of each world (Overworld, Underworld, Moon) are shuffled independently</li>\n    <li>Blue Planet=Doors of the Overworld and Underworld are shuffled together and the Moon is shuffled independently.</li>\n    <li>Gated=Doors of the Moon and Underworld are shuffled together and the Overworld is shuffled independently.</li>\n    <li>Why=Doors of the Moon and Overworld are shuffled together and the Underworld is shuffled independently.</li>\n    <li>All=Doors of each world (Overworld, Underworld, Moon) are shuffled together.</li>\n</ul>",
+            "fork": true,
             "subcontrols": [
               {
                 "flag": "@anon81",
@@ -8705,7 +8707,7 @@ var FLAG_UISPEC = [
           {
             "flag": "Xsmallparty",
             "title": "Award extra EXP when your party is not full",
-            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size.",
+            "description": "Normally, the number of chararcters in your party does not impact the experience gained (except under split EXP, where the number of non-swoon/petrified characters matters). Under this flag, encounters give bonus experience depending on how many empty party slots you have, compared to the maximum party size for the seed: if you can have <em>N</em> characters in your party but you don't, you get 6-<em>N</em> bonuses of 10%, cumulative for <em>N</em> from 1 to the maximum party size. See <a href='fork_info#xsmallparty''>the fork_info page</a> for the full table of bonuses.",
             "fork": true
           },
           {
@@ -9435,11 +9437,13 @@ var FLAG_UISPEC = [
               {
                 "flag": "-kit3:support",
                 "title": "Support kit",
+                "description": "A selection of support-type items that your starting character can use.",
                 "fork": true
               },
               {
                 "flag": "-kit3:heroplusplus",
                 "title": "Hero++ kit",
+                "description": "The Hero and Support kits packaged together.",
                 "fork": true
               },
               {
@@ -9647,6 +9651,12 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "-zotspell",
+        "title": "Rosa learns a random spell in place of Exit at Zot",
+        "description": "Under this flag, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell.",
+        "fork": true
+      },
+      {
         "flag": "@anon108",
         "title": "Alternate starting conditions",
         "fork": true,
@@ -9669,11 +9679,6 @@ var FLAG_UISPEC = [
         "flag": "@anon109",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
-          {
-            "flag": "-vanilla:zot",
-            "title": "Vanilla Zot spell",
-            "description": "By default, instead of learning Exit at the top of Zot, Rosa will learn a random white magic spell chosen from a set of good spells, and will learn Exit at the level she would normally learn the chosen spell. This flag removes that behavior."
-          },
           {
             "flag": "-vanilla:fashion",
             "title": "Vanilla fashion",

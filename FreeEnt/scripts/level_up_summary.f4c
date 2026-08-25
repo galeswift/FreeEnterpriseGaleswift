@@ -7,14 +7,57 @@ msfpatch {
     LevelUpSummary_Init:
         stz $_LevelUpSummary_LevelCount
         stz $_LevelUpSummary_SpellCount
-        
-        // do displaced instructions and return
-        ldx $98
-        lda $405f,x
-        jml $03eefc
 
-    .addr $03eef7
+        // do the check for whether this character
+        // is receiving experience
+        bne $+LevelUpSummaryNeeded
+        // no level up, move on
+        jml $03eff1
+
+    %LevelUpSummaryNeeded:
+        // $25B8-25FF : last 0x48 = 72 bytes of enemy 6's battle stats,
+        // use those for a lookup table of spells in a given spellset
+        // (the N-th byte is N if the spellset contains spell N, else 0)
+        // use $25B7 as a counter for when to stop
+        // first, pull the spellsets
+        ldx $a6
+        lda $1000,x
+        and #$1f
+        sta $1690
+        jsr $_CharEx__PullSpellSets
+
+        // next, zero out the whole table area
+        // (the indexing looks off-by-one but it isn't)
+        tdc
+        ldy #$0048
+    %BeginClearTableLoop:
+        sta $25b8,y
+        dey
+        bne $-BeginClearTableLoop
+        
+        // finally, run through all spells and build the table
+        ldx #$0030
+        lda #$48
+        sta $25b7
+    %BeginFillTableLoop:
+        lda $1560,x
+        beq $+NextSpellInSpellset
+        tay
+        sta $25b8,y
+    %NextSpellInSpellset:
+        inx
+        dec $25b7
+        bne $-BeginFillTableLoop
+
+        // these bytes now hold every spell this
+        // character currently knows (before learning
+        // more spells, possibly)
+
+        jml $03ef01
+
+    .addr $03eefc
         jml $=LevelUpSummary_Init
+        nop
 }
 
 
@@ -32,6 +75,8 @@ msfpatch {
         lda $291c,x
         cmp #$ff
         beq $+LevelUpSummary_Accumulate_Done
+        cmp #$fe
+        beq $+LevelUpSummary_SkipSpell
         // %if wacky_misspelled%
         jsl $=Wacky__Misspell
         // %end%
@@ -41,10 +86,14 @@ msfpatch {
         pla
         sta $_LevelUpSummary_SpellList,x
         inc $_LevelUpSummary_SpellCount
+    %LevelUpSummary_SkipSpell:
         inc $af
         bra $-LevelUpSummary_Accumulate_SpellLoopStart
-    LevelUpSummary_Accumulate_Done:
-        jml $03efee
+    %LevelUpSummary_Accumulate_Done:
+        // thanks to the Misspelled jsl, we don't know
+        // exactly how many bytes there are until $03efee,
+        // so just jmp there (which might be "jump 0 bytes")
+        jmp $efee
 }
 
 // borrow another alert message to use for "gained X levels"

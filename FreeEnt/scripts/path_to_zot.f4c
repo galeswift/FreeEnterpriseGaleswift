@@ -80,7 +80,7 @@ event($8E)  //Exiting the Tower of Zot
 
     player face left
     // %flag starting_blackchocobo on%
-    music #BlackChocobo fade in
+    music #Overworld fade in
     // %end%
     // %flag starting_blackchocobo off%
     music #Airship fade in

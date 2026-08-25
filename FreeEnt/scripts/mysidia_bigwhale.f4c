@@ -263,14 +263,18 @@ event($9E)  //Big Whale surfacing
     player face down
     [#B #Objectives_Tick #objective.quest_bigwhale]
     
-    // %if doorsrando_starting_underground%
-    set #UnderworldOpen
-    // %end%
-
     pause 2
     batch 8 {
         player move down
     }
+    // %if doorsrando_starting_underground%
+    player invisible
+    [#B #If #not_Flag #flag.UnderworldOpen] {
+        vfx #AgartMountainExplosion
+        set #UnderworldOpen
+        sound #None
+    }
+    // %end%
     load map #Overworld at 153 199 
     player face down
 }

@@ -199,6 +199,7 @@ F4C_FILES = '''
     scripts/item_delivery_quantity.f4c
     scripts/extend_spellsets.f4c
     scripts/odin_sprite_patch.f4c
+    scripts/critical_hit_visuals.f4c
 '''
 # the missing scripts/black_shirt_fix.f4c is included below as a conditional, if -wacky:whatsmygear is not on
 # the missing opening.f4c script is included as a condition, depending on -starting: flags
@@ -619,6 +620,7 @@ def build(romfile, options, force_recompile=False):
 
     if env.options.flags.has('starting_blackchocobo'):
         env.add_file('scripts/opening_blackchocobo.f4c')
+        env.add_file('scripts/black_chocobo_no_autofly.f4c')
     elif env.options.flags.has('starting_underground'):
         env.add_file('scripts/opening_underground.f4c')
     else:
@@ -921,12 +923,14 @@ def build(romfile, options, force_recompile=False):
         rando_scope,rando_type = is_doorsrando[0].split(":")
         env.add_file('scripts/map_history_extension.f4c')
         env.add_file('scripts/doorsrando.f4c')
+        env.add_file('scripts/black_chocobo_no_autofly.f4c')
         env.add_toggle('doorsrando')
         if rando_scope == "-entrancesrando":
             env.add_toggle('entrancesrando')
         
         if options.flags.has('starting_underground'):
             env.add_toggle('doorsrando_starting_underground')
+            env.add_toggle('short_agart_explosion')
 
         doors_rando.apply(env, rando_scope,rando_type)
 
@@ -934,6 +938,9 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/panic_button.f4c')
     if options.flags.has('-forcesealed'):
         env.add_file('scripts/force_sealed_cave_boss.f4c')
+    if not options.flags.has('starting_underground') and (options.flags.has('-panicbutton') or is_doorsrando):
+        env.add_toggle('underworld_open_agart_explosion_pair')
+        env.add_toggle('short_agart_explosion')
 
     # must be last
     wacky_rando.apply(env)
