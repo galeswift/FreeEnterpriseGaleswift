@@ -175,6 +175,8 @@ def apply(env):
         rom_base = WACKY_ROM_ADDRESS
         ram_base = WACKY_RAM_ADDRESS
 
+        spoiler_table_name = ("WACKY CHALLENGE" if len(wacky_challenge) == 1 else "WACKY CHALLENGES")
+
         for idx, wacky in enumerate(wacky_challenge):
             # apply script of the same name, if it exists
             script_filename = f'scripts/wacky/{wacky}.f4c'
@@ -207,7 +209,7 @@ def apply(env):
             centered_text = '\n'.join([line.center(26).upper().rstrip() for line in text.split('\n')])
             env.add_substitution(f'wacky challenge title {idx+1}', f'\n{centered_text}')
             env.add_toggle(f'wacky_challenge_{idx+1}')
-            env.spoilers.add_table(f'WACKY CHALLENGE {idx+1}', [[text.replace('\n', ' ')]], public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
+            env.spoilers.add_table(spoiler_table_name, [[text.replace('\n', ' ')]], public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
 
 
 
