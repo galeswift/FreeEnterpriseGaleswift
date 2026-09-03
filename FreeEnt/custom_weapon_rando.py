@@ -157,7 +157,8 @@ def apply(env):
     if env.options.flags.has('key_item_from_forge'):
         pass # do nothing, since we'll overwrite the key item otherwise
     elif 'custom_weapon' in env.options.test_settings:
-        custom_weapon = databases.get_custom_weapons_dbview().find_one(lambda cw: env.options.test_settings['custom_weapon'].lower() in f"{cw.name}|{cw.spoilername}".lower())
+        weapons_dbview = databases.get_custom_weapons_dbview()
+        custom_weapon = weapons_dbview.find_one(lambda cw: env.options.test_settings['custom_weapon'].lower() in f"{cw.name}|{cw.spoilername}".lower())
     elif env.options.flags.has('hero_challenge') or env.options.flags.has('superhero_challenge'):
         # you should expect to get a weapon associated to your hero, regardless of anything else
         weapons_dbview = databases.get_custom_weapons_dbview()

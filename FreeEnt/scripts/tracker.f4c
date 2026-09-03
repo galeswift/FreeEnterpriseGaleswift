@@ -503,7 +503,7 @@ msfpatch {
         lda $1500
         and #$04
         beq $+UseLightSwordIcon
-        lda {% legend icon %}
+        lda {% legend icon : #$2e %}
         bra $+NotLegendIcon
     %UseLightSwordIcon:
         lda #$2e
