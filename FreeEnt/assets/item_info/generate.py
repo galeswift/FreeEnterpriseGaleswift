@@ -97,7 +97,6 @@ FE_DESCRIPTIONS = load_custom_descriptions('custom_descriptions.txt')
 VANILLA_DESCRIPTIONS = load_custom_descriptions('vanilla_descriptions.txt')
 CUSTOM_WEAPON_DESCRIPTIONS = load_custom_descriptions('gba_descriptions.txt')
 FE_DARKPAL_DESCRIPTIONS = load_custom_descriptions('custom_descriptions_dark_paladin.txt')
-CUSTOM_DARKPAL_WEAPON_DESCRIPTIONS = load_custom_descriptions('dp_gba_descriptions.txt')
 CUSTOM_LEGEND_DESCRIPTIONS = load_custom_descriptions('custom_legend_descriptions.txt')
 ADVERTISING_DESCRIPTIONS = load_custom_descriptions('advertising_descriptions.txt')
 
@@ -105,7 +104,7 @@ fe_item_data = []
 vanilla_item_data = []
 fe_dp_item_data = []
 
-with open('ff2.sfc', 'rb') as romfile:
+with open('PATH-TO-ROM', 'rb') as romfile:
     for item_id in range(0xFD):
         is_weapon = (item_id < 0x60)
         is_armor = (item_id >= 0x60 and item_id < 0xB0)
@@ -182,7 +181,7 @@ for custom_legend in custom_legend_dbview:
         custom_legend.name,
         CUSTOM_LEGEND_DESCRIPTIONS.get(custom_legend.id, None),
         is_weapon=True,
-        strength=0x28,
+        strength=(0x00 if custom_legend.id == 0x20C else 0x28),
         percent=0x63,
         metallic=True,
         long_range=custom_legend.longrange

@@ -366,6 +366,10 @@ def apply(env):
         if custom_legend.twohanded:
             legend_bytes[6] |= 0x20
 
+        # the Legend Claw should not have non-zero attack power; it's a claw
+        if custom_legend.id == 0x20C:
+            legend_bytes[1] = 0
+
         # don't need to patch the stats byte, to save What's My Gear Again? effort
         env.add_binary(UnheaderedAddress(0x79100 + CUSTOM_LEGEND_ITEM_ID * 0x08), legend_bytes[0:7], as_script=True)
 
