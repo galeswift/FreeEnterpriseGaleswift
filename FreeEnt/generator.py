@@ -765,8 +765,12 @@ def build(romfile, options, force_recompile=False):
     elif not options.flags.has('glitch_allow_life'):
         # this case handles both the absence of any Glife flags and Gnolifer
         env.add_file('scripts/remove_life_glitch.f4c')
-    if (not options.flags.has('glitch_allow_backrow')) or 'sixleggedrace' in env.meta.get('wacky_challenge', []):
+    no_backrow_glitch = (not options.flags.has('glitch_allow_backrow')) or 'sixleggedrace' in env.meta.get('wacky_challenge', [])
+    if no_backrow_glitch or options.flags.has('bug_fixes'):
+        # remove_backrow_glitch.f4c handles both removing the glitch and allowing a second weapon to set the long range bit
         env.add_file('scripts/remove_backrow_glitch.f4c')
+        if no_backrow_glitch:
+            env.add_toggle("remove_backrow_glitch")
 
     # some part of this fix is always needed; substitutions within
     # this file handle whether the glitch is fully "fixed"

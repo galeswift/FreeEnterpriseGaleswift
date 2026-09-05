@@ -9594,7 +9594,7 @@ var FLAG_UISPEC = [
       {
         "flag": "-miscbugfixes",
         "title": "Include minor bug fixes",
-        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.",
+        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, incorrect axtor reference for Regen, and only weapons in the right hand setting long range bit for dual-wielding characters.",
         "fork": true
       },
       {
