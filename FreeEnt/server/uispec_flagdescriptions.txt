@@ -1123,6 +1123,9 @@ Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a cou
 [Zmustnerf]
 Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).
 
+[Zdrain]
+Zeromus's physical attack now drains HP and Big Bang has the Drain spell effect instead of inflicting HP leak. Healing on Zeromus is capped at 9999. 
+
 [Znocosplay]
 Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite.
 

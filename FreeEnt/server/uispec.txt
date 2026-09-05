@@ -859,6 +859,7 @@
 <>^ Nerfing of Big Bangs
 .(Znonerfs)! Prevent nerfing of Big Bangs
 .(Zmustnerf)! 9999 damage Big Bangs
+[Zdrain]!^ Big Bang and physical attacks drain HP
 [Znocosplay] Vanilla Z sprite
 
 == OTHER

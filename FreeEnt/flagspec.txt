@@ -82,6 +82,7 @@ Zunsure:vanilla Zunsure:physical Zunsure:ailments Zunsure:chaos Zunsure:lavosshe
 Zwhichbang
 Zphaseshift
 Znonerfs/Zmustnerf
+Zdrain
 Znocosplay
 -kit:basic/-kit:better/-kit:loaded/-kit:cata/-kit:freedom/-kit:cid/-kit:yang/-kit:money/-kit:grabbag/-kit:miab/-kit:archer/-kit:fabul/-kit:castlevania/-kit:summon/-kit:notdeme/-kit:meme/-kit:defense/-kit:mist/-kit:mysidia/-kit:baron/-kit:dwarf/-kit:eblan/-kit:libra/-kit:99/-kit:green/-kit:adamant/-kit:cursed/-kit:hero/-kit:support/-kit:heroplusplus/-kit:exit/-kit:atb/-kit:egg/-kit:zelda/-kit:random
 -kit2:basic/-kit2:better/-kit2:loaded/-kit2:cata/-kit2:freedom/-kit2:cid/-kit2:yang/-kit2:money/-kit2:grabbag/-kit2:miab/-kit2:archer/-kit2:fabul/-kit2:castlevania/-kit2:summon/-kit2:notdeme/-kit2:meme/-kit2:defense/-kit2:mist/-kit2:mysidia/-kit2:baron/-kit2:dwarf/-kit2:eblan/-kit2:libra/-kit2:99/-kit2:green/-kit2:adamant/-kit2:cursed/-kit2:hero/-kit2:support/-kit2:heroplusplus/-kit2:exit/-kit2:atb/-kit2:egg/-kit2:zelda/-kit2:random
@@ -448,6 +449,7 @@ Zwhichbang         z_random_bigbangs
 Zphaseshift        z_random_phases
 Znonerfs           z_no_nerfs
 Zmustnerf          z_must_nerf
+Zdrain             z_drain_attacks
 
 -pushbtojump         jump
 

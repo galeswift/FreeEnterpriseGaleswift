@@ -1,9 +1,3 @@
-// for when Z needs maxed out attack/spell power,
-// we need to adjust the attack index/spell power using
-// scripting because otherwise the boss data doesn't line up
-// %Z base stat changes%
-// %end%
-
 // Z pre-first-BB phase
 ai_script(moon $4B) 
 {

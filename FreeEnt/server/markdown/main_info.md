@@ -1353,7 +1353,7 @@ This flag removes summon orbs from shops, boxes/miabs, and quest rewards. You ca
 
 These flags handle the randomization of Zeromus and the relevant battle scripts. The intent is to refresh the Zeromus fight experience, so that there's something new to experience at the end of the game.
 
-There are four main script change flags: `Zphysical`, `Zphysmag`, `Zchaos`, and `Zlavosshell`. Within those flags are two other flags that modify the scripts: `Zwhichbang` and `Zphaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `Znonerfs` and `Zmustnerf`.
+There are four main script change flags: `Zphysical`, `Zphysmag`, `Zchaos`, and `Zlavosshell`. Within those flags are two other flags that modify the scripts: `Zwhichbang` and `Zphaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `Znonerfs` and `Zmustnerf`. As well, there is a challenge flag to give Zeromus an HP drain effect on physical attacks and make Big Bang drain HP: `Zdrain`.
 
 ### `Zvanilla` {: .h6 }
 
@@ -1406,6 +1406,10 @@ This flag places chains around every Big Bang type attack that Zeromus does, so 
 This flag changes Zeromus's base spell power to 255 (or attack stats to (255,99,255), if physical scripting is enabled) and changes the scripted stat changes for Big Bang type attacks to be 253 for spell power and (255,99,255) for physical scripting. In this way, Zeromus will do 9999 damage almost guaranteed, unless you nerf the Big Bangs/Dark Waves.
 
 Dark Wave is normally bugged; it does not cap its damage, so it breaks the graphical display/can heal by overflowing 14-bit damage. So, we need to patch that issue.
+
+### `Zdrain` {: .h6 }
+
+This flag gives Zeromus's physical attack the drain element, so Z will drain HP on hit. Moreover, Big Bang is given the Drain spell effect instead of HP leak. Healing on Zeromus is capped at 9999. If Wyvern happens to get Big Bang from `Bwhichburn` or `Bitburns`, then yes, Big Bang will drain HP. On some flags, this flag will effectively do nothing, because Z will not attack physically nor use Big Bang (e.g. on `Zvanilla/whichburn`, Big Bang might not be included anywhere).
 
 ### `Znocosplay` {: .h6 }
 

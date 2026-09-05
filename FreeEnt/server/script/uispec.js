@@ -8884,6 +8884,13 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "Zdrain",
+        "title": "Big Bang and physical attacks drain HP",
+        "description": "Zeromus's physical attack now drains HP and Big Bang has the Drain spell effect instead of inflicting HP leak. Healing on Zeromus is capped at 9999.",
+        "hard": true,
+        "fork": true
+      },
+      {
         "flag": "Znocosplay",
         "title": "Vanilla Z sprite",
         "description": "Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite."
