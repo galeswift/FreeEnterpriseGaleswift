@@ -9506,6 +9506,12 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "-infarrows",
+        "title": "Arrows are infinite-use",
+        "description": "Arrows are now infinite use, meaning they are treated like any other weapon and will not be used up. Pricing and tiering for arrows changes.",
+        "fork": true
+      },
+      {
         "flag": "-speedmodbalance",
         "title": "Alter the speed modifier behaviour",
         "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).",

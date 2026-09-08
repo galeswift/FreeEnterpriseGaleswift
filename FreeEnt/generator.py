@@ -51,6 +51,7 @@ from . import update_abilities
 from . import update_equipment
 
 from . import compile_item_prices
+from . import databases
 from . import doors_rando
 
 from .script_preprocessor import ScriptPreprocessor
@@ -664,6 +665,22 @@ def build(romfile, options, force_recompile=False):
         env.add_file('scripts/adjust_us_drops.f4c')
     else:
         env.add_file('scripts/japanese_drops.f4c')
+
+    # handle any item tier changes; if none, then we just have the usual tiers
+    env.meta['altered_item_tiers'] = {}
+    items_dbview = databases.get_items_dbview()
+    for item in items_dbview:
+        env.meta['altered_item_tiers'].update({item.code : item.tier})
+
+    # infinite arrows have slight tier changes; while we're here,
+    # load the relevant scripts
+    if options.flags.has('infinite_arrows'):
+        inf_arrow_dbview = databases.get_infinite_arrows_dbview()
+        for arrow in inf_arrow_dbview:
+            env.meta['altered_item_tiers'].update({arrow.code : arrow.tier})
+        env.add_file('scripts/infinite_arrows.f4c')
+        if 'unstackable' not in env.meta.get('wacky_challenge', []):
+            env.add_toggle('infinite_arrows_not_unstackable')
 
     RANDO_MODULES = [
         character_rando,

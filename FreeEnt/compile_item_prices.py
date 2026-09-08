@@ -8,6 +8,12 @@ def apply(env):
     items_dbview = databases.get_items_dbview()
     altered_item_prices = env.meta.get('altered_item_prices', {})
 
+    if env.options.flags.has('infinite_arrows'):
+        # change the prices of arrows according to infinite_arrows.csvdb
+        inf_arrows_dbview = databases.get_infinite_arrows_dbview()
+        for arrow in inf_arrows_dbview:
+            altered_item_prices.update({arrow.code : arrow.price})
+
     randomized_item_codes = list(range(0x100))
     env.rnd.shuffle(randomized_item_codes)
     if not env.options.flags.has('sellsmith'):

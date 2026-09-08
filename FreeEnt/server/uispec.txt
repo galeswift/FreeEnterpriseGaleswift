@@ -977,6 +977,7 @@
 [-spoon] Edward can equip the Spoon
 [-monsterevade]!^ Monsters get physical and magical evasion
 [-monsterflee]^ Monsters can flee from battle
+[-infarrows]^ Arrows are infinite-use
 [-speedmodbalance]^ Alter the speed modifier behaviour
 [@smithy] Smithy reward
 .<> Alternative forge items

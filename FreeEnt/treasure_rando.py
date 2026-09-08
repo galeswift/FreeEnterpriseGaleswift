@@ -280,16 +280,17 @@ def apply(env):
     unrestricted_items_dbview = databases.get_items_dbview()
     refineItemsView(unrestricted_items_dbview, env)      
     refineItemsView(items_dbview, env)        
+    altered_item_tiers = env.meta['altered_item_tiers']
 
     maxtier = env.options.flags.get_suffix('Tmaxtier:')
     if maxtier:
         maxtier = int(maxtier)
-        items_dbview.refine(lambda it: it.tier <= maxtier)
+        items_dbview.refine(lambda it: altered_item_tiers[it.code] <= maxtier)
 
     mintier = env.options.flags.get_suffix('Tmintier:')
     if mintier:
         mintier = int(mintier)
-        items_dbview.refine(lambda it: it.tier >= mintier)
+        items_dbview.refine(lambda it: altered_item_tiers[it.code] >= mintier)
 
     if 'kleptomania' in env.meta.get('wacky_challenge', []):
         items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']))
@@ -298,7 +299,7 @@ def apply(env):
     if env.options.flags.has('treasure_money'):
         autosell_items = items_dbview.find_all()
     elif not env.options.flags.has_any('treasure_vanilla', 'treasure_shuffle', 'treasure_junk'):
-        autosell_items = items_dbview.find_all(lambda it: it.tier == 1)
+        autosell_items = items_dbview.find_all(lambda it: altered_item_tiers[it.code] == 1)
     else:
         autosell_items = []
 
@@ -306,7 +307,7 @@ def apply(env):
         if env.options.flags.has('shops_sell_zero'):
             autosells[item.const] = 0
         else:
-            multiplier = (10 if item.subtype == 'arrow' else 1)
+            multiplier = (10 if item.subtype == 'arrow' and not env.options.flags.has('infinite_arrows') else 1)
             divisor = (4 if env.options.flags.has('shops_sell_quarter') else 2)
             autosells[item.const] = max(10, _round_gp(int(item.price * multiplier / divisor)))
 
@@ -432,7 +433,7 @@ def apply(env):
     elif env.options.flags.has('treasure_wild') or env.options.flags.has('treasure_standard'):
         max_item_tier = (99 if env.options.flags.has('treasure_wild') else 5)
         # exclude HrGlass1 and HrGlass3 from Twild gen if HrGlass2 can't spawn
-        item_pool = items_dbview.get_refined_view(lambda it: it.tier <= max_item_tier).find_all()    
+        item_pool = items_dbview.get_refined_view(lambda it: altered_item_tiers[it.code] <= max_item_tier).find_all()    
         unrestricted_item_pool = unrestricted_items_dbview.find_all()    
         for t in plain_chests_dbview.find_all():
             if (should_unrestrict(env, t)):

@@ -597,11 +597,13 @@ def apply(env):
     env.spoilers.add_table("CHARACTERS", character_spoilers, public=character_spoilers_public)
 
     # set starting gear, if needed
+    inf_arrows = env.options.flags.has('infinite_arrows')
+    altered_item_tiers = env.meta['altered_item_tiers']
     # first, check for Cnekkie
     if env.options.flags.has('characters_nekkie'):
         starting_weapon_spoilers = []
-        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and it.tier in (1,2,3))
-        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in (1,2,3))
+        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and altered_item_tiers[it.code] in (1,2,3))
+        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and altered_item_tiers[it.code] in (1,2,3))
         for reference_actor_id in REFERENCE_ACTORS_TO_EQUIP_JOBS:
             job = REFERENCE_ACTORS_TO_EQUIP_JOBS[reference_actor_id]
             if env.options.flags.has('rosapaladin'):
@@ -615,7 +617,7 @@ def apply(env):
             if weapon.subtype == 'bow':
                 arrow = env.rnd.choice(arrows_dbview.find_all())
                 starting_weapon_spoilers.append(SpoilerRow(REFERENCE_ACTORS_TO_SPOILER_NAMES[reference_actor_id], databases.get_item_spoiler_name(weapon) + ' + ' + databases.get_item_spoiler_name(arrow), obscurable=True))
-                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge', []) else ' 20')
+                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge', []) or inf_arrows else ' 20')
                 off_hand_value = weapon.const
             else:
                 main_hand_value = weapon.const
@@ -650,12 +652,12 @@ def apply(env):
     if thrift_tier:
         thrift_tier = int(thrift_tier)
         starting_gear_spoilers = []
-        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and it.tier in range(1,thrift_tier+1))
-        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in range(1,thrift_tier+1))
-        shields_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype == 'shield' and it.tier in range(1,thrift_tier+1))
-        head_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['helmet','hat'] and it.tier in range(1,thrift_tier+1))
-        body_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['armor','robe'] and it.tier in range(1,thrift_tier+1))
-        arms_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['gauntlet','ring'] and it.tier in range(1,thrift_tier+1)
+        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        shields_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype == 'shield' and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        head_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['helmet','hat'] and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        body_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['armor','robe'] and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        arms_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['gauntlet','ring'] and altered_item_tiers[it.code] in range(1,thrift_tier+1)
                                                                     and it.const != '#item.Cursed') # it makes more sense to just ban Cursed Rings entirely, given their value.
 
         for reference_actor_id in REFERENCE_ACTORS_TO_EQUIP_JOBS:
@@ -673,7 +675,7 @@ def apply(env):
             if weapon.subtype == 'bow':
                 arrow = env.rnd.choice(arrows_dbview.find_all())
                 gear_list.append(databases.get_item_spoiler_name(weapon) + ' + ' + databases.get_item_spoiler_name(arrow))
-                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge',[]) else ' 20')
+                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge',[]) or inf_arrows else ' 20')
                 off_hand_value = weapon.const
             else:
                 main_hand_value = weapon.const

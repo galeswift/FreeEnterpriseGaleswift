@@ -879,6 +879,9 @@ Monsters will be able to evade both physical and magical attacks from your party
 [-monsterflee]
 Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active.
 
+[-infarrows]
+Arrows are now infinite use, meaning they are treated like any other weapon and will not be used up. Pricing and tiering for arrows changes.
+
 [@smithy]
 Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.
 

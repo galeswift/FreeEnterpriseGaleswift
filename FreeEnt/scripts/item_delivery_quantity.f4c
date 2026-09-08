@@ -32,6 +32,8 @@ msfpatch {
 
         // %if wacky_unstackable%
         jml $=ItemDeliverChanges__ReturnPoint__Deliver1
+        // %elif flags: infinite_arrows%
+        jml $=ItemDeliverChanges__ReturnPoint__Deliver1
         // %end%
 
         // check if item is arrow

@@ -664,6 +664,21 @@ msfpatch {
         jsl $=Wacky__InitializeAxtorHook
         // %end%
 
+        // %if infinite_arrows_not_unstackable%
+        // when not on the Unstackable wacky,
+        // insist that all hands only get one item
+        lda $1174
+        beq $+LeftHand
+        lda #$01
+        sta $1174
+    %LeftHand:
+        lda $1176
+        beq $+Done
+        lda #$01
+        sta $1176
+    %Done:
+        // %end%
+
         // push "initialized" record to shadow party
         // (still needs stats calculations, but that
         // happens when actually added to party)

@@ -855,6 +855,30 @@ Normally, with the Panic button you can simply warp out of Sealed Cave after pic
 
 These flags restore functionality to monsters that the original devs removed before the game released. `-monsterevade` allows monsters to correctly load their physical and magical evade stats at the start of battle (instead of just when those stats change, like for Valvalis). Be warned: monsters will take a lot less damage, and will dodge Life pots/casts! `-monsterflee` builds on the evade functionality and restores the ability for monsters to flee from battle (which requires them to have non-zero evade). Monsters can flee from non-boss-bit battles.
 
+### `-infarrows` {: .h6 }
+
+- Idea: Many people throughout the years
+- Design: ScytheMarshall, CoffeeAndChocobos, Guerin, Marshal, others
+- Programming: ScytheMarshall
+- Locations: infinite_arrows.f4c, infinite_arrows.csvdb, compile_item_prices.py, databases.py, *many* other files
+
+This flag makes arrows infinite-use, like other weapons. They are delivered individually and have more appropriate item prices and tiers, as described in this table:
+
+Arrows   | Old Tier | New Tier | Old Price | New Price
+------   | - | - | - | -
+Iron     | 1 | 1 | 10 | 50 
+White    | 2 | 3 | 20 | 2000 
+Fire     | 2 | 2 | 30 | 900 
+Ice      | 2 | 2 | 30 | 900 
+Lit      | 2 | 3 | 30 | 4000 
+Darkness | 2 | 2 | 40 | 800 
+Poison   | 3 | 3 | 70 | 2000 
+Mute     | 3 | 4 | 100 | 14000 
+Charm    | 3 | 4 | 110 | 18000 
+Samurai  | 5 | 5 | 150 | 23000 
+Medusa   | 3 | 4 | 1250 | 20000
+Artemis  | 7 | 7 | 500 | 120000 
+
 ### `-miscbugfixes` {: .h6 }
 
 - Idea: ScytheMarshall, cassidy (for Hermes/Berserk)

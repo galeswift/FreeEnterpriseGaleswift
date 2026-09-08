@@ -60,8 +60,9 @@ def apply(env):
     shops_dbview = databases.get_shops_dbview()
 
     items_dbview = databases.get_items_dbview()
+    altered_item_tiers = env.meta['altered_item_tiers']
     item_categories = {it.const : it.category for it in items_dbview}
-    items_dbview.refine(lambda it: it.tier)
+    items_dbview.refine(lambda it: altered_item_tiers[it.code])
     
     banned_items = []
     if env.options.flags.has('shops_no_apples'):
@@ -192,7 +193,7 @@ def apply(env):
                                                            or (not darters_set.isdisjoint(user_set) and it.throw))     
 
     if 'kleptomania' in wacky:
-        items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']) or (it.tier == 1))
+        items_dbview.refine(lambda it: (it.category not in ['weapon', 'armor']) or (altered_item_tiers[it.code] == 1))
     if 'friendlyfire' in wacky:
         items_dbview.refine(lambda it: (it.const not in ['#item.Cure3', '#item.Elixir']))
     if 'afflicted' in wacky:
@@ -258,17 +259,17 @@ def apply(env):
                     candidate = None
                     if item.category == 'weapon':
                         if not weapons_by_tier[item.tier]:
-                            weapons_by_tier[item.tier] = items_dbview.find_all(lambda it: it.category == 'weapon' and it.tier == item.tier) 
+                            weapons_by_tier[item.tier] = items_dbview.find_all(lambda it: it.category == 'weapon' and altered_item_tiers[it.code] == item.tier) 
                         candidate = env.rnd.choice(weapons_by_tier[item.tier])
                         weapons_by_tier[item.tier].remove(candidate)
                     if item.category == 'armor':
                         if not armor_by_tier[item.tier]:
-                            armor_by_tier[item.tier] = items_dbview.find_all(lambda it: it.category == 'armor' and it.tier == item.tier) 
+                            armor_by_tier[item.tier] = items_dbview.find_all(lambda it: it.category == 'armor' and altered_item_tiers[it.code] == item.tier) 
                         candidate = env.rnd.choice(armor_by_tier[item.tier])
                         armor_by_tier[item.tier].remove(candidate)
                     if item.category == 'item':
                         if not items_by_tier[item.tier]:
-                            items_by_tier[item.tier] = items_dbview.find_all(lambda it: it.category == 'item' and it.tier == item.tier and not (it.shopoverride == 'wild')) 
+                            items_by_tier[item.tier] = items_dbview.find_all(lambda it: it.category == 'item' and altered_item_tiers[it.code] == item.tier and not (it.shopoverride == 'wild')) 
                         candidate = env.rnd.choice(items_by_tier[item.tier])
                         items_by_tier[item.tier].remove(candidate)
                     if candidate:
@@ -407,7 +408,7 @@ def apply(env):
         gated_items_view = {}
         for item_const in desired_guaranteed_items:
             raw_items_dbview = databases.get_items_dbview()
-            raw_items_dbview.refine(lambda it: it.tier)
+            raw_items_dbview.refine(lambda it: altered_item_tiers[it.code])
             free_items_view = raw_items_dbview.find_all(lambda it: item_const == it.const and can_be_in_shop(it, 'free'))
             gated_items_view = raw_items_dbview.find_all(lambda it: item_const == it.const and can_be_in_shop(it, 'gated'))
             for item in free_items_view:
@@ -481,7 +482,7 @@ def apply(env):
                     candidates.extend(add_pool)
 
             env.rnd.shuffle(candidates)
-            candidates.sort(key = lambda it: it.tier, reverse=True)
+            candidates.sort(key = lambda it: altered_item_tiers[it.code], reverse=True)
 
             if category == 'item' and env.options.flags.has('shops_standard') and not env.options.flags.has('shops_singles'):
                 # special behavior: guarantee two tier-5 items in Cave Eblan item shop
@@ -489,7 +490,7 @@ def apply(env):
                     if sa.shop.id == 0x18:
                         break
 
-                seed_items = list(filter(lambda it: it.tier == 5, candidates))[:2]
+                seed_items = list(filter(lambda it: altered_item_tiers[it.code] == 5, candidates))[:2]
                 for item in seed_items:
                     if sa.is_full():
                         break

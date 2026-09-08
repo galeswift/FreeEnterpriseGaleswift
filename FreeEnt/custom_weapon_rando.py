@@ -187,6 +187,7 @@ def apply(env):
         custom_weapon = env.rnd.choice(available_weapons)
     elif env.options.flags.has('altsmith'):
         items_dbview = databases.get_items_dbview()
+        altered_item_tiers = env.meta['altered_item_tiers']
         # to match the Pink Tail turn-in reward, also restrict the MoonVeil if Tno:j is on
         if env.options.flags.has('treasure_no_j_items'):
             items_dbview.refine(lambda it: not it.j)
@@ -198,7 +199,7 @@ def apply(env):
             if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
                     and (env.meta['available_characters'].issubset(set(['yang'])) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
                 items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(_expand_chars_to_jobs(env.meta['available_characters'])))
-        items = items_dbview.find_all(lambda it: it.tier in [7, 8])
+        items = items_dbview.find_all(lambda it: altered_item_tiers[it.code] in [7, 8])
         if env.options.flags.has('goodsmith'):
             # if we want "good" items, take the best according to the list above (we've already guaranteed there's something available)
             smith_reward = None
@@ -397,5 +398,5 @@ def apply(env):
         env.meta.setdefault('item_description_overrides', {})[CUSTOM_LEGEND_ITEM_ID] = description_data
 
         # add protection from losing the Legend Arrow
-        if custom_legend.id == 0x206:
+        if custom_legend.id == 0x206 and not env.options.flags.has('infinite_arrows'):
             env.add_toggle('legend_arrow')
