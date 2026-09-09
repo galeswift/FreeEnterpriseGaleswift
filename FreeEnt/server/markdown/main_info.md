@@ -102,6 +102,8 @@ These flags move the free key item in the Toroia Hospital (the one Edward gives 
 
 The v4.6.0 `Kmiab` flag includes all of the non-LST miabs in the key item pool, or all miabs if `Kmoon` or `Kunsafe` is on. Now, there are three subgroups of miabs: "above-ground" (Zot, Eblan, Hook route, Lunar Path, Giant), "below-ground" (Feymarch, Sylph Cave, Lower Bab-il), and the LST miabs. These subgroups can be specified separately, the vanilla `Kmiab` behaviour with safety checks can be selected using `Kmiab:standard`, and all miabs (ignoring the safety checks, so the pre-v.4.6.0 behaviour) can be selected using Kmiab:all or just specifying all three subgroups. 
 
+In v4.6 FE, on `Kmiab` three of the miabs are removed from the possible added key item checks, for balancing purposes. Here, this behaviour still occurs but only if there is more than one subgroup of miabs selected. (This behaviour is different from the v5.0 alpha behaviour, where one miab is removed for every three places that have miabs enabled for potential key item checks.)
+
 ### `Kforge` {: .h6 }
 
 - Idea: sgrunt (but probably others, and b0ardface for the original "Forge the Crystal")
