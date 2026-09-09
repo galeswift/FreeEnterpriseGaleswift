@@ -93,6 +93,7 @@ Znocosplay
 -monsterevade
 -monsterflee
 -infarrows
+-warpitem
 -smith:super/-smith:alt -smith:playable/-smith:good -smith:omni -smith:spoilsuper -smith:sellsuper
 -starting:blackchocobo/-starting:underground
 -speedmodbalance
@@ -406,6 +407,7 @@ Fomnimage      add_spells_fusoya
 -monsterevade        give_monsters_evade
 -monsterflee         let_monsters_flee
 -infarrows           infinite_arrows
+-warpitem            eagleeye_warp
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith

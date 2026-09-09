@@ -879,6 +879,14 @@ Samurai  | 5 | 5 | 150 | 23000
 Medusa   | 3 | 4 | 1250 | 20000
 Artemis  | 7 | 7 | 500 | 120000 
 
+### `-warpitem` {: .h6 }
+
+- Idea: CoffeeAndChocobos, ScytheMarshall, Skarcerer, others throughout the years
+- Design/Programming: ScytheMarshall
+- Locations: call_orbs.f4c, compile_item_prices.py, generator.py
+
+This flag turns the EagleEye into a Warp item that casts Warp outside of battle. It is now tier 2 and costs 1000 GP. `Omode:external` takes precedence over this flag, since they both modify the EagleEye.
+
 ### `-miscbugfixes` {: .h6 }
 
 - Idea: ScytheMarshall, cassidy (for Hermes/Berserk)

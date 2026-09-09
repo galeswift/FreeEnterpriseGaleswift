@@ -882,6 +882,9 @@ Monsters will be able to flee from battles that you can run from, based on their
 [-infarrows]
 Arrows are now infinite use, meaning they are treated like any other weapon and will not be used up. Pricing and tiering for arrows changes.
 
+[-warpitem]
+Instead of the EagleEye that casts Sight, there is a Warp item that casts Warp outside of battle. 
+
 [@smithy]
 Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.
 

@@ -424,6 +424,9 @@ class FlagLogicCore:
             flagset.set('Omode:ki16')
             self._lib.push(log, ['correction', 'Can only collect 16 KIs for an objective with Owin:crystal; changing Omode:ki17 to Omode:ki16'])
 
+        if flagset.has('Omode:external'):
+            self._simple_disable(flagset, log, 'The external objective takes precedence over the Warp item', ['-warpitem'])
+
         if flagset.has('Owin:crystal'):
             self._simple_disable(flagset, log, 'Cannot start with the Crystal if it is the objective reward', ['Kstart:crystal'])
 

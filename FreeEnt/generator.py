@@ -682,6 +682,10 @@ def build(romfile, options, force_recompile=False):
         if 'unstackable' not in env.meta.get('wacky_challenge', []):
             env.add_toggle('infinite_arrows_not_unstackable')
 
+    # the Warp item is tier 2, not 1
+    if options.flags.has('eagleeye_warp'):
+        env.meta['altered_item_tiers'].update({0xE4 : 2})
+
     RANDO_MODULES = [
         character_rando,
         core_rando,

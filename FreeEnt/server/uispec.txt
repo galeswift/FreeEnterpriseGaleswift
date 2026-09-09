@@ -978,6 +978,7 @@
 [-monsterevade]!^ Monsters get physical and magical evasion
 [-monsterflee]^ Monsters can flee from battle
 [-infarrows]^ Arrows are infinite-use
+[-warpitem]^ The EagleEye is replaced with a Warp item
 [-speedmodbalance]^ Alter the speed modifier behaviour
 [@smithy] Smithy reward
 .<> Alternative forge items
