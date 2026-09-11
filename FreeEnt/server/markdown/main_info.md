@@ -932,6 +932,25 @@ Under this flag, Rosa learns a white magic spell at the top of Zot, chosen from 
 
 On `-tweak:rosadin`, Rosa will learn a random spell, but because she cannot learn any of the non-Exit spells, she will not learn Exit. Cecil's white magic is unchanged.
 
+### `-t8scramble:[n,playable,spread]` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design: CoffeeAndChocobos, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: update_equipment.py
+
+These flags modify which characters are able to equip each of the tier 8 items (Excalbur, Crystal Sword, Adamant Armour). The numbered parameter `n` indicates how many characters will be able to equip each item. Rydia will have the same tier 8 equipment options as both child and adult, but Dark Knight Cecil will still not be able to equip any of the items. Under `-t8scramble:playable`, only characters appearing in the seed will be considered; otherwise, by default all characters will be considered. If `n` happens to be at least the number of characters appearing in the seed under `-t8scramble:playable`, or if `n` is 12, then all characters will be able to equip all three items. 
+
+`-t8scramble:spread` assigns the characters to the items while minimizing repetition; for example, if there are 5 available characters (say, the vanilla endgame party, under `-t8scramble:playable`) and `n` is 3, then the algorithm could go as follows: 
+1. Cecil, Kain, and Edge are chosen to equip the Excal.
+2. Rosa and Rydia are assigned to the Crystal Sword.
+3. Since we've used all five characters, we go back and choose one of the three remaining characters to also equip the CS, say, Kain.
+4. Finally, of the four remaining characters in this round, we choose three (say, Rosa, Rydia, Edge) to equip the Adamant.
+5. We end up with four characters being able to equip two of the items and one character (Cecil) only equipping one.
+If 3 times `n` is smaller than the number of characters appearing in the seed, or just smaller than 12 without `-t8scramble:playable`, some characters will not equip any of the items. The order in which the items are assigned is randomized.
+
+If `M` is the number of characters appearing in the seed, or 12 without `-t8scramble:playable`, then to determine the spread of the equipment options, compute `3*n` and find `k = ceiling(3*n / M)`. Then `(k-1)*M < 3*n <= k*M`, assuming `n` is not 0. We have that the `M` characters will be able to equip `k-1` of the weapons, and `3*n - (k-1)*M` of the characters will equip `k` of the items. In the above example, `M` is 5 and `n` is 3, so `k = ceiling(9 / 5) = 2`, and so `3*n - (k-1)*M = 9 - 5 = 4` characters can equip 2 of the items, with the fifth character still able to equip `k-1 = 1` of them.
+
 ## Kit Flags
 
 ### `-kit:atb` {: .h6 }

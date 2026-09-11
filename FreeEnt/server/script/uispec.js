@@ -9583,7 +9583,88 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon104",
+        "flag": "@t8",
+        "title": "Change tier 8 equip tables",
+        "description": "These flags change who gets to equip the Excalbur, Crystal Sword, and Adamant Armor. The numbered flags specify how many characters will be able to equip each item. Rydia gets the same options as child and adult, but Cecil is only considered as a paladin.",
+        "subcontrols": [
+          {
+            "flag": "@anon104",
+            "title": "Number of characters per item",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-t8scramble:0",
+                "title": "None of the items are equippable"
+              },
+              {
+                "flag": "-t8scramble:1",
+                "title": "Each item is equippable by 1 character"
+              },
+              {
+                "flag": "-t8scramble:2",
+                "title": "Each item is equippable by 2 characters"
+              },
+              {
+                "flag": "-t8scramble:3",
+                "title": "Each item is equippable by 3 characters"
+              },
+              {
+                "flag": "-t8scramble:4",
+                "title": "Each item is equippable by 4 characters"
+              },
+              {
+                "flag": "-t8scramble:5",
+                "title": "Each item is equippable by 5 characters"
+              },
+              {
+                "flag": "-t8scramble:6",
+                "title": "Each item is equippable by 6 characters"
+              },
+              {
+                "flag": "-t8scramble:7",
+                "title": "Each item is equippable by 7 characters"
+              },
+              {
+                "flag": "-t8scramble:8",
+                "title": "Each item is equippable by 8 characters"
+              },
+              {
+                "flag": "-t8scramble:9",
+                "title": "Each item is equippable by 9 characters"
+              },
+              {
+                "flag": "-t8scramble:10",
+                "title": "Each item is equippable by 10 characters"
+              },
+              {
+                "flag": "-t8scramble:11",
+                "title": "Each item is equippable by 11 characters"
+              },
+              {
+                "flag": "-t8scramble:12",
+                "title": "Each item is equippable by all characters"
+              },
+              {
+                "flag": "-t8scramble:dkc",
+                "title": "Each item is equippable by only Dark Knight Cecil",
+                "description": "Under this flag Dark Knight Cecil can equip all three items and is the only character who can equip any of them."
+              }
+            ]
+          },
+          {
+            "flag": "-t8scramble:playable",
+            "title": "Scramble only considers playable characters",
+            "description": "The randomization process only considers characters that will appear in the seed."
+          },
+          {
+            "flag": "-t8scramble:spread",
+            "title": "Characters are spread evenly across the items",
+            "description": "The characters for each item are chosen with minimal repetition, so as to spread out the items over all of the characters."
+          }
+        ]
+      },
+      {
+        "flag": "@anon105",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -9617,11 +9698,11 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon105",
+        "flag": "@anon106",
         "title": "Call options",
         "subcontrols": [
           {
-            "flag": "@anon106",
+            "flag": "@anon107",
             "title": "Spellset options",
             "type": "select",
             "subcontrols": [
@@ -9643,7 +9724,7 @@ var FLAG_UISPEC = [
             "description": "By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior."
           },
           {
-            "flag": "@anon107",
+            "flag": "@anon108",
             "title": "Dwarf Castle spell learning",
             "type": "select",
             "subcontrols": [
@@ -9676,7 +9757,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon108",
+        "flag": "@anon109",
         "title": "Alternate starting conditions",
         "fork": true,
         "type": "select",
@@ -9695,7 +9776,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon109",
+        "flag": "@anon110",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9736,7 +9817,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>None of these modes can be used together: \"friendlyfire\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"tellahmaneuver\", \"3point\"</li>\n\t<li>None of these modes can be used together: \"musical\", \"darts\", \"skillissue\"</li>\t\n\t<li>None of these modes can be used together: \"worthfighting\", \"battlescars\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"menarepigs\", \"skywarriors\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"unstackable\", \"menarepigs\", \"skywarriors\", \"battlescars\", \"3point\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, fewer random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon110",
+            "flag": "@anon111",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9973,12 +10054,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon111",
+        "flag": "@anon112",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon112",
+            "flag": "@anon113",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -10000,7 +10081,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon113",
+            "flag": "@anon114",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -10017,7 +10098,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon114",
+            "flag": "@anon115",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -10096,7 +10177,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon115",
+        "flag": "@anon116",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -10150,7 +10231,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon116",
+            "flag": "@anon117",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -10166,7 +10247,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon117",
+                "flag": "@anon118",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

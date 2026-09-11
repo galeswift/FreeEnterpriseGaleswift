@@ -95,6 +95,7 @@ Znocosplay
 -infarrows
 -warpitem
 -smith:super/-smith:alt -smith:playable/-smith:good -smith:omni -smith:spoilsuper -smith:sellsuper
+-t8scramble:0/-t8scramble:1/-t8scramble:2/-t8scramble:3/-t8scramble:4/-t8scramble:5/-t8scramble:6/-t8scramble:7/-t8scramble:8/-t8scramble:9/-t8scramble:10/-t8scramble:11/-t8scramble:12/-t8scramble:dkc -t8scramble:playable -t8scramble:spread
 -starting:blackchocobo/-starting:underground
 -speedmodbalance
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
@@ -415,6 +416,8 @@ Fomnimage      add_spells_fusoya
 -smith:omni          omnismith
 -smith:spoilsuper    spoilsmith
 -smith:sellsuper     sellsmith
+-t8scramble:playable tier8_scramble_playable
+-t8scramble:spread   tier8_scramble_spread
 -starting:blackchocobo  starting_blackchocobo
 -starting:underground   starting_underground
 

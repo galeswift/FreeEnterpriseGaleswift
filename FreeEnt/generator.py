@@ -725,7 +725,7 @@ def build(romfile, options, force_recompile=False):
     update_abilities.command_lists(env)
 
     # handle all changes to equipment and the equipment index table
-    # except for the Spoon and the custom FF4A weapon
+    # except for the custom FF4A weapon
     update_equipment.equip_table(env)
     update_equipment.equipment(env)
 

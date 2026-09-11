@@ -621,6 +621,13 @@ class FlagLogicCore {
             flagset.set("-monsterevade");
             this._lib.push(log, ["correction", "Monsters require evade to flee; forced to add -monsterevade"]);
         }
+        if (flagset.has("-t8scramble:dkc")) {
+            this._simple_disable(flagset, log, "Dark Knight Cecil is forced, so tier 8 spread and playable options are irrelevant", ["-t8scramble:playable", "-t8scramble:spread"]);
+        } else {
+            if ((flagset.get_list("^-t8scramble:[0-9]").length === 0)) {
+                this._simple_disable(flagset, log, "No tier 8 scramble numerical parameter specified", ["-t8scramble:playable", "-t8scramble:spread"]);
+            }
+        }
         if (flagset.has_any("-entrancesrando:normal", "-entrancesrando:gated", "-entrancesrando:blueplanet", "-entrancesrando:why", "-entrancesrando:all")) {
             this._simple_disable_regex(flagset, log, "Entrances rando takes priority", "^-doorsrando");
         }

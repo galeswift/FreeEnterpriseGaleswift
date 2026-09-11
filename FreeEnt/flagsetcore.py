@@ -570,6 +570,11 @@ class FlagLogicCore:
             flagset.set('-monsterevade')
             self._lib.push(log, ['correction', 'Monsters require evade to flee; forced to add -monsterevade'])
 
+        if flagset.has('-t8scramble:dkc'):
+            self._simple_disable(flagset, log, 'Dark Knight Cecil is forced, so tier 8 spread and playable options are irrelevant', ['-t8scramble:playable', '-t8scramble:spread'])
+        elif len(flagset.get_list(r'^-t8scramble:[0-9]')) == 0:
+            self._simple_disable(flagset, log, 'No tier 8 scramble numerical parameter specified', ['-t8scramble:playable', '-t8scramble:spread'])
+
         if flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet','-entrancesrando:why','-entrancesrando:all'):
             self._simple_disable_regex(flagset, log, 'Entrances rando takes priority', r'^-doorsrando')
 

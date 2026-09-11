@@ -903,6 +903,18 @@ If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will
 [-smith:spoilsuper]
 If Kokkol forges a weapon from FF4 Advance, then the Legend Sword becomes the Legend "Weapon" of the same type as the FF4 Advance weapon, with additional properties shared by most weapons of that type.
 
+[@t8]
+These flags change who gets to equip the Excalbur, Crystal Sword, and Adamant Armor. The numbered flags specify how many characters will be able to equip each item. Rydia gets the same options as child and adult, but Cecil is only considered as a paladin.
+
+[-t8scramble:dkc]
+Under this flag Dark Knight Cecil can equip all three items and is the only character who can equip any of them.
+
+[-t8scramble:playable]
+The randomization process only considers characters that will appear in the seed.
+
+[-t8scramble:spread]
+The characters for each item are chosen with minimal repetition, so as to spread out the items over all of the characters.
+
 [-starting:blackchocobo]
 Instead of starting with the Enterprise, start at Baron with Black Chocobos available but no Enterprise. The Enterprise is obtained by completing Baron Castle.
 

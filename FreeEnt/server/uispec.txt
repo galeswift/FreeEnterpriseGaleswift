@@ -990,6 +990,24 @@
 .[-smith:omni]^ All characters can equip the FF4A weapon 
 .[-smith:spoilsuper]^ The Legend Sword previews the FF4A weapon
 .[-smith:sellsuper]^ The FF4A weapon will have a non-zero sell price
+[@t8] Change tier 8 equip tables
+.<> Number of characters per item
+..(-t8scramble:0) None of the items are equippable
+..(-t8scramble:1) Each item is equippable by 1 character
+..(-t8scramble:2) Each item is equippable by 2 characters
+..(-t8scramble:3) Each item is equippable by 3 characters
+..(-t8scramble:4) Each item is equippable by 4 characters
+..(-t8scramble:5) Each item is equippable by 5 characters
+..(-t8scramble:6) Each item is equippable by 6 characters
+..(-t8scramble:7) Each item is equippable by 7 characters
+..(-t8scramble:8) Each item is equippable by 8 characters
+..(-t8scramble:9) Each item is equippable by 9 characters
+..(-t8scramble:10) Each item is equippable by 10 characters
+..(-t8scramble:11) Each item is equippable by 11 characters
+..(-t8scramble:12) Each item is equippable by all characters
+..(-t8scramble:dkc) Each item is equippable by only Dark Knight Cecil
+.[-t8scramble:playable] Scramble only considers playable characters
+.[-t8scramble:spread] Characters are spread evenly across the items
 <>^ Change the PRNG table
 .(-prng:shuffle) Shuffle the PRNG table values
 .(-prng:random) Randomize the PRNG values independently
