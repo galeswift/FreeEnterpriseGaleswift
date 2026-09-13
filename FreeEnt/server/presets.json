@@ -158,7 +158,7 @@
         {
             "name": "Doorway To Tomorrow",
             "description": "The flagset used for the Doorway to Tomorrow side tournament in 2025.",
-            "flags": "Omode:ki11/req:all/win:crystal Kmain/summon/moon/miab:above,below Pshop Cstandard/nofree/start:not_tellah/thrift:4/abilities:j/hero Tstandard Swildish/no:sirens Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Hrandom Glife/sylph/backrow Fweighted Ahero Xnokeybonus/kicheckbonus:5/maxlevelbonus Zvanilla -kit:basic -kit2:freedom -kit3:exit -noadamants -spoon -doorsrando:all"
+            "flags": "Omode:ki11/req:all/win:crystal Kmain/summon/moon/miab:above,below Pshop Cstandard/nofree/start:not_tellah/thrift:4/abilities:j/hero Tstandard Swildish/no:sirens Bstandard/alt:gauntlet/whichburn/whichbez Etoggle Hrandom Glife/sylph/backrow Fweighted Ahero Xnokeybonus/kicheckbonus:5/maxlevelbonus Zvanilla -kit:basic -kit2:freedom -kit3:exit -noadamants -spoon -doorsrando:all -panicbutton"
         }
     ]
   },
