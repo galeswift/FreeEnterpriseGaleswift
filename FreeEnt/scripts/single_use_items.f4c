@@ -1,0 +1,177 @@
+// destroy certain items after battle;
+// includes a hook into the wacky
+// Wardrobe Malfunction code, instead
+// of forcing that to use Wacky__PostBattleHook
+
+msfpatch{
+    SingleUseItems:
+        // only run once, at most
+        // (including single-use and 
+        // the Wardrobe Malfunction wacky)
+        lda $_PostBattle__Flags
+        and #$01
+        beq $+FirstTime
+        rtl
+
+    %FirstTime:
+        // since we might be doing alerts,
+        // set up the audiovisual scripting to
+        // display battle alerts ahead of time
+        // (the spoils code sets it, but we're
+        // working before that)
+        lda #$f8
+        sta $33c2
+        lda #$03
+        sta $33c3
+        // loop the character field
+        // records, checking if non-empty
+        // and then checking the three slots
+        // returns long, to be used in post_battle.f4c
+        tdc
+        tax
+        tay
+    %SingleUseOuterLoopStart:
+        lda $1000,x
+        beq $+SingleUseOuterLoopNext
+    %SingleUseInnerLoopStart:
+        lda $1030,x
+        // since we don't know how many flags are on,
+        // skip if no item
+        beq $+SingleLoopInnerNext
+
+        // %flag single_use_cursed_ring on%
+        cmp #$af
+        bne $+CheckAdamant
+        stz $1030,x
+        bra $+BrokenItem
+    %CheckAdamant:
+        // %end%
+
+        // %flag single_use_adamant on%
+        cmp #$9a
+        bne $+CheckWacky
+        stz $1030,x
+        bra $+BrokenItem
+    %CheckWacky:
+        // %end%
+
+        // %if wacky_wardrobe%
+        // assert single use takes priority
+        // over the wacky change
+        jsr $_Wacky__WardrobeMalfunction
+        bra $+SingleLoopInnerNext
+        // %end%
+
+    %BrokenItem:
+        jsr $_ShowItemBreakAlert
+    %SingleLoopInnerNext:
+        inx
+        iny
+        cpy #$0003
+        bcc $-SingleUseInnerLoopStart
+
+        // %flag single_use_crystal_sword on%
+    %CheckCrystalSword:
+        lda $1030,x
+        cmp #$3f
+        bne $+CheckNextHand
+        stz $1030,x
+        stz $1031,x
+        // set and show battle alert
+        jsr $_ShowItemBreakAlert
+    %CheckNextHand:
+        inx
+        inx
+        iny
+        cpy #$0005
+        bcc $-CheckCrystalSword
+        dex
+        dex
+        dex
+        dex
+        // %end%
+        // reset Y to 0, X to the base index
+        ldy #$0000
+        dex
+        dex
+        dex
+    %SingleUseOuterLoopNext:
+        jsr $_Util__XPlus40
+        cpx #$0140
+        bcc $-SingleUseOuterLoopStart
+    %SingleUseDone:
+        rtl
+
+    ShowItemBreakAlert:
+        // given the item ID in A, set up
+        // and display the "[item] broke" alert
+        // preserves X,Y
+        sta $359a
+        lda #$08
+        sta $34ca
+        lda #$05
+        phx
+        phy
+        jsl $028003
+        ply
+        plx
+        rts
+}
+
+// %flag single_use_crystal_sword on%
+// prevent CS from being unequipped mid-battle
+msfpatch{
+    .addr $02b236
+        jml $=CSInHandSecond
+        nop
+
+    .new
+    CSInHandSecond:
+        // A contains the (non-zero) item ID
+        cmp #$3f
+        beq $+ErrorOut
+        // displaced
+        lda $32da,x
+        bmi $+ErrorOut
+        jml $02b23b
+    %ErrorOut:
+        // jump to error code 
+        jml $02b284
+
+    .addr $02b2a7
+        jml $=CSInHandFirst
+        nop
+
+    .new
+    CSInHandFirst:
+        // check if it's the CS in hand
+        // before doing anything else
+        lda $32db,x
+        cmp #$3f
+        beq $+ErrorOut2
+        // displaced
+        lda $321b,y
+        beq $+DirectSwap
+        jml $02b2ac
+    %ErrorOut2:
+        // jump to error code 
+        jml $02b2ea
+    %DirectSwap:
+        jml $02b2ec
+}
+// %end%
+
+text(alert message $08) {
+[next]3 broke.
+}
+// set alert to wait for user input
+patch($16fd7c bus) { 01 }
+
+// %if ~wacky_kleptomania%
+// don't skip icon in alert message
+msfpatch {
+    .addr $02A59E
+        nop
+        lda #$09
+}
+// %end%

@@ -96,6 +96,7 @@ Znocosplay
 -warpitem
 -smith:super/-smith:alt -smith:playable/-smith:good -smith:omni -smith:spoilsuper -smith:sellsuper
 -t8scramble:0/-t8scramble:1/-t8scramble:2/-t8scramble:3/-t8scramble:4/-t8scramble:5/-t8scramble:6/-t8scramble:7/-t8scramble:8/-t8scramble:9/-t8scramble:10/-t8scramble:11/-t8scramble:12/-t8scramble:dkc -t8scramble:playable -t8scramble:spread
+-singleuse:cursed -singleuse:crystal -singleuse:adamant
 -starting:blackchocobo/-starting:underground
 -speedmodbalance
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
@@ -152,6 +153,7 @@ Znocosplay
 -wacky:skillissue
 -wacky:workexperience
 -wacky:moneygains
+-wacky:wardrobe
 -tweak:kainmagic/-tweak:harmspell -tweak:edwardheal -tweak:darkpaladin/-tweak:rosadin -tweak:cidairship -tweak:twinmeteo -tweak:chocobosummon 
 -tweak:edwardsing/-tweak:edwardsingbetter -tweak:cidpeep -tweak:rosapray -tweak:fusoyaregen -tweak:yanghp -tweak:tellahrecall
 -tweak:edgedart -tweak:magicwhips -tweak:rydiaredmage
@@ -418,6 +420,9 @@ Fomnimage      add_spells_fusoya
 -smith:sellsuper     sellsmith
 -t8scramble:playable tier8_scramble_playable
 -t8scramble:spread   tier8_scramble_spread
+-singleuse:cursed    single_use_cursed_ring
+-singleuse:crystal   single_use_crystal_sword
+-singleuse:adamant   single_use_adamant
 -starting:blackchocobo  starting_blackchocobo
 -starting:underground   starting_underground
 

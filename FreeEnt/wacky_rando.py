@@ -37,6 +37,7 @@ WACKY_CHALLENGES = {
     'advertising'       : 'Truth in\nAdvertising',
     'workexperience'    : 'Work Experience',
     'moneygains'        : 'Big Money,\nLittle Gains',
+    'wardrobe'          : 'Wardrobe Malfunction',
     'musical'           : 'Final Fantasy IV:\nThe Musical',
     'darts'             : 'World Championship\nof Darts',
     'unstackable'       : 'Unstackable',
@@ -85,6 +86,7 @@ WACKY_RAM_USAGE = {
     'advertising'       : 0,
     'workexperience'    : 0,
     'moneygains'        : 0,
+    'wardrobe'          : 1,
     'musical'           : 0,
     'darts'             : 0,
     'unstackable'       : 0,
@@ -639,6 +641,16 @@ def apply_afflicted_legacyversion(env):
     
     env.add_binary(WACKY_ROM_ADDRESS, status_bytes, as_script=True)
 '''
+
+def apply_wardrobe(env, rom_address):
+    env.add_toggle('single_use_items')
+    env.add_file('scripts/single_use_items.f4c')
+    env.add_file('scripts/custom_battle_dialog_ext_opcodes.f4c')
+    # set up threshold data: each of the 67 armour pieces (0x6D to 0xAF)
+    # get a random value from 0 to 128 (0-50%)
+    threshold_data = env.rnd.choices(range(0x81),k=(0xAF-0x6C))
+    env.add_binary(rom_address, threshold_data, as_script=True)
+    return len(threshold_data)
 
 def apply_battlescars(env, rom_address):
     env.add_toggle('wacky_initialize_axtor_hook')

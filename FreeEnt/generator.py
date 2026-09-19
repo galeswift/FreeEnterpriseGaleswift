@@ -808,6 +808,10 @@ def build(romfile, options, force_recompile=False):
     if options.flags.has('let_monsters_flee'):
         env.add_file('scripts/monster_flee.f4c')
 
+    if options.flags.has_any('single_use_cursed_ring', 'single_use_crystal_sword', 'single_use_adamant'):
+        env.add_toggle('single_use_items')
+        env.add_file('scripts/single_use_items.f4c')
+
     # agility flag substitutions and toggles
     if options.flags.has('random_agility'):
         random_offset = env.rnd.randrange(0x100)

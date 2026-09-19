@@ -1,0 +1,152 @@
+// is called from single_use_items.f4c
+
+msfpatch{
+    Wacky__WardrobeMalfunction:
+        // save X register and item ID
+        phx
+        pha
+        pha
+        pha
+
+        // get battle seed
+        // (pull formation, add #$10
+        // if hi byte is #$01; carry is
+        // guaranteed cleared)
+        lda #$00
+        xba
+        lda $1801
+        asl a
+        asl a
+        asl a
+        asl a
+        adc $1800
+        sta $_Wacky__RAM_wardrobe
+
+        // EOR with item ID to get 
+        // RNG index, load RNG value
+        // and store
+        pla
+        eor $_Wacky__RAM_wardrobe
+        tax
+        lda $14ee00,x
+        sta $_Wacky__RAM_wardrobe
+
+        // find the item's wacky
+        // threshold value, swap it
+        // into the RAM value so that we
+        // more easily compare; end with
+        // the RNG value in A and the
+        // threshold value in RAM
+        pla
+        sec
+        sbc #$6d
+        tax
+        lda $_Wacky__RAM_wardrobe
+        pha
+        lda $=Wacky__ROMData_wardrobe,x
+        sta $_Wacky__RAM_wardrobe
+        pla
+        // compare threshold to RNG;
+        // if RNG is strictly less than the
+        // threshold, then do the wacky part,
+        // else pull X and do nothing
+        cmp $_Wacky__RAM_wardrobe
+        bcc $+ModifyItem
+        pla
+        plx
+        rts
+
+    %ModifyItem:
+        // next, cut the threshold in 4
+        // to see if we just break the item;
+        // if the RNG is strictly less than
+        // the new threshold, then break it,
+        // otherwise transform it
+        lsr $_Wacky__RAM_wardrobe
+        lsr $_Wacky__RAM_wardrobe
+        cmp $_Wacky__RAM_wardrobe
+        bcs $+TransformItem
+
+        // break the item, done
+        pla
+        plx
+        stz $1030,x
+        // show battle alert
+        // for broken equipment
+        jsr $_ShowItemBreakAlert
+        rts
+
+    %TransformItem:
+        // identify if the item is
+        // a head/body/arms piece;
+        // don't need the threshold
+        // value now, so put the RNG
+        // value back into Wacky RAM,
+        // use it to get a new RNG value, 
+        // and set up division, using the
+        // base item ID for that type of
+        // armour in Wacky RAM
+        sta $_Wacky__RAM_wardrobe
+        pla
+        // set the item ID to be loaded
+        // for the next textbox
+        sta $359a
+        cmp #$81
+        bcs $+NotHead
+        eor $_Wacky__RAM_wardrobe
+        sta $3945
+        lda #$6d
+        sta $_Wacky__RAM_wardrobe
+        lda #$14
+        bra $+GetNewItemID
+
+    %NotHead:
+        cmp #$9c
+        bcs $+NotBody
+        eor $_Wacky__RAM_wardrobe
+        sta $3945
+        lda #$81
+        sta $_Wacky__RAM_wardrobe
+        lda #$1b
+        bra $+GetNewItemID
+
+    %NotBody:
+        eor $_Wacky__RAM_wardrobe
+        sta $3945
+        lda #$9c
+        sta $_Wacky__RAM_wardrobe
+        lda #$15
+
+    %GetNewItemID:
+        // divide, take remainder
+        // and add to base value to find the new item
+        sta $3947
+        stz $3946
+        stz $3948
+        jsr $_Util__BattleDivide3949
+        lda $394b
+        clc
+        adc $_Wacky__RAM_wardrobe
+        plx
+        sta $1030,x
+        // set the new item ID to be loaded,
+        // show battle alert for transformed equipment
+        sta $359d
+        lda #$09
+        sta $34ca
+        lda #$05
+        phx
+        phy
+        jsl $028003
+        ply
+        plx
+        rts
+}
+
+// note the custom [next]5 opcode;
+// see custom_battle_dialog_ext_opcodes.f4c
+text(alert message $09) {
+[next]3 to: [next]5.
+}
+// set alert to wait for user input
+patch($16fd7d bus) { 01 }

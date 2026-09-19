@@ -1,5 +1,40 @@
+// FE has some post-battle functions that
+// need to run, flags-depending, but they should
+// only run once. In lieu of rewriting the whole
+// spoils system/etc., we set a flag to be checked
+// so that we only run each function once, at
+// the appropriate time.
+// (this idea/code was originally used for
+// Battle Scars, but we can generalize it)
+
+// list of flags/information in PostBattle__Flags:
+// $01: have we run these functions already?
+// $02: Legend Sword needs to be salvaged, put it in
+//      inventory or battle spoils (miab vs. non-miab)
+// $04-$80: unused
+
+
 msfpatch {
+    .def PostBattle__Flags  $7e163e
+
+    // Make sure to clear PostBattle__Flags when battle starts
+    .addr $03809d
+        jsl $=PostBattle__ClearFlag
+
+    .new
+    PostBattle__ClearFlag:
+        stz $_PostBattle__Flags
+        // displaced
+        ldx #$007f
+        tdc
+        rtl
+}
+
+msfpatch{
     .addr $03f20d
+        // %if single_use_items%
+        jsl $=SingleUseItems
+        // %end%
         // %flag characters_permadeath on%
         jsl $=Permadeath
         // %end%
@@ -21,5 +56,14 @@ msfpatch {
         jsl $=RemoveItemDuplication_PostBattle
         // %end%
 
+        // BAND-AID: if spoils occur in battle, these functions
+        //  will run twice. Use a flag to make sure we don't do so
+        //  (comment moved from battlescars.f4c)
+        // if this code runs twice, we're done with the flags anyway
+        inc $_PostBattle__Flags
+
         jmp $95d8
+
+        // see the FE ROM map for
+        // remaining space here
 }

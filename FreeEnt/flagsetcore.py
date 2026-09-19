@@ -1363,8 +1363,8 @@ class FlagLogicCore:
         challenges = flagset.get_list(r'^-wacky:')
         if challenges:
             # implement the more precise wacky compability logic, since Status Enforcement doesn't take up Wacky RAM anymore
-            WACKY_POSITIVE_RAM = ['payablegolbez', 'tellahmaneuver', 'worthfighting', 'skillissue', 'battlescars', 'zombies']
-            WACKY_RAM_BYTES = [3, 6, 2, 2, 1, 6]
+            WACKY_POSITIVE_RAM = ['payablegolbez', 'wardrobe', 'tellahmaneuver', 'worthfighting', 'skillissue', 'battlescars', 'zombies']
+            WACKY_RAM_BYTES = [3, 1, 6, 2, 2, 1, 6]
             MAX_WACKY_RAM = 32
             WACKY_MUTUAL_INCOMPATIBILITIES = [
                 ['friendlyfire', 'afflicted'], # These both use Wacky__SpellFilterHook

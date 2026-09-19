@@ -1429,8 +1429,8 @@ class FlagLogicCore {
         }
         challenges = flagset.get_list("^-wacky:");
         if (challenges) {
-            WACKY_POSITIVE_RAM = ["payablegolbez", "tellahmaneuver", "worthfighting", "skillissue", "battlescars", "zombies"];
-            WACKY_RAM_BYTES = [3, 6, 2, 2, 1, 6];
+            WACKY_POSITIVE_RAM = ["payablegolbez", "wardrobe", "tellahmaneuver", "worthfighting", "skillissue", "battlescars", "zombies"];
+            WACKY_RAM_BYTES = [3, 1, 6, 2, 2, 1, 6];
             MAX_WACKY_RAM = 32;
             WACKY_MUTUAL_INCOMPATIBILITIES = [["friendlyfire", "afflicted"], ["tellahmaneuver", "3point"], ["musical", "darts", "skillissue"], ["worthfighting", "battlescars", "zombies", "afflicted"], ["menarepigs", "skywarriors", "mirrormirror", "zombies", "afflicted"], ["unstackable", "menarepigs", "skywarriors", "battlescars", "3point", "mirrormirror", "zombies", "afflicted"]];
             ram_bytes_used = 0;

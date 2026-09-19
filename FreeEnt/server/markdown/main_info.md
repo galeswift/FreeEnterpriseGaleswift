@@ -951,6 +951,15 @@ If 3 times `n` is smaller than the number of characters appearing in the seed, o
 
 If `M` is the number of characters appearing in the seed, or 12 without `-t8scramble:playable`, then to determine the spread of the equipment options, compute `3*n` and find `k = ceiling(3*n / M)`. Then `(k-1)*M < 3*n <= k*M`, assuming `n` is not 0. We have that the `M` characters will be able to equip `k-1` of the weapons, and `3*n - (k-1)*M` of the characters will equip `k` of the items. In the above example, `M` is 5 and `n` is 3, so `k = ceiling(9 / 5) = 2`, and so `3*n - (k-1)*M = 9 - 5 = 4` characters can equip 2 of the items, with the fifth character still able to equip `k-1 = 1` of them.
 
+### `-singleuse:[cursed,crystal,adamant]` {: .h6 }
+
+- Idea: CoffeeAndChocobos, anyone who's ever suggested "The Other FE" (where items break), like Alchemie
+- Design: CoffeeAndChocobos, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: single_use_items.f4c, post_battle.f4c, generator.py
+
+These flags cause any of the specified items (Cursed Ring, Crystal Sword, Adamant Armour) equipped on active party members to break after any battle (including after running away but not including cutscene battles). Items in your inventory are safe. To prevent you from stashing the Crystal Sword away, it cannot be unequipped mid-battle. There will be an in-battle dialog box that tells you that your item broke.
+
 ## Kit Flags
 
 ### `-kit:atb` {: .h6 }
@@ -1548,6 +1557,15 @@ The idea is that two characters can do the same work and get different experienc
 - Locations: wacky_rando.py, moneygains.f4c, randomizer_boss.f4c
 
 This wacky flag swaps GP and EXP rewards from battle, as if the GP and EXP values for monsters were swapped. Meaning, the experience you get will be the GP rewards appropriately scaled by the experience flags (or ignored entirely by `Enoexp`), and the GP you get will be from the experience rewards, including the 3-byte rewards for some bosses (or ignored entirely by the Time is Money wacky or `Enogp`).
+
+### `-wacky:wardrobe` - Wardrobe Malfunction {: .h6 }
+
+- Idea: Marshal, ScytheMarshall
+- Design: Marshal, ScytheMarshall, CoffeeAndChocobos
+- Programming: ScytheMarshall
+- Locations: wacky_rando.py, wardrobe.f4c, single_use_items.f4c, custom_battle_dialog_ext_opcodes.f4c
+
+This wacky flag causes all equipped armour items (head/body/arms) to either transform into another item of that same type or break after each battle (including after running away but not including cutscene battles). Each of those items is assigned a probability from 0 to 50% for the wacky effect to occur; 1/4 of that probability (rounded down) is the chance that it breaks, using the same RNG value. The RNG value is determined by the battle formation and the equipped item, so no amount of resetting will avoid that item changing unless you simply unequip it. The RNG value, modified deterministically, also determines the item to replace your equipped item, so it will always transform into the same item after a specific battle. Due to integer division, items with lower IDs are ever-so-slightly more likely to be chosen, favouring heavier armour over lighter armour. There will be an in-battle dialog box that tells you what your item transformed into, or that it broke.
 
 ## Tweak Flags
 
