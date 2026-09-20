@@ -812,6 +812,9 @@ def build(romfile, options, force_recompile=False):
         env.add_toggle('single_use_items')
         env.add_file('scripts/single_use_items.f4c')
 
+    if options.flags.has_any('gravity_sap', 'gravity_sap_danger'):
+        env.add_file('scripts/gravity_sap_damage.f4c')
+
     # agility flag substitutions and toggles
     if options.flags.has('random_agility'):
         random_offset = env.rnd.randrange(0x100)

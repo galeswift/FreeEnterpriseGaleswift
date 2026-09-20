@@ -9518,6 +9518,30 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "@gravitysap",
+        "title": "Calculate sap damage using current HP",
+        "description": "Normally, sap damage (from Virus, Big Bang, etc.) is 2 HP per tick. Under these flags, sap damage scales based on the current HP of the actor, with minimum 2 HP as before.",
+        "subcontrols": [
+          {
+            "flag": "@anon102",
+            "title": "Fraction of current HP",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-gravitysap:calm",
+                "title": "1/64 for party, 1/512 for monsters",
+                "hard": true
+              },
+              {
+                "flag": "-gravitysap:danger",
+                "title": "1/16 for party, 1/128 for monsters",
+                "hard": true
+              }
+            ]
+          }
+        ]
+      },
+      {
         "flag": "-speedmodbalance",
         "title": "Alter the speed modifier behaviour",
         "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).",
@@ -9529,7 +9553,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon102",
+            "flag": "@anon103",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -9545,7 +9569,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon103",
+            "flag": "@anon104",
             "title": "Restrictions on forge items",
             "type": "select",
             "subcontrols": [
@@ -9588,7 +9612,7 @@ var FLAG_UISPEC = [
         "description": "These flags change who gets to equip the Excalbur, Crystal Sword, and Adamant Armor. The numbered flags specify how many characters will be able to equip each item. Rydia gets the same options as child and adult, but Cecil is only considered as a paladin.",
         "subcontrols": [
           {
-            "flag": "@anon104",
+            "flag": "@anon105",
             "title": "Number of characters per item",
             "type": "select",
             "subcontrols": [
@@ -9687,7 +9711,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon105",
+        "flag": "@anon106",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -9721,11 +9745,11 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon106",
+        "flag": "@anon107",
         "title": "Call options",
         "subcontrols": [
           {
-            "flag": "@anon107",
+            "flag": "@anon108",
             "title": "Spellset options",
             "type": "select",
             "subcontrols": [
@@ -9747,7 +9771,7 @@ var FLAG_UISPEC = [
             "description": "By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior."
           },
           {
-            "flag": "@anon108",
+            "flag": "@anon109",
             "title": "Dwarf Castle spell learning",
             "type": "select",
             "subcontrols": [
@@ -9780,7 +9804,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon109",
+        "flag": "@anon110",
         "title": "Alternate starting conditions",
         "fork": true,
         "type": "select",
@@ -9799,7 +9823,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon110",
+        "flag": "@anon111",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9840,7 +9864,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>None of these modes can be used together: \"friendlyfire\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"tellahmaneuver\", \"3point\"</li>\n\t<li>None of these modes can be used together: \"musical\", \"darts\", \"skillissue\"</li>\t\n\t<li>None of these modes can be used together: \"worthfighting\", \"battlescars\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"menarepigs\", \"skywarriors\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"unstackable\", \"menarepigs\", \"skywarriors\", \"battlescars\", \"3point\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, fewer random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon111",
+            "flag": "@anon112",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -10083,12 +10107,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon112",
+        "flag": "@anon113",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon113",
+            "flag": "@anon114",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -10110,7 +10134,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon114",
+            "flag": "@anon115",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -10127,7 +10151,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon115",
+            "flag": "@anon116",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -10206,7 +10230,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon116",
+        "flag": "@anon117",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -10260,7 +10284,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon117",
+            "flag": "@anon118",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -10276,7 +10300,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon118",
+                "flag": "@anon119",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -1,0 +1,46 @@
+// replace the constant 2 damage sap
+// with scaling damage based on current HP,
+// differing for chars and monsters
+
+msfpatch{
+    .addr $03aa54
+        jsl $=GravitySapDamage
+        nop nop
+    
+    .new
+    GravitySapDamage:
+        ldy $a6
+        rep #$20
+        .mx 0x00
+        lda $2007,y
+        // check if monster or character,
+        // 0x0a = 2 * 0x05
+        cpx #$000a
+        bcc $+CharacterSap
+        // monsters are damaged
+        // max(2,CurHP/512)
+        lsr a
+        lsr a
+        lsr a
+    %CharacterSap:
+        // characters are damaged
+        // max(2, CurHP/64)
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        // %flag gravity_sap_danger off%
+        // under danger mode, damage is x4
+        lsr a
+        lsr a
+        // %end%
+        cmp #$0002
+        bcs $+DamageAcquired
+        lda #$0002
+    %DamageAcquired:
+        sta $34d4,x
+        sep #$20
+        .mx 0x20
+        tdc
+        rtl
+}

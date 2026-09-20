@@ -885,6 +885,9 @@ Arrows are now infinite use, meaning they are treated like any other weapon and 
 [-warpitem]
 Instead of the EagleEye that casts Sight, there is a Warp item that casts Warp outside of battle. 
 
+[@gravitysap]
+Normally, sap damage (from Virus, Big Bang, etc.) is 2 HP per tick. Under these flags, sap damage scales based on the current HP of the actor, with minimum 2 HP as before. 
+
 [@smithy]
 Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.
 

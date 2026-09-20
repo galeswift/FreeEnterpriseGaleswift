@@ -960,6 +960,15 @@ If `M` is the number of characters appearing in the seed, or 12 without `-t8scra
 
 These flags cause any of the specified items (Cursed Ring, Crystal Sword, Adamant Armour) equipped on active party members to break after any battle (including after running away but not including cutscene battles). Items in your inventory are safe. To prevent you from stashing the Crystal Sword away, it cannot be unequipped mid-battle. There will be an in-battle dialog box that tells you that your item broke.
 
+### `-gravitysap:[calm,danger]` {: .h6 }
+
+- Idea: Matik, CoffeeAndChocobos
+- Design: CoffeeAndChocobos, Marshal, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: gravity_sap_damage.f4c, generator.py
+
+These flags make the sap damage from Virus, Big Bang, White/Harm on undeads, etc. do damage per tick based on a fraction of the actor's current HP. The minimum is the vanilla 2 damage per tick, and the fraction depends on which of the two flags is being used. Under `calm`, the fraction is 1/64 for characters and 1/512 for monsters; under `danger`, the fraction is 1/16 for characters and 1/128 for monsters. Be careful!
+
 ## Kit Flags
 
 ### `-kit:atb` {: .h6 }

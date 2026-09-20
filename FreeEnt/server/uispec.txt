@@ -979,6 +979,10 @@
 [-monsterflee]^ Monsters can flee from battle
 [-infarrows]^ Arrows are infinite-use
 [-warpitem]^ The EagleEye is replaced with a Warp item
+[@gravitysap] Calculate sap damage using current HP
+.<> Fraction of current HP
+..(-gravitysap:calm)! 1/64 for party, 1/512 for monsters
+..(-gravitysap:danger)! 1/16 for party, 1/128 for monsters
 [-speedmodbalance]^ Alter the speed modifier behaviour
 [@smithy] Smithy reward
 .<> Alternative forge items

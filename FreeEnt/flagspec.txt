@@ -94,6 +94,7 @@ Znocosplay
 -monsterflee
 -infarrows
 -warpitem
+-gravitysap:calm/-gravitysap:danger
 -smith:super/-smith:alt -smith:playable/-smith:good -smith:omni -smith:spoilsuper -smith:sellsuper
 -t8scramble:0/-t8scramble:1/-t8scramble:2/-t8scramble:3/-t8scramble:4/-t8scramble:5/-t8scramble:6/-t8scramble:7/-t8scramble:8/-t8scramble:9/-t8scramble:10/-t8scramble:11/-t8scramble:12/-t8scramble:dkc -t8scramble:playable -t8scramble:spread
 -singleuse:cursed -singleuse:crystal -singleuse:adamant
@@ -411,6 +412,8 @@ Fomnimage      add_spells_fusoya
 -monsterflee         let_monsters_flee
 -infarrows           infinite_arrows
 -warpitem            eagleeye_warp
+-gravitysap:calm     gravity_sap
+-gravitysap:danger   gravity_sap_danger
 -smith:super         supersmith
 -smith:alt           altsmith
 -smith:playable      playablesmith
