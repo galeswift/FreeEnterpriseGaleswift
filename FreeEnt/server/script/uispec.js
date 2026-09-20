@@ -9691,6 +9691,7 @@ var FLAG_UISPEC = [
         "flag": "@singleuse",
         "title": "Make certain equipment single-use",
         "description": "Under these flags, all copies of the items equipped during battle will disappear at the end of battle, including if you run away (but not cutscene battles). Items in your inventory are safe.",
+        "fork": true,
         "subcontrols": [
           {
             "flag": "-singleuse:cursed",
