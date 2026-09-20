@@ -333,7 +333,10 @@ def apply(env):
         custom_legend = databases.get_custom_legend_dbview().find_one(lambda cl : cl.id == CUSTOM_WEAPON_TO_LEGEND[custom_weapon.id])
 
         if custom_legend.id == 0x19:
-            # making no changes if it's a holy sword
+            # making no changes if it's a holy sword, except if it's *also* -smith:omni,
+            # in which case we need to assign it the new "all characters" equip field
+            if env.options.flags.has('omnismith'):
+                env.add_binary(UnheaderedAddress(0x79100 + CUSTOM_LEGEND_ITEM_ID * 0x08 + 0x06), [CUSTOM_WEAPON_EQUIP_TABLE_INDEX], as_script=True)
             return 
 
         # replace [wrench] with [hammer] on Truth in Advertising and update Tracker menu icon
