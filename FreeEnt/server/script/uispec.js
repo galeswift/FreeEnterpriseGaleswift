@@ -9666,20 +9666,23 @@ var FLAG_UISPEC = [
       {
         "flag": "@singleuse",
         "title": "Make certain equipment single-use",
-        "description": "Under these flags, all copies of the items equipped during battle will disappear at the end of battle, including cutscene battles and if you run away. Items in your inventory are safe.",
+        "description": "Under these flags, all copies of the items equipped during battle will disappear at the end of battle, including if you run away (but not cutscene battles). Items in your inventory are safe.",
         "subcontrols": [
           {
             "flag": "-singleuse:cursed",
-            "title": "Cursed Rings break after battle"
+            "title": "Cursed Rings break after battle",
+            "hard": true
           },
           {
             "flag": "-singleuse:crystal",
             "title": "Crystal Swords break after battle",
-            "description": "The Crystal Sword can be equipped mid-battle but cannot be unequipped, so that it cannot be stashed in your inventory to prevent losing it."
+            "description": "The Crystal Sword can be equipped mid-battle but cannot be unequipped, so that it cannot be stashed in your inventory to prevent losing it.",
+            "hard": true
           },
           {
             "flag": "-singleuse:adamant",
-            "title": "Adamant Armors break after battle"
+            "title": "Adamant Armors break after battle",
+            "hard": true
           }
         ]
       },

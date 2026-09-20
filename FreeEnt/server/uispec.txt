@@ -1009,9 +1009,9 @@
 .[-t8scramble:playable] Scramble only considers playable characters
 .[-t8scramble:spread] Characters are spread evenly across the items
 [@singleuse] Make certain equipment single-use
-.[-singleuse:cursed] Cursed Rings break after battle
-.[-singleuse:crystal] Crystal Swords break after battle
-.[-singleuse:adamant] Adamant Armors break after battle
+.[-singleuse:cursed]! Cursed Rings break after battle
+.[-singleuse:crystal]! Crystal Swords break after battle
+.[-singleuse:adamant]! Adamant Armors break after battle
 <>^ Change the PRNG table
 .(-prng:shuffle) Shuffle the PRNG table values
 .(-prng:random) Randomize the PRNG values independently
