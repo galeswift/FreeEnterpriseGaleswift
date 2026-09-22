@@ -102,6 +102,7 @@ Znocosplay
 -singleuse:cursed -singleuse:crystal -singleuse:adamant
 -starting:blackchocobo/-starting:underground
 -speedmodbalance
+-multifast
 -prng:shuffle/-prng:random/-prng:consecutive/-prng:mostlysingle
 -miscbugfixes
 -call:levelup/-call:all -call:vanillahobs -call:vanillagrowup/-call:nogrowup -call:noorbs
@@ -442,6 +443,7 @@ Amonster     monster_agility
 Aflat        flat_agility
 A750formula  formula_agility
 -speedmodbalance     balance_speed_mod_range
+-multifast           multitarget_fast
 
 Xsplit           experience_split
 Xnoboost         experience_no_boost

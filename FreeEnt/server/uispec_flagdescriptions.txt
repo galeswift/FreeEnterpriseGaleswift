@@ -1042,6 +1042,9 @@ The default base ATB for the agility anchor is 5 ticks. Under these flags, the b
 [-speedmodbalance]
 In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).
 
+[-multifast]
+Normally, Fast can only target a single character when you cast it (monsters can override that, like Baigan does). This flag allows Fast to multi-target.
+
 [@exp]
 To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.
 

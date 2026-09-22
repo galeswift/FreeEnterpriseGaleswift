@@ -1285,6 +1285,14 @@ This flag will scale the base ATB for the anchor up to 10 ticks or down to 1 tic
 
 This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now increases the speed modifier by 4 instead of 8, SilkWebs increase by 8 instead of 16, Fast decreases the speed modifier by 4 instead of 3, and Hermes is left alone because it already decreased by 8. S3's original idea had a range of 8-24.
 
+### `-multifast` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: multitarget_fast.f4c, update_spells.py
+
+This flag allows Fast to be multi-targetted by characters (monsters can override targetting, but you can't).
+
 ## Experience Flags
 
 - Idea: various (everyone in the relevant Discord thread!)

@@ -56,6 +56,14 @@ def spell_data(env):
             as_script=True
         )
 
+    # make Fast single/multi-target, so it targets like e.g. Cure1
+    if env.options.flags.has('multitarget_fast'):
+        env.add_binary(
+            BusAddress(0xF97A0 + 0x00 + (0x06 * 0x08)),
+            [0x61],
+            as_script=True
+        )
+
 def spellset_data(env):
     # collect all changes to all spellsets except for FuSoYa, 
     # and add one script for all changes

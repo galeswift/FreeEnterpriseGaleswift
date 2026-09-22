@@ -9588,6 +9588,12 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "-multifast",
+        "title": "Make Fast a multi-target spell",
+        "description": "Normally, Fast can only target a single character when you cast it (monsters can override that, like Baigan does). This flag allows Fast to multi-target.",
+        "fork": true
+      },
+      {
         "flag": "@smithy",
         "title": "Smithy reward",
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",

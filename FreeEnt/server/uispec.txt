@@ -991,6 +991,7 @@
 ..(-gravitysap:calm)! 1/64 for party, 1/512 for monsters
 ..(-gravitysap:danger)! 1/16 for party, 1/128 for monsters
 [-speedmodbalance]^ Alter the speed modifier behaviour
+[-multifast]^ Make Fast a multi-target spell
 [@smithy] Smithy reward
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
