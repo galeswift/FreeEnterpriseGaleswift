@@ -4990,6 +4990,46 @@ var FLAG_UISPEC = [
         "title": "Cecil starts the game as a paladin",
         "description": "Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check.",
         "fork": true
+      },
+      {
+        "flag": "@statscap",
+        "title": "Upper bounds for character stats",
+        "description": "Under these flags, the five main character stats (Strength, Agility, Vitality, Wisdom, and Will) go up to the specified limit instead of 99. The cap applies to stats inside and outside of battle as the normal cap of 99 does (including Bluff).",
+        "fork": true,
+        "subcontrols": [
+          {
+            "flag": "@statscap",
+            "title": "Value for upper bound",
+            "description": "Under these flags, the five main character stats (Strength, Agility, Vitality, Wisdom, and Will) go up to the specified limit instead of 99. The cap applies to stats inside and outside of battle as the normal cap of 99 does (including Bluff).",
+            "fork": true,
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "Cstatscap:28",
+                "title": "Character stats go up to 28",
+                "hard": true
+              },
+              {
+                "flag": "Cstatscap:50",
+                "title": "Character stats go up to 50",
+                "hard": true
+              },
+              {
+                "flag": "Cstatscap:69",
+                "title": "Character stats go up to 69",
+                "hard": true
+              },
+              {
+                "flag": "Cstatscap:127",
+                "title": "Character stats go up to 127"
+              },
+              {
+                "flag": "Cstatscap:255",
+                "title": "Character stats go up to 255"
+              }
+            ]
+          }
+        ]
       }
     ]
   },

@@ -754,6 +754,20 @@ def apply(env):
                                                             '        [#B #MakeSuperhero]\n' +
                                                             '    }\n')
 
+    # handle Cstatscap:[] flags
+    statscap_flags = env.options.flags.get_suffix('Cstatscap:')
+    if statscap_flags:
+        cap = int(statscap_flags)
+        env.add_substitution('new stats cap', f'{cap:02X}')
+        env.add_file('scripts/different_stats_cap.f4c')
+        if cap in [127,255]:
+            env.add_toggle('three_digit_stats')
+            if cap == 255:
+                env.add_toggle('one_byte_cap')
+        elif cap == 28:
+            # Fu isn't allowed to start with 40 Wis/Wil, so directly patch
+            # his starting stats to be 28
+            env.add_binary(BusAddress(0x0FAA92), [0x1C, 0x1C])
 
 CHARACTER_AS_ENEMY_NAMES = {
     'cecil'  : ['D.Knight', 'Paladin'],

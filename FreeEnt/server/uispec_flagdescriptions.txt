@@ -278,6 +278,9 @@ If a duplicate character tries to join your party, instead you are given the opt
 [Cfuse:equip]
 If a duplicate character tries to join your party, instead you are given the option to "fuse" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats. Only equipment that the character can normally equip can be fused.
 
+[@statscap]
+Under these flags, the five main character stats (Strength, Agility, Vitality, Wisdom, and Will) go up to the specified limit instead of 99. The cap applies to stats inside and outside of battle as the normal cap of 99 does (including Bluff).
+
 [Cnekkie]
 Characters start with a random low-level weapon and no armor. (Duplicate characters will have the same starting gear.)
 

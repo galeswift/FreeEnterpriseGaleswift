@@ -464,6 +464,13 @@
 .[Cbye] Dismissed characters are irretrievable
 .[Cpermajoin] Characters can't be dismissed
 [Cpaladin]^ Cecil starts the game as a paladin
+[@statscap]^ Upper bounds for character stats
+.<@statscap>^ Value for upper bound
+..(Cstatscap:28)! Character stats go up to 28
+..(Cstatscap:50)! Character stats go up to 50
+..(Cstatscap:69)! Character stats go up to 69
+..(Cstatscap:127) Character stats go up to 127
+..(Cstatscap:255) Character stats go up to 255
 
 == TREASURES
 <>* Treasure chests (other than MIABs)

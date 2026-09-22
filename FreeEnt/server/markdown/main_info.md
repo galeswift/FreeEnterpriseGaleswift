@@ -312,11 +312,20 @@ Under this flag, mutually exclusive to the renamed `Cabilities:j` flag, each cha
 - Idea: Marshal (fusion idea), ScytheMarshall (of gear)
 - Design: ScytheMarshall, Marshal
 - Programming: ScytheMarshall
-- Locations: nodupes_gear_fusion.f4c, rewards.f4c, eventextensions_misc.f4c, generator.py, 
+- Locations: nodupes_gear_fusion.f4c, rewards.f4c, eventextensions_misc.f4c, generator.py 
 
 This flag allows you to "fuse" equipment to characters when you encounter a duplicate character to one already in your party. Fusing equipment to a character removes one copy of the item from your inventory and adds the stat bonuses from that item to your character's base stats, clamping the stats to the range 1-99. The stat changes are permanent but do not persist through re-initialization (for Cecil going from Dark Knight to Paladin, or for any character on `Cmostlydead`). There may be some order-of-operations issues when combined with `Csuperhero`, in the sense that because the stats are clamped between 1 and 99, when a character loses stats they might go down to 49 when you might have expected their stats to only drop to a higher value.
 
 On `Cfuse:gear`, any equipment can be used for any character, regardless of whether or not they can equip it. On `Cfuse:equip`, only equipment that the character can normally equip (subject to other flags, like `-wacky:omnidextrous`) can be used.
+
+### `Cstatscap:[28/50/69/127/255]` {: .h6 }
+
+- Idea: ScytheMarshall, CoffeeAndChocobos
+- Design: ScytheMarshall, CoffeeAndChocobos
+- Programming: ScytheMarshall
+- Locations: different_stats_cap.f4c, character_rando.py
+
+Under these flags, the five main character stats are bounded above by the specified cap instead of 99. For 127 and 255, this makes stacking stats gear even more beneficial, while for 28/50/69, the game becomes *much* more challenging. HP, MP, and Level are not included here. The new cap applies to Bluff in battle. Each of the caps has a soft explanation: 28 allows for RA2 Zeromus, 50 is about half the normal cap, 69 allows for RA5 Zeromus, 127 is a reachable upper bound higher than 99, and 255 is just keeping the stat contained in one byte.
 
 ## Treasure Flags
 
@@ -1522,7 +1531,7 @@ This wacky flag changes the drop rate for monsters that sometimes drop items to 
 - Design/Programming: ScytheMarshall (with documentation from Wylem)
 - Locations: wacky_rando.py, wacky/scrambledstats.f4c, agility.f4c
 
-This wacky flag shuffles the roles of the five main stats (Str, Agi, Vit, Wis, Wil) in battle for your characters (and Vit for monsters). Your derived stats like attack/defense depend on the new stats. 
+This wacky flag shuffles the roles of the five main stats (Str, Agi, Vit, Wis, Wil) in battle for your characters (and Vit for monsters). Your derived stats like attack/defense depend on the new stats. Bluff will still increase Wisdom in battle, which may or may not be helpful.
 
 ### `-wacky:advertising` - Truth in Advertising {: .h6 }
 
