@@ -23,11 +23,20 @@ class FlagSetCore {
         this._flags = {};
         this._embedded_version = null;
     }
-    load(flag_string) {
-        if (((flag_string.length > 0) && (flag_string[0] === "b"))) {
+    load_and_validate(flag_string) {
+        if (((flag_string.length > 0) && _pj.in_es6(flag_string[0], ["b", "c"]))) {
             this._load_binary(flag_string);
+            return null;
         } else {
             this._load_text(flag_string);
+            return this.validate();
+        }
+    }
+    load(flag_string) {
+        var invalid_flags;
+        invalid_flags = this.load_and_validate(flag_string);
+        if (invalid_flags) {
+            throw new Error(`Invalid flags: ${", ".join(invalid_flags)}`);
         }
     }
     _load_text(flag_string) {
@@ -122,6 +131,17 @@ class FlagSetCore {
                 this.set(flag_binary_info["flag"]);
             }
         }
+    }
+    validate() {
+        var invalid_flags;
+        invalid_flags = [];
+        for (var flag, _pj_c = 0, _pj_a = this._lib.keys(this._flags), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            flag = _pj_a[_pj_c];
+            if ((! _pj.in_es6(flag, this._flagspec["order"]))) {
+                this._lib.push(invalid_flags, flag);
+            }
+        }
+        return invalid_flags;
     }
     get_list(regex = null) {
         var flags;
