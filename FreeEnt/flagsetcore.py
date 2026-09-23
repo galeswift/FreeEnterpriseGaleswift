@@ -35,11 +35,18 @@ class FlagSetCore:
         self._flags = {}
         self._embedded_version = None
 
-    def load(self, flag_string):
-        if len(flag_string) > 0 and flag_string[0] == 'b':
+    def load_and_validate(self, flag_string):
+        if len(flag_string) > 0 and flag_string[0] in ['b', 'c']:
             self._load_binary(flag_string)
+            return None
         else:
             self._load_text(flag_string)
+            return self.validate()
+
+    def load(self, flag_string):
+        invalid_flags = self.load_and_validate(flag_string)
+        if invalid_flags:
+            raise Exception(f"Invalid flags: {', '.join(invalid_flags)}")
 
     def _load_text(self, flag_string):
         self._flags = {}
@@ -112,6 +119,13 @@ class FlagSetCore:
 
             if value == flag_binary_info['value']:
                 self.set(flag_binary_info['flag'])
+
+    def validate(self):
+        invalid_flags = []
+        for flag in self._lib.keys(self._flags):
+            if flag not in self._flagspec['order']:
+                self._lib.push(invalid_flags, flag)
+        return invalid_flags
 
     def get_list(self, regex=None):
         flags = []

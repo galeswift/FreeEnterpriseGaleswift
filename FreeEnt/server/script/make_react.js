@@ -29,10 +29,18 @@ class InitializationPanel extends React.Component {
         }
     }
 
-    handleApplyFlags(flagString, scroll = true) {
+    handleApplyFlags(flagString, scroll=true)
+    {
+        let warnings = [];
         let flags = new FlagSet();
-        try {
-            flags.load(flagString);
+        try
+        {
+            let invalid_flags = flags.load_and_validate(flagString);
+            if (invalid_flags.length > 0)
+            {
+                warnings.push("Warning: Some flags are not valid. This flagstring may be intended for an older version or a different generator.");
+            }
+            invalid_flags.forEach((item) => warnings.push("- Removed invalid flag " + item));
         }
         catch (err) {
             // if the flag string is binary and failed to load, attempt an upconversion
@@ -57,10 +65,11 @@ class InitializationPanel extends React.Component {
             return;
         }
 
-        this.setState({ error: null, warnings: null }, () => {
-            this.props.onApplyFlags(flags);
-            if (scroll) {
-                document.getElementById("flagEditor").scrollIntoView({ behavior: 'smooth' });
+        this.setState({error: null, warnings: warnings}, () => { 
+            this.props.onApplyFlags(flags); 
+            if (scroll && warnings.length == 0)
+            {
+                document.getElementById("flagEditor").scrollIntoView({behavior: 'smooth'});
             }
         });
     }
