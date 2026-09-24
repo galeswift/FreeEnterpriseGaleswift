@@ -1,7 +1,8 @@
 import datetime
 import pymongo
+from pymongo.errors import OperationFailure
 
-SEED_LIFETIME_IN_SECONDS = 60 * 60 * 24 * 7
+SEED_LIFETIME_IN_SECONDS = 60 * 60 * 24 * 7 * 4
 
 class CachedSeed:
     def __init__(self, doc):
@@ -19,7 +20,12 @@ class SeedStore:
         self._db['seeds'].create_index(
             [('binary_flags', pymongo.ASCENDING), ('seed', pymongo.ASCENDING)], 
             unique=True)
-        self._db['seeds'].create_index('lastAccessedTime', expireAfterSeconds=SEED_LIFETIME_IN_SECONDS)
+        try:
+            self._db['seeds'].create_index('lastAccessedTime', expireAfterSeconds=SEED_LIFETIME_IN_SECONDS)
+        except OperationFailure as e:
+            # ignore differences in expiry time
+            if e.code != 85:
+                raise e
 
     def put(self, seed_id, patch_data, **metadata):
         now = datetime.datetime.utcnow()
