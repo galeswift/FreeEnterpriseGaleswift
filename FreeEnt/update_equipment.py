@@ -38,10 +38,10 @@ EQUIP_TABLE = {
     0x0C : 0b0010100010001100, # Black Mage Rods
     0x0D : 0b0000000000000000, # unused
     0x0E : 0b0000100100100100, # Tiara/Heroine (for female characters)
-    0x0F : 0b0000000000000000, # unused
+    0x0F : 0b0000000000000000, # reserved for -t8scramble (Adamant)
     0x10 : 0b0000000000000000, # reserved for the custom FF4 weapon
-    0x11 : 0b0000000000000000, # unused
-    0x12 : 0b0000000000000000, # unused
+    0x11 : 0b0000000000000000, # reserved for -t8scramble (Excal)
+    0x12 : 0b0000000000000000, # reserved for -t8scramble (CS)
     0x13 : 0b0001101010010110, # Knives -> changed by rosadin
     0x14 : 0b0011100111111100, # Mage Rings
     0x15 : 0b0000000000000001, # DKC swords/shields/armour -> changed by rydiaredmage and darkpaladin
@@ -62,6 +62,7 @@ def equip_table(env):
     # - -tweak:rydiaredmage
     # - -tweak:rosadin
     # - -tweak:darkpaladin
+    # - -t8scramble
     
     equip_table_to_change = {}
 
@@ -91,7 +92,68 @@ def equip_table(env):
         equip_table_to_change[0x0B] = (equip_table_to_change.setdefault(0x0B, EQUIP_TABLE[0x0B]) | pcecil_bit) & (0xFFFF ^ rosa_bit)
         # Rosa gaining holy swords/shields and PCecil losing them is managed
         # by changing the equipment data itself, not the equip table
-        
+
+    # change tier 8 equipment options
+    t8scramble_flags = env.options.flags.get_list(r'^-t8scramble:')
+    if t8scramble_flags:
+        # first flag is always the number of chars or 'dkc'
+        target_equip_num = t8scramble_flags[0][12:]
+        if target_equip_num == 'dkc':
+            # items equippable by DKC and only DKC
+            for table_id in [0x0F, 0x11, 0x12]:
+                equip_table_to_change[table_id] = 0x1
+        else:
+            target_equip_num = int(target_equip_num)
+
+            if env.options.flags.has('tier8_scramble_playable'):
+                # restrict to available characters in the seed; convert strings to match CHARS_TO_EQUIP_BIT
+                available_chars = [char.capitalize().replace("Cecil","PCecil").replace("Rydia","ARydia").replace("Fusoya","FuSoYa") 
+                                   for char in env.meta['available_characters']]
+                print(available_chars)
+                target_equip_num = min(target_equip_num, len(available_chars))
+            else:
+                available_chars = [char for char in CHARS_TO_EQUIP_BIT]
+                available_chars.remove('DKCecil')
+                available_chars.remove('CRydia') # we'll manually handle Child Rydia's bit later
+
+            if env.options.flags.has('tier8_scramble_spread'):
+                # assign characters to equipment with minimal repetition
+                # first, randomize the order of the items
+                assign_order = [0x0F, 0x11, 0x12]
+                env.rnd.shuffle(assign_order)
+                print(assign_order)
+                # set up parameters
+                unused_chars = [ch for ch in available_chars]
+                current_item_chars = []
+                while assign_order:
+                    # choose as many unused characters as possible for the current item, up to the max number needed
+                    current_item_chars.extend(env.rnd.sample(unused_chars,k=min(len(unused_chars),target_equip_num-len(current_item_chars))))
+                    unused_chars = [ch for ch in available_chars if ch not in current_item_chars]
+                    if len(current_item_chars) == target_equip_num:
+                        # item is full, set up the equip table entry, pop the item ID, reset current_item_chars
+                        table_entry = 0
+                        for ch in current_item_chars:
+                            table_entry += (0x1 << CHARS_TO_EQUIP_BIT[ch])
+                        table_id = assign_order.pop(0)
+                        equip_table_to_change[table_id] = table_entry
+                        current_item_chars = []
+                    if not unused_chars:
+                        # reset unused_chars back to all options 
+                        unused_chars = [c for c in available_chars]
+            else:
+                # assign characters to equipment independently
+                for table_id in [0x0F, 0x11, 0x12]:
+                    table_entry = 0
+                    selected_chars = env.rnd.sample(available_chars,k=target_equip_num)
+                    for ch in selected_chars:
+                        table_entry += (0x1 << CHARS_TO_EQUIP_BIT[ch])
+                    equip_table_to_change[table_id] = table_entry
+
+            # Match Child Rydia's options to Adult Rydia's options
+            for table_id in [0x0F, 0x11, 0x12]:
+                if equip_table_to_change[table_id] & (0x1 << CHARS_TO_EQUIP_BIT['ARydia']):
+                    equip_table_to_change[table_id] += (0x1 << CHARS_TO_EQUIP_BIT['CRydia'])
+
     # implement patches to the equip table
     for idx in equip_table_to_change:
         env.add_binary(BusAddress(0x0FA550 + 0x02*idx), [equip_table_to_change[idx] & 0x00FF, equip_table_to_change[idx]>>8], as_script=True)
@@ -177,6 +239,14 @@ def equipment(env):
         equipment_to_change.setdefault(0x35,{}).update({0x02 : 0xBC, 0x03 : 0x44})
         # Flame whip casts Flame. Also needs... a bit more damage for hits, for balance.
         equipment_to_change.setdefault(0x36,{}).update({0x02 : 0xC1, 0x03 : 0x42})
+
+    # point the tier 8 items to their new equip_table entries if necessary
+    # allow Fist Fight to override -t8scramble for the Excal and CS
+    t8scramble_flags = env.options.flags.get_list(r'^-t8scramble:')
+    if t8scramble_flags:
+        equipment_to_change.setdefault(0x1B,{}).update({0x06 : 0x11}) # Excal
+        equipment_to_change.setdefault(0x3F,{}).update({0x06 : 0x12}) # CS
+        equipment_to_change.setdefault(0x9A,{}).update({0x06 : 0x0F}) # Adamant
 
     if 'fistfight' in env.meta.get('wacky_challenge',[]):
         # change claws to be universally equippable, all other weapons not

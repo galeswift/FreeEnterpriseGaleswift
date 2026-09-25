@@ -597,11 +597,13 @@ def apply(env):
     env.spoilers.add_table("CHARACTERS", character_spoilers, public=character_spoilers_public)
 
     # set starting gear, if needed
+    inf_arrows = env.options.flags.has('infinite_arrows')
+    altered_item_tiers = env.meta['altered_item_tiers']
     # first, check for Cnekkie
     if env.options.flags.has('characters_nekkie'):
         starting_weapon_spoilers = []
-        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and it.tier in (1,2,3))
-        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in (1,2,3))
+        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and altered_item_tiers[it.code] in (1,2,3))
+        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and altered_item_tiers[it.code] in (1,2,3))
         for reference_actor_id in REFERENCE_ACTORS_TO_EQUIP_JOBS:
             job = REFERENCE_ACTORS_TO_EQUIP_JOBS[reference_actor_id]
             if env.options.flags.has('rosapaladin'):
@@ -615,7 +617,7 @@ def apply(env):
             if weapon.subtype == 'bow':
                 arrow = env.rnd.choice(arrows_dbview.find_all())
                 starting_weapon_spoilers.append(SpoilerRow(REFERENCE_ACTORS_TO_SPOILER_NAMES[reference_actor_id], databases.get_item_spoiler_name(weapon) + ' + ' + databases.get_item_spoiler_name(arrow), obscurable=True))
-                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge', []) else ' 20')
+                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge', []) or inf_arrows else ' 20')
                 off_hand_value = weapon.const
             else:
                 main_hand_value = weapon.const
@@ -650,12 +652,12 @@ def apply(env):
     if thrift_tier:
         thrift_tier = int(thrift_tier)
         starting_gear_spoilers = []
-        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and it.tier in range(1,thrift_tier+1))
-        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in range(1,thrift_tier+1))
-        shields_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype == 'shield' and it.tier in range(1,thrift_tier+1))
-        head_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['helmet','hat'] and it.tier in range(1,thrift_tier+1))
-        body_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['armor','robe'] and it.tier in range(1,thrift_tier+1))
-        arms_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['gauntlet','ring'] and it.tier in range(1,thrift_tier+1)
+        weapons_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        arrows_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        shields_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype == 'shield' and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        head_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['helmet','hat'] and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        body_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['armor','robe'] and altered_item_tiers[it.code] in range(1,thrift_tier+1))
+        arms_dbview = databases.get_items_dbview().get_refined_view(lambda it: it.category == 'armor' and it.subtype in ['gauntlet','ring'] and altered_item_tiers[it.code] in range(1,thrift_tier+1)
                                                                     and it.const != '#item.Cursed') # it makes more sense to just ban Cursed Rings entirely, given their value.
 
         for reference_actor_id in REFERENCE_ACTORS_TO_EQUIP_JOBS:
@@ -673,7 +675,7 @@ def apply(env):
             if weapon.subtype == 'bow':
                 arrow = env.rnd.choice(arrows_dbview.find_all())
                 gear_list.append(databases.get_item_spoiler_name(weapon) + ' + ' + databases.get_item_spoiler_name(arrow))
-                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge',[]) else ' 20')
+                main_hand_value = arrow.const + (' 1' if 'unstackable' in env.meta.get('wacky_challenge',[]) or inf_arrows else ' 20')
                 off_hand_value = weapon.const
             else:
                 main_hand_value = weapon.const
@@ -752,6 +754,20 @@ def apply(env):
                                                             '        [#B #MakeSuperhero]\n' +
                                                             '    }\n')
 
+    # handle Cstatscap:[] flags
+    statscap_flags = env.options.flags.get_suffix('Cstatscap:')
+    if statscap_flags:
+        cap = int(statscap_flags)
+        env.add_substitution('new stats cap', f'{cap:02X}')
+        env.add_file('scripts/different_stats_cap.f4c')
+        if cap in [127,255]:
+            env.add_toggle('three_digit_stats')
+            if cap == 255:
+                env.add_toggle('one_byte_cap')
+        elif cap == 28:
+            # Fu isn't allowed to start with 40 Wis/Wil, so directly patch
+            # his starting stats to be 28
+            env.add_binary(BusAddress(0x0FAA92), [0x1C, 0x1C])
 
 CHARACTER_AS_ENEMY_NAMES = {
     'cecil'  : ['D.Knight', 'Paladin'],

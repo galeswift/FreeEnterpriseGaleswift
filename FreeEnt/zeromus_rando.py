@@ -229,7 +229,10 @@ def apply(env):
         script_category = main_z_flag[1:]
     else:
         # randomly choose from the Zunsure options or the main category, which flagsetcore ensures are disjoint
-        script_category = env.rnd.choice([main_z_flag] + z_unsure_flags)[1:]
+        script_category = env.rnd.choice([main_z_flag[1:]] + [f[8:] for f in z_unsure_flags])
+        if script_category == 'vanilla':
+            # in cases where the script category was not guaranteed and we get the vanilla script, spoil that
+            env.spoilers.add_table("ZEROMUS SCRIPT", [("Script category", "Vanilla")], public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))
     
     bigbang_replacements = [[], [], [], [], [], []]
     script_nuke_replacement = []
@@ -261,6 +264,7 @@ def apply(env):
     whichbangflag = False
     replacescriptflag = False
     fixjumpflag = False
+    changestatsflag = False
 
     # main script changes: physical, ailments, chaos, or three random scripts. Handle each of the applicable subflags as well, except for phaseshift.
     # at the end, check for other flags that impact the vanilla script.
@@ -269,6 +273,7 @@ def apply(env):
         physicalflag = True
         replacescriptflag = True
         fixjumpflag = True
+        changestatsflag = True
         # repurpose attack index $5D to be (20, 99, 200) and $5E to be (18, 99, 255), set Z's base attack index to be $5D
         # make adjustments for ET or J Zeromus, to get closer to those damage amounts
         # ......... do I want to give Z an attack element? ... like *Drain*? lmao. No, but that'd be wild.
@@ -389,13 +394,16 @@ def apply(env):
         # for reactions: first two are vanilla, third is custom react-to-Dart, fourth is custom react-to-Aim, fifth is react-to-Jump (Land), sixth is react-to-Fight
         # will need to change in the event of writing a compiler for new ai sets/etc.
         env.add_binary(address.UnheaderedAddress(0x0764A1), [0x61, 0x56, 0x18, 0x54, 0x05, 0x4E, 0x30, 0x58, 0x5C, 0x4F, 0x06, 0x4D]) 
+
+        # spoiler
+        env.spoilers.add_table("ZEROMUS SCRIPT", [("Script category", "Physical")], public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))
     
     elif script_category == 'ailments':
         # the normal script, but the six different Nuke/Virus casts are replaced with status spells (let's make them all different, for variety)
         # no, we're not changing the Count cast in ET Meteo phase
         replacescriptflag = True
         potential_spells = list(POSSIBLE_STATUS_SPELLS)
-        ailments_spoilers = []
+        ailments_spoilers = [("Script category", "Ailments")]
         ailments_to_use = env.rnd.sample(potential_spells, k=6)
         targeting_data = [env.rnd.choice(POSSIBLE_STATUS_SPELLS[sp].split(' / ')) for sp in ailments_to_use]
         script_fragments = []
@@ -453,7 +461,7 @@ def apply(env):
         
         elif env.options.flags.has('z_must_nerf'):
             # vanilla script except we make the spell power set to 253 (0xFD) for Big Bangs
-            # setting 255 at the start via the script-change f4c
+            # setting 255 at the start via the stats-change f4c
             # I *think* using 255 (0xFF) makes the game think it's an opcode... yep. so does 254 (0xFE), so 253 it is.
             env.add_substitution('zeromus initial spell power', '    spell power 255')
             
@@ -466,7 +474,8 @@ def apply(env):
         # add status protection, for added danger... to us
         env.add_substitution('zeromus status protection',
                              'resist status #Poison #Blind #Mute #Piggy #Mini #Toad #Stone #Swoon #Calcify1 #Calcify2 #Berserk #Charm #Sleep #Stun #Curse')
-        env.spoilers.add_table("MISC", ailments_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))    
+        changestatsflag = True
+        env.spoilers.add_table("ZEROMUS SCRIPT", ailments_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))    
 
     elif script_category == 'chaos':
         # 2-5 random attacks per phase (or 1-3 for last phase), sometimes with a pass-shake-BB-type pattern (at most floor(n/2) of them), random reactions
@@ -477,7 +486,7 @@ def apply(env):
         potential_shake_attacks = list(shake_dict)
         potential_non_shake_attacks = list(POSSIBLE_CHAOS_COMMANDS)
         potential_reactions = list(POSSIBLE_CHAOS_REACTIONS)
-        chaos_spoilers = []
+        chaos_spoilers = [("Script category", "Chaos")]
         spoilers_to_add = [[], [], []]
 
         for i in range(0,3):
@@ -620,6 +629,7 @@ def apply(env):
         if env.options.flags.has('z_must_nerf'):
             # even with whichbang, we're restricting the opening BB to be magic, so don't change attack
             env.add_substitution('zeromus initial spell power', '    spell power 255')
+            changestatsflag = True
 
         for i in range(0,3):
             env.add_substitution(f'chaos phase {i+1}', ''.join(chaos_phases[i]))
@@ -697,7 +707,7 @@ def apply(env):
         counter_virus_replacement.extend(reaction_list[3])
 
         env.add_file('scripts/zeromus_chaosscript.f4c')
-        env.spoilers.add_table("MISC", chaos_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))        
+        env.spoilers.add_table("ZEROMUS SCRIPT", chaos_spoilers, public = env.options.flags.has_any('-spoil:all', '-spoil:misc'))        
 
     elif script_category == 'lavosshell':
         # assign three random scripts from the game, avoiding condition changes
@@ -754,6 +764,7 @@ def apply(env):
         elif env.options.flags.has('z_must_nerf'):
             replacescriptflag = True
             env.add_substitution('zeromus initial spell power', '    spell power 255')
+            changestatsflag = True
             if 0x14C in scripts[:3]:
                 for i in [1, 2, 3]:
                     bigbang_replacements[i].extend([
@@ -768,8 +779,9 @@ def apply(env):
                     ])
         # spoiler log:
         env.spoilers.add_table(
-            "MISC", 
-            [ ("Zeromus script 1", script_descriptions[scripts[0]]),
+            "ZEROMUS SCRIPT", 
+            [ ("Script category", "Lavos Shell"),
+            ("Zeromus script 1", script_descriptions[scripts[0]]),
             ("Zeromus script 2", script_descriptions[scripts[1]]),
             ("Zeromus script 3", script_descriptions[scripts[2]]) ],
             public = env.options.flags.has_any('-spoil:all', '-spoil:misc')
@@ -806,6 +818,7 @@ def apply(env):
             # I *think* using 255 (0xFF) makes the game think it's an opcode... yep. so does 254 (0xFE), so 253 it is.
             replacescriptflag = True
             env.add_substitution('zeromus initial spell power', '    spell power 255')
+            changestatsflag = True
             
             for i in range(1,6):
                 bigbang_replacements[i].extend([
@@ -828,6 +841,7 @@ def apply(env):
         # setting 255 at the start via the f4c, 253 for scripted changes because 254/255 break things
         if env.options.flags.has('z_must_nerf'):
             env.add_substitution('zeromus initial spell power', '    spell power 255')
+            changestatsflag = True
         for i in range(0,6):
             if env.options.flags.has('z_no_nerfs') and replacement_commands[i] == '#spell.Meteo':
                 bb_spell_powers[i] = int(versionmult * 9)
@@ -862,7 +876,7 @@ def apply(env):
 
         # build spoiler log
         env.spoilers.add_table(
-            "MISC", 
+            "ZEROMUS SCRIPT", 
             [ ("Opening Big Bang replacement", databases.get_spell_spoiler_name(replacement_commands[0])),
             ("Virus phase Big Bang replacements", ', '.join([databases.get_spell_spoiler_name(replacement_commands[i]) for i in range(1,4)])),
             ("Nuke phase Big Bang replacements", ', '.join([databases.get_spell_spoiler_name(replacement_commands[i]) for i in range(4,6)])) ],
@@ -879,10 +893,16 @@ def apply(env):
         phases_name_dict = ( {0x4C : 'Needle', 0x55 : 'Jump', 0x57 : 'Dark Wave'} if physicalflag 
                             else {0x4C : 'Virus', 0x55 : 'Nuke', 0x57 : 'Meteo'} )
         env.spoilers.add_table(
-            "MISC", 
+            "ZEROMUS SCRIPT", 
             [ ("Zeromus phase order", ', '.join([phases_name_dict[p] for p in phases])) ],
             public = env.options.flags.has_any('-spoil:all', '-spoil:misc')
             )        
+
+    if env.options.flags.has('z_drain_attacks'):
+        # give Z the drain effect on physical attacks
+        env.add_substitution('zeromus attack element', 'attack element #Absorb')
+        changestatsflag = True
+        # change Big Bang to have the Drain spell effect, in update_spells.py
 
     # now add the script changes as substitutions, and add any remaining f4c files
     for i in range(0,6):
@@ -905,5 +925,7 @@ def apply(env):
             env.add_file('scripts/zeromus_etscript.f4c')
         else:
             env.add_file('scripts/zeromus_replacescript.f4c')
+    if changestatsflag:
+        env.add_file('scripts/zeromus_changestats.f4c')
     if fixjumpflag:
         env.add_file('scripts/fix_jump_retargeting.f4c')

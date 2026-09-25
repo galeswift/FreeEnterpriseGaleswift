@@ -464,6 +464,13 @@
 .[Cbye] Dismissed characters are irretrievable
 .[Cpermajoin] Characters can't be dismissed
 [Cpaladin]^ Cecil starts the game as a paladin
+[@statscap]^ Upper bounds for character stats
+.<@statscap>^ Value for upper bound
+..(Cstatscap:28)! Character stats go up to 28
+..(Cstatscap:50)! Character stats go up to 50
+..(Cstatscap:69)! Character stats go up to 69
+..(Cstatscap:127) Character stats go up to 127
+..(Cstatscap:255) Character stats go up to 255
 
 == TREASURES
 <>* Treasure chests (other than MIABs)
@@ -859,6 +866,7 @@
 <>^ Nerfing of Big Bangs
 .(Znonerfs)! Prevent nerfing of Big Bangs
 .(Zmustnerf)! 9999 damage Big Bangs
+[Zdrain]!^ Big Bang and physical attacks drain HP
 [Znocosplay] Vanilla Z sprite
 
 == OTHER
@@ -976,7 +984,14 @@
 [-spoon] Edward can equip the Spoon
 [-monsterevade]!^ Monsters get physical and magical evasion
 [-monsterflee]^ Monsters can flee from battle
+[-infarrows]^ Arrows are infinite-use
+[-warpitem]^ The EagleEye is replaced with a Warp item
+[@gravitysap] Calculate sap damage using current HP
+.<> Fraction of current HP
+..(-gravitysap:calm)! 1/64 for party, 1/512 for monsters
+..(-gravitysap:danger)! 1/16 for party, 1/128 for monsters
 [-speedmodbalance]^ Alter the speed modifier behaviour
+[-multifast]^ Make Fast a multi-target spell
 [@smithy] Smithy reward
 .<> Alternative forge items
 ..(-smith:alt) Kokkol crafts a random tier 7/8 item
@@ -987,6 +1002,28 @@
 .[-smith:omni]^ All characters can equip the FF4A weapon 
 .[-smith:spoilsuper]^ The Legend Sword previews the FF4A weapon
 .[-smith:sellsuper]^ The FF4A weapon will have a non-zero sell price
+[@t8] Change tier 8 equip tables
+.<> Number of characters per item
+..(-t8scramble:0) None of the items are equippable
+..(-t8scramble:1) Each item is equippable by 1 character
+..(-t8scramble:2) Each item is equippable by 2 characters
+..(-t8scramble:3) Each item is equippable by 3 characters
+..(-t8scramble:4) Each item is equippable by 4 characters
+..(-t8scramble:5) Each item is equippable by 5 characters
+..(-t8scramble:6) Each item is equippable by 6 characters
+..(-t8scramble:7) Each item is equippable by 7 characters
+..(-t8scramble:8) Each item is equippable by 8 characters
+..(-t8scramble:9) Each item is equippable by 9 characters
+..(-t8scramble:10) Each item is equippable by 10 characters
+..(-t8scramble:11) Each item is equippable by 11 characters
+..(-t8scramble:12) Each item is equippable by all characters
+..(-t8scramble:dkc) Each item is equippable by only Dark Knight Cecil
+.[-t8scramble:playable] Scramble only considers playable characters
+.[-t8scramble:spread] Characters are spread evenly across the items
+[@singleuse]^ Make certain equipment single-use
+.[-singleuse:cursed]! Cursed Rings break after battle
+.[-singleuse:crystal]! Crystal Swords break after battle
+.[-singleuse:adamant]! Adamant Armors break after battle
 <>^ Change the PRNG table
 .(-prng:shuffle) Shuffle the PRNG table values
 .(-prng:random) Randomize the PRNG values independently
@@ -1058,6 +1095,7 @@
 .[-wacky:timeismoney]       "Time is Money"
 .[-wacky:advertising]^      "Truth in Advertising"
 .[-wacky:unstackable]!      "Unstackable"
+.[-wacky:wardrobe]!^        "Wardrobe Malfunction"
 .[-wacky:whatsmygear]^      "What's My Gear Again?"
 .[-wacky:workexperience]!^  "Work Experience"
 .[-wacky:darts]             "World Championship of Darts"

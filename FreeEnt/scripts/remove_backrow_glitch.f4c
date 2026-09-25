@@ -6,12 +6,23 @@ msfpatch {
     .new
     LongRangeFix:
         and #$20  // displaced check
-        beq $+ClearLongRangeBit
-        jml $039d9e
-    %ClearLongRangeBit:
+        bne $+SetLongRangeBit 
+        // %flag bug_fixes on%
+        // check second weapon as well
+        // if no weapon, then it can't set
+        // the long range bit anyway
+        lda $28a7
+        and #$20
+        bne $+SetLongRangeBit
+        // %end%
+        // %if remove_backrow_glitch%
+        // remove the long range bit
         ldy #$0001
         lda ($80),y
         and #$df
         sta ($80),y
+        // %end%
         jml $039da7
+    %SetLongRangeBit:
+        jml $039d9e
 }

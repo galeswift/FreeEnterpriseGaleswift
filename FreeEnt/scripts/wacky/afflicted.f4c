@@ -66,6 +66,9 @@ msfpatch {
 // clean out bad statuses after battle
 msfpatch {
     Wacky__PostBattleHook:
+        lda $_PostBattle__Flags
+        and #$01
+        bne $+SkipHook
         ldx #$0000
     %LoopStart:
         lda $1000,x
@@ -84,7 +87,7 @@ msfpatch {
         jsr $_Util__XPlus40
         cpx #$0140
         bcc $-LoopStart
-    
+    %SkipHook:
         rtl
 }
 

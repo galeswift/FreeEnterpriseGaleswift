@@ -70,9 +70,9 @@ msfpatch{
 
 
 // add a pointer at $03B3A6 for the $15 command jump data
-patch($03B3A6 bus) { 20 F2 }
+patch($03B3A6 bus) { 30 F2 }
 
-// use $03F220 for hook to new code, re: _execute
+// use $03F230 for hook to new code, re: _execute
 // and make sure to rts here, and/or do other
 // bank03-specific things that would be easier here
 // than in bank20
@@ -82,7 +82,7 @@ patch($03B3A6 bus) { 20 F2 }
 // wacky stuff, so we push the hook a bit further in
 
 msfpatch{
-    .addr $03f220
+    .addr $03f230
         jsl $=BattleCommand__ExecuteRaid
         rts
     BattleCommand__ExecuteRaidApplyDamage:

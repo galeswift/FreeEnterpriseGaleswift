@@ -1,0 +1,13 @@
+code,const,name,spoilername,category,subtype,j,flag,tier,shopoverride,price,throw,metal,longrange,twohanded,equip
+0x54,#item.IronArrow,[arrow]Iron,Iron Arrows,weapon,arrow,,,1,,50,,yes,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x55,#item.WhiteArrow,[arrow]White,White Arrows,weapon,arrow,,,3,,2000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x56,#item.FireArrow,[arrow]Fire,Fire Arrows,weapon,arrow,,,2,,900,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x57,#item.IceArrow,[arrow]Ice,Ice Arrows,weapon,arrow,,,2,,900,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x58,#item.LitArrow,[arrow]Lit,Lit Arrows,weapon,arrow,,,3,,4000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x59,#item.DarknessArrow,[arrow]Darkness,Darkness Arrows,weapon,arrow,,,2,,800,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x5A,#item.PoisonArrow,[arrow]Poison,Poison Arrows,weapon,arrow,,,3,,2000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x5B,#item.MuteArrow,[arrow]Mute,Mute Arrows,weapon,arrow,,,4,,14000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x5C,#item.CharmArrow,[arrow]Charm,Charm Arrows,weapon,arrow,,,4,,18000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x5D,#item.SamuraiArrow,[arrow]Samurai,Samurai Arrows,weapon,arrow,,,5,,23000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x5E,#item.MedusaArrow,[arrow]Medusa,Medusa Arrows,weapon,arrow,,,4,,20000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"
+0x5F,#item.ArtemisArrow,[arrow]Artemis,Artemis Arrows,weapon,arrow,,,7,,120000,,,yes,,"crydia,edward,rosa,palom,porom,pcecil,cid,arydia,fusoya"

@@ -51,6 +51,7 @@ from . import update_abilities
 from . import update_equipment
 
 from . import compile_item_prices
+from . import databases
 from . import doors_rando
 
 from .script_preprocessor import ScriptPreprocessor
@@ -200,6 +201,7 @@ F4C_FILES = '''
     scripts/extend_spellsets.f4c
     scripts/odin_sprite_patch.f4c
     scripts/critical_hit_visuals.f4c
+    scripts/fix_legend_removal.f4c
 '''
 # the missing scripts/black_shirt_fix.f4c is included below as a conditional, if -wacky:whatsmygear is not on
 # the missing opening.f4c script is included as a condition, depending on -starting: flags
@@ -664,6 +666,26 @@ def build(romfile, options, force_recompile=False):
     else:
         env.add_file('scripts/japanese_drops.f4c')
 
+    # handle any item tier changes; if none, then we just have the usual tiers
+    env.meta['altered_item_tiers'] = {}
+    items_dbview = databases.get_items_dbview()
+    for item in items_dbview:
+        env.meta['altered_item_tiers'].update({item.code : item.tier})
+
+    # infinite arrows have slight tier changes; while we're here,
+    # load the relevant scripts
+    if options.flags.has('infinite_arrows'):
+        inf_arrow_dbview = databases.get_infinite_arrows_dbview()
+        for arrow in inf_arrow_dbview:
+            env.meta['altered_item_tiers'].update({arrow.code : arrow.tier})
+        env.add_file('scripts/infinite_arrows.f4c')
+        if 'unstackable' not in env.meta.get('wacky_challenge', []):
+            env.add_toggle('infinite_arrows_not_unstackable')
+
+    # the Warp item is tier 2, not 1
+    if options.flags.has('eagleeye_warp'):
+        env.meta['altered_item_tiers'].update({0xE4 : 2})
+
     RANDO_MODULES = [
         character_rando,
         core_rando,
@@ -703,7 +725,7 @@ def build(romfile, options, force_recompile=False):
     update_abilities.command_lists(env)
 
     # handle all changes to equipment and the equipment index table
-    # except for the Spoon and the custom FF4A weapon
+    # except for the custom FF4A weapon
     update_equipment.equip_table(env)
     update_equipment.equipment(env)
 
@@ -764,8 +786,12 @@ def build(romfile, options, force_recompile=False):
     elif not options.flags.has('glitch_allow_life'):
         # this case handles both the absence of any Glife flags and Gnolifer
         env.add_file('scripts/remove_life_glitch.f4c')
-    if (not options.flags.has('glitch_allow_backrow')) or 'sixleggedrace' in env.meta.get('wacky_challenge', []):
+    no_backrow_glitch = (not options.flags.has('glitch_allow_backrow')) or 'sixleggedrace' in env.meta.get('wacky_challenge', [])
+    if no_backrow_glitch or options.flags.has('bug_fixes'):
+        # remove_backrow_glitch.f4c handles both removing the glitch and allowing a second weapon to set the long range bit
         env.add_file('scripts/remove_backrow_glitch.f4c')
+        if no_backrow_glitch:
+            env.add_toggle("remove_backrow_glitch")
 
     # some part of this fix is always needed; substitutions within
     # this file handle whether the glitch is fully "fixed"
@@ -781,6 +807,13 @@ def build(romfile, options, force_recompile=False):
     
     if options.flags.has('let_monsters_flee'):
         env.add_file('scripts/monster_flee.f4c')
+
+    if options.flags.has_any('single_use_cursed_ring', 'single_use_crystal_sword', 'single_use_adamant'):
+        env.add_toggle('single_use_items')
+        env.add_file('scripts/single_use_items.f4c')
+
+    if options.flags.has_any('gravity_sap', 'gravity_sap_danger'):
+        env.add_file('scripts/gravity_sap_damage.f4c')
 
     # agility flag substitutions and toggles
     if options.flags.has('random_agility'):

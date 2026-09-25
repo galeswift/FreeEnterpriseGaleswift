@@ -1,0 +1,64 @@
+// make modifications to treat arrows
+// like weapons that don't get
+// used up in battle
+
+// giving 1 arrow happens in
+// item_delivery_quantity.f4c
+
+msfpatch{
+    // do not check to transfer the entire
+    // stack of arrows into a hand
+    .addr $01c13a
+        clc
+        nop nop
+
+    // do not transfer stacks of arrows
+    // when equipping
+    .addr $01c17b
+        clc
+        nop nop
+
+    .addr $01c19d
+        clc
+        nop nop
+
+    .addr $01c1e1
+        clc
+        nop nop
+
+    // award only one arrow in battle spoils
+    .addr $01d472
+        clc
+        nop nop
+
+    // default arrow count to 1 in battle menu transfers
+    .addr $0294a4
+        clc
+        nop
+
+    // ignore the special case of 20-or-fewer arrows, thus
+    // never passing $0294ed the arrows mode ($03)
+    .addr $02b24c
+        and #$00
+
+    .addr $02b2cc
+        and #$00
+
+    // make arrows fail to swap with the same arrow
+    .addr $02b272
+        and #$00
+
+    // never subtract arrows (and thus never set the
+    // arrow removal flag)
+    .addr $03c4b2
+        nop nop nop
+
+    // ensure sneaking only gives one arrow 
+    .addr $03e25e
+        sec
+        nop
+}
+
+// initializing characters to only have one arrow equipped
+// happens in character_expansion.f4c (and also in
+// character_rando.py)

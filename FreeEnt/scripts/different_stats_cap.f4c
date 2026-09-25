@@ -1,0 +1,203 @@
+// modify the character stats cap
+// away from 99
+
+// for reference, during stat calculation:
+// $80 is the character stat record pointer
+// $a9 holds the base stat Y
+// $ab holds the new stat Y
+
+// rejig stat calculation re: equipment,
+// since the old system was tailored to 1-99 (ish).
+// it doesn't work for 127 or 255, so needs to be fixed
+
+msfpatch{
+    .addr $0398eb
+        ldy $ab
+        jml $=DifferentStatsCap
+        nop nop nop nop 
+        nop nop nop
+        // here is $0398f8
+    UpperBoundStat:
+        // %if one_byte_cap%
+        bcc $+HaveFinalStat
+        lda #$ff
+        nop nop 
+        nop nop 
+        // %else%
+        // replace the old stats cap and carry on
+        cmp #${% new stats cap : 63 %}
+        bcc $+HaveFinalStat
+        lda #${% new stats cap : 63 %}
+        nop nop
+        // %end%
+    HaveFinalStat:
+        // now we're at $039900, which we can set
+        // to load the correct offset into Y, and
+        // then lead into sta ($80),y at $039902
+        ldy $ab
+
+    .new
+    DifferentStatsCap:
+        // ($80),y holds the equipment bonus,
+        // with Y holding the value from $ab
+        clc
+        lda ($80),y
+        // assume that total stat bonuses are between
+        // -128 ($80) and 127 ($7f); really they're between
+        // -75 ($b5) and 75 ($4b)
+        bpl $+PositiveStatBonus
+        // the stat bonus is negative, so add and see if
+        // we roll over, i.e. set the carry
+        ldy $a9
+        adc ($80),y
+        bcs $+StatObtained
+        // since the carry isn't set, the base stat wasn't
+        // enough to get past -1, so just load 1 (which means
+        // we still set 0 if we hit it exactly)
+        lda #$01
+    %StatObtained:
+        // stat obtained, and since (by assumption) there is no
+        // circumstance where we're higher than the upper bound,
+        // since no character (now) starts with higher stats than
+        // the bound, we can just set the value
+        jml $=HaveFinalStat
+    %PositiveStatBonus:
+        // stat bonus is positive, so just add and go back to bank03
+        ldy $a9
+        adc ($80),y
+    %BackToNormalCode:
+        // rejoin normal code sequence, 
+        // which has modifications for upper bounds
+        jml $=UpperBoundStat
+}
+
+// cap Bluff
+// %if one_byte_cap%
+// modify game logic just to cap at 255/one byte
+msfpatch{
+    .addr $03ead5
+        bcc $+SetNewWisdom
+        lda #$ff
+    %SetNewWisdom:
+        nop nop
+}
+// %else%
+patch($03ead6 bus) { {% new stats cap : 63 %} }
+patch($03eada bus) { {% new stats cap : 63 %} }
+// %end%
+
+// cap stat increases
+// %if one_byte_cap%
+// modify game logic just to cap at 255/one byte
+msfpatch{
+    .addr $03f05d
+        bcc $+SetNewStat
+        lda #$ff
+    %SetNewStat:
+        nop nop
+}
+// %else%
+patch($03f05e bus) { {% new stats cap : 63 %} }
+patch($03f062 bus) { {% new stats cap : 63 %} }
+// %end%
+
+
+// %if three_digit_stats%
+// tell the game to draw three digits
+// of stats on the status screen, not two
+msfpatch{
+    .addr $01a9b0
+        jsr $_DrawTwoThreeDigitNumber
+
+    .addr $01a9bb
+        jsr $_DrawTwoThreeDigitNumber
+
+    .addr $01a9c6
+        jsr $_DrawTwoThreeDigitNumber
+
+    .addr $01a9d1
+        jsr $_DrawTwoThreeDigitNumber
+
+    .addr $01a9dc
+        jsr $_DrawTwoThreeDigitNumber
+
+    .addr $01ffe0
+    DrawTwoThreeDigitNumber:
+        cmp #$64
+        bcs $+ThreeDigitNumber
+        // have two-digit number, jump 
+        // to that routine and let it rts
+        jmp $8369
+    %ThreeDigitNumber:
+        // decrement Y twice to get the correct Y offset
+        dey
+        dey
+        jsl $=DrawThreeDigitStat
+        rts
+
+    .new
+    DrawThreeDigitStat:
+        // first, determine if the first digit is 1 or 2
+        cmp #$c8
+        bcc $+HundredsDigitOne
+        // hundreds digit is a 2, so subtract 200 and
+        // store the result for later
+        sec
+        sbc #$c8
+        pha
+        lda #$82
+        bra $+PlaceHundredsDigit
+    %HundredsDigitOne:
+        // hundreds digit is a 1, so subtract 100 and
+        // store the result for later
+        sec
+        sbc #$64
+        pha
+        lda #$81
+    %PlaceHundredsDigit:
+        sta $b600,y
+        iny
+        iny
+
+        // now format the rest of the number as normal
+        pla
+        ldx #$81bd
+        jsr $_MK_DoLongCallX
+        // ... but replace $ff with $80 for 0, since we
+        // don't want to draw a blank tile (the tens
+        // digit is in the lo byte of A, since we draw
+        // that first, left-to-right)
+        cmp #$ff
+        bne $+HaveCorrectTiles
+        lda #$80
+    %HaveCorrectTiles:
+        // jump into the two-digit drawing routine
+        // after formatting, and we're done
+        ldx #$836c
+        jsr $_MK_DoLongCallX
+        rtl
+
+    // only draw ellipses for the stats numbers if
+    // the numbers are two-digit
+    .addr $01ab9a
+        jml $=DrawEllipsisConditionally
+
+    .new
+    DrawEllipsisConditionally:
+        ldx #$0410
+        ldy #$0000
+    %EllipsisLoopStart:
+        lda $1014,y
+        cmp #$64
+        bcs $+DontDrawEllipsis
+        lda #$c3
+        sta $b600,x
+    %DontDrawEllipsis:
+        iny
+        jsr $_Util__XPlus80
+        cpx #$0690
+        bcc $-EllipsisLoopStart
+        lda #$c3
+        jml $01abab
+}
+// %end%

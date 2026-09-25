@@ -106,6 +106,10 @@ WRAM:
     -> 7E:163B       F: Big Chocobo Summon probability
     -> 7E:163C       F: Big Chocobo Summon spell power byte
     -> 7E:163D       F: Gear fusion menu check (for select item dialog)
+    -> 7E:163E       F: post-battle flags
+                        : $01: have already run post-battle functions
+                        : $02: need to salvage the Legend Sword
+                        : $04-$80: unused
 
     -> 7E:1660-166C  F: unallocated (formerly wacky challenge allocated space)
     -> 7E:166D-166F   : long address storage

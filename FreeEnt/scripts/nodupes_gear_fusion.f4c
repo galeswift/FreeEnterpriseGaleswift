@@ -217,25 +217,42 @@ msfpatch{
         ldy #$0000
 
         // add the appropriate stat change to each stat in order
+        // also, imitate the modified code from the spoils code
+        // in different_stats_cap.f4c (in case we have a
+        // different stats cap from a flag), with small changes
         // X is the appropriate stat offset
     %AddStatLoop:
-        lda $_FuseGear_StrChange,y
         clc
+        lda $_FuseGear_StrChange,y
+        bpl $+PositiveGearBonus
         adc $100f,x
-
-        // note that if we ever make stats add more than 28,
-        // we'd need to change this part
-        bpl $+CheckMaxStat
+        bcs $+NewStatObtained
+        lda #$01
+    %NewStatObtained:
+        // %if one_byte_cap%
+        bne $+EndStatChecks
         lda #$01
         bra $+EndStatChecks
+        // %else%
+        bra $+CheckZeroStat
+        // %end%
+        
+    %PositiveGearBonus:
+        adc $100f,x
     %CheckMaxStat:
-        cmp #$64
+        // %if one_byte_cap%
+        bcc $+EndStatChecks
+        lda #$ff
+        // %else%
+        cmp #${% new stats cap : 63 %}
         bcc $+CheckZeroStat
-        lda #$63
+        lda #${% new stats cap : 63 %}
         bra $+EndStatChecks
     %CheckZeroStat:
         bne $+EndStatChecks
         lda #$01
+        // %end%
+
     %EndStatChecks:
         sta $100f,x
         inx

@@ -35,11 +35,18 @@ class FlagSetCore:
         self._flags = {}
         self._embedded_version = None
 
-    def load(self, flag_string):
-        if len(flag_string) > 0 and flag_string[0] == 'b':
+    def load_and_validate(self, flag_string):
+        if len(flag_string) > 0 and flag_string[0] in ['b', 'c']:
             self._load_binary(flag_string)
+            return None
         else:
             self._load_text(flag_string)
+            return self.validate()
+
+    def load(self, flag_string):
+        invalid_flags = self.load_and_validate(flag_string)
+        if invalid_flags:
+            raise Exception(f"Invalid flags: {', '.join(invalid_flags)}")
 
     def _load_text(self, flag_string):
         self._flags = {}
@@ -112,6 +119,13 @@ class FlagSetCore:
 
             if value == flag_binary_info['value']:
                 self.set(flag_binary_info['flag'])
+
+    def validate(self):
+        invalid_flags = []
+        for flag in self._lib.keys(self._flags):
+            if flag not in self._flagspec['order']:
+                self._lib.push(invalid_flags, flag)
+        return invalid_flags
 
     def get_list(self, regex=None):
         flags = []
@@ -424,6 +438,9 @@ class FlagLogicCore:
             flagset.set('Omode:ki16')
             self._lib.push(log, ['correction', 'Can only collect 16 KIs for an objective with Owin:crystal; changing Omode:ki17 to Omode:ki16'])
 
+        if flagset.has('Omode:external'):
+            self._simple_disable(flagset, log, 'The external objective takes precedence over the Warp item', ['-warpitem'])
+
         if flagset.has('Owin:crystal'):
             self._simple_disable(flagset, log, 'Cannot start with the Crystal if it is the objective reward', ['Kstart:crystal'])
 
@@ -566,6 +583,11 @@ class FlagLogicCore:
         if flagset.has('-monsterflee') and not flagset.has('-monsterevade'):
             flagset.set('-monsterevade')
             self._lib.push(log, ['correction', 'Monsters require evade to flee; forced to add -monsterevade'])
+
+        if flagset.has('-t8scramble:dkc'):
+            self._simple_disable(flagset, log, 'Dark Knight Cecil is forced, so tier 8 spread and playable options are irrelevant', ['-t8scramble:playable', '-t8scramble:spread'])
+        elif len(flagset.get_list(r'^-t8scramble:[0-9]')) == 0:
+            self._simple_disable(flagset, log, 'No tier 8 scramble numerical parameter specified', ['-t8scramble:playable', '-t8scramble:spread'])
 
         if flagset.has_any('-entrancesrando:normal','-entrancesrando:gated','-entrancesrando:blueplanet','-entrancesrando:why','-entrancesrando:all'):
             self._simple_disable_regex(flagset, log, 'Entrances rando takes priority', r'^-doorsrando')
@@ -1355,8 +1377,8 @@ class FlagLogicCore:
         challenges = flagset.get_list(r'^-wacky:')
         if challenges:
             # implement the more precise wacky compability logic, since Status Enforcement doesn't take up Wacky RAM anymore
-            WACKY_POSITIVE_RAM = ['payablegolbez', 'tellahmaneuver', 'worthfighting', 'skillissue', 'battlescars', 'zombies']
-            WACKY_RAM_BYTES = [3, 6, 2, 2, 1, 6]
+            WACKY_POSITIVE_RAM = ['payablegolbez', 'wardrobe', 'tellahmaneuver', 'worthfighting', 'skillissue', 'battlescars', 'zombies']
+            WACKY_RAM_BYTES = [3, 1, 6, 2, 2, 1, 6]
             MAX_WACKY_RAM = 32
             WACKY_MUTUAL_INCOMPATIBILITIES = [
                 ['friendlyfire', 'afflicted'], # These both use Wacky__SpellFilterHook

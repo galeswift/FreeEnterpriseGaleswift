@@ -12,15 +12,13 @@ msfpatch {
 
 msfpatch {
     Wacky__PostBattleHook:
-        // BAND-AID: if a level-up occurs in battle, this function
-        //  will run twice. Use a flag to make sure we don't do so
-        lda $_Wacky__RAM_battlescars
+        // only run once, at most
+        lda $_PostBattle__Flags
+        and #$01
         beq $+FirstTime
         rtl
     
     %FirstTime:
-        inc $_Wacky__RAM_battlescars
-
         // do not apply effects after "no gameover" battles
         lda $38e5
         and #$02
@@ -59,19 +57,5 @@ msfpatch {
         lda #$0000
         sep #$20
         .mx 0x20
-        rtl
-}
-
-msfpatch {
-    // Make sure to clear "already ran battle scars" when battle starts
-    .addr $03809D
-        jsl $=Wacky__BattleScars_PreBattle
-
-    .new
-    Wacky__BattleScars_PreBattle:
-        stz $_Wacky__RAM_battlescars
-        // displaced
-        ldx #$007f
-        tdc
         rtl
 }

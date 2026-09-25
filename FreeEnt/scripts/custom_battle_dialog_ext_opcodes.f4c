@@ -1,0 +1,27 @@
+// create custom opcodes for
+// loading battle dialog info
+// (the high bit gets masked out)
+
+// List of new opcodes:
+// $85: Item name from $359d
+
+msfpatch{
+    .addr $02a51b
+        jml $=BattleUpdateDialog__ExtOpcodes
+
+    .new
+    BattleUpdateDialog__ExtOpcodes:
+        cmp #$05
+        bne $+NextOpcodeAfter85
+        lda $359d
+        // jump to the usual item name routine,
+        // but after loading the item ID
+        jml $02a593
+    %NextOpcodeAfter85:
+ 
+        // displaced
+        lda $359a
+        asl a
+        jml $02a51f
+
+}

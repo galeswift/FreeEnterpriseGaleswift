@@ -157,7 +157,8 @@ def apply(env):
     if env.options.flags.has('key_item_from_forge'):
         pass # do nothing, since we'll overwrite the key item otherwise
     elif 'custom_weapon' in env.options.test_settings:
-        custom_weapon = databases.get_custom_weapons_dbview().find_one(lambda cw: env.options.test_settings['custom_weapon'].lower() in f"{cw.name}|{cw.spoilername}".lower())
+        weapons_dbview = databases.get_custom_weapons_dbview()
+        custom_weapon = weapons_dbview.find_one(lambda cw: env.options.test_settings['custom_weapon'].lower() in f"{cw.name}|{cw.spoilername}".lower())
     elif env.options.flags.has('hero_challenge') or env.options.flags.has('superhero_challenge'):
         # you should expect to get a weapon associated to your hero, regardless of anything else
         weapons_dbview = databases.get_custom_weapons_dbview()
@@ -186,6 +187,7 @@ def apply(env):
         custom_weapon = env.rnd.choice(available_weapons)
     elif env.options.flags.has('altsmith'):
         items_dbview = databases.get_items_dbview()
+        altered_item_tiers = env.meta['altered_item_tiers']
         # to match the Pink Tail turn-in reward, also restrict the MoonVeil if Tno:j is on
         if env.options.flags.has('treasure_no_j_items'):
             items_dbview.refine(lambda it: not it.j)
@@ -197,7 +199,7 @@ def apply(env):
             if not (env.options.flags.has('no_adamants') and env.options.flags.has('treasure_no_j_items') 
                     and (env.meta['available_characters'].issubset(set(['yang'])) or 'fistfight' in env.meta.get('wacky_challenge',[]))):
                 items_dbview.refine(lambda it: it.category == 'item' or not set(it.equip).isdisjoint(_expand_chars_to_jobs(env.meta['available_characters'])))
-        items = items_dbview.find_all(lambda it: it.tier in [7, 8])
+        items = items_dbview.find_all(lambda it: altered_item_tiers[it.code] in [7, 8])
         if env.options.flags.has('goodsmith'):
             # if we want "good" items, take the best according to the list above (we've already guaranteed there's something available)
             smith_reward = None
@@ -331,7 +333,10 @@ def apply(env):
         custom_legend = databases.get_custom_legend_dbview().find_one(lambda cl : cl.id == CUSTOM_WEAPON_TO_LEGEND[custom_weapon.id])
 
         if custom_legend.id == 0x19:
-            # making no changes if it's a holy sword
+            # making no changes if it's a holy sword, except if it's *also* -smith:omni,
+            # in which case we need to assign it the new "all characters" equip field
+            if env.options.flags.has('omnismith'):
+                env.add_binary(UnheaderedAddress(0x79100 + CUSTOM_LEGEND_ITEM_ID * 0x08 + 0x06), [CUSTOM_WEAPON_EQUIP_TABLE_INDEX], as_script=True)
             return 
 
         # replace [wrench] with [hammer] on Truth in Advertising and update Tracker menu icon
@@ -365,6 +370,10 @@ def apply(env):
         if custom_legend.twohanded:
             legend_bytes[6] |= 0x20
 
+        # the Legend Claw should not have non-zero attack power; it's a claw
+        if custom_legend.id == 0x20C:
+            legend_bytes[1] = 0
+
         # don't need to patch the stats byte, to save What's My Gear Again? effort
         env.add_binary(UnheaderedAddress(0x79100 + CUSTOM_LEGEND_ITEM_ID * 0x08), legend_bytes[0:7], as_script=True)
 
@@ -392,5 +401,5 @@ def apply(env):
         env.meta.setdefault('item_description_overrides', {})[CUSTOM_LEGEND_ITEM_ID] = description_data
 
         # add protection from losing the Legend Arrow
-        if custom_legend.id == 0x206:
+        if custom_legend.id == 0x206 and not env.options.flags.has('infinite_arrows'):
             env.add_toggle('legend_arrow')

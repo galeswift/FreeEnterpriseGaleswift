@@ -102,6 +102,8 @@ These flags move the free key item in the Toroia Hospital (the one Edward gives 
 
 The v4.6.0 `Kmiab` flag includes all of the non-LST miabs in the key item pool, or all miabs if `Kmoon` or `Kunsafe` is on. Now, there are three subgroups of miabs: "above-ground" (Zot, Eblan, Hook route, Lunar Path, Giant), "below-ground" (Feymarch, Sylph Cave, Lower Bab-il), and the LST miabs. These subgroups can be specified separately, the vanilla `Kmiab` behaviour with safety checks can be selected using `Kmiab:standard`, and all miabs (ignoring the safety checks, so the pre-v.4.6.0 behaviour) can be selected using Kmiab:all or just specifying all three subgroups. 
 
+In v4.6 FE, on `Kmiab` three of the miabs are removed from the possible added key item checks, for balancing purposes. Here, this behaviour still occurs but only if there is more than one subgroup of miabs selected. (This behaviour is different from the v5.0 alpha behaviour, where one miab is removed for every three places that have miabs enabled for potential key item checks.)
+
 ### `Kforge` {: .h6 }
 
 - Idea: sgrunt (but probably others, and b0ardface for the original "Forge the Crystal")
@@ -310,11 +312,20 @@ Under this flag, mutually exclusive to the renamed `Cabilities:j` flag, each cha
 - Idea: Marshal (fusion idea), ScytheMarshall (of gear)
 - Design: ScytheMarshall, Marshal
 - Programming: ScytheMarshall
-- Locations: nodupes_gear_fusion.f4c, rewards.f4c, eventextensions_misc.f4c, generator.py, 
+- Locations: nodupes_gear_fusion.f4c, rewards.f4c, eventextensions_misc.f4c, generator.py 
 
 This flag allows you to "fuse" equipment to characters when you encounter a duplicate character to one already in your party. Fusing equipment to a character removes one copy of the item from your inventory and adds the stat bonuses from that item to your character's base stats, clamping the stats to the range 1-99. The stat changes are permanent but do not persist through re-initialization (for Cecil going from Dark Knight to Paladin, or for any character on `Cmostlydead`). There may be some order-of-operations issues when combined with `Csuperhero`, in the sense that because the stats are clamped between 1 and 99, when a character loses stats they might go down to 49 when you might have expected their stats to only drop to a higher value.
 
 On `Cfuse:gear`, any equipment can be used for any character, regardless of whether or not they can equip it. On `Cfuse:equip`, only equipment that the character can normally equip (subject to other flags, like `-wacky:omnidextrous`) can be used.
+
+### `Cstatscap:[28/50/69/127/255]` {: .h6 }
+
+- Idea: ScytheMarshall, CoffeeAndChocobos
+- Design: ScytheMarshall, CoffeeAndChocobos
+- Programming: ScytheMarshall
+- Locations: different_stats_cap.f4c, character_rando.py
+
+Under these flags, the five main character stats are bounded above by the specified cap instead of 99. For 127 and 255, this makes stacking stats gear even more beneficial, while for 28/50/69, the game becomes *much* more challenging. HP, MP, and Level are not included here. The new cap applies to Bluff in battle. Each of the caps has a soft explanation: 28 allows for RA2 Zeromus, 50 is about half the normal cap, 69 allows for RA5 Zeromus, 127 is a reachable upper bound higher than 99, and 255 is just keeping the stat contained in one byte.
 
 ## Treasure Flags
 
@@ -855,6 +866,38 @@ Normally, with the Panic button you can simply warp out of Sealed Cave after pic
 
 These flags restore functionality to monsters that the original devs removed before the game released. `-monsterevade` allows monsters to correctly load their physical and magical evade stats at the start of battle (instead of just when those stats change, like for Valvalis). Be warned: monsters will take a lot less damage, and will dodge Life pots/casts! `-monsterflee` builds on the evade functionality and restores the ability for monsters to flee from battle (which requires them to have non-zero evade). Monsters can flee from non-boss-bit battles.
 
+### `-infarrows` {: .h6 }
+
+- Idea: Many people throughout the years
+- Design: ScytheMarshall, CoffeeAndChocobos, Guerin, Marshal, others
+- Programming: ScytheMarshall
+- Locations: infinite_arrows.f4c, infinite_arrows.csvdb, compile_item_prices.py, databases.py, *many* other files
+
+This flag makes arrows infinite-use, like other weapons. They are delivered individually and have more appropriate item prices and tiers, as described in this table:
+
+Arrows   | Old Tier | New Tier | Old Price | New Price
+------   | - | - | - | -
+Iron     | 1 | 1 | 10 | 50 
+White    | 2 | 3 | 20 | 2000 
+Fire     | 2 | 2 | 30 | 900 
+Ice      | 2 | 2 | 30 | 900 
+Lit      | 2 | 3 | 30 | 4000 
+Darkness | 2 | 2 | 40 | 800 
+Poison   | 3 | 3 | 70 | 2000 
+Mute     | 3 | 4 | 100 | 14000 
+Charm    | 3 | 4 | 110 | 18000 
+Samurai  | 5 | 5 | 150 | 23000 
+Medusa   | 3 | 4 | 1250 | 20000
+Artemis  | 7 | 7 | 500 | 120000 
+
+### `-warpitem` {: .h6 }
+
+- Idea: CoffeeAndChocobos, ScytheMarshall, Skarcerer, others throughout the years
+- Design/Programming: ScytheMarshall
+- Locations: call_orbs.f4c, compile_item_prices.py, generator.py
+
+This flag turns the EagleEye into a Warp item that casts Warp outside of battle. It is now tier 2 and costs 1000 GP. `Omode:external` takes precedence over this flag, since they both modify the EagleEye.
+
 ### `-miscbugfixes` {: .h6 }
 
 - Idea: ScytheMarshall, cassidy (for Hermes/Berserk)
@@ -868,6 +911,7 @@ This flag includes fixes for a variety of vanilla FF4 bugs:
 - The (Wisdom+Will)-based timer issue, where the code loads a garbage byte instead of the correct byte, causing Sap timers to be effectively random. The fix is to load the correct byte.
 - The Will-based timer overflow issue, where the code does not multiply by 4 correctly (losing upper bits if the value is greater than 64). The fix is to write a better loop. This fix impacts Sleep/Paralyze/gradual petrification (only from the dummied-out Medusa Sword); in particular, some high-level monsters will not sleep way longer than intended, now.
 - The slot 0 Regen bug, where the game checks the middle slot five times to see if each slot should have the Regen apply to them. The fix is to just index into the empty_slot array.
+- The fact that you cannot backrow-glitch an ambidextrous character (Edge or Yang) using a weapon in the left hand (unless that is the *only* weapon they have equipped). The fix is to just check the other weapon slot, which will have the second weapon if there is one and nothing if not.
 
 It also adds a fix for a vanilla FE bug: 
 - The axtor/actor check Regen bug, where the game looks for the *actor* FuSoYa, but in FE it loads the axtor ID, which (currently) is always less than Fu's vanilla actor ID (`$13`), so it never finds Fu to potentially stop Bless due to status conditions. The "fix" (since it's still a bit quirky) is to run through the axtor-reference-actor lookup table to convert to a number compatible with what the game expects. Since it stops at the first FuSoYa, you can abuse it by using Regen with a lower-priority Fu and knocking them out, to enjoy infinite (minimal) healing.
@@ -896,6 +940,43 @@ Under this flag, Rosa learns a white magic spell at the top of Zot, chosen from 
     Rosa can learn any of: Blink, Bersk, Cure3, Cure4, Exit, Fast, Float, Life2, Size, Wall, White.
 
 On `-tweak:rosadin`, Rosa will learn a random spell, but because she cannot learn any of the non-Exit spells, she will not learn Exit. Cecil's white magic is unchanged.
+
+### `-t8scramble:[n,playable,spread]` {: .h6 }
+
+- Idea: CoffeeAndChocobos
+- Design: CoffeeAndChocobos, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: update_equipment.py
+
+These flags modify which characters are able to equip each of the tier 8 items (Excalbur, Crystal Sword, Adamant Armour). The numbered parameter `n` indicates how many characters will be able to equip each item. Rydia will have the same tier 8 equipment options as both child and adult, but Dark Knight Cecil will still not be able to equip any of the items. Under `-t8scramble:playable`, only characters appearing in the seed will be considered; otherwise, by default all characters will be considered. If `n` happens to be at least the number of characters appearing in the seed under `-t8scramble:playable`, or if `n` is 12, then all characters will be able to equip all three items. 
+
+`-t8scramble:spread` assigns the characters to the items while minimizing repetition; for example, if there are 5 available characters (say, the vanilla endgame party, under `-t8scramble:playable`) and `n` is 3, then the algorithm could go as follows: 
+1. Cecil, Kain, and Edge are chosen to equip the Excal.
+2. Rosa and Rydia are assigned to the Crystal Sword.
+3. Since we've used all five characters, we go back and choose one of the three remaining characters to also equip the CS, say, Kain.
+4. Finally, of the four remaining characters in this round, we choose three (say, Rosa, Rydia, Edge) to equip the Adamant.
+5. We end up with four characters being able to equip two of the items and one character (Cecil) only equipping one.
+If 3 times `n` is smaller than the number of characters appearing in the seed, or just smaller than 12 without `-t8scramble:playable`, some characters will not equip any of the items. The order in which the items are assigned is randomized.
+
+If `M` is the number of characters appearing in the seed, or 12 without `-t8scramble:playable`, then to determine the spread of the equipment options, compute `3*n` and find `k = ceiling(3*n / M)`. Then `(k-1)*M < 3*n <= k*M`, assuming `n` is not 0. We have that the `M` characters will be able to equip `k-1` of the weapons, and `3*n - (k-1)*M` of the characters will equip `k` of the items. In the above example, `M` is 5 and `n` is 3, so `k = ceiling(9 / 5) = 2`, and so `3*n - (k-1)*M = 9 - 5 = 4` characters can equip 2 of the items, with the fifth character still able to equip `k-1 = 1` of them.
+
+### `-singleuse:[cursed,crystal,adamant]` {: .h6 }
+
+- Idea: CoffeeAndChocobos, anyone who's ever suggested "The Other FE" (where items break), like Alchemie
+- Design: CoffeeAndChocobos, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: single_use_items.f4c, post_battle.f4c, generator.py
+
+These flags cause any of the specified items (Cursed Ring, Crystal Sword, Adamant Armour) equipped on active party members to break after any battle (including after running away but not including cutscene battles). Items in your inventory are safe. To prevent you from stashing the Crystal Sword away, it cannot be unequipped mid-battle. There will be an in-battle dialog box that tells you that your item broke.
+
+### `-gravitysap:[calm,danger]` {: .h6 }
+
+- Idea: Matik, CoffeeAndChocobos
+- Design: CoffeeAndChocobos, Marshal, ScytheMarshall
+- Programming: ScytheMarshall
+- Locations: gravity_sap_damage.f4c, generator.py
+
+These flags make the sap damage from Virus, Big Bang, White/Harm on undeads, etc. do damage per tick based on a fraction of the actor's current HP. The minimum is the vanilla 2 damage per tick, and the fraction depends on which of the two flags is being used. Under `calm`, the fraction is 1/64 for characters and 1/512 for monsters; under `danger`, the fraction is 1/16 for characters and 1/128 for monsters. Be careful!
 
 ## Kit Flags
 
@@ -991,6 +1072,8 @@ This kit gives you a sword (one of Fire/Ice/Slumber/Silver/Light), a shield (Iro
 
 ## Smith Flags
 
+Related to the Forge, the game will now search for the Legend item in the left hands of characters as well as the right hands, so you cannot stash the item in a left hand on Omnidex or on `-smith:spoilsuper` to keep it after forging (this change is located in fix_legend_removal.f4c).
+
 ### `-smith:playable` {: .h6 }
 
 - Idea: various (perhaps mostly ScytheMarshall)
@@ -1026,9 +1109,9 @@ Note that under this flag or under the Omnidextrous wacky flag, any sort of play
 - Idea: Pushwall
 - Design: Pushwall, ScytheMarshall
 - Programming: ScytheMarshall
-- Locations: custom_weapon_rando.py, custom_weapon_support.f4c
+- Locations: custom_weapon_rando.py, custom_weapon_support.f4c, custom_legend_descriptions.txt, custom_legend.csvdb
 
-This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power, 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item), and becomes usable only by characters that can equip the FF4A weapon that it will become (only Kain can equip the Legend Spear, and so on). It will also match animations. The full list of additional properties is below:
+This flag turns the Legend Sword into the same weapon type as the FF4 Advance weapon (and the flag is turned off if there isn't one). It remains 40 power (except for the Legend Claw, which has 0 power), 99% accuracy, +3 Wil, magnetic, and holy elemental, and then gains similar attributes shared by most or all weapons of that type (for example, the Legend Spear will also hit air weakness, and the Legend Rod will cast a spell upon use as an item), and becomes usable only by characters that can equip the FF4A weapon that it will become (only Kain can equip the Legend Spear, and so on). It will also match animations. The full list of additional properties is below:
 
 !!! info "Alternate Legend weapon properties"
     - Legend Claw, for Tiger Fang, Dragon Claw, Godhand: hits Undead weakness.
@@ -1042,7 +1125,7 @@ This flag turns the Legend Sword into the same weapon type as the FF4 Advance we
     - Legend Dagger, for Triton's Dagger: cast Virus upon use as an item.
     - Legend Whip, for Mist Whip: long-range, inflicts Paralyze.
     - Legend Axe, for Gigant Axe: two-handed.
-    - Legend Star, for Scrap Metal: long-range, hits air weakness (but is not Dartable; Edge just equips it).
+    - Legend Star, for Scrap Metal: long-range, hits air weakness (but is not Dartable, so it's only useful on Omnidex or `-smith:omni`).
     - Legend Boomerang, for Rising Sun: long-range, hits air weakness.
     - Legend Harp, for Requiem Harp, Apollo's Harp, Loki's Lute: long-range, two-handed, inflicts Blind.
     - Legend Hammer, for Thor's Hammer, Fiery Hammer: two-handed, hits Machine weakness.
@@ -1202,6 +1285,14 @@ This flag will scale the base ATB for the anchor up to 10 ticks or down to 1 tic
 
 This flag changes the speed modifier range to be 8-32 (from 12-32). Slow now increases the speed modifier by 4 instead of 8, SilkWebs increase by 8 instead of 16, Fast decreases the speed modifier by 4 instead of 3, and Hermes is left alone because it already decreased by 8. S3's original idea had a range of 8-24.
 
+### `-multifast` {: .h6 }
+
+- Idea: ScytheMarshall
+- Design/Programming: ScytheMarshall
+- Locations: multitarget_fast.f4c, update_spells.py
+
+This flag allows Fast to be multi-targetted by characters (monsters can override targetting, but you can't).
+
 ## Experience Flags
 
 - Idea: various (everyone in the relevant Discord thread!)
@@ -1350,7 +1441,7 @@ This flag removes summon orbs from shops, boxes/miabs, and quest rewards. You ca
 
 These flags handle the randomization of Zeromus and the relevant battle scripts. The intent is to refresh the Zeromus fight experience, so that there's something new to experience at the end of the game.
 
-There are four main script change flags: `Zphysical`, `Zphysmag`, `Zchaos`, and `Zlavosshell`. Within those flags are two other flags that modify the scripts: `Zwhichbang` and `Zphaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `Znonerfs` and `Zmustnerf`.
+There are four main script change flags: `Zphysical`, `Zphysmag`, `Zchaos`, and `Zlavosshell`. Within those flags are two other flags that modify the scripts: `Zwhichbang` and `Zphaseshift`. Additional to those flags are flags that modify nerfing of Big Bang/similar attacks: `Znonerfs` and `Zmustnerf`. As well, there is a challenge flag to give Zeromus an HP drain effect on physical attacks and make Big Bang drain HP: `Zdrain`.
 
 ### `Zvanilla` {: .h6 }
 
@@ -1404,6 +1495,10 @@ This flag changes Zeromus's base spell power to 255 (or attack stats to (255,99,
 
 Dark Wave is normally bugged; it does not cap its damage, so it breaks the graphical display/can heal by overflowing 14-bit damage. So, we need to patch that issue.
 
+### `Zdrain` {: .h6 }
+
+This flag gives Zeromus's physical attack the drain element, so Z will drain HP on hit. Moreover, Big Bang is given the Drain spell effect instead of HP leak. Healing on Zeromus is capped at 9999. If Wyvern happens to get Big Bang from `Bwhichburn` or `Bitburns`, then yes, Big Bang will drain HP. On some flags, this flag will effectively do nothing, because Z will not attack physically nor use Big Bang (e.g. on `Zvanilla/whichburn`, Big Bang might not be included anywhere).
+
 ### `Znocosplay` {: .h6 }
 
 This flag is just `-vanilla:z` renamed; prior to v4.6.4.Gale, this flag was called `-z:vanillasprite`.
@@ -1444,7 +1539,7 @@ This wacky flag changes the drop rate for monsters that sometimes drop items to 
 - Design/Programming: ScytheMarshall (with documentation from Wylem)
 - Locations: wacky_rando.py, wacky/scrambledstats.f4c, agility.f4c
 
-This wacky flag shuffles the roles of the five main stats (Str, Agi, Vit, Wis, Wil) in battle for your characters (and Vit for monsters). Your derived stats like attack/defense depend on the new stats. 
+This wacky flag shuffles the roles of the five main stats (Str, Agi, Vit, Wis, Wil) in battle for your characters (and Vit for monsters). Your derived stats like attack/defense depend on the new stats. Bluff will still increase Wisdom in battle, which may or may not be helpful.
 
 ### `-wacky:advertising` - Truth in Advertising {: .h6 }
 
@@ -1488,6 +1583,15 @@ The idea is that two characters can do the same work and get different experienc
 - Locations: wacky_rando.py, moneygains.f4c, randomizer_boss.f4c
 
 This wacky flag swaps GP and EXP rewards from battle, as if the GP and EXP values for monsters were swapped. Meaning, the experience you get will be the GP rewards appropriately scaled by the experience flags (or ignored entirely by `Enoexp`), and the GP you get will be from the experience rewards, including the 3-byte rewards for some bosses (or ignored entirely by the Time is Money wacky or `Enogp`).
+
+### `-wacky:wardrobe` - Wardrobe Malfunction {: .h6 }
+
+- Idea: Marshal, ScytheMarshall
+- Design: Marshal, ScytheMarshall, CoffeeAndChocobos
+- Programming: ScytheMarshall
+- Locations: wacky_rando.py, wardrobe.f4c, single_use_items.f4c, custom_battle_dialog_ext_opcodes.f4c
+
+This wacky flag causes all equipped armour items (head/body/arms) to either transform into another item of that same type or break after each battle (including after running away but not including cutscene battles). Each of those items is assigned a probability from 0 to 50% for the wacky effect to occur; 1/4 of that probability (rounded down) is the chance that it breaks, using the same RNG value. The RNG value is determined by the battle formation and the equipped item, so no amount of resetting will avoid that item changing unless you simply unequip it. The RNG value, modified deterministically, also determines the item to replace your equipped item, so it will always transform into the same item after a specific battle. Due to integer division, items with lower IDs are ever-so-slightly more likely to be chosen, favouring heavier armour over lighter armour. There will be an in-battle dialog box that tells you what your item transformed into, or that it broke.
 
 ## Tweak Flags
 

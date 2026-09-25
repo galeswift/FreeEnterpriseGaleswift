@@ -864,6 +864,8 @@ def apply(env):
     items_dbview = databases.get_items_dbview()
     treasure_rando.refineItemsView(items_dbview, env)
 
+    altered_item_tiers = env.meta['altered_item_tiers']
+
     unsafe = False
     if env.options.flags.has('key_items_unsafe') or env.options.flags.has('key_items_unsafer'):
         unsafe = True
@@ -1636,14 +1638,14 @@ def apply(env):
         # for later, find items by tier (to see if there are any left)
         items_by_tier = {}
         for i in range(1,9):
-            items_by_tier[i] = items_dbview.find_all(lambda it: it.tier == i)
+            items_by_tier[i] = items_dbview.find_all(lambda it: altered_item_tiers[it.code] == i)
 
         if env.options.flags.has('treasure_standard') or env.options.flags.has('treasure_wild'):
             low_tier = 6
-            src_pool = items_dbview.find_all(lambda it: it.tier in range(low_tier, 9))
+            src_pool = items_dbview.find_all(lambda it: altered_item_tiers[it.code] in range(low_tier, 9))
             while not src_pool:
                 low_tier -= 1
-                src_pool = items_dbview.find_all(lambda it: it.tier in range(low_tier, 9))
+                src_pool = items_dbview.find_all(lambda it: altered_item_tiers[it.code] in range(low_tier, 9))
             pool = list(src_pool)
             while len(pool) < len(unassigned_quest_slots):
                 pool.append(env.rnd.choice(src_pool))
@@ -1695,7 +1697,7 @@ def apply(env):
                     if tier_counts[tier] <= 0:
                         continue
 
-                    tier_src_pool = items_dbview.find_all(lambda it: it.tier == tier)
+                    tier_src_pool = items_dbview.find_all(lambda it: altered_item_tiers[it.code] == tier)
                     tier_pool = list(tier_src_pool)
 
                     if len(tier_pool) == 0:
@@ -1742,10 +1744,10 @@ def apply(env):
             min_miab_tier = 5
             max_miab_tier = 98 if env.options.flags.has('treasure_standard') else 99
             # future-proofing the selection of src_pool items in case items are restricted to where tier 5 is impossible
-            src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
+            src_pool = items_dbview.find_all(lambda it: altered_item_tiers[it.code] >= min_miab_tier and altered_item_tiers[it.code] <= max_miab_tier)
             while not src_pool:
                 min_miab_tier -= 1
-                src_pool = items_dbview.find_all(lambda it: it.tier >= min_miab_tier and it.tier <= max_miab_tier)
+                src_pool = items_dbview.find_all(lambda it: altered_item_tiers[it.code] >= min_miab_tier and altered_item_tiers[it.code] <= max_miab_tier)
             pool = list(src_pool)
             while len(pool) < len(unassigned_chest_slots):
                 pool.append(env.rnd.choice(src_pool))
@@ -1806,7 +1808,7 @@ def apply(env):
 
             pools = {}
             for tier in total_tier_counts:
-                src_pool = items_dbview.find_all(lambda it: it.tier == tier)
+                src_pool = items_dbview.find_all(lambda it: altered_item_tiers[it.code] == tier)
                 if len(src_pool) == 0:
                     continue
 
@@ -1874,10 +1876,10 @@ def apply(env):
     if not env.options.flags.has('key_item_from_pink_tail'):
         if env.options.flags.has('no_adamants'):
             lbound = 7
-            items = items_dbview.find_all(lambda it: it.tier in range(lbound, 9))
+            items = items_dbview.find_all(lambda it: altered_item_tiers[it.code] in range(lbound, 9))
             while not items:
                 lbound -= 1
-                items = items_dbview.find_all(lambda it: it.tier in range(lbound, 9))
+                items = items_dbview.find_all(lambda it: altered_item_tiers[it.code] in range(lbound, 9))
             pink_tail_item = env.rnd.choice(items)
             rewards_assignment[RewardSlot.pink_trade_item] = ItemReward(pink_tail_item.const)
         else:

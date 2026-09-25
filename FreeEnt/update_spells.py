@@ -24,7 +24,7 @@ def spell_data(env):
         if env.options.flags.has('twinmeteo'):
             spell = spells_dbview.find_one(lambda sp: sp.code == 0x5E)
             env.add_binary(
-                BusAddress(0xF97A5 + (0x06 * 0x5E)),
+                BusAddress(0xF97A0 + 0x05 + (0x06 * 0x5E)),
                 [(spell.data[5] & 0x80) | 0x63],
                 as_script=True
             )   
@@ -37,17 +37,32 @@ def spell_data(env):
 
             if env.options.flags.has('bigchocobosummon'):
                 env.add_binary(
-                    BusAddress(0xF97A5 + (0x06 * 0x5F)),
+                    BusAddress(0xF97A0 + 0x05 + (0x06 * 0x5F)),
                     [0x87],
                     as_script=True
                 )        
             if env.options.flags.has_any('kainmagic','harmspell'):
-                spell = spells_dbview.find_one(lambda sp: sp.code == 0x17)
                 env.add_binary(
-                    BusAddress(0xF97A5 + (0x06 * 0x17)),
+                    BusAddress(0xF97A0 + 0x05 + (0x06 * 0x17)),
                     [sight_hi_bit | sight_mp],
                     as_script=True
                 )                    
+
+    # change Big Bang (ID 0x87) to have the Drain spell effect (0x04) if necessary
+    if env.options.flags.has('z_drain_attacks'):
+        env.add_binary(
+            BusAddress(0xF97A0 + 0x03 + (0x06 * 0x87)),
+            [0x04],
+            as_script=True
+        )
+
+    # make Fast single/multi-target, so it targets like e.g. Cure1
+    if env.options.flags.has('multitarget_fast'):
+        env.add_binary(
+            BusAddress(0xF97A0 + 0x00 + (0x06 * 0x08)),
+            [0x61],
+            as_script=True
+        )
 
 def spellset_data(env):
     # collect all changes to all spellsets except for FuSoYa, 

@@ -23,11 +23,20 @@ class FlagSetCore {
         this._flags = {};
         this._embedded_version = null;
     }
-    load(flag_string) {
-        if (((flag_string.length > 0) && (flag_string[0] === "b"))) {
+    load_and_validate(flag_string) {
+        if (((flag_string.length > 0) && _pj.in_es6(flag_string[0], ["b", "c"]))) {
             this._load_binary(flag_string);
+            return null;
         } else {
             this._load_text(flag_string);
+            return this.validate();
+        }
+    }
+    load(flag_string) {
+        var invalid_flags;
+        invalid_flags = this.load_and_validate(flag_string);
+        if (invalid_flags) {
+            throw new Error(`Invalid flags: ${", ".join(invalid_flags)}`);
         }
     }
     _load_text(flag_string) {
@@ -122,6 +131,17 @@ class FlagSetCore {
                 this.set(flag_binary_info["flag"]);
             }
         }
+    }
+    validate() {
+        var invalid_flags;
+        invalid_flags = [];
+        for (var flag, _pj_c = 0, _pj_a = this._lib.keys(this._flags), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+            flag = _pj_a[_pj_c];
+            if ((! _pj.in_es6(flag, this._flagspec["order"]))) {
+                this._lib.push(invalid_flags, flag);
+            }
+        }
+        return invalid_flags;
     }
     get_list(regex = null) {
         var flags;
@@ -468,6 +488,9 @@ class FlagLogicCore {
             flagset.set("Omode:ki16");
             this._lib.push(log, ["correction", "Can only collect 16 KIs for an objective with Owin:crystal; changing Omode:ki17 to Omode:ki16"]);
         }
+        if (flagset.has("Omode:external")) {
+            this._simple_disable(flagset, log, "The external objective takes precedence over the Warp item", ["-warpitem"]);
+        }
         if (flagset.has("Owin:crystal")) {
             this._simple_disable(flagset, log, "Cannot start with the Crystal if it is the objective reward", ["Kstart:crystal"]);
         }
@@ -617,6 +640,13 @@ class FlagLogicCore {
         if ((flagset.has("-monsterflee") && (! flagset.has("-monsterevade")))) {
             flagset.set("-monsterevade");
             this._lib.push(log, ["correction", "Monsters require evade to flee; forced to add -monsterevade"]);
+        }
+        if (flagset.has("-t8scramble:dkc")) {
+            this._simple_disable(flagset, log, "Dark Knight Cecil is forced, so tier 8 spread and playable options are irrelevant", ["-t8scramble:playable", "-t8scramble:spread"]);
+        } else {
+            if ((flagset.get_list("^-t8scramble:[0-9]").length === 0)) {
+                this._simple_disable(flagset, log, "No tier 8 scramble numerical parameter specified", ["-t8scramble:playable", "-t8scramble:spread"]);
+            }
         }
         if (flagset.has_any("-entrancesrando:normal", "-entrancesrando:gated", "-entrancesrando:blueplanet", "-entrancesrando:why", "-entrancesrando:all")) {
             this._simple_disable_regex(flagset, log, "Entrances rando takes priority", "^-doorsrando");
@@ -1419,8 +1449,8 @@ class FlagLogicCore {
         }
         challenges = flagset.get_list("^-wacky:");
         if (challenges) {
-            WACKY_POSITIVE_RAM = ["payablegolbez", "tellahmaneuver", "worthfighting", "skillissue", "battlescars", "zombies"];
-            WACKY_RAM_BYTES = [3, 6, 2, 2, 1, 6];
+            WACKY_POSITIVE_RAM = ["payablegolbez", "wardrobe", "tellahmaneuver", "worthfighting", "skillissue", "battlescars", "zombies"];
+            WACKY_RAM_BYTES = [3, 1, 6, 2, 2, 1, 6];
             MAX_WACKY_RAM = 32;
             WACKY_MUTUAL_INCOMPATIBILITIES = [["friendlyfire", "afflicted"], ["tellahmaneuver", "3point"], ["musical", "darts", "skillissue"], ["worthfighting", "battlescars", "zombies", "afflicted"], ["menarepigs", "skywarriors", "mirrormirror", "zombies", "afflicted"], ["unstackable", "menarepigs", "skywarriors", "battlescars", "3point", "mirrormirror", "zombies", "afflicted"]];
             ram_bytes_used = 0;

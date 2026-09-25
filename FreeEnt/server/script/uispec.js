@@ -4990,6 +4990,46 @@ var FLAG_UISPEC = [
         "title": "Cecil starts the game as a paladin",
         "description": "Cecil will start as a paladin, but Mt. Ordeals will still grant spells to Tellah, and hold a key item check.",
         "fork": true
+      },
+      {
+        "flag": "@statscap",
+        "title": "Upper bounds for character stats",
+        "description": "Under these flags, the five main character stats (Strength, Agility, Vitality, Wisdom, and Will) go up to the specified limit instead of 99. The cap applies to stats inside and outside of battle as the normal cap of 99 does (including Bluff).",
+        "fork": true,
+        "subcontrols": [
+          {
+            "flag": "@statscap",
+            "title": "Value for upper bound",
+            "description": "Under these flags, the five main character stats (Strength, Agility, Vitality, Wisdom, and Will) go up to the specified limit instead of 99. The cap applies to stats inside and outside of battle as the normal cap of 99 does (including Bluff).",
+            "fork": true,
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "Cstatscap:28",
+                "title": "Character stats go up to 28",
+                "hard": true
+              },
+              {
+                "flag": "Cstatscap:50",
+                "title": "Character stats go up to 50",
+                "hard": true
+              },
+              {
+                "flag": "Cstatscap:69",
+                "title": "Character stats go up to 69",
+                "hard": true
+              },
+              {
+                "flag": "Cstatscap:127",
+                "title": "Character stats go up to 127"
+              },
+              {
+                "flag": "Cstatscap:255",
+                "title": "Character stats go up to 255"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -8884,6 +8924,13 @@ var FLAG_UISPEC = [
         ]
       },
       {
+        "flag": "Zdrain",
+        "title": "Big Bang and physical attacks drain HP",
+        "description": "Zeromus's physical attack now drains HP and Big Bang has the Drain spell effect instead of inflicting HP leak. Healing on Zeromus is capped at 9999.",
+        "hard": true,
+        "fork": true
+      },
+      {
         "flag": "Znocosplay",
         "title": "Vanilla Z sprite",
         "description": "Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite."
@@ -9499,9 +9546,51 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
+        "flag": "-infarrows",
+        "title": "Arrows are infinite-use",
+        "description": "Arrows are now infinite use, meaning they are treated like any other weapon and will not be used up. Pricing and tiering for arrows changes.",
+        "fork": true
+      },
+      {
+        "flag": "-warpitem",
+        "title": "The EagleEye is replaced with a Warp item",
+        "description": "Instead of the EagleEye that casts Sight, there is a Warp item that casts Warp outside of battle.",
+        "fork": true
+      },
+      {
+        "flag": "@gravitysap",
+        "title": "Calculate sap damage using current HP",
+        "description": "Normally, sap damage (from Virus, Big Bang, etc.) is 2 HP per tick. Under these flags, sap damage scales based on the current HP of the actor, with minimum 2 HP as before.",
+        "subcontrols": [
+          {
+            "flag": "@anon102",
+            "title": "Fraction of current HP",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-gravitysap:calm",
+                "title": "1/64 for party, 1/512 for monsters",
+                "hard": true
+              },
+              {
+                "flag": "-gravitysap:danger",
+                "title": "1/16 for party, 1/128 for monsters",
+                "hard": true
+              }
+            ]
+          }
+        ]
+      },
+      {
         "flag": "-speedmodbalance",
         "title": "Alter the speed modifier behaviour",
         "description": "In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).",
+        "fork": true
+      },
+      {
+        "flag": "-multifast",
+        "title": "Make Fast a multi-target spell",
+        "description": "Normally, Fast can only target a single character when you cast it (monsters can override that, like Baigan does). This flag allows Fast to multi-target.",
         "fork": true
       },
       {
@@ -9510,7 +9599,7 @@ var FLAG_UISPEC = [
         "description": "Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.",
         "subcontrols": [
           {
-            "flag": "@anon102",
+            "flag": "@anon103",
             "title": "Alternative forge items",
             "type": "select",
             "subcontrols": [
@@ -9526,7 +9615,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon103",
+            "flag": "@anon104",
             "title": "Restrictions on forge items",
             "type": "select",
             "subcontrols": [
@@ -9564,7 +9653,112 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon104",
+        "flag": "@t8",
+        "title": "Change tier 8 equip tables",
+        "description": "These flags change who gets to equip the Excalbur, Crystal Sword, and Adamant Armor. The numbered flags specify how many characters will be able to equip each item. Rydia gets the same options as child and adult, but Cecil is only considered as a paladin.",
+        "subcontrols": [
+          {
+            "flag": "@anon105",
+            "title": "Number of characters per item",
+            "type": "select",
+            "subcontrols": [
+              {
+                "flag": "-t8scramble:0",
+                "title": "None of the items are equippable"
+              },
+              {
+                "flag": "-t8scramble:1",
+                "title": "Each item is equippable by 1 character"
+              },
+              {
+                "flag": "-t8scramble:2",
+                "title": "Each item is equippable by 2 characters"
+              },
+              {
+                "flag": "-t8scramble:3",
+                "title": "Each item is equippable by 3 characters"
+              },
+              {
+                "flag": "-t8scramble:4",
+                "title": "Each item is equippable by 4 characters"
+              },
+              {
+                "flag": "-t8scramble:5",
+                "title": "Each item is equippable by 5 characters"
+              },
+              {
+                "flag": "-t8scramble:6",
+                "title": "Each item is equippable by 6 characters"
+              },
+              {
+                "flag": "-t8scramble:7",
+                "title": "Each item is equippable by 7 characters"
+              },
+              {
+                "flag": "-t8scramble:8",
+                "title": "Each item is equippable by 8 characters"
+              },
+              {
+                "flag": "-t8scramble:9",
+                "title": "Each item is equippable by 9 characters"
+              },
+              {
+                "flag": "-t8scramble:10",
+                "title": "Each item is equippable by 10 characters"
+              },
+              {
+                "flag": "-t8scramble:11",
+                "title": "Each item is equippable by 11 characters"
+              },
+              {
+                "flag": "-t8scramble:12",
+                "title": "Each item is equippable by all characters"
+              },
+              {
+                "flag": "-t8scramble:dkc",
+                "title": "Each item is equippable by only Dark Knight Cecil",
+                "description": "Under this flag Dark Knight Cecil can equip all three items and is the only character who can equip any of them."
+              }
+            ]
+          },
+          {
+            "flag": "-t8scramble:playable",
+            "title": "Scramble only considers playable characters",
+            "description": "The randomization process only considers characters that will appear in the seed."
+          },
+          {
+            "flag": "-t8scramble:spread",
+            "title": "Characters are spread evenly across the items",
+            "description": "The characters for each item are chosen with minimal repetition, so as to spread out the items over all of the characters."
+          }
+        ]
+      },
+      {
+        "flag": "@singleuse",
+        "title": "Make certain equipment single-use",
+        "description": "Under these flags, all copies of the items equipped during battle will disappear at the end of battle, including if you run away (but not cutscene battles). Items in your inventory are safe.",
+        "fork": true,
+        "subcontrols": [
+          {
+            "flag": "-singleuse:cursed",
+            "title": "Cursed Rings break after battle",
+            "hard": true
+          },
+          {
+            "flag": "-singleuse:crystal",
+            "title": "Crystal Swords break after battle",
+            "description": "The Crystal Sword can be equipped mid-battle but cannot be unequipped, so that it cannot be stashed in your inventory to prevent losing it.",
+            "hard": true
+          },
+          {
+            "flag": "-singleuse:adamant",
+            "title": "Adamant Armors break after battle",
+            "hard": true
+          }
+        ]
+      },
+      {
+        "flag": "@anon106",
         "title": "Change the PRNG table",
         "fork": true,
         "type": "select",
@@ -9594,15 +9788,15 @@ var FLAG_UISPEC = [
       {
         "flag": "-miscbugfixes",
         "title": "Include minor bug fixes",
-        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.",
+        "description": "This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, incorrect axtor reference for Regen, and only weapons in the right hand setting long range bit for dual-wielding characters.",
         "fork": true
       },
       {
-        "flag": "@anon105",
+        "flag": "@anon107",
         "title": "Call options",
         "subcontrols": [
           {
-            "flag": "@anon106",
+            "flag": "@anon108",
             "title": "Spellset options",
             "type": "select",
             "subcontrols": [
@@ -9624,7 +9818,7 @@ var FLAG_UISPEC = [
             "description": "By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior."
           },
           {
-            "flag": "@anon107",
+            "flag": "@anon109",
             "title": "Dwarf Castle spell learning",
             "type": "select",
             "subcontrols": [
@@ -9657,7 +9851,7 @@ var FLAG_UISPEC = [
         "fork": true
       },
       {
-        "flag": "@anon108",
+        "flag": "@anon110",
         "title": "Alternate starting conditions",
         "fork": true,
         "type": "select",
@@ -9676,7 +9870,7 @@ var FLAG_UISPEC = [
         ]
       },
       {
-        "flag": "@anon109",
+        "flag": "@anon111",
         "title": "Restore vanilla behaviors",
         "subcontrols": [
           {
@@ -9717,7 +9911,7 @@ var FLAG_UISPEC = [
         "description": "<ul>\n    <li>Guidingway will introduce the challenge.</li>\n    <li>Guidingway will not explain the challenge.</li>\n    <li>Wacky challenges are not intended to be balanced, robust, coherent, fair, or bug-free.</li>\n    <li>(They are intended to be wacky.)</li>\n</ul>\n<p><b>NOTE:</b> While wacky challenges can now be combined, some modes are incompatible:</p>\n<ul>\n\t<li>None of these modes can be used together: \"friendlyfire\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"tellahmaneuver\", \"3point\"</li>\n\t<li>None of these modes can be used together: \"musical\", \"darts\", \"skillissue\"</li>\t\n\t<li>None of these modes can be used together: \"worthfighting\", \"battlescars\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"menarepigs\", \"skywarriors\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n\t<li>None of these modes can be used together: \"unstackable\", \"menarepigs\", \"skywarriors\", \"battlescars\", \"3point\", \"mirrormirror\", \"zombies\", \"afflicted\"</li>\n</ul>\n<p>If the random option is used and there are not enough compatible modes remaining, fewer random modes will be chosen.</p>",
         "subcontrols": [
           {
-            "flag": "@anon110",
+            "flag": "@anon112",
             "title": "Random wacky challenge(s)",
             "type": "select",
             "subcontrols": [
@@ -9928,6 +10122,12 @@ var FLAG_UISPEC = [
             "hard": true
           },
           {
+            "flag": "-wacky:wardrobe",
+            "title": "\"Wardrobe Malfunction\"",
+            "hard": true,
+            "fork": true
+          },
+          {
             "flag": "-wacky:whatsmygear",
             "title": "\"What's My Gear Again?\"",
             "fork": true
@@ -9954,12 +10154,12 @@ var FLAG_UISPEC = [
     "title": "TWEAKS",
     "controls": [
       {
-        "flag": "@anon111",
+        "flag": "@anon113",
         "title": "Miscellaneous tweaks",
         "fork": true,
         "subcontrols": [
           {
-            "flag": "@anon112",
+            "flag": "@anon114",
             "title": "Sight replacements",
             "type": "select",
             "subcontrols": [
@@ -9981,7 +10181,7 @@ var FLAG_UISPEC = [
             "description": "Edward's Heal command will now use the best of Cure3/Cure2/Cure1 available."
           },
           {
-            "flag": "@anon113",
+            "flag": "@anon115",
             "title": "Improve Edward's Sing command",
             "type": "select",
             "subcontrols": [
@@ -9998,7 +10198,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon114",
+            "flag": "@anon116",
             "title": "Changes to Cecil's Paladin class",
             "type": "select",
             "subcontrols": [
@@ -10077,7 +10277,7 @@ var FLAG_UISPEC = [
     "title": "SPOILERS",
     "controls": [
       {
-        "flag": "@anon115",
+        "flag": "@anon117",
         "title": "No spoiler log",
         "type": "select",
         "subcontrols": [
@@ -10131,7 +10331,7 @@ var FLAG_UISPEC = [
             ]
           },
           {
-            "flag": "@anon116",
+            "flag": "@anon118",
             "title": "Partial spoiler log",
             "subcontrols": [
               {
@@ -10147,7 +10347,7 @@ var FLAG_UISPEC = [
                 "title": "Spoil characters"
               },
               {
-                "flag": "@anon117",
+                "flag": "@anon119",
                 "title": "Spoil treasure chests",
                 "type": "select",
                 "subcontrols": [

@@ -514,6 +514,8 @@ SUPPORT_KIT = {
 def apply(env):
     kits = []
     items_dbview = databases.get_items_dbview()
+    altered_item_tiers = env.meta['altered_item_tiers']
+    inf_arrows = env.options.flags.has('infinite_arrows')
 
     kit_names = []
     if env.options.test_settings.get('items', False):
@@ -549,11 +551,11 @@ def apply(env):
     for kit_name in kit_names:
         if kit_name == 'grabbag':
             kit_spec = [
-                ( items_dbview.find_all(lambda it: it.tier >= 1 and it.tier <= 5), [1] * 8 )
+                ( items_dbview.find_all(lambda it: altered_item_tiers[it.code] >= 1 and altered_item_tiers[it.code] <= 5), [1] * 8 )
                 ]
         elif kit_name == '99':
             kit_spec = [
-                ( items_dbview.find_all(lambda it: it.tier >= 1 and it.tier <= 8), [99] )
+                ( items_dbview.find_all(lambda it: altered_item_tiers[it.code] >= 1 and altered_item_tiers[it.code] <= 8), [99] )
                 ]
         elif kit_name in ['hero', 'heroplusplus']:
             char = env.meta['starting_character']
@@ -563,11 +565,11 @@ def apply(env):
                 char = 'pcecil'
             if (char == 'rydia'):
                 char = 'arydia'
-            weapons_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and it.tier in (4,5) and char in it.equip)
-            arrows_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in (4,5) and char in it.equip)
-            armor_dbview = items_dbview.get_refined_view(lambda it: it.category == 'armor' and it.subtype in ('armor','robe') and it.tier in (4,5) and char in it.equip)
-            head_dbview = items_dbview.get_refined_view(lambda it: it.category == 'armor' and it.subtype in ('hat','helmet') and it.tier in (4,5) and char in it.equip)
-            hand_dbview = items_dbview.get_refined_view(lambda it: it.category == 'armor' and it.subtype in ('ring','gauntlet') and it.tier in (4,5) and it.const != '#item.Cursed' and char in it.equip)
+            weapons_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and altered_item_tiers[it.code] in (4,5) and char in it.equip)
+            arrows_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and altered_item_tiers[it.code] in (4,5) and char in it.equip)
+            armor_dbview = items_dbview.get_refined_view(lambda it: it.category == 'armor' and it.subtype in ('armor','robe') and altered_item_tiers[it.code] in (4,5) and char in it.equip)
+            head_dbview = items_dbview.get_refined_view(lambda it: it.category == 'armor' and it.subtype in ('hat','helmet') and altered_item_tiers[it.code] in (4,5) and char in it.equip)
+            hand_dbview = items_dbview.get_refined_view(lambda it: it.category == 'armor' and it.subtype in ('ring','gauntlet') and altered_item_tiers[it.code] in (4,5) and it.const != '#item.Cursed' and char in it.equip)
             weapon1 = env.rnd.choice(weapons_dbview.find_all())
             weapon2 = None
             if weapon1.subtype == 'bow':
@@ -579,7 +581,7 @@ def apply(env):
             hand = env.rnd.choice(hand_dbview.find_all())
             kit_spec = [ ( [ weapon1 ], [1]) ]
             if weapon2:
-                quantity = [20] if (weapon1.subtype == 'bow' and ('unstackable' not in env.meta.get('wacky_challenge', []))) else [1]
+                quantity = [20] if (weapon1.subtype == 'bow' and ('unstackable' not in env.meta.get('wacky_challenge', []) and not inf_arrows)) else [1]
                 kit_spec += [ ( [ weapon2 ], quantity ) ]
             kit_spec += [ ([ armor ], [1]), ( [ head ], [1]), ( [ hand ], [1]) ]
             if kit_name == 'heroplusplus':
@@ -642,15 +644,15 @@ def apply(env):
             chosen_kit = env.rnd.choices(egg_kits, weights=egg_weights, k=1)[0]
             kit_spec = EGG_METHODS[chosen_kit]['items']
             if chosen_kit in ['heavyarmor', 'sorcrobe', 'moonveil']:
-                weapons_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and it.tier in (3,5) and char in it.equip)
+                weapons_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype != 'arrow' and altered_item_tiers[it.code] in (3,5) and char in it.equip)
                 if 'unstackable' in wackies:
                     weapons_dbview.refine(lambda it: it.subtype != 'bow')
                 weapon1 = env.rnd.choice(weapons_dbview.find_all())
                 kit_spec.append( (weapon1.const[6:], [1]) )
                 if weapon1.subtype == 'bow':
-                    arrows_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and it.tier in (3,5) and char in it.equip)
+                    arrows_dbview = items_dbview.get_refined_view(lambda it: it.category == 'weapon' and it.subtype == 'arrow' and altered_item_tiers[it.code] in (3,5) and char in it.equip)
                     weapon2 = env.rnd.choice(arrows_dbview.find_all())
-                    kit_spec.append( (weapon2.const[6:], [30]) )
+                    kit_spec.append( (weapon2.const[6:], [(1 if inf_arrows else 30)]) )
             elif chosen_kit in ['baham', 'levia'] and 'tellahmaneuver' in wackies:
                 kit_spec[2] = ('AuApple', [(6 if chosen_kit == 'baham' else 5)])
             elif chosen_kit in ['magicspear'] and 'darts' in wackies:
@@ -690,6 +692,13 @@ def apply(env):
                             qty = env.rnd.randint(1,10)
                         if 'unstackable' in env.meta.get('wacky_challenge', []):
                             qty = 1
+                        if inf_arrows:
+                            if type(item) is str: 
+                                if 'Arrow' in item:
+                                    qty = 1
+                            else:
+                                if item.subtype == 'arrow':
+                                    qty = 1
                         kit.append( (items_dbview.find_one(lambda it: it.const == item_const), qty) )
 
         if kit:

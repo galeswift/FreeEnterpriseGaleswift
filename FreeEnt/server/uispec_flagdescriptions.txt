@@ -278,6 +278,9 @@ If a duplicate character tries to join your party, instead you are given the opt
 [Cfuse:equip]
 If a duplicate character tries to join your party, instead you are given the option to "fuse" a piece of equipment to the instance of that character in your party, which adds the stat bonuses from that item to the character's base stats. Only equipment that the character can normally equip can be fused.
 
+[@statscap]
+Under these flags, the five main character stats (Strength, Agility, Vitality, Wisdom, and Will) go up to the specified limit instead of 99. The cap applies to stats inside and outside of battle as the normal cap of 99 does (including Bluff).
+
 [Cnekkie]
 Characters start with a random low-level weapon and no armor. (Duplicate characters will have the same starting gear.)
 
@@ -879,6 +882,15 @@ Monsters will be able to evade both physical and magical attacks from your party
 [-monsterflee]
 Monsters will be able to flee from battles that you can run from, based on their evasion stat. Requires <em>-monsterevade</em> to be active.
 
+[-infarrows]
+Arrows are now infinite use, meaning they are treated like any other weapon and will not be used up. Pricing and tiering for arrows changes.
+
+[-warpitem]
+Instead of the EagleEye that casts Sight, there is a Warp item that casts Warp outside of battle. 
+
+[@gravitysap]
+Normally, sap damage (from Virus, Big Bang, etc.) is 2 HP per tick. Under these flags, sap damage scales based on the current HP of the actor, with minimum 2 HP as before. 
+
 [@smithy]
 Normally, Kokkol the Smith forges the Adamant and Legend to make Excalibur. These flags change what Kokkol will make.
 
@@ -896,6 +908,24 @@ If Kokkol forges a weapon from FF4 Advance, then all characters in the seed will
 
 [-smith:spoilsuper]
 If Kokkol forges a weapon from FF4 Advance, then the Legend Sword becomes the Legend "Weapon" of the same type as the FF4 Advance weapon, with additional properties shared by most weapons of that type.
+
+[@t8]
+These flags change who gets to equip the Excalbur, Crystal Sword, and Adamant Armor. The numbered flags specify how many characters will be able to equip each item. Rydia gets the same options as child and adult, but Cecil is only considered as a paladin.
+
+[-t8scramble:dkc]
+Under this flag Dark Knight Cecil can equip all three items and is the only character who can equip any of them.
+
+[-t8scramble:playable]
+The randomization process only considers characters that will appear in the seed.
+
+[-t8scramble:spread]
+The characters for each item are chosen with minimal repetition, so as to spread out the items over all of the characters.
+
+[@singleuse]
+Under these flags, all copies of the items equipped during battle will disappear at the end of battle, including if you run away (but not cutscene battles). Items in your inventory are safe.
+
+[-singleuse:crystal]
+The Crystal Sword can be equipped mid-battle but cannot be unequipped, so that it cannot be stashed in your inventory to prevent losing it.
 
 [-starting:blackchocobo]
 Instead of starting with the Enterprise, start at Baron with Black Chocobos available but no Enterprise. The Enterprise is obtained by completing Baron Castle.
@@ -1012,6 +1042,9 @@ The default base ATB for the agility anchor is 5 ticks. Under these flags, the b
 [-speedmodbalance]
 In vanilla FF4, the speed modifier is a number from 12 to 32 that, when divided by 16, gives a fraction by which character timers are scaled (to speed up or slow down your characters and their charge times). Under this flag, the speed modifier now goes from 8 to 32, Slow only adds 4 instead of 8, Fast subtracts 4 instead of 3, and SilkWebs only add 8 instead of 16 (Hermes were already subtracting 8).
 
+[-multifast]
+Normally, Fast can only target a single character when you cast it (monsters can override that, like Baigan does). This flag allows Fast to multi-target.
+
 [@exp]
 To reduce grinding, Free Enterprise normally applies a number of experience boosts, which may be individually disabled by these flags. There are also options to change the experience distribution in other ways. See <a href='fork_info#experience-flags'>the fork_info page</a> for a more detailed breakdown of each flag.
 
@@ -1064,7 +1097,7 @@ To prevent softlocks, the randomized PRNG table will be such that all battle slo
 To prevent softlocks, the PRNG table will have a small number of entries clustered around the randomly chosen number to ensure that all battle slots are available for random targetting.
 
 [-miscbugfixes]
-This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, and incorrect axtor reference for Regen.
+This flag includes a number of minor bug fixes that FE v4.6 does not have: the Hermes/berserk issue (fixed in v5.0), incorrect Will and Will+Wisdom timers, incorrect victim history entries, incorrect slot indexing with Regen, incorrect axtor reference for Regen, and only weapons in the right hand setting long range bit for dual-wielding characters.
 
 [-call:vanillahobs]
 By default, instead of learning Fire1 at Mt. Hobs, Rydia will learn a random summon (other than Leviatan and Bahamut). This flag removes that behavior.
@@ -1122,6 +1155,9 @@ Normally in FF4, Zeromus' Big Bang can be nerfed by using magic to trigger a cou
 
 [Zmustnerf]
 Zeromus will now do 9999 damage with Big Bang unless you nerf it (or avoid it in other ways).
+
+[Zdrain]
+Zeromus's physical attack now drains HP and Big Bang has the Drain spell effect instead of inflicting HP leak. Healing on Zeromus is capped at 9999. 
 
 [Znocosplay]
 Free Enterprise replaces Zeromus' battle sprite with a random sprite. (Its battle behavior and stats are unchanged.) Enable this flag to preserve Zeromus' original battle sprite.

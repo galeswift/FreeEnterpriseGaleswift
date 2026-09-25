@@ -76,6 +76,13 @@ _items_db = csvdb.CsvDb(os.path.join(DB_PATH, 'items.csvdb'), {
     'equip' : csvdb.List(',')
     })
 
+_infinite_arrows_db = csvdb.CsvDb(os.path.join(DB_PATH, 'infinite_arrows.csvdb'), {
+    'code' : csvdb.HexInt,
+    'tier' : int,
+    'price' : int,
+    'equip' : csvdb.List(',')
+    })
+
 _shops_db = csvdb.CsvDb(os.path.join(DB_PATH, 'shops.csvdb'), {
     'id' : csvdb.HexInt,
     'manifest' : csvdb.List('\n', filter_func=str.strip),
@@ -148,6 +155,9 @@ def get_treasure_dbview():
 
 def get_items_dbview():
     return _items_db.create_view()
+
+def get_infinite_arrows_dbview():
+    return _infinite_arrows_db.create_view()
 
 def get_shops_dbview():
     return _shops_db.create_view()

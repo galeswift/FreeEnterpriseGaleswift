@@ -16,7 +16,27 @@
 // updated permadeath.f4c code
 
 msfpatch {
-    SwoonToWishes:
+    SwoonToWishes:        
+        // check PostBattle__Flags;
+        // if first-time, run the swoon-to-wishes code
+        // and check for the Legend Sword as we go
+        // -- then if there won't be a second time,
+        // salvage the Legend Sword 
+        // if second-time, then there must be spoils,
+        // and we can now salvage the Legend Sword
+        // if we need to
+        lda $_PostBattle__Flags
+        // can't have bit 2 w/o bit 1, so this saves
+        // an instruction
+        and #$03
+        beq $+DoSwoonToWishes
+        // check if the Legend Sword needs salvaging
+        and #$02
+        beq $+NoSalvagingNeeded
+        jsr $_SalvageLegendSword
+    %NoSalvagingNeeded:
+        rtl
+
         // don't do anything for "no gameover" battles
         lda $38e5
         and #$02
@@ -38,7 +58,7 @@ msfpatch {
         and #$80  // check for swoon
 
         beq $+Next
-        // %flag hero_challenge on%
+        // %anyflags: hero_challenge superhero_challenge%
         //  the Hero is exempt from being sent to the Tower
         lda $1000,x
         and #$1f
@@ -46,22 +66,9 @@ msfpatch {
         beq $+Next
         // %end%
 
-        // %if check_legend_swoon%
-        // retrieve the Legend Sword if Cbye is on or if
-        // Cmostlydead is on, but otherwise it's
-        // fine to leave it on the character
-        lda $a8
-        and #$40 // ran away, if yes do the check
-        bne $+DoLegendCheck
-        lda $a8
-        and #$10 // spoils available, if not do the check
-        beq $+DoLegendCheck
-        lda $1000,x // going to run twice; check if second time
-        bne $+SkipLegendCheck
-    %DoLegendCheck:
+        // due to things like doors rando and starting underground,
+        // always take the Legend Sword away
         jsr $_CheckForLegendSword
-    %SkipLegendCheck:
-        // %end%
 
         lda $1000,x
         and #$1f
@@ -77,7 +84,7 @@ msfpatch {
         clc
         adc #$1000
         tax
-        lda #$0000
+        tdc
         sep #$20
         .mx 0x20
         pla
@@ -97,6 +104,21 @@ msfpatch {
         cpx #$0140
         bcc $-LoopStart
 
+        // do we need to salvage the Legend Sword?
+        // if yes, do we do it now or later?
+        lda $_PostBattle__Flags
+        and #$02
+        beq $+SkipSalvaging
+        
+        // if there are spoils, skip for now 
+        // and we'll catch it in a different code branch,
+        // otherwise salvage now
+        lda $a8
+        and #$10
+        beq $+SkipSalvaging
+        jsr $_SalvageLegendSword
+
+    %SkipSalvaging:
         // change party leader if previous party leader left the party
         // switch D bank so we can borrow some bank 15 routines
         phd
@@ -113,29 +135,34 @@ msfpatch {
         pld
         rtl
 
-    %CheckForLegendSword:
-        lda $1034,x
-        beq $+CheckLeftHand
+    CheckForLegendSword:
         lda $1033,x
         cmp #$19
-        beq $+HasLegend
+        bne $+CheckLeftHand
+        // zero out the hand/count
+        stz $1033,x
+        stz $1034,x
+        // jump forward to set the flag,
+        // then return here to possibly
+        // handle the left hand as well
+        jsr $_SetSalvageFlag
     %CheckLeftHand:
-        lda $1036,x
-        beq $+NoLegend
         lda $1035,x
         cmp #$19
-        bne $+NoLegend
-    %HasLegend:
-        phx
-        jsr $_KeepLegendSword
-        plx
-    %NoLegend:
+        bne $+DoneChecking
+        // zero out the hand/count
+        stz $1035,x
+        stz $1036,x
+    %SetSalvageFlag:
+        // set the flag to salvage
+        // the lost sword
+        lda $_PostBattle__Flags
+        ora #$02
+        sta $_PostBattle__Flags
+    %DoneChecking:
         rts
 
-    %KeepLegendSword:
-        // blank departed character's hand slots to prevent double-trigger later
-        stz $1033,x
-        stz $1035,x
+    SalvageLegendSword:
         // try to stuff Legend Sword in the inventory
         ldx #$0000
     %InventoryLoop:
@@ -153,6 +180,8 @@ msfpatch {
         bcc $-InventoryLoop
 
         // if it didn't make it to the inventory, try to deliver as a battle item
+        // we're only calling this function when there are no other spoils or
+        // after we've already set spoils
         lda $06c6
         bne $+MIABSpoils
         ldx #$0000

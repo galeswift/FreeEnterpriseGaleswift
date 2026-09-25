@@ -1,0 +1,40 @@
+// normally the Legend Sword is only removed
+// from the right hand of a character or from
+// the inventory.
+// ... but under Omnidextrous or -smith:spoilsuper,
+// you can equip the Legend item in a left hand,
+// so we need to look there too. Technically this
+// will search for whatever item the event calls for,
+// but generally this event is used for key items only
+// (so it matters only for the Legend item).
+
+msfpatch{
+    .addr $00e8e4
+        jsl $=RemoveLegendSword__Extension
+        nop
+
+    .new
+    RemoveLegendSword__Extension:
+        // displaced; D = $0600
+        lda $1033,x
+        cmp $06
+        // return if we found it,
+        // else check the left hand also
+        beq $+BackToEvent
+        lda $1035,x
+        cmp $06
+        bne $+BackToEvent
+        // okay, we found it, just remove it now
+        stz $1035,x
+        stz $1036,x
+        // ugly; pop the return stack to jml to
+        // the end of the event, so that we mimic
+        // the behaviour of the original event and
+        // only remove the first copy/stack we find
+        pla
+        pla
+        pla
+        jml $00e907
+    %BackToEvent:
+        rtl
+}

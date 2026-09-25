@@ -37,6 +37,7 @@ WACKY_CHALLENGES = {
     'advertising'       : 'Truth in\nAdvertising',
     'workexperience'    : 'Work Experience',
     'moneygains'        : 'Big Money,\nLittle Gains',
+    'wardrobe'          : 'Wardrobe Malfunction',
     'musical'           : 'Final Fantasy IV:\nThe Musical',
     'darts'             : 'World Championship\nof Darts',
     'unstackable'       : 'Unstackable',
@@ -85,6 +86,7 @@ WACKY_RAM_USAGE = {
     'advertising'       : 0,
     'workexperience'    : 0,
     'moneygains'        : 0,
+    'wardrobe'          : 1,
     'musical'           : 0,
     'darts'             : 0,
     'unstackable'       : 0,
@@ -175,6 +177,8 @@ def apply(env):
         rom_base = WACKY_ROM_ADDRESS
         ram_base = WACKY_RAM_ADDRESS
 
+        spoiler_table_name = ("WACKY CHALLENGE" if len(wacky_challenge) == 1 else "WACKY CHALLENGES")
+
         for idx, wacky in enumerate(wacky_challenge):
             # apply script of the same name, if it exists
             script_filename = f'scripts/wacky/{wacky}.f4c'
@@ -207,7 +211,7 @@ def apply(env):
             centered_text = '\n'.join([line.center(26).upper().rstrip() for line in text.split('\n')])
             env.add_substitution(f'wacky challenge title {idx+1}', f'\n{centered_text}')
             env.add_toggle(f'wacky_challenge_{idx+1}')
-            env.spoilers.add_table(f'WACKY CHALLENGE {idx+1}', [[text.replace('\n', ' ')]], public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
+            env.spoilers.add_table(spoiler_table_name, [[text.replace('\n', ' ')]], public=env.options.flags.has_any('-spoil:all', '-spoil:misc'))
 
 
 
@@ -508,10 +512,11 @@ def apply_misspelled(env, rom_address):
 def apply_kleptomania(env, rom_address):
     VANILLA_MONSTER_LEVELS = [3,5,5,4,5,20,19,4,6,5,5,6,6,6,6,6,7,23,7,7,8,8,9,36,16,25,12,9,21,9,11,14,97,19,10,10,11,12,23,48,15,8,8,16,12,15,16,13,16,31,17,20,20,79,17,17,15,18,18,34,20,20,35,15,27,20,20,21,21,41,22,22,41,25,44,49,27,26,35,32,28,79,28,29,39,14,14,28,25,29,29,32,32,33,34,43,26,27,34,32,30,31,53,31,50,33,39,96,40,35,67,42,23,36,37,45,43,23,39,32,40,48,26,58,40,40,44,48,98,30,50,98,36,37,96,16,60,60,61,34,97,40,45,54,99,61,97,32,99,99,30,71,99,61,62,98,97,54,98,99,99,10,10,2,15,15,15,9,9,9,16,15,15,16,16,16,26,36,31,47,31,7,32,32,25,15,15,50,53,79,47,37,63,79,79,19,5,48,48,63,96,96,47,5,31,17,1,1,1,1,15,15,47,79,63,63,63,1,31,31,31,31,1,3]
     items_dbview = databases.get_items_dbview()
-    available_weapons = items_dbview.find_all(lambda it: it.category == 'weapon' and it.tier >= 2 and it.tier <= 8)
-    available_armor = items_dbview.find_all(lambda it: it.category == 'armor' and it.tier >= 1 and it.tier <= 8)
-    available_weapons.sort(key=lambda it: it.tier)
-    available_armor.sort(key=lambda it: it.tier)
+    altered_item_tiers = env.meta['altered_item_tiers']
+    available_weapons = items_dbview.find_all(lambda it: it.category == 'weapon' and altered_item_tiers[it.code] >= 2 and altered_item_tiers[it.code] <= 8)
+    available_armor = items_dbview.find_all(lambda it: it.category == 'armor' and altered_item_tiers[it.code] >= 1 and altered_item_tiers[it.code] <= 8)
+    available_weapons.sort(key=lambda it: altered_item_tiers[it.code])
+    available_armor.sort(key=lambda it: altered_item_tiers[it.code])
 
     is_armor_queue = [bool((i % 5) < 2) for i in range(len(VANILLA_MONSTER_LEVELS))]
     env.rnd.shuffle(is_armor_queue)
@@ -636,6 +641,16 @@ def apply_afflicted_legacyversion(env):
     
     env.add_binary(WACKY_ROM_ADDRESS, status_bytes, as_script=True)
 '''
+
+def apply_wardrobe(env, rom_address):
+    env.add_toggle('single_use_items')
+    env.add_file('scripts/single_use_items.f4c')
+    env.add_file('scripts/custom_battle_dialog_ext_opcodes.f4c')
+    # set up threshold data: each of the 67 armour pieces (0x6D to 0xAF)
+    # get a random value from 0 to 128 (0-50%)
+    threshold_data = env.rnd.choices(range(0x81),k=(0xAF-0x6C))
+    env.add_binary(rom_address, threshold_data, as_script=True)
+    return len(threshold_data)
 
 def apply_battlescars(env, rom_address):
     env.add_toggle('wacky_initialize_axtor_hook')
