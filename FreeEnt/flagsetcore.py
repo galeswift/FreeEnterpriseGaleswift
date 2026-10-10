@@ -34,6 +34,10 @@ class FlagSetCore:
         self._lib = lib
         self._flags = {}
         self._embedded_version = None
+        # dict for fast flag validity checks; flagspec['order'] is a long list
+        self._valid_flags = {}
+        for flag in flagspec['order']:
+            self._valid_flags[flag] = True
 
     def load_and_validate(self, flag_string):
         if len(flag_string) > 0 and flag_string[0] in ['b', 'c']:
@@ -147,7 +151,7 @@ class FlagSetCore:
         return self._embedded_version
         
     def has(self, flag):
-        if flag not in self._flagspec['order']:
+        if flag not in self._valid_flags:
             raise Exception(f"Invalid flag {flag}")
 
         if flag in self._flagspec['implicit']:
