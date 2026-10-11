@@ -35,7 +35,7 @@ class InitializationPanel extends React.Component {
         let flags = new FlagSet();
         try
         {
-            let invalid_flags = flags.load_and_validate(flagString);
+            let invalid_flags = flags.load_and_validate(flagString) || [];
             if (invalid_flags.length > 0)
             {
                 warnings.push("Warning: Some flags are not valid. This flagstring may be intended for an older version or a different generator.");
