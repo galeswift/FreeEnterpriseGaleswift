@@ -1,4 +1,5 @@
 import multiprocessing
+import os
 
 from . import generator
 from . import website
@@ -15,7 +16,7 @@ class ServerConfig:
         self.password = None
         self.beta = False
         self.port = 8080
-        self.db_url = "mongodb://127.0.0.1:27017"
+        self.db_url = os.getenv("FE_MONGO_URL", "mongodb://127.0.0.1:27017")
 
     @property
     def db_name(self):

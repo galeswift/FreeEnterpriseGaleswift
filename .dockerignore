@@ -1,0 +1,14 @@
+.git
+.vscode
+venv
+.venv
+ff4.smc
+rom
+output
+.lastseed
+debug*
+notes.txt
+CLAUDE.local.md
+**/__pycache__
+FreeEnt/server/_build
+FreeEnt/server/bin

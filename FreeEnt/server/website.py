@@ -456,7 +456,8 @@ def run(config, task_queue):
     #if not config.local and not config.beta:
     #    cherrypy.config.update({'request.show_tracebacks': False})
 
-    cherrypy.config.update({'server.socket_port' : config.port})
+    # FE_LISTEN_HOST=0.0.0.0 in Docker, so the proxy can reach the server from outside the container
+    cherrypy.config.update({'server.socket_port' : config.port, 'server.socket_host' : os.getenv('FE_LISTEN_HOST', '127.0.0.1')})
     if not config.local:
         cherrypy.config.update({
             'environment' : 'production',

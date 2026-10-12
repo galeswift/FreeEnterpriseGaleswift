@@ -7,6 +7,8 @@ services:
     command: ["python", "-m", "FreeEnt", "/rom/ff4.smc", "server", "--local"]
     ports:
       - "8080:8080"          # access at http://localhost:8080
+    environment:
+      FE_MONGO_URL: mongodb://mongo:27017
     volumes:
       - ./rom:/rom:ro
     depends_on:

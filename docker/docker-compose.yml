@@ -1,7 +1,11 @@
 services:
   freeent:
-    build: .
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     restart: unless-stopped
+    environment:
+      FE_MONGO_URL: mongodb://mongo:27017
     volumes:
       - ./rom:/rom:ro        # place your ff4.smc in the rom/ folder
     depends_on:
