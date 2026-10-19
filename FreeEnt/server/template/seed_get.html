@@ -99,6 +99,27 @@
                 color: #444;
             }
 
+            #enterprise_section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 0.8rem;
+            }
+
+            #enterprise_preview {
+                width: 3rem;
+                height: 3rem;
+                image-rendering: pixelated;
+                background-color: #5a8a4a;
+                border: 0.1rem solid #887;
+                border-radius: 0.3rem;
+                margin-right: 0.8rem;
+            }
+
+            #enterprise_palette {
+                margin-left: 0.5rem;
+            }
+
             #file_section {
                 display: flex;
                 align-items: stretch;
@@ -363,6 +384,19 @@
             </div>
             <div id="patch">
                 <div id="patch_header">Please provide an uncompressed ROM of Final Fantasy II US v1.1:</div>
+                <div id="enterprise_section">
+                    <canvas id="enterprise_preview" width="16" height="16"></canvas>
+                    <label for="enterprise_color">Enterprise color:</label>
+                    <select id="enterprise_color" onchange="drawEnterprisePreview();">
+                        <optgroup label="Palettes">
+                            <option value="palette-24">Orange (default)</option>
+                            <option value="palette-26">Blue</option>
+                            <option value="palette-28">Red</option>
+                        </optgroup>
+                        <optgroup label="Custom colors" id="enterprise_custom_colors">
+                        </optgroup>
+                    </select>
+                </div>
                 <div id="file_section">
                     <div id="cached_file" style="display:none;">
                         Loaded <span id="cached_file_name">ROM data</span> from local cache. <span id="clear_cached_file_button" onclick="clearCachedFile();">clear</span>
@@ -513,6 +547,7 @@
                         }
                         else throw e;
                     }
+                    applyEnterpriseColor(ret);
                     var basename = "FF4FE.{{ seed_key }}";
                     var ext = '.' + romData.name.split(".").pop();
                     download(ret, basename + ext, romData.mime);
@@ -653,8 +688,212 @@
                 applyButtonElem.className = (applyEnabled ? '' : 'disabled');
             }
 
+            // The Enterprise's left-facing overworld frame: four 3bpp tiles
+            // (top-left, top-right, bottom-left, bottom-right) from $1C:8840.
+            var ENTERPRISE_LEFT_TILES = "01000f00110e0f001b0427181a043b0400000000000000004080f880c43878807080f8b0bc00fb000080000000b000044438bf407780bf40c03f7f0030000f003b409bc07f350f009a057a05bb04f7090bf1f502f90206007484740dfdfa0600";
+
+            // Sprite palettes 4-7 (generic field sprite palettes at $0D:8040),
+            // eight BGR555 colors each.
+            var VEHICLE_PALETTES = "00000000ff7f7f027f027901ff2f4a2900000000f77e087d1f025d5dce7d4a29000000005e270f001700bb011042ff7f00000000e71c5a6b10424a297f2a1800";
+
+            // OAM flag bytes that pick the Enterprise's palette: the overworld
+            // sprite, the zoomed-out sprite, and the cutscene sprite.
+            var ENTERPRISE_PALETTE_FLAG_OFFSETS = [0x0AB98E, 0x0AB4F7, 0x005ABE];
+            var ENTERPRISE_DEFAULT_PALETTE_FLAGS = 0x18;
+
+            // The Enterprise's 24 overworld tiles ($1C:86C0), 3bpp.
+            var ENTERPRISE_TILES_OFFSET = 0x0E06C0;
+            var ENTERPRISE_TILE_COUNT = 24;
+
+            // The enterprise_sprite.f4c block ($21:E400): a signature, colors
+            // 8-15 of sprite palette 4, and the fourth bitplane of each tile.
+            var ENTERPRISE_SPRITE_SIGNATURE_OFFSET = 0x10E400;
+            var ENTERPRISE_SPRITE_SIGNATURE = "ENT4";
+            var ENTERPRISE_SPRITE_COLORS_OFFSET = 0x10E410;
+            var ENTERPRISE_SPRITE_BITPLANE_OFFSET = 0x10E420;
+
+            // Each custom color set replaces some of the sprite's stock colors
+            // (1-7) with new ones. The pixels using a replaced color get the
+            // fourth bitplane set, which moves them to color 8 higher up, where
+            // the new color is stored.
+            //   1 black outline, 2 white, 4 orange hull, 5 dark orange,
+            //   6 yellow trim, 7 grey
+            var ENTERPRISE_CUSTOM_COLORS = [
+                { name: "Green",    colors: { 4: "40b040", 5: "207020", 6: "a0e060" } },
+                { name: "Sky blue", colors: { 4: "4078e0", 5: "203890", 6: "90c8f8" } },
+                { name: "Purple",   colors: { 4: "9050d0", 5: "502880", 6: "e0a0f8" } },
+                { name: "Silver",   colors: { 4: "b0b0b8", 5: "707078", 6: "f0f0f8", 7: "505058" } },
+                { name: "Crimson",  colors: { 4: "d03030", 5: "801818" } },
+                { name: "Midnight", colors: { 2: "f8d850", 4: "303848", 5: "181c28", 6: "f8d850", 7: "606878" } }
+            ];
+
+            function hexToBytes(hex)
+            {
+                var bytes = new Uint8Array(hex.length / 2);
+                for(var i = 0; i < bytes.length; i++)
+                {
+                    bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+                }
+                return bytes;
+            }
+
+            function rgbToSnesColor(rgb)
+            {
+                var r = parseInt(rgb.substr(0, 2), 16) >> 3;
+                var g = parseInt(rgb.substr(2, 2), 16) >> 3;
+                var b = parseInt(rgb.substr(4, 2), 16) >> 3;
+                return r | (g << 5) | (b << 10);
+            }
+
+            // The 3bpp color index (0-7) of one pixel of a tile.
+            function getTilePixel(tiles, tileStart, x, y)
+            {
+                var bit = 7 - x;
+                return ((tiles[tileStart + y * 2] >> bit) & 1)
+                    | (((tiles[tileStart + y * 2 + 1] >> bit) & 1) << 1)
+                    | (((tiles[tileStart + 16 + y] >> bit) & 1) << 2);
+            }
+
+            // Returns { paletteFlags: n } or { customColors: {...} }.
+            function getEnterpriseColorChoice()
+            {
+                var value = document.getElementById("enterprise_color").value;
+                var parts = value.split("-");
+                if(parts[0] == "custom")
+                {
+                    return { customColors: ENTERPRISE_CUSTOM_COLORS[parseInt(parts[1])].colors };
+                }
+                return { paletteFlags: parseInt(parts[1]) };
+            }
+
+            function fillEnterpriseCustomColorOptions()
+            {
+                var group = document.getElementById("enterprise_custom_colors");
+                for(var i = 0; i < ENTERPRISE_CUSTOM_COLORS.length; i++)
+                {
+                    var option = document.createElement("option");
+                    option.value = "custom-" + i;
+                    option.textContent = ENTERPRISE_CUSTOM_COLORS[i].name;
+                    group.appendChild(option);
+                }
+            }
+
+            function drawEnterprisePreview()
+            {
+                var tiles = hexToBytes(ENTERPRISE_LEFT_TILES);
+                var palettes = hexToBytes(VEHICLE_PALETTES);
+                var choice = getEnterpriseColorChoice();
+                var paletteFlags = (choice.customColors ? ENTERPRISE_DEFAULT_PALETTE_FLAGS : choice.paletteFlags);
+                var paletteStart = (((paletteFlags >> 1) & 7) - 4) * 16;
+
+                var canvas = document.getElementById("enterprise_preview");
+                var context = canvas.getContext("2d");
+                var image = context.createImageData(16, 16);
+                for(var tile = 0; tile < 4; tile++)
+                {
+                    for(var y = 0; y < 8; y++)
+                    {
+                        for(var x = 0; x < 8; x++)
+                        {
+                            var index = getTilePixel(tiles, tile * 24, x, y);
+                            if(index == 0)
+                            {
+                                continue;
+                            }
+
+                            var color;
+                            if(choice.customColors && choice.customColors[index])
+                            {
+                                color = rgbToSnesColor(choice.customColors[index]);
+                            }
+                            else
+                            {
+                                color = palettes[paletteStart + index * 2] | (palettes[paletteStart + index * 2 + 1] << 8);
+                            }
+
+                            var pixel = (((tile >> 1) * 8 + y) * 16 + (tile & 1) * 8 + x) * 4;
+                            image.data[pixel] = (color & 0x1F) << 3;
+                            image.data[pixel + 1] = ((color >> 5) & 0x1F) << 3;
+                            image.data[pixel + 2] = ((color >> 10) & 0x1F) << 3;
+                            image.data[pixel + 3] = 255;
+                        }
+                    }
+                }
+                context.putImageData(image, 0, 0);
+            }
+
+            function applyEnterpriseColor(rom)
+            {
+                var choice = getEnterpriseColorChoice();
+                if(choice.customColors)
+                {
+                    applyEnterpriseCustomColors(rom, choice.customColors);
+                }
+                else
+                {
+                    applyEnterprisePalette(rom, choice.paletteFlags);
+                }
+            }
+
+            function applyEnterprisePalette(rom, flags)
+            {
+                if(flags == ENTERPRISE_DEFAULT_PALETTE_FLAGS)
+                {
+                    return;
+                }
+
+                for(var i = 0; i < ENTERPRISE_PALETTE_FLAG_OFFSETS.length; i++)
+                {
+                    if(rom[ENTERPRISE_PALETTE_FLAG_OFFSETS[i]] != ENTERPRISE_DEFAULT_PALETTE_FLAGS)
+                    {
+                        throw "This seed doesn't support changing the Enterprise color; please choose the default color.";
+                    }
+                }
+
+                for(var i = 0; i < ENTERPRISE_PALETTE_FLAG_OFFSETS.length; i++)
+                {
+                    rom[ENTERPRISE_PALETTE_FLAG_OFFSETS[i]] = flags;
+                }
+            }
+
+            function applyEnterpriseCustomColors(rom, customColors)
+            {
+                for(var i = 0; i < ENTERPRISE_SPRITE_SIGNATURE.length; i++)
+                {
+                    if(rom[ENTERPRISE_SPRITE_SIGNATURE_OFFSET + i] != ENTERPRISE_SPRITE_SIGNATURE.charCodeAt(i))
+                    {
+                        throw "This seed doesn't support custom Enterprise colors; please choose one of the palettes.";
+                    }
+                }
+
+                for(var index in customColors)
+                {
+                    var color = rgbToSnesColor(customColors[index]);
+                    rom[ENTERPRISE_SPRITE_COLORS_OFFSET + index * 2] = color & 0xFF;
+                    rom[ENTERPRISE_SPRITE_COLORS_OFFSET + index * 2 + 1] = color >> 8;
+                }
+
+                for(var tile = 0; tile < ENTERPRISE_TILE_COUNT; tile++)
+                {
+                    for(var y = 0; y < 8; y++)
+                    {
+                        var row = 0;
+                        for(var x = 0; x < 8; x++)
+                        {
+                            if(customColors[getTilePixel(rom, ENTERPRISE_TILES_OFFSET + tile * 24, x, y)])
+                            {
+                                row |= (0x80 >> x);
+                            }
+                        }
+                        rom[ENTERPRISE_SPRITE_BITPLANE_OFFSET + tile * 8 + y] = row;
+                    }
+                }
+            }
+
             window.onload = function() {
                 updateFileControls();
+                fillEnterpriseCustomColorOptions();
+                drawEnterprisePreview();
             }
         </script>
 

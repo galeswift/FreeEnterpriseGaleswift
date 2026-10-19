@@ -58,7 +58,9 @@ Fork modifications via fork devs.
 21:DD60 - 21:DFFF   : *** UNUSED ***
 
 21:E000 - 21:E31F  F: doors rando trigger data
-21:E320 - 21:EFFF   : *** UNUSED ***
+21:E320 - 21:E3FF   : *** UNUSED ***
+21:E400 - 21:E4DF  F: Enterprise sprite fourth bitplane and extra colors (customized by the website)
+21:E4E0 - 21:EFFF   : *** UNUSED ***
 
 21:F000 - 21:F0CF   : *** UNUSED ***
 21:F0D0 - 21:F0EF   : randomizer - flags

@@ -201,6 +201,7 @@ F4C_FILES = '''
     scripts/extend_spellsets.f4c
     scripts/odin_sprite_patch.f4c
     scripts/critical_hit_visuals.f4c
+    scripts/enterprise_sprite.f4c
     scripts/fix_legend_removal.f4c
 '''
 # the missing scripts/black_shirt_fix.f4c is included below as a conditional, if -wacky:whatsmygear is not on

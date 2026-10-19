@@ -1,0 +1,91 @@
+// Gives the Enterprise's overworld sprite a fourth bitplane, so it can use
+// colors 8-15 of its palette on top of the usual 1-7.
+//
+// Field sprites are stored as 3bpp, and copy_3bpp_to_vram ($15:B000) leaves
+// the fourth bitplane at zero, so every sprite only reaches colors 0-7. The
+// outdoor palette load ($00:954B) fills colors 8-15 with black. After the
+// outdoor field sprites and palettes are loaded, this writes the Enterprise's
+// fourth bitplane to VRAM and its extra colors to the upper half of sprite
+// palette 4 (and palette 6, which the red airship cutscenes draw it with).
+// Other sprites keep a zero fourth bitplane, so they never see these colors.
+//
+// The data lives at a fixed address so the website can customize it after
+// the seed is generated. With an all-zero bitplane the sprite is unchanged.
+//
+//   $21:E400 - $21:E403  signature "ENT4", which the website checks for
+//   $21:E410 - $21:E41F  colors 8-15 (BGR555)
+//   $21:E420 - $21:E4DF  fourth bitplane, 8 rows for each of the 24 tiles $78-$8F
+
+patch($21e400 bus) {
+    45 4E 54 34 00 00 00 00 00 00 00 00 00 00 00 00
+}
+
+patch($21e410 bus) {
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+}
+
+patch($21e420 bus) {
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+}
+
+msfpatch {
+    EnterpriseSprite__LoadOutdoor:
+        // displaced instruction: copy the whirlpool field sprites
+        jsl $15c144
+
+        php
+        sep #$20
+        rep #$10
+
+        // colors 8-15 of sprite palettes 4 and 6 in the CG-RAM staging area
+        ldx #$0000
+    %ColorLoop:
+        lda $21e410,x
+        sta $7e0e6b,x
+        sta $7e0eab,x
+        inx
+        cpx #$0010
+        bcc $-ColorLoop
+
+        // the fourth bitplane is the high byte of words 8-15 of each tile,
+        // starting at tile $78 (VRAM word $4780)
+        lda #$80
+        sta $2115
+        ldx #$0000
+        ldy #$4788
+    %TileLoop:
+        sty $2116
+    %RowLoop:
+        lda $21e420,x
+        sta $2119
+        inx
+        txa
+        and #$07
+        bne $-RowLoop
+
+        rep #$20
+        tya
+        clc
+        adc #$0010
+        tay
+        sep #$20
+        cpx #$00c0
+        bcc $-TileLoop
+
+        plp
+        rtl
+
+    .addr $00956f
+        jsl $=EnterpriseSprite__LoadOutdoor
+}
