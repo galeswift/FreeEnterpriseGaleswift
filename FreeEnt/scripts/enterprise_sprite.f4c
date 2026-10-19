@@ -75,11 +75,13 @@ msfpatch {
         bne $-RowLoop
 
         rep #$20
+        .mx 0x00
         tya
         clc
         adc #$0010
         tay
         sep #$20
+        .mx 0x20
         cpx #$00c0
         bcc $-TileLoop
 
