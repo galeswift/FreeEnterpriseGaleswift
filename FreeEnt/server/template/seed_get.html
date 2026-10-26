@@ -99,25 +99,121 @@
                 color: #444;
             }
 
+            /* The Enterprise color picker, styled after the flag sections on the make page. */
             #enterprise_section {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 0.8rem;
+                margin: 0 1rem 1rem 1rem;
+                padding: 1em;
+                background-color: #eee;
+                border-left: 1em solid #d8a050;
+                box-shadow: 0em 0.5em 1em 0 rgba(0, 0, 0, 0.5);
+            }
+
+            #enterprise_section .sectionTitle {
+                color: #888;
+                font-size: 1.4em;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                padding: 0.2em;
+            }
+
+            #enterprise_section .sectionDescription {
+                padding: 0.4em 0.2em 0.8em 0.2em;
+                font-size: 0.8em;
+                color: #666;
             }
 
             #enterprise_preview {
-                width: 3rem;
-                height: 3rem;
+                display: block;
+                width: 16rem;
+                height: 4rem;
+                margin: 0 auto 0.8em auto;
                 image-rendering: pixelated;
                 background-color: #5a8a4a;
-                border: 0.1rem solid #887;
-                border-radius: 0.3rem;
-                margin-right: 0.8rem;
+                border: 1px solid #ccc;
             }
 
-            #enterprise_palette {
-                margin-left: 0.5rem;
+            #enterprise_options {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+                grid-gap: 0.2em;
+            }
+
+            #enterprise_section .flagButton {
+                cursor: pointer;
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                align-items: center;
+                border: 1px solid #ddd;
+                user-select: none;
+                color: #aaa;
+            }
+
+            #enterprise_section .flagIcon {
+                padding: 0.2em 0.3em;
+                line-height: 0;
+            }
+
+            #enterprise_section .flagIcon canvas {
+                width: 2em;
+                height: 2em;
+                image-rendering: pixelated;
+            }
+
+            #enterprise_section .flagTitle {
+                padding: 0.3em 0.4em;
+            }
+
+            #enterprise_section .flagName {
+                align-self: stretch;
+                min-width: 1em;
+                background-color: #ccc;
+            }
+
+            #enterprise_section .flagButton.selected {
+                border-color: darkblue;
+            }
+
+            #enterprise_section .flagButton.selected>.flagTitle {
+                align-self: stretch;
+                display: flex;
+                align-items: center;
+                background-color: white;
+                color: black;
+            }
+
+            #enterprise_section .flagButton.selected>.flagName {
+                background-image: linear-gradient(blue, darkblue);
+            }
+
+            #enterprise_section .flagButton.selected.null {
+                border-color: gray;
+            }
+
+            #enterprise_section .flagButton.selected.null>.flagName {
+                background-image: linear-gradient(gray, black);
+            }
+
+            #enterprise_png_controls {
+                margin-top: 0.8em;
+                font-size: 0.8em;
+                color: #666;
+            }
+
+            #enterprise_png_controls a {
+                color: #44a;
+            }
+
+            #enterprise_warning {
+                padding-top: 0.8em;
+                font-size: 0.8em;
+                font-weight: bold;
+                color: #864;
+            }
+
+            #enterprise_error {
+                padding-top: 0.8em;
+                font-size: 0.8em;
+                color: #d44;
             }
 
             #file_section {
@@ -382,21 +478,24 @@
                 </div>
                 {% endif %}
             </div>
+            <div id="enterprise_section">
+                <div class="sectionTitle">Enterprise</div>
+                <div class="sectionDescription">
+                    Choose how the Enterprise looks in your copy of the game. This only changes its colors and art; the seed plays the same for everyone.
+                </div>
+                <canvas id="enterprise_preview" width="64" height="16"></canvas>
+                <div id="enterprise_options"></div>
+                <div id="enterprise_png_controls" style="display:none;">
+                    <input type="file" id="enterprise_png" accept="image/png" onchange="handleEnterprisePngChanged();">
+                    <a href="javascript:;" onclick="downloadEnterpriseTemplate();">Download template</a>
+                </div>
+                <div id="enterprise_warning" style="display:none;">
+                    Colors 1-7 of this sprite's palette are shared with the hovercraft, ship, yellow chocobo, tanks and vehicle shadows, so those will change color too.
+                </div>
+                <div id="enterprise_error" style="display:none;"></div>
+            </div>
             <div id="patch">
                 <div id="patch_header">Please provide an uncompressed ROM of Final Fantasy II US v1.1:</div>
-                <div id="enterprise_section">
-                    <canvas id="enterprise_preview" width="16" height="16"></canvas>
-                    <label for="enterprise_color">Enterprise color:</label>
-                    <select id="enterprise_color" onchange="drawEnterprisePreview();">
-                        <optgroup label="Palettes">
-                            <option value="palette-24">Orange (default)</option>
-                            <option value="palette-26">Blue</option>
-                            <option value="palette-28">Red</option>
-                        </optgroup>
-                        <optgroup label="Custom colors" id="enterprise_custom_colors">
-                        </optgroup>
-                    </select>
-                </div>
                 <div id="file_section">
                     <div id="cached_file" style="display:none;">
                         Loaded <span id="cached_file_name">ROM data</span> from local cache. <span id="clear_cached_file_button" onclick="clearCachedFile();">clear</span>
@@ -688,22 +787,25 @@
                 applyButtonElem.className = (applyEnabled ? '' : 'disabled');
             }
 
-            // The Enterprise's left-facing overworld frame: four 3bpp tiles
-            // (top-left, top-right, bottom-left, bottom-right) from $1C:8840.
-            var ENTERPRISE_LEFT_TILES = "01000f00110e0f001b0427181a043b0400000000000000004080f880c43878807080f8b0bc00fb000080000000b000044438bf407780bf40c03f7f0030000f003b409bc07f350f009a057a05bb04f7090bf1f502f90206007484740dfdfa0600";
+            // The Enterprise's 24 overworld tiles ($1C:86C0), 3bpp: four tiles
+            // (top-left, top-right, bottom-left, bottom-right) for each of the
+            // frames down 1, down 2, up 1, up 2, left 1, left 2. The right
+            // frames are the left ones mirrored.
+            var ENTERPRISE_TILES_OFFSET = 0x0E06C0;
+            var ENTERPRISE_FRAME_COUNT = 6;
+            var ENTERPRISE_TILES = "010007000f001f0019061700130c15020000070c080800084080f0807880fc80cc3074807cb0f4800080709808083888150a0b040b040d0206010500030001000805050201020100f408e8106810d820b04050806000400068d0d0a040a0c080000007000f001f001d0317001f0617000000070c09080e088000f080f800fc80dce074a0e458d42000807098c828400817080a040b040d0206010500030001000b05050201020100d428a8106810d820b04050806000400048d0d0a040a0c0800100070009060f00130e1502170216080001000502080a0940807080c830788078b0f48094009408004000103088686817081708190615020f000b000b0404000b0a0e0a04060400f408f408cc3054a07880e800e8909000e8a83828103090000100030005030f001f06170014001408000101050e080b0bc000e080d0e0788064b8dc20f420b40880c0c0102008284817081708190614030f000a030b0404000b0a0e0b04060400f408f408cc3014e0f800a8e0e8101000e8a838e810b0100001000f00110e0f001b0427181a043b0400000000000000004080f880c43878807080f8b0bc00fb000080000000b000044438bf407780bf40c03f7f0030000f003b409bc07f350f009a057a05bb04f7090bf1f502f90206007484740dfdfa060000000300050303000c001e0c0c003f0000000100000c00008000e080d0e06080d820e418dc20da200080c000000000044438bf407780bf40c03f7f0030000f003b409bc07f350f00bb047a05bb05f6090bf0f502f90206007484750cfcfa0600";
 
             // Sprite palettes 4-7 (generic field sprite palettes at $0D:8040),
-            // eight BGR555 colors each.
+            // eight BGR555 colors each. The Enterprise uses palette 4, which it
+            // shares with the hovercraft, ship, yellow chocobo, tanks and the
+            // vehicle shadows.
+            var VEHICLE_PALETTES_OFFSET = 0x068040;
             var VEHICLE_PALETTES = "00000000ff7f7f027f027901ff2f4a2900000000f77e087d1f025d5dce7d4a29000000005e270f001700bb011042ff7f00000000e71c5a6b10424a297f2a1800";
 
             // OAM flag bytes that pick the Enterprise's palette: the overworld
             // sprite, the zoomed-out sprite, and the cutscene sprite.
             var ENTERPRISE_PALETTE_FLAG_OFFSETS = [0x0AB98E, 0x0AB4F7, 0x005ABE];
             var ENTERPRISE_DEFAULT_PALETTE_FLAGS = 0x18;
-
-            // The Enterprise's 24 overworld tiles ($1C:86C0), 3bpp.
-            var ENTERPRISE_TILES_OFFSET = 0x0E06C0;
-            var ENTERPRISE_TILE_COUNT = 24;
 
             // The enterprise_sprite.f4c block ($21:E400): a signature, colors
             // 8-15 of sprite palette 4, and the fourth bitplane of each tile.
@@ -712,13 +814,19 @@
             var ENTERPRISE_SPRITE_COLORS_OFFSET = 0x10E410;
             var ENTERPRISE_SPRITE_BITPLANE_OFFSET = 0x10E420;
 
-            // Each custom color set replaces some of the sprite's stock colors
-            // (1-7) with new ones. The pixels using a replaced color get the
-            // fourth bitplane set, which moves them to color 8 higher up, where
-            // the new color is stored.
-            //   1 black outline, 2 white, 4 orange hull, 5 dark orange,
-            //   6 yellow trim, 7 grey
-            var ENTERPRISE_CUSTOM_COLORS = [
+            // The Enterprise colors players can pick from, in order, followed by
+            // the option to upload a PNG. An entry either:
+            //  - uses another vehicle palette (paletteFlags: $1A for palette 5,
+            //    $1C for palette 6), which works on any seed, or
+            //  - replaces some of the sprite's stock colors (colors), which
+            //    needs enterprise_sprite.f4c. The pixels using a replaced color
+            //    move to color 8 higher up, where the new color is stored.
+            //    The stock colors are 1 black outline, 2 white, 4 orange hull,
+            //    5 dark orange, 6 yellow trim and 7 grey.
+            var ENTERPRISE_COLORS = [
+                { name: "Orange",   paletteFlags: 0x18 },
+                { name: "Blue",     paletteFlags: 0x1A },
+                { name: "Red",      paletteFlags: 0x1C },
                 { name: "Green",    colors: { 4: "40b040", 5: "207020", 6: "a0e060" } },
                 { name: "Sky blue", colors: { 4: "4078e0", 5: "203890", 6: "90c8f8" } },
                 { name: "Purple",   colors: { 4: "9050d0", 5: "502880", 6: "e0a0f8" } },
@@ -726,6 +834,23 @@
                 { name: "Crimson",  colors: { 4: "d03030", 5: "801818" } },
                 { name: "Midnight", colors: { 2: "f8d850", 4: "303848", 5: "181c28", 6: "f8d850", 7: "606878" } }
             ];
+
+            // The picked entry of ENTERPRISE_COLORS, or "png".
+            var enterpriseChoice = 0;
+
+            // The PNG format: six 16x16 frames side by side, in the same order
+            // as the tiles, and an 8x8 palette block in the bottom-right corner
+            // holding colors 0-15 as 2x2 squares, read left to right, top to
+            // bottom. Color 0 is transparent.
+            var ENTERPRISE_PNG_WIDTH = 104;
+            var ENTERPRISE_PNG_HEIGHT = 16;
+            var ENTERPRISE_PNG_PALETTE_X = 96;
+            var ENTERPRISE_PNG_PALETTE_Y = 8;
+            var ENTERPRISE_PNG_TRANSPARENT = "f800f8";
+            var ENTERPRISE_PNG_TEMPLATE_EXTRA_COLORS = ["400000", "404000", "004000", "004040", "000040", "400040", "404040", "604020"];
+
+            // The sprite from the PNG the player chose, or null.
+            var enterpriseUpload = null;
 
             function hexToBytes(hex)
             {
@@ -745,6 +870,16 @@
                 return r | (g << 5) | (b << 10);
             }
 
+            function snesColorToRgb(color)
+            {
+                return [(color & 0x1F) << 3, ((color >> 5) & 0x1F) << 3, ((color >> 10) & 0x1F) << 3];
+            }
+
+            function rgbToHex(r, g, b)
+            {
+                return ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).substr(1);
+            }
+
             // The 3bpp color index (0-7) of one pixel of a tile.
             function getTilePixel(tiles, tileStart, x, y)
             {
@@ -754,84 +889,402 @@
                     | (((tiles[tileStart + 16 + y] >> bit) & 1) << 2);
             }
 
-            // Returns { paletteFlags: n } or { customColors: {...} }.
-            function getEnterpriseColorChoice()
+            // A sprite is { frames, colors, paletteFlags }: six frames of 16x16
+            // color indices (0-15, row by row), sixteen BGR555 colors, and the
+            // OAM flags that pick its palette.
+            function getStockEnterpriseFrames()
             {
-                var value = document.getElementById("enterprise_color").value;
-                var parts = value.split("-");
-                if(parts[0] == "custom")
+                var tiles = hexToBytes(ENTERPRISE_TILES);
+                var frames = [];
+                for(var frame = 0; frame < ENTERPRISE_FRAME_COUNT; frame++)
                 {
-                    return { customColors: ENTERPRISE_CUSTOM_COLORS[parseInt(parts[1])].colors };
+                    var pixels = new Uint8Array(256);
+                    for(var tile = 0; tile < 4; tile++)
+                    {
+                        for(var y = 0; y < 8; y++)
+                        {
+                            for(var x = 0; x < 8; x++)
+                            {
+                                pixels[((tile >> 1) * 8 + y) * 16 + (tile & 1) * 8 + x] = getTilePixel(tiles, (frame * 4 + tile) * 24, x, y);
+                            }
+                        }
+                    }
+                    frames.push(pixels);
                 }
-                return { paletteFlags: parseInt(parts[1]) };
+                return frames;
             }
 
-            function fillEnterpriseCustomColorOptions()
+            function getVehiclePaletteColors(paletteFlags)
             {
-                var group = document.getElementById("enterprise_custom_colors");
-                for(var i = 0; i < ENTERPRISE_CUSTOM_COLORS.length; i++)
+                var palettes = hexToBytes(VEHICLE_PALETTES);
+                var start = (((paletteFlags >> 1) & 7) - 4) * 16;
+                var colors = [];
+                for(var i = 0; i < 16; i++)
                 {
-                    var option = document.createElement("option");
-                    option.value = "custom-" + i;
-                    option.textContent = ENTERPRISE_CUSTOM_COLORS[i].name;
-                    group.appendChild(option);
+                    colors.push(i < 8 ? (palettes[start + i * 2] | (palettes[start + i * 2 + 1] << 8)) : 0);
+                }
+                return colors;
+            }
+
+            function getEnterpriseSprite(choice)
+            {
+                if(choice == "png")
+                {
+                    return enterpriseUpload;
+                }
+
+                var entry = ENTERPRISE_COLORS[choice];
+                if(entry.colors)
+                {
+                    var customColors = entry.colors;
+                    var sprite = { frames: getStockEnterpriseFrames(), colors: getVehiclePaletteColors(ENTERPRISE_DEFAULT_PALETTE_FLAGS), paletteFlags: ENTERPRISE_DEFAULT_PALETTE_FLAGS };
+                    for(var index in customColors)
+                    {
+                        sprite.colors[8 + parseInt(index)] = rgbToSnesColor(customColors[index]);
+                    }
+                    for(var frame = 0; frame < sprite.frames.length; frame++)
+                    {
+                        for(var i = 0; i < 256; i++)
+                        {
+                            if(customColors[sprite.frames[frame][i]])
+                            {
+                                sprite.frames[frame][i] += 8;
+                            }
+                        }
+                    }
+                    return sprite;
+                }
+
+                return { frames: getStockEnterpriseFrames(), colors: getVehiclePaletteColors(entry.paletteFlags), paletteFlags: entry.paletteFlags };
+            }
+
+            // One button per entry of ENTERPRISE_COLORS, then one for uploading
+            // a PNG, each with a small left-facing picture of the sprite.
+            function buildEnterpriseOptions()
+            {
+                var container = document.getElementById("enterprise_options");
+                var choices = [];
+                for(var i = 0; i < ENTERPRISE_COLORS.length; i++)
+                {
+                    choices.push({ choice: i, name: ENTERPRISE_COLORS[i].name });
+                }
+                choices.push({ choice: "png", name: "Upload a PNG" });
+
+                for(var i = 0; i < choices.length; i++)
+                {
+                    var button = document.createElement("div");
+                    button.className = "flagButton";
+                    button.id = "enterprise_option_" + choices[i].choice;
+                    button.onclick = selectEnterpriseColor.bind(null, choices[i].choice);
+
+                    var icon = document.createElement("div");
+                    icon.className = "flagIcon";
+                    var canvas = document.createElement("canvas");
+                    canvas.width = 16;
+                    canvas.height = 16;
+                    icon.appendChild(canvas);
+
+                    var title = document.createElement("div");
+                    title.className = "flagTitle";
+                    title.textContent = choices[i].name;
+
+                    var name = document.createElement("div");
+                    name.className = "flagName";
+
+                    button.appendChild(icon);
+                    button.appendChild(title);
+                    button.appendChild(name);
+                    container.appendChild(button);
+                    drawEnterpriseIcon(choices[i].choice);
                 }
             }
 
+            function drawEnterpriseIcon(choice)
+            {
+                var canvas = document.getElementById("enterprise_option_" + choice).getElementsByTagName("canvas")[0];
+                drawEnterpriseViews(canvas, getEnterpriseSprite(choice), [ { frame: 4, mirror: false } ]);
+            }
+
+            function selectEnterpriseColor(choice)
+            {
+                enterpriseChoice = choice;
+                updateEnterpriseControls();
+            }
+
+            function updateEnterpriseControls()
+            {
+                var buttons = document.getElementById("enterprise_options").children;
+                for(var i = 0; i < buttons.length; i++)
+                {
+                    // like the make page, the stock choice is shown as "null"
+                    var className = "flagButton";
+                    if(buttons[i].id == "enterprise_option_" + enterpriseChoice)
+                    {
+                        className += (enterpriseChoice === 0 ? " selected null" : " selected");
+                    }
+                    buttons[i].className = className;
+                }
+
+                var isPng = (enterpriseChoice == "png");
+                document.getElementById("enterprise_png_controls").style.display = (isPng ? "block" : "none");
+                if(!isPng)
+                {
+                    document.getElementById("enterprise_error").style.display = "none";
+                }
+                drawEnterprisePreview();
+            }
+
+            function showEnterpriseError(message)
+            {
+                var errorElem = document.getElementById("enterprise_error");
+                errorElem.textContent = message;
+                errorElem.style.display = (message ? "block" : "none");
+            }
+
+            // Shows the sprite facing down, up, left and right, and whether it
+            // changes the colors it shares with the other vehicles.
             function drawEnterprisePreview()
             {
-                var tiles = hexToBytes(ENTERPRISE_LEFT_TILES);
-                var palettes = hexToBytes(VEHICLE_PALETTES);
-                var choice = getEnterpriseColorChoice();
-                var paletteFlags = (choice.customColors ? ENTERPRISE_DEFAULT_PALETTE_FLAGS : choice.paletteFlags);
-                var paletteStart = (((paletteFlags >> 1) & 7) - 4) * 16;
+                var sprite = getEnterpriseSprite(enterpriseChoice);
+                var views = [ { frame: 0, mirror: false }, { frame: 2, mirror: false }, { frame: 4, mirror: false }, { frame: 4, mirror: true } ];
+                drawEnterpriseViews(document.getElementById("enterprise_preview"), sprite, views);
 
-                var canvas = document.getElementById("enterprise_preview");
-                var context = canvas.getContext("2d");
-                var image = context.createImageData(16, 16);
-                for(var tile = 0; tile < 4; tile++)
+                var stockColors = getVehiclePaletteColors(ENTERPRISE_DEFAULT_PALETTE_FLAGS);
+                var changesSharedColors = false;
+                if(sprite && sprite.paletteFlags == ENTERPRISE_DEFAULT_PALETTE_FLAGS)
                 {
-                    for(var y = 0; y < 8; y++)
+                    for(var i = 1; i < 8; i++)
                     {
-                        for(var x = 0; x < 8; x++)
+                        if(sprite.colors[i] != stockColors[i])
                         {
-                            var index = getTilePixel(tiles, tile * 24, x, y);
-                            if(index == 0)
-                            {
-                                continue;
-                            }
+                            changesSharedColors = true;
+                        }
+                    }
+                }
+                document.getElementById("enterprise_warning").style.display = (changesSharedColors ? "block" : "none");
+            }
 
-                            var color;
-                            if(choice.customColors && choice.customColors[index])
+            // Draws the given frames of a sprite side by side on a canvas that
+            // is 16 pixels wide per view. A null sprite leaves the canvas empty.
+            function drawEnterpriseViews(canvas, sprite, views)
+            {
+                var context = canvas.getContext("2d");
+                var width = views.length * 16;
+                var image = context.createImageData(width, 16);
+                if(sprite)
+                {
+                    for(var view = 0; view < views.length; view++)
+                    {
+                        var pixels = sprite.frames[views[view].frame];
+                        for(var y = 0; y < 16; y++)
+                        {
+                            for(var x = 0; x < 16; x++)
                             {
-                                color = rgbToSnesColor(choice.customColors[index]);
-                            }
-                            else
-                            {
-                                color = palettes[paletteStart + index * 2] | (palettes[paletteStart + index * 2 + 1] << 8);
-                            }
+                                var index = pixels[y * 16 + (views[view].mirror ? 15 - x : x)];
+                                if(index == 0)
+                                {
+                                    continue;
+                                }
 
-                            var pixel = (((tile >> 1) * 8 + y) * 16 + (tile & 1) * 8 + x) * 4;
-                            image.data[pixel] = (color & 0x1F) << 3;
-                            image.data[pixel + 1] = ((color >> 5) & 0x1F) << 3;
-                            image.data[pixel + 2] = ((color >> 10) & 0x1F) << 3;
-                            image.data[pixel + 3] = 255;
+                                var rgb = snesColorToRgb(sprite.colors[index]);
+                                var pixel = (y * width + view * 16 + x) * 4;
+                                image.data[pixel] = rgb[0];
+                                image.data[pixel + 1] = rgb[1];
+                                image.data[pixel + 2] = rgb[2];
+                                image.data[pixel + 3] = 255;
+                            }
                         }
                     }
                 }
                 context.putImageData(image, 0, 0);
             }
 
+            function handleEnterprisePngChanged()
+            {
+                enterpriseUpload = null;
+                showEnterpriseError("");
+                drawEnterprisePreview();
+                drawEnterpriseIcon("png");
+
+                var fileElem = document.getElementById("enterprise_png");
+                if(fileElem.files.length != 1)
+                {
+                    return;
+                }
+
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var img = new Image();
+                    img.onload = function() {
+                        var canvas = document.createElement("canvas");
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        var context = canvas.getContext("2d");
+                        context.drawImage(img, 0, 0);
+                        try {
+                            enterpriseUpload = readEnterprisePng(context.getImageData(0, 0, img.width, img.height));
+                        } catch(e) {
+                            if (typeof(e) != 'string')
+                            {
+                                throw e;
+                            }
+                            showEnterpriseError(e);
+                        }
+                        drawEnterprisePreview();
+                        drawEnterpriseIcon("png");
+                    };
+                    img.onerror = function() {
+                        showEnterpriseError("That file couldn't be read as an image.");
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(fileElem.files[0]);
+            }
+
+            // Turns the PNG's pixels into a sprite. Colors are rounded down to
+            // what the SNES can show, and every pixel must match a color in the
+            // palette block. If two colors in the block are the same, pixels
+            // use the higher one, which keeps them out of the shared colors.
+            function readEnterprisePng(imageData)
+            {
+                if(imageData.width != ENTERPRISE_PNG_WIDTH || imageData.height != ENTERPRISE_PNG_HEIGHT)
+                {
+                    throw "The PNG must be " + ENTERPRISE_PNG_WIDTH + "x" + ENTERPRISE_PNG_HEIGHT + " pixels; this one is " + imageData.width + "x" + imageData.height + ".";
+                }
+
+                function getPixel(x, y)
+                {
+                    var i = (y * imageData.width + x) * 4;
+                    if(imageData.data[i + 3] < 128)
+                    {
+                        return null;
+                    }
+                    return rgbToHex(imageData.data[i] & 0xF8, imageData.data[i + 1] & 0xF8, imageData.data[i + 2] & 0xF8);
+                }
+
+                var palette = [];
+                for(var index = 0; index < 16; index++)
+                {
+                    var x = ENTERPRISE_PNG_PALETTE_X + (index % 4) * 2;
+                    var y = ENTERPRISE_PNG_PALETTE_Y + (index >> 2) * 2;
+                    var color = getPixel(x, y);
+                    if(color === null || getPixel(x + 1, y) !== color || getPixel(x, y + 1) !== color || getPixel(x + 1, y + 1) !== color)
+                    {
+                        throw "Color " + index + " in the palette block (at " + x + ", " + y + ") must be a solid 2x2 square.";
+                    }
+                    palette.push(color);
+                }
+
+                var sprite = { frames: [], colors: [], paletteFlags: ENTERPRISE_DEFAULT_PALETTE_FLAGS };
+                for(var index = 0; index < 16; index++)
+                {
+                    sprite.colors.push(rgbToSnesColor(palette[index]));
+                }
+
+                for(var frame = 0; frame < ENTERPRISE_FRAME_COUNT; frame++)
+                {
+                    var pixels = new Uint8Array(256);
+                    for(var y = 0; y < 16; y++)
+                    {
+                        for(var x = 0; x < 16; x++)
+                        {
+                            var color = getPixel(frame * 16 + x, y);
+                            var found = 0;
+                            if(color !== null && color != palette[0])
+                            {
+                                found = palette.lastIndexOf(color);
+                                if(found <= 0)
+                                {
+                                    throw "The pixel at " + (frame * 16 + x) + ", " + y + " is #" + color + ", which isn't in the palette block.";
+                                }
+                            }
+                            pixels[y * 16 + x] = found;
+                        }
+                    }
+                    sprite.frames.push(pixels);
+                }
+
+                return sprite;
+            }
+
+            // Downloads the stock sprite in the PNG format, with placeholder
+            // colors in 8-15.
+            function downloadEnterpriseTemplate()
+            {
+                var frames = getStockEnterpriseFrames();
+                var colors = getVehiclePaletteColors(ENTERPRISE_DEFAULT_PALETTE_FLAGS);
+                colors[0] = rgbToSnesColor(ENTERPRISE_PNG_TRANSPARENT);
+                for(var i = 0; i < 8; i++)
+                {
+                    colors[8 + i] = rgbToSnesColor(ENTERPRISE_PNG_TEMPLATE_EXTRA_COLORS[i]);
+                }
+
+                var canvas = document.createElement("canvas");
+                canvas.width = ENTERPRISE_PNG_WIDTH;
+                canvas.height = ENTERPRISE_PNG_HEIGHT;
+                var context = canvas.getContext("2d");
+                var image = context.createImageData(ENTERPRISE_PNG_WIDTH, ENTERPRISE_PNG_HEIGHT);
+                function setPixel(x, y, index)
+                {
+                    var rgb = snesColorToRgb(colors[index]);
+                    var pixel = (y * ENTERPRISE_PNG_WIDTH + x) * 4;
+                    image.data[pixel] = rgb[0];
+                    image.data[pixel + 1] = rgb[1];
+                    image.data[pixel + 2] = rgb[2];
+                    image.data[pixel + 3] = 255;
+                }
+
+                for(var y = 0; y < ENTERPRISE_PNG_HEIGHT; y++)
+                {
+                    for(var x = 0; x < ENTERPRISE_PNG_WIDTH; x++)
+                    {
+                        setPixel(x, y, 0);
+                    }
+                }
+                for(var frame = 0; frame < frames.length; frame++)
+                {
+                    for(var i = 0; i < 256; i++)
+                    {
+                        setPixel(frame * 16 + (i % 16), i >> 4, frames[frame][i]);
+                    }
+                }
+                for(var index = 0; index < 16; index++)
+                {
+                    var x = ENTERPRISE_PNG_PALETTE_X + (index % 4) * 2;
+                    var y = ENTERPRISE_PNG_PALETTE_Y + (index >> 2) * 2;
+                    setPixel(x, y, index);
+                    setPixel(x + 1, y, index);
+                    setPixel(x, y + 1, index);
+                    setPixel(x + 1, y + 1, index);
+                }
+
+                context.putImageData(image, 0, 0);
+                canvas.toBlob(function(blob) {
+                    var a = document.createElement("a");
+                    a.href = URL.createObjectURL(blob);
+                    a.setAttribute("download", "enterprise_template.png");
+                    a.style.display = "none";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }, "image/png");
+            }
+
             function applyEnterpriseColor(rom)
             {
-                var choice = getEnterpriseColorChoice();
-                if(choice.customColors)
+                var sprite = getEnterpriseSprite(enterpriseChoice);
+                if(!sprite)
                 {
-                    applyEnterpriseCustomColors(rom, choice.customColors);
+                    throw "Please choose a PNG for the Enterprise, or pick one of the other colors.";
+                }
+
+                if(enterpriseChoice != "png" && ENTERPRISE_COLORS[enterpriseChoice].paletteFlags)
+                {
+                    applyEnterprisePalette(rom, sprite.paletteFlags);
                 }
                 else
                 {
-                    applyEnterprisePalette(rom, choice.paletteFlags);
+                    writeEnterpriseSprite(rom, sprite);
                 }
             }
 
@@ -856,7 +1309,10 @@
                 }
             }
 
-            function applyEnterpriseCustomColors(rom, customColors)
+            // Writes a sprite that uses palette 4: its tiles (bitplanes 0-2 in
+            // place, the fourth in the enterprise_sprite.f4c block), colors 1-7
+            // into the shared vehicle palette, and colors 8-15 into the block.
+            function writeEnterpriseSprite(rom, sprite)
             {
                 for(var i = 0; i < ENTERPRISE_SPRITE_SIGNATURE.length; i++)
                 {
@@ -866,34 +1322,55 @@
                     }
                 }
 
-                for(var index in customColors)
+                var stockTiles = hexToBytes(ENTERPRISE_TILES);
+                for(var i = 0; i < stockTiles.length; i++)
                 {
-                    var color = rgbToSnesColor(customColors[index]);
-                    rom[ENTERPRISE_SPRITE_COLORS_OFFSET + index * 2] = color & 0xFF;
-                    rom[ENTERPRISE_SPRITE_COLORS_OFFSET + index * 2 + 1] = color >> 8;
+                    if(rom[ENTERPRISE_TILES_OFFSET + i] != stockTiles[i])
+                    {
+                        throw "This seed's Enterprise sprite isn't where it was expected; please choose one of the palettes.";
+                    }
                 }
 
-                for(var tile = 0; tile < ENTERPRISE_TILE_COUNT; tile++)
+                for(var frame = 0; frame < ENTERPRISE_FRAME_COUNT; frame++)
                 {
-                    for(var y = 0; y < 8; y++)
+                    for(var tile = 0; tile < 4; tile++)
                     {
-                        var row = 0;
-                        for(var x = 0; x < 8; x++)
+                        var tileStart = ENTERPRISE_TILES_OFFSET + (frame * 4 + tile) * 24;
+                        var bitplaneStart = ENTERPRISE_SPRITE_BITPLANE_OFFSET + (frame * 4 + tile) * 8;
+                        for(var y = 0; y < 8; y++)
                         {
-                            if(customColors[getTilePixel(rom, ENTERPRISE_TILES_OFFSET + tile * 24, x, y)])
+                            var planes = [0, 0, 0, 0];
+                            for(var x = 0; x < 8; x++)
                             {
-                                row |= (0x80 >> x);
+                                var index = sprite.frames[frame][((tile >> 1) * 8 + y) * 16 + (tile & 1) * 8 + x];
+                                for(var plane = 0; plane < 4; plane++)
+                                {
+                                    if(index & (1 << plane))
+                                    {
+                                        planes[plane] |= (0x80 >> x);
+                                    }
+                                }
                             }
+                            rom[tileStart + y * 2] = planes[0];
+                            rom[tileStart + y * 2 + 1] = planes[1];
+                            rom[tileStart + 16 + y] = planes[2];
+                            rom[bitplaneStart + y] = planes[3];
                         }
-                        rom[ENTERPRISE_SPRITE_BITPLANE_OFFSET + tile * 8 + y] = row;
                     }
+                }
+
+                for(var index = 1; index < 16; index++)
+                {
+                    var offset = (index < 8 ? VEHICLE_PALETTES_OFFSET + index * 2 : ENTERPRISE_SPRITE_COLORS_OFFSET + (index - 8) * 2);
+                    rom[offset] = sprite.colors[index] & 0xFF;
+                    rom[offset + 1] = sprite.colors[index] >> 8;
                 }
             }
 
             window.onload = function() {
                 updateFileControls();
-                fillEnterpriseCustomColorOptions();
-                drawEnterprisePreview();
+                buildEnterpriseOptions();
+                updateEnterpriseControls();
             }
         </script>
 
