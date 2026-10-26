@@ -11,6 +11,7 @@ services:
       FE_MONGO_URL: mongodb://mongo:27017
     volumes:
       - ./rom:/rom:ro
+      - ../FreeEnt/server/template:/app/FreeEnt/server/template:ro
     depends_on:
       - mongo
 

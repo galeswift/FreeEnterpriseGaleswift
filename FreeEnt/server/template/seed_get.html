@@ -90,8 +90,7 @@
             }
 
             #patch {
-                margin-left: 1rem;
-                margin-right: 1rem;
+                margin: 1rem;
                 background-color: silver;
                 border-radius: 1rem;
                 padding: 1rem;
@@ -99,120 +98,53 @@
                 color: #444;
             }
 
-            /* The Enterprise color picker, styled after the flag sections on the make page. */
             #enterprise_section {
-                margin: 0 1rem 1rem 1rem;
-                padding: 1em;
-                background-color: #eee;
-                border-left: 1em solid #d8a050;
-                box-shadow: 0em 0.5em 1em 0 rgba(0, 0, 0, 0.5);
             }
 
-            #enterprise_section .sectionTitle {
-                color: #888;
-                font-size: 1.4em;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                padding: 0.2em;
-            }
-
-            #enterprise_section .sectionDescription {
-                padding: 0.4em 0.2em 0.8em 0.2em;
-                font-size: 0.8em;
-                color: #666;
-            }
-
-            #enterprise_preview {
-                display: block;
-                width: 16rem;
-                height: 4rem;
-                margin: 0 auto 0.8em auto;
-                image-rendering: pixelated;
-                background-color: #5a8a4a;
-                border: 1px solid #ccc;
-            }
-
-            #enterprise_options {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
-                grid-gap: 0.2em;
-            }
-
-            #enterprise_section .flagButton {
-                cursor: pointer;
-                display: grid;
-                grid-template-columns: auto 1fr auto;
-                align-items: center;
-                border: 1px solid #ddd;
-                user-select: none;
-                color: #aaa;
-            }
-
-            #enterprise_section .flagIcon {
-                padding: 0.2em 0.3em;
-                line-height: 0;
-            }
-
-            #enterprise_section .flagIcon canvas {
-                width: 2em;
-                height: 2em;
-                image-rendering: pixelated;
-            }
-
-            #enterprise_section .flagTitle {
-                padding: 0.3em 0.4em;
-            }
-
-            #enterprise_section .flagName {
-                align-self: stretch;
-                min-width: 1em;
-                background-color: #ccc;
-            }
-
-            #enterprise_section .flagButton.selected {
-                border-color: darkblue;
-            }
-
-            #enterprise_section .flagButton.selected>.flagTitle {
-                align-self: stretch;
+            #enterprise_row {
                 display: flex;
+                justify-content: center;
                 align-items: center;
-                background-color: white;
-                color: black;
             }
 
-            #enterprise_section .flagButton.selected>.flagName {
-                background-image: linear-gradient(blue, darkblue);
+            #enterprise_preview_container {
+                padding: .2rem;            
+            }
+            #enterprise_preview {
+                width: 14rem;
+                height: auto;
+                margin: 0 .5rem;
+                image-rendering: pixelated;
+                background-color: #eee;
+                border: 0.2rem dashed #887;
+                border-radius: 0.5rem;
+                padding: .5rem;
             }
 
-            #enterprise_section .flagButton.selected.null {
-                border-color: gray;
-            }
-
-            #enterprise_section .flagButton.selected.null>.flagName {
-                background-image: linear-gradient(gray, black);
+            #enterprise_color {
+                padding: 0.3rem;
+                border: 0.1rem dashed #887;
+                border-radius: 0.5rem;
+                background-color: #eee;
+                color: #444;
+                font-family: inherit;
             }
 
             #enterprise_png_controls {
-                margin-top: 0.8em;
-                font-size: 0.8em;
-                color: #666;
+                margin-top: 0.5rem;
+                font-size: 0.8rem;
             }
 
             #enterprise_png_controls a {
-                color: #44a;
+                color: #444;
             }
 
-            #enterprise_warning {
-                padding-top: 0.8em;
-                font-size: 0.8em;
-                font-weight: bold;
-                color: #864;
+            #enterprise_warning, #enterprise_error {
+                margin-top: 0.5rem;
+                font-size: 0.8rem;
             }
 
             #enterprise_error {
-                padding-top: 0.8em;
-                font-size: 0.8em;
                 color: #d44;
             }
 
@@ -478,22 +410,6 @@
                 </div>
                 {% endif %}
             </div>
-            <div id="enterprise_section">
-                <div class="sectionTitle">Enterprise</div>
-                <div class="sectionDescription">
-                    Choose how the Enterprise looks in your copy of the game. This only changes its colors and art; the seed plays the same for everyone.
-                </div>
-                <canvas id="enterprise_preview" width="64" height="16"></canvas>
-                <div id="enterprise_options"></div>
-                <div id="enterprise_png_controls" style="display:none;">
-                    <input type="file" id="enterprise_png" accept="image/png" onchange="handleEnterprisePngChanged();">
-                    <a href="javascript:;" onclick="downloadEnterpriseTemplate();">Download template</a>
-                </div>
-                <div id="enterprise_warning" style="display:none;">
-                    Colors 1-7 of this sprite's palette are shared with the hovercraft, ship, yellow chocobo, tanks and vehicle shadows, so those will change color too.
-                </div>
-                <div id="enterprise_error" style="display:none;"></div>
-            </div>
             <div id="patch">
                 <div id="patch_header">Please provide an uncompressed ROM of Final Fantasy II US v1.1:</div>
                 <div id="file_section">
@@ -503,7 +419,26 @@
                     <input type="file" id="source_rom" onchange="handleRomFileChanged();">
                     <div id="apply_button" class="disabled" onclick="tryPatch();">Apply</div>
                 </div>
-                <div id="error"></div>
+                <div id="error"></div>                         
+            </div>
+            <div id="patch">                
+                <div id="enterprise_section">
+                    <div id="enterprise_row">
+                        <label for="enterprise_color">Customize Your Enterprise:</label>
+                        <div id="enterprise_preview_container">
+                            <canvas id="enterprise_preview" width="64" height="16"></canvas>
+                        </div>
+                        <select id="enterprise_color" onchange="updateEnterpriseControls();"></select>
+                    </div>
+                    <div id="enterprise_png_controls" style="display:none;">
+                        <input type="file" id="enterprise_png" accept="image/png" onchange="handleEnterprisePngChanged();">
+                        <a href="javascript:;" onclick="downloadEnterpriseTemplate();">Download template</a>
+                    </div>
+                    <div id="enterprise_warning" style="display:none;">
+                        Colors 1-7 of this sprite's palette are shared with the hovercraft, ship, yellow chocobo, tanks and vehicle shadows, so those will change color too.
+                    </div>
+                    <div id="enterprise_error" style="display:none;"></div>
+                </div>                
             </div>
             <div id="share">
                 This seed can be shared by saving and distributing <a href="" download="FF4FE.{{ seed_key }}.html">this HTML file</a>, or by sharing this <a href="javascript:;" onclick="downloadBpsPatch();">BPS patch</a>. It can also be shared via <a href="{{ seed_url }}">this link</a>, though be aware that the link will expire if not accessed for some time.
@@ -824,7 +759,7 @@
             //    The stock colors are 1 black outline, 2 white, 4 orange hull,
             //    5 dark orange, 6 yellow trim and 7 grey.
             var ENTERPRISE_COLORS = [
-                { name: "Orange",   paletteFlags: 0x18 },
+                { name: "Orange (default)", paletteFlags: 0x18 },
                 { name: "Blue",     paletteFlags: 0x1A },
                 { name: "Red",      paletteFlags: 0x1C },
                 { name: "Green",    colors: { 4: "40b040", 5: "207020", 6: "a0e060" } },
@@ -958,72 +893,29 @@
                 return { frames: getStockEnterpriseFrames(), colors: getVehiclePaletteColors(entry.paletteFlags), paletteFlags: entry.paletteFlags };
             }
 
-            // One button per entry of ENTERPRISE_COLORS, then one for uploading
-            // a PNG, each with a small left-facing picture of the sprite.
+            // One option per entry of ENTERPRISE_COLORS, then one for uploading
+            // a PNG.
             function buildEnterpriseOptions()
             {
-                var container = document.getElementById("enterprise_options");
-                var choices = [];
+                var select = document.getElementById("enterprise_color");
                 for(var i = 0; i < ENTERPRISE_COLORS.length; i++)
                 {
-                    choices.push({ choice: i, name: ENTERPRISE_COLORS[i].name });
+                    var option = document.createElement("option");
+                    option.value = i;
+                    option.textContent = ENTERPRISE_COLORS[i].name;
+                    select.appendChild(option);
                 }
-                choices.push({ choice: "png", name: "Upload a PNG" });
 
-                for(var i = 0; i < choices.length; i++)
-                {
-                    var button = document.createElement("div");
-                    button.className = "flagButton";
-                    button.id = "enterprise_option_" + choices[i].choice;
-                    button.onclick = selectEnterpriseColor.bind(null, choices[i].choice);
-
-                    var icon = document.createElement("div");
-                    icon.className = "flagIcon";
-                    var canvas = document.createElement("canvas");
-                    canvas.width = 16;
-                    canvas.height = 16;
-                    icon.appendChild(canvas);
-
-                    var title = document.createElement("div");
-                    title.className = "flagTitle";
-                    title.textContent = choices[i].name;
-
-                    var name = document.createElement("div");
-                    name.className = "flagName";
-
-                    button.appendChild(icon);
-                    button.appendChild(title);
-                    button.appendChild(name);
-                    container.appendChild(button);
-                    drawEnterpriseIcon(choices[i].choice);
-                }
-            }
-
-            function drawEnterpriseIcon(choice)
-            {
-                var canvas = document.getElementById("enterprise_option_" + choice).getElementsByTagName("canvas")[0];
-                drawEnterpriseViews(canvas, getEnterpriseSprite(choice), [ { frame: 4, mirror: false } ]);
-            }
-
-            function selectEnterpriseColor(choice)
-            {
-                enterpriseChoice = choice;
-                updateEnterpriseControls();
+                var pngOption = document.createElement("option");
+                pngOption.value = "png";
+                pngOption.textContent = "Upload a PNG";
+                select.appendChild(pngOption);
             }
 
             function updateEnterpriseControls()
             {
-                var buttons = document.getElementById("enterprise_options").children;
-                for(var i = 0; i < buttons.length; i++)
-                {
-                    // like the make page, the stock choice is shown as "null"
-                    var className = "flagButton";
-                    if(buttons[i].id == "enterprise_option_" + enterpriseChoice)
-                    {
-                        className += (enterpriseChoice === 0 ? " selected null" : " selected");
-                    }
-                    buttons[i].className = className;
-                }
+                var value = document.getElementById("enterprise_color").value;
+                enterpriseChoice = (value == "png" ? "png" : parseInt(value));
 
                 var isPng = (enterpriseChoice == "png");
                 document.getElementById("enterprise_png_controls").style.display = (isPng ? "block" : "none");
@@ -1104,7 +996,6 @@
                 enterpriseUpload = null;
                 showEnterpriseError("");
                 drawEnterprisePreview();
-                drawEnterpriseIcon("png");
 
                 var fileElem = document.getElementById("enterprise_png");
                 if(fileElem.files.length != 1)
@@ -1131,7 +1022,6 @@
                             showEnterpriseError(e);
                         }
                         drawEnterprisePreview();
-                        drawEnterpriseIcon("png");
                     };
                     img.onerror = function() {
                         showEnterpriseError("That file couldn't be read as an image.");
