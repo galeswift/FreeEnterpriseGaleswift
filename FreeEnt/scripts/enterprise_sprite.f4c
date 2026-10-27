@@ -44,9 +44,15 @@ msfpatch {
         // displaced instruction: copy the whirlpool field sprites
         jsl $15c144
 
+        // keep A, X and Y as the displaced call left them
         php
+        rep #$30
+        .mx 0x00
+        pha
+        phx
+        phy
         sep #$20
-        rep #$10
+        .mx 0x20
 
         // colors 8-15 of sprite palettes 4 and 6 in the CG-RAM staging area
         ldx #$0000
@@ -85,7 +91,13 @@ msfpatch {
         cpx #$00c0
         bcc $-TileLoop
 
+        rep #$30
+        .mx 0x00
+        ply
+        plx
+        pla
         plp
+        .mx 0x20
         rtl
 
     .addr $00956f
