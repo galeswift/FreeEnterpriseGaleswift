@@ -11,7 +11,7 @@ import jinja2
 import pymongo
 import requests
 
-from . import tasks, seeds
+from . import tasks, seeds, enterprise_sprites
 from markdown import extensions
 
 import FreeEnt
@@ -184,6 +184,7 @@ class Site:
             loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'template')),
             autoescape=jinja2.select_autoescape(['html', 'xml']),
             )
+        self._enterprise_sprites = enterprise_sprites.load()
 
     def _check_hibernation_mode(self):
         if cherrypy.request.app.config['FreeEnt']['hibernation_mode']:
@@ -361,7 +362,8 @@ class Site:
             checksum_images = checksum_images,
             hide_flags = (metaconfig and metaconfig.get('hide_flags', False)),
             test_settings = (json.dumps(metaconfig['test_settings']) if (metaconfig and metaconfig.get('test_settings', None)) else None),
-            spoiler = (base64.b64encode(public_spoiler).decode('utf-8') if public_spoiler else None)
+            spoiler = (base64.b64encode(public_spoiler).decode('utf-8') if public_spoiler else None),
+            enterprise_sprites = self._enterprise_sprites
             )
 
     @cherrypy.expose

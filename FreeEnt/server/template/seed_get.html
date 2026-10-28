@@ -465,6 +465,9 @@
             </div>
         </div>
 
+        <!-- the preset Enterprise sprites, as [{ name, png }] with each PNG as a data URL -->
+        <script type="application/json" id="enterprise_preset_sprites">{{ (enterprise_sprites or []) | tojson }}</script>
+
         <script>
 
             var INPUT_FILE_ERROR = "The provided ROM is incorrect; please verify you have the correct version of the game and try again.";
@@ -772,7 +775,14 @@
                 { name: "Midnight", colors: { 2: "f8d850", 4: "303848", 5: "181c28", 6: "f8d850", 7: "606878" } }
             ];
 
-            // The picked entry of ENTERPRISE_COLORS, or "png".
+            // The preset sprites from FreeEnt/server/enterprise_sprites, each
+            // { name, png } with the PNG as a data URL, and the sprites decoded
+            // from them (null until decoded, or if the PNG is broken).
+            var ENTERPRISE_PRESET_SPRITES = JSON.parse(document.getElementById("enterprise_preset_sprites").textContent);
+            var enterprisePresetSprites = [];
+
+            // The picked entry of ENTERPRISE_COLORS (a number), "sprite-N" for
+            // entry N of ENTERPRISE_PRESET_SPRITES, or "png".
             var enterpriseChoice = 0;
 
             // The PNG format: six 16x16 frames side by side, in the same order
@@ -869,6 +879,10 @@
                 {
                     return enterpriseUpload;
                 }
+                if(typeof(choice) == "string")
+                {
+                    return enterprisePresetSprites[parseInt(choice.split("-")[1])] || null;
+                }
 
                 var entry = ENTERPRISE_COLORS[choice];
                 if(entry.colors)
@@ -895,29 +909,52 @@
                 return { frames: getStockEnterpriseFrames(), colors: getVehiclePaletteColors(entry.paletteFlags), paletteFlags: entry.paletteFlags };
             }
 
-            // One option per entry of ENTERPRISE_COLORS, then one for uploading
-            // a PNG.
+            // One option per entry of ENTERPRISE_COLORS, then one per preset
+            // sprite, then one for uploading a PNG. Preset sprites are decoded
+            // here; one that turns out to be broken is taken out of the list.
             function buildEnterpriseOptions()
             {
                 var select = document.getElementById("enterprise_color");
-                for(var i = 0; i < ENTERPRISE_COLORS.length; i++)
+                function addOption(value, name)
                 {
                     var option = document.createElement("option");
-                    option.value = i;
-                    option.textContent = ENTERPRISE_COLORS[i].name;
+                    option.value = value;
+                    option.textContent = name;
                     select.appendChild(option);
+                    return option;
                 }
 
-                var pngOption = document.createElement("option");
-                pngOption.value = "png";
-                pngOption.textContent = "Upload a PNG";
-                select.appendChild(pngOption);
+                for(var i = 0; i < ENTERPRISE_COLORS.length; i++)
+                {
+                    addOption(i, ENTERPRISE_COLORS[i].name);
+                }
+
+                for(var i = 0; i < ENTERPRISE_PRESET_SPRITES.length; i++)
+                {
+                    enterprisePresetSprites.push(null);
+                    var option = addOption("sprite-" + i, ENTERPRISE_PRESET_SPRITES[i].name);
+                    readEnterprisePngUrl(ENTERPRISE_PRESET_SPRITES[i].png, function(index, option, sprite, error) {
+                        if(error)
+                        {
+                            console.error("Enterprise preset sprite " + ENTERPRISE_PRESET_SPRITES[index].name + ": " + error);
+                            select.removeChild(option);
+                            return;
+                        }
+                        enterprisePresetSprites[index] = sprite;
+                        if(enterpriseChoice == "sprite-" + index)
+                        {
+                            drawEnterprisePreview();
+                        }
+                    }.bind(null, i, option));
+                }
+
+                addOption("png", "Upload a PNG");
             }
 
             function updateEnterpriseControls()
             {
                 var value = document.getElementById("enterprise_color").value;
-                enterpriseChoice = (value == "png" ? "png" : parseInt(value));
+                enterpriseChoice = ((value == "png" || value.indexOf("sprite-") == 0) ? value : parseInt(value));
 
                 var isPng = (enterpriseChoice == "png");
                 document.getElementById("enterprise_png_controls").style.display = (isPng ? "block" : "none");
@@ -1007,30 +1044,43 @@
 
                 var reader = new FileReader();
                 reader.onload = function() {
-                    var img = new Image();
-                    img.onload = function() {
-                        var canvas = document.createElement("canvas");
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        var context = canvas.getContext("2d");
-                        context.drawImage(img, 0, 0);
-                        try {
-                            enterpriseUpload = readEnterprisePng(context.getImageData(0, 0, img.width, img.height));
-                        } catch(e) {
-                            if (typeof(e) != 'string')
-                            {
-                                throw e;
-                            }
-                            showEnterpriseError(e);
-                        }
+                    readEnterprisePngUrl(reader.result, function(sprite, error) {
+                        enterpriseUpload = sprite;
+                        showEnterpriseError(error || "");
                         drawEnterprisePreview();
-                    };
-                    img.onerror = function() {
-                        showEnterpriseError("That file couldn't be read as an image.");
-                    };
-                    img.src = reader.result;
+                    });
                 };
                 reader.readAsDataURL(fileElem.files[0]);
+            }
+
+            // Loads a PNG from a URL and turns it into a sprite, then calls
+            // done(sprite, null), or done(null, message) if it can't be used.
+            function readEnterprisePngUrl(url, done)
+            {
+                var img = new Image();
+                img.onload = function() {
+                    var canvas = document.createElement("canvas");
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    var context = canvas.getContext("2d");
+                    context.drawImage(img, 0, 0);
+                    var sprite;
+                    try {
+                        sprite = readEnterprisePng(context.getImageData(0, 0, img.width, img.height));
+                    } catch(e) {
+                        if (typeof(e) != 'string')
+                        {
+                            throw e;
+                        }
+                        done(null, e);
+                        return;
+                    }
+                    done(sprite, null);
+                };
+                img.onerror = function() {
+                    done(null, "That file couldn't be read as an image.");
+                };
+                img.src = url;
             }
 
             // Turns the PNG's pixels into a sprite. Colors are rounded down to
@@ -1170,7 +1220,7 @@
                     throw "Please choose a PNG for the Enterprise, or pick one of the other colors.";
                 }
 
-                if(enterpriseChoice != "png" && ENTERPRISE_COLORS[enterpriseChoice].paletteFlags)
+                if(typeof(enterpriseChoice) == "number" && ENTERPRISE_COLORS[enterpriseChoice].paletteFlags)
                 {
                     applyEnterprisePalette(rom, sprite.paletteFlags);
                 }
