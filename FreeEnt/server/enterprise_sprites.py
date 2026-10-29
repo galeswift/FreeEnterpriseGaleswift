@@ -2,6 +2,8 @@
 
 Each PNG in the enterprise_sprites folder becomes an option in the seed page's
 Enterprise list, named after its file (rainbow_stripes.png is "Rainbow Stripes").
+An artist to credit can follow the name after a double dash, written as they
+want it shown (rainbow_stripes--Galeswift.png).
 The PNGs use the format described in markdown/enterprise_sprite.md, and are
 checked here with the same rules the page applies to an uploaded PNG, so a
 broken one is logged and left out instead of reaching players.
@@ -24,7 +26,8 @@ FRAME_COUNT = 6
 
 
 def load():
-    '''Returns [{ 'name', 'png' }] for every usable PNG, with 'png' as a data URL.'''
+    '''Returns [{ 'name', 'artist', 'png' }] for every usable PNG, with 'png' as a
+    data URL and 'artist' empty when the file doesn't name one.'''
     sprites = []
     if not os.path.isdir(SPRITES_DIR):
         return sprites
@@ -38,8 +41,10 @@ def load():
         if error:
             cherrypy.log(f"Leaving out Enterprise sprite {filename}: {error}")
             continue
+        name, _, artist = os.path.splitext(filename)[0].partition('--')
         sprites.append({
-            'name' : os.path.splitext(filename)[0].replace('_', ' ').title(),
+            'name' : name.replace('_', ' ').title(),
+            'artist' : artist.strip(),
             'png' : 'data:image/png;base64,' + base64.b64encode(data).decode('ascii'),
         })
     return sprites

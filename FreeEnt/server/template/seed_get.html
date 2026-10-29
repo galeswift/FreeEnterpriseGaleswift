@@ -430,6 +430,7 @@
                         </div>
                         <select id="enterprise_color" onchange="updateEnterpriseControls();"></select>
                     </div>
+                    <div id="enterprise_credit" style="display:none;"></div>
                     <div id="enterprise_png_controls" style="display:none;">
                         <input type="file" id="enterprise_png" accept="image/png" onchange="handleEnterprisePngChanged();">
                         <a href="javascript:;" onclick="downloadEnterpriseTemplate();">Download template</a>
@@ -962,6 +963,17 @@
                 {
                     document.getElementById("enterprise_error").style.display = "none";
                 }
+
+                // credit the artist of a preset sprite, when its file names one
+                var artist = "";
+                if(typeof(enterpriseChoice) == "string" && enterpriseChoice.indexOf("sprite-") == 0)
+                {
+                    artist = ENTERPRISE_PRESET_SPRITES[parseInt(enterpriseChoice.split("-")[1])].artist;
+                }
+                var creditElem = document.getElementById("enterprise_credit");
+                creditElem.textContent = (artist ? "Sprite by " + artist : "");
+                creditElem.style.display = (artist ? "block" : "none");
+
                 drawEnterprisePreview();
             }
 
