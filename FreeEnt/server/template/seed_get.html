@@ -122,12 +122,63 @@
             }
 
             #enterprise_color {
+                position: relative;
+                flex-shrink: 0;
+                width: 10.5rem;
+            }
+
+            #enterprise_color_button_name {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            #enterprise_color_button {
                 padding: 0.3rem;
                 border: 0.1rem dashed #887;
                 border-radius: 0.5rem;
                 background-color: #eee;
                 color: #444;
-                font-family: inherit;
+                cursor: pointer;
+            }
+
+            #enterprise_color_button:focus {
+                outline: 0.1rem solid #796c26;
+            }
+
+            #enterprise_color_list {
+                position: absolute;
+                z-index: 10;
+                left: 0;
+                min-width: 100%;
+                width: max-content;
+                max-height: 20rem;
+                overflow-x: hidden;
+                overflow-y: auto;
+                border: 0.1rem solid #887;
+                border-radius: 0.5rem;
+                background-color: #eee;
+                color: #444;
+                text-align: left;
+            }
+
+            .enterprise_option {
+                display: flex;
+                align-items: center;
+                padding: 0.2rem 0.4rem;
+                white-space: nowrap;
+                cursor: pointer;
+            }
+
+            #enterprise_color_list .enterprise_option.highlighted {
+                background-color: #ffee96;
+            }
+
+            .enterprise_option canvas {
+                flex-shrink: 0;
+                width: 2rem;
+                height: 2rem;
+                margin-right: 0.4rem;
+                image-rendering: pixelated;
             }
 
             #enterprise_png_controls {
@@ -424,11 +475,17 @@
             <div id="patch">                
                 <div id="enterprise_section">
                     <div id="enterprise_row">
-                        <label for="enterprise_color">Customize Your Enterprise:</label>
+                        <label>Customize Your Enterprise:</label>
                         <div id="enterprise_preview_container">
                             <canvas id="enterprise_preview" width="64" height="16"></canvas>
                         </div>
-                        <select id="enterprise_color" onchange="updateEnterpriseControls();"></select>
+                        <div id="enterprise_color">
+                            <div id="enterprise_color_button" class="enterprise_option" tabindex="0" onclick="toggleEnterpriseList(event);" onkeydown="handleEnterpriseKey(event);">
+                                <canvas id="enterprise_color_button_canvas" width="16" height="16"></canvas>
+                                <span id="enterprise_color_button_name"></span>
+                            </div>
+                            <div id="enterprise_color_list" style="display:none;"></div>
+                        </div>
                     </div>
                     <div id="enterprise_credit" style="display:none;"></div>
                     <div id="enterprise_png_controls" style="display:none;">
@@ -910,18 +967,37 @@
                 return { frames: getStockEnterpriseFrames(), colors: getVehiclePaletteColors(entry.paletteFlags), paletteFlags: entry.paletteFlags };
             }
 
+            // The list's options, each { choice, name, option, canvas }, which
+            // of the two flying frames they're showing, and which option is
+            // highlighted while the list is open.
+            var enterpriseOptions = [];
+            var enterpriseOptionFrame = 0;
+            var enterpriseHighlight = 0;
+
             // One option per entry of ENTERPRISE_COLORS, then one per preset
             // sprite, then one for uploading a PNG. Preset sprites are decoded
             // here; one that turns out to be broken is taken out of the list.
             function buildEnterpriseOptions()
             {
-                var select = document.getElementById("enterprise_color");
-                function addOption(value, name)
+                var list = document.getElementById("enterprise_color_list");
+                function addOption(choice, name)
                 {
-                    var option = document.createElement("option");
-                    option.value = value;
-                    option.textContent = name;
-                    select.appendChild(option);
+                    var option = document.createElement("div");
+                    option.className = "enterprise_option";
+                    var canvas = document.createElement("canvas");
+                    canvas.width = 16;
+                    canvas.height = 16;
+                    option.appendChild(canvas);
+                    option.appendChild(document.createTextNode(name));
+                    option.onclick = function() {
+                        closeEnterpriseList();
+                        updateEnterpriseControls(choice);
+                    };
+                    option.onmouseenter = function() {
+                        highlightEnterpriseOption(getEnterpriseOptionIndex(choice));
+                    };
+                    list.appendChild(option);
+                    enterpriseOptions.push({ choice: choice, name: name, option: option, canvas: canvas });
                     return option;
                 }
 
@@ -938,7 +1014,15 @@
                         if(error)
                         {
                             console.error("Enterprise preset sprite " + ENTERPRISE_PRESET_SPRITES[index].name + ": " + error);
-                            select.removeChild(option);
+                            list.removeChild(option);
+                            for(var j = 0; j < enterpriseOptions.length; j++)
+                            {
+                                if(enterpriseOptions[j].option == option)
+                                {
+                                    enterpriseOptions.splice(j, 1);
+                                    break;
+                                }
+                            }
                             return;
                         }
                         enterprisePresetSprites[index] = sprite;
@@ -950,12 +1034,142 @@
                 }
 
                 addOption("png", "Upload a PNG");
+
+                // clicking anywhere else closes the list
+                document.addEventListener("click", closeEnterpriseList);
+
+                drawEnterpriseOptions();
+                setInterval(drawEnterpriseOptions, 250);
             }
 
-            function updateEnterpriseControls()
+            function getEnterpriseOptionIndex(choice)
             {
-                var value = document.getElementById("enterprise_color").value;
-                enterpriseChoice = ((value == "png" || value.indexOf("sprite-") == 0) ? value : parseInt(value));
+                for(var i = 0; i < enterpriseOptions.length; i++)
+                {
+                    if(enterpriseOptions[i].choice == choice)
+                    {
+                        return i;
+                    }
+                }
+                return 0;
+            }
+
+            function isEnterpriseListOpen()
+            {
+                return document.getElementById("enterprise_color_list").style.display != "none";
+            }
+
+            // Opens the list with the picked option highlighted.
+            function openEnterpriseList()
+            {
+                document.getElementById("enterprise_color_list").style.display = "block";
+                highlightEnterpriseOption(getEnterpriseOptionIndex(enterpriseChoice));
+            }
+
+            function closeEnterpriseList()
+            {
+                document.getElementById("enterprise_color_list").style.display = "none";
+            }
+
+            function toggleEnterpriseList(event)
+            {
+                event.stopPropagation();
+                if(isEnterpriseListOpen())
+                {
+                    closeEnterpriseList();
+                }
+                else
+                {
+                    openEnterpriseList();
+                }
+            }
+
+            function highlightEnterpriseOption(index)
+            {
+                enterpriseHighlight = index;
+                for(var i = 0; i < enterpriseOptions.length; i++)
+                {
+                    enterpriseOptions[i].option.className = (i == index ? "enterprise_option highlighted" : "enterprise_option");
+                }
+                enterpriseOptions[index].option.scrollIntoView({ block: "nearest" });
+            }
+
+            // Keys on the button work like a select: up and down change the
+            // pick while the list is closed, and move the highlight while it's
+            // open. Enter or space opens the list or picks the highlighted
+            // option, and escape or tab closes it.
+            function handleEnterpriseKey(event)
+            {
+                var bListOpen = isEnterpriseListOpen();
+                if(event.key == "ArrowDown" || event.key == "ArrowUp")
+                {
+                    event.preventDefault();
+                    var index = getEnterpriseOptionIndex(enterpriseChoice);
+                    if(bListOpen)
+                    {
+                        index = enterpriseHighlight;
+                    }
+
+                    if(event.key == "ArrowDown" && index < enterpriseOptions.length - 1)
+                    {
+                        index++;
+                    }
+                    else if(event.key == "ArrowUp" && index > 0)
+                    {
+                        index--;
+                    }
+
+                    if(bListOpen)
+                    {
+                        highlightEnterpriseOption(index);
+                    }
+                    else
+                    {
+                        updateEnterpriseControls(enterpriseOptions[index].choice);
+                    }
+                }
+                else if(event.key == "Enter" || event.key == " ")
+                {
+                    event.preventDefault();
+                    if(bListOpen)
+                    {
+                        closeEnterpriseList();
+                        updateEnterpriseControls(enterpriseOptions[enterpriseHighlight].choice);
+                    }
+                    else
+                    {
+                        openEnterpriseList();
+                    }
+                }
+                else if(event.key == "Escape" || event.key == "Tab")
+                {
+                    closeEnterpriseList();
+                }
+            }
+
+            // Draws each option's sprite, and the picked one on the button,
+            // flying right, switching between the two side frames on each call.
+            function drawEnterpriseOptions()
+            {
+                enterpriseOptionFrame = 1 - enterpriseOptionFrame;
+                var views = [ { frame: 4 + enterpriseOptionFrame, mirror: true } ];
+                for(var i = 0; i < enterpriseOptions.length; i++)
+                {
+                    drawEnterpriseViews(enterpriseOptions[i].canvas, getEnterpriseSprite(enterpriseOptions[i].choice), views);
+                }
+                drawEnterpriseViews(document.getElementById("enterprise_color_button_canvas"), getEnterpriseSprite(enterpriseChoice), views);
+            }
+
+            function updateEnterpriseControls(choice)
+            {
+                enterpriseChoice = choice;
+                for(var i = 0; i < enterpriseOptions.length; i++)
+                {
+                    if(enterpriseOptions[i].choice == choice)
+                    {
+                        document.getElementById("enterprise_color_button_name").textContent = enterpriseOptions[i].name;
+                    }
+                }
 
                 var isPng = (enterpriseChoice == "png");
                 document.getElementById("enterprise_png_controls").style.display = (isPng ? "block" : "none");
@@ -1324,7 +1538,7 @@
             window.onload = function() {
                 updateFileControls();
                 buildEnterpriseOptions();
-                updateEnterpriseControls();
+                updateEnterpriseControls(0);
             }
         </script>
 
